@@ -9,7 +9,7 @@ mp.events.add('playerDeath', (player) => {
 
 mp.events.add('playerJoin', (player) => {
     console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-    var user = db.loginUser(player.socialClub,player.ip);
+    var user = db.loginUser(player);
     if (user.banned) {
       player.outputChatBox("!{red}You have been banned.");
       setTimeout(function(){
@@ -25,6 +25,7 @@ mp.events.add('playerJoin', (player) => {
     else {
       player.notify(`Last connection from ~g~${user.last_login.ip}~w~ at ~g~${user.last_login.date}`);
       player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
+      player.call('characterSelection', user);
     }
 });
 

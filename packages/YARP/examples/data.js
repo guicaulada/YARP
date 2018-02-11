@@ -13,9 +13,9 @@ var user = {
   banned : false,
   identifier : "ip",
   characters : {
-    1 : {
+    c1 : {
       homes : {
-        1 : {
+        h1 : {
           home : "Name",
           number : 0
         }
@@ -28,7 +28,7 @@ var user = {
         age : 22
       },
       business : {
-        1 : {
+        b1 : {
           name : "Name",
           desc : "Description",
           capital : 0,
@@ -37,7 +37,7 @@ var user = {
         }
       },
       vehicles : {
-        1 : {
+        v1 : {
           model : "modelname",
           data : "json"
         }

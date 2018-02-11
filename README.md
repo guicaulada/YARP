@@ -18,6 +18,8 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
 
 ## Features
 * **JSON Disk Database**
+* **Dynamic Groups/Permissions**
+* **Whitelist**
 * **More to come...**
 
 ## API
