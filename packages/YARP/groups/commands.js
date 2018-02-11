@@ -2,7 +2,7 @@ var db = require('./database.js');
 
 mp.events.addCommand("addgroup", (player, fullText, arg1) => {
   if (arg1 != null){
-    if (db.hasPermission(player,"addgroup_cmd")){
+    if (db.hasPermission(player,"cmd.addgroup")){
       if (db.addGroup(arg1)){
         player.outputChatBox(`!{green}Group !{yellow}${arg1}!{green} has been created!`);
       } else {
@@ -16,7 +16,7 @@ mp.events.addCommand("addgroup", (player, fullText, arg1) => {
 
 mp.events.addCommand("addperm", (player, fullText, arg1, arg2) => {
   if (arg1 != null && arg2 != null){
-    if (db.hasPermission(player,"addperm_cmd")){
+    if (db.hasPermission(player,"cmd.addperm")){
       if (db.addPermission(arg1,arg2)){
         player.outputChatBox(`!{green}Permission !{yellow}${arg2}!{green} has been added to !{yellow}${arg1}!{green}!`);
       } else {
@@ -30,7 +30,7 @@ mp.events.addCommand("addperm", (player, fullText, arg1, arg2) => {
 
 mp.events.addCommand("rmgroup", (player, fullText, arg1) => {
   if (arg1 != null){
-    if (db.hasPermission(player,"rmgroup_cmd")){
+    if (db.hasPermission(player,"cmd.rmgroup")){
       if (db.removeGroup(arg1)){
         player.outputChatBox(`!{green}Group !{yellow}${arg1}!{green} has been removed!`);
       } else {
@@ -44,7 +44,7 @@ mp.events.addCommand("rmgroup", (player, fullText, arg1) => {
 
 mp.events.addCommand("rmperm", (player, fullText, arg1, arg2) => {
   if (arg1 != null && arg2 != null){
-    if (db.hasPermission(player,"rmperm_cmd")){
+    if (db.hasPermission(player,"cmd.rmperm")){
       if (db.removePermission(arg1,arg2)){
         player.outputChatBox(`!{green}Permission !{yellow}${arg2}!{green} has been removed from !{yellow}${arg1}!{green}!`);
       } else {
@@ -58,7 +58,7 @@ mp.events.addCommand("rmperm", (player, fullText, arg1, arg2) => {
 
 mp.events.addCommand("givegroup", (player, fullText, arg1, arg2) => {
   if (arg1 != null){
-    if (db.hasPermission(player,"givegroup_cmd")){
+    if (db.hasPermission(player,"cmd.givegroup")){
       if (db.giveGroup(arg1, arg2)){
         player.outputChatBox(`!{green}Group !{yellow}${arg2}!{green} has been added to !{yellow}${arg1}!{green}!`);
       } else {
@@ -72,7 +72,7 @@ mp.events.addCommand("givegroup", (player, fullText, arg1, arg2) => {
 
 mp.events.addCommand("takegroup", (player, fullText, arg1, arg2) => {
   if (arg1 != null){
-    if (db.hasPermission(player,"takegroup_cmd")){
+    if (db.hasPermission(player,"cmd.takegroup")){
       if (db.takeGroup(arg1, arg2)){
         player.outputChatBox(`!{green}Group !{yellow}${arg2}!{green} has been removed from !{yellow}${arg1}!{green}!`);
       } else {
