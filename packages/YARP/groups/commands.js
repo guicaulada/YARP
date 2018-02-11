@@ -1,28 +1,4 @@
 var db = require('./database.js');
-mp.events.addCommand('kill', (player) => {
-  if (db.hasPermission(player,"kill_cmd")){
-    player.health = 0;
-  }
-});
-
-mp.events.addCommand('hp', (player) => {
-  if (db.hasPermission(player,"hp_cmd")){
-    player.health = 100;
-  }
-});
-
-mp.events.addCommand('armor', (player) => {
-  if (db.hasPermission(player,"armor_cmd")){
-    player.armour = 100;
-  }
-});
-
-mp.events.addCommand("weapon", (player, fullText, weapon, ammo) => {
-  if (db.hasPermission(player,"weapon_cmd")){
-    var weaponHash = mp.joaat(weapon);
-    player.giveWeapon(weaponHash, parseInt(ammo) || 10000);
-  }
-});
 
 mp.events.addCommand("addgroup", (player, fullText, arg1) => {
   if (arg1 != null){
