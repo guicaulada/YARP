@@ -25,7 +25,7 @@ mp.events.add('playerJoin', (player) => {
     else {
       player.notify(`Last connection from ~g~${user.last_login.ip}~w~ at ~g~${user.last_login.date}`);
       player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
-      player.call('characterSelection', user);
+      //player.call('characterSelection', [JSON.stringify(user)]);
     }
 });
 

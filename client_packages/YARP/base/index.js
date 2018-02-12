@@ -1,1 +1,1 @@
-require('./events.js');
+require('./YARP/base/events.js');
