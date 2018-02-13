@@ -20,14 +20,14 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Añadimos la cabecera del menú
 	header.textContent = businessName;
-	
+
 	for(let i = 0; i < businessItemsArray.length; i++) {
 		// Obtenemos el objeto en curso
 		let item = businessItemsArray[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let imageContainer = document.createElement('div');
@@ -44,7 +44,7 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 		let itemAmount = document.createElement('span');
 		let itemAdd = document.createElement('span');
 		let itemSubstract = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		imageContainer.classList.add('item-image');
@@ -60,7 +60,7 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 		itemAmount.classList.add('item-amount-description');
 		itemAdd.classList.add('item-adder');
 		itemSubstract.classList.add('item-substract', 'hidden');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemImage.src = '../img/inventory/' + item.hash + '.png';
 		itemDescription.textContent = item.description;
@@ -68,7 +68,7 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 		itemAmount.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
 		itemAdd.textContent = '+';
 		itemSubstract.textContent = '-';
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -80,32 +80,32 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 					previousSelected.classList.remove('active-item');
 					previousAmountNode.classList.add('hidden');
 				}
-				
+
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				let currentAmountNode = findFirstChildByClass(currentSelected, 'item-amount-container');
 				currentSelected.classList.add('active-item');
 				currentAmountNode.classList.remove('hidden');
-				
+
 				// Guardamos el nuevo índice seleccionado
 				purchasedAmount = 1;
 				selected = i;
-				
+
 				// Actualizamos el texto del elemento
 				itemAmount.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
 				document.getElementsByClassName('item-adder')[selected].classList.remove('hidden');
 				document.getElementsByClassName('item-substract')[selected].classList.add('hidden');
 			}
 		});
-		
+
 		itemAdd.onclick = (function() {
 			// Sumamos una unidad
 			purchasedAmount++;
-			
+
 			// Obtenemos ambos botones
 			let adderButton = document.getElementsByClassName('item-adder')[selected];
 			let substractButton = document.getElementsByClassName('item-substract')[selected];
-			
+
 			if(purchasedAmount == 10) {
 				// Ha llegado al máximo
 				adderButton.classList.add('hidden');
@@ -113,20 +113,20 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 				// Volvemos el elemento visible
 				substractButton.classList.remove('hidden');
 			}
-			
+
 			// Actualizamos la cantidad
 			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
 			amountSpan.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
 		});
-		
+
 		itemSubstract.onclick = (function() {
 			// Restamos una unidad
 			purchasedAmount--;
-			
+
 			// Obtenemos ambos botones
 			let adderButton = document.getElementsByClassName('item-adder')[selected];
 			let substractButton = document.getElementsByClassName('item-substract')[selected];
-			
+
 			if(purchasedAmount == 1) {
 				// Ha llegado al mínimo
 				substractButton.classList.add('hidden');
@@ -134,12 +134,12 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 				// Volvemos el elemento visible
 				adderButton.classList.remove('hidden');
 			}
-			
+
 			// Actualizamos la cantidad
 			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
 			amountSpan.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(imageContainer);
@@ -157,19 +157,19 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 		addSubstractContainer.appendChild(itemAdd);
 		addSubstractContainer.appendChild(itemSubstract);
 	}
-	
+
 	// Añadimos los botones
 	let purchaseButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	purchaseButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	purchaseButton.textContent = 'Comprar';
 	cancelButton.textContent = 'Salir';
-	
+
 	// Ponemos la función para cada elemento
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
@@ -177,12 +177,12 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 			mp.trigger('purchaseItem', selected, purchasedAmount);
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
 		mp.trigger('cancelBusinessPurchase');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(purchaseButton);
 	options.appendChild(cancelButton);
@@ -192,10 +192,10 @@ function populateTunningMenu(tunningComponentsJSON) {
 	// Añadimos el título al menú
 	let header = document.getElementById('header');
 	header.textContent = 'Menú de modificaciones';
-	
+
 	// Obtenemos la lista de componentes
 	tunningComponents = JSON.parse(tunningComponentsJSON);
-	
+
 	// Mostramos el menú principal
 	populateTunningHome();
 }
@@ -204,70 +204,70 @@ function populateTunningHome() {
 	// Obtenemos el nodo contenedor
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Inicializamos las opciones
 	selected = null;
 	drawable = null;
-	
+
 	// Limpiamos el contenido
 	while(content.firstChild) {
 		content.removeChild(content.firstChild);
 	}
-	
+
 	// Limpiamos las opciones
 	while(options.firstChild) {
 		options.removeChild(options.firstChild);
 	}
-	
+
 	for(let i = 0; i < tunningComponents.length; i++) {
 		// Obtenemos el objeto en curso
 		let group = tunningComponents[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
 		let descContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = group.desc;
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Seleccionamos el elemento pulsado
 			selected = i;
-			
+
 			// Mostramos la página de componentes
 			populateTunningComponents();
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
 		infoContainer.appendChild(descContainer);
 		descContainer.appendChild(itemDescription);
 	}
-	
+
 	// Añadimos el botón
 	let exitButton = document.createElement('div');
-	
+
 	// Añadimos las clases al botón
 	exitButton.classList.add('single-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	exitButton.textContent = 'Salir';
-	
+
 	exitButton.onclick = (function() {
 		// Cerramos la ventana de compra
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(exitButton);
 }
@@ -276,21 +276,21 @@ function populateTunningComponents() {
 	// Obtenemos el nodo contenedor
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Limpiamos el contenido
 	while(content.firstChild) {
 		content.removeChild(content.firstChild);
 	}
-	
+
 	// Limpiamos las opciones
 	while(options.firstChild) {
 		options.removeChild(options.firstChild);
 	}
-	
+
 	for(let i = 0; i < tunningComponents[selected].components.length; i++) {
 		// Obtenemos el componente
 		let component = tunningComponents[selected].components[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -299,7 +299,7 @@ function populateTunningComponents() {
 		let priceContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
 		let itemPrice = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -308,11 +308,11 @@ function populateTunningComponents() {
 		priceContainer.classList.add('item-price-container');
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = component.desc;
 		itemPrice.innerHTML = '<b>Precio unitario: </b>' + tunningComponents[selected].products + '$';
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -322,19 +322,19 @@ function populateTunningComponents() {
 					let previousSelected = document.getElementsByClassName('item-row')[drawable];
 					previousSelected.classList.remove('active-item');
 				}
-				
+
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el nuevo índice seleccionado
 				drawable = i;
-				
+
 				// Actualizamos el tunning del vehículo
 				mp.trigger('addVehicleComponent', tunningComponents[selected].slot, drawable);
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -344,19 +344,19 @@ function populateTunningComponents() {
 		purchaseContainer.appendChild(priceContainer);
 		priceContainer.appendChild(itemPrice);
 	}
-	
+
 	// Añadimos los botones
 	let purchaseButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	purchaseButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	purchaseButton.textContent = 'Comprar';
 	cancelButton.textContent = 'Atrás';
-	
+
 	// Ponemos la función para cada elemento
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
@@ -364,12 +364,12 @@ function populateTunningComponents() {
 			//mp.trigger('purchaseItem', selected, purchasedAmount);
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Volvemos al inicio
 		populateTunningHome();
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(purchaseButton);
 	options.appendChild(cancelButton);
@@ -382,17 +382,17 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Añadimos la cabecera del menú
 	header.textContent = 'Pedidos de comida rápida';
-	
+
 	for(let i = 0; i < fastfoodOrders.length; i++) {
 		// Obtenemos el objeto en curso
 		let order = fastfoodOrders[i];
-		
+
 		// Calculamos el precio del pedido
 		let amount = order.pizzas * PRICE_PIZZA + order.hamburgers * PRICE_HAMBURGER + order.sandwitches * PRICE_SANDWICH;
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -404,7 +404,7 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 		let itemDescription = document.createElement('span');
 		let itemPrice = document.createElement('span');
 		let itemAmount = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -416,12 +416,12 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
 		itemAmount.classList.add('item-amount-description');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = 'Pedido #' + order.id;
 		itemPrice.innerHTML = '<b>Pedido: </b>' + amount + '$';
 		itemAmount.innerHTML = '<b>Distancia: </b>' + parseFloat(distances[i] / 1000).toFixed(2) + 'km';
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -431,16 +431,16 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 					let previousSelected = document.getElementsByClassName('item-row')[selected];
 					previousSelected.classList.remove('active-item');
 				}
-				
+
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el nuevo índice seleccionado
 				selected = i;
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -453,19 +453,19 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 		itemAmountContainer.appendChild(amountTextContainer);
 		amountTextContainer.appendChild(itemAmount);
 	}
-	
+
 	// Añadimos los botones
 	let deliverButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	deliverButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	deliverButton.textContent = 'Entregar';
 	cancelButton.textContent = 'Salir';
-	
+
 	// Ponemos la función para cada elemento
 	deliverButton.onclick = (function() {
 		// Entregamos el pedido seleccionado
@@ -473,12 +473,12 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 			mp.trigger('deliverFastfoodOrder', fastfoodOrders[selected].id);
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(deliverButton);
 	options.appendChild(cancelButton);
@@ -489,26 +489,26 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Añadimos el texto de cabecera y obtenemos la lista de delitos
 	let crimesArray = JSON.parse(crimesJson);
 	header.textContent = 'Lista de delitos';
 	selectedOptions = [];
-	
+
 	if(selectedCrimes.length > 0) {
 		// Obtenemos los delitos
 		let crimes = JSON.parse(selectedCrimes);
-		
+
 		for(let i = 0; i < crimes.length; i++) {
 			// Añadimos el delito
 			selectedOptions.push(crimes[i]);
 		}
 	}
-	
+
 	for(let i = 0; i < crimesArray.length; i++) {
 		// Obtenemos el componente
 		let crime = crimesArray[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -520,7 +520,7 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 		let itemDescription = document.createElement('span');
 		let itemPrice = document.createElement('span');
 		let itemAmount = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -532,7 +532,7 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
 		itemAmount.classList.add('item-amount-description');
-		
+
 		for(let c = 0; c < selectedOptions.length; c++) {
 			if(JSON.stringify(crime) === JSON.stringify(selectedOptions[c])) {
 				// Marcamos el delito como aplicable
@@ -542,12 +542,12 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 				break;
 			}
 		}
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = crime.crime;
 		itemPrice.innerHTML = '<b>Multa: </b>' + crime.fine + '$';
 		itemAmount.innerHTML = '<b>Tiempo: </b>' + crime.jail + 'min.';
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -555,19 +555,19 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el índice seleccionado
 				selectedOptions.push(crime);
 			} else {
 				// Eliminamos la selección del elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.remove('active-item');
-				
+
 				// Eliminamos el índice seleccionado
 				selectedOptions.splice(selectedOptions.indexOf(crime), 1);
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -580,19 +580,19 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 		itemAmountContainer.appendChild(amountTextContainer);
 		amountTextContainer.appendChild(itemAmount);
 	}
-	
+
 	// Añadimos los botones
 	let applyButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	applyButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	applyButton.textContent = 'Inculpar';
 	cancelButton.textContent = 'Salir';
-	
+
 	// Ponemos la función para cada elemento
 	applyButton.onclick = (function() {
 		// Entregamos el pedido seleccionado
@@ -600,12 +600,12 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 			mp.trigger('applyCrimes', JSON.stringify(selectedOptions));
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(applyButton);
 	options.appendChild(cancelButton);
@@ -616,68 +616,68 @@ function populateCharacterList(charactersJson) {
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Obtenemos la lista de jugadores
 	let characters = JSON.parse(charactersJson);
-	
+
 	// Añadimos el texto de cabecera
-	header.textContent = 'Lista de personajes';
-	
+	header.textContent = 'Character list';
+
 	for(let i = 0; i < characters.length; i++) {
 		// Obtenemos el componente
 		let character = characters[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
 		let descContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
-		
+
 		// Añadimos el contenido de cada elemento
-		itemDescription.textContent = character;
-		
+		itemDescription.textContent = character.name;
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Cargamos el personaje
 			mp.trigger('loadCharacter', character);
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
 		infoContainer.appendChild(descContainer);
 		descContainer.appendChild(itemDescription);
 	}
-	
+
 	// Añadimos los botones
 	let createButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	createButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
-	createButton.textContent = 'Crear nuevo';
-	cancelButton.textContent = 'Salir';
-	
+	createButton.textContent = 'New character';
+	cancelButton.textContent = 'Exit';
+
 	// Ponemos la función para cada elemento
 	createButton.onclick = (function() {
 		// Mostramos el menú de creación de personaje
 		mp.trigger('showCharacterCreationMenu');
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de personajes
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(createButton);
 	options.appendChild(cancelButton);
@@ -687,11 +687,11 @@ function populateTattooMenu(tattooZoneArray, businessName, priceMultiplier) {
 	// Añadimos el título al menú
 	let header = document.getElementById('header');
 	header.textContent = businessName;
-	
+
 	// Obtenemos las listas de tatuajes
 	tattooZones = JSON.parse(tattooZoneArray);
 	multiplier = priceMultiplier;
-	
+
 	// Mostramos el menú principal
 	populateTattooHome();
 }
@@ -700,70 +700,70 @@ function populateTattooHome() {
 	// Obtenemos el nodo contenedor
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Inicializamos las opciones
 	selected = null;
 	drawable = null;
-	
+
 	// Limpiamos el contenido
 	while(content.firstChild) {
 		content.removeChild(content.firstChild);
 	}
-	
+
 	// Limpiamos las opciones
 	while(options.firstChild) {
 		options.removeChild(options.firstChild);
 	}
-	
+
 	for(let i = 0; i < tattooZones.length; i++) {
 		// Obtenemos la zona en curso
 		let zone = tattooZones[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
 		let descContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = zone;
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Seleccionamos el elemento pulsado
 			selected = i;
-			
+
 			// Cargamos la lista de tatuajes de la zona
 			mp.trigger('getZoneTattoos', i);
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
 		infoContainer.appendChild(descContainer);
 		descContainer.appendChild(itemDescription);
 	}
-	
+
 	// Añadimos el botón
 	let exitButton = document.createElement('div');
-	
+
 	// Añadimos las clases al botón
 	exitButton.classList.add('single-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	exitButton.textContent = 'Salir';
-	
+
 	exitButton.onclick = (function() {
 		// Salimos del menú
 		mp.trigger('exitTattooShop');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(exitButton);
 }
@@ -772,24 +772,24 @@ function populateZoneTattoos(zoneTattooJson) {
 	// Obtenemos el nodo contenedor
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Parseamos el JSON
 	let zoneTattooArray = JSON.parse(zoneTattooJson);
-	
+
 	// Limpiamos el contenido
 	while(content.firstChild) {
 		content.removeChild(content.firstChild);
 	}
-	
+
 	// Limpiamos las opciones
 	while(options.firstChild) {
 		options.removeChild(options.firstChild);
 	}
-	
+
 	for(let i = 0; i < zoneTattooArray.length; i++) {
 		// Obtenemos el componente
 		let tattoo = zoneTattooArray[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -798,7 +798,7 @@ function populateZoneTattoos(zoneTattooJson) {
 		let priceContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
 		let itemPrice = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -807,11 +807,11 @@ function populateZoneTattoos(zoneTattooJson) {
 		priceContainer.classList.add('item-price-container');
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = tattoo.name;
 		itemPrice.innerHTML = '<b>Precio: </b>' + Math.round(tattoo.price * multiplier) + '$';
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -821,19 +821,19 @@ function populateZoneTattoos(zoneTattooJson) {
 					let previousSelected = document.getElementsByClassName('item-row')[drawable];
 					previousSelected.classList.remove('active-item');
 				}
-				
+
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el nuevo índice seleccionado
 				drawable = i;
-				
+
 				// Actualizamos los tatuajes
 				mp.trigger('addPlayerTattoo', drawable);
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -843,19 +843,19 @@ function populateZoneTattoos(zoneTattooJson) {
 		purchaseContainer.appendChild(priceContainer);
 		priceContainer.appendChild(itemPrice);
 	}
-	
+
 	// Añadimos los botones
 	let purchaseButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	purchaseButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	purchaseButton.textContent = 'Comprar';
 	cancelButton.textContent = 'Atrás';
-	
+
 	// Ponemos la función para cada elemento
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
@@ -863,15 +863,15 @@ function populateZoneTattoos(zoneTattooJson) {
 			mp.trigger('purchaseTattoo', selected, drawable);
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Volvemos al inicio
 		populateTattooHome();
-		
+
 		// Limpiamos los tatuajes no comprados
 		mp.trigger('clearTattoos');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(purchaseButton);
 	options.appendChild(cancelButton);
@@ -883,15 +883,15 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Añadimos la cabecera del menú
 	header.textContent = businessName;
 	selectedOptions = JSON.parse(selectedFaceJson);
-	
+
 	for(let i = 0; i < faceOptions.length; i++) {
 		// Obtenemos el objeto en curso
 		let face = faceOptions[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -904,7 +904,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 		let itemAmount = document.createElement('span');
 		let itemAdd = document.createElement('span');
 		let itemSubstract = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -917,28 +917,28 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 		itemAmount.classList.add('item-amount-description');
 		itemAdd.classList.add('item-adder');
 		itemSubstract.classList.add('item-substract');
-		
+
 		// Miramos si hay que ocultar los controles
 		if(selectedOptions[i] == face.minValue) {
 			itemSubstract.classList.add('hidden');
 		} else if(selectedOptions[i] == face.maxValue) {
 			itemAdd.classList.add('hidden');
-		}		
-		
+		}
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = face.desc;
 		itemAmount.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 		itemAdd.textContent = '+';
 		itemSubstract.textContent = '-';
-		
+
 		itemAdd.onclick = (function() {
 			// Sumamos una unidad
 			selectedOptions[i]++;
-			
+
 			// Obtenemos ambos botones
 			let adderButton = document.getElementsByClassName('item-adder')[i];
 			let substractButton = document.getElementsByClassName('item-substract')[i];
-			
+
 			if(selectedOptions[i] == face.maxValue) {
 				// Ha llegado al máximo
 				adderButton.classList.add('hidden');
@@ -946,23 +946,23 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 				// Volvemos el elemento visible
 				substractButton.classList.remove('hidden');
 			}
-			
+
 			// Actualizamos el tipo
 			let amountSpan = document.getElementsByClassName('item-amount-description')[i];
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
-			
+
 			// Actualizamos la apariencia
 			mp.trigger('updateFacialHair', i, selectedOptions[i]);
 		});
-		
+
 		itemSubstract.onclick = (function() {
 			// Restamos una unidad
 			selectedOptions[i]--;
-			
+
 			// Obtenemos ambos botones
 			let adderButton = document.getElementsByClassName('item-adder')[i];
 			let substractButton = document.getElementsByClassName('item-substract')[i];
-			
+
 			if(selectedOptions[i] == face.minValue) {
 				// Ha llegado al mínimo
 				substractButton.classList.add('hidden');
@@ -970,15 +970,15 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 				// Volvemos el elemento visible
 				adderButton.classList.remove('hidden');
 			}
-			
+
 			// Actualizamos el tipo
 			let amountSpan = document.getElementsByClassName('item-amount-description')[i];
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
-			
+
 			// Actualizamos la apariencia
 			mp.trigger('updateFacialHair', i, selectedOptions[i]);
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -992,31 +992,31 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 		addSubstractContainer.appendChild(itemAdd);
 		addSubstractContainer.appendChild(itemSubstract);
 	}
-	
+
 	// Añadimos los botones
 	let acceptButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	acceptButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	acceptButton.textContent = 'Aceptar';
 	cancelButton.textContent = 'Salir';
-	
+
 	// Ponemos la función para cada elemento
 	acceptButton.onclick = (function() {
 		// Guardamos los cambios
 		mp.trigger('applyHairdresserChanges');
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cancelamos el peinado y cerramos la ventana de pedidos
 		mp.trigger('cancelHairdresserChanges');
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(acceptButton);
 	options.appendChild(cancelButton);
@@ -1028,25 +1028,25 @@ function populateTownHallMenu(townHallOptionsJson) {
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Añadimos la cabecera del menú
 	header.textContent = 'Trámites del ayuntamiento';
 	selected = null;
-	
+
 	// Limpiamos el contenido
 	while(content.firstChild) {
 		content.removeChild(content.firstChild);
 	}
-	
+
 	// Limpiamos las opciones
 	while(options.firstChild) {
 		options.removeChild(options.firstChild);
 	}
-	
+
 	for(let i = 0; i < townHallOptions.length; i++) {
 		// Obtenemos el objeto en curso
 		let townHall = townHallOptions[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -1055,7 +1055,7 @@ function populateTownHallMenu(townHallOptionsJson) {
 		let priceContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
 		let itemPrice = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -1064,15 +1064,15 @@ function populateTownHallMenu(townHallOptionsJson) {
 		priceContainer.classList.add('item-price-container');
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = townHall.desc;
-		
+
 		if(townHall.price > 0) {
 			// Si tiene precio, lo mostramos
 			itemPrice.innerHTML = '<b>Precio: </b>' + townHall.price + '$';
 		}
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -1082,20 +1082,20 @@ function populateTownHallMenu(townHallOptionsJson) {
 					let previousSelected = document.getElementsByClassName('item-row')[selected];
 					previousSelected.classList.remove('active-item');
 				}
-				
+
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el nuevo índice seleccionado
 				selected = i;
-				
+
 				// Cambiamos el texto del botón
 				let leftButton = document.getElementsByClassName('accept-button')[0];
 				leftButton.textContent = townHall.price > 0 ? 'Pagar' : 'Comprobar';
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -1105,19 +1105,19 @@ function populateTownHallMenu(townHallOptionsJson) {
 		purchaseContainer.appendChild(priceContainer);
 		priceContainer.appendChild(itemPrice);
 	}
-	
+
 	// Añadimos los botones
 	let acceptButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	acceptButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	acceptButton.textContent = 'Pagar';
 	cancelButton.textContent = 'Salir';
-	
+
 	// Ponemos la función para cada elemento
 	acceptButton.onclick = (function() {
 		if(selected != null) {
@@ -1125,12 +1125,12 @@ function populateTownHallMenu(townHallOptionsJson) {
 			mp.trigger('executeTownHallOperation', selected);
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana del ayuntamiento
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(acceptButton);
 	options.appendChild(cancelButton);
@@ -1142,21 +1142,21 @@ function populateFinesMenu(finesJson) {
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 	selectedOptions = [];
-	
+
 	// Limpiamos el contenido
 	while(content.firstChild) {
 		content.removeChild(content.firstChild);
 	}
-	
+
 	// Limpiamos las opciones
 	while(options.firstChild) {
 		options.removeChild(options.firstChild);
 	}
-	
+
 	for(let i = 0; i < finesList.length; i++) {
 		// Obtenemos el objeto en curso
 		let fine = finesList[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
@@ -1168,7 +1168,7 @@ function populateFinesMenu(finesJson) {
 		let itemDescription = document.createElement('span');
 		let itemPrice = document.createElement('span');
 		let itemAmount = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
@@ -1180,12 +1180,12 @@ function populateFinesMenu(finesJson) {
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
 		itemAmount.classList.add('item-amount-description');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = fine.reason;
 		itemPrice.innerHTML = '<b>Cantidad: </b>' + fine.amount + '$';
 		itemAmount.innerHTML = '<b>Fecha: </b>' + fine.date.split(' ')[0];
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -1193,19 +1193,19 @@ function populateFinesMenu(finesJson) {
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el índice seleccionado
 				selectedOptions.push(fine);
 			} else {
 				// Eliminamos la selección del elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.remove('active-item');
-				
+
 				// Eliminamos el índice seleccionado
 				selectedOptions.splice(selectedOptions.indexOf(fine), 1);
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
@@ -1218,19 +1218,19 @@ function populateFinesMenu(finesJson) {
 		itemAmountContainer.appendChild(amountTextContainer);
 		amountTextContainer.appendChild(itemAmount);
 	}
-	
+
 	// Añadimos los botones
 	let acceptButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	acceptButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	acceptButton.textContent = 'Pagar';
 	cancelButton.textContent = 'Atrás';
-	
+
 	// Ponemos la función para cada elemento
 	acceptButton.onclick = (function() {
 		if(selectedOptions.length > 0) {
@@ -1238,12 +1238,12 @@ function populateFinesMenu(finesJson) {
 			mp.trigger('payPlayerFines', JSON.stringify(selectedOptions));
 		}
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Volvemos al índice del ayuntamiento
 		mp.trigger('backTownHallIndex');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(acceptButton);
 	options.appendChild(cancelButton);
@@ -1255,29 +1255,29 @@ function populatePoliceControlsMenu(policeControlJson) {
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-	
+
 	// Añadimos la cabecera del menú
 	header.textContent = 'Controles policiales';
-	
+
 	for(let i = 0; i < policeControls.length; i++) {
 		// Obtenemos el objeto en curso
 		let control = policeControls[i];
-		
+
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
 		let infoContainer = document.createElement('div');
 		let descContainer = document.createElement('div');
 		let itemDescription = document.createElement('span');
-		
+
 		// Añadimos las clases a cada elemento
 		itemContainer.classList.add('item-row');
 		infoContainer.classList.add('item-content');
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
-		
+
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = control;
-		
+
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Comprobamos que se ha pulsado en un elemento no seleccionado
@@ -1287,47 +1287,47 @@ function populatePoliceControlsMenu(policeControlJson) {
 					let previousSelected = document.getElementsByClassName('item-row')[selected];
 					previousSelected.classList.remove('active-item');
 				}
-				
+
 				// Seleccionamos el elemento pulsado
 				let currentSelected = document.getElementsByClassName('item-row')[i];
 				currentSelected.classList.add('active-item');
-				
+
 				// Guardamos el nuevo índice seleccionado
 				selected = i;
 			}
 		});
-		
+
 		// Ordenamos la jerarquía de elementos
 		content.appendChild(itemContainer);
 		itemContainer.appendChild(infoContainer);
 		infoContainer.appendChild(descContainer);
 		descContainer.appendChild(itemDescription);
 	}
-	
+
 	// Añadimos los botones
 	let acceptButton = document.createElement('div');
 	let cancelButton = document.createElement('div');
-	
+
 	// Añadimos las clases a cada botón
 	acceptButton.classList.add('double-button', 'accept-button');
 	cancelButton.classList.add('double-button', 'cancel-button');
-	
+
 	// Añadimos el texto de los botones
 	acceptButton.textContent = 'Cargar';
 	cancelButton.textContent = 'Salir';
-	
+
 	// Ponemos la función para cada elemento
 	acceptButton.onclick = (function() {
 		// Procesamos la opción y borramos el navegador
 		mp.trigger('proccessPoliceControlAction');
 		mp.trigger('destroyBrowser');
 	});
-	
+
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de controles
 		mp.trigger('destroyBrowser');
 	});
-		
+
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(acceptButton);
 	options.appendChild(cancelButton);
@@ -1353,4 +1353,4 @@ function findFirstChildByClass(element, className) {
 	}
 	recurse(element, className, false);
 	return foundElement;
-}		
+}

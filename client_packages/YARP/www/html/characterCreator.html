@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Creador de personajes</title>
+    <title>Character creator</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/character.css" />
     <link rel="stylesheet" href="../css/scrollbar.css" />
@@ -16,7 +16,7 @@
     <div id="error" class="error-window no-display">
         <div class="error-alert center">
             <span id="error-message" class="alert-text text-white"></span>
-            <button class="error-hide" onclick="hideError();">Aceptar</button>
+            <button class="error-hide" onclick="hideError();">Accept</button>
         </div>
     </div>
 
@@ -26,10 +26,10 @@
         <div class="character-name">
             <div class="character-name-form">
                 <div class="character-name-input">
-                    <input id="character-name" class="character-input" type="text" placeholder="Nombre" maxlength="15" required="required" />
+                    <input id="character-name" class="character-input" type="text" placeholder="Name" maxlength="15" required="required" />
                 </div>
                 <div class="character-name-input">
-                    <input id="character-surname" class="character-input" type="text" placeholder="Apellido" maxlength="15" required="required" />
+                    <input id="character-surname" class="character-input" type="text" placeholder="Surname" maxlength="15" required="required" />
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="character-age">
-            <label for="age" class="color-lightgrey">Edad: </label>
+            <label for="age" class="color-lightgrey">Age: </label>
             <div class="age-input">
                 <span class="input-group-btn age-group-btn data-dwn">
                     <button id="btn-age-minus" class="btn-age btn btn-default btn-info" data-dir="minus" data-field="age"><span class="glyphicon glyphicon-minus"></span></button>
@@ -57,7 +57,7 @@
             <!--<input id="age" class="character-input width-12" type="number" name="age" min="12" max="90" value="18" />-->
         </div>
         <div class="character-sex-orientation">
-            <label for="sexual-orientation" class="color-lightgrey">Orientación sexual</label><br />
+            <label for="sexual-orientation" class="color-lightgrey">Sexual orientation</label><br />
             <div class="input-group sex-orientation-picker">
                 <input id="sex-orientation-heterosexual" class="form-check-input" type="radio" value="0" name="sexual-orientation" checked="checked" /><label for="sex-orientation-heterosexual" class="text-dark-grey">Heterosexual</label><br />
                 <input id="sex-orientation-homosexual" class="form-check-input" type="radio" value="1" name="sexual-orientation" /><label for="sex-orientation-homosexual" class="text-dark-grey">Homosexual</label><br />
@@ -70,16 +70,16 @@
 
         <!-- Desplegable con las opciones a editar -->
         <div class="option-selected" onclick="toggleMenu();">
-            <span id="current-option" class="title-menu">Rasgos faciales</span>
+            <span id="current-option" class="title-menu">Facial features</span>
         </div>
         <nav id="slider" class="slider-menu">
             <ul>
-                <li>Rasgos faciales</li>
-                <li>Pelo y vello</li>
-                <li>Marcas de piel</li>
-                <li>Ojos</li>
-                <li>Detalles faciales</li>
-                <li>Maquillaje</li>
+                <li>Facial features</li>
+                <li>Hair and beard</li>
+                <li>Skin features</li>
+                <li>Eyes</li>
+                <li>Facial details</li>
+                <li>Makeup</li>
             </ul>
         </nav>
 
@@ -87,43 +87,43 @@
             <!-- Opción rasgos básicos -->
             <div id="basic-features" >
                 <div>
-                    <h2>Cara paterna</h2>
+                    <h2>Father's face</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevFatherFace();"></span>
-                        <span id="face-father-shape" class="color-lightgrey">Tipo 1</span>
+                        <span id="face-father-shape" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextFatherFace();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Cara materna</h2>
+                    <h2>Mother's face</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevMotherFace();"></span>
-                        <span id="face-mother-shape" class="color-lightgrey">Tipo 1</span>
+                        <span id="face-mother-shape" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextMotherFace();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Mezcla de caras</h2>
+                    <h2>Face mix</h2>
                     <input id="headMix" type="range" min="0" max="99" oninput="updateFaceMix();" />
                 </div>
                 <div>
-                    <h2>Tono de piel paterno</h2>
+                    <h2>Father's skin tone</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevFatherSkin();"></span>
-                        <span id="father-skin" class="color-lightgrey">Tono 1</span>
+                        <span id="father-skin" class="color-lightgrey">Tone 1</span>
                         <span class="right-arrow" onclick="showNextFatherSkin();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Tono de piel materno</h2>
+                    <h2>Mother's skin tone</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevMotherSkin();"></span>
-                        <span id="mother-skin" class="color-lightgrey">Tono 1</span>
+                        <span id="mother-skin" class="color-lightgrey">Tone 1</span>
                         <span class="right-arrow" onclick="showNextMotherSkin();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Mezcla del tono de piel</h2>
+                    <h2>Skin mix</h2>
                     <input id="skinMix" type="range" min="0" max="99" oninput="updateSkinMix();" />
                 </div>
             </div>
@@ -131,58 +131,58 @@
             <!-- Opción pelo y vello -->
             <div id="hair" class="no-display">
                 <div>
-                    <h2>Estilo de pelo</h2>
+                    <h2>Hairstyle</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevHairModel();"></span>
-                        <span id="hair-model" class="color-lightgrey">Tipo 1</span>
+                        <span id="hair-model" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextHairModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color principal del pelo</h2>
+                    <h2>Hair color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevHairFirstColor();"></span>
-                        <span id="hair-first-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="hair-first-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextHairFirstColor();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color de las puntas</h2>
+                    <h2>Highlight color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevHairSecondColor();"></span>
-                        <span id="hair-second-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="hair-second-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextHairSecondColor();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Estilo de barba</h2>
+                    <h2>Beard style</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevBeardModel();"></span>
-                        <span id="beard-model" class="color-lightgrey">Sin barba</span>
+                        <span id="beard-model" class="color-lightgrey">No beard</span>
                         <span class="right-arrow" onclick="showNextBeardModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color de barba</h2>
+                    <h2>Beard color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevBeardColor();"></span>
-                        <span id="beard-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="beard-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextBeardColor();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Estilo de vello del pecho</h2>
+                    <h2>Chest hair style</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevChestModel();"></span>
-                        <span id="chest-model" class="color-lightgrey">Sin vello</span>
+                        <span id="chest-model" class="color-lightgrey">No hair</span>
                         <span class="right-arrow" onclick="showNextChestModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color del vello del pecho</h2>
+                    <h2>Chest hair color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevChestColor();"></span>
-                        <span id="chest-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="chest-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextChestColor();"></span>
                     </div>
                 </div>
@@ -191,42 +191,42 @@
             <!-- Opción marcas de piel -->
             <div id="skin-features" class="no-display">
                 <div>
-                    <h2>Manchas</h2>
+                    <h2>Blemishes</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevBlemishesModel();"></span>
-                        <span id="blemishes-model" class="color-lightgrey">Sin manchas</span>
+                        <span id="blemishes-model" class="color-lightgrey">No blemishes</span>
                         <span class="right-arrow" onclick="showNextBlemishesModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Marcas de edad</h2>
+                    <h2>Ageing</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevAgeingModel();"></span>
-                        <span id="ageing-model" class="color-lightgrey">Sin marcas de edad</span>
+                        <span id="ageing-model" class="color-lightgrey">No ageing</span>
                         <span class="right-arrow" onclick="showNextAgeingModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Complexión</h2>
+                    <h2>Complexion</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevComplexionModel();"></span>
-                        <span id="complexion-model" class="color-lightgrey">Sin complexión</span>
+                        <span id="complexion-model" class="color-lightgrey">No complexion</span>
                         <span class="right-arrow" onclick="showNextComplexionModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Quemadura solar</h2>
+                    <h2>Sunburn</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevSundamageModel();"></span>
-                        <span id="sundamage-model" class="color-lightgrey">Sin quemaduras solares</span>
+                        <span id="sundamage-model" class="color-lightgrey">No sunburn</span>
                         <span class="right-arrow" onclick="showNextSundamageModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Pecas</h2>
+                    <h2>Freckles</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevFrecklesModel();"></span>
-                        <span id="freckles-model" class="color-lightgrey">Sin pecas</span>
+                        <span id="freckles-model" class="color-lightgrey">No freckles</span>
                         <span class="right-arrow" onclick="showNextFrecklesModel();"></span>
                     </div>
                 </div>
@@ -235,26 +235,26 @@
             <!-- Opción ojos -->
             <div id="eyes" class="no-display">
                 <div>
-                    <h2>Color de los ojos</h2>
+                    <h2>Eye color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevEyesColor();"></span>
-                        <span id="eyes-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="eyes-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextEyesColor();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Estilo de cejas</h2>
+                    <h2>Eybrows style</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevEyebrowsModel();"></span>
-                        <span id="eyebrows-model" class="color-lightgrey">Tipo 1</span>
+                        <span id="eyebrows-model" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextEyebrowsModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color de las cejas</h2>
+                    <h2>Eyebrows color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevEyebrowsColor();"></span>
-                        <span id="eyebrows-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="eyebrows-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextEyebrowsColor();"></span>
                     </div>
                 </div>
@@ -263,83 +263,83 @@
             <!-- Opción detalles faciales -->
             <div id="face-features" class="no-display overflow-auto">
                 <div>
-                    <h2>Anchura de la nariz</h2>
+                    <h2>Nose width</h2>
                     <input id="a" type="range" min="0" max="99" oninput="updateA();" />
                 </div>
                 <div>
-                    <h2>Altura de la nariz</h2>
+                    <h2>Nose height</h2>
                     <input id="b" type="range" min="0" max="99" oninput="updateB();" />
                 </div>
                 <div>
-                    <h2>Largura de la nariz</h2>
+                    <h2>Nose lenght</h2>
                     <input id="c" type="range" min="0" max="99" oninput="updateC();" />
                 </div>
                 <div>
-                    <h2>Curvatura del puente de la nariz</h2>
+                    <h2>Nose bridge curvature</h2>
                     <input id="d" type="range" min="0" max="99" oninput="updateD();" />
                 </div>
                 <div>
-                    <h2>Ángulo de la nariz</h2>
+                    <h2>Nose angle</h2>
                     <input id="e" type="range" min="0" max="99" oninput="updateE();" />
                 </div>
                 <div>
-                    <h2>Nariz torcida</h2>
+                    <h2>Nose twist</h2>
                     <input id="f" type="range" min="0" max="99" oninput="updateF();" />
                 </div>
                 <div>
-                    <h2>Altura de las cejas</h2>
+                    <h2>Eyebeows height</h2>
                     <input id="g" type="range" min="0" max="99" oninput="updateG();" />
                 </div>
                 <div>
-                    <h2>Frente prominente</h2>
+                    <h2>Forehead depth</h2>
                     <input id="h" type="range" min="0" max="99" oninput="updateH();" />
                 </div>
                 <div>
-                    <h2>Altura de los pómulos</h2>
+                    <h2>Cheekbones Height</h2>
                     <input id="i" type="range" min="0" max="99" oninput="updateI();" />
                 </div>
                 <div>
-                    <h2>Anchura de los pómulos</h2>
+                    <h2>Cheekbones widht</h2>
                     <input id="j" type="range" min="0" max="99" oninput="updateJ();" />
                 </div>
                 <div>
-                    <h2>Anchura de las mejillas</h2>
+                    <h2>Cheek width</h2>
                     <input id="k" type="range" min="0" max="99" oninput="updateK();" />
                 </div>
                 <div>
-                    <h2>Abertura de los ojos</h2>
+                    <h2>Eye size</h2>
                     <input id="l" type="range" min="0" max="99" oninput="updateL();" />
                 </div>
                 <div>
-                    <h2>Grosor de los labios</h2>
+                    <h2>Lips thickness</h2>
                     <input id="m" type="range" min="0" max="99" oninput="updateM();" />
                 </div>
                 <div>
-                    <h2>Anchura de la mandíbula</h2>
+                    <h2>Jaw width</h2>
                     <input id="n" type="range" min="0" max="99" oninput="updateN();" />
                 </div>
                 <div>
-                    <h2>Altura de la mandíbula</h2>
+                    <h2>Jaw height</h2>
                     <input id="o" type="range" min="0" max="99" oninput="updateO();" />
                 </div>
                 <div>
-                    <h2>Altura de la barbilla</h2>
+                    <h2>Chin height</h2>
                     <input id="p" type="range" min="0" max="99" oninput="updateP();" />
                 </div>
                 <div>
-                    <h2>Profundidad de la barbilla</h2>
+                    <h2>Chin depth</h2>
                     <input id="q" type="range" min="0" max="99" oninput="updateQ();" />
                 </div>
                 <div>
-                    <h2>Anchura de la barbilla</h2>
+                    <h2>Chin width</h2>
                     <input id="r" type="range" min="0" max="99" oninput="updateR();" />
                 </div>
                 <div>
-                    <h2>Saliente de la barbilla</h2>
+                    <h2>Chin size</h2>
                     <input id="s" type="range" min="0" max="99" oninput="updateS();" />
                 </div>
                 <div>
-                    <h2>Anchura de cuello</h2>
+                    <h2>Neck width</h2>
                     <input id="t" type="range" min="0" max="99" oninput="updateT();" />
                 </div>
             </div>
@@ -347,42 +347,42 @@
             <!-- Opción maquillaje -->
             <div id="lipstick" class="no-display">
                 <div>
-                    <h2>Estilo de maquillaje</h2>
+                    <h2>Makeup style</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevMakeupModel();"></span>
-                        <span id="makeup-model" class="color-lightgrey">Sin maquillaje</span>
+                        <span id="makeup-model" class="color-lightgrey">No makeup</span>
                         <span class="right-arrow" onclick="showNextMakeupModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Estilo de colorete</h2>
+                    <h2>Blush style</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevBlushModel();"></span>
-                        <span id="blush-model" class="color-lightgrey">Sin colorete</span>
+                        <span id="blush-model" class="color-lightgrey">No blush</span>
                         <span class="right-arrow" onclick="showNextBlushModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color del colorete</h2>
+                    <h2>Blush color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevBlushColor();"></span>
-                        <span id="blush-color" class="color-lightgrey">Tipo 1</span>
+                        <span id="blush-color" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextBlushColor();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Estilo de pintalabios</h2>
+                    <h2>Lipstick style</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevLipstickModel();"></span>
-                        <span id="lipstick-model" class="color-lightgrey">Tipo 1</span>
+                        <span id="lipstick-model" class="color-lightgrey">Type 1</span>
                         <span class="right-arrow" onclick="showNextLipstickModel();"></span>
                     </div>
                 </div>
                 <div>
-                    <h2>Color del pintalabios</h2>
+                    <h2>Liptick color</h2>
                     <div class="arrow-picker">
                         <span class="left-arrow" onclick="showPrevLipstickColor();"></span>
-                        <span id="lipstick-color" class="color-lightgrey">Sin pintalabios</span>
+                        <span id="lipstick-color" class="color-lightgrey">No lipsticks</span>
                         <span class="right-arrow" onclick="showNextLipstickColor();"></span>
                     </div>
                 </div>
@@ -392,18 +392,18 @@
 
     <!-- Cuadro para previsualizar al personaje -->
     <div class="content">
-        
+
         <div class="col-md-12">
             <div class="btn-group pull-right">
-                <button  class="btn" onclick="cameraPointTo(1);" style="margin-top: 5px;">Enfocar cara</button>
-                <button class="btn" onclick="cameraPointTo(0);" style="margin-top: 5px;">Enfocar cuerpo</button>
+                <button  class="btn" onclick="cameraPointTo(1);" style="margin-top: 5px;">Focus face</button>
+                <button class="btn" onclick="cameraPointTo(0);" style="margin-top: 5px;">Focus body</button>
             </div>
         </div>
         <div  class="col-md-8">
             <input id="character-slider" style="margin-top: 5px;" type="range" min="0" max="360" oninput="rotateCharacter();" />
         </div>
     </div>
-    
+
 
     <!-- Botones de selección de opciones -->
     <div class="footer-menu">

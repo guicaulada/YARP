@@ -2,6 +2,8 @@
 var db = require('diskdb');
 var bcrypt = require('bcryptjs');
 var utils = require(`./utils.js`);
+var cfg = require('./config.js');
+
 db.connect('./packages/YARP/_db');
 db.loadCollections(['users','groups']);
 exports.db = db;
@@ -10,12 +12,17 @@ exports.USERS = {};
 exports.GROUPS = {};
 
 //Users Database Interaction
-exports.USERS.getUser = function(player){
+exports.USERS.getUserByPlayer = function(player){
   var user = db.users.findOne({social_club : player.socialClub});
   return user
 };
 
-exports.USERS.loginUser = function(player, password){
+exports.USERS.getUserByRegistration = function(reg){
+  var user = db.users.findOne({characters : {registration: reg}});
+  return user
+};
+
+exports.USERS.verifyAuthentication = function(player, password){
   var user = db.users.findOne({social_club : player.socialClub});
   var last_login = {
     ip : player.ip,
@@ -24,14 +31,14 @@ exports.USERS.loginUser = function(player, password){
   if (user == null) {
     var hash = bcrypt.hashSync(password, 10);
     user = {
-        id : db.users.count()+1,
-        social_club : player.socialClub,
-        password : hash,
-        last_login : last_login,
-        whitelisted : false,
-        banned : false,
-        groups : ["user"],
-        characters : []
+      id : db.users.count()+1,
+      social_club : player.socialClub,
+      password : hash,
+      last_login : last_login,
+      whitelisted : false,
+      banned : false,
+      groups : ["user"],
+      characters : []
     };
     db.users.save(user);
   } else {
@@ -41,6 +48,30 @@ exports.USERS.loginUser = function(player, password){
       user = null;
     }
   }
+  return user;
+};
+
+exports.USERS.createCharacter = function(player, name, age, jskin){
+  var user = db.users.findOne({social_club : player.socialClub});
+  var last_login = {
+    ip : player.ip,
+    date : utils.FUNCTIONS.getFormattedDate()
+  }
+  character = {
+    id :user.characters.length+1,
+    last_login : last_login,
+    groups : ["user"],
+    job : "citizen",
+    name : name,
+    age : age,
+    money : cfg.swallet,
+    registration : utils.FUNCTIONS.generateRegistration(),
+    customization : jskin,
+    weapons : [],
+    inventory : []
+  };
+  user.characters.push(character);
+  db.users.update(user, {characters : user.characters}, {multi: false, upsert: false});
   return user;
 };
 

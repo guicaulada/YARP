@@ -1,10 +1,9 @@
-var spawnPoints = require('../json/spawn_points.json').SpawnPoints;
-var cfg = require('../json/config.json');
+var cfg = require('./config.js');
 var db = require('./database.js');
 
 mp.events.add('playerJoin', (player) => {
     console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-    var user = db.USERS.getUser(player);
+    var user = db.USERS.getUserByPlayer(player);
     if(user != null){
       if (user.banned) {
         player.outputChatBox("!{red}You have been banned.");
@@ -19,17 +18,17 @@ mp.events.add('playerJoin', (player) => {
         },1000);
       }
       else {
-        player.call('showLogin', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+        player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
       }
     }
     else {
       user = {social_club: player.socialClub};
-      player.call('showLogin', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+      player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
     }
 });
 
 mp.events.add('playerDeath', (player) => {
-    player.spawn(spawnPoints[Math.floor(Math.random() * spawnPoints.length)]);
+    player.spawn(cfg.spawn[Math.floor(Math.random() * cfg.spawn.length)]);
     player.health = 100;
 });
 
@@ -47,13 +46,24 @@ mp.events.add('playerChat', (player, message) => {
 });
 
 //Login events
-mp.events.add('loginUser', (player,password) => {
-  var user = db.USERS.loginUser(player, password);
+mp.events.add('verifyAuthentication', (player,password) => {
+  var user = db.USERS.verifyAuthentication(player, password);
   if(user != null){
-    player.notify(`Last connection from ~g~${user.last_login.ip}~w~ at ~g~${user.last_login.date}`);
-    player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
-    player.call('destroyBrowser',[['freezePlayer', false]]);
+    //player.notify(`Last connection from ~g~${user.last_login.ip}~w~ at ~g~${user.last_login.date}`);
+    //player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
+    //player.call('destroyBrowser',[['freezePlayer', false]]);
+    if(user.characters.length == 0){
+      player.call('showCharacterCreationMenu');
+    } else {
+  	  player.call('createBrowser', [['package://YARP/www/html/sideMenu.html', 'populateCharacterList', JSON.stringify(user.characters)]]);
+    }
   } else {
-    player.call('loginUser', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+    player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
   }
+});
+
+//Character creation
+mp.events.add('createCharacter', (player, name, age, jskin) => {
+  var user = db.USERS.createCharacter(player,name,age,jskin);
+  player.call('createBrowser', [['package://YARP/www/html/sideMenu.html', 'populateCharacterList', JSON.stringify(user.characters)]]);
 });

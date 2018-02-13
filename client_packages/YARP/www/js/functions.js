@@ -4,7 +4,7 @@ let catalogSelectedOption = 0;
 
 function loginAccount() {
     var password = document.getElementById('pass').value;
-    mp.trigger('loginUser', password);
+    mp.trigger('verifyAuthentication', password);
 };
 
 function selectName() {
@@ -391,6 +391,10 @@ function populateQuestionAnswers(question, answersJSON) {
 		// Añadimos el radio a la lista
 		document.getElementById('license-answers').appendChild(div);
 	}
+}
+
+function setAccountName(sclub){
+  document.getElementById('acct').value = `${sclub}`;
 }
 
 function submitAnswer() {

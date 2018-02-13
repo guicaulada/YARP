@@ -1,3 +1,4 @@
+var db = require('./database.js');
 
 exports.FUNCTIONS = {};
 
@@ -18,3 +19,18 @@ exports.FUNCTIONS.getFormattedDate = function(){
   var today = `${dd}/${mm}/${yyyy} ${h}:${m}:${s}`;
   return today;
 };
+
+exports.FUNCTIONS.generateRegistration = function(){
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+  for (var i = 0; i < 8; i++){
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  if (db.USERS.getUserByRegistration() == null){
+    return text;
+  } else {
+    return exports.FUNCTIONS.generateRegistration();
+  }
+}
