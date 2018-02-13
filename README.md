@@ -24,7 +24,7 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
 * **Whitelist**
 * **More to come...**
 
-## API
+## Usage
 
 YARP is still under development, information will be added here in the future.
 
@@ -45,3 +45,9 @@ YARP is still under development, information will be added here in the future.
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+## Acknowledgments
+*Thanks to the following people who in some way or another, has helped with this project:*
+* [Shadow](https://github.com/shadowbrz)
+* [ImagicTheCat](https://github.com/ImagicTheCat)
+* [xabier1989](https://github.com/xabier1989)
