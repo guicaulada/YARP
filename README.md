@@ -19,9 +19,10 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
    * ```npm install bcryptjs```
 
 ## Features
+* **Whitelist**
 * **JSON Disk Database**
 * **Dynamic Groups/Permissions**
-* **Whitelist**
+* **Secure Authentication**
 * **More to come...**
 
 ## Usage
