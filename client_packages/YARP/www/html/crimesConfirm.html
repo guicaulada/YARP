@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Confirmación de delitos</title>
+        <link rel="stylesheet" href="../css/crimes.css" />
+        <link rel="stylesheet" href="../css/scrollbar.css" />
+    </head>
+    <body>
+		<div class="crimes-content">
+			<div class="crimes-header">Confirmación de delitos a aplicar</div>
+			<div class="crimes-body">
+				<ul id="content" class="crime-list"></ul>
+			</div>
+			<div class="crimes-info">
+				<div id="jail" class="crimes-time"></div>
+				<div id="fine" class="crimes-amount"></div>
+			</div>
+			<div class="crimes-options">
+				<div class="confirm-button" onclick="applyCrimesToPlayer();">Inculpar</div>
+				<div class="cancel-button" onclick="showCrimesMenu();">Cancelar</div>
+			</div>
+		</div>
+    </body>
+    <script src="../js/crimes.js"></script>
+</html>

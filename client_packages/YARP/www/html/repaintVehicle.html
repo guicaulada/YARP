@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Pintura para vehículos</title>
+        <link rel="stylesheet" href="../css/repaint.css" />
+        <link rel="stylesheet" href="../css/scrollbar.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/farbtastic.css" />
+    </head>
+    <body>
+        <!-- Parte en blanco para el contenido del juego -->
+        <div class="content"></div>
+        
+        <!-- Pestañas de selección -->
+        <div class="tabs-menu">
+            <div class="active-tab"><span>Colores predefinidos</span></div>
+            <div><span>Colores personalizados</span></div>
+        </div>
+
+        <div class="footer-menu">
+            <!-- Contenido pestaña predefinidos -->
+            <div id="predefined" class="left width-80">
+                <div class="color-content-double">
+                    <div><h1>Color primario</h1></div>
+                    <div class="arrow-picker">
+                        <span class="left-arrow" onclick="showPrevColorType(0);"></span>
+                        <span id="first-color-type" class="color-lightgrey">Metalizado</span>
+                        <span class="right-arrow" onclick="showNextColorType(0);"></span>
+                    </div>
+                    <div class="arrow-picker">
+                        <span class="left-arrow" onclick="showPrevColorDesc(0);"></span>
+                        <span id="first-color-desc" class="color-lightgrey">Negro</span>
+                        <span class="right-arrow" onclick="showNextColorDesc(0);"></span>
+                    </div>
+                    <div class="">
+                        <input id="first-color-id" type="number" min="0" max="159" value="0" onchange="selectPredefinedColor(0);" />
+                    </div>
+                </div>
+                <div class="color-content-double">
+                    <h1>Color secundario</h1>
+                    <div class="arrow-picker">
+                        <span class="left-arrow" onclick="showPrevColorType(1);"></span>
+                        <span id="second-color-type" class="color-lightgrey">Metalizado</span>
+                        <span class="right-arrow" onclick="showNextColorType(1);"></span>
+                    </div>
+                    <div class="arrow-picker">
+                        <span class="left-arrow" onclick="showPrevColorDesc(1);"></span>
+                        <span id="second-color-desc" class="color-lightgrey">Negro</span>
+                        <span class="right-arrow" onclick="showNextColorDesc(1);"></span>
+                    </div>
+                    <div class="">
+                        <input id="second-color-id" type="number" min="0" max="159" value="0" onchange="selectPredefinedColor(1);" />
+                    </div>
+                    <input id="pearlescent-color" type="number" min="0" max="159" value="0" onchange="selectPearlescentColor();" />
+                </div>
+            </div>
+
+            <!-- Contenido pestaña personalizados -->
+            <div id="custom" class="no-display left width-80">
+                <div class="color-content-double">
+                    <div><h1>Color primario</h1></div>
+                    <div id="first-custom-color"></div>
+                </div>
+                <div class="color-content-double">
+                    <h1>Color secundario</h1>
+                    <div id="second-custom-color"></div>
+                </div>
+            </div>
+
+            <!-- Recuento de precio y gasto -->
+            <div class="left width-20">
+                <p><b>Productos:</b> 250</p>
+                <p><b>Precio:</b> <input id="price" class="width-15" type="number" value="0"/></p>
+                <div>
+                    <input type="submit" class="accept-button" value="Repintar" onclick="acceptRepaint();"/>
+                    <input type="submit" class="cancel-button" value="Cancelar" onclick="cancelRepaint();"/>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- Carga de librerías -->
+    <script src="../lib/jquery-3.1.1.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <script src="../lib/farbtastic.js"></script>
+    <script src="../js/repaint.js"></script>
+</html>

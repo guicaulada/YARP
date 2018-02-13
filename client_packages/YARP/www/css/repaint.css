@@ -1,0 +1,123 @@
+﻿* {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	border: 0px;
+	margin: 0px;
+}
+
+body {
+	width: 100%;
+	height: 100vh;
+	margin: 0px auto;
+	background-color: transparent;
+}
+
+input[type=number] {
+	padding-left: 5px;
+	color: black;
+}
+
+.no-display {
+	display: none;
+}
+
+.left {
+	float: left;
+}
+
+.width-15 {
+	width: 15%;
+}
+
+.width-20 {
+	width: 20%;
+}
+
+.width-80 {
+	width: 80%;
+}
+
+.content {
+	width: 100%;
+	height: calc(100vh - 320px);
+}
+
+.tabs-menu {
+	display: inline;
+	width: 100%;
+	height: 40px;
+}
+
+.tabs-menu > div {
+	float: left;
+	height: 40px;
+	color: white;
+	padding: 4px 14px;
+	font-weight: bold;
+	line-height: 35px;
+	background-color: rgba(0, 0, 0, 0.675);
+}
+
+.active-tab {
+	background-color: rgba(0, 0, 0, 0.875) !important;
+}
+
+.footer-menu {
+	clear: both;
+	width: 100%;
+	height: 280px;
+	color: rgba(235, 235, 235, 0.925);
+	background-color: rgba(0, 0, 0, 0.875);
+}
+
+.color-content-single {
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+.color-content-double {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+
+.arrow-picker {
+	text-align: center;
+	margin: 0 auto;
+	width: 70%;
+}
+
+.arrow-picker span:nth-child(2) {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.left-arrow:before {
+    content: '\25C0';
+	padding: 2px 4px;
+	background-color: #222222;
+	color: #FEFEFE;
+	border-radius: 3px;
+}
+
+.right-arrow:before {
+    content: '\25B6';
+	padding: 2px 4px;
+	background-color: #222222;
+	color: #FEFEFE;
+	border-radius: 3px;
+}
+
+.accept-button {
+	color: white;
+	font-weight: bold;
+	background-color: #388E3C;
+}
+
+.cancel-button {
+	color: white;
+	font-weight: bold;
+	background-color: #C62828;
+}

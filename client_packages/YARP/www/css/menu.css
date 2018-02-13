@@ -1,0 +1,154 @@
+﻿body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	color: white;
+}
+
+.active-item {
+	background-color: rgba(20, 20, 20, 0.85);
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.menu-content {
+	position: absolute;
+	top: 15vh;
+	right: 2%;
+	width: 25%;
+	height: 70vh;
+}
+
+.menu-header {
+	height: 5vh;
+	line-height: 5vh;
+	font-weight: bold;
+	font-size: 1.15vmax;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.95);
+}
+
+.menu-body {
+	height: 60vh;
+	overflow-y: auto;
+	background-color: rgba(0, 0, 0, 0.75);
+}
+
+.menu-options {
+	height: 5vh;
+}
+
+.item-row {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 78px;
+}
+
+.item-image {
+	float: left;
+	width: 64px;
+	height: 64px;
+	margin: 7px;
+}
+
+.item-content {
+	float: left;
+	margin-left: 2px;
+	line-height: 34px;
+	vertical-align: middle;
+	width: calc(100% - 80px);
+}
+
+.item-header {
+	width: 100%;
+	height: 30px;
+}
+
+.item-purchase {
+	display: inline-block;
+	width: 100%;
+	height: 48px;
+	line-height: 48px;
+	vertical-align: middle;
+}
+
+.item-price-container {
+	float: left;
+	width: 45%;
+}
+
+.item-amount-container {
+	float: right;
+	width: 55%;
+}
+
+.item-amount-desc-container {
+	float: left;
+	text-align: right;
+	padding-right: 30px;
+	width: calc(100% - 80px);
+}
+
+.item-add-substract-container {
+	float: right;
+	width: 50px;
+}
+
+.item-adder {
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.item-substract {
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.single-button {
+	display: inline;
+	float: left;
+	height: 5vh;
+	width: 100%;
+	font-weight: bold;
+	text-align: center;
+	line-height: 5vh;
+	vertical-align: middle;
+}
+
+.double-button {
+	display: inline;
+	float: left;
+	height: 5vh;
+	width: 50%;
+	font-weight: bold;
+	text-align: center;
+	line-height: 5vh;
+	vertical-align: middle;
+}
+
+.accept-button {
+	background-color: #66BB6A;
+}
+
+.accept-button:hover {
+	background-color: #4CAF50;
+}
+
+.cancel-button {
+	background-color: #E53935;
+}
+
+.cancel-button:hover {
+	background-color: #D32F2F;
+}

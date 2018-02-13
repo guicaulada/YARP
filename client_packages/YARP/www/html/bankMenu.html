@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Menú principal del ATM</title>
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/scrollbar.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <script src="../lib/jquery-3.1.1.min.js"></script>
+        <script src="../lib/bootstrap.min.js"></script>
+    </head>
+    <body class="background col-lg-12">
+        <div class="col-lg-6 center-block panel vertical-center">
+            <div class="panel-heading col-lg-12"><img src="../img/bank/bank-logo.png" /></div>
+
+            <!-- Menú principal del ATM -->
+            <div id="bank-menu" class="panel-body">
+
+                <!-- Opciones de depósito y retiro -->
+                <div class="row">
+                    <figure class="figure col-lg-6 pointer" onclick="withdrawMoney();">
+                        <img src="../img/bank/withdraw.png" class="figure-img img-fluid rounded center-block" alt="Retirar dinero">
+                        <figcaption class="figure-caption">Retirar</figcaption>
+                    </figure>
+                    <figure class="figure col-lg-6 pointer center" onclick="depositMoney();">
+                        <img src="../img/bank/deposit.png" class="figure-img img-fluid rounded center-block" alt="Depositar dinero">
+                        <figcaption class="figure-caption">Depósito</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Separador -->
+                <div style="height: 25px;"></div>
+                
+                <!-- Opciones de transferencia y balance -->
+                <div class="row">
+                    <figure class="figure col-lg-6 pointer" onclick="transferMoney();">
+                        <img src="../img/bank/transfer.png" class="figure-img img-fluid rounded center-block" alt="Transferir dinero">
+                        <figcaption class="figure-caption">Transferencia</figcaption>
+                    </figure>
+                    <figure class="figure col-lg-6 pointer" onclick="showBalance();">
+                        <img src="../img/bank/balance.png" class="figure-img img-fluid rounded center-block" alt="Balance de cuenta">
+                        <figcaption class="figure-caption">Balance</figcaption>
+                    </figure>
+                </div>
+
+            </div>
+
+            <!-- Opción de retirar dinero -->
+            <div id="bank-withdraw" class="panel-body hidden">
+                <div class="col-lg-5 col-lg-offset-2"><h1>Retirar dinero</h1></div>
+                <div class="col-lg-5 col-lg-offset-2"><label>Saldo disponible: </label><span id="bank-withdraw-balance"></span></div>
+                <div class="col-lg-5 col-lg-offset-2"><input id="bank-withdraw-amount" type="number" value="0" min="0"/></div>
+                <div class="col-lg-5 col-lg-offset-2"><span id="bank-withdraw-error" class="hidden alert alert-danger"></span></div>
+            </div>
+
+            <!-- Opción de depositar dinero -->
+            <div id="bank-deposit" class="panel-body hidden">
+                <div class="col-lg-5 col-lg-offset-2"><h1>Depositar dinero</h1></div>
+                <div class="col-lg-5 col-lg-offset-2"><label>Saldo disponible: </label><span id="bank-deposit-balance"></span></div>
+                <div class="col-lg-5 col-lg-offset-2"><input id="bank-deposit-amount" type="number" value="0" min="0"/></div>
+                <div class="col-lg-5 col-lg-offset-2"><span id="bank-deposit-error" class="hidden alert alert-danger"></span></div>
+            </div>
+
+            <!-- Opción de transferir dinero -->
+            <div id="bank-transfer" class="panel-body hidden">
+                <div class="col-lg-5 col-lg-offset-2"><h1>Transferir dinero</h1></div>
+                <div class="col-lg-5 col-lg-offset-2"><label>Saldo disponible: </label><span id="bank-transfer-balance"></span></div>
+                <div class="col-lg-5 col-lg-offset-2"><input id="bank-transfer-person" type="text" placeholder="Receptor"/></div>
+                <div class="col-lg-5 col-lg-offset-2"><input id="bank-transfer-amount" type="number" value="0" min="0"/></div>
+                <div class="col-lg-5 col-lg-offset-2"><span id="bank-transfer-error" class="hidden alert alert-danger"></span></div>
+            </div>
+
+            <!-- Opción de obtener el balance de la cuenta -->
+            <div id="bank-balance" class="panel-body hidden">
+                <div class="col-lg-8 col-lg-offset-2">Balance de cuenta</div>
+                <table class="col-lg-8 col-lg-offset-2">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>Día</th>
+                            <th>Operación</th>
+                            <th>Cuenta origen o destino</th>
+                            <th>Cuantía</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bankBalanceTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="btn-group panel-footer col-lg-12" role="group">
+                <button id="bank-accept" type="button" class="btn btn-secondary hidden" onclick="bankAccept();">Aceptar</button>
+                <button id="bank-exit" type="button" class="btn btn-secondary" onclick="bankBack();">Salir</button>
+            </div>
+
+        </div>
+    </body>
+    <script src="../js/functions.js"></script>
+</html>

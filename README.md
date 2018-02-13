@@ -5,7 +5,8 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
 ## Requirements
 
 * [nodejs](https://nodejs.org) - A JavaScript runtime built on Chrome's V8 JavaScript engine
-* [diskdb](https://www.npmjs.com/package/diskdb) - A Lightweight Disk based JSON Database for Node.
+* [diskdb](https://github.com/arvindr21/diskDB) - A Lightweight Disk based JSON Database for Node.
+* [bcrypt](https://github.com/dcodeIO/bcrypt.js) - Optimized bcrypt in JavaScript with zero dependencies.
 
 ## Installation
 
@@ -15,6 +16,7 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
    * Run the command prompt as administrator.
    * ```cd C:/server-files``` *(use your server path)*
    * ```npm install diskdb```
+   * ```npm install bcryptjs```
 
 ## Features
 * **JSON Disk Database**

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Panel de jugadores conectados</title>
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/scrollbar.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <script src="../lib/jquery-3.1.1.min.js"></script>
+        <script src="../lib/bootstrap.min.js"></script>
+    </head>
+    <body class="background col-lg-12" onload="getPlayerList();">
+        <table class="table">
+            <thead class="thead-default">
+                <tr>
+                    <th class="text-white">#</th>
+                    <th class="text-white">Nombre</th>
+                    <th class="text-white">Ping</th>
+                </tr>
+            </thead>
+            <tbody id="playersTableBody" class="text-dark-white"></tbody>
+        </table>
+    </body>
+    <script src="../js/functions.js"></script>
+</html>

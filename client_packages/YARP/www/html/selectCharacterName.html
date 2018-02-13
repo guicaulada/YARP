@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Panel de registro de cuenta</title>
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/scrollbar.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <script src="../lib/jquery-3.1.1.min.js"></script>
+        <script src="../lib/bootstrap.min.js"></script>
+    </head>
+    <body class="background col-lg-12">
+        <form class="col-lg-3 center-block panel vertical-center">
+            <div class="panel-heading">Acceso al servidor</div>
+            <p class="text-center">Introduce el nombre y apellido de tu personaje:</p>
+            <div class="col-lg-8 col-lg-offset-2"><input id="name" class="form-control center-block" type="text" placeholder="Nombre" required="required" autofocus/></div>
+            <div class="col-lg-8 col-lg-offset-2"><input id="surname" class="form-control center-block" type="text" placeholder="Apellido" required="required"/></div>
+            <div class="col-lg-6 col-lg-offset-3"><button id="register" class="btn btn-primary form-control center-block" onclick="selectName();">Acceder</button></div>
+        </form>
+    </body>
+    <script src="../js/functions.js"></script>
+</html>

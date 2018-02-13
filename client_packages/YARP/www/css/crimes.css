@@ -1,0 +1,104 @@
+﻿body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	color: white;
+}
+
+.crimes-content {
+	position: absolute;
+	top: 25vh;
+	left: 35%;
+	width: 30%;
+	height: 50vh;
+}
+
+.crimes-header {
+	height: 5vh;
+	line-height: 5vh;
+	font-weight: bold;
+	font-size: 1.15vmax;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.95);
+}
+
+.crimes-body {
+	height: 36vh;
+	overflow-y: auto;
+	background-color: rgba(0, 0, 0, 0.75);
+}
+
+.crime-list {
+	list-style: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 5px;
+}
+
+.crime-list > li {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.crimes-info {
+	height: 4vh;
+	background-color: rgba(0, 0, 0, 0.85);
+}
+
+.crimes-amount {
+	float: left;
+	width: 50%;
+	line-height: 4vh;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.crimes-time {
+	float: left;
+	width: 50%;
+	line-height: 4vh;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.crimes-options {
+	height: 5vh;
+}
+
+.confirm-button {
+	display: inline;
+	float: left;
+	height: 5vh;
+	width: 50%;
+	font-weight: bold;
+	text-align: center;
+	line-height: 5vh;
+	vertical-align: middle;
+	background-color: #66BB6A;
+}
+
+.confirm-button:hover {
+	background-color: #4CAF50;
+}
+
+.cancel-button {
+	display: inline;
+	float: left;
+	height: 5vh;
+	width: 50%;
+	font-weight: bold;
+	text-align: center;
+	line-height: 5vh;
+	vertical-align: middle;
+	background-color: #E53935;
+}
+
+.cancel-button:hover {
+	background-color: #D32F2F;
+}

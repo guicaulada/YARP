@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Account Registration</title>
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/scrollbar.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <script src="../lib/jquery-3.1.1.min.js"></script>
+        <script src="../lib/bootstrap.min.js"></script>
+    </head>
+    <body class="background col-lg-12">
+        <form class="col-lg-3 center-block panel vertical-center">
+            <div class="panel-heading login-heading"><img class="logo" src="../img/login/logo.png" /></div>
+            <p class="text-center">Welcome to Sighmir's YARP Server. To play in this server you need to register an account.</p>
+            <div class="col-lg-8 col-lg-offset-2"><input id="acct" class="form-control center-block" type="text" placeholder="Account" required="required" readonly/></div>
+            <div class="col-lg-8 col-lg-offset-2"><input id="pass" class="form-control center-block" type="password" placeholder="Password" required="required" autofocus/></div>
+            <div class="col-lg-6 col-lg-offset-3"><button id="register" class="btn btn-primary form-control center-block" onclick="loginAccount();">Register</button></div>
+        </form>
+    </body>
+    <script src="../js/functions.js"></script>
+</html>
