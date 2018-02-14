@@ -20,12 +20,12 @@ mp.events.add('showPlayerCharacters', (charactersJson) => {
 	mp.events.call('createBrowser', ['package://YARP/www/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
-mp.events.add('loadCharacter', (characterName) => {
+mp.events.add('loadCharacter', (characterJson) => {
 	// Destruímos el menú de personajes
 	mp.events.call('destroyBrowser');
 
 	// Cargamos el personaje
-	mp.events.callRemote('loadCharacter', characterName);
+	mp.events.callRemote('loadCharacter', characterJson);
 });
 
 mp.events.add('showCharacterCreationMenu', () => {
@@ -87,10 +87,10 @@ mp.events.add('characterNameDuplicated', () => {
 	mp.events.call('executeFunction', ['showPlayerDuplicatedWarn']);
 });
 
-mp.events.add('acceptCharacterCreation', (name, age) => {
+mp.events.add('acceptCharacterCreation', (name, age, model) => {
 	// Llamamos a la función para crear el personaje
-	let skinJson = JSON.stringify(faceModel);
-	mp.events.callRemote('createCharacter', name, age, skinJson);
+	let faceJson = JSON.stringify(faceModel);
+	mp.events.callRemote('createCharacter', name, age, model, faceJson);
 });
 
 mp.events.add('cancelCharacterCreation', () => {
@@ -148,14 +148,14 @@ mp.events.add('entityStreamIn', (entity) => {
 	}
 });
 
-mp.events.add('updatePlayerCustomSkin', (player, tattooJsonArray) => {
+mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
 	// Obtenemos los objetos recibidos
-	let face = initializeCharacterCreation(player);
-	let tattooArray = JSON.parse(tattooJsonArray);
+	let face = JSON.parse(faceJson);
+	let tattoo = JSON.parse(tattooJson);
 
 	// Actualizamos la apariencia del personaje
 	updatePlayerFace(player, face);
-	updatePlayerTattoos(player, tattooArray);
+	updatePlayerTattoos(player, tattoo);
 });
 
 function initializeCharacterCreation(player) {

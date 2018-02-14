@@ -23,6 +23,7 @@ let currentBlushModel = -1;
 let currentBlushColor = 0;
 let currentLipstickModel = -1;
 let currentLipstickColor = 0;
+let currentModel = "mp_m_freemode_01";
 
 function hideError() {
 	$('#error').addClass('no-display');
@@ -48,20 +49,20 @@ function toggleCharacterCustomize() {
 
 $("div#sex").on("click", "img", function() {
 	if($(this).hasClass("enabled") == false) {
-		var sex = 0;
+		currentModel = "mp_m_freemode_01";
 		if($("#sex-male").hasClass("enabled") == true) {
 			$("#sex-male").attr("src", "../img/character/male-disabled.png");
 			$("#sex-female").attr("src", "../img/character/female-enabled.png");
 			$("#sex-male").removeClass("enabled");
 			$("#sex-female").addClass("enabled");
-			sex = 1;
+			currentModel = "mp_f_freemode_01";
 		} else {
 			$("#sex-male").attr("src", "../img/character/male-enabled.png");
 			$("#sex-female").attr("src", "../img/character/female-disabled.png");
 			$("#sex-female").removeClass("enabled");
 			$("#sex-male").addClass("enabled");
 		}
-		mp.trigger('updatePlayerSex', sex);
+		mp.trigger('updatePlayerSex', currentModel);
 	}
 });
 
@@ -95,7 +96,7 @@ function createCharacter() {
 		let characterAge = $('#age').val();
 		let characterName = $('#character-name').val()[0].toUpperCase() + $('#character-name').val().substr(1);
 		let characterSurname = $('#character-surname').val()[0].toUpperCase() + $('#character-surname').val().substr(1);
-		mp.trigger('acceptCharacterCreation', characterName.trim() + " " + characterSurname.trim(), characterAge);
+		mp.trigger('acceptCharacterCreation', characterName.trim() + " " + characterSurname.trim(), characterAge, currentModel);
 	}
 }
 

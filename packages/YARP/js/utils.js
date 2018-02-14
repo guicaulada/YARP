@@ -28,7 +28,7 @@ exports.FUNCTIONS.generateRegistration = function(){
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 
-  if (db.USERS.getUserByRegistration() == null){
+  if (db.CHARACTERS.getUserByRegistration() == null){
     return text;
   } else {
     return exports.FUNCTIONS.generateRegistration();

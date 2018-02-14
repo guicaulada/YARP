@@ -5,21 +5,17 @@ var utils = require(`./utils.js`);
 var cfg = require('./config.js');
 
 db.connect('./packages/YARP/_db');
-db.loadCollections(['users','groups']);
+db.loadCollections(['users','groups','characters']);
 exports.db = db;
 
 exports.USERS = {};
 exports.GROUPS = {};
+exports.CHARACTERS = {};
 
-//Users Database Interaction
+//Users DB Interaction
 exports.USERS.getUserByPlayer = function(player){
   var user = db.users.findOne({social_club : player.socialClub});
-  return user
-};
-
-exports.USERS.getUserByRegistration = function(reg){
-  var user = db.users.findOne({characters : {registration: reg}});
-  return user
+  return user;
 };
 
 exports.USERS.verifyAuthentication = function(player, password){
@@ -38,7 +34,7 @@ exports.USERS.verifyAuthentication = function(player, password){
       whitelisted : false,
       banned : false,
       groups : ["user"],
-      characters : []
+      active : false
     };
     db.users.save(user);
   } else {
@@ -51,31 +47,76 @@ exports.USERS.verifyAuthentication = function(player, password){
   return user;
 };
 
-exports.USERS.createCharacter = function(player, name, age, jskin){
+exports.USERS.getPlayerActiveCharacter = function(player){
+  var user = db.users.findOne({social_club : player.socialClub});
+  var character = db.characters.findOne({name: user.active});
+  return character;
+};
+
+exports.USERS.activatePlayerCharacter = function(player, character){
   var user = db.users.findOne({social_club : player.socialClub});
   var last_login = {
     ip : player.ip,
     date : utils.FUNCTIONS.getFormattedDate()
   }
-  character = {
-    id :user.characters.length+1,
-    last_login : last_login,
-    groups : ["user"],
-    job : "citizen",
-    name : name,
-    age : age,
-    money : cfg.swallet,
-    registration : utils.FUNCTIONS.generateRegistration(),
-    customization : jskin,
-    weapons : [],
-    inventory : []
-  };
-  user.characters.push(character);
-  db.users.update(user, {characters : user.characters}, {multi: false, upsert: false});
+  db.characters.update({name : character.name}, {last_login : last_login}, {multi: false, upsert: false});
+  db.users.update(user, {active : character.name}, {multi: false, upsert: false});
   return user;
 };
 
-//Group Database Interaction
+//Characters DB Interaction
+exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
+  var character = db.characters.findOne({name : name});
+  if(character == null){
+    var last_login = {
+      ip : player.ip,
+      date : utils.FUNCTIONS.getFormattedDate()
+    }
+    character = {
+      id : db.characters.count()+1,
+      social_club : player.socialClub,
+      last_login : last_login,
+      groups : ["user"],
+      job : "Citizen",
+      name : name,
+      age : age,
+      model : sex,
+      wallet : cfg.swallet,
+      bank : cfg.sbank,
+      registration : utils.FUNCTIONS.generateRegistration(),
+      face : JSON.parse(jface),
+      health : 100,
+      armour : 0,
+      position : { "x" : -888.8746, "y" : -2313.2836, "z" : -3.5077, "h" : 90 },
+      weapons : {},
+      inventory : {},
+      customization : {},
+      decoration : {},
+      clothes : {}
+    };
+    db.characters.save(character);
+    return db.characters.find({social_club : player.socialClub});
+  } else {
+    return null;
+  }
+};
+
+exports.CHARACTERS.getUserByRegistration = function(reg){
+  var character = db.characters.findOne({registration: reg});
+  if(character != null){
+    var user = db.users.findOne({social_club : character.social_club});
+    return user;
+  } else {
+    return null;
+  }
+};
+
+exports.CHARACTERS.getPlayerCharacters = function(player){
+  var characters = db.characters.find({social_club : player.socialClub});
+  return characters;
+};
+
+//Groups DB Interaction
 exports.GROUPS.addGroup = function(name){
   var group = db.groups.findOne({name : name});
   if (group == null){

@@ -32,9 +32,15 @@ mp.events.add('executeFunction', (arguments) => {
 	customBrowser.execute(`${arguments[0]}(${input});`);
 });
 
-mp.events.add('destroyBrowser', () => {
+mp.events.add('destroyBrowser', (args) => {
 	mp.gui.cursor.visible = false;
 	mp.gui.chat.activate(true);
 	customBrowser.destroy();
 	customBrowser = null;
+
+	if(args != null){
+		var cbr = args[0];
+		args = args.slice(1 , args.length);
+		mp.events.call(cbr, args);
+	}
 });

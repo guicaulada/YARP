@@ -638,14 +638,15 @@ function populateCharacterList(charactersJson) {
 		infoContainer.classList.add('item-content');
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
+		itemDescription.setAttribute('style', 'white-space: pre;');
 
 		// Añadimos el contenido de cada elemento
-		itemDescription.textContent = character.name;
+		itemDescription.textContent = `${character.name}, ${character.age}\r\n${character.job}`;
 
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Cargamos el personaje
-			mp.trigger('loadCharacter', character);
+			mp.trigger('loadCharacter', JSON.stringify(character));
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -675,12 +676,12 @@ function populateCharacterList(charactersJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de personajes
-		mp.trigger('destroyBrowser');
 	});
 
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(createButton);
 	options.appendChild(cancelButton);
+	document.getElementsByClassName("cancel-button")[0].style.background = '#D32F2F';
 }
 
 function populateTattooMenu(tattooZoneArray, businessName, priceMultiplier) {
