@@ -138,3 +138,9 @@ mp.events.addCommand("takegroup", (player, fullText, arg1, arg2) => {
     player.outputChatBox("!{red}Usage: /takegroup <userid> <group>");
   }
 });
+
+mp.events.addCommand("money", (player) => {
+  var character = db.CHARACTERS.getCharacterByPlayer(player);
+  player.outputChatBox(`Wallet: !{51, 204, 51}${character.wallet}`);
+  player.outputChatBox(`Bank: !{0, 153, 255}${character.bank}`);
+});

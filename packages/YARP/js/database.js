@@ -1,6 +1,6 @@
 
-var db = require('diskdb');
-var bcrypt = require('bcryptjs');
+var db = require('diskdb'); // https://www.npmjs.com/package/diskdb
+var bcrypt = require('bcryptjs'); // https://www.npmjs.com/package/bcryptjs
 var utils = require(`./utils.js`);
 var cfg = require('./config.js');
 
@@ -85,7 +85,6 @@ exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
 
 exports.CHARACTERS.updateCharacterWorldData = function(character){
   db.characters.update({name : character.name}, {
-    model : character.model,
     position : { "x" : character.position.x, "y" : character.position.y, "z" : character.position.z, "h" : character.position.h },
     health : character.health,
     armour : character.armour,
@@ -108,7 +107,7 @@ exports.CHARACTERS.getPlayerCharacters = function(player){
 };
 
 
-exports.CHARACTERS.getPlayerActiveCharacter = function(player){
+exports.CHARACTERS.getCharacterByPlayer = function(player){
   var character = db.characters.findOne({name: player.name});
   return character;
 };

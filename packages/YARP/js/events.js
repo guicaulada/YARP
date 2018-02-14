@@ -98,13 +98,14 @@ mp.events.add('loadCharacter', (player, jchar) => {
 setInterval(function(){
   mp.players.forEach(
 		(player, id) => {
-      var character = {};
-      character.name = player.name;
-      character.model = player.model;
-      character.position = { "x" : player.position.x, "y" : player.position.y, "z" : player.position.z, "h" : player.heading};
-      character.health = player.health;
-      character.armour = player.armour;
-      db.CHARACTERS.updateCharacterWorldData(character);
+      if((player.position.x && player.position.y && player.position.z) != 0){
+        var character = {};
+        character.name = player.name;
+        character.position = { "x" : player.position.x, "y" : player.position.y, "z" : player.position.z, "h" : player.heading};
+        character.health = player.health;
+        character.armour = player.armour;
+        db.CHARACTERS.updateCharacterWorldData(character);
+      }
 		}
 	);
 },1000*cfg.save);

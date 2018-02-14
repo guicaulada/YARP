@@ -26,14 +26,15 @@ mp.events.add('toggleNoclip', () => {
     }
 });
 
+//Key codes http://keycode.info/
 mp.events.add('render', () => {
   if (noclip){
-    if (mp.keys.isDown(0x57) === true) {
+    if (mp.keys.isDown(87) === true) {
       const pos = mp.players.local.position;
       const dir = utils.FUNCTIONS.getCameraDirection();
       mp.players.local.setCoordsNoOffset(pos.x+dir.x,pos.y+dir.y,pos.z+dir.z, false, false, false);
     }
-    if (mp.keys.isDown(0x53) === true) {
+    if (mp.keys.isDown(83) === true) {
       const pos = mp.players.local.position;
       const dir = utils.FUNCTIONS.getCameraDirection();
       mp.players.local.setCoordsNoOffset(pos.x-dir.x,pos.y-dir.y,pos.z-dir.z, false, false, false);
