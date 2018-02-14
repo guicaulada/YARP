@@ -6,7 +6,7 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
 * [RAGE-MP](rage.mp) - RAGE Multiplayer is an multiplayer modification for Grand Theft Auto V that is alternative to GTA Online.
 * [nodejs](https://nodejs.org) - A JavaScript runtime built on Chrome's V8 JavaScript engine
 * [diskdb](https://github.com/arvindr21/diskDB) - A Lightweight Disk based JSON Database for Node.
-* [bcrypt](https://github.com/dcodeIO/bcrypt.js) - Optimized bcrypt in JavaScript with zero dependencies.
+* [bcryptjs](https://github.com/dcodeIO/bcrypt.js) - Optimized bcrypt in JavaScript with zero dependencies.
 
 ## Installation
 
