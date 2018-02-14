@@ -23,6 +23,7 @@ YARP aim's to be a lightweight gamemode with all the features needed for a good 
 * **JSON Disk Database**
 * **Dynamic Groups/Permissions**
 * **Secure Authentication**
+* **Multiple Characters**
 * **More to come...**
 
 ## Usage
