@@ -3,6 +3,7 @@ var db = require('diskdb'); // https://www.npmjs.com/package/diskdb
 var bcrypt = require('bcryptjs'); // https://www.npmjs.com/package/bcryptjs
 var utils = require(`./utils.js`);
 var cfg = require('./config.js');
+var items = require('./items.js');
 
 db.connect('./packages/YARP/_db');
 db.loadCollections(['users','groups','characters']);
@@ -71,7 +72,7 @@ exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
       armour : 0,
       position : { "x" : -888.8746, "y" : -2313.2836, "z" : -3.5077, "h" : 90 },
       weapons : {},
-      inventory : {},
+      inventory : {weight: 0},
       customization : {},
       decoration : {},
       clothes : {}
@@ -112,6 +113,51 @@ exports.CHARACTERS.getCharacterByPlayer = function(player){
   return character;
 };
 
+exports.CHARACTERS.tryWalletPayment = function(player, value){
+  var character = db.characters.findOne({name: player.name});
+  if (character.wallet-value >= 0){
+    db.characters.update({name : character.name}, {wallet : character.wallet-value}, {multi: false, upsert: false});
+    player.notify(`Paid ~r~$${value}.`);
+    return true;
+  } else {
+    player.notify(`~r~Not enough money in your wallet.`);
+    return false;
+  }
+};
+
+exports.CHARACTERS.tryBankPayment = function(player, value){
+  var character = db.characters.findOne({name: player.name});
+  if (character.bank-value >= 0){
+    db.characters.update({name : character.name}, {bank : character.bank-value}, {multi: false, upsert: false});
+    player.notify(`Paid ~r~$${value}.`);
+    return true;
+  } else {
+    player.notify(`~r~Not enough money in your bank.`);
+    return false;
+  }
+};
+
+exports.CHARACTERS.tryGiveInventoryItem = function(player, business, item, amount){
+  var character = db.characters.findOne({name: player.name});
+  if (character.inventory.weight+item.weight < cfg.max_weight){
+    if (character.inventory[business] != null){
+      if (character.inventory[business][item.id] == null){
+        character.inventory[business][item.id] = 0;
+      }
+      character.inventory[business][item.id] = character.inventory[business][item.id] + amount;
+    } else {
+      character.inventory[business] = {};
+      character.inventory[business][item.id] = amount
+    }
+    character.inventory.weight = character.inventory.weight + (amount*item.weight)
+    db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
+    player.notify(`Received ~g~${amount} ${item.name}.`);
+    return true;
+  } else {
+    player.notify(`~r~Inventory is full.`);
+    return false;
+  }
+};
 //Groups DB Interaction
 exports.GROUPS.addGroup = function(name){
   var group = db.groups.findOne({name : name});

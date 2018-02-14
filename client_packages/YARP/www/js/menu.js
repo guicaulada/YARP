@@ -10,7 +10,7 @@ let multiplier = 0.0;
 let selected = null;
 let drawable = null;
 
-function populateBusinessItems(businessItemsJson, businessName, multiplier) {
+function populateBusinessItems(businessName, businessItemsJson, multiplier) {
 	// Inicializamos los valores
 	purchasedAmount = 1;
 	selected = null;
@@ -62,10 +62,10 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 		itemSubstract.classList.add('item-substract', 'hidden');
 
 		// Añadimos el contenido de cada elemento
-		itemImage.src = '../img/inventory/' + item.hash + '.png';
-		itemDescription.textContent = item.description;
-		itemPrice.innerHTML = '<b>Precio unitario: </b>' + Math.round(item.products * parseFloat(multiplier)) + '$';
-		itemAmount.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
+		itemImage.src = '../img/inventory/' + item.img + '.png';
+		itemDescription.textContent = item.name;
+		itemPrice.innerHTML = '<b>Price: </b>' + Math.round(item.price * parseFloat(multiplier)) + '$';
+		itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 		itemAdd.textContent = '+';
 		itemSubstract.textContent = '-';
 
@@ -92,7 +92,7 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 				selected = i;
 
 				// Actualizamos el texto del elemento
-				itemAmount.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
+				itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 				document.getElementsByClassName('item-adder')[selected].classList.remove('hidden');
 				document.getElementsByClassName('item-substract')[selected].classList.add('hidden');
 			}
@@ -116,7 +116,7 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 
 			// Actualizamos la cantidad
 			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
-			amountSpan.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
+			amountSpan.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 		});
 
 		itemSubstract.onclick = (function() {
@@ -137,7 +137,7 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 
 			// Actualizamos la cantidad
 			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
-			amountSpan.innerHTML = '<b>Cantidad: </b>' + purchasedAmount;
+			amountSpan.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -154,8 +154,8 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 		itemAmountContainer.appendChild(amountTextContainer);
 		amountTextContainer.appendChild(itemAmount);
 		itemAmountContainer.appendChild(addSubstractContainer);
-		addSubstractContainer.appendChild(itemAdd);
 		addSubstractContainer.appendChild(itemSubstract);
+		addSubstractContainer.appendChild(itemAdd);
 	}
 
 	// Añadimos los botones
@@ -167,20 +167,20 @@ function populateBusinessItems(businessItemsJson, businessName, multiplier) {
 	cancelButton.classList.add('double-button', 'cancel-button');
 
 	// Añadimos el texto de los botones
-	purchaseButton.textContent = 'Comprar';
-	cancelButton.textContent = 'Salir';
+	purchaseButton.textContent = 'Buy';
+	cancelButton.textContent = 'Exit';
 
 	// Ponemos la función para cada elemento
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseItem', selected, purchasedAmount);
+			mp.trigger('purchaseBusinessItem', businessName, businessItemsArray[selected].id, purchasedAmount);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('cancelBusinessPurchase');
+		mp.trigger('destroyBrowser');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -661,12 +661,10 @@ function populateCharacterList(charactersJson) {
 	let cancelButton = document.createElement('div');
 
 	// Añadimos las clases a cada botón
-	createButton.classList.add('double-button', 'accept-button');
-	cancelButton.classList.add('double-button', 'cancel-button');
+	createButton.classList.add('single-button', 'accept-button');
 
 	// Añadimos el texto de los botones
 	createButton.textContent = 'New character';
-	cancelButton.textContent = 'Exit';
 
 	// Ponemos la función para cada elemento
 	createButton.onclick = (function() {
@@ -674,14 +672,8 @@ function populateCharacterList(charactersJson) {
 		mp.trigger('showCharacterCreationMenu');
 	});
 
-	cancelButton.onclick = (function() {
-		// Cerramos la ventana de personajes
-	});
-
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(createButton);
-	options.appendChild(cancelButton);
-	document.getElementsByClassName("cancel-button")[0].style.background = '#D32F2F';
 }
 
 function populateTattooMenu(tattooZoneArray, businessName, priceMultiplier) {
