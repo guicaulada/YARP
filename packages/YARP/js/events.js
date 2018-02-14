@@ -83,7 +83,6 @@ mp.events.add('setCharacterIntoCreator', (player) => {
 
 mp.events.add('loadCharacter', (player, jchar) => {
   var character = JSON.parse(jchar);
-  var user = db.USERS.activatePlayerCharacter(player, character);
   player.notify(`Last connection from ~g~${character.last_login.ip}~w~ at ~g~${character.last_login.date}`);
   player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
   player.model = character.model;
@@ -95,3 +94,17 @@ mp.events.add('loadCharacter', (player, jchar) => {
   player.weapons = character.weapons;
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });
+
+setInterval(function(){
+  mp.players.forEach(
+		(player, id) => {
+      var character = {};
+      character.name = player.name;
+      character.model = player.model;
+      character.position = { "x" : player.position.x, "y" : player.position.y, "z" : player.position.z, "h" : player.heading};
+      character.health = player.health;
+      character.armour = player.armour;
+      db.CHARACTERS.updateCharacterWorldData(character);
+		}
+	);
+},1000*cfg.save);

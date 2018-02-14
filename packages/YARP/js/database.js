@@ -33,8 +33,7 @@ exports.USERS.verifyAuthentication = function(player, password){
       last_login : last_login,
       whitelisted : false,
       banned : false,
-      groups : ["user"],
-      active : false
+      groups : ["user"]
     };
     db.users.save(user);
   } else {
@@ -44,23 +43,6 @@ exports.USERS.verifyAuthentication = function(player, password){
       user = null;
     }
   }
-  return user;
-};
-
-exports.USERS.getPlayerActiveCharacter = function(player){
-  var user = db.users.findOne({social_club : player.socialClub});
-  var character = db.characters.findOne({name: user.active});
-  return character;
-};
-
-exports.USERS.activatePlayerCharacter = function(player, character){
-  var user = db.users.findOne({social_club : player.socialClub});
-  var last_login = {
-    ip : player.ip,
-    date : utils.FUNCTIONS.getFormattedDate()
-  }
-  db.characters.update({name : character.name}, {last_login : last_login}, {multi: false, upsert: false});
-  db.users.update(user, {active : character.name}, {multi: false, upsert: false});
   return user;
 };
 
@@ -101,6 +83,15 @@ exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
   }
 };
 
+exports.CHARACTERS.updateCharacterWorldData = function(character){
+  db.characters.update({name : character.name}, {
+    model : character.model,
+    position : { "x" : character.position.x, "y" : character.position.y, "z" : character.position.z, "h" : character.position.h },
+    health : character.health,
+    armour : character.armour,
+  }, {multi: false, upsert: false});
+};
+
 exports.CHARACTERS.getUserByRegistration = function(reg){
   var character = db.characters.findOne({registration: reg});
   if(character != null){
@@ -114,6 +105,12 @@ exports.CHARACTERS.getUserByRegistration = function(reg){
 exports.CHARACTERS.getPlayerCharacters = function(player){
   var characters = db.characters.find({social_club : player.socialClub});
   return characters;
+};
+
+
+exports.CHARACTERS.getPlayerActiveCharacter = function(player){
+  var character = db.characters.findOne({name: player.name});
+  return character;
 };
 
 //Groups DB Interaction

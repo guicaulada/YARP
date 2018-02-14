@@ -1,6 +1,7 @@
-exports.whitelist = true;
-exports.swallet = 100;
-exports.sbank = 1500;
+exports.whitelist = true; //Whitelisted true/false
+exports.swallet = 100; //Starting wallet
+exports.sbank = 1500; //Starting bank
+exports.save = 10; //Save interval (seconds)
 exports.spawn = [
   { "x": -425.517, "y": 1123.620, "z": 325.8544 },
   { "x": -415.777, "y": 1168.791, "z": 325.854 },

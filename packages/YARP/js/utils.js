@@ -34,3 +34,7 @@ exports.FUNCTIONS.generateRegistration = function(){
     return exports.FUNCTIONS.generateRegistration();
   }
 }
+
+exports.FUNCTIONS.round = function(value, decimals){
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
