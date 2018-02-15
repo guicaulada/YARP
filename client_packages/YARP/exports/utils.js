@@ -1,6 +1,5 @@
-exports.FUNCTIONS = {};
 
-exports.FUNCTIONS.getCameraDirection = function(){
+exports.getCameraDirection = function(){
   // Credits to https://github.com/ImagicTheCat/vRP/blob/vrpex/vrp/client/base.lua#L46 - Thank you for teaching me so much.
   const heading = mp.game.cam.getGameplayCamRelativeHeading()+mp.players.local.getHeading();
   const pitch = mp.game.cam.getGameplayCamRot(0).x;

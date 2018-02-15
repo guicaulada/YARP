@@ -17,7 +17,7 @@ mp.events.add('showPlayerCharacters', (charactersJson) => {
 	characters = charactersJson;
 
 	// Mostramos la ventana con la lista de jugadores
-	mp.events.call('createBrowser', ['package://YARP/www/html/sideMenu.html', 'populateCharacterList', charactersJson]);
+	mp.events.call('createBrowser', ['package://YARP/statics/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
 mp.events.add('loadCharacter', (characterJson) => {
@@ -47,7 +47,7 @@ mp.events.add('showCharacterCreationMenu', () => {
 	mp.gui.chat.show(false);
 
 	// Cargamos el menú de creación de personajes
-	mp.events.call('createBrowser', ['package://YARP/www/html/characterCreator.html']);
+	mp.events.call('createBrowser', ['package://YARP/statics/html/characterCreator.html']);
 });
 
 mp.events.add('updatePlayerSex', (sex) => {
@@ -111,7 +111,7 @@ mp.events.add('cancelCharacterCreation', () => {
 	mp.events.callRemote('loadCharacter', mp.players.local.name);
 
 	// Mostramos la ventana con la lista de jugadores
-	mp.events.call('createBrowser', ['package://YARP/www/html/sideMenu.html', 'populateCharacterList', characters]);
+	mp.events.call('createBrowser', ['package://YARP/statics/html/sideMenu.html', 'populateCharacterList', characters]);
 });
 
 mp.events.add('characterCreatedSuccessfully', () => {

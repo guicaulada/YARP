@@ -1,8 +1,7 @@
 var db = require('./database.js');
+var cfg = require('./config.js');
 
-exports.FUNCTIONS = {};
-
-exports.FUNCTIONS.getFormattedDate = function(){
+exports.getFormattedDate = function(){
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
@@ -20,7 +19,7 @@ exports.FUNCTIONS.getFormattedDate = function(){
   return today;
 };
 
-exports.FUNCTIONS.generateRegistration = function(){
+exports.generateRegistration = function(){
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -28,13 +27,13 @@ exports.FUNCTIONS.generateRegistration = function(){
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 
-  if (db.CHARACTERS.getUserByRegistration() == null){
+  if (db.characters.getUserByRegistration() == null){
     return text;
   } else {
-    return exports.FUNCTIONS.generateRegistration();
+    return exports.generateRegistration();
   }
 }
 
-exports.FUNCTIONS.round = function(value, decimals){
+exports.round = function(value, decimals){
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }

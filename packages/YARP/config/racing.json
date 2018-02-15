@@ -1,0 +1,21 @@
+{
+  "racing": {
+    "name":"Race",
+    "action": [],
+    "positions": [
+      {"x": -1277.629, "y": -2030.913, "z": 1.2823},
+      {"x": 2384.969, "y": 4277.583, "z": 30.379},
+      {"x": 1577.881, "y": 3836.107, "z": 30.7717}
+    ],
+    "blip": {
+      "sprite": 316, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

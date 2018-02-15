@@ -1,9 +1,9 @@
-var cfg = require('./config.js');
-var db = require('./database.js');
+var cfg = require('../exports/config.js');
+var db = require('../exports/database.js');
 
 //Character creation
 mp.events.add('createCharacter', (player, name, age, sex, jface) => {
-  var characters = db.CHARACTERS.createCharacter(player,name,age,sex,jface);
+  var characters = db.characters.createCharacter(player,name,age,sex,jface);
   if(characters != null){
     player.call('characterCreatedSuccessfully');
     player.call('showPlayerCharacters', [JSON.stringify(characters)]);
@@ -44,8 +44,8 @@ setInterval(function(){
         character.position = { "x" : player.position.x, "y" : player.position.y, "z" : player.position.z, "h" : player.heading};
         character.health = player.health;
         character.armour = player.armour;
-        db.CHARACTERS.updateCharacterWorldData(character);
+        db.characters.updateCharacterWorldData(character);
       }
 		}
 	);
-},1000*cfg.save);
+},1000*cfg.basics.save_interval);

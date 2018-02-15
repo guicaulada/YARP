@@ -1,0 +1,24 @@
+{
+  "tattoshop": {
+    "name":"Tattoo Shop",
+    "action": [],
+    "positions": [
+      {"x": 1322.645, "y": -1651.976, "z": 52.275},
+      {"x": -1153.676, "y": -1425.68, "z": 4.954},
+      {"x": 322.139, "y": 180.467, "z": 103.587},
+      {"x": -3170.071, "y": 1075.059, "z": 20.829},
+      {"x": 1864.633, "y": 3747.738, "z": 33.032},
+      {"x": -293.713, "y": 6200.04, "z": 31.487}
+    ],
+    "blip": {
+      "sprite": 75, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

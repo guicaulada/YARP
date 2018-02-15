@@ -10,23 +10,23 @@ let multiplier = 0.0;
 let selected = null;
 let drawable = null;
 
-function populateBusinessItems(businessName, businessItemsJson, multiplier) {
+function populateStoreItems(storeJson, multiplier) {
 	// Inicializamos los valores
 	purchasedAmount = 1;
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let businessItemsArray = JSON.parse(businessItemsJson);
+	let store = JSON.parse(storeJson);
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 
 	// Añadimos la cabecera del menú
-	header.textContent = businessName;
+	header.textContent = store.name;
 
-	for(let i = 0; i < businessItemsArray.length; i++) {
+	for(let i = 0; i < store.items.length; i++) {
 		// Obtenemos el objeto en curso
-		let item = businessItemsArray[i];
+		let item = store.items[i];
 
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
@@ -174,7 +174,7 @@ function populateBusinessItems(businessName, businessItemsJson, multiplier) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseBusinessItem', businessName, businessItemsArray[selected].id, purchasedAmount);
+			mp.trigger('purchaseStoreItem', store.items[selected], purchasedAmount);
 		}
 	});
 

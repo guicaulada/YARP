@@ -1,0 +1,87 @@
+{
+  "lester": {
+    "name":"Lester",
+    "action": [],
+    "positions": [
+      {"x": 1274.292, "y": -1712.663, "z": 54.771},
+      {"x": 705.859, "y": -964.651, "z": 30.396}
+    ],
+    "blip": {
+      "sprite": 77, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "epsilon": {
+    "name":"Epsilon",
+    "action": [],
+    "positions": [
+      {"x": 245.1564, "y": 370.211, "z": 104.7382}
+    ],
+    "blip": {
+      "sprite": 206, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "franklin": {
+    "name":"Franklin",
+    "action": [],
+    "positions": [
+      {"x": 7.900, "y": 548.100, "z": 175.500},
+      {"x": -14.128, "y": -1445.483, "z": 30.648}
+    ],
+    "blip": {
+      "sprite": 210, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "michael": {
+    "name":"Michael",
+    "action": [],
+    "positions": [
+      {"x": -852.400, "y": 160.000, "z": 65.600}
+    ],
+    "blip": {
+      "sprite": 124, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "trevor": {
+    "name":"Trevor",
+    "action": [],
+    "positions": [
+      {"x": 1985.700, "y": 3812.200, "z": 32.200},
+      {"x": -1159.034, "y": -1521.180, "z": 10.633}
+    ],
+    "blip": {
+      "sprite": 208, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

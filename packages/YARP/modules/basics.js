@@ -1,9 +1,9 @@
-var cfg = require('./config.js');
-var db = require('./database.js');
+var cfg = require('../exports/config.js');
+var db = require('../exports/database.js');
 
 mp.events.add('playerJoin', (player) => {
     console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-    var user = db.USERS.getUserByPlayer(player);
+    var user = db.users.getUserByPlayer(player);
     if(user != null){
       if (user.banned) {
         player.outputChatBox("!{red}You have been banned.");
@@ -45,17 +45,41 @@ mp.events.add('playerChat', (player, message) => {
 	 mp.players.broadcast(`${player.name}: ${message}`);
 });
 
-//Login event
 mp.events.add('verifyAuthentication', (player,password) => {
-  var user = db.USERS.verifyAuthentication(player, password);
+  var user = db.users.verifyAuthentication(player, password);
   if(user != null){
-    var characters = db.CHARACTERS.getPlayerCharacters(player);
+    var characters = db.characters.getPlayerCharacters(player);
     if(characters.length == 0){
       player.call('showCharacterCreationMenu');
     } else {
       player.call('showPlayerCharacters', [JSON.stringify(characters)]);
     }
+    player.call('loadServerConfig', [JSON.stringify(cfg)]);
   } else {
     player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
   }
 });
+
+for (file in cfg){
+  for (id in cfg[file]){
+    let item = cfg[file][id];
+    if(item){
+      if(item.blip){
+        if(!item.blip.hidden){
+          for(pos of item.positions){
+            mp.blips.new(item.blip.sprite, pos, {
+              name: item.blip.name,
+              scale: item.blip.scale,
+              color: item.blip.color,
+              alpha: item.blip.alpha,
+              drawDistance: item.blip.distance,
+              shortRange: item.blip.range,
+              rotation: item.blip.rotation,
+              dimension: item.blip.dimension
+            });
+          }
+        }
+      }
+    }
+  }
+}

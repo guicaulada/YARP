@@ -1,0 +1,23 @@
+{
+  "lscustoms": {
+    "name":"LS Customs",
+    "action": [],
+    "positions": [
+      {"x": -337.3863, "y": -136.9247, "z": 39.0737},
+      {"x": -1155.536, "y": -2007.183, "z": 13.244},
+      {"x": 731.8163, "y": -1088.822, "z": 22.233},
+      {"x": 1175.04, "y": 2640.216, "z": 37.82177},
+      {"x": 110.8406, "y": 6626.568, "z": 32.287}
+    ],
+    "blip": {
+      "sprite": 72, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

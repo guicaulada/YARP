@@ -1,0 +1,359 @@
+{
+  "casino": {
+    "name":"Bahama Mamas",
+    "action": [],
+    "positions": [
+      {"x": 925.329, "y": 46.152, "z": 80.908}
+    ],
+    "blip": {
+      "sprite": 207, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "taxi": {
+    "name":"Downtown CO.",
+    "action": [],
+    "positions": [
+      {"x": 900.461, "y": -181.466, "z": 73.89}
+    ],
+    "blip": {
+      "sprite": 375, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "arena": {
+    "name":"MazeBank Arena",
+    "action": [],
+    "positions": [
+      {"x": -250.604, "y": -2030.000, "z": 30.000}
+    ],
+    "blip": {
+      "sprite": 135, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "sotw": {
+    "name":"Smoke on the Water",
+    "action": [],
+    "positions": [
+      {"x": -1171.42, "y": -1572.72, "z": 3.6636}
+    ],
+    "blip": {
+      "sprite": 140, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "tequilala": {
+    "name":"Tequil-La La",
+    "action": [],
+    "positions": [
+      {"x": -565.171, "y": 276.625, "z": 83.286}
+    ],
+    "blip": {
+      "sprite": 93, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "theather": {
+    "name":"Theater",
+    "action": [],
+    "positions": [
+      {"x": -455.752, "y": 180.466, "z": 104.301}
+    ],
+    "blip": {
+      "sprite": 135, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "weedfarm": {
+    "name":"Weed Farm",
+    "action": [],
+    "positions": [
+      {"x": 2208.777, "y": 5578.235, "z": 53.735}
+    ],
+    "blip": {
+      "sprite": 140, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "fib": {
+    "name":"FIB",
+    "action": [],
+    "positions": [
+      {"x": 105.455, "y": -745.483, "z": 44.754}
+    ],
+    "blip": {
+      "sprite": 106, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "lifeinvader": {
+    "name":"Lifeinvader",
+    "action": [],
+    "positions": [
+      {"x": -1047.900, "y": -233.000, "z": 39.000}
+    ],
+    "blip": {
+      "sprite": 77, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "cluckingbell": {
+    "name":"Cluckin Bell",
+    "action": [],
+    "positions": [
+      {"x": -72.68752, "y": 6253.72656, "z": 31.08991}
+    ],
+    "blip": {
+      "sprite": 357, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "comedyclub": {
+    "name":"Comedy Club",
+    "action": [],
+    "positions": [
+      {"x": -447.4833, "y": 280.3197, "z": 77.5215}
+    ],
+    "blip": {
+      "sprite": 102, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "yatch": {
+    "name":"Yacht",
+    "action": [],
+    "positions": [
+      {"x": -2045.800, "y": -1031.200, "z": 11.900}
+    ],
+    "blip": {
+      "sprite": 410, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "ranch": {
+    "name":"Ranch",
+    "action": [],
+    "positions": [
+      {"x": 2441.200, "y": 4968.500, "z": 51.700}
+    ],
+    "blip": {
+      "sprite": 438, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "playboy": {
+    "name":"PlayBoy",
+    "action": [],
+    "positions": [
+      {"x": -1475.234, "y": 167.088, "z": 55.841}
+    ],
+    "blip": {
+      "sprite": 439, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "chopshop": {
+    "name":"Chop Shop",
+    "action": [],
+    "positions": [
+      {"x": 479.056, "y": -1316.825, "z": 28.203}
+    ],
+    "blip": {
+      "sprite": 446, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "rebelradio": {
+    "name":"Rebel Radio",
+    "action": [],
+    "positions": [
+      {"x": 736.153, "y": 2583.143, "z": 79.634}
+    ],
+    "blip": {
+      "sprite": 136, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "morgue": {
+    "name":"Morgue",
+    "action": [],
+    "positions": [
+      {"x": 243.351, "y": -1376.014, "z": 39.534}
+    ],
+    "blip": {
+      "sprite": 310, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "golf": {
+    "name":"Golf",
+    "action": [],
+    "positions": [
+      {"x": -1336.715, "y": 59.051, "z": 55.246}
+    ],
+    "blip": {
+      "sprite": 109, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "hippiecamp": {
+    "name":"Hippie Camp",
+    "action": [],
+    "positions": [
+      {"x": 2476.712, "y": 3789.645, "z": 41.226}
+    ],
+    "blip": {
+      "sprite": 140, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "torture": {
+    "name":"Torture",
+    "action": [],
+    "positions": [
+      {"x": 132.583, "y": -2202.327, "z": 7.187}
+    ],
+    "blip": {
+      "sprite": 79, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "bodytraining": {
+    "name":"Body Training",
+    "action": [],
+    "positions": [
+      {"x": -1202.96252441406, "y": -1566.14086914063, "z": 4.61040639877319}
+    ],
+    "blip": {
+      "sprite": 311, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

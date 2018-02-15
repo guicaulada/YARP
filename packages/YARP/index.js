@@ -1,8 +1,7 @@
-exports.CONFIG = require('./js/config.js');
-exports.UTILS = require('./js/utils.js');
-exports.DATABASE = require('./js/database.js');
-exports.PLAYER = require('./js/player.js');
-exports.CHARACTER = require('./js/character.js');
-exports.COMMANDS = require('./js/commands.js');
-exports.BLIPS = require('./js/blips.js');
-exports.ITEMS = require('./js/items.js');
+exports.CONFIG = require('./exports/config.js');
+exports.DATABASE = require('./exports/database.js');
+exports.UTILS = require('./exports/utils.js');
+require('./modules/basics.js');
+require('./modules/characters.js');
+require('./modules/commands.js');
+require('./modules/stores.js');

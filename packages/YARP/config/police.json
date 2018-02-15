@@ -1,0 +1,39 @@
+{
+  "policestation": {
+    "name":"Police Station",
+    "action": [],
+    "positions": [
+      {"x": 425.130, "y": -979.558, "z": 30.711},
+      {"x": 1859.234, "y": 3678.742, "z": 33.690},
+      {"x": -438.862, "y": 6020.768, "z": 31.490},
+      {"x": 818.221, "y": -1289.883, "z": 26.300}
+    ],
+    "blip": {
+      "sprite": 60, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "jail": {
+    "name":"Jail",
+    "action": [],
+    "positions": [
+      {"x": 1679.049, "y": 2513.711, "z": 45.565}
+    ],
+    "blip": {
+      "sprite": 285, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

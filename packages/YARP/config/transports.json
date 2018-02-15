@@ -1,0 +1,38 @@
+{
+  "airport": {
+    "name": "Airport",
+    "action": [],
+    "positions": [
+      {"x": -1032.690, "y": -2728.141, "z": 13.757},
+      {"x": 1743.6820, "y": 3286.2510, "z": 40.087}
+    ],
+    "blip": {
+      "sprite": 90, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  },
+  "cablecar": {
+    "name":"Cable Car",
+    "action": [],
+    "positions": [
+      {"x": -737.746, "y": 5595.192, "z": 41.655},
+      {"x": 457.097, "y": 5571.724, "z": 781.184}
+    ],
+    "blip": {
+      "sprite": 36, "color": 4, "scale": 1,
+      "alpha": 255, "distance": 100, "range": true,
+      "rotation": 0, "dimension": 0, "hidden": true
+    },
+    "text": {
+      "msg": "Press E to access",
+      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
+      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+    }
+  }
+}

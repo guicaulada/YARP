@@ -1,29 +1,27 @@
-
 var db = require('diskdb'); // https://www.npmjs.com/package/diskdb
 var bcrypt = require('bcryptjs'); // https://www.npmjs.com/package/bcryptjs
 var utils = require(`./utils.js`);
 var cfg = require('./config.js');
-var items = require('./items.js');
 
 db.connect('./packages/YARP/_db');
 db.loadCollections(['users','groups','characters']);
 exports.db = db;
 
-exports.USERS = {};
-exports.GROUPS = {};
-exports.CHARACTERS = {};
+exports.users = {};
+exports.groups = {};
+exports.characters = {};
 
 //Users DB Interaction
-exports.USERS.getUserByPlayer = function(player){
+exports.users.getUserByPlayer = function(player){
   var user = db.users.findOne({social_club : player.socialClub});
   return user;
 };
 
-exports.USERS.verifyAuthentication = function(player, password){
+exports.users.verifyAuthentication = function(player, password){
   var user = db.users.findOne({social_club : player.socialClub});
   var last_login = {
     ip : player.ip,
-    date : utils.FUNCTIONS.getFormattedDate()
+    date : utils.getFormattedDate()
   }
   if (user == null) {
     var hash = bcrypt.hashSync(password, 10);
@@ -48,12 +46,12 @@ exports.USERS.verifyAuthentication = function(player, password){
 };
 
 //Characters DB Interaction
-exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
+exports.characters.createCharacter = function(player, name, age, sex, jface){
   var character = db.characters.findOne({name : name});
   if(character == null){
     var last_login = {
       ip : player.ip,
-      date : utils.FUNCTIONS.getFormattedDate()
+      date : utils.getFormattedDate()
     }
     character = {
       id : db.characters.count()+1,
@@ -66,11 +64,11 @@ exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
       model : sex,
       wallet : cfg.swallet,
       bank : cfg.sbank,
-      registration : utils.FUNCTIONS.generateRegistration(),
+      registration : utils.generateRegistration(),
       face : JSON.parse(jface),
       health : 100,
       armour : 0,
-      position : { "x" : -888.8746, "y" : -2313.2836, "z" : -3.5077, "h" : 90 },
+      position : { "x" : cfg.basics.first_spawn.x, "y" : cfg.basics.first_spawn.y, "z" : cfg.basics.first_spawn.z, "h" : cfg.basics.first_spawn.h },
       weapons : {},
       inventory : {weight: 0},
       customization : {},
@@ -84,7 +82,7 @@ exports.CHARACTERS.createCharacter = function(player, name, age, sex, jface){
   }
 };
 
-exports.CHARACTERS.updateCharacterWorldData = function(character){
+exports.characters.updateCharacterWorldData = function(character){
   db.characters.update({name : character.name}, {
     position : { "x" : character.position.x, "y" : character.position.y, "z" : character.position.z, "h" : character.position.h },
     health : character.health,
@@ -92,7 +90,7 @@ exports.CHARACTERS.updateCharacterWorldData = function(character){
   }, {multi: false, upsert: false});
 };
 
-exports.CHARACTERS.getUserByRegistration = function(reg){
+exports.characters.getUserByRegistration = function(reg){
   var character = db.characters.findOne({registration: reg});
   if(character != null){
     var user = db.users.findOne({social_club : character.social_club});
@@ -102,18 +100,18 @@ exports.CHARACTERS.getUserByRegistration = function(reg){
   }
 };
 
-exports.CHARACTERS.getPlayerCharacters = function(player){
+exports.characters.getPlayerCharacters = function(player){
   var characters = db.characters.find({social_club : player.socialClub});
   return characters;
 };
 
 
-exports.CHARACTERS.getCharacterByPlayer = function(player){
+exports.characters.getCharacterByPlayer = function(player){
   var character = db.characters.findOne({name: player.name});
   return character;
 };
 
-exports.CHARACTERS.tryWalletPayment = function(player, value){
+exports.characters.tryWalletPayment = function(player, value){
   var character = db.characters.findOne({name: player.name});
   if (character.wallet-value >= 0){
     db.characters.update({name : character.name}, {wallet : character.wallet-value}, {multi: false, upsert: false});
@@ -125,7 +123,7 @@ exports.CHARACTERS.tryWalletPayment = function(player, value){
   }
 };
 
-exports.CHARACTERS.tryBankPayment = function(player, value){
+exports.characters.tryBankPayment = function(player, value){
   var character = db.characters.findOne({name: player.name});
   if (character.bank-value >= 0){
     db.characters.update({name : character.name}, {bank : character.bank-value}, {multi: false, upsert: false});
@@ -137,7 +135,8 @@ exports.CHARACTERS.tryBankPayment = function(player, value){
   }
 };
 
-exports.CHARACTERS.tryGiveInventoryItem = function(player, business, item, amount){
+exports.characters.tryGiveInventoryItem = function(player, id, amount){
+  var item = cfg.items[id];
   var character = db.characters.findOne({name: player.name});
   if (character.inventory.weight+item.weight < cfg.max_weight){
     if (character.inventory[business] != null){
@@ -159,7 +158,7 @@ exports.CHARACTERS.tryGiveInventoryItem = function(player, business, item, amoun
   }
 };
 //Groups DB Interaction
-exports.GROUPS.addGroup = function(name){
+exports.groups.addGroup = function(name){
   var group = db.groups.findOne({name : name});
   if (group == null){
     group = {
@@ -172,7 +171,7 @@ exports.GROUPS.addGroup = function(name){
   return false;
 };
 
-exports.GROUPS.addPermission = function(name,permission){
+exports.groups.addPermission = function(name,permission){
   var group = db.groups.findOne({name : name});
   if (group == null){
     group = {
@@ -188,7 +187,7 @@ exports.GROUPS.addPermission = function(name,permission){
   return true;
 };
 
-exports.GROUPS.removeGroup = function(name){
+exports.groups.removeGroup = function(name){
   var group = db.groups.findOne({name : name});
   if (group == null){
     return false;
@@ -198,7 +197,7 @@ exports.GROUPS.removeGroup = function(name){
   }
 };
 
-exports.GROUPS.removePermission = function(name,permission){
+exports.groups.removePermission = function(name,permission){
   var group = db.groups.findOne({name : name});
   if (group == null){
     return false;
@@ -210,7 +209,7 @@ exports.GROUPS.removePermission = function(name,permission){
   }
 };
 
-exports.GROUPS.takeGroup = function(userid,group){
+exports.groups.takeGroup = function(userid,group){
   var user = db.users.findOne({id : parseInt(userid)});
   if (user == null){
     return false;
@@ -220,7 +219,7 @@ exports.GROUPS.takeGroup = function(userid,group){
   }
 };
 
-exports.GROUPS.giveGroup = function(userid,group){
+exports.groups.giveGroup = function(userid,group){
   var user = db.users.findOne({id : parseInt(userid)});
   if (user == null){
     return false;
@@ -231,7 +230,7 @@ exports.GROUPS.giveGroup = function(userid,group){
   }
 };
 
-exports.GROUPS.hasPermission = function(player,permission){
+exports.groups.hasPermission = function(player,permission){
   var user = db.users.findOne({social_club : player.socialClub});
   var result = false;
   var removed = false;

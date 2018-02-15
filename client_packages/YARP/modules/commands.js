@@ -1,4 +1,4 @@
-var utils = require('./YARP/js/utils.js');
+var utils = require('./YARP/exports/utils.js');
 var camdir = false;
 var noclip = false;
 var charpos = false;
@@ -31,12 +31,12 @@ mp.events.add('render', () => {
   if (noclip){
     if (mp.keys.isDown(87) === true) {
       const pos = mp.players.local.position;
-      const dir = utils.FUNCTIONS.getCameraDirection();
+      const dir = utils.getCameraDirection();
       mp.players.local.setCoordsNoOffset(pos.x+dir.x,pos.y+dir.y,pos.z+dir.z, false, false, false);
     }
     if (mp.keys.isDown(83) === true) {
       const pos = mp.players.local.position;
-      const dir = utils.FUNCTIONS.getCameraDirection();
+      const dir = utils.getCameraDirection();
       mp.players.local.setCoordsNoOffset(pos.x-dir.x,pos.y-dir.y,pos.z-dir.z, false, false, false);
     }
   }
@@ -51,7 +51,7 @@ mp.events.add('render', () => {
     });
   }
   if (camdir){
-    const dir = utils.FUNCTIONS.getCameraDirection();
+    const dir = utils.getCameraDirection();
     mp.game.graphics.drawText(`X:${dir.x}    Y:${dir.y}    Z:${dir.z}`, [0.5, 0.05],
     {
       font: 4,
