@@ -13,7 +13,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "taxi": {
@@ -30,7 +36,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "arena": {
@@ -47,7 +59,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "sotw": {
@@ -64,7 +82,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "tequilala": {
@@ -81,7 +105,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "theather": {
@@ -98,7 +128,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "weedfarm": {
@@ -115,7 +151,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "fib": {
@@ -132,7 +174,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "lifeinvader": {
@@ -149,7 +197,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "cluckingbell": {
@@ -166,7 +220,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "comedyclub": {
@@ -183,7 +243,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "yatch": {
@@ -200,7 +266,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "ranch": {
@@ -217,7 +289,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "playboy": {
@@ -234,7 +312,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "chopshop": {
@@ -251,7 +335,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "rebelradio": {
@@ -268,7 +358,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "morgue": {
@@ -285,7 +381,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "golf": {
@@ -302,7 +404,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "hippiecamp": {
@@ -319,7 +427,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "torture": {
@@ -336,7 +450,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   },
   "bodytraining": {
@@ -353,7 +473,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   }
 }

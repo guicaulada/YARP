@@ -64,8 +64,8 @@ for (file in cfg){
     let item = cfg[file][id];
     if(item != null){
       if(item.blip != null){
-        if(!item.blip.hidden){
-          for(pos of item.positions){
+        for(pos of item.positions){
+          if(!item.blip.hidden){
             mp.blips.new(item.blip.sprite, pos, {
               name: item.blip.name,
               scale: item.blip.scale,
@@ -74,7 +74,7 @@ for (file in cfg){
               drawDistance: item.blip.distance,
               shortRange: item.blip.range,
               rotation: item.blip.rotation,
-              dimension: item.blip.dimension
+              dimension: 0
             });
           }
         }
@@ -86,21 +86,21 @@ for (file in cfg){
 inRange = {};
 setInterval(function(){
   mp.players.forEach((player, id) => {
-    for (file in cfg){
-      for (id in cfg[file]){
-        let item = cfg[file][id];
-        if(item != null){
-          if(item.action != null && item.action != []){
-            if((typeof item.action[0]) === "string"){
-              if(item.positions != null){
-                for(pos of item.positions){
-                  item.pos = pos;
-                  if (player.dist(pos) < 3){
-                    player.call('addInRangeItem', [JSON.stringify(item), file, id]);
-                    inRange[player] = pos;
-                  } else if (inRange[player] == pos) {
-                    player.call('removeInRangeItem');
-                    inRange[player] = null;
+    if (inRange[player] == null){
+      for (file in cfg){
+        for (cfg_id in cfg[file]){
+          let item = cfg[file][cfg_id];
+          if(item != null){
+            if(item.action != null && item.action != []){
+              if((typeof item.action[0]) === "string"){
+                if(item.positions != null){
+                  for(pos of item.positions){
+                    item.pos = pos;
+                    dist = player.dist(pos)
+                    if (dist < item.text.range || dist < item.marker.range){
+                      player.call('addInRangeItem', [JSON.stringify(item), file, cfg_id]);
+                      inRange[player] = pos;
+                    }
                   }
                 }
               }
@@ -111,3 +111,7 @@ setInterval(function(){
     }
   });
 },100);
+
+mp.events.add('removeInRangeItem', (player) => {
+  inRange[player] = null;
+});

@@ -148,18 +148,33 @@ mp.events.addCommand("money", (player) => {
 });
 
 var wp_pos = {};
-mp.events.addCommand("tp", (player, fullText, arg1, arg2, arg3) => {
+mp.events.addCommand("tp", (player, fullText) => {
   if (db.groups.hasPermission(player,"cmd.tp")){
-    if (arg3 != null){
-      player.spawn(new mp.Vector3(arg1, arg2, arg3));
-    } else if (arg2 == null && arg1 != null){
-      if (mp.players.at(arg1) != null){
-        player.spawn(mp.players.at(arg1).position);
-      } else {
-        player.outputChatBox("!{red}Invalid user id!");
+    if (fullText != null){
+      var args = fullText.split(" ");
+      if (args.length >= 3){
+        args[0] = Number(args[0]);
+        args[1] = Number(args[1]);
+        args[2] = Number(args[2]);
+        player.position = new mp.Vector3(args[0], args[1], args[2]);
+      } else if (args.length == 2){
+        args[0] = Number(args[0]);
+        args[1] = Number(args[1]);
+        if (mp.players.at(args[0]) != null || mp.players.at(args[1]) != null){
+          mp.players.at(args[0]).position = mp.players.at(args[1]).position;
+        } else {
+          player.outputChatBox("!{red}Invalid user id!");
+        }
+      } else if (args.length == 1){
+        args[0] = Number(args[0]);
+        if (mp.players.at(args[0]) != null){
+          player.position = mp.players.at(args[0]).position;
+        } else {
+          player.outputChatBox("!{red}Invalid user id!");
+        }
       }
-    } else if (arg1 == null && wp_pos[player] != null){
-      player.spawn(wp_pos[player]);
+    } else if (wp_pos[player] != null){
+      player.position = wp_pos[player];
     } else {
       player.outputChatBox("!{red}Usage: /tp [<userid> or <x> <y> <z> or have a waypoint]");
     }
@@ -169,8 +184,7 @@ mp.events.addCommand("tp", (player, fullText, arg1, arg2, arg3) => {
 mp.events.addCommand("jtp", (player, fullText) => {
   if (db.groups.hasPermission(player,"cmd.jtp")){
     if (fullText != null){
-      console.log(JSON.parse(fullText));
-      player.spawn(JSON.parse(fullText));
+      player.position = JSON.parse(fullText);
     } else {
       player.outputChatBox("!{red}Usage: /jtp <jsonPos>");
     }
@@ -187,7 +201,7 @@ mp.events.addCommand("jpos", (player, fullText) => {
     }
     fs.appendFile("jpos.txt", JSON.stringify(player.position) + fullText +"\n", function(err) {
       if(err) {
-        return console.log(err);
+        return console.log('JPOS:'+err);
       }
       player.outputChatBox("!{green}JSON position saved to file!");
     });
@@ -195,9 +209,10 @@ mp.events.addCommand("jpos", (player, fullText) => {
 });
 
 mp.events.add("playerCreateWaypoint", (player, position) => {
- wp_pos[player] = position;
+  //I dont think this event is being called... I don't know why.
+  wp_pos[player] = position;
 });
 
 mp.events.add("playerReachWaypoint", (player) => {
- wp_pos[player] = null;
+  wp_pos[player] = null;
 });

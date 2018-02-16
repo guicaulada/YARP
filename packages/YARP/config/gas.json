@@ -41,7 +41,13 @@
     "text": {
       "msg": "Press E to access",
       "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "scale": {"x": 1.0, "y": 1.0}, "outline": true
+      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+    },
+    "marker": {
+      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
     }
   }
 }
