@@ -2,7 +2,14 @@
   "foodshop": {
     "name":"Store",
     "action": ["loadStoreMenu"],
-    "items": ["burger","fries","hotdog","beer","juice","soda"],
+    "items": {
+      "burger": 10,
+      "fries": 5,
+      "hotdog": 15,
+      "beer": 5,
+      "juice": 10,
+      "soda": 15
+    },
     "positions": [
       {"x": 1734.48046875, "y": 6420.38134765625, "z": 34.5372314453125},
       {"x": 1960.7580566406, "y": 3749.26367187, "z": 31.3437423706055},
@@ -25,7 +32,7 @@
     "blip": {
       "sprite": 52, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",

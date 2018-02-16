@@ -13,7 +13,7 @@
     "blip": {
       "sprite": 75, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",

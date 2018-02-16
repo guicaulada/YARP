@@ -8,7 +8,7 @@
     "blip": {
       "sprite": 207, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -25,7 +25,7 @@
     "blip": {
       "sprite": 375, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -42,7 +42,7 @@
     "blip": {
       "sprite": 135, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -59,7 +59,7 @@
     "blip": {
       "sprite": 140, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -76,7 +76,7 @@
     "blip": {
       "sprite": 93, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -93,7 +93,7 @@
     "blip": {
       "sprite": 135, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -110,7 +110,7 @@
     "blip": {
       "sprite": 140, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -127,7 +127,7 @@
     "blip": {
       "sprite": 106, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -144,7 +144,7 @@
     "blip": {
       "sprite": 77, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -161,7 +161,7 @@
     "blip": {
       "sprite": 357, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -178,7 +178,7 @@
     "blip": {
       "sprite": 102, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -195,7 +195,7 @@
     "blip": {
       "sprite": 410, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -212,7 +212,7 @@
     "blip": {
       "sprite": 438, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -229,7 +229,7 @@
     "blip": {
       "sprite": 439, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -246,7 +246,7 @@
     "blip": {
       "sprite": 446, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -263,7 +263,7 @@
     "blip": {
       "sprite": 136, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -280,7 +280,7 @@
     "blip": {
       "sprite": 310, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -297,7 +297,7 @@
     "blip": {
       "sprite": 109, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -314,7 +314,7 @@
     "blip": {
       "sprite": 140, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -331,7 +331,7 @@
     "blip": {
       "sprite": 79, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",
@@ -348,7 +348,7 @@
     "blip": {
       "sprite": 311, "color": 4, "scale": 1,
       "alpha": 255, "distance": 100, "range": true,
-      "rotation": 0, "dimension": 0, "hidden": true
+      "rotation": 0, "dimension": 0, "hidden": false
     },
     "text": {
       "msg": "Press E to access",

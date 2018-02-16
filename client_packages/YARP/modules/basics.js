@@ -1,4 +1,3 @@
-var cfg = null;
 
 mp.events.add('showAuthenticationMenu', (juser, jtime) => {
   var user = JSON.parse(juser);
@@ -15,44 +14,33 @@ mp.events.add('verifyAuthentication', (password) => {
   mp.events.callRemote('verifyAuthentication', password);
 });
 
-mp.events.add('loadServerConfig', (serverConfig) => {
-  cfg = serverConfig;
+var inRange = null;
+mp.events.add('addInRangeItem', (itemJson, file, id) => {
+  if (inRange == null){
+    inRange = {
+      item: JSON.parse(itemJson),
+      file: file,
+      id: id
+    };
+    mp.keys.bind(69, false, function() {
+      mp.events.callRemote(inRange.item.action[0], inRange.file, inRange.id);
+    });
+  }
 });
 
-var inRange = null;
-mp.events.add('render', () => {
+mp.events.add('removeInRangeItem', () => {
   mp.keys.unbind(69, false);
   inRange = null;
-  if(cfg != null){
-    for (file in cfg){
-      for (id in cfg[file]){
-        let item = cfg[file][id];
-        if(item){
-          if(item.action != null){
-            if((typeof item.action[0]) == "string"){
-              for(ipos of item.positions){
-                const pos = mp.players.local.position;
-                if (mp.game.system.vdist(pos.x, pos.y, pos.z, ipos.x, ipos.y, ipos.z) < 3){
-                  inRange = {
-                    file: file,
-                    id: id
-                  };
-                  mp.game.graphics.drawText(item.text.msg, [ipos.x, ipos.y, ipos.z],
-                  {
-                    font: item.text.font,
-                    color: [item.text.color.r, item.text.color.g, item.text.color.b, item.text.color.a],
-                    scale: [item.scale.x, item.scale.y],
-                    outline: item.scale.outline
-                  });
-                  mp.keys.bind(69, false, function() {
-                    mp.events.callRemote(item.action[0], inRange.file, inRange.id);
-                  });
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+});
+
+mp.events.add('render', () => {
+  if (inRange != null){
+    mp.game.graphics.drawText(inRange.item.text.msg, [inRange.item.pos.x, inRange.item.pos.y, inRange.item.pos.z],
+    {
+      font: inRange.item.text.font,
+      color: [inRange.item.text.color.r, inRange.item.text.color.g, inRange.item.text.color.b, inRange.item.text.color.a],
+      scale: [inRange.item.text.scale.x, inRange.item.text.scale.y],
+      outline: inRange.item.text.outline
+    });
   }
 });

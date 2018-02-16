@@ -1,8 +1,8 @@
 
-mp.events.add('showStoreMenu', (storeJson, multiplier) => {
-	mp.events.call('createBrowser', ['package://YARP/statics/html/sideMenu.html', 'populateStoreItems', storeJson, multiplier]);
+mp.events.add('showStoreMenu', (file, id, store, itemsJson, multiplier) => {
+	mp.events.call('createBrowser', ['package://YARP/statics/html/sideMenu.html', 'populateStoreItems', file, id, store, itemsJson, multiplier]);
 });
 
-mp.events.add('purchaseStoreItem', (id, amount) => {
-  mp.events.callRemote('purchaseStoreItem', id, amount);
+mp.events.add('purchaseStoreItem', (file, id, item, amount) => {
+  mp.events.callRemote('purchaseStoreItem', file, id, item, amount);
 });

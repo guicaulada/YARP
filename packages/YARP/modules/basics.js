@@ -28,7 +28,7 @@ mp.events.add('playerJoin', (player) => {
 });
 
 mp.events.add('playerDeath', (player) => {
-    player.spawn(cfg.spawn[Math.floor(Math.random() * cfg.spawn.length)]);
+    player.spawn(cfg.basics.spawn[Math.floor(Math.random() * cfg.basics.spawn.length)]);
     player.health = 100;
 });
 
@@ -54,7 +54,6 @@ mp.events.add('verifyAuthentication', (player,password) => {
     } else {
       player.call('showPlayerCharacters', [JSON.stringify(characters)]);
     }
-    player.call('loadServerConfig', [JSON.stringify(cfg)]);
   } else {
     player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
   }
@@ -63,8 +62,8 @@ mp.events.add('verifyAuthentication', (player,password) => {
 for (file in cfg){
   for (id in cfg[file]){
     let item = cfg[file][id];
-    if(item){
-      if(item.blip){
+    if(item != null){
+      if(item.blip != null){
         if(!item.blip.hidden){
           for(pos of item.positions){
             mp.blips.new(item.blip.sprite, pos, {
@@ -83,3 +82,32 @@ for (file in cfg){
     }
   }
 }
+
+inRange = {};
+setInterval(function(){
+  mp.players.forEach((player, id) => {
+    for (file in cfg){
+      for (id in cfg[file]){
+        let item = cfg[file][id];
+        if(item != null){
+          if(item.action != null && item.action != []){
+            if((typeof item.action[0]) === "string"){
+              if(item.positions != null){
+                for(pos of item.positions){
+                  item.pos = pos;
+                  if (player.dist(pos) < 3){
+                    player.call('addInRangeItem', [JSON.stringify(item), file, id]);
+                    inRange[player] = pos;
+                  } else if (inRange[player] == pos) {
+                    player.call('removeInRangeItem');
+                    inRange[player] = null;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+},100);

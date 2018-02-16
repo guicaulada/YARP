@@ -137,24 +137,24 @@ exports.characters.tryBankPayment = function(player, value){
 
 exports.characters.tryGiveInventoryItem = function(player, id, amount){
   var item = cfg.items[id];
-  var character = db.characters.findOne({name: player.name});
-  if (character.inventory.weight+item.weight < cfg.max_weight){
-    if (character.inventory[business] != null){
-      if (character.inventory[business][item.id] == null){
-        character.inventory[business][item.id] = 0;
+  if (item != null){
+    var character = db.characters.findOne({name: player.name});
+    if (character.inventory.weight+item.weight < cfg.basics.max_weight){
+      if (character.inventory[id] != null){
+        character.inventory[id] = character.inventory[id]+amount;
+      } else {
+        character.inventory[id] = amount;
       }
-      character.inventory[business][item.id] = character.inventory[business][item.id] + amount;
+      character.inventory.weight = character.inventory.weight + (amount*item.weight)
+      db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
+      player.notify(`Received ~g~${amount} ${item.name}.`);
+      return true;
     } else {
-      character.inventory[business] = {};
-      character.inventory[business][item.id] = amount
+      player.notify(`~r~Inventory is full.`);
+      return false;
     }
-    character.inventory.weight = character.inventory.weight + (amount*item.weight)
-    db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
-    player.notify(`Received ~g~${amount} ${item.name}.`);
-    return true;
   } else {
-    player.notify(`~r~Inventory is full.`);
-    return false;
+    player.notify(`~r~ERROR: Invalid item.`);
   }
 };
 //Groups DB Interaction
