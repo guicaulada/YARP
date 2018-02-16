@@ -140,7 +140,64 @@ mp.events.addCommand("takegroup", (player, fullText, arg1, arg2) => {
 });
 
 mp.events.addCommand("money", (player) => {
-  var character = db.characters.getCharacterByPlayer(player);
-  player.outputChatBox(`Wallet: !{51, 204, 51}${character.wallet}`);
-  player.outputChatBox(`Bank: !{0, 153, 255}${character.bank}`);
+  if (db.groups.hasPermission(player,"cmd.money")){
+    var character = db.characters.getCharacterByPlayer(player);
+    player.outputChatBox(`Wallet: !{51, 204, 51}${character.wallet}`);
+    player.outputChatBox(`Bank: !{0, 153, 255}${character.bank}`);
+  }
+});
+
+var wp_pos = {};
+mp.events.addCommand("tp", (player, fullText, arg1, arg2, arg3) => {
+  if (db.groups.hasPermission(player,"cmd.tp")){
+    if (arg3 != null){
+      player.spawn(new mp.Vector3(arg1, arg2, arg3));
+    } else if (arg2 == null && arg1 != null){
+      if (mp.players.at(arg1) != null){
+        player.spawn(mp.players.at(arg1).position);
+      } else {
+        player.outputChatBox("!{red}Invalid user id!");
+      }
+    } else if (arg1 == null && wp_pos[player] != null){
+      player.spawn(wp_pos[player]);
+    } else {
+      player.outputChatBox("!{red}Usage: /tp [<userid> or <x> <y> <z> or have a waypoint]");
+    }
+  }
+});
+
+mp.events.addCommand("jtp", (player, fullText) => {
+  if (db.groups.hasPermission(player,"cmd.jtp")){
+    if (fullText != null){
+      console.log(JSON.parse(fullText));
+      player.spawn(JSON.parse(fullText));
+    } else {
+      player.outputChatBox("!{red}Usage: /jtp <jsonPos>");
+    }
+  }
+});
+
+mp.events.addCommand("jpos", (player, fullText) => {
+  if (db.groups.hasPermission(player,"cmd.jpos")){
+    var fs = require('fs');
+    if (fullText != null && fullText != "" && fullText != " "){
+      fullText = " : " + fullText;
+    } else {
+      fullText = "";
+    }
+    fs.appendFile("jpos.txt", JSON.stringify(player.position) + fullText +"\n", function(err) {
+      if(err) {
+        return console.log(err);
+      }
+      player.outputChatBox("!{green}JSON position saved to file!");
+    });
+  }
+});
+
+mp.events.add("playerCreateWaypoint", (player, position) => {
+ wp_pos[player] = position;
+});
+
+mp.events.add("playerReachWaypoint", (player) => {
+ wp_pos[player] = null;
 });

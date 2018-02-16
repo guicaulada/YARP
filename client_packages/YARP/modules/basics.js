@@ -1,7 +1,7 @@
-
 mp.events.add('showAuthenticationMenu', (juser, jtime) => {
   var user = JSON.parse(juser);
   var time = JSON.parse(jtime);
+	mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
 	mp.game.time.setClockTime(time.h, time.m, time.s);
   if (user.password == null){
     mp.events.call('createBrowser', ['package://YARP/statics/html/accountRegister.html','setAccountName',user.social_club]);
@@ -29,6 +29,7 @@ mp.events.add('addInRangeItem', (itemJson, file, id) => {
 });
 
 mp.events.add('removeInRangeItem', () => {
+  mp.events.call('destroyBrowser');
   mp.keys.unbind(69, false);
   inRange = null;
 });

@@ -25,6 +25,7 @@ mp.events.add('loadCharacter', (characterJson) => {
 	mp.events.call('destroyBrowser');
 
 	// Cargamos el personaje
+	mp.game.invoke('0xB0C54402D009BA38');
 	mp.events.callRemote('loadCharacter', characterJson);
 });
 
