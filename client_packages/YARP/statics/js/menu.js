@@ -10,6 +10,184 @@ let multiplier = 0.0;
 let selected = null;
 let drawable = null;
 
+function populateAmmuWeapons(file, id, ammu, weaponJson, multiplier) {
+	// Inicializamos los valores
+	purchasedAmount = 1;
+	selected = null;
+
+	// Obtenemos la lista de objetos a mostrar
+	let weapons = JSON.parse(weaponJson);
+	let header = document.getElementById('header');
+	let content = document.getElementById('content');
+	let options = document.getElementById('options');
+
+	// Añadimos la cabecera del menú
+	header.textContent = ammu;
+
+	for(let i = 0; i < weapons.length; i++) {
+		// Obtenemos el objeto en curso
+		let weapon = weapons[i];
+
+		// Creamos los elementos para mostrar cada objeto
+		let itemContainer = document.createElement('div');
+		let imageContainer = document.createElement('div');
+		let infoContainer = document.createElement('div');
+		let descContainer = document.createElement('div');
+		let purchaseContainer = document.createElement('div');
+		let priceContainer = document.createElement('div');
+		let itemAmountContainer = document.createElement('div');
+		let amountTextContainer = document.createElement('div');
+		let addSubstractContainer = document.createElement('div');
+		let itemImage = document.createElement('img');
+		let itemDescription = document.createElement('span');
+		let itemPrice = document.createElement('span');
+		let itemAmount = document.createElement('span');
+		let itemAdd = document.createElement('span');
+		let itemSubstract = document.createElement('span');
+
+		// Añadimos las clases a cada elemento
+		itemContainer.classList.add('item-row');
+		imageContainer.classList.add('item-image');
+		infoContainer.classList.add('item-content');
+		descContainer.classList.add('item-header');
+		purchaseContainer.classList.add('item-purchase');
+		priceContainer.classList.add('item-price-container');
+		itemAmountContainer.classList.add('item-amount-container', 'hidden');
+		amountTextContainer.classList.add('item-amount-desc-container');
+		addSubstractContainer.classList.add('item-add-substract-container');
+		itemDescription.classList.add('item-description');
+		itemPrice.classList.add('item-price');
+		itemAmount.classList.add('item-amount-description');
+		itemAdd.classList.add('item-adder');
+		itemSubstract.classList.add('item-substract', 'hidden');
+
+		// Añadimos el contenido de cada elemento
+		itemImage.src = '../img/inventory/' + weapon.img + '.png';
+		itemDescription.textContent = weapon.name  + '(' +Math.round(weapon.price * parseFloat(multiplier)) + '$)';
+		itemPrice.innerHTML = '<b>Ammo: </b>' + Math.round(weapon.ammo * parseFloat(multiplier)) + '$';
+		itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
+		itemAdd.textContent = '+';
+		itemSubstract.textContent = '-';
+
+		// Ponemos la función para cada elemento
+		itemContainer.onclick = (function() {
+			// Comprobamos que se ha pulsado en un elemento no seleccionado
+			if(selected !== i) {
+				// Miramos si había algún elemento seleccionado
+				if(selected != null) {
+					let previousSelected = document.getElementsByClassName('item-row')[selected];
+					let previousAmountNode = findFirstChildByClass(previousSelected, 'item-amount-container');
+					previousSelected.classList.remove('active-item');
+					previousAmountNode.classList.add('hidden');
+				}
+
+				// Seleccionamos el elemento pulsado
+				let currentSelected = document.getElementsByClassName('item-row')[i];
+				let currentAmountNode = findFirstChildByClass(currentSelected, 'item-amount-container');
+				currentSelected.classList.add('active-item');
+				currentAmountNode.classList.remove('hidden');
+
+				// Guardamos el nuevo índice seleccionado
+				purchasedAmount = 1;
+				selected = i;
+
+				// Actualizamos el texto del elemento
+				itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
+				document.getElementsByClassName('item-adder')[selected].classList.remove('hidden');
+				document.getElementsByClassName('item-substract')[selected].classList.add('hidden');
+			}
+		});
+
+		itemAdd.onclick = (function() {
+			// Sumamos una unidad
+			purchasedAmount++;
+
+			// Obtenemos ambos botones
+			let adderButton = document.getElementsByClassName('item-adder')[selected];
+			let substractButton = document.getElementsByClassName('item-substract')[selected];
+
+			if(purchasedAmount == 10) {
+				// Ha llegado al máximo
+				adderButton.classList.add('hidden');
+			} else if(substractButton.classList.contains('hidden') === true) {
+				// Volvemos el elemento visible
+				substractButton.classList.remove('hidden');
+			}
+
+			// Actualizamos la cantidad
+			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
+			amountSpan.innerHTML = '<b>Amount: </b>' + purchasedAmount;
+		});
+
+		itemSubstract.onclick = (function() {
+			// Restamos una unidad
+			purchasedAmount--;
+
+			// Obtenemos ambos botones
+			let adderButton = document.getElementsByClassName('item-adder')[selected];
+			let substractButton = document.getElementsByClassName('item-substract')[selected];
+
+			if(purchasedAmount == 1) {
+				// Ha llegado al mínimo
+				substractButton.classList.add('hidden');
+			} else if(adderButton.classList.contains('hidden') === true) {
+				// Volvemos el elemento visible
+				adderButton.classList.remove('hidden');
+			}
+
+			// Actualizamos la cantidad
+			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
+			amountSpan.innerHTML = '<b>Amount: </b>' + purchasedAmount;
+		});
+
+		// Ordenamos la jerarquía de elementos
+		content.appendChild(itemContainer);
+		itemContainer.appendChild(imageContainer);
+		itemContainer.appendChild(infoContainer);
+		imageContainer.appendChild(itemImage);
+		infoContainer.appendChild(descContainer);
+		descContainer.appendChild(itemDescription);
+		infoContainer.appendChild(purchaseContainer);
+		purchaseContainer.appendChild(priceContainer);
+		priceContainer.appendChild(itemPrice);
+		purchaseContainer.appendChild(itemAmountContainer);
+		itemAmountContainer.appendChild(amountTextContainer);
+		amountTextContainer.appendChild(itemAmount);
+		itemAmountContainer.appendChild(addSubstractContainer);
+		addSubstractContainer.appendChild(itemSubstract);
+		addSubstractContainer.appendChild(itemAdd);
+	}
+
+	// Añadimos los botones
+	let purchaseButton = document.createElement('div');
+	let cancelButton = document.createElement('div');
+
+	// Añadimos las clases a cada botón
+	purchaseButton.classList.add('double-button', 'accept-button');
+	cancelButton.classList.add('double-button', 'cancel-button');
+
+	// Añadimos el texto de los botones
+	purchaseButton.textContent = 'Buy';
+	cancelButton.textContent = 'Exit';
+
+	// Ponemos la función para cada elemento
+	purchaseButton.onclick = (function() {
+		// Mandamos la acción de compra si ha seleccionado algo
+		if(selected != null) {
+			mp.trigger('purchaseAmmuWeapon', file, id, weapons[selected].id, purchasedAmount);
+		}
+	});
+
+	cancelButton.onclick = (function() {
+		// Cerramos la ventana de compra
+		mp.trigger('destroyBrowser');
+	});
+
+	// Ordenamos la jerarquía de elementos
+	options.appendChild(purchaseButton);
+	options.appendChild(cancelButton);
+}
+
 function populateStoreItems(file, id, store, itemsJson, multiplier) {
 	// Inicializamos los valores
 	purchasedAmount = 1;

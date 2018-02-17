@@ -35,6 +35,7 @@ mp.events.add('showCharacterCreationMenu', () => {
 
 	// Inicializamos las variables del personaje
 	mp.events.callRemote('setCharacterIntoCreator');
+	mp.game.invoke('0xB0C54402D009BA38');
 	initializeCharacterCreation(mp.players.local);
 
 	// Ponemos la cámara enfocando al personaje

@@ -157,6 +157,32 @@ exports.characters.tryGiveInventoryItem = function(player, id, amount){
     player.notify(`~r~ERROR: Invalid item.`);
   }
 };
+
+exports.characters.giveWeapon = function(player, id, amount){
+  var weapon = cfg.weapons[id];
+  if (weapon != null){
+    var character = db.characters.findOne({name: player.name});
+    if (character.weapons[id] != null){
+      character.weapons[id] = character.weapons[id]+amount;
+    } else {
+      character.weapons[id] = amount;
+    }
+    db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
+    player.notify(`Equiped~g~ ${weapon.name} (${amount}).`);
+  } else {
+    player.notify(`~r~ERROR: Invalid weapon.`);
+  }
+};
+
+exports.characters.getWeapons = function(player){
+    var character = db.characters.findOne({name: player.name});
+    return character.weapons;
+};
+
+exports.characters.removeAllWeapons = function(player){
+  player.removeAllWeapons();
+  db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
+};
 //Groups DB Interaction
 exports.groups.addGroup = function(name){
   var group = db.groups.findOne({name : name});

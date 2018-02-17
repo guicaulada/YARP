@@ -17,3 +17,4 @@ exports.racing = require('../config/racing.json');
 exports.stores = require('../config/stores.json');
 exports.tattooshops = require('../config/tattooshops.json');
 exports.transports = require('../config/transports.json');
+exports.weapons = require('../config/weapons.json');

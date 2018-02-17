@@ -21,7 +21,7 @@ mp.events.addCommand('armor', (player) => {
 mp.events.addCommand("weapon", (player, fullText, weapon, ammo) => {
   if (db.groups.hasPermission(player,"cmd.weapon")){
     var weaponHash = mp.joaat(weapon);
-    player.giveWeapon(weaponHash, parseInt(ammo) || 10000);
+    player.giveWeapon(weaponHash, Number(ammo) || 10000);
   }
 });
 

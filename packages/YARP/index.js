@@ -4,4 +4,4 @@ exports.UTILS = require('./exports/utils.js');
 require('./modules/basics.js');
 require('./modules/characters.js');
 require('./modules/commands.js');
-require('./modules/stores.js');
+require('./modules/menus.js');

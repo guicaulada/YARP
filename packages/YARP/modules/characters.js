@@ -28,10 +28,13 @@ mp.events.add('loadCharacter', (player, jchar) => {
   player.model = character.model;
   player.name = character.name;
   player.position = { "x" : character.position.x, "y" : character.position.y, "z" : character.position.z };
-  player.heading = character.position.h
+  player.heading = character.position.h;
   player.health = character.health;
   player.armour = character.armour;
-  player.weapons = character.weapons;
+  for (weapon in character.weapons){
+    var weaponHash = mp.joaat(weapon);
+    player.giveWeapon(weaponHash, Number(character.weapons[weapon]));
+  }
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });
 
