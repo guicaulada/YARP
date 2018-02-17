@@ -1,3 +1,5 @@
+var utils = require('./YARP/exports/utils.js');
+
 mp.events.add('showAuthenticationMenu', (juser, jtime) => {
   var user = JSON.parse(juser);
   var time = JSON.parse(jtime);
@@ -26,7 +28,19 @@ mp.events.add('addInRangeItem', (itemJson, file, id) => {
   }
 });
 
+var isAiming = null;
 mp.events.add('render', () => {
+  if (isAiming == null && mp.game.player.isFreeAiming()){
+    isAiming = {
+      weapon: utils.getCurrentWeapon(),
+      fired: 0
+    };
+  } else if (isAiming != null && mp.players.local.isShooting()) {
+    isAiming.fired++;
+  } else if (isAiming != null && !mp.game.player.isFreeAiming()){
+    mp.events.callRemote('updateWeaponAmmo', isAiming.weapon, isAiming.fired);
+    isAiming = null;
+  }
   if (inRange != null){
     var player_pos = mp.players.local.position;
     var pos = inRange.item.pos;

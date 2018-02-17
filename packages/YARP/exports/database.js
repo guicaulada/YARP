@@ -62,8 +62,8 @@ exports.characters.createCharacter = function(player, name, age, sex, jface){
       name : name,
       age : age,
       model : sex,
-      wallet : cfg.swallet,
-      bank : cfg.sbank,
+      wallet : cfg.basics.swallet,
+      bank : cfg.basics.sbank,
       registration : utils.generateRegistration(),
       face : JSON.parse(jface),
       health : 100,
@@ -154,7 +154,7 @@ exports.characters.tryGiveInventoryItem = function(player, id, amount){
       return false;
     }
   } else {
-    player.notify(`~r~ERROR: Invalid item.`);
+    player.notify(`~r~ERROR: ~w~Invalid item.`);
   }
 };
 
@@ -162,15 +162,16 @@ exports.characters.giveWeapon = function(player, id, amount){
   var weapon = cfg.weapons[id];
   if (weapon != null){
     var character = db.characters.findOne({name: player.name});
-    if (character.weapons[id] != null){
-      character.weapons[id] = character.weapons[id]+amount;
+    var weaponHash = mp.joaat(id);
+    if (character.weapons[weaponHash] != null){
+      character.weapons[weaponHash] = character.weapons[weaponHash]+amount;
     } else {
-      character.weapons[id] = amount;
+      character.weapons[weaponHash] = amount;
     }
     db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
     player.notify(`Equiped~g~ ${weapon.name} (${amount}).`);
   } else {
-    player.notify(`~r~ERROR: Invalid weapon.`);
+    player.notify(`~r~ERROR: ~w~Invalid weapon.`);
   }
 };
 
@@ -181,7 +182,20 @@ exports.characters.getWeapons = function(player){
 
 exports.characters.removeAllWeapons = function(player){
   player.removeAllWeapons();
-  db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
+  var character = db.characters.findOne({name: player.name});
+  db.characters.update({name : character.name}, {weapons : {}}, {multi: false, upsert: false});
+};
+
+exports.characters.tryRemoveBullets = function(player, hash, amount){
+  var character = db.characters.findOne({name: player.name});
+  if (character.weapons[hash] != null) {
+    if (character.weapons[hash] - amount >= 0){
+      character.weapons[hash] = character.weapons[hash] - amount;
+      db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
+      return true;
+    }
+  }
+  return false;
 };
 //Groups DB Interaction
 exports.groups.addGroup = function(name){

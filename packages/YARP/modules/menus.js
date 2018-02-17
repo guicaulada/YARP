@@ -23,11 +23,11 @@ mp.events.add('purchaseAmmuWeapon', (player, file, id, weapon, amount) => {
   var ammo_price = cfg[file][id].weapons[weapon].ammo;
   var price = ammo_price*amount;
   var player_weapons = db.characters.getWeapons(player);
-  if(player_weapons[weapon] == null){
+  var weaponHash = mp.joaat(weapon);
+  if(player_weapons[weaponHash] == null){
     price = price + body_price;
   }
   if(db.characters.tryWalletPayment(player, price)){
-    var weaponHash = mp.joaat(weapon);
     player.giveWeapon(weaponHash, Number(amount));
     db.characters.giveWeapon(player, weapon, amount);
   }

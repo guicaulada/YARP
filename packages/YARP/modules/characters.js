@@ -1,5 +1,6 @@
 var cfg = require('../exports/config.js');
 var db = require('../exports/database.js');
+var utils = require('../exports/utils.js');
 
 //Character creation
 mp.events.add('createCharacter', (player, name, age, sex, jface) => {
@@ -32,10 +33,18 @@ mp.events.add('loadCharacter', (player, jchar) => {
   player.health = character.health;
   player.armour = character.armour;
   for (weapon in character.weapons){
-    var weaponHash = mp.joaat(weapon);
-    player.giveWeapon(weaponHash, Number(character.weapons[weapon]));
+    player.giveWeapon(Number(weapon), Number(character.weapons[weapon]));
   }
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
+});
+
+mp.events.add('updateWeaponAmmo', (player, weaponHash, fired) => {
+  if (!db.characters.tryRemoveBullets(player, weaponHash, fired)){
+    player.outputChatBox("!{red}You shot more bullets than you currently have.");
+    setTimeout(function(){
+      player.kick("You shot more bullets than you currently have.");
+    },1000);
+  }
 });
 
 setInterval(function(){

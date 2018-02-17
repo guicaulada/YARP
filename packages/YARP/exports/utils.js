@@ -17,7 +17,7 @@ exports.getFormattedDate = function(){
   }
   var today = `${dd}/${mm}/${yyyy} ${h}:${m}:${s}`;
   return today;
-};
+}
 
 exports.generateRegistration = function(){
   var text = "";
