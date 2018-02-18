@@ -28,6 +28,7 @@ mp.events.add('playerJoin', (player) => {
 });
 
 mp.events.add('playerDeath', (player) => {
+    player.call('removeWeapons');
     player.spawn(cfg.basics.spawn[Math.floor(Math.random() * cfg.basics.spawn.length)]);
     db.characters.removeAllWeapons(player);
     player.health = 100;

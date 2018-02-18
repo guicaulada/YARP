@@ -28,12 +28,16 @@ exports.getWeaponClipSize = function(weaponhash){
   return mp.game.invoke('0xADBCA3534D2F6BEB', weaponhash);
 }
 
+exports.gotWeapon = function(weaponhash){
+  return mp.game.invoke('0xBEF481E5CF03DC93', mp.players.local.handle, weaponhash, false);
+}
+
 exports.getAllWeapons = function(){
   const weapons = {};
   weaponSlots.forEach(weaponSlot => {
-      const weapon = exports.getWeaponTypeInSlot(player, weaponSlot);
+      const weapon = exports.getWeaponTypeInSlot(mp.players.local.handle, weaponSlot);
       if (weapon !== 0 && weapon !== -1569615261) {
-          weapons[weapon] = { ammo: exports.getAmmoWeapon(player, weapon) };
+          weapons[weapon] = { ammo: exports.getAmmoWeapon(mp.players.local.handle, weapon) };
       }
   });
   return weapons;

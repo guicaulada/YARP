@@ -35,6 +35,7 @@ mp.events.add('loadCharacter', (player, jchar) => {
   for (weapon in character.weapons){
     player.giveWeapon(Number(weapon), Number(character.weapons[weapon]));
   }
+  player.call('setWeaponsConfig', [JSON.stringify(cfg.weapons)]);
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });
 

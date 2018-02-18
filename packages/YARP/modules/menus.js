@@ -38,11 +38,11 @@ mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {
 mp.events.add('purchaseAmmuWeapon', (player, file, id, weapon_id, amount) => {
   var weapon = cfg.weapons[weapon_id];
   if (weapon != null){
-    var body_price = cfg[file][id].weapons[weapon].body;
-    var ammo_price = cfg[file][id].weapons[weapon].ammo;
+    var body_price = cfg[file][id].weapons[weapon_id].body;
+    var ammo_price = cfg[file][id].weapons[weapon_id].ammo;
     var price = ammo_price*amount;
     var player_weapons = db.characters.getWeapons(player);
-    var weaponHash = mp.joaat(weapon);
+    var weaponHash = mp.joaat(weapon_id);
     if(player_weapons[weaponHash] == null){
       price = price + body_price;
     }

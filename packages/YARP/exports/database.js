@@ -195,10 +195,10 @@ exports.characters.getInventoryItems = function(player){
 
 exports.characters.giveWeapon = function(player, hash, amount){
   var character = db.characters.findOne({name: player.name});
-  if (character.weapons[weaponHash] != null){
-    character.weapons[weaponHash] = character.weapons[weaponHash]+amount;
+  if (character.weapons[hash] != null){
+    character.weapons[hash] = character.weapons[hash]+amount;
   } else {
-    character.weapons[weaponHash] = amount;
+    character.weapons[hash] = amount;
   }
   db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
 };
