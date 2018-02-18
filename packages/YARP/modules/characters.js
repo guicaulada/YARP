@@ -4,8 +4,8 @@ var utils = require('../exports/utils.js');
 
 //Character creation
 mp.events.add('createCharacter', (player, name, age, sex, jface) => {
-  var characters = db.characters.createCharacter(player,name,age,sex,jface);
-  if(characters != null){
+  var character = db.characters.tryCreateCharacter(player,name,age,sex,jface);
+  if(character != null){
     player.call('characterCreatedSuccessfully');
     player.call('showPlayerCharacters', [JSON.stringify(characters)]);
   } else {

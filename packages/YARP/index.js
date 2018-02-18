@@ -5,3 +5,5 @@ require('./modules/basics.js');
 require('./modules/characters.js');
 require('./modules/commands.js');
 require('./modules/menus.js');
+require('./modules/inventory.js');
+require('./modules/items.js');

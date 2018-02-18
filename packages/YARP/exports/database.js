@@ -26,7 +26,6 @@ exports.users.verifyAuthentication = function(player, password){
   if (user == null) {
     var hash = bcrypt.hashSync(password, 10);
     user = {
-      id : db.users.count()+1,
       social_club : player.socialClub,
       password : hash,
       last_login : last_login,
@@ -46,7 +45,7 @@ exports.users.verifyAuthentication = function(player, password){
 };
 
 //Characters DB Interaction
-exports.characters.createCharacter = function(player, name, age, sex, jface){
+exports.characters.tryCreateCharacter = function(player, name, age, sex, jface){
   var character = db.characters.findOne({name : name});
   if(character == null){
     var last_login = {
@@ -54,11 +53,10 @@ exports.characters.createCharacter = function(player, name, age, sex, jface){
       date : utils.getFormattedDate()
     }
     character = {
-      id : db.characters.count()+1,
       social_club : player.socialClub,
       last_login : last_login,
       groups : ["user"],
-      job : "Citizen",
+      profession : "Citizen",
       name : name,
       age : age,
       model : sex,
@@ -70,6 +68,7 @@ exports.characters.createCharacter = function(player, name, age, sex, jface){
       armour : 0,
       position : { "x" : cfg.basics.first_spawn.x, "y" : cfg.basics.first_spawn.y, "z" : cfg.basics.first_spawn.z, "h" : cfg.basics.first_spawn.h },
       weapons : {},
+      skills : {},
       inventory : {weight: 0},
       customization : {},
       decoration : {},
@@ -115,10 +114,8 @@ exports.characters.tryWalletPayment = function(player, value){
   var character = db.characters.findOne({name: player.name});
   if (character.wallet-value >= 0){
     db.characters.update({name : character.name}, {wallet : character.wallet-value}, {multi: false, upsert: false});
-    player.notify(`Paid ~r~$${value}.`);
     return true;
   } else {
-    player.notify(`~r~Not enough money in your wallet.`);
     return false;
   }
 };
@@ -127,52 +124,56 @@ exports.characters.tryBankPayment = function(player, value){
   var character = db.characters.findOne({name: player.name});
   if (character.bank-value >= 0){
     db.characters.update({name : character.name}, {bank : character.bank-value}, {multi: false, upsert: false});
-    player.notify(`Paid ~r~$${value}.`);
     return true;
   } else {
-    player.notify(`~r~Not enough money in your bank.`);
     return false;
   }
 };
 
-exports.characters.tryGiveInventoryItem = function(player, id, amount){
-  var item = cfg.items[id];
+exports.characters.tryGiveInventoryItem = function(player, item, amount){
   if (item != null){
-    var character = db.characters.findOne({name: player.name});
-    if (character.inventory.weight+item.weight < cfg.basics.max_weight){
-      if (character.inventory[id] != null){
-        character.inventory[id] = character.inventory[id]+amount;
-      } else {
-        character.inventory[id] = amount;
+    if (item.weight != null){
+      var character = db.characters.findOne({name: player.name});
+      if (character.inventory.weight+item.weight < cfg.basics.max_weight){
+        if (character.inventory[id] != null){
+          character.inventory[id] = character.inventory[id]+amount;
+        } else {
+          character.inventory[id] = amount;
+        }
+        character.inventory.weight = character.inventory.weight + (amount*item.weight)
+        db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
+        return true;
       }
-      character.inventory.weight = character.inventory.weight + (amount*item.weight)
-      db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
-      player.notify(`Received ~g~${amount} ${item.name}.`);
-      return true;
     } else {
-      player.notify(`~r~Inventory is full.`);
       return false;
     }
   } else {
-    player.notify(`~r~ERROR: ~w~Invalid item.`);
+    return false;
   }
 };
 
-exports.characters.giveWeapon = function(player, id, amount){
-  var weapon = cfg.weapons[id];
-  if (weapon != null){
+exports.characters.getInventoryItems = function(player){
     var character = db.characters.findOne({name: player.name});
-    var weaponHash = mp.joaat(id);
-    if (character.weapons[weaponHash] != null){
-      character.weapons[weaponHash] = character.weapons[weaponHash]+amount;
-    } else {
-      character.weapons[weaponHash] = amount;
+    let items = [];
+    for (item_id in character.inventory){
+      let item = cfg.items[item_id];
+      if (item != null){
+        item.amount = character.inventory[item_id];
+        item.id = item_id;
+        items.push(item);
+      }
     }
-    db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
-    player.notify(`Equiped~g~ ${weapon.name} (${amount}).`);
+    return items
+};
+
+exports.characters.giveWeapon = function(player, hash, amount){
+  var character = db.characters.findOne({name: player.name});
+  if (character.weapons[weaponHash] != null){
+    character.weapons[weaponHash] = character.weapons[weaponHash]+amount;
   } else {
-    player.notify(`~r~ERROR: ~w~Invalid weapon.`);
+    character.weapons[weaponHash] = amount;
   }
+  db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
 };
 
 exports.characters.getWeapons = function(player){
@@ -197,12 +198,30 @@ exports.characters.tryRemoveBullets = function(player, hash, amount){
   }
   return false;
 };
+
+
+exports.characters.setProfession = function(player,profession){
+  var character = db.characters.findOne({name: player.name});
+  let result = false;
+  if (character != null){
+    db.characters.update({name : player.name}, {profession : profession}, {multi: false, upsert: false});
+    return true;
+  }
+  return false;
+};
+
+exports.characters.getProfession = function(player,group){
+  var character = db.characters.findOne({name: player.name});
+  return character.profession;
+};
+
 //Groups DB Interaction
-exports.groups.addGroup = function(name){
+exports.groups.tryAddGroup = function(name, job){
   var group = db.groups.findOne({name : name});
   if (group == null){
     group = {
       name : name,
+      job: job,
       permissions : []
     }
     db.groups.save(group);
@@ -211,7 +230,7 @@ exports.groups.addGroup = function(name){
   return false;
 };
 
-exports.groups.addPermission = function(name,permission){
+exports.groups.tryAddPermission = function(name,permission){
   var group = db.groups.findOne({name : name});
   if (group == null){
     group = {
@@ -227,7 +246,7 @@ exports.groups.addPermission = function(name,permission){
   return true;
 };
 
-exports.groups.removeGroup = function(name){
+exports.groups.tryRemoveGroup = function(name){
   var group = db.groups.findOne({name : name});
   if (group == null){
     return false;
@@ -237,7 +256,7 @@ exports.groups.removeGroup = function(name){
   }
 };
 
-exports.groups.removePermission = function(name,permission){
+exports.groups.tryRemovePermission = function(name,permission){
   var group = db.groups.findOne({name : name});
   if (group == null){
     return false;
@@ -249,51 +268,129 @@ exports.groups.removePermission = function(name,permission){
   }
 };
 
-exports.groups.takeGroup = function(userid,group){
-  var user = db.users.findOne({id : parseInt(userid)});
-  if (user == null){
-    return false;
-  } else {
-    db.users.update(user, {groups : user.groups.filter(e => e !== group)}, {multi: false, upsert: false});
-    return true;
+exports.groups.tryTakeGroup = function(player,group){
+  let dbdata = utils.getUserAndOrCharacter(player);
+  let result = false;
+  if (dbdata.character != null && dbdata.character.groups.indexOf(group) > -1)){
+    db.characters.update(dbdata.character, {groups : dbdata.character.groups.filter(e => e !== group)}, {multi: false, upsert: false});
+    result = true;
   }
+  if (dbdata.user != null && dbdata.user.groups.indexOf(group) > -1)) {
+    db.users.update(dbdata.user, {groups : dbdata.user.groups.filter(e => e !== group)}, {multi: false, upsert: false});
+    result = true;
+  }
+  return result;
 };
 
-exports.groups.giveGroup = function(userid,group){
-  var user = db.users.findOne({id : parseInt(userid)});
-  if (user == null){
-    return false;
-  } else {
-    user.groups.push(group);
-    db.users.update(user, {groups : user.groups}, {multi: false, upsert: false});
-    return true;
+exports.groups.tryGiveGroup = function(player,group){
+  let dbdata = utils.getUserAndOrCharacter(player);
+  let result = false;
+  if (dbdata.character != null && dbdata.character.groups.indexOf(group) < 0)){
+    dbdata.character.groups.push(group);
+    db.characters.update(dbdata.character, {groups : dbdata.character.groups}, {multi: false, upsert: false});
+    result = true;
   }
+  if (dbdata.user != null && dbdata.user.groups.indexOf(group) < 0)) {
+    dbdata.user.groups.push(group);
+    db.users.update(dbdata.user, {groups : dbdata.user.groups}, {multi: false, upsert: false});
+    result = true;
+  }
+  return result;
 };
 
 exports.groups.hasPermission = function(player,permission){
-  var user = db.users.findOne({social_club : player.socialClub});
-  var result = false;
-  var removed = false;
-  var readd = false;
-  user.groups.forEach(function(g){
-    var group = db.groups.findOne({name : g});
-    if (group != null) {
-      if (group.permissions.indexOf("*") > -1){
-        result = true;
-      }
-      if (group.permissions.indexOf(permission) > -1){
-        result = true;
-      }
-      if (group.permissions.indexOf(`-${permission}`) > -1){
-        removed = true;
-      }
-      if (group.permissions.indexOf(`+${permission}`) > -1){
-        readd = true;
+  let dbdata = utils.getUserAndCharacter(player);
+  let result = false;
+  let removed = false;
+  let readd = false;
+  if (permission[0] == '#') {
+    if (dbdata.character != null){
+      let parts = permission.split('.');
+      let item = dbdata.character.inventory[parts[0]];
+      let operation = parts[1][0];
+      let value = Number(parts[1].splice(1,parts[1].length))
+      switch(operation) {
+        case '>':
+          result = (item > value);
+          break;
+        case '<':
+          result = (item < value);
+          break;
+        default:
+          result = (item == value);
+          break;
       }
     }
-  });
+  } else if (permission[0] == '@') {
+    if (dbdata.character != null){
+      let parts = permission.split('.');
+      let skill = dbdata.character.skills[parts[0]];
+      let operation = parts[1][0];
+      let value = Number(parts[1].splice(1,parts[1].length))
+      switch(operation) {
+        case '>':
+          result = (skill > value);
+          break;
+        case '<':
+          result = (skill < value);
+          break;
+        default:
+          result = (skill == value);
+          break;
+      }
+    }
+  } else {
+    if (dbdata.user != null){
+      dbdata.user.groups.forEach(function(name){
+        let group = db.groups.findOne({name : name});
+        if (group != null) {
+          if (group.permissions.indexOf("*") > -1){
+            result = true;
+          }
+          if (group.permissions.indexOf(permission) > -1){
+            result = true;
+          }
+          if (group.permissions.indexOf(`-${permission}`) > -1){
+            removed = true;
+          }
+          if (group.permissions.indexOf(`+${permission}`) > -1){
+            readd = true;
+          }
+        }
+      });
+    }
+    if (dbdata.character != null){
+      dbdata.character.groups.push(dbdata.character.job);
+      dbdata.character.groups.forEach(function(name){
+        let group = db.groups.findOne({name : name});
+        if (group != null) {
+          if (group.permissions.indexOf("*") > -1){
+            result = true;
+          }
+          if (group.permissions.indexOf(permission) > -1){
+            result = true;
+          }
+          if (group.permissions.indexOf(`-${permission}`) > -1){
+            removed = true;
+          }
+          if (group.permissions.indexOf(`+${permission}`) > -1){
+            readd = true;
+          }
+        }
+      });
+    }
+  }
   if (removed && !readd){
     result = false;
   }
   return result;
+};
+
+exports.groups.hasPermissions = function(player,permissions){
+  for (let i = 0; i < permissions.length; i++){
+    if (!exports.groups.hasPermission(player,permissions[i])) {
+      return false;
+    }
+  }
+  return true;
 };

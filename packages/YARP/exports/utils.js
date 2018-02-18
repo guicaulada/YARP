@@ -1,6 +1,23 @@
 var db = require('./database.js');
 var cfg = require('./config.js');
 
+exports.getUserAndCharacter = function(player){
+  let user = null;
+  let character = null;
+  if ((typeof player) === 'string') {
+    let names = player.split(' ');
+    if (names.length == 2) {
+      character = db.characters.findOne({name: player});
+    } else {
+      user = db.users.findOne({social_club: player});
+    }
+  } else {
+    user = db.users.findOne({social_club: player.socialClub});
+    character = db.characters.findOne({name: player.name});
+  }
+  return {user: user, character: character};
+}
+
 exports.getFormattedDate = function(){
   var today = new Date();
   var dd = today.getDate();

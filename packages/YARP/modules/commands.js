@@ -18,20 +18,27 @@ mp.events.addCommand('armor', (player) => {
   }
 });
 
-mp.events.addCommand("weapon", (player, fullText, weapon, ammo) => {
+mp.events.addCommand("weapon", (player, msg, weapon, ammo) => {
   if (db.groups.hasPermission(player,"cmd.weapon")){
     var weaponHash = mp.joaat(weapon);
     player.giveWeapon(weaponHash, Number(ammo) || 10000);
   }
 });
 
-mp.events.addCommand('veh', (player, text) => {
+mp.events.addCommand('inventory', (player) => {
+  if (db.groups.hasPermission(player,"cmd.inventory")){
+    let inventoryJson = JSON.stringify(db.characters.getInventoryItems(player));
+    player.call('showPlayerInventory', [inventoryJson, 0])
+  }
+});
+
+mp.events.addCommand('veh', (player, model) => {
   if (db.groups.hasPermission(player,"cmd.veh")){
-    if (text == undefined) {
+    if (model == null) {
         let veh = mp.vehicles.new(mp.joaat('T20'), player.position);
         player.putIntoVehicle(veh, -1);
     } else {
-        let veh = mp.vehicles.new(mp.joaat(text), player.position);
+        let veh = mp.vehicles.new(mp.joaat(model), player.position);
         player.putIntoVehicle(veh, -1);
     }
   }
@@ -55,11 +62,11 @@ mp.events.addCommand('camdir', (player) => {
   }
 });
 
-mp.events.addCommand("addgroup", (player, fullText, arg1) => {
-  if (arg1 != null){
+mp.events.addCommand("addgroup", (player, msg, group) => {
+  if (group != null){
     if (db.groups.hasPermission(player,"cmd.addgroup")){
-      if (db.groups.addGroup(arg1)){
-        player.outputChatBox(`!{green}Group !{yellow}${arg1}!{green} has been created!`);
+      if (db.groups.tryAddGroup(group)){
+        player.outputChatBox(`!{green}Group !{yellow}${group}!{green} has been created!`);
       } else {
         player.outputChatBox("!{red}Group already exist!");
       }
@@ -69,11 +76,11 @@ mp.events.addCommand("addgroup", (player, fullText, arg1) => {
   }
 });
 
-mp.events.addCommand("addperm", (player, fullText, arg1, arg2) => {
-  if (arg1 != null && arg2 != null){
+mp.events.addCommand("addperm", (player, msg, group, perm) => {
+  if (group != null && perm != null){
     if (db.groups.hasPermission(player,"cmd.addperm")){
-      if (db.groups.addPermission(arg1,arg2)){
-        player.outputChatBox(`!{green}Permission !{yellow}${arg2}!{green} has been added to !{yellow}${arg1}!{green}!`);
+      if (db.groups.tryAddPermission(group,perm)){
+        player.outputChatBox(`!{green}Permission !{yellow}${perm}!{green} has been added to !{yellow}${group}!{green}!`);
       } else {
         player.outputChatBox("!{red}Permission already exist!");
       }
@@ -83,11 +90,11 @@ mp.events.addCommand("addperm", (player, fullText, arg1, arg2) => {
   }
 });
 
-mp.events.addCommand("rmgroup", (player, fullText, arg1) => {
-  if (arg1 != null){
+mp.events.addCommand("rmgroup", (player, msg, group) => {
+  if (group != null){
     if (db.groups.hasPermission(player,"cmd.rmgroup")){
-      if (db.groups.removeGroup(arg1)){
-        player.outputChatBox(`!{green}Group !{yellow}${arg1}!{green} has been removed!`);
+      if (db.groups.tryRemoveGroup(group)){
+        player.outputChatBox(`!{green}Group !{yellow}${group}!{green} has been removed!`);
       } else {
         player.outputChatBox("!{red}Group doesn't exist!");
       }
@@ -97,11 +104,11 @@ mp.events.addCommand("rmgroup", (player, fullText, arg1) => {
   }
 });
 
-mp.events.addCommand("rmperm", (player, fullText, arg1, arg2) => {
-  if (arg1 != null && arg2 != null){
+mp.events.addCommand("rmperm", (player, msg, group, perm) => {
+  if (group != null && perm != null){
     if (db.groups.hasPermission(player,"cmd.rmperm")){
-      if (db.groups.removePermission(arg1,arg2)){
-        player.outputChatBox(`!{green}Permission !{yellow}${arg2}!{green} has been removed from !{yellow}${arg1}!{green}!`);
+      if (db.groups.tryRemovePermission(group,perm)){
+        player.outputChatBox(`!{green}Permission !{yellow}${perm}!{green} has been removed from !{yellow}${group}!{green}!`);
       } else {
         player.outputChatBox("!{red}Permission doesn't exist!");
       }
@@ -111,13 +118,25 @@ mp.events.addCommand("rmperm", (player, fullText, arg1, arg2) => {
   }
 });
 
-mp.events.addCommand("givegroup", (player, fullText, arg1, arg2) => {
-  if (arg1 != null){
-    if (db.groups.hasPermission(player,"cmd.givegroup")){
-      if (db.groups.giveGroup(arg1, arg2)){
-        player.outputChatBox(`!{green}Group !{yellow}${arg2}!{green} has been added to !{yellow}${arg1}!{green}!`);
+mp.events.addCommand("givegroup", (player, msg) => {
+  if (msg != null){
+    var args = msg.split(" ");
+    if (db.groups.hasPermission(player,"cmd.takegroup")){
+      var target = mp.players.at(Number(args[0]));
+      var group = args[1];
+      if (target == null) {
+        if (args.length > 2) {
+          target = `${args[0]} ${args[1]}`;
+          group = args[2];
+        }
+      }
+      if (db.groups.tryGiveGroup(target, group)){
+        if (target.socialClub != null) {
+          target = target.socialClub;
+        }
+        player.outputChatBox(`!{green}Group !{yellow}${group}!{green} has been added to !{yellow}${target}!{green}!`);
       } else {
-        player.outputChatBox("!{red}Player doesn't exist!");
+        player.outputChatBox("!{red}Player already have that group!");
       }
     }
   } else {
@@ -125,13 +144,25 @@ mp.events.addCommand("givegroup", (player, fullText, arg1, arg2) => {
   }
 });
 
-mp.events.addCommand("takegroup", (player, fullText, arg1, arg2) => {
-  if (arg1 != null){
+mp.events.addCommand("takegroup", (player, msg) => {
+  if (msg != null){
+    var args = msg.split(" ");
     if (db.groups.hasPermission(player,"cmd.takegroup")){
-      if (db.groups.takeGroup(arg1, arg2)){
-        player.outputChatBox(`!{green}Group !{yellow}${arg2}!{green} has been removed from !{yellow}${arg1}!{green}!`);
+      var target = mp.players.at(Number(args[0]));
+      var group = args[1];
+      if (target == null) {
+        if (args.length > 2) {
+          target = `${args[0]} ${args[1]}`;
+          group = args[2];
+        }
+      }
+      if (db.groups.tryTakeGroup(target, group)){
+        if (target.socialClub != null) {
+          target = target.socialClub;
+        }
+        player.outputChatBox(`!{green}Group !{yellow}${group}!{green} has been removed from !{yellow}${target}!{green}!`);
       } else {
-        player.outputChatBox("!{red}Player doesn't exist!");
+        player.outputChatBox("!{red}Player doesn't have that group!");
       }
     }
   } else {
@@ -148,10 +179,10 @@ mp.events.addCommand("money", (player) => {
 });
 
 var wp_pos = {};
-mp.events.addCommand("tp", (player, fullText) => {
+mp.events.addCommand("tp", (player, msg) => {
   if (db.groups.hasPermission(player,"cmd.tp")){
-    if (fullText != null){
-      var args = fullText.split(" ");
+    if (msg != null){
+      var args = msg.split(" ");
       if (args.length >= 3){
         args[0] = Number(args[0]);
         args[1] = Number(args[1]);
@@ -181,27 +212,27 @@ mp.events.addCommand("tp", (player, fullText) => {
   }
 });
 
-mp.events.addCommand("jtp", (player, fullText) => {
+mp.events.addCommand("jtp", (player, jsonPos) => {
   if (db.groups.hasPermission(player,"cmd.jtp")){
-    if (fullText != null){
-      player.position = JSON.parse(fullText);
+    if (jsonPos != null){
+      player.position = JSON.parse(jsonPos);
     } else {
       player.outputChatBox("!{red}Usage: /jtp <jsonPos>");
     }
   }
 });
 
-mp.events.addCommand("jpos", (player, fullText) => {
+mp.events.addCommand("jpos", (player, comment) => {
   if (db.groups.hasPermission(player,"cmd.jpos")){
     var fs = require('fs');
-    if (fullText != null && fullText != "" && fullText != " "){
-      fullText = " : " + fullText;
+    if (comment != null && comment != "" && comment != " "){
+      comment = " : " + comment;
     } else {
-      fullText = "";
+      comment = "";
     }
-    fs.appendFile("jpos.txt", JSON.stringify(player.position) + fullText +"\n", function(err) {
+    fs.appendFile("jpos.txt", JSON.stringify(player.position) + comment +"\n", function(err) {
       if(err) {
-        return console.log('JPOS:'+err);
+        return console.log('JPOS ERROR:\n'+err);
       }
       player.outputChatBox("!{green}JSON position saved to file!");
     });

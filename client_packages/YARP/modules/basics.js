@@ -59,17 +59,6 @@ mp.events.add('render', () => {
             scale: [text.scale.x, text.scale.y],
             outline: text.outline
           });
-          if(!inRange.active){
-            inRange.active = true;
-            mp.keys.bind(69, false, function() {
-              mp.events.callRemote(inRange.item.action[0], inRange.file, inRange.id);
-            });
-          }
-        } else {
-          if(inRange.active){
-            inRange.active = false;
-            mp.keys.unbind(69, false);
-          }
         }
       }
     }
@@ -86,6 +75,19 @@ mp.events.add('render', () => {
             marker.spin, "", "", marker.onentity
           );
         }
+      }
+    }
+    if(hasText && hasMarker){
+      if(!inRange.active){
+        inRange.active = true;
+        mp.keys.bind(69, false, function() {
+          mp.events.callRemote(inRange.item.action[0], inRange.file, inRange.id);
+        });
+      }
+    } else {
+      if(inRange.active){
+        inRange.active = false;
+        mp.keys.unbind(69, false);
       }
     }
     if(!hasText && !hasMarker){

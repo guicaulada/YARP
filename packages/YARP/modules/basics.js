@@ -11,7 +11,7 @@ mp.events.add('playerJoin', (player) => {
           player.kick("You have been banned.");
         },1000);
       }
-      else if (cfg.whitelist && !user.whitelisted) {
+      else if (cfg.basics.whitelist && !user.whitelisted) {
         player.outputChatBox("!{yellow}You are not whitelisted.");
         setTimeout(function(){
           player.kick("You are not whitelisted.");

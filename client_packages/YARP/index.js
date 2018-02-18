@@ -5,3 +5,4 @@ require('./YARP/modules/characters.js');
 require('./YARP/modules/commands.js');
 require('./YARP/modules/menus.js');
 require('./YARP/modules/ipls.js');
+require('./YARP/modules/inventory.js');
