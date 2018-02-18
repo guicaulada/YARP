@@ -20,8 +20,9 @@ mp.events.add('loadStoreMenu', (player, file, id) => {
 
 mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {
   var item = cfg.items[item_id];
+  item.id = item_id;
   if (item != null){
-    var price = cfg[file][id].items[item]*amount;
+    var price = cfg[file][id].items[item_id]*amount;
     if(db.characters.tryWalletPayment(player, price)){
       db.characters.tryGiveInventoryItem(player, item, amount);
       player.notify(`Paid ~r~$${price}`);

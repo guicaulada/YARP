@@ -8,8 +8,11 @@ mp.events.add('loadInventoryMenu', (player) => {
 
 mp.events.add('useInventoryItem', (player, item_id) => {
   let item = cfg.items[item_id];
+  item.id = item_id;
   let args = item.action.slice(1, item.action.length);
-  mp.events.call(item.action[0], player, args);
+  if (db.characters.tryTakeInventoryItem(player, item, 1)){
+    mp.events.call(item.action[0], player, args);
+  }
 });
 
 mp.events.add('requestInventoryItem', (player, item_id) => {

@@ -17,6 +17,11 @@ exports.users.getUserByPlayer = function(player){
   return user;
 };
 
+exports.users.getUserBySocialClub = function(socialClub){
+  var user = db.users.findOne({social_club : socialClub});
+  return user;
+};
+
 exports.users.verifyAuthentication = function(player, password){
   var user = db.users.findOne({social_club : player.socialClub});
   var last_login = {
@@ -110,6 +115,11 @@ exports.characters.getCharacterByPlayer = function(player){
   return character;
 };
 
+exports.characters.getCharacterByName = function(name){
+  var character = db.characters.findOne({name: name});
+  return character;
+};
+
 exports.characters.tryWalletPayment = function(player, value){
   var character = db.characters.findOne({name: player.name});
   if (character.wallet-value >= 0){
@@ -134,13 +144,13 @@ exports.characters.tryGiveInventoryItem = function(player, item, amount){
   if (item != null){
     if (item.weight != null){
       var character = db.characters.findOne({name: player.name});
-      if (character.inventory.weight+item.weight < cfg.basics.max_weight){
-        if (character.inventory[id] != null){
-          character.inventory[id] = character.inventory[id]+amount;
+      if (character.inventory.weight + item.weight < cfg.basics.max_weight){
+        if (character.inventory[item.id] != null){
+          character.inventory[item.id] = character.inventory[item.id] + amount;
         } else {
-          character.inventory[id] = amount;
+          character.inventory[item.id] = amount;
         }
-        character.inventory.weight = character.inventory.weight + (amount*item.weight)
+        character.inventory.weight = utils.round(character.inventory.weight + (amount*item.weight),1);
         db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
         return true;
       }
@@ -150,6 +160,23 @@ exports.characters.tryGiveInventoryItem = function(player, item, amount){
   } else {
     return false;
   }
+};
+
+exports.characters.tryTakeInventoryItem = function(player, item, amount){
+  if (item != null){
+    if (item.weight != null){
+      var character = db.characters.findOne({name: player.name});
+      if (character.inventory[item.id] != null){
+        if (character.inventory[item.id] - amount >= 0){
+          character.inventory[item.id] = character.inventory[item.id] - amount;
+          character.inventory.weight = utils.round(character.inventory.weight - (amount*item.weight),1);
+          db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 };
 
 exports.characters.getInventoryItems = function(player){
@@ -271,11 +298,11 @@ exports.groups.tryRemovePermission = function(name,permission){
 exports.groups.tryTakeGroup = function(player,group){
   let dbdata = utils.getUserAndOrCharacter(player);
   let result = false;
-  if (dbdata.character != null && dbdata.character.groups.indexOf(group) > -1)){
+  if (dbdata.character != null && dbdata.character.groups.indexOf(group) > -1){
     db.characters.update(dbdata.character, {groups : dbdata.character.groups.filter(e => e !== group)}, {multi: false, upsert: false});
     result = true;
   }
-  if (dbdata.user != null && dbdata.user.groups.indexOf(group) > -1)) {
+  if (dbdata.user != null && dbdata.user.groups.indexOf(group) > -1) {
     db.users.update(dbdata.user, {groups : dbdata.user.groups.filter(e => e !== group)}, {multi: false, upsert: false});
     result = true;
   }
@@ -285,12 +312,12 @@ exports.groups.tryTakeGroup = function(player,group){
 exports.groups.tryGiveGroup = function(player,group){
   let dbdata = utils.getUserAndOrCharacter(player);
   let result = false;
-  if (dbdata.character != null && dbdata.character.groups.indexOf(group) < 0)){
+  if (dbdata.character != null && dbdata.character.groups.indexOf(group) < 0){
     dbdata.character.groups.push(group);
     db.characters.update(dbdata.character, {groups : dbdata.character.groups}, {multi: false, upsert: false});
     result = true;
   }
-  if (dbdata.user != null && dbdata.user.groups.indexOf(group) < 0)) {
+  if (dbdata.user != null && dbdata.user.groups.indexOf(group) < 0) {
     dbdata.user.groups.push(group);
     db.users.update(dbdata.user, {groups : dbdata.user.groups}, {multi: false, upsert: false});
     result = true;

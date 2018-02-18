@@ -7,13 +7,13 @@ exports.getUserAndCharacter = function(player){
   if ((typeof player) === 'string') {
     let names = player.split(' ');
     if (names.length == 2) {
-      character = db.characters.findOne({name: player});
+      character = db.characters.getCharacterByName(player);
     } else {
-      user = db.users.findOne({social_club: player});
+      user = db.users.getUserBySocialClub(player);
     }
   } else {
-    user = db.users.findOne({social_club: player.socialClub});
-    character = db.characters.findOne({name: player.name});
+    user = db.users.getUserByPlayer(player);
+    character = db.characters.getCharacterByPlayer(player);
   }
   return {user: user, character: character};
 }

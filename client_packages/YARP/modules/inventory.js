@@ -1,8 +1,5 @@
 //Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/inventory.js
 let targetType = null;
-mp.keys.bind(73, false, function() {
-	mp.events.callRemote('loadInventoryMenu');
-});
 
 mp.events.add('showPlayerInventory', (inventoryJson, target) => {
 	// Guardamos los datos del inventario

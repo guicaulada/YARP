@@ -1,5 +1,7 @@
 ﻿let selected = null;
 let selected_id = null;
+let selectedAmount = null;
+let currentSelected = null;
 
 function populateInventory(inventoryJson, title) {
 	// Inicializamos la selección
@@ -23,47 +25,49 @@ function populateInventory(inventoryJson, title) {
 	for(let i = 0; i < inventory.length; i++) {
 		// Obtenemos el objeto del inventario
 		let item = inventory[i];
+		if (item.amount > 0){
+			// Creamos los elementos para mostrar cada objeto
+			let itemContainer = document.createElement('div');
+			let amountContainer = document.createElement('div');
+			let itemImage = document.createElement('img');
 
-		// Creamos los elementos para mostrar cada objeto
-		let itemContainer = document.createElement('div');
-		let amountContainer = document.createElement('div');
-		let itemImage = document.createElement('img');
+			// Añadimos las clases a cada elemento
+			itemContainer.classList.add('inventory-item');
+			amountContainer.classList.add('inventory-amount');
 
-		// Añadimos las clases a cada elemento
-		itemContainer.classList.add('inventory-item');
-		amountContainer.classList.add('inventory-amount');
+			// Añadimos el contenido de cada elemento
+			itemImage.src = '../img/inventory/' + item.img + '.png';
+			amountContainer.textContent = item.amount;
 
-		// Añadimos el contenido de cada elemento
-		itemImage.src = '../img/inventory/' + item.img + '.png';
-		amountContainer.textContent = item.amount;
+			// Añadimos la función de click sobre el elemento
+			itemContainer.onclick = (function() {
+				// Comprobamos que se ha pulsado en un elemento no seleccionado
+				if(selected !== i) {
+					// Miramos si había algún elemento seleccionado
+					if(selected != null) {
+						let previousSelected = document.getElementsByClassName('inventory-item')[selected];
+						previousSelected.classList.remove('active-item');
+					}
 
-		// Añadimos la función de click sobre el elemento
-		itemContainer.onclick = (function() {
-			// Comprobamos que se ha pulsado en un elemento no seleccionado
-			if(selected !== i) {
-				// Miramos si había algún elemento seleccionado
-				if(selected != null) {
-					let previousSelected = document.getElementsByClassName('inventory-item')[selected];
-					previousSelected.classList.remove('active-item');
+					// Seleccionamos el elemento pulsado
+					currentSelected = document.getElementsByClassName('inventory-item')[i];
+					currentSelected.classList.add('active-item');
+
+					// Guardamos el nuevo índice seleccionado
+					selected = i;
+					selected_id = item.id;
+					selectedAmount = amountContainer;
+
+					// Obtenemos las opciones a mostrar
+					mp.trigger('getInventoryOptions');
 				}
+			});
 
-				// Seleccionamos el elemento pulsado
-				let currentSelected = document.getElementsByClassName('inventory-item')[i];
-				currentSelected.classList.add('active-item');
-
-				// Guardamos el nuevo índice seleccionado
-				selected = i;
-				selected_id = item.id;
-
-				// Obtenemos las opciones a mostrar
-				mp.trigger('getInventoryOptions');
-			}
-		});
-
-		// Ordenamos la jerarquía de elementos
-		inventoryContainer.appendChild(itemContainer);
-		itemContainer.appendChild(amountContainer);
-		itemContainer.appendChild(itemImage);
+			// Ordenamos la jerarquía de elementos
+			inventoryContainer.appendChild(itemContainer);
+			itemContainer.appendChild(amountContainer);
+			itemContainer.appendChild(itemImage);
+		}
 	}
 }
 
@@ -71,6 +75,7 @@ function showInventoryOptions(optionsArray) {
 	// Añadimos las opciones
 	let options = optionsArray.split(",");
 	let inventoryOptions = document.getElementById('options');
+	let inventoryContainer = document.getElementById('inventory');
 	while (inventoryOptions.firstChild) {
 	    inventoryOptions.removeChild(inventoryOptions.firstChild);
 	}
@@ -82,6 +87,18 @@ function showInventoryOptions(optionsArray) {
 		itemOption.textContent = options[i];
 		itemOption.onclick = (function(){
 			mp.trigger('executeInventoryAction', selected_id, options[i]);
+			if (Number(selectedAmount.textContent) - 1 > 0)
+			  selectedAmount.textContent = Number(selectedAmount.textContent) - 1;
+			else {
+				inventoryContainer.removeChild(currentSelected);
+				selected = null;
+				selected_id = null;
+				selectedAmount = null;
+				currentSelected = null;
+				while (inventoryOptions.firstChild) {
+						inventoryOptions.removeChild(inventoryOptions.firstChild);
+				}
+			}
 		});
 		inventoryOptions.appendChild(itemOption);
 	}
