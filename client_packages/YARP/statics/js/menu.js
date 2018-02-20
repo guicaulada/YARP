@@ -800,7 +800,6 @@ function populateCharacterList(charactersJson) {
 
 	// Añadimos el texto de cabecera
 	header.textContent = 'Character list';
-
 	for(let i = 0; i < characters.length; i++) {
 		// Obtenemos el componente
 		let character = characters[i];
@@ -817,9 +816,11 @@ function populateCharacterList(charactersJson) {
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
 		itemDescription.setAttribute('style', 'white-space: pre;');
-
+		if (character.groups["job"] == null) {
+			character.groups["job"] = "Citizen";
+		}
 		// Añadimos el contenido de cada elemento
-		itemDescription.textContent = `${character.name}, ${character.age}\r\n${character.job}`;
+		itemDescription.textContent = `${character.name}, ${character.age}\r\n${character.groups["job"]}`;
 
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
@@ -835,23 +836,24 @@ function populateCharacterList(charactersJson) {
 	}
 
 	// Añadimos los botones
-	let createButton = document.createElement('div');
-	let cancelButton = document.createElement('div');
+	if (characters.length < 5){
+		let createButton = document.createElement('div');
 
-	// Añadimos las clases a cada botón
-	createButton.classList.add('single-button', 'accept-button');
+		// Añadimos las clases a cada botón
+		createButton.classList.add('single-button', 'accept-button');
 
-	// Añadimos el texto de los botones
-	createButton.textContent = 'New character';
+		// Añadimos el texto de los botones
+		createButton.textContent = 'New character';
 
-	// Ponemos la función para cada elemento
-	createButton.onclick = (function() {
-		// Mostramos el menú de creación de personaje
-		mp.trigger('showCharacterCreationMenu');
-	});
+		// Ponemos la función para cada elemento
+		createButton.onclick = (function() {
+			// Mostramos el menú de creación de personaje
+			mp.trigger('showCharacterCreationMenu');
+		});
 
-	// Ordenamos la jerarquía de elementos
-	options.appendChild(createButton);
+		// Ordenamos la jerarquía de elementos
+		options.appendChild(createButton);
+	}
 }
 
 function populateTattooMenu(tattooZoneArray, businessName, priceMultiplier) {

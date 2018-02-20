@@ -11,7 +11,7 @@ mp.events.add('playerJoin', (player) => {
           player.kick("You have been banned.");
         },1000);
       }
-      else if (cfg.basics.whitelist && !user.whitelisted) {
+      else if (cfg.base.whitelist && !user.whitelisted) {
         player.outputChatBox("!{yellow}You are not whitelisted.");
         setTimeout(function(){
           player.kick("You are not whitelisted.");
@@ -29,7 +29,7 @@ mp.events.add('playerJoin', (player) => {
 
 mp.events.add('playerDeath', (player) => {
     player.call('removeWeapons');
-    player.spawn(cfg.basics.spawn[Math.floor(Math.random() * cfg.basics.spawn.length)]);
+    player.spawn(cfg.base.spawn[Math.floor(Math.random() * cfg.base.spawn.length)]);
     db.characters.removeAllWeapons(player);
     player.health = 100;
 });
@@ -90,24 +90,53 @@ setInterval(function(){
   mp.players.forEach((player, id) => {
     if (inRange[player] == null){
       for (file in cfg){
-        for (cfg_id in cfg[file]){
-          let item = cfg[file][cfg_id];
-          if(item != null){
-            if(item.action != null && item.action != []){
-              if((typeof item.action[0]) === "string"){
-                if(item.positions != null){
-                  for(pos of item.positions){
-                    item.pos = pos;
-                    dist = player.dist(pos)
-                    if (dist < item.text.range || dist < item.marker.range){
-                      player.call('addInRangeItem', [JSON.stringify(item), file, cfg_id]);
-                      inRange[player] = pos;
+        if (inRange[player] == null){
+          for (cfg_id in cfg[file]){
+            if (inRange[player] == null){
+              let item = cfg[file][cfg_id];
+              if(item != null){
+                if(item.action != null && item.action != []){
+                  if((typeof item.action[0]) === "string"){
+                    if(item.positions != null){
+                      for(pos of item.positions){
+                        if (inRange[player] == null){
+                          item.pos = pos;
+                          dist = player.dist(pos)
+                          for (text of item.texts) {
+                            if (dist < text.range){
+                              inRange[player] = pos;
+                            }
+                          }
+                          for (marker of item.markers) {
+                            if (dist < marker.range){
+                              inRange[player] = pos;
+                            }
+                          }
+                          for (npc of item.npcs) {
+                            if (dist < npc.range){
+                              inRange[player] = pos;
+                            }
+                          }
+                          if (dist < item.range){
+                            inRange[player] = pos;
+                          }
+                          if (inRange[player] != null){
+                            player.call('addInRangeItem', [JSON.stringify(item), file, cfg_id]);
+                          }
+                        } else {
+                          break;
+                        }
+                      }
                     }
                   }
                 }
               }
+            } else {
+              break;
             }
           }
+        } else {
+          break;
         }
       }
     }

@@ -7,6 +7,7 @@ mp.events.add('createCharacter', (player, name, age, sex, jface) => {
   var character = db.characters.tryCreateCharacter(player,name,age,sex,jface);
   if(character != null){
     player.call('characterCreatedSuccessfully');
+    var characters = db.characters.getPlayerCharacters(player);
     player.call('showPlayerCharacters', [JSON.stringify(characters)]);
   } else {
     player.call('characterNameDuplicated');
@@ -35,12 +36,14 @@ mp.events.add('loadCharacter', (player, jchar) => {
   for (weapon in character.weapons){
     player.giveWeapon(Number(weapon), Number(character.weapons[weapon]));
   }
+  player.setVariable('PLAYER_WALLET', character.wallet);
+  player.setVariable('PLAYER_BANK', character.bank);
   player.call('setWeaponsConfig', [JSON.stringify(cfg.weapons)]);
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });
 
-mp.events.add('updateWeaponAmmo', (player, weaponHash, fired) => {
-  if (!db.characters.tryRemoveBullets(player, weaponHash, fired)){
+mp.events.add('updateWeaponAmmo', (player, weaponHash, amount) => {
+  if (!db.characters.updateWeaponAmmo(player, weaponHash, amount)){
     player.outputChatBox("!{red}You shot more bullets than you currently have.");
     setTimeout(function(){
       player.kick("You shot more bullets than you currently have.");
@@ -61,4 +64,4 @@ setInterval(function(){
       }
 		}
 	);
-},1000*cfg.basics.save_interval);
+},1000*cfg.base.save_interval);

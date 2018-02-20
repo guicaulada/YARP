@@ -10,12 +10,12 @@ body {
 	margin: 0px auto;
 }
 
-figure img { 
-	margin: 0 auto; 
+figure img {
+	margin: 0 auto;
 }
 
-figcaption { 
-	text-align: center; 
+figcaption {
+	text-align: center;
 }
 
 .pointer {
@@ -60,7 +60,7 @@ figcaption {
 
 .vehicle-scrollable {
 	height: 75vh;
-	margin-top: 2.5vh; 
+	margin-top: 2.5vh;
 	overflow-y: auto;
 }
 
@@ -86,4 +86,14 @@ figcaption {
 
 #register {
 	margin-bottom: 10%;
+}
+
+#bank-withdraw-error {
+	height:20px;
+}
+#bank-deposit-error {
+	height:20px;
+}
+#bank-transfer-error {
+	height:20px;
 }

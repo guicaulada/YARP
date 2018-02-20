@@ -1,7 +1,7 @@
 exports.ammunations = require('../config/ammunations.json');
 exports.banks = require('../config/banks.json');
 exports.barbershops = require('../config/barbershops.json');
-exports.basics = require('../config/basics.json');
+exports.base = require('../config/base.json');
 exports.business = require('../config/business.json');
 exports.carwashes = require('../config/carwashes.json');
 exports.clothing = require('../config/clothing.json');

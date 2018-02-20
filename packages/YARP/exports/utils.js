@@ -1,21 +1,36 @@
 var db = require('./database.js');
 var cfg = require('./config.js');
 
-exports.getUserAndCharacter = function(player){
+exports.getPlayerUserCharacter = function(data){
   let user = null;
   let character = null;
-  if ((typeof player) === 'string') {
-    let names = player.split(' ');
+  let player = null;
+  if ((typeof data) === 'string') {
+    let names = data.split(' ');
     if (names.length == 2) {
-      character = db.characters.getCharacterByName(player);
+      character = db.characters.getCharacterByName(data);
     } else {
-      user = db.users.getUserBySocialClub(player);
+      user = db.users.getUserBySocialClub(data);
+    }
+    if (user != null){
+      mp.players.forEach((p, id) => {
+        if (p.socialClub == user.social_club){
+          player = p;
+        }
+      });
+    } else if (character != null){
+      mp.players.forEach((p, id) => {
+        if (p.socialClub == character.social_club){
+          player = p;
+        }
+      });
     }
   } else {
-    user = db.users.getUserByPlayer(player);
-    character = db.characters.getCharacterByPlayer(player);
+    player = data;
+    user = db.users.getUserByPlayer(data);
+    character = db.characters.getCharacterByPlayer(data);
   }
-  return {user: user, character: character};
+  return {user: user, character: character, player: player};
 }
 
 exports.getFormattedDate = function(){

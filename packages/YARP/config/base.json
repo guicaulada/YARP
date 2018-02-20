@@ -1,4 +1,5 @@
 {
+  "admins": ["Sighmir"],
   "whitelist": true,
   "swallet": 100,
   "sbank": 1500,

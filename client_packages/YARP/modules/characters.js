@@ -40,7 +40,7 @@ mp.events.add('showCharacterCreationMenu', () => {
 
 	// Ponemos la cámara enfocando al personaje
 	camera = mp.cameras.new('default', new mp.Vector3(152.6008, -1003.25, -98), new mp.Vector3(-20.0, 0.0, 0.0), 90);
-    camera.setActive(true);
+  camera.setActive(true);
 	mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
 	// Deshabilitamos la interfaz

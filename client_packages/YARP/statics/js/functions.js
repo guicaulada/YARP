@@ -53,7 +53,7 @@ function withdrawMoney() {
     $('#bank-menu').addClass('hidden');
     $('#bank-withdraw').removeClass('hidden');
     $('#bank-accept').removeClass('hidden');
-    $('#bank-exit').html('Cancelar');
+    $('#bank-exit').html('Cancel');
 	mp.trigger('updateBankAccountMoney');
 }
 
@@ -62,7 +62,7 @@ function depositMoney() {
     $('#bank-menu').addClass('hidden');
     $('#bank-deposit').removeClass('hidden');
     $('#bank-accept').removeClass('hidden');
-    $('#bank-exit').html('Cancelar');
+    $('#bank-exit').html('Cancel');
 	mp.trigger('updateBankAccountMoney');
 }
 
@@ -71,7 +71,7 @@ function transferMoney() {
     $('#bank-menu').addClass('hidden');
     $('#bank-transfer').removeClass('hidden');
     $('#bank-accept').removeClass('hidden');
-    $('#bank-exit').html('Cancelar');
+    $('#bank-exit').html('Cancel');
 	mp.trigger('updateBankAccountMoney');
 }
 
@@ -94,7 +94,7 @@ function showBalance() {
     bankSelectedOption = 4;
     $('#bank-menu').addClass('hidden');
     $('#bank-balance').removeClass('hidden');
-    $('#bank-exit').html('Cancelar');
+    $('#bank-exit').html('Cancel');
 	mp.trigger("loadPlayerBankBalance");
 }
 
@@ -113,19 +113,22 @@ function showBankOperations(bankOperationsJson, playerName) {
 		var amountColumn = document.createElement("TD");
 
 		// Añadimos los datos del array
-		dateColumn.innerHTML = bankOperationsArray[i].day + " " + bankOperationsArray[i].time;
+		dateColumn.innerHTML = bankOperationsArray[i].date;
 		operationColumn.innerHTML = bankOperationsArray[i].type;
 		switch(bankOperationsArray[i].type) {
-			case "Transferencia":
+			case "Transfer":
 				if(bankOperationsArray[i].source === playerName) {
 					amountColumn.innerHTML = "-" + bankOperationsArray[i].amount + "$";
-					involvedColumn.innerHTML = bankOperationsArray[i].receiver;
+					involvedColumn.innerHTML = bankOperationsArray[i].target;
 				} else {
 					amountColumn.innerHTML = bankOperationsArray[i].amount + "$";
 					involvedColumn.innerHTML = bankOperationsArray[i].source;
 				}
 				break;
-			case "Retiro":
+			case "Withdraw":
+				amountColumn.innerHTML = "-" + bankOperationsArray[i].amount + "$";
+				break;
+			case "Payment":
 				amountColumn.innerHTML = "-" + bankOperationsArray[i].amount + "$";
 				break;
 			default:
@@ -191,7 +194,7 @@ function bankBack() {
             break;
     }
     $('#bank-accept').addClass('hidden');
-    $('#bank-exit').html('Salir');
+    $('#bank-exit').html('Exit');
     bankSelectedOption = 0;
 }
 
@@ -202,7 +205,7 @@ function catalogBack() {
             break;
     }
     mp.trigger("closeCatalog");
-    $('#catalog-exit').html('Salir');
+    $('#catalog-exit').html('Exit');
     catalogSelectedOption = 0;
 }
 

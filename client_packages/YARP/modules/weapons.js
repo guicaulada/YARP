@@ -18,7 +18,6 @@ mp.events.add('render', () => {
       if (!onPlayer && weaponHash != utils.getCurrentWeapon()) {
         SetGear(weaponModel);
       } else if (onPlayer && weaponHash == utils.getCurrentWeapon()) {
-        mp.game.graphics.notify("ole");
         RemoveGear(weaponModel);
       }
     } else if (playerWeapons[weaponModel] != null) {

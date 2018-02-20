@@ -1,9 +1,12 @@
-exports.CONFIG = require('./exports/config.js');
-exports.DATABASE = require('./exports/database.js');
-exports.UTILS = require('./exports/utils.js');
-require('./modules/basics.js');
+exports.config = require('./exports/config.js');
+exports.db = require('./exports/database.js');
+exports.utils = require('./exports/utils.js');
+require('./modules/base.js');
 require('./modules/characters.js');
-require('./modules/commands.js');
 require('./modules/menus.js');
 require('./modules/inventory.js');
 require('./modules/items.js');
+require('./modules/banks.js');
+require('./commands/admins.js');
+require('./commands/groups.js');
+require('./commands/users.js');
