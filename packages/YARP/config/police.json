@@ -1,8 +1,6 @@
 {
   "policestation": {
     "name":"Police Station",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 425.130, "y": -979.558, "z": 30.711},
       {"x": 1859.234, "y": 3678.742, "z": 33.690},
@@ -16,14 +14,16 @@
     },
     "texts": [
       {
-        "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-        "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-        "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
       }
     ],
     "markers": [
       {
-        "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
         "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
         "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
         "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
@@ -31,15 +31,14 @@
     ],
     "npcs": [
       {
-        "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-        "action": [], "destroy": true, "hidden": false
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
       }
     ]
   },
   "jail": {
     "name":"Jail",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 1679.049, "y": 2513.711, "z": 45.565}
     ],
@@ -50,14 +49,16 @@
     },
     "texts": [
       {
-        "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-        "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-        "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
       }
     ],
     "markers": [
       {
-        "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
         "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
         "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
         "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
@@ -65,8 +66,9 @@
     ],
     "npcs": [
       {
-        "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-        "action": [], "destroy": true, "hidden": false
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
       }
     ]
   }

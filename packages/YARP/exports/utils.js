@@ -14,13 +14,13 @@ exports.getPlayerUserCharacter = function(data){
     }
     if (user != null){
       mp.players.forEach((p, id) => {
-        if (p.socialClub == user.social_club){
+        if (p.socialClub == user.socialClub){
           player = p;
         }
       });
     } else if (character != null){
       mp.players.forEach((p, id) => {
-        if (p.socialClub == character.social_club){
+        if (p.socialClub == character.socialClub){
           player = p;
         }
       });

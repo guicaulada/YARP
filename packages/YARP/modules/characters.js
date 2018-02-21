@@ -25,7 +25,7 @@ mp.events.add('setCharacterIntoCreator', (player) => {
 
 mp.events.add('loadCharacter', (player, jchar) => {
   var character = JSON.parse(jchar);
-  player.notify(`Last connection from ~g~${character.last_login.ip}~w~ at ~g~${character.last_login.date}`);
+  player.notify(`Last connection from ~g~${character.lastLogin.ip}~w~ at ~g~${character.lastLogin.date}`);
   player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
   player.model = character.model;
   player.name = character.name;

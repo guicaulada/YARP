@@ -1,8 +1,6 @@
 {
   "casino": {
     "name":"Bahama Mamas",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 925.329, "y": 46.152, "z": 80.908}
     ],
@@ -11,26 +9,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "taxi": {
     "name":"Downtown CO.",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 900.461, "y": -181.466, "z": 73.89}
     ],
@@ -39,26 +44,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "arena": {
     "name":"MazeBank Arena",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -250.604, "y": -2030.000, "z": 30.000}
     ],
@@ -67,26 +79,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "sotw": {
     "name":"Smoke on the Water",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -1171.42, "y": -1572.72, "z": 3.6636}
     ],
@@ -95,26 +114,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "tequilala": {
     "name":"Tequil-La La",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -565.171, "y": 276.625, "z": 83.286}
     ],
@@ -123,26 +149,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "theather": {
     "name":"Theater",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -455.752, "y": 180.466, "z": 104.301}
     ],
@@ -151,26 +184,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "weedfarm": {
     "name":"Weed Farm",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 2208.777, "y": 5578.235, "z": 53.735}
     ],
@@ -179,26 +219,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "fib": {
     "name":"FIB",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 105.455, "y": -745.483, "z": 44.754}
     ],
@@ -207,26 +254,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "lifeinvader": {
     "name":"Lifeinvader",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -1047.900, "y": -233.000, "z": 39.000}
     ],
@@ -235,26 +289,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "cluckingbell": {
     "name":"Cluckin Bell",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -72.68752, "y": 6253.72656, "z": 31.08991}
     ],
@@ -263,26 +324,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "comedyclub": {
     "name":"Comedy Club",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -447.4833, "y": 280.3197, "z": 77.5215}
     ],
@@ -291,26 +359,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "yatch": {
     "name":"Yacht",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -2045.800, "y": -1031.200, "z": 11.900}
     ],
@@ -319,26 +394,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "ranch": {
     "name":"Ranch",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 2441.200, "y": 4968.500, "z": 51.700}
     ],
@@ -347,26 +429,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "playboy": {
     "name":"PlayBoy",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -1475.234, "y": 167.088, "z": 55.841}
     ],
@@ -375,26 +464,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "chopshop": {
     "name":"Chop Shop",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 479.056, "y": -1316.825, "z": 28.203}
     ],
@@ -403,26 +499,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "rebelradio": {
     "name":"Rebel Radio",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 736.153, "y": 2583.143, "z": 79.634}
     ],
@@ -431,26 +534,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "morgue": {
     "name":"Morgue",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 243.351, "y": -1376.014, "z": 39.534}
     ],
@@ -459,26 +569,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "golf": {
     "name":"Golf",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -1336.715, "y": 59.051, "z": 55.246}
     ],
@@ -487,26 +604,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "hippiecamp": {
     "name":"Hippie Camp",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 2476.712, "y": 3789.645, "z": 41.226}
     ],
@@ -515,26 +639,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "torture": {
     "name":"Torture",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": 132.583, "y": -2202.327, "z": 7.187}
     ],
@@ -543,26 +674,33 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   },
   "bodytraining": {
     "name":"Body Training",
-    "action": [],
-    "range": 5,
     "positions": [
       {"x": -1202.96252441406, "y": -1566.14086914063, "z": 4.61040639877319}
     ],
@@ -571,20 +709,29 @@
       "alpha": 255, "distance": 100, "range": true,
       "rotation": 0, "dimension": 0, "hidden": false
     },
-    "text": {
-      "msg": "Press E to access", "offset": {"x": 0, "y": 0, "z": 1},
-      "font": 2, "color": {"r": 51, "g": 204, "b": 51, "a": 255},
-      "range": 3, "scale": {"x": 1.0, "y": 1.0}, "outline": true, "hidden": false
-    },
-    "marker": {
-      "type": 1, "range": 30, "color": {"r": 255, "g": 255, "b": 0, "a": 255},
-      "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
-      "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-      "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
-    },
-    "npc": {
-      "model": "a_c_westy", "range": 100, "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-      "action": [], "destroy": true, "hidden": false
-    }
+    "texts": [
+      {
+        "msg": "Press E to access", "event": [], "range": 3, "key": 69,
+        "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
+        "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
+        "font": 2, "outline": true, "hidden": false
+      }
+    ],
+    "markers": [
+      {
+        "type": 1, "event": [], "range": 3,
+        "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
+        "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
+        "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+      }
+    ],
+    "npcs": [
+      {
+        "model": "a_c_westy", "event": [],
+        "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
+        "destroy": true, "hidden": false, "distance": 100
+      }
+    ]
   }
 }

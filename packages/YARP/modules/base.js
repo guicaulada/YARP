@@ -22,7 +22,7 @@ mp.events.add('playerJoin', (player) => {
       }
     }
     else {
-      user = {social_club: player.socialClub};
+      user = {socialClub: player.socialClub};
       player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
     }
 });
@@ -95,38 +95,37 @@ setInterval(function(){
             if (inRange[player] == null){
               let item = cfg[file][cfg_id];
               if(item != null){
-                if(item.action != null && item.action != []){
-                  if((typeof item.action[0]) === "string"){
-                    if(item.positions != null){
-                      for(pos of item.positions){
-                        if (inRange[player] == null){
-                          item.pos = pos;
-                          dist = player.dist(pos)
-                          for (text of item.texts) {
-                            if (dist < text.range){
-                              inRange[player] = pos;
-                            }
-                          }
-                          for (marker of item.markers) {
-                            if (dist < marker.range){
-                              inRange[player] = pos;
-                            }
-                          }
-                          for (npc of item.npcs) {
-                            if (dist < npc.range){
-                              inRange[player] = pos;
-                            }
-                          }
-                          if (dist < item.range){
+                if(item.positions != null){
+                  for(pos of item.positions){
+                    if (inRange[player] == null){
+                      item.pos = pos;
+                      dist = player.dist(pos)
+                      if (inRange[player] == null){
+                        for (text of item.texts) {
+                          if (dist < text.distance){
                             inRange[player] = pos;
                           }
-                          if (inRange[player] != null){
-                            player.call('addInRangeItem', [JSON.stringify(item), file, cfg_id]);
-                          }
-                        } else {
-                          break;
                         }
                       }
+                      if (inRange[player] == null){
+                        for (marker of item.markers) {
+                          if (dist < marker.distance){
+                            inRange[player] = pos;
+                          }
+                        }
+                      }
+                      if (inRange[player] == null){
+                        for (npc of item.npcs) {
+                          if (dist < npc.distance){
+                            inRange[player] = pos;
+                          }
+                        }
+                      }
+                      if (inRange[player] != null){
+                        player.call('addInRangeItem', [JSON.stringify(item), file, cfg_id]);
+                      }
+                    } else {
+                      break;
                     }
                   }
                 }
@@ -141,7 +140,7 @@ setInterval(function(){
       }
     }
   });
-},100);
+},500);
 
 mp.events.add('removeInRangeItem', (player) => {
   inRange[player] = null;

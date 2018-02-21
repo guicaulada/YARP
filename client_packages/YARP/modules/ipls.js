@@ -1,3 +1,4 @@
+/*//I am not sure if these are needed...
 mp.events.add("playerJoin", function(){
   mp.game.gameplay.enableMpDlcMaps(true);
   mp.game.streaming.removeIpl("bh1_16_doors_shut");
@@ -171,3 +172,4 @@ mp.events.add("playerJoin", function(){
   mp.game.interior.enableInteriorProp(258561,"upgrade_bunker_set");
   mp.game.interior.refreshInterior(258561);
 });
+*/

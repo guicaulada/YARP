@@ -4,27 +4,27 @@ var utils = require('../exports/utils.js');
 var cfg = require('../exports/config.js');
 
 exports.getUserByPlayer = function(player){
-  var user = db.users.findOne({social_club : player.socialClub});
+  var user = db.users.findOne({socialClub : player.socialClub});
   return user;
 };
 
 exports.getUserBySocialClub = function(socialClub){
-  var user = db.users.findOne({social_club : socialClub});
+  var user = db.users.findOne({socialClub : socialClub});
   return user;
 };
 
 exports.verifyAuthentication = function(player, password){
-  var user = db.users.findOne({social_club : player.socialClub});
-  var last_login = {
+  var user = db.users.findOne({socialClub : player.socialClub});
+  var lastLogin = {
     ip : player.ip,
     date : utils.getFormattedDate()
   }
   if (user == null) {
     var hash = bcrypt.hashSync(password, 10);
     user = {
-      social_club : player.socialClub,
+      socialClub : player.socialClub,
       password : hash,
-      last_login : last_login,
+      lastLogin : lastLogin,
       whitelisted : false,
       banned : false,
       groups : []
@@ -32,7 +32,7 @@ exports.verifyAuthentication = function(player, password){
     db.users.save(user);
   } else {
     if(bcrypt.compareSync(password, user.password)){
-      db.users.update(user, {last_login : last_login}, {multi: false, upsert: false});
+      db.users.update(user, {lastLogin : lastLogin}, {multi: false, upsert: false});
     } else {
       user = null;
     }

@@ -5,13 +5,13 @@ var cfg = require('../exports/config.js');
 exports.tryCreateCharacter = function(player, name, age, sex, jface){
   var character = db.characters.findOne({name : name});
   if(character == null){
-    var last_login = {
+    var lastLogin = {
       ip : player.ip,
       date : utils.getFormattedDate()
     }
     character = {
-      social_club : player.socialClub,
-      last_login : last_login,
+      socialClub : player.socialClub,
+      lastLogin : lastLogin,
       name : name,
       age : age,
       model : sex,
@@ -47,7 +47,7 @@ exports.updateCharacterWorldData = function(character){
 exports.getUserByRegistration = function(reg){
   var character = db.characters.findOne({registration: reg});
   if(character != null){
-    var user = db.users.findOne({social_club : character.social_club});
+    var user = db.users.findOne({socialClub : character.socialClub});
     return user;
   } else {
     return null;
@@ -55,7 +55,7 @@ exports.getUserByRegistration = function(reg){
 };
 
 exports.getPlayerCharacters = function(player){
-  var characters = db.characters.find({social_club : player.socialClub});
+  var characters = db.characters.find({socialClub : player.socialClub});
   for (character of characters) {
     for (name of character.groups) {
       var group = db.groups.findOne({name: name});
@@ -183,7 +183,7 @@ exports.tryGiveInventoryItem = function(player, item, amount){
   if (item != null){
     if (item.weight != null){
       var character = db.characters.findOne({name: player.name});
-      if (character.inventory.weight + item.weight < cfg.basics.max_weight){
+      if (character.inventory.weight + item.weight < cfg.base.max_weight){
         if (character.inventory[item.id] != null){
           character.inventory[item.id] = character.inventory[item.id] + amount;
         } else {
@@ -269,11 +269,11 @@ exports.tryTakeGroup = function(player,name){
   let data = utils.getPlayerUserCharacter(player);
   let result = false;
   if (data.character != null && data.character.groups.indexOf(name) > -1){
-    db.characters.update(data.character, {groups : data.character.groups.filter(e => e !== name)}, {multi: false, upsert: false});
+    db.characters.update({name : data.character.name}, {groups : data.character.groups.filter(e => e !== name)}, {multi: false, upsert: false});
     result = true;
   }
   if (data.user != null && data.user.groups.indexOf(name) > -1) {
-    db.users.update(data.user, {groups : data.user.groups.filter(e => e !== name)}, {multi: false, upsert: false});
+    db.users.update({socialClub : data.user.socialClub}, {groups : data.user.groups.filter(e => e !== name)}, {multi: false, upsert: false});
     result = true;
   }
   return result;
@@ -284,30 +284,30 @@ exports.tryGiveGroup = function(player,name){
   let group = db.groups.findOne({name: name});
   let result = false;
   if (group != null) {
-    if (data.character != null && data.character.groups.indexOf(group) < 0){
+    if (data.character != null && data.character.groups.indexOf(name) < 0){
       if (group.type != null){
-        for (let i = 0; i < data.character.groups; i++){
-          let ch_group = db.groups.findOne({name: name});
+        for (let i = 0; i < data.character.groups.length; i++){
+          let ch_group = db.groups.findOne({name: data.character.groups[i]});
           if (ch_group.type == group.type){
-            data.character.groups = data.character.groups.splice(i, 1)
+            data.character.groups.splice(i, 1);
           }
         }
       }
       data.character.groups.push(group.name);
-      db.characters.update(data.character, {groups : data.character.groups}, {multi: false, upsert: false});
+      db.characters.update({name: data.character.name}, {groups : data.character.groups}, {multi: false, upsert: false});
       result = true;
     }
-    if (data.user != null && data.user.groups.indexOf(group) < 0) {
+    if (data.user != null && data.user.groups.indexOf(name) < 0) {
       if (group.type != null){
-        for (let i = 0; i < data.user.groups; i++){
-          let ch_group = db.groups.findOne({name: name});
+        for (let i = 0; i < data.user.groups.length; i++){
+          let ch_group = db.groups.findOne({name: data.user.groups[i]});
           if (ch_group.type == group.type){
-            data.user.groups = data.user.groups.splice(i, 1)
+            data.user.groups.splice(i, 1);
           }
         }
       }
       data.user.groups.push(group.name);
-      db.users.update(data.user, {groups : data.user.groups}, {multi: false, upsert: false});
+      db.users.update({socialClub: data.user.socialClub}, {groups : data.user.groups}, {multi: false, upsert: false});
       result = true;
     }
   }
