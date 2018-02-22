@@ -24,23 +24,23 @@
         "msg": "Press E to access", "event": [], "range": 3, "key": 69,
         "offset": {"x": 0, "y": 0, "z": 1}, "scale": {"x": 1.0, "y": 1.0},
         "color": {"r": 51, "g": 204, "b": 51, "a": 255}, "distance": 10,
-        "font": 2, "outline": true, "hidden": false
+        "font": 2, "outline": true, "hidden": true
       }
     ],
     "markers": [
       {
-        "type": 1, "event": [], "range": 3,
+        "type": 1, "in": [], "out": [], "range": 3,
         "color": {"r": 255, "g": 255, "b": 0, "a": 255}, "distance": 50,
         "offset": {"x": 0, "y": 0, "z": -1}, "scale": {"x": 1, "y": 1, "z": 0.5},
         "direction": {"x": 0, "y": 0, "z": 0}, "rotation": {"x": 0, "y": 0, "z": 0},
-        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": false
+        "bounce": false, "rotate": false, "spin": false, "onentity": false, "hidden": true
       }
     ],
     "npcs": [
       {
         "model": "a_c_westy", "event": [],
         "offset": {"x": 0, "y": 0, "z": 0, "h": 180},
-        "destroy": true, "hidden": false, "distance": 100
+        "destroy": true, "hidden": true, "distance": 100
       }
     ]
   }

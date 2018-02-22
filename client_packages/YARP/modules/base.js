@@ -30,10 +30,53 @@ mp.events.add('addInRangeItem', (itemJson, file, id) => {
   }
 });
 
+var lastWallet = 0;
+var lastBank = 0;
+var moneyUpdate = null;
+var moneyUpdated = false;
+var moneyColor = [];
 mp.events.add('render', () => {
+  //Saving bullets when ped is shooting and checking if shooting bullets that he doesnt have
   if (mp.players.local.isShooting()){
     mp.events.callRemote('updateWeaponAmmo', utils.getCurrentWeapon(), -1);
   }
+  //Money display on top right, updates automatically with setVariable(PLAYER_WALLET, value)
+  let playerWallet = mp.players.local.getVariable("PLAYER_WALLET");
+  if (playerWallet == null){
+    playerWallet = 0;
+  }
+  let walletDiff = playerWallet-lastWallet;
+  if (walletDiff < 0){
+    moneyUpdate = `-$${-walletDiff}`;
+    moneyColor = [255, 0, 0, 255];
+  } else if (walletDiff > 0) {
+    moneyUpdate = `+$${walletDiff}`;
+    moneyColor = [0, 255, 0, 255];
+  }
+  if (moneyUpdate != null) {
+    mp.game.graphics.drawText(moneyUpdate, [1.0-(0.01*moneyUpdate.length), 0.1], {
+      font: 7,
+      color: moneyColor,
+      scale: [0.75, 0.75],
+      outline: true
+    });
+    if (!moneyUpdated){
+      moneyUpdated = true;
+      setTimeout(function(){
+        moneyUpdate = null;
+        moneyUpdated = false;
+      },2500);
+    }
+  }
+  lastWallet = playerWallet;
+  let walletDisplay = `$${playerWallet}`;
+  mp.game.graphics.drawText(walletDisplay, [1.0-(0.01*walletDisplay.length), 0.05], {
+    font: 7,
+    color: [255, 255, 255, 255],
+    scale: [0.75, 0.75],
+    outline: true
+  });
+  //Check for objects related to the in range item added by the event addInRangeItem
   if (inRange != null){
     let player_pos = mp.players.local.position;
     let pos = inRange.item.pos;
@@ -56,20 +99,21 @@ mp.events.add('render', () => {
             scale: [text.scale.x, text.scale.y],
             outline: text.outline
           });
-          if (text.event.length > 0){
-            if (dist < text.range){
-              if (inRange.closestText.id != i && (dist < inRange.closestText.dist || inRange.closestText.dist == null)){
-                inRange.closestText.id = i;
-                inRange.closestText.dist = dist;
-                let args = text.event.splice(1,text.event.length);
-                mp.keys.bind(text.key, false, function() {
-                  mp.events.callRemote(text.event[0], inRange.file, inRange.id, args);
-                });
-              }
-            } else if (inRange.closestText.id == i) {
-              mp.keys.unbind(text.key, false);
-              mp.events.call('destroyBrowser');
+        }
+        if (text.event.length > 0){
+          if (dist < text.range){
+            if (inRange.closestText.id != i && (dist < inRange.closestText.dist || inRange.closestText.dist == null)){
+              inRange.closestText.id = i;
+              inRange.closestText.dist = dist;
+              let args = text.event.splice(1,text.event.length);
+              mp.keys.bind(text.key, false, function() {
+                mp.events.callRemote(text.event[0], inRange.file, inRange.id, args);
+              });
             }
+          } else if (inRange.closestText.id == i) {
+            inRange.closestText = {};
+            mp.keys.unbind(text.key, false);
+            mp.events.call('destroyBrowser');
           }
         }
       }
@@ -89,17 +133,22 @@ mp.events.add('render', () => {
             marker.bounce, marker.rotate, 2,
             marker.spin, "", "", marker.onentity
           );
-          if (marker.event.length > 0){
-            if (dist < marker.range) {
-              if (inRange.closestMarker.id != i && (dist < inRange.closestMarker.dist || inRange.closestMarker.dist == null)){
-                inRange.closestMarker.id = i;
-                inRange.closestMarker.dist = dist;
-                let args = marker.event.splice(1,marker.event.length);
-                mp.events.callRemote(marker.event[0], inRange.file, inRange.id, args);
-              }
-            } else if (inRange.closestMarker.id == i) {
-              mp.events.call('destroyBrowser');
+        }
+        if (dist < marker.range) {
+          if (inRange.closestMarker.id != i && (dist < inRange.closestMarker.dist || inRange.closestMarker.dist == null)){
+            inRange.closestMarker.id = i;
+            inRange.closestMarker.dist = dist;
+            if (marker.in.length > 0){
+              let args = marker.in.splice(1,marker.in.length);
+              mp.events.callRemote(marker.in[0], inRange.file, inRange.id, args);
             }
+          }
+        } else if (inRange.closestMarker.id == i) {
+          inRange.closestMarker = {};
+          mp.events.call('destroyBrowser');
+          if (marker.out.length > 0){
+            let args = marker.out.splice(1,marker.out.length);
+            mp.events.callRemote(marker.out[0], inRange.file, inRange.id, args);
           }
         }
       }
