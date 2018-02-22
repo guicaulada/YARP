@@ -1,9 +1,9 @@
 var db = require('../exports/database.js');
 var cfg = require('../exports/config.js');
 
-mp.events.addCommand("newgroup", (player, msg, group, type) => {
+mp.events.addCommand("addgroup", (player, msg, group, type) => {
   if (group != null){
-    if (db.characters.hasPermission(player,"cmd.newgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.characters.hasPermission(player,"cmd.addgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddGroup(group, type)){
         player.outputChatBox(`Group !{green}${group}!{white} has been created!`);
       } else {
@@ -11,13 +11,13 @@ mp.events.addCommand("newgroup", (player, msg, group, type) => {
       }
     }
   } else {
-    player.outputChatBox("!{yellow}USAGE: !{white}/newgroup <group> [optional: <type>]");
+    player.outputChatBox("!{yellow}USAGE: !{white}/addgroup <group> [optional: <type>]");
   }
 });
 
-mp.events.addCommand("delgroup", (player, msg, group) => {
+mp.events.addCommand("rmgroup", (player, msg, group) => {
   if (group != null){
-    if (db.characters.hasPermission(player,"cmd.delgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.characters.hasPermission(player,"cmd.rmgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemoveGroup(group)){
         player.outputChatBox(`Group !{green}${group}!{white} has been removed!`);
       } else {
@@ -25,7 +25,7 @@ mp.events.addCommand("delgroup", (player, msg, group) => {
       }
     }
   } else {
-    player.outputChatBox("!{yellow}USAGE: !{white}/delgroup <group>");
+    player.outputChatBox("!{yellow}USAGE: !{white}/rmgroup <group>");
   }
 });
 
@@ -57,10 +57,10 @@ mp.events.addCommand("rmperm", (player, msg, group, perm) => {
   }
 });
 
-mp.events.addCommand("addgroup", (player, msg) => {
+mp.events.addCommand("givegroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.characters.hasPermission(player,"cmd.addgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.characters.hasPermission(player,"cmd.givegroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
       var target = args[1];
       if (args.length > 2) {
@@ -76,14 +76,14 @@ mp.events.addCommand("addgroup", (player, msg) => {
       }
     }
   } else {
-    player.outputChatBox("!{yellow}USAGE: !{white}/addgroup <group> <socialClub or character name>");
+    player.outputChatBox("!{yellow}USAGE: !{white}/givegroup <group> <socialClub or character name>");
   }
 });
 
-mp.events.addCommand("rmgroup", (player, msg) => {
+mp.events.addCommand("takegroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.characters.hasPermission(player,"cmd.rmgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.characters.hasPermission(player,"cmd.takegroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
       var target = args[1];
       if (args.length > 2) {
@@ -99,6 +99,6 @@ mp.events.addCommand("rmgroup", (player, msg) => {
       }
     }
   } else {
-    player.outputChatBox("!{yellow}USAGE: /rmgroup <group> <socialClub or character name>");
+    player.outputChatBox("!{yellow}USAGE: /takegroup <group> <socialClub or character name>");
   }
 });

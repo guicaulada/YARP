@@ -2,12 +2,12 @@ var cfg = require('../exports/config.js');
 var db = require('../exports/database.js');
 
 mp.events.add('loadStoreMenu', (player, file, id) => {
-  var store = cfg[file][id];
-  var i = 0;
-  var items = [];
+  let store = cfg[file][id];
+  let i = 0;
+  let items = [];
   //Treating config items for menu
   for(item_id in store.items) {
-    var item = cfg.items[item_id];
+    let item = cfg.items[item_id];
     if (item != null){
       items[i] = item;
       items[i].price = store.items[item_id];
@@ -15,14 +15,14 @@ mp.events.add('loadStoreMenu', (player, file, id) => {
       i++;
     }
   }
-  player.call('showStoreMenu', [file, id, store.name, JSON.stringify(items), 1.0]);
+  player.call('showStoreMenu', [file, id, store.name, JSON.stringify(items)]);
 });
 
 mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {
-  var item = cfg.items[item_id];
+  let item = cfg.items[item_id];
   item.id = item_id;
   if (item != null){
-    var price = cfg[file][id].items[item_id]*amount;
+    let price = cfg[file][id].items[item_id]*amount;
     if(db.characters.tryWalletPayment(player, price)){
       db.characters.tryGiveInventoryItem(player, item, amount);
       player.notify(`Paid ~r~$${price}`);
@@ -36,13 +36,13 @@ mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {
 });
 
 mp.events.add('purchaseAmmuWeapon', (player, file, id, weapon_id, amount) => {
-  var weapon = cfg.weapons[weapon_id];
+  let weapon = cfg.weapons[weapon_id];
   if (weapon != null){
-    var body_price = cfg[file][id].weapons[weapon_id].body;
-    var ammo_price = cfg[file][id].weapons[weapon_id].ammo;
-    var price = ammo_price*amount;
-    var player_weapons = db.characters.getWeapons(player);
-    var weaponHash = mp.joaat(weapon_id);
+    let body_price = cfg[file][id].weapons[weapon_id].body;
+    let ammo_price = cfg[file][id].weapons[weapon_id].ammo;
+    let price = ammo_price*amount;
+    let player_weapons = db.characters.getWeapons(player);
+    let weaponHash = mp.joaat(weapon_id);
     if(player_weapons[weaponHash] == null){
       price = price + body_price;
     }
@@ -60,12 +60,12 @@ mp.events.add('purchaseAmmuWeapon', (player, file, id, weapon_id, amount) => {
 });
 
 mp.events.add('loadAmmuMenu', (player, file, id) => {
-  var ammu = cfg[file][id];
-  var i = 0;
-  var weapons = [];
+  let ammu = cfg[file][id];
+  let i = 0;
+  let weapons = [];
   //Treating config items for menu
   for(weapon_id in ammu.weapons) {
-    var weapon = cfg.weapons[weapon_id];
+    let weapon = cfg.weapons[weapon_id];
     if (weapon != null){
       weapons[i] = weapon;
       weapons[i].price = ammu.weapons[weapon_id].body;
@@ -74,5 +74,29 @@ mp.events.add('loadAmmuMenu', (player, file, id) => {
       i++;
     }
   }
-  player.call('showAmmuMenu', [file, id, ammu.name, JSON.stringify(weapons), 1.0]);
+  player.call('showAmmuMenu', [file, id, ammu.name, JSON.stringify(weapons)]);
+});
+
+mp.events.add('loadSelectorMenu', (player, file, id) => {
+  let selector = cfg[file][id];
+  //Treating config items for menu
+  for(option in selector.options) {
+    selector.options[option].id = option;
+  }
+  player.call('showSelectorMenu', [file, id, selector.name, JSON.stringify(selector.options)]);
+});
+
+mp.events.add('selectSelectorOption', (player, file, id, option_id) => {
+  let selector = cfg[file][id];
+  let option = selector.options[option_id];
+  let args = option.event.slice(1, option.event.length);
+  mp.events.call(option.event[0], player, args);
+});
+
+mp.events.add('selectorAddGroup', (player, args) => {
+  if (db.characters.tryGiveGroup(player.name, args[0])){
+    player.notify(`~g~New Group: ~w~${args[0]}`);
+  } else {
+    player.notify("You are already in that group!");
+  }
 });

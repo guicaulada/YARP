@@ -14,6 +14,7 @@ exports.lscustoms = require('../config/lscustoms.json');
 exports.missions = require('../config/missions.json');
 exports.police = require('../config/police.json');
 exports.racing = require('../config/racing.json');
+exports.selectors = require('../config/selectors.json');
 exports.stores = require('../config/stores.json');
 exports.tattooshops = require('../config/tattooshops.json');
 exports.transports = require('../config/transports.json');
