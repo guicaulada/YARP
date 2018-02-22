@@ -15,7 +15,7 @@ mp.events.add('purchaseAmmuWeapon', (file, id, weapon, amount) => {
   mp.events.callRemote('purchaseAmmuWeapon', file, id, weapon, amount);
 });
 
-mp.events.add('showSelectorMenu', (file, id, store, optionsJson) => {
+mp.events.add('showSelectorMenu', (file, id, selector, optionsJson) => {
 	mp.events.call('createBrowser', ['package://YARP/statics/html/sideMenu.html', 'populateSelectorOptions', file, id, selector, optionsJson]);
 });
 

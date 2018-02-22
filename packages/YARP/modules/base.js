@@ -7,12 +7,14 @@ mp.events.add('playerJoin', (player) => {
     if(user != null){
       if (user.banned) {
         player.outputChatBox("!{red}You have been banned.");
+        console.log(`${player.socialClub} is banned.`);
         setTimeout(function(){
           player.kick("You have been banned.");
         },1000);
       }
       else if (cfg.base.whitelist && !user.whitelisted) {
         player.outputChatBox("!{yellow}You are not whitelisted.");
+        console.log(`${player.socialClub} is not whitelisted.`);
         setTimeout(function(){
           player.kick("You are not whitelisted.");
         },1000);
@@ -44,7 +46,8 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
 });
 
 mp.events.add('playerChat', (player, message) => {
-	 mp.players.broadcast(`${player.name}: ${message}`);
+  console.log(`${player.name}: ${message}`);
+	mp.players.broadcast(`${player.name}: ${message}`);
 });
 
 mp.events.add('verifyAuthentication', (player,password) => {
@@ -85,53 +88,52 @@ for (file in cfg){
   }
 }
 
-inRange = {};
+inRangeItems = {};
 setInterval(function(){
-  mp.players.forEach((player, id) => {
-    if (inRange[player] == null){
-      for (file in cfg){
-        if (inRange[player] == null){
-          for (cfg_id in cfg[file]){
-            if (inRange[player] == null){
-              let item = cfg[file][cfg_id];
-              if(item != null){
-                if(item.positions != null){
-                  for(pos of item.positions){
-                    if (inRange[player] == null){
-                      item.pos = pos;
-                      dist = player.dist(pos)
-                      if (inRange[player] == null){
-                        for (text of item.texts) {
-                          if (dist < text.distance){
-                            inRange[player] = pos;
-                          }
-                        }
+  mp.players.forEach((player, i) => {
+    if (inRangeItems[player] == null){
+      inRangeItems[player] = {};
+    }
+    for (file in cfg){
+      for (id in cfg[file]){
+        if (inRangeItems[player][file+id] == null){
+          let item = cfg[file][id];
+          if(item != null){
+            if(item.positions != null){
+              for(pos of item.positions){
+                if (inRangeItems[player][file+id] == null){
+                  item.pos = pos;
+                  dist = player.dist(pos)
+                  if (inRangeItems[player][file+id] == null){
+                    for (text of item.texts) {
+                      if (dist < text.distance){
+                        inRangeItems[player][file+id] = pos;
                       }
-                      if (inRange[player] == null){
-                        for (marker of item.markers) {
-                          if (dist < marker.distance){
-                            inRange[player] = pos;
-                          }
-                        }
-                      }
-                      if (inRange[player] == null){
-                        for (npc of item.npcs) {
-                          if (dist < npc.distance){
-                            inRange[player] = pos;
-                          }
-                        }
-                      }
-                      if (inRange[player] != null){
-                        player.call('addInRangeItem', [JSON.stringify(item), file, cfg_id]);
-                      }
-                    } else {
-                      break;
                     }
                   }
+                  if (inRangeItems[player][file+id] == null){
+                    for (marker of item.markers) {
+                      if (dist < marker.distance){
+                        inRangeItems[player][file+id] = pos;
+                      }
+                    }
+                  }
+                  if (inRangeItems[player][file+id] == null){
+                    for (npc of item.npcs) {
+                      if (dist < npc.distance){
+                        inRangeItems[player][file+id] = pos;
+                      }
+                    }
+                  }
+                  if (inRangeItems[player][file+id] != null){
+                    //console.log(`${player.name} has entered ${id}(${file})`);
+                    inRangeItems[player][file+id] = pos;
+                    player.call('addInRangeItem', [JSON.stringify(item), file, id]);
+                  }
+                } else {
+                  break;
                 }
               }
-            } else {
-              break;
             }
           }
         } else {
@@ -142,6 +144,6 @@ setInterval(function(){
   });
 },500);
 
-mp.events.add('removeInRangeItem', (player) => {
-  inRange[player] = null;
+mp.events.add('removeInRangeItem', (player, file, id) => {
+  inRangeItems[player][file+id] = null;
 });

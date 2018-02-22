@@ -1,1 +1,98 @@
-[{"name":"admin","permissions":["*"],"_id":"d702494a349b476282a4424d040b55ca"},{"name":"user","permissions":[],"_id":"88607fa07f2d4a22a1a2cdc1a7e256b9"},{"name":"Police","permissions":[],"type":"job","_id":"da07ae40774c4bbaa7098532b9217537"},{"name":"Leader","permissions":[],"type":"rank","_id":"e2781bcec9d34a1fa5095ba615431cd2"},{"name":"Recruit","permissions":[],"type":"rank","_id":"7b3099d125604b009bc21da1f6d836f5"}]
+[
+  {
+    "name": "admin",
+    "permissions": [
+      "*"
+    ],
+    "_id": "d702494a349b476282a4424d040b55ca"
+  },
+  {
+    "name": "user",
+    "permissions": [],
+    "_id": "88607fa07f2d4a22a1a2cdc1a7e256b9"
+  },
+  {
+    "name": "Police",
+    "permissions": [],
+    "type": "job",
+    "_id": "da07ae40774c4bbaa7098532b9217537"
+  },
+  {
+    "name": "Leader",
+    "permissions": [],
+    "type": "rank",
+    "_id": "e2781bcec9d34a1fa5095ba615431cd2"
+  },
+  {
+    "name": "Recruit",
+    "permissions": [],
+    "type": "rank",
+    "_id": "7b3099d125604b009bc21da1f6d836f5"
+  },
+  {
+    "name": "Carjacker",
+    "permissions": [],
+    "type": "job",
+    "_id": "c993a2f6eaff4fe4b92d4ce65c8e4666"
+  },
+  {
+    "name": "Mugger",
+    "permissions": [],
+    "type": "job",
+    "_id": "8f2f7edc58c347ccb694c200da7c321a"
+  },
+  {
+    "name": "Hacker",
+    "permissions": [],
+    "type": "job",
+    "_id": "bdbac0a516984816bc6a0e10215c549c"
+  },
+  {
+    "name": "Hitman",
+    "permissions": [],
+    "type": "job",
+    "_id": "ef03536358d94d6db6c1ed6afc3e356d"
+  },
+  {
+    "name": "Gun_Dealer",
+    "permissions": [],
+    "type": "job",
+    "_id": "6fd9df2997364e45b446d5b51d2aee7e"
+  },
+  {
+    "name": "Drug_Dealer",
+    "permissions": [],
+    "type": "job",
+    "_id": "b23e41aed07744008f0a4b420fddf18c"
+  },
+  {
+    "name": "Citizen",
+    "permissions": [],
+    "type": "job",
+    "_id": "2cacf16499d9480a9c8bdd5bf2a46c9d"
+  },
+  {
+    "name": "Repair",
+    "permissions": [],
+    "type": "job",
+    "_id": "f1e9e5efd7164f2e9f30849c7fb7defa"
+  },
+  {
+    "name": "Taxi",
+    "permissions": [],
+    "type": "job",
+    "_id": "bd3fdf1690644f7094c6a147e5930be8"
+  },
+  {
+    "name": "Delivery",
+    "permissions": [],
+    "type": "job",
+    "_id": "cf6947cc4ef44d8fbc23ea6e19c39443"
+  },
+  {
+    "name": "Emergency",
+    "permissions": [],
+    "type": "job",
+    "_id": "7a3e2d7314684db4bbd995b5d41dc230"
+  }
+]

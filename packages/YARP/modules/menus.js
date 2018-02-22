@@ -79,11 +79,15 @@ mp.events.add('loadAmmuMenu', (player, file, id) => {
 
 mp.events.add('loadSelectorMenu', (player, file, id) => {
   let selector = cfg[file][id];
+  let options = [];
+  let i = 0;
   //Treating config items for menu
   for(option in selector.options) {
-    selector.options[option].id = option;
+    options[i] = selector.options[option];
+    options[i].id = option;
+    i++;
   }
-  player.call('showSelectorMenu', [file, id, selector.name, JSON.stringify(selector.options)]);
+  player.call('showSelectorMenu', [file, id, selector.name, JSON.stringify(options)]);
 });
 
 mp.events.add('selectSelectorOption', (player, file, id, option_id) => {

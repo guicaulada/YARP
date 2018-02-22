@@ -1,8 +1,4 @@
-﻿const PRICE_PIZZA = 20;
-const PRICE_HAMBURGER = 10;
-const PRICE_SANDWICH = 5;
-
-let tunningComponents = [];
+﻿let tunningComponents = [];
 let tattooZones = [];
 let selectedOptions = [];
 let purchasedAmount = 1;
@@ -12,11 +8,10 @@ let drawable = null;
 
 function populateSelectorOptions(file, id, selector, optionsJson) {
 	// Inicializamos los valores
-	purchasedAmount = 1;
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let options = JSON.parse(optionsJson);
+	let s_options = JSON.parse(optionsJson);
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
@@ -24,9 +19,9 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 	// Añadimos la cabecera del menú
 	header.textContent = selector;
 
-	for(let i = 0; i < options.length; i++) {
+	for(let i = 0; i < s_options.length; i++) {
 		// Obtenemos el objeto en curso
-		let option = options[i];
+		let option = s_options[i];
 
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
@@ -42,7 +37,7 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 		infoContainer.classList.add('item-content');
 		descContainer.classList.add('item-header');
 		purchaseContainer.classList.add('item-purchase');
-		priceContainer.classList.add('item-price-container');
+		priceContainer.classList.add('item-description');
 		itemDescription.classList.add('item-description');
 		itemPrice.classList.add('item-price');
 
@@ -95,7 +90,7 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('selectSelectorOption', file, id, options[selected].id);
+			mp.trigger('selectSelectorOption', file, id, s_options[selected].id);
 		}
 	});
 
