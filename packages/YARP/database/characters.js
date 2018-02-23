@@ -1,9 +1,9 @@
-var db = require(`./base.js`).db;
+var db = require('../exports/database.js');
 var utils = require('../exports/utils.js');
 var cfg = require('../exports/config.js');
 
 exports.tryCreateCharacter = function(player, name, age, sex, jface){
-  var character = db.characters.findOne({name : name});
+  var character = db.diskdb.characters.findOne({name : name});
   if(character == null){
     var lastLogin = {
       ip : player.ip,
@@ -29,7 +29,7 @@ exports.tryCreateCharacter = function(player, name, age, sex, jface){
       decoration : {},
       clothes : {}
     };
-    db.characters.save(character);
+    db.diskdb.characters.save(character);
     return character;
   } else {
     return null;
@@ -37,52 +37,35 @@ exports.tryCreateCharacter = function(player, name, age, sex, jface){
 };
 
 exports.updateCharacterWorldData = function(character){
-  db.characters.update({name : character.name}, {
+  db.diskdb.characters.update({name : character.name}, {
     position : { "x" : character.position.x, "y" : character.position.y, "z" : character.position.z, "h" : character.position.h },
     health : character.health,
     armour : character.armour,
   }, {multi: false, upsert: false});
 };
 
-exports.getUserByRegistration = function(reg){
-  var character = db.characters.findOne({registration: reg});
-  if(character != null){
-    var user = db.users.findOne({socialClub : character.socialClub});
-    return user;
-  } else {
-    return null;
-  }
-};
-
-exports.getPlayerCharacters = function(player){
-  var characters = db.characters.find({socialClub : player.socialClub});
-  for (character of characters) {
-    for (name of character.groups) {
-      var group = db.groups.findOne({name: name});
-      if (group != null && group.type != null) {
-        character.groups[group.type] = group.name;
-      }
-    }
-  }
-  return characters;
+exports.getCharactersByPlayer = function(player){
+  return db.diskdb.characters.find({socialClub : player.socialClub});
 };
 
 
 exports.getCharacterByPlayer = function(player){
-  var character = db.characters.findOne({name: player.name});
-  return character;
+  return db.diskdb.characters.findOne({name: player.name});
 };
 
 exports.getCharacterByName = function(name){
-  var character = db.characters.findOne({name: name});
-  return character;
+  return db.diskdb.characters.findOne({name: name});
+};
+
+exports.updateCharacterData = function(name, data){
+  return db.diskdb.characters.update({name: name}, data, {multi: false, upsert: false});
 };
 
 exports.tryWalletPayment = function(player, value){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   if (character.wallet-value >= 0){
     player.setVariable('PLAYER_WALLET', character.wallet-value);
-    db.characters.update({name : character.name}, {wallet : character.wallet-value}, {multi: false, upsert: false});
+    exports.updateCharacterData(character.name, {wallet : character.wallet-value});
     return true;
   } else {
     return false;
@@ -90,7 +73,7 @@ exports.tryWalletPayment = function(player, value){
 };
 
 exports.tryBankPayment = function(player, value){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   if (character.bank-value >= 0){
     player.setVariable('PLAYER_BANK', character.bank-value);
     operation = {
@@ -100,8 +83,8 @@ exports.tryBankPayment = function(player, value){
       source : character.name,
       target : ""
     }
-    db.atms.save(operation);
-    db.characters.update({name : character.name}, {bank : character.bank-value}, {multi: false, upsert: false});
+    db.diskdb.atms.save(operation);
+    exports.updateCharacterData(character.name, {bank : character.bank-value});
     return true;
   } else {
     return false;
@@ -109,7 +92,7 @@ exports.tryBankPayment = function(player, value){
 };
 
 exports.tryDeposit = function(player, value){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   if (character.wallet-value >= 0){
     player.setVariable('PLAYER_WALLET', character.wallet-value);
     player.setVariable('PLAYER_BANK', character.bank+value);
@@ -120,8 +103,8 @@ exports.tryDeposit = function(player, value){
       source : character.name,
       target : ""
     }
-    db.atms.save(operation);
-    db.characters.update({name : character.name}, {wallet : character.wallet-value, bank : character.bank+value}, {multi: false, upsert: false});
+    db.diskdb.atms.save(operation);
+    exports.updateCharacterData(character.name, {wallet : character.wallet-value, bank : character.bank+value});
     return true;
   } else {
     return false;
@@ -129,7 +112,7 @@ exports.tryDeposit = function(player, value){
 };
 
 exports.tryWithdraw = function(player, value){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   if (character.bank-value >= 0){
     player.setVariable('PLAYER_WALLET', character.wallet+value);
     player.setVariable('PLAYER_BANK', character.bank-value);
@@ -140,8 +123,8 @@ exports.tryWithdraw = function(player, value){
       source : character.name,
       target : ""
     }
-    db.atms.save(operation);
-    db.characters.update({name : character.name}, {wallet : character.wallet+value, bank : character.bank-value}, {multi: false, upsert: false});
+    db.diskdb.atms.save(operation);
+    exports.updateCharacterData(character.name, {wallet : character.wallet+value, bank : character.bank-value});
     return true;
   } else {
     return false;
@@ -149,12 +132,12 @@ exports.tryWithdraw = function(player, value){
 };
 
 exports.tryTransfer = function(player, player2, value){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   var target = utils.getPlayerUserCharacter(player2);
-  if (target.character != null){
+  if (target != null){
     if (character.bank-value >= 0){
       player.setVariable('PLAYER_BANK', character.bank-value);
-      target.player.setVariable('PLAYER_BANK', character.bank+value);
+      target.player.setVariable('PLAYER_BANK', target.character.bank+value);
       operation = {
         type : "Transfer",
         date: utils.getFormattedDate(),
@@ -162,9 +145,9 @@ exports.tryTransfer = function(player, player2, value){
         source : character.name,
         target : target.character.name
       }
-      db.atms.save(operation);
-      db.characters.update({name : character.name}, {bank : character.bank-value}, {multi: false, upsert: false});
-      db.characters.update({name : target.character.name}, {bank : target.character.bank+value}, {multi: false, upsert: false});
+      db.diskdb.atms.save(operation);
+      exports.updateCharacterData(character.name, {bank : character.bank-value});
+      exports.updateCharacterData(target.character.name, {bank : target.character.bank+value});
       return true;
     }
   }
@@ -172,9 +155,9 @@ exports.tryTransfer = function(player, player2, value){
 };
 
 exports.getCharacterBalance = function(player){
-  let data = utils.getPlayerUserCharacter(player);
-  let meSource = db.atms.find({source: data.character.name});
-  let meReceiver = db.atms.find({target: data.character.name});
+  var character = exports.getCharacterByPlayer(player);
+  let meSource = db.diskdb.atms.find({source: character.name});
+  let meReceiver = db.diskdb.atms.find({target: character.name});
   let balance = meSource.concat(meReceiver);
   return balance;
 };
@@ -182,7 +165,7 @@ exports.getCharacterBalance = function(player){
 exports.tryGiveInventoryItem = function(player, item, amount){
   if (item != null){
     if (item.weight != null){
-      var character = db.characters.findOne({name: player.name});
+      var character = exports.getCharacterByPlayer(player);
       if (character.inventory.weight + item.weight < cfg.base.max_weight){
         if (character.inventory[item.id] != null){
           character.inventory[item.id] = character.inventory[item.id] + amount;
@@ -190,7 +173,7 @@ exports.tryGiveInventoryItem = function(player, item, amount){
           character.inventory[item.id] = amount;
         }
         character.inventory.weight = utils.round(character.inventory.weight + (amount*item.weight),1);
-        db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
+        exports.updateCharacterData(character.name, {inventory : character.inventory});
         return true;
       }
     } else {
@@ -204,12 +187,12 @@ exports.tryGiveInventoryItem = function(player, item, amount){
 exports.tryTakeInventoryItem = function(player, item, amount){
   if (item != null){
     if (item.weight != null){
-      var character = db.characters.findOne({name: player.name});
+      var character = exports.getCharacterByPlayer(player);
       if (character.inventory[item.id] != null){
         if (character.inventory[item.id] - amount >= 0){
           character.inventory[item.id] = character.inventory[item.id] - amount;
           character.inventory.weight = utils.round(character.inventory.weight - (amount*item.weight),1);
-          db.characters.update({name : character.name}, {inventory : character.inventory}, {multi: false, upsert: false});
+          exports.updateCharacterData(character.name, {inventory : character.inventory});
           return true;
         }
       }
@@ -219,7 +202,7 @@ exports.tryTakeInventoryItem = function(player, item, amount){
 };
 
 exports.getInventoryItems = function(player){
-    var character = db.characters.findOne({name: player.name});
+    var character = exports.getCharacterByPlayer(player);
     let items = [];
     for (item_id in character.inventory){
       let item = cfg.items[item_id];
@@ -233,96 +216,119 @@ exports.getInventoryItems = function(player){
 };
 
 exports.giveWeapon = function(player, hash, amount){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   if (character.weapons[hash] != null){
     character.weapons[hash] = character.weapons[hash]+amount;
   } else {
     character.weapons[hash] = amount;
   }
-  db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
+  exports.updateCharacterData(character.name, {weapons : character.weapons});
 };
 
 exports.getWeapons = function(player){
-    var character = db.characters.findOne({name: player.name});
-    return character.weapons;
+  return exports.getCharacterByPlayer(player);
 };
 
 exports.removeAllWeapons = function(player){
   player.removeAllWeapons();
-  var character = db.characters.findOne({name: player.name});
-  db.characters.update({name : character.name}, {weapons : {}}, {multi: false, upsert: false});
+  var character = exports.getCharacterByPlayer(player);
+  exports.updateCharacterData(character.name, {});
 };
 
 exports.updateWeaponAmmo = function(player, hash, amount){
-  var character = db.characters.findOne({name: player.name});
+  var character = exports.getCharacterByPlayer(player);
   if (character.weapons[hash] != null) {
     if (character.weapons[hash] + amount >= 0){
       character.weapons[hash] = character.weapons[hash] + amount;
-      db.characters.update({name : character.name}, {weapons : character.weapons}, {multi: false, upsert: false});
+      exports.updateCharacterData(character.name, {weapons : character.weapons});
       return true;
     }
   }
   return false;
 };
 
-exports.tryTakeGroup = function(player,name){
-  let data = utils.getPlayerUserCharacter(player);
-  let result = false;
-  if (data.character != null && data.character.groups.indexOf(name) > -1){
-    db.characters.update({name : data.character.name}, {groups : data.character.groups.filter(e => e !== name)}, {multi: false, upsert: false});
-    result = true;
+exports.getGroupByType = function(ch_name,type){
+  var character = exports.getCharacterByName(ch_name);
+  if (character != null){
+    for (name of character.groups){
+      var group = db.groups.getGroupByName(name);
+      if (group.type == type){
+        return group.name;
+      }
+    }
   }
-  if (data.user != null && data.user.groups.indexOf(name) > -1) {
-    db.users.update({socialClub : data.user.socialClub}, {groups : data.user.groups.filter(e => e !== name)}, {multi: false, upsert: false});
-    result = true;
-  }
-  return result;
+  return null;
 };
 
-exports.tryGiveGroup = function(player,name){
-  let data = utils.getPlayerUserCharacter(player);
-  let group = db.groups.findOne({name: name});
-  let result = false;
+exports.tryTakeGroupByPlayer = function(player,name){
+  var character = exports.getCharacterByPlayer(player);
+  if (character != null && character.groups.indexOf(name) > -1){
+    exports.updateCharacterData(character.name, {groups : character.groups.filter(e => e !== name)});
+    return true;
+  }
+  return false;
+};
+
+exports.tryGiveGroupByPlayer = function(player,name){
+  var character = exports.getCharacterByPlayer(player);
+  var group = db.groups.getGroupByName(name);
   if (group != null) {
-    if (data.character != null && data.character.groups.indexOf(name) < 0){
+    if (character != null && character.groups.indexOf(name) < 0){
       if (group.type != null){
-        for (let i = 0; i < data.character.groups.length; i++){
-          let ch_group = db.groups.findOne({name: data.character.groups[i]});
+        for (let i = 0; i < character.groups.length; i++){
+          var ch_group = db.groups.getGroupByName(character.groups[i]);
           if (ch_group.type == group.type){
-            data.character.groups.splice(i, 1);
+            character.groups.splice(i, 1);
           }
         }
       }
-      data.character.groups.push(group.name);
-      db.characters.update({name: data.character.name}, {groups : data.character.groups}, {multi: false, upsert: false});
-      result = true;
-    }
-    if (data.user != null && data.user.groups.indexOf(name) < 0) {
-      if (group.type != null){
-        for (let i = 0; i < data.user.groups.length; i++){
-          let ch_group = db.groups.findOne({name: data.user.groups[i]});
-          if (ch_group.type == group.type){
-            data.user.groups.splice(i, 1);
-          }
-        }
-      }
-      data.user.groups.push(group.name);
-      db.users.update({socialClub: data.user.socialClub}, {groups : data.user.groups}, {multi: false, upsert: false});
-      result = true;
+      character.groups.push(group.name);
+      exports.updateCharacterData(character.name, {groups : character.groups});
+      return true;
     }
   }
-  return result;
+  return false;
+};
+
+exports.tryTakeGroupByName = function(ch_name,name){
+  var character = exports.getCharacterByName(ch_name);
+  if (character != null && character.groups.indexOf(name) > -1){
+    exports.updateCharacterData(character.name, {groups : character.groups.filter(e => e !== name)});
+    return true;
+  }
+  return false;
+};
+
+exports.tryGiveGroupByName = function(ch_name,name){
+  var character = exports.getCharacterByName(ch_name);
+  var group = db.groups.getGroupByName(name);
+  if (group != null) {
+    if (character != null && character.groups.indexOf(name) < 0){
+      if (group.type != null){
+        for (let i = 0; i < character.groups.length; i++){
+          var ch_group = db.groups.getGroupByName(character.groups[i]);
+          if (ch_group.type == group.type){
+            character.groups.splice(i, 1);
+          }
+        }
+      }
+      character.groups.push(group.name);
+      exports.updateCharacterData(character.name, {groups : character.groups});
+      return true;
+    }
+  }
+  return false;
 };
 
 exports.hasPermission = function(player,permission){
-  let data = utils.getPlayerUserCharacter(player);
+  var character = exports.getCharacterByPlayer(player);
   let result = false;
   let removed = false;
   let readd = false;
   if (permission[0] == '#') {
-    if (data.character != null){
+    if (character != null){
       let parts = permission.split('.');
-      let item = data.character.inventory[parts[0]];
+      let item = character.inventory[parts[0]];
       let operation = parts[1][0];
       let value = Number(parts[1].splice(1,parts[1].length))
       switch(operation) {
@@ -338,9 +344,9 @@ exports.hasPermission = function(player,permission){
       }
     }
   } else if (permission[0] == '@') {
-    if (data.character != null){
+    if (character != null){
       let parts = permission.split('.');
-      let skill = data.character.skills[parts[0]];
+      let skill = character.skills[parts[0]];
       let operation = parts[1][0];
       let value = Number(parts[1].splice(1,parts[1].length))
       switch(operation) {
@@ -356,28 +362,9 @@ exports.hasPermission = function(player,permission){
       }
     }
   } else {
-    if (data.user != null){
-      data.user.groups.forEach(function(name){
-        let group = db.groups.findOne({name : name});
-        if (group != null) {
-          if (group.permissions.indexOf("*") > -1){
-            result = true;
-          }
-          if (group.permissions.indexOf(permission) > -1){
-            result = true;
-          }
-          if (group.permissions.indexOf(`-${permission}`) > -1){
-            removed = true;
-          }
-          if (group.permissions.indexOf(`+${permission}`) > -1){
-            readd = true;
-          }
-        }
-      });
-    }
-    if (data.character != null){
-      data.character.groups.forEach(function(name){
-        let group = db.groups.findOne({name : name});
+    if (character != null){
+      character.groups.forEach(function(name){
+        var group = db.groups.getGroupByName(name);
         if (group != null) {
           if (group.permissions.indexOf("*") > -1){
             result = true;

@@ -98,7 +98,7 @@ mp.events.add('selectSelectorOption', (player, file, id, option_id) => {
 });
 
 mp.events.add('selectorAddGroup', (player, args) => {
-  if (db.characters.tryGiveGroup(player.name, args[0])){
+  if (db.characters.tryGiveGroupByPlayer(player, args[0])){
     player.notify(`~g~New Group: ~w~${args[0]}`);
   } else {
     player.notify("You are already in that group!");

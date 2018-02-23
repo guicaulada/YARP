@@ -910,11 +910,11 @@ function populateCharacterList(charactersJson) {
 		descContainer.classList.add('item-header');
 		itemDescription.classList.add('item-description');
 		itemDescription.setAttribute('style', 'white-space: pre;');
-		if (character.groups["job"] == null) {
-			character.groups["job"] = "Citizen";
+		if (character.job == null) {
+			character.job = "Citizen";
 		}
 		// Añadimos el contenido de cada elemento
-		itemDescription.textContent = `${character.name}, ${character.age}\r\n${character.groups["job"]}`;
+		itemDescription.textContent = `${character.name}, ${character.age}\r\n${character.job}`;
 
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {

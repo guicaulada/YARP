@@ -47,7 +47,9 @@ mp.events.add('render', () => {
     moneyUpdate = `+$${walletDiff}`;
     moneyColor = [0, 255, 0, 255];
   }
+  let jobHeight = 0.1;
   if (moneyUpdate != null) {
+    jobHeight = jobHeight + 0.05;
     mp.game.graphics.drawText(moneyUpdate, [1.0-(0.01*moneyUpdate.length), 0.1], {
       font: 7,
       color: moneyColor,
@@ -65,6 +67,16 @@ mp.events.add('render', () => {
   lastWallet = playerWallet;
   let walletDisplay = `$${playerWallet}`;
   mp.game.graphics.drawText(walletDisplay, [1.0-(0.01*walletDisplay.length), 0.05], {
+    font: 7,
+    color: [255, 255, 255, 255],
+    scale: [0.75, 0.75],
+    outline: true
+  });
+  let playerJob = mp.players.local.getVariable("PLAYER_JOB");
+  if (playerJob == null) {
+    playerJob = "Citizen";
+  }
+  mp.game.graphics.drawText(playerJob, [1.0-(0.01*playerJob.length), jobHeight], {
     font: 7,
     color: [255, 255, 255, 255],
     scale: [0.75, 0.75],

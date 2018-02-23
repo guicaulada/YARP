@@ -3,9 +3,9 @@ var cfg = require('../exports/config.js');
 
 mp.events.addCommand("addgroup", (player, msg, group, type) => {
   if (group != null){
-    if (db.characters.hasPermission(player,"cmd.addgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.addgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddGroup(group, type)){
-        player.outputChatBox(`Group !{green}${group}!{white} has been created!`);
+        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} has been created!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Group already exist!");
       }
@@ -17,9 +17,9 @@ mp.events.addCommand("addgroup", (player, msg, group, type) => {
 
 mp.events.addCommand("rmgroup", (player, msg, group) => {
   if (group != null){
-    if (db.characters.hasPermission(player,"cmd.rmgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.rmgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemoveGroup(group)){
-        player.outputChatBox(`Group !{green}${group}!{white} has been removed!`);
+        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} has been removed!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Group doesn't exist!");
       }
@@ -31,9 +31,9 @@ mp.events.addCommand("rmgroup", (player, msg, group) => {
 
 mp.events.addCommand("addperm", (player, msg, group, perm) => {
   if (group != null && perm != null){
-    if (db.characters.hasPermission(player,"cmd.addperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.addperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddPermission(group,perm)){
-        player.outputChatBox(`Permission !{green}${perm}!{white} has been added to !{green}${group}!{white}!`);
+        player.outputChatBox(`!{blue}COMMAND: !{white}Permission ${perm} added to ${group}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Permission already exist!");
       }
@@ -45,9 +45,9 @@ mp.events.addCommand("addperm", (player, msg, group, perm) => {
 
 mp.events.addCommand("rmperm", (player, msg, group, perm) => {
   if (group != null && perm != null){
-    if (db.characters.hasPermission(player,"cmd.rmperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.rmperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemovePermission(group,perm)){
-        player.outputChatBox(`Permission !{green}${perm}!{white} has been removed from !{green}${group}!{white}!`);
+        player.outputChatBox(`!{blue}COMMAND: !{white}Permission ${perm} removed from ${group}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Permission doesn't exist!");
       }
@@ -57,48 +57,70 @@ mp.events.addCommand("rmperm", (player, msg, group, perm) => {
   }
 });
 
-mp.events.addCommand("givegroup", (player, msg) => {
+mp.events.addCommand("givecgroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.characters.hasPermission(player,"cmd.givegroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.givecgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
-      var target = args[1];
-      if (args.length > 2) {
-        target = `${args[1]} ${args[2]}`;
-      }
-      if (db.characters.tryGiveGroup(target, group)){
-        if (target.socialClub != null) {
-          target = target.socialClub;
-        }
-        player.outputChatBox(`Group !{green}${group}!{white} has been added to !{green}${target}!{white}!`);
+      var target = `${args[1]} ${args[2]}`;
+      if (db.characters.tryGiveGroupByName(target, group)){
+        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} added to ${target}!`);
       } else {
-        player.outputChatBox("!{red}ERROR: !{white}Player already have that group!");
+        player.outputChatBox("!{red}ERROR: !{white}Character doesn't have that group!");
       }
     }
   } else {
-    player.outputChatBox("!{yellow}USAGE: !{white}/givegroup <group> <socialClub or character name>");
+    player.outputChatBox("!{yellow}USAGE: !{white}/givecgroup <group> <Character Name>");
   }
 });
 
-mp.events.addCommand("takegroup", (player, msg) => {
+mp.events.addCommand("takecgroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.characters.hasPermission(player,"cmd.takegroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.takecgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
-      var target = args[1];
-      if (args.length > 2) {
-        target = `${args[1]} ${args[2]}`;
-      }
-      if (db.characters.tryTakeGroup(target, group)){
-        if (target.socialClub != null) {
-          target = target.socialClub;
-        }
-        player.outputChatBox(`Group !{green}${group}!{white} has been removed from !{green}${target}!{white}!`);
+      var target = `${args[1]} ${args[2]}`;
+      if (db.characters.tryTakeGroupByName(target, group)){
+        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} removed from ${target}!`);
       } else {
-        player.outputChatBox("!{red}ERROR: !{white}Player doesn't have that group!");
+        player.outputChatBox("!{red}ERROR: !{white}Character doesn't have that group!");
       }
     }
   } else {
-    player.outputChatBox("!{yellow}USAGE: /takegroup <group> <socialClub or character name>");
+    player.outputChatBox("!{yellow}USAGE: !{white}/takecgroup <group> <Character Name>");
+  }
+});
+
+mp.events.addCommand("giveugroup", (player, msg) => {
+  if (msg != null){
+    var args = msg.split(" ");
+    if (db.users.hasPermission(player,"cmd.giveugroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+      var group = args[0];
+      var target = args[1];
+      if (db.users.tryGiveGroupBySocialClub(target, group)){
+        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} added to ${target}!`);
+      } else {
+        player.outputChatBox("!{red}ERROR: !{white}User doesn't have that group!");
+      }
+    }
+  } else {
+    player.outputChatBox("!{yellow}USAGE: !{white}/giveugroup <group> <SocialClub>");
+  }
+});
+
+mp.events.addCommand("takeugroup", (player, msg) => {
+  if (msg != null){
+    var args = msg.split(" ");
+    if (db.users.hasPermission(player,"cmd.takeugroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+      var group = args[0];
+      var target = args[1];
+      if (db.users.tryTakeGroupBySocialClub(target, group)){
+        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} removed from ${target}!`);
+      } else {
+        player.outputChatBox("!{red}ERROR: !{white}User doesn't have that group!");
+      }
+    }
+  } else {
+    player.outputChatBox("!{yellow}USAGE: !{white}/takeugroup <group> <SocialClub>");
   }
 });

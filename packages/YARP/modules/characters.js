@@ -7,7 +7,10 @@ mp.events.add('createCharacter', (player, name, age, sex, jface) => {
   var character = db.characters.tryCreateCharacter(player,name,age,sex,jface);
   if(character != null){
     player.call('characterCreatedSuccessfully');
-    var characters = db.characters.getPlayerCharacters(player);
+    var characters = db.characters.getCharactersByPlayer(player);
+    for (character of characters){
+      character.job = db.characters.getGroupByType(character.name, "job");
+    }
     player.call('showPlayerCharacters', [JSON.stringify(characters)]);
   } else {
     player.call('characterNameDuplicated');
@@ -38,6 +41,7 @@ mp.events.add('loadCharacter', (player, jchar) => {
   }
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
+  player.setVariable('PLAYER_JOB', db.characters.getGroupByType(character.name, "job"));
   player.call('setWeaponsConfig', [JSON.stringify(cfg.weapons)]);
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });

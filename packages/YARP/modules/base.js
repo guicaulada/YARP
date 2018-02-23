@@ -51,9 +51,9 @@ mp.events.add('playerChat', (player, message) => {
 });
 
 mp.events.add('verifyAuthentication', (player,password) => {
-  var user = db.users.verifyAuthentication(player, password);
+  var user = db.users.getAuthUser(player, password);
   if(user != null){
-    var characters = db.characters.getPlayerCharacters(player);
+    var characters = db.characters.getCharactersByPlayer(player);
     if(characters.length == 0){
       player.call('showCharacterCreationMenu');
     } else {

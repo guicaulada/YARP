@@ -1,25 +1,25 @@
 var db = require('../exports/database.js');
 
 mp.events.addCommand('kill', (player) => {
-  if (db.characters.hasPermission(player,"cmd.kill")){
+  if (db.users.hasPermission(player,"cmd.kill")){
     player.health = 0;
   }
 });
 
 mp.events.addCommand('hp', (player) => {
-  if (db.characters.hasPermission(player,"cmd.hp")){
+  if (db.users.hasPermission(player,"cmd.hp")){
     player.health = 100;
   }
 });
 
 mp.events.addCommand('armor', (player) => {
-  if (db.characters.hasPermission(player,"cmd.armor")){
+  if (db.users.hasPermission(player,"cmd.armor")){
     player.armour = 100;
   }
 });
 
 mp.events.addCommand("weapon", (player, msg, weapon, ammo) => {
-  if (db.characters.hasPermission(player,"cmd.weapon")){
+  if (db.users.hasPermission(player,"cmd.weapon")){
     var weaponHash = mp.joaat(weapon);
     db.characters.giveWeapon(player, weaponHash, Number(ammo) || 10000);
     player.giveWeapon(weaponHash, Number(ammo) || 10000);
@@ -27,7 +27,7 @@ mp.events.addCommand("weapon", (player, msg, weapon, ammo) => {
 });
 
 mp.events.addCommand('veh', (player, model) => {
-  if (db.characters.hasPermission(player,"cmd.veh")){
+  if (db.users.hasPermission(player,"cmd.veh")){
     if (model == null) {
         let veh = mp.vehicles.new(mp.joaat('T20'), player.position);
         player.putIntoVehicle(veh, -1);
@@ -39,26 +39,26 @@ mp.events.addCommand('veh', (player, model) => {
 });
 
 mp.events.addCommand('noclip', (player) => {
-  if (db.characters.hasPermission(player,"cmd.noclip")){
+  if (db.users.hasPermission(player,"cmd.noclip")){
     player.call('toggleNoclip')
   }
 });
 
 mp.events.addCommand('charpos', (player) => {
-  if (db.characters.hasPermission(player,"cmd.charpos")){
+  if (db.users.hasPermission(player,"cmd.charpos")){
     player.call('toggleCharpos')
   }
 });
 
 mp.events.addCommand('camdir', (player) => {
-  if (db.characters.hasPermission(player,"cmd.camdir")){
+  if (db.users.hasPermission(player,"cmd.camdir")){
     player.call('toggleCamdir')
   }
 });
 
 var wp_pos = {};
 mp.events.addCommand("tp", (player, msg) => {
-  if (db.characters.hasPermission(player,"cmd.tp")){
+  if (db.users.hasPermission(player,"cmd.tp")){
     if (msg != null){
       var args = msg.split(" ");
       if (args.length >= 3){
@@ -91,7 +91,7 @@ mp.events.addCommand("tp", (player, msg) => {
 });
 
 mp.events.addCommand("jtp", (player, jsonPos) => {
-  if (db.characters.hasPermission(player,"cmd.jtp")){
+  if (db.users.hasPermission(player,"cmd.jtp")){
     if (jsonPos != null){
       player.position = JSON.parse(jsonPos);
     } else {
@@ -101,7 +101,7 @@ mp.events.addCommand("jtp", (player, jsonPos) => {
 });
 
 mp.events.addCommand("jpos", (player, comment) => {
-  if (db.characters.hasPermission(player,"cmd.jpos")){
+  if (db.users.hasPermission(player,"cmd.jpos")){
     var fs = require('fs');
     if (comment != null && comment != "" && comment != " "){
       comment = " : " + comment;
