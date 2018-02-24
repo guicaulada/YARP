@@ -23,3 +23,19 @@ mp.events.add('showSelectorMenu', (file, id, selector, optionsJson) => {
 mp.events.add('selectSelectorOption', (file, id, option) => {
   mp.events.callRemote('selectSelectorOption', file, id, option);
 });
+
+mp.events.add('showAuthenticationMenu', (juser, jtime) => {
+  let user = JSON.parse(juser);
+  let time = JSON.parse(jtime);
+	mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
+	mp.game.time.setClockTime(time.h, time.m, time.s);
+  if (user.password == null){
+    mp.events.call('createBrowser', ['package://YARP/statics/html/accountRegister.html','setAccountName',user.socialClub]);
+  } else {
+    mp.events.call('createBrowser', ['package://YARP/statics/html/accountLogin.html']);
+  }
+});
+
+mp.events.add('verifyAuthentication', (password) => {
+  mp.events.callRemote('verifyAuthentication', password);
+});

@@ -8,6 +8,9 @@ mp.events.add('setWeaponsConfig', (weaponsJson) => {
 });
 
 mp.events.add('render', () => {
+	if (mp.players.local.isShooting()){
+		mp.events.callRemote('updateWeaponAmmo', utils.getCurrentWeapon(), -1);
+	}
   for (weaponModel in weaponsConfig) {
     let weaponHash = mp.game.joaat(weaponModel)
     if (utils.gotWeapon(weaponHash)){

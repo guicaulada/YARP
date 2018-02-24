@@ -1,21 +1,3 @@
-var utils = require('./YARP/exports/utils.js');
-
-mp.events.add('showAuthenticationMenu', (juser, jtime) => {
-  let user = JSON.parse(juser);
-  let time = JSON.parse(jtime);
-	mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-	mp.game.time.setClockTime(time.h, time.m, time.s);
-  if (user.password == null){
-    mp.events.call('createBrowser', ['package://YARP/statics/html/accountRegister.html','setAccountName',user.socialClub]);
-  } else {
-    mp.events.call('createBrowser', ['package://YARP/statics/html/accountLogin.html']);
-  }
-});
-
-mp.events.add('verifyAuthentication', (password) => {
-  mp.events.callRemote('verifyAuthentication', password);
-});
-
 var inRangeItems = {};
 var closestText = {};
 var closestMarker = {};
@@ -24,65 +6,7 @@ mp.events.add('addInRangeItem', (itemJson, file, id) => {
   inRangeItems[file+'.'+id] = JSON.parse(itemJson);
 });
 
-var lastWallet = 0;
-var lastBank = 0;
-var moneyUpdate = null;
-var moneyUpdated = false;
-var moneyColor = [];
 mp.events.add('render', () => {
-  //Saving bullets when ped is shooting and checking if shooting bullets that he doesnt have
-  if (mp.players.local.isShooting()){
-    mp.events.callRemote('updateWeaponAmmo', utils.getCurrentWeapon(), -1);
-  }
-  //Money display on top right, updates automatically with setVariable(PLAYER_WALLET, value)
-  let playerWallet = mp.players.local.getVariable("PLAYER_WALLET");
-  if (playerWallet == null){
-    playerWallet = 0;
-  }
-  let walletDiff = playerWallet-lastWallet;
-  if (walletDiff < 0){
-    moneyUpdate = `-$${-walletDiff}`;
-    moneyColor = [255, 0, 0, 255];
-  } else if (walletDiff > 0) {
-    moneyUpdate = `+$${walletDiff}`;
-    moneyColor = [0, 255, 0, 255];
-  }
-  let jobHeight = 0.1;
-  if (moneyUpdate != null) {
-    jobHeight = jobHeight + 0.05;
-    mp.game.graphics.drawText(moneyUpdate, [1.0-(0.01*moneyUpdate.length), 0.1], {
-      font: 7,
-      color: moneyColor,
-      scale: [0.75, 0.75],
-      outline: true
-    });
-    if (!moneyUpdated){
-      moneyUpdated = true;
-      setTimeout(function(){
-        moneyUpdate = null;
-        moneyUpdated = false;
-      },2500);
-    }
-  }
-  lastWallet = playerWallet;
-  let walletDisplay = `$${playerWallet}`;
-  mp.game.graphics.drawText(walletDisplay, [1.0-(0.01*walletDisplay.length), 0.05], {
-    font: 7,
-    color: [255, 255, 255, 255],
-    scale: [0.75, 0.75],
-    outline: true
-  });
-  let playerJob = mp.players.local.getVariable("PLAYER_JOB");
-  if (playerJob == null) {
-    playerJob = "Citizen";
-  }
-  mp.game.graphics.drawText(playerJob, [1.0-(0.01*playerJob.length), jobHeight], {
-    font: 7,
-    color: [255, 255, 255, 255],
-    scale: [0.75, 0.75],
-    outline: true
-  });
-  //Check for objects related to the in range item added by the event addInRangeItem
   for (fileid in inRangeItems){
     let inRangeItem = inRangeItems[fileid];
     if (inRangeItem != null){

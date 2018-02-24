@@ -1,4 +1,5 @@
 var db = require('../exports/database.js');
+var utils = require('../exports/utils.js');
 
 mp.events.addCommand('kill', (player) => {
   if (db.users.hasPermission(player,"cmd.kill")){
@@ -67,25 +68,25 @@ mp.events.addCommand("tp", (player, msg) => {
         args[2] = Number(args[2]);
         player.position = new mp.Vector3(args[0], args[1], args[2]);
       } else if (args.length == 2){
-        args[0] = Number(args[0]);
-        args[1] = Number(args[1]);
-        if (mp.players.at(args[0]) != null || mp.players.at(args[1]) != null){
-          mp.players.at(args[0]).position = mp.players.at(args[1]).position;
+        args[0] = utils.getPlayerUserCharacter(args[0]);
+        args[1] = utils.getPlayerUserCharacter(args[1]);
+        if (args[0] != null || args[1] != null){
+          args[0].player.position = args[1].player.position;
         } else {
-          player.outputChatBox("!{red}Invalid user id!");
+          player.outputChatBox("!{red}ERROR: !{white}Invalid user id!");
         }
       } else if (args.length == 1){
-        args[0] = Number(args[0]);
+        args[0] = utils.getPlayerUserCharacter(args[0]);
         if (mp.players.at(args[0]) != null){
-          player.position = mp.players.at(args[0]).position;
+          player.position = args[0].player.position;
         } else {
-          player.outputChatBox("!{red}Invalid user id!");
+          player.outputChatBox("!{red}ERROR: !{white}Invalid user id!");
         }
       }
     } else if (wp_pos[player] != null){
       player.position = wp_pos[player];
     } else {
-      player.outputChatBox("!{red}Usage: /tp [<userid> or <x> <y> <z> or have a waypoint]");
+      player.outputChatBox("!{yellow}USAGE: !{white}/tp [<socialClub>][<socialClub> <socialClub>][<x> <y> <z>][waypoint active]");
     }
   }
 });
@@ -95,7 +96,7 @@ mp.events.addCommand("jtp", (player, jsonPos) => {
     if (jsonPos != null){
       player.position = JSON.parse(jsonPos);
     } else {
-      player.outputChatBox("!{red}Usage: /jtp <jsonPos>");
+      player.outputChatBox("!{yellow}USAGE: !{white}/jtp <jsonPos>");
     }
   }
 });
@@ -108,17 +109,12 @@ mp.events.addCommand("jpos", (player, comment) => {
     } else {
       comment = "";
     }
-    fs.appendFile("jpos.txt", JSON.stringify(player.position) + comment +"\n", function(err) {
-      if(err) {
-        return console.log('JPOS ERROR:\n'+err);
-      }
-      player.outputChatBox("!{green}JSON position saved to file!");
-    });
+    fs.appendFile("jpos.txt", JSON.stringify(player.position) + comment +"\n");
+    player.outputChatBox("!{blue}COMMAND: !{white}JSON position saved to file!");
   }
 });
 
 mp.events.add("playerCreateWaypoint", (player, position) => {
-  //I dont think this event is being called... I don't know why.
   wp_pos[player] = position;
 });
 

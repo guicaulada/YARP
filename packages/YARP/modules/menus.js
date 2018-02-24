@@ -104,3 +104,17 @@ mp.events.add('selectorAddGroup', (player, args) => {
     player.notify("You are already in that group!");
   }
 });
+
+mp.events.add('verifyAuthentication', (player,password) => {
+  var user = db.users.getAuthUser(player, password);
+  if(user != null){
+    var characters = db.characters.getCharactersByPlayer(player);
+    if(characters.length == 0){
+      player.call('showCharacterCreationMenu');
+    } else {
+      player.call('showPlayerCharacters', [JSON.stringify(characters)]);
+    }
+  } else {
+    player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+  }
+});
