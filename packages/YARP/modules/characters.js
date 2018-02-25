@@ -8,8 +8,8 @@ mp.events.add('createCharacter', (player, name, age, sex, jface) => {
   if(character != null){
     player.call('characterCreatedSuccessfully');
     var characters = db.characters.getCharactersByPlayer(player);
-    for (character of characters){
-      character.job = db.characters.getGroupByType(character.name, "job");
+    for (let i = 0; i < characters.length; i++){
+      characters[i].job = db.characters.getGroupByType(characters[i].name, "job");
     }
     player.call('showPlayerCharacters', [JSON.stringify(characters)]);
   } else {

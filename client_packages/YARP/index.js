@@ -8,3 +8,4 @@ require('./YARP/modules/inventory.js');
 require('./YARP/modules/weapons.js');
 require('./YARP/modules/money.js');
 require('./YARP/modules/banks.js');
+require('./YARP/modules/gui.js');

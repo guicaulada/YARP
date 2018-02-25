@@ -1,5 +1,6 @@
 var db = require('../exports/database.js');
 var utils = require('../exports/utils.js');
+var cfg = require('../exports/config.js');
 
 mp.events.addCommand('kill', (player) => {
   if (db.users.hasPermission(player,"cmd.kill")){
@@ -30,14 +31,30 @@ mp.events.addCommand("weapon", (player, msg, weapon, ammo) => {
 mp.events.addCommand('veh', (player, model) => {
   if (db.users.hasPermission(player,"cmd.veh")){
     if (model == null) {
-        let veh = mp.vehicles.new(mp.joaat('T20'), player.position);
-        player.putIntoVehicle(veh, -1);
+      let menu = {}
+      menu.title = "Vehicles";
+      menu.options = {};
+      for (vehicle in cfg.vehicles){
+        menu.options[vehicle] = {};
+        menu.options[vehicle].type = "default";
+        menu.options[vehicle].event = ['spawnVehicle', vehicle];
+      }
+      player.call('GUI:Create',[JSON.stringify(menu)]);
     } else {
-        let veh = mp.vehicles.new(mp.joaat(model), player.position);
-        player.putIntoVehicle(veh, -1);
+      mp.events.call('spawnVehicle',player,model);
     }
   }
 });
+
+mp.events.add('spawnVehicle', (player,model) => {
+  if ((typeof model) != 'number' && (typeof model) != 'string'){
+    model = model[0];
+  }
+  if ((typeof model) === 'string'){
+    model = mp.vehicles.new(mp.joaat(model), player.position);
+  }
+  player.putIntoVehicle(model, -1);
+})
 
 mp.events.addCommand('noclip', (player) => {
   if (db.users.hasPermission(player,"cmd.noclip")){
@@ -56,6 +73,34 @@ mp.events.addCommand('camdir', (player) => {
     player.call('toggleCamdir')
   }
 });
+
+mp.events.addCommand('testmenu', (player) => {
+  if (db.users.hasPermission(player,"cmd.testmenu")){
+    let menu = {}
+    menu.title = "Test Menu";
+    menu.options = {};
+    menu.options["test"] = {};
+    menu.options["test"].type = "default";
+    menu.options["test"].event = ['notifyMenuResult'];
+    menu.options["bool"] = {};
+    menu.options["bool"].type = "bool";
+    menu.options["bool"].event = ['notifyMenuResult'];
+    menu.options["int"] = {};
+    menu.options["int"].type = "int";
+    menu.options["int"].min = 1;
+    menu.options["int"].max = 55;
+    menu.options["int"].event = ['notifyMenuResult'];
+    menu.options["array"] = {};
+    menu.options["array"].type = "array";
+    menu.options["array"].event = ['notifyMenuResult'];
+    menu.options["array"].array = ["TEST1","TEST2","TEST3","TEST4"];
+    player.call('GUI:Create',[JSON.stringify(menu)]);
+  }
+});
+
+mp.events.add('notifyMenuResult', (player,result,args) => {
+  player.notify(`${result}`);
+})
 
 var wp_pos = {};
 mp.events.addCommand("tp", (player, msg) => {
@@ -110,7 +155,7 @@ mp.events.addCommand("jpos", (player, comment) => {
       comment = "";
     }
     fs.appendFile("jpos.txt", JSON.stringify(player.position) + comment +"\n");
-    player.outputChatBox("!{blue}COMMAND: !{white}JSON position saved to file!");
+    player.outputChatBox("!{cyan}COMMAND: !{white}JSON position saved to file!");
   }
 });
 

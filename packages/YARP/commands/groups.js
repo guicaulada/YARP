@@ -5,7 +5,7 @@ mp.events.addCommand("addgroup", (player, msg, group, type) => {
   if (group != null){
     if (db.users.hasPermission(player,"cmd.addgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddGroup(group, type)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} has been created!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} has been created!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Group already exist!");
       }
@@ -19,7 +19,7 @@ mp.events.addCommand("rmgroup", (player, msg, group) => {
   if (group != null){
     if (db.users.hasPermission(player,"cmd.rmgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemoveGroup(group)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} has been removed!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} has been removed!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Group doesn't exist!");
       }
@@ -33,7 +33,7 @@ mp.events.addCommand("addperm", (player, msg, group, perm) => {
   if (group != null && perm != null){
     if (db.users.hasPermission(player,"cmd.addperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddPermission(group,perm)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Permission ${perm} added to ${group}!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Permission ${perm} added to ${group}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Permission already exist!");
       }
@@ -47,7 +47,7 @@ mp.events.addCommand("rmperm", (player, msg, group, perm) => {
   if (group != null && perm != null){
     if (db.users.hasPermission(player,"cmd.rmperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemovePermission(group,perm)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Permission ${perm} removed from ${group}!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Permission ${perm} removed from ${group}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Permission doesn't exist!");
       }
@@ -64,7 +64,7 @@ mp.events.addCommand("givecgroup", (player, msg) => {
       var group = args[0];
       var target = `${args[1]} ${args[2]}`;
       if (db.characters.tryGiveGroupByName(target, group)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} added to ${target}!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} added to ${target}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Character doesn't have that group!");
       }
@@ -81,7 +81,7 @@ mp.events.addCommand("takecgroup", (player, msg) => {
       var group = args[0];
       var target = `${args[1]} ${args[2]}`;
       if (db.characters.tryTakeGroupByName(target, group)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} removed from ${target}!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} removed from ${target}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}Character doesn't have that group!");
       }
@@ -98,7 +98,7 @@ mp.events.addCommand("giveugroup", (player, msg) => {
       var group = args[0];
       var target = args[1];
       if (db.users.tryGiveGroupBySocialClub(target, group)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} added to ${target}!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} added to ${target}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}User doesn't have that group!");
       }
@@ -115,7 +115,7 @@ mp.events.addCommand("takeugroup", (player, msg) => {
       var group = args[0];
       var target = args[1];
       if (db.users.tryTakeGroupBySocialClub(target, group)){
-        player.outputChatBox(`!{blue}COMMAND: !{white}Group ${group} removed from ${target}!`);
+        player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} removed from ${target}!`);
       } else {
         player.outputChatBox("!{red}ERROR: !{white}User doesn't have that group!");
       }

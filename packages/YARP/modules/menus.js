@@ -112,6 +112,10 @@ mp.events.add('verifyAuthentication', (player,password) => {
     if(characters.length == 0){
       player.call('showCharacterCreationMenu');
     } else {
+      var characters = db.characters.getCharactersByPlayer(player);
+      for (let i = 0; i < characters.length; i++){
+        characters[i].job = db.characters.getGroupByType(characters[i].name, "job");
+      }
       player.call('showPlayerCharacters', [JSON.stringify(characters)]);
     }
   } else {

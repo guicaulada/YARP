@@ -50,6 +50,7 @@ YARP is still under development, information will be added here in the future.
 
 ## Acknowledgments
 *Thanks to the following people who in some way or another, has helped with this project:*
+
 * [Shadow](https://github.com/shadowbrz)
 * [ImagicTheCat](https://github.com/ImagicTheCat)
 * [xabier1989](https://github.com/xabier1989)
