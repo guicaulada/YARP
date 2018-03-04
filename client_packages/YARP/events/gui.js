@@ -92,13 +92,13 @@ Menu.Option = function(option){
 	}
 
 	if(currentOption <= GUI.maxVisOptions && optionCount <= GUI.maxVisOptions) {
-		GUI.Text(option, GUI.optionText, [menuX - 0.1, ((menuYOptionAdd - 0.018) + (optionCount / menuYOptionDiv) * menuYModify)],  optionTextSize, false);
+		GUI.Text(option, GUI.optionText, [menuX - 0.068, ((menuYOptionAdd - 0.018) + (optionCount / menuYOptionDiv) * menuYModify)],  optionTextSize, false);
 		GUI.Rect(GUI.optionRect, [ menuX, (menuYOptionAdd + (optionCount / menuYOptionDiv) * menuYModify) ], optionRectSize);
 		if(thisOption) {
 			GUI.Rect(GUI.scroller, [ menuX, (menuYOptionAdd + (optionCount / menuYOptionDiv) * menuYModify) ], optionRectSize);
 		}
 	} else if (optionCount > currentOption - GUI.maxVisOptions && optionCount <= currentOption) {
-		GUI.Text(option, GUI.optionText, [menuX - 0.1, ((menuYOptionAdd - 0.018) + ((optionCount - (currentOption - GUI.maxVisOptions)) / menuYOptionDiv) * menuYModify)],  optionTextSize, false);
+		GUI.Text(option, GUI.optionText, [menuX - 0.068, ((menuYOptionAdd - 0.018) + ((optionCount - (currentOption - GUI.maxVisOptions)) / menuYOptionDiv) * menuYModify)],  optionTextSize, false);
 		GUI.Rect(GUI.optionRect, [ menuX, (menuYOptionAdd + ((optionCount - (currentOption - GUI.maxVisOptions)) / menuYOptionDiv) * menuYModify) ], optionRectSize);
 		if(thisOption) {
 			GUI.Rect(GUI.scroller, [ menuX, (menuYOptionAdd + ((optionCount - (currentOption - GUI.maxVisOptions)) / menuYOptionDiv) * menuYModify) ], optionRectSize);
@@ -261,6 +261,9 @@ Menu.updateSelection = function(){
     buttonPressed = true;
 		selectPressed = true;
 	} else if (mp.keys.isDown(8) === true && !buttonPressed) {
+		buttonPressed = true;
+		mp.events.call('GUI:Destroy');
+	} else if (mp.keys.isDown(192) === true && !buttonPressed) {
     buttonPressed = true;
 		if (prevMenu == null) {
 			Menu.Switch(null, "");
@@ -269,10 +272,7 @@ Menu.updateSelection = function(){
 		if (prevMenu != null) {
 			Menu.Switch(null, prevMenu);
 		}
-	} else if (mp.keys.isDown(192) === true && !buttonPressed) {
-    buttonPressed = true;
-    mp.events.call('GUI:Destroy');
-  }
+	}
 	optionCount = 0;
 }
 
@@ -308,10 +308,19 @@ mp.events.add('GUI:Update', () => {
 
 mp.events.add('GUI:Create', (newmenu) => {
 	menu = JSON.parse(newmenu);
+	currentOption = 1;
   buttonPressed = true;
+	if (menu.onopen != null){
+		let args = menu.onopen.slice(1,menu.onopen.length)
+		mp.events.callRemote(menu.onopen[0],args)
+	}
 })
 
 mp.events.add('GUI:Destroy', (newmenu) => {
+	if (menu.onclose != null){
+		let args = menu.onclose.slice(1,menu.onclose.length)
+		mp.events.callRemote(menu.onclose[0],args)
+	}
 	menu = null;
 })
 
@@ -328,7 +337,7 @@ mp.events.add('render', () => {
         mp.events.call("GUI:Option", option, function(cb){
           if (cb && menu.options[option].event != null) {
             let args = menu.options[option].event.slice(1,menu.options[option].event.length);
-		        mp.events.callRemote(menu.options[option].event[0], option, args);
+		        mp.events.callRemote(menu.options[option].event[0], option, JSON.stringify(args));
           }
         });
       } else if (menu.options[option].type == "bool") {
@@ -338,7 +347,7 @@ mp.events.add('render', () => {
         mp.events.call("GUI:Bool", option, bools[option], function(cb){
           if (menu.options[option].event != null && cb != bools[option]){
             let args = menu.options[option].event.slice(1,menu.options[option].event.length);
-		        mp.events.callRemote(menu.options[option].event[0], cb, args);
+		        mp.events.callRemote(menu.options[option].event[0], cb, JSON.stringify(args));
           }
           bools[option] = cb;
         });
@@ -350,12 +359,15 @@ mp.events.add('render', () => {
           if (menu.options[option].max == null){
             menu.options[option].max = 100
           }
-          ints[option] = menu.options[option].min;
+					if (menu.options[option].start == null){
+						menu.options[option].start = min;
+					}
+          ints[option] = menu.options[option].start;
         }
         mp.events.call("GUI:Int", option, ints[option], menu.options[option].min, menu.options[option].max, function(cb){
           if (menu.options[option].event != null && cb != ints[option]){
             let args = menu.options[option].event.slice(1,menu.options[option].event.length);
-		        mp.events.callRemote(menu.options[option].event[0], cb, args);
+		        mp.events.callRemote(menu.options[option].event[0], cb, JSON.stringify(args));
           }
           ints[option] = cb;
         });
@@ -370,7 +382,7 @@ mp.events.add('render', () => {
         mp.events.call("GUI:StringArray", option, arrays[option], positions[option], function(cb){
           if (menu.options[option].event != null && cb != positions[option]){
             let args = menu.options[option].event.slice(1,menu.options[option].event.length);
-		        mp.events.callRemote(menu.options[option].event[0], cb, args);
+		        mp.events.callRemote(menu.options[option].event[0], cb, JSON.stringify(args));
           }
           positions[option] = cb;
         });

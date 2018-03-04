@@ -1,6 +1,3 @@
-var cfg = require('../exports/config.js');
-var db = require('../exports/database.js');
-
 mp.events.add('playerJoin', (player) => {
     console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
     var user = db.users.getUserByPlayer(player);

@@ -1,6 +1,3 @@
-var cfg = require('../exports/config.js');
-var db = require('../exports/database.js');
-
 mp.events.add('loadATM', (player) => {
   player.call('showATM');
 });

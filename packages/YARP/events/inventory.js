@@ -1,6 +1,3 @@
-var cfg = require('../exports/config.js');
-var db = require('../exports/database.js');
-
 mp.events.add('loadInventoryMenu', (player) => {
   let inventoryJson = JSON.stringify(db.characters.getInventoryItems(player));
   player.call('showPlayerInventory', [inventoryJson, 0])

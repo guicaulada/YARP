@@ -1,8 +1,3 @@
-var cfg = require('../exports/config.js');
-var db = require('../exports/database.js');
-var utils = require('../exports/utils.js');
-
-//Character creation
 mp.events.add('createCharacter', (player, name, age, sex, jface) => {
   var character = db.characters.tryCreateCharacter(player,name,age,sex,jface);
   if(character != null){

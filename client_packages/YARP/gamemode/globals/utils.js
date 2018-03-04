@@ -57,4 +57,24 @@ exports.getCameraDirection = function(){
     z = z/len;
   }
   return {"x":x,"y":y,"z":z};
-};
+}
+
+exports.spawnObject = function(model, pos, cb) {
+  if ((typeof model) === 'string'){
+    model = mp.game.joaat(model);
+  }
+  mp.game.streaming.requestModel(model, () => {
+    let obj = mp.objects.new(model, pos, {
+      rotation: new mp.Vector3(0, 0, 0),
+      alpha: 255,
+      dimension: mp.players.local.dimension
+    });
+    if (cb != null){
+      cb(obj)
+    }
+  });
+}
+
+exports.deleteObject = function(object){
+  mp.game.object.deleteObject(object.handle);
+}

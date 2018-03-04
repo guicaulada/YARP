@@ -8,9 +8,6 @@ mp.events.add('setWeaponsConfig', (weaponsJson) => {
 });
 
 mp.events.add('render', () => {
-	if (mp.players.local.isShooting()){
-		mp.events.callRemote('updateWeaponAmmo', utils.getCurrentWeapon(), -1);
-	}
   for (weaponModel in weaponsConfig) {
     let weaponHash = mp.game.joaat(weaponModel)
     if (utils.gotWeapon(weaponHash)){
@@ -29,6 +26,10 @@ mp.events.add('render', () => {
   }
 });
 
+mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
+	mp.events.callRemote('updateWeaponAmmo', utils.getCurrentWeapon(), -1);
+});
+
 mp.events.add('removeWeapon', (weaponName) => {
 	RemoveGear(weaponName)
 });
@@ -38,36 +39,15 @@ mp.events.add('removeWeapons', (weaponName) => {
 });
 
 function RemoveGear(weapon){
-	DeleteWeapon(playerWeapons[weapon]);
+	utils.deleteObject(playerWeapons[weapon]);
   playerWeapons[weapon] = null;
 }
 
 function RemoveGears(){
 	for (weapon in playerWeapons){
-		DeleteWeapon(playerWeapons[weapon])
+		utils.deleteObject(playerWeapons[weapon])
 	}
 	playerWeapons = {};
-}
-
-function SpawnObject(model, pos, cb) {
-  if ((typeof model) === 'string'){
-    model = mp.game.joaat(model);
-  }
-  mp.game.streaming.requestModel(model, () => {
-    let obj = mp.objects.new(model, pos, {
-      rotation: new mp.Vector3(0, 0, 0),
-      alpha: 255,
-      dimension: 0
-    });
-
-    if (cb != null){
-      cb(obj)
-    }
-  });
-}
-
-function DeleteWeapon(object){
-  mp.game.object.deleteObject(object.handle);
 }
 
 function SetGear(weapon){
@@ -92,7 +72,7 @@ function SetGear(weapon){
 		model    = weaponsConfig[weapon].model;
 	}
 
-	SpawnObject(model, pos, function(obj){
+	utils.spawnObject(model, pos, function(obj){
 		let boneIndex = mp.players.local.getBoneIndex(bone);
 		let bonePos 	= mp.players.local.getWorldPositionOfBone(boneIndex);
 		obj.attachTo(mp.players.local.handle, boneIndex, boneX, boneY, boneZ, boneXRot, boneYRot, boneZRot, false, false, false, false, 2, true);

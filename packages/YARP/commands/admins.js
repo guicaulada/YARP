@@ -37,7 +37,7 @@ mp.events.addCommand('veh', (player, model) => {
       for (vehicle in cfg.vehicles){
         menu.options[vehicle] = {};
         menu.options[vehicle].type = "default";
-        menu.options[vehicle].event = ['spawnVehicle', vehicle];
+        menu.options[vehicle].event = ['spawnVehicle'];
       }
       player.call('GUI:Create',[JSON.stringify(menu)]);
     } else {
@@ -47,14 +47,15 @@ mp.events.addCommand('veh', (player, model) => {
 });
 
 mp.events.add('spawnVehicle', (player,model) => {
-  if ((typeof model) != 'number' && (typeof model) != 'string'){
-    model = model[0];
-  }
-  if ((typeof model) === 'string'){
-    model = mp.vehicles.new(mp.joaat(model), player.position);
-  }
+  model = mp.vehicles.new(mp.joaat(model), player.position);
   player.putIntoVehicle(model, -1);
 })
+
+mp.events.addCommand('obj', (player) => {
+  if (db.users.hasPermission(player,"cmd.obj")){
+    mp.events.call('showObjectsMenu', player);
+  }
+});
 
 mp.events.addCommand('noclip', (player) => {
   if (db.users.hasPermission(player,"cmd.noclip")){
