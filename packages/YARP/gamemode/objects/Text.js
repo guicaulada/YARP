@@ -2,10 +2,9 @@
 /**
  * @file Text class
  */
-import TextManager from '../managers/TextManager';
-export default class Text{
-  constructor(msg,position,range,key,offset,scale,color,viewDistance,font,outline,hidden,cb){
-    this._id = TextManager.getNewId();
+module.exports = class Text{
+  constructor(id,msg,position,range,key,offset,scale,color,viewDistance,font,outline,hidden,cb){
+    this._id = id;
     this.msg = msg || "Press E to access";
     this.position = position;
     this.range = range || 3;
@@ -18,9 +17,5 @@ export default class Text{
     this.outline = outline || true;
     this.hidden = hidden || true;
     this.cb = cb;
-  }
-
-  save(){
-    TextManager.save(this);
   }
 }

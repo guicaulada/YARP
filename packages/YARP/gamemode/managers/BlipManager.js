@@ -1,18 +1,18 @@
 'use strict';
 /**
- * @file ItemManager class
+ * @file BlipManager class
  */
-module.exports = class ItemManager{
-  static add(item){
-    yarp.db.insertOne("items", item);
+module.exports = class BlipManager{
+  static add(blip){
+    yarp.db.insertOne("blips", blip);
   }
 
   static findAll(){
-    return yarp.db.findMany("items", {});
+    return yarp.db.findMany("blips", {});
   }
 
   static findById(id){
-    return yarp.db.findOne("items", {_id: id});
+    return yarp.db.findOne("blips", {_id: id});
   }
 
   static indexById(){
@@ -23,5 +23,4 @@ module.exports = class ItemManager{
     }
     return result;
   }
-
 }

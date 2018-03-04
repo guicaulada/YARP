@@ -1,18 +1,18 @@
 'use strict';
 /**
- * @file ItemManager class
+ * @file NpcManager class
  */
-module.exports = class ItemManager{
-  static add(item){
-    yarp.db.insertOne("items", item);
+module.exports = class NpcManager{
+  static add(npc){
+    yarp.db.insertOne("npcs", npc);
   }
 
   static findAll(){
-    return yarp.db.findMany("items", {});
+    return yarp.db.findMany("npcs", {});
   }
 
   static findById(id){
-    return yarp.db.findOne("items", {_id: id});
+    return yarp.db.findOne("npcs", {_id: id});
   }
 
   static indexById(){
@@ -23,5 +23,4 @@ module.exports = class ItemManager{
     }
     return result;
   }
-
 }

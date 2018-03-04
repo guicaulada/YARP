@@ -2,16 +2,15 @@
 /**
  * @file Group class
  */
-import GroupManager from '../managers/GroupManager';
-export default class Group{
-  constructor(name,type){
-    this._id = GroupManager.getNewId();
-    this.name = name;
+let GroupManager = require('../managers/GroupManager');
+module.exports = class Group{
+  constructor(id,type){
+    this._id = id;
     this.type = type || 'default';
     this.permissions = [];
   }
-  save(){
-    GroupManager.save(this);
+  add(){
+    GroupManager.add(this);
   }
   addPermission(permission){
     if (this.permissions.indexOf(permission) == -1) {

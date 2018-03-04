@@ -2,24 +2,25 @@
 /**
  * @file CharacterManager class
  */
-export default class CharacterManager{
-  static save(character){
+module.exports = class CharacterManager{
+  static add(character){
     yarp.db.insertOne("characters", character);
   }
 
-  static findBySocialClub(socialClub){
-    return yarp.db.findMany("characters", {socialClub: socialClub});
-  }
-
-  static findByName(name){
-    return yarp.db.findOne("characters", {name: name});
+  static findAll(){
+    return yarp.db.findMany("characters", {});
   }
 
   static findById(id){
     return yarp.db.findOne("characters", {_id: id});
   }
 
-  static getNewId(){
-    return yarp.db.findMany("characters", {}).length+1;
+  static indexById(){
+    let result = {};
+    let collection = this.findAll();
+    for (object of collection){
+      result[object._id] = object;
+    }
+    return result;
   }
 }

@@ -1,18 +1,18 @@
 'use strict';
 /**
- * @file ItemManager class
+ * @file MarkerManager class
  */
-module.exports = class ItemManager{
-  static add(item){
-    yarp.db.insertOne("items", item);
+module.exports = class MarkerManager{
+  static add(marker){
+    yarp.db.insertOne("markers", marker);
   }
 
   static findAll(){
-    return yarp.db.findMany("items", {});
+    return yarp.db.findMany("markers", {});
   }
 
   static findById(id){
-    return yarp.db.findOne("items", {_id: id});
+    return yarp.db.findOne("markers", {_id: id});
   }
 
   static indexById(){
@@ -23,5 +23,4 @@ module.exports = class ItemManager{
     }
     return result;
   }
-
 }

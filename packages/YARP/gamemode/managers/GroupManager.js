@@ -2,24 +2,29 @@
 /**
  * @file GroupManager class
  */
-export default class GroupManager{
-  static save(group){
+module.exports = class GroupManager{
+  static add(group){
     yarp.db.insertOne("groups", group);
-  }
-
-  static findByName(name){
-    return yarp.db.findOne("groups", {name: name});
   }
 
   static findByType(type){
     return yarp.db.findMany("groups", {type: type});
   }
 
-  static findById(id){
-    return yarp.db.findOne("groups", {_id: id});
+  static findAll(){
+    return yarp.db.findMany("groups", {});
   }
 
-  static getNewId(){
-    return yarp.db.findMany("groups", {}).length+1;
+  static findById(id){
+    return yarp.db.findOne("items", {_id: id});
+  }
+
+  static indexById(){
+    let result = {};
+    let collection = this.findAll();
+    for (object of collection){
+      result[object._id] = object;
+    }
+    return result;
   }
 }

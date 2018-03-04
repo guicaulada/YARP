@@ -2,8 +2,8 @@
 /**
  * @file BankManager class
  */
-export default class TransactionManager{
-  static save(transaction){
+module.exports = class TransactionManager{
+  static add(transaction){
     yarp.db.insertOne("transactions", transaction);
   }
 
@@ -13,11 +13,24 @@ export default class TransactionManager{
     return as_source.concat(as_target);
   }
 
+  static findAll(){
+    return yarp.db.findMany("transactions", {});
+  }
+
   static findById(id){
     return yarp.db.findOne("transactions", {_id: id});
   }
 
+  static indexById(){
+    let result = {};
+    let collection = this.findAll();
+    for (object of collection){
+      result[object._id] = object;
+    }
+    return result;
+  }
+
   static getNewId(){
-    return yarp.db.findMany("transactions", {}).length+1;
+    return this.findAll().length+1;
   }
 }

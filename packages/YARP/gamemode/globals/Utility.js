@@ -2,7 +2,7 @@
 /**
  * @file Utility class
  */
-export default class Utility {
+module.exports = class Utility {
   /**
   * Get formatted date and time.
   * @param {Date} date - date

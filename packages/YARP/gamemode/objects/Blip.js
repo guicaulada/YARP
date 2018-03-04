@@ -2,10 +2,8 @@
 /**
  * @file Blip class
  */
-import BlipManager from '../managers/BlipManager';
-export default class Blip{
+module.exports = class Blip{
   constructor(name,position,sprite,scale,color,alpha,viewDistance,fade,rotation,dimension,hidden){
-    this._id = BlipManager.getNewId();
     this.name = name;
     this.position = position;
     this.sprite = sprite;
@@ -17,9 +15,5 @@ export default class Blip{
     this.rotation = rotation;
     this.dimension = dimension;
     this.hidden = hidden || true;
-  }
-
-  save(){
-    BlipManager.save(this);
   }
 }

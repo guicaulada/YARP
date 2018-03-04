@@ -2,23 +2,17 @@
 /**
  * @file User class
  */
-import GroupManager from '../managers/GroupManager';
-import UserManager from '../managers/UserManager';
-export default class User{
+let GroupManager = require('../managers/GroupManager');
+module.exports = class User{
   constructor(socialClub, password){
     if (socialClub && password){
-      this._id = UserManager.getNewId();
-      this.socialClub = player.socialClub;
+      this._id = socialClub;
       this.password = bcrypt.hashSync(password, 10);
       this.lastLogin =  "";
       this.whitelisted = false;
       this.banned = false;
       this.groups = [];
     }
-  }
-
-  save(){
-    UserManager.save(this);
   }
 
   get player(){
@@ -31,7 +25,7 @@ export default class User{
   }
 
   updateLastLogin(ip){
-    this.lastLogin : `${ip} | ${yarp.utils.getTimestamp(new Date())}`;
+    this.lastLogin = `${ip} | ${yarp.utils.getTimestamp(new Date())}`;
   }
 
   addGroup(group){
@@ -49,8 +43,9 @@ export default class User{
     let result = false;
     let removed = false;
     let readd = false;
+    var groups = GroupManager.indexById();
     this.groups.forEach(function(name){
-      var group = GroupManager.getByName(name);
+      let group = groups[name];
       if (group != null) {
         if (group.permissions.indexOf("*") > -1){
           result = true;

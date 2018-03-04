@@ -2,10 +2,9 @@
 /**
  * @file Marker class
  */
-import MarkerManager from '../managers/MarkerManager';
-export default class Marker{
-  constructor(type, position,range,offset,scale,color,viewDistance,direction,rotation,bounce,rotate,spin,stayOnTop,hidden,cb_in,cb_out){
-    this._id = MarkerManager.getNewId();
+module.exports = class Marker{
+  constructor(id,type, position,range,offset,scale,color,viewDistance,direction,rotation,bounce,rotate,spin,stayOnTop,hidden,cb_in,cb_out){
+    this._id = id;
     this.type = type || 1;
     this.position = position;
     this.range = range || 3;
@@ -22,9 +21,5 @@ export default class Marker{
     this.hidden = hidden || true;
     this.cb_in = cb_in;
     this.cb_out = cb_out;
-  }
-
-  save(){
-    MarkerManager.save(this);
   }
 }

@@ -2,37 +2,31 @@
 /**
  * @file Character class
  */
-import Transaction from './Transaction';
-import TransactionManager from '../managers/TransactionManager';
-import CharacterManager from '../managers/CharacterManager';
-import ItemManager from '../managers/ItemManager';
-import GroupManager from '../managers/GroupManager';
-export default class Character{
-  constructor(socialClub, name, age, sex, face){
-    this._id = CharacterManager.getNewId();
-    this.socialClub : socialClub;
-    this.lastLogin : "";
-    this.name : name;
-    this.age : age;
-    this.model : sex;
-    this.wallet : yarp.cfg.gamemode.swallet;
-    this.bank : yarp.cfg.gamemode.sbank;
-    this.face : face;
-    this.health : 100;
-    this.armour : 0;
-    this.position : { "x" : yarp.cfg.gamemode.first_spawn.x, "y" : yarp.cfg.gamemode.first_spawn.y, "z" : yarp.cfg.gamemode.first_spawn.z, "h" : yarp.cfg.gamemode.first_spawn.h };
-    this.groups : [];
-    this.weapons : {};
-    this.skills : {};
-    this.weight : 0;
-    this.inventory : {};
-    this.customization : {};
-    this.decoration : {};
-    this.clothes : {}
-  }
-
-  save(){
-    CharacterManager.save(this);
+let Transaction = require('./Transaction');
+let TransactionManager = require('../managers/TransactionManager');
+let ItemManager = require('../managers/ItemManager');
+let GroupManager = require('../managers/GroupManager');
+module.exports = class Character{
+  constructor(socialClub, id, age, sex, face){
+    this._id = id;
+    this.socialClub = socialClub;
+    this.lastLogin = "";
+    this.age = age;
+    this.model = sex;
+    this.wallet = yarp.cfg.gamemode.swallet;
+    this.bank = yarp.cfg.gamemode.sbank;
+    this.face = face;
+    this.health = 100;
+    this.armour = 0;
+    this.position = { "x" : yarp.cfg.gamemode.first_spawn.x, "y" : yarp.cfg.gamemode.first_spawn.y, "z" : yarp.cfg.gamemode.first_spawn.z, "h" : yarp.cfg.gamemode.first_spawn.h };
+    this.groups = [];
+    this.weapons = {};
+    this.skills = {};
+    this.weight = 0;
+    this.inventory = {};
+    this.customization = {};
+    this.decoration = {};
+    this.clothes = {}
   }
 
   get player(){
@@ -49,7 +43,7 @@ export default class Character{
   }
 
   updateLastLogin(ip){
-    this.lastLogin : `${ip} | ${utils.getTimestamp(new Date())}`;
+    this.lastLogin = `${ip} | ${utils.getTimestamp(new Date())}`;
   }
 
   addGroup(group){
@@ -168,7 +162,7 @@ export default class Character{
     return null;
   }
 
-  hasPermission = function(permission){
+  hasPermission(permission){
     let result = false;
     let removed = false;
     let readd = false;
@@ -210,8 +204,9 @@ export default class Character{
       }
     } else {
       if (character != null){
+        var groups = GroupManager.indexById();
         this.groups.forEach(function(name){
-          var group = GroupManager.getByName(name);
+          let group = groups[name];
           if (group != null) {
             if (group.permissions.indexOf("*") > -1){
               result = true;

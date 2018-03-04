@@ -1,18 +1,18 @@
 'use strict';
 /**
- * @file ItemManager class
+ * @file TextManager class
  */
-module.exports = class ItemManager{
-  static add(item){
-    yarp.db.insertOne("items", item);
+module.exports = class TextManagers{
+  static add(text){
+    yarp.db.insertOne("texts", text);
   }
 
   static findAll(){
-    return yarp.db.findMany("items", {});
+    return yarp.db.findMany("texts", {});
   }
 
   static findById(id){
-    return yarp.db.findOne("items", {_id: id});
+    return yarp.db.findOne("texts", {_id: id});
   }
 
   static indexById(){
@@ -23,5 +23,4 @@ module.exports = class ItemManager{
     }
     return result;
   }
-
 }

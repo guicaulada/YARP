@@ -2,17 +2,13 @@
 /**
  * @file Item class
  */
-import TransactionManager from '../managers/TransactionManager';
-export default class Transaction{
-  constructor(type,value,source,target){
-    this._id = TransactionManager.getNewId();
+module.exports = class Transaction{
+  constructor(id,type,value,source,target,date){
+    this._id = id;
     this.type = type;
     this.value = value;
     this.source = source;
     this.target = target;
-  }
-
-  save(){
-    TransactionManager.save(this);
+    this.date = yarp.utils.getTimestamp(date);
   }
 }
