@@ -1,10 +1,10 @@
 'use strict';
 
 global.yarp = {
-    cfg: new (require('./gamemode/globals/Config.js'))(),
-    utils: new (require('./gamemode/globals/Utility.js'))(),
-    cmd: new (require('./gamemode/managers/CommandManager.js'))(),
-    db: new (require('./gamemode/globals/MongoDB.js'))()
+    cfg: require('./gamemode/globals/Config.js'),
+    utils: require('./gamemode/globals/Utility.js'),
+    cmd: require('./gamemode/managers/CommandManager.js'),
+    db: require('./gamemode/globals/MongoDB.js');
 };
 
 require('./modules/base.js');

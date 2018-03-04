@@ -21,6 +21,15 @@ export default class User{
     UserManager.save(this);
   }
 
+  get player(){
+    mp.players.forEach((player, i) => {
+      if (player.socialClub == this.socialClub){
+        return player;
+      }
+    });
+    return null;
+  }
+
   updateLastLogin(ip){
     this.lastLogin : `${ip} | ${yarp.utils.getTimestamp(new Date())}`;
   }

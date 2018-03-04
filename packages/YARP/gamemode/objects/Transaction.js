@@ -5,11 +5,11 @@
 import TransactionManager from '../managers/TransactionManager';
 export default class Transaction{
   constructor(type,value,source,target){
-    transaction._id = TransactionManager.getNewId();
-    transaction.type = type;
-    transaction.value = value;
-    transaction.source = source;
-    transaction.target = target;
+    this._id = TransactionManager.getNewId();
+    this.type = type;
+    this.value = value;
+    this.source = source;
+    this.target = target;
   }
 
   save(){

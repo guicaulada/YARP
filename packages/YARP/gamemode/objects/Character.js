@@ -2,7 +2,8 @@
 /**
  * @file Character class
  */
-import Bank from './bank';
+import Transaction from './Transaction';
+import TransactionManager from '../managers/TransactionManager';
 import CharacterManager from '../managers/CharacterManager';
 import ItemManager from '../managers/ItemManager';
 import GroupManager from '../managers/GroupManager';
@@ -28,6 +29,23 @@ export default class Character{
     this.customization : {};
     this.decoration : {};
     this.clothes : {}
+  }
+
+  save(){
+    CharacterManager.save(this);
+  }
+
+  get player(){
+    mp.players.forEach((player, i) => {
+      if (player.name == this.name){
+        return player;
+      }
+    });
+    return null;
+  }
+
+  get balance(){
+    return TransactionManager.getBalance(this.name);
   }
 
   updateLastLogin(ip){
@@ -61,7 +79,8 @@ export default class Character{
   chargeBank(value){
     if (this.bank-value >= 0){
       player.setVariable('PLAYER_BANK', this.bank-value);
-      Bank.addPayment(value,this.name);
+      let transaction = new Transaction("Payment",value,this.name);
+      transaction.save();
       this.bank = this.bank-value;
       return true;
     }
@@ -72,7 +91,8 @@ export default class Character{
     if (this.wallet-value >= 0){
       player.setVariable('PLAYER_WALLET', this.wallet-value);
       player.setVariable('PLAYER_BANK', this.bank+value);
-      Bank.addDeposit(value,this.name);
+      let transaction = new Transaction("Deposit",value,this.name);
+      transaction.save();
       this.wallet = this.wallet-value;
       this.bank = this.bank+value;
       return true;
@@ -84,7 +104,8 @@ export default class Character{
     if (this.bank-value >= 0){
       player.setVariable('PLAYER_WALLET', this.wallet+value);
       player.setVariable('PLAYER_BANK', this.bank-value);
-      Bank.addWithdraw(value,this.name);
+      let transaction = new Transaction("Withdraw",value,this.name);
+      transaction.save();
       this.wallet = this.wallet+value;
       this.bank = this.bank-value;
       return true;
@@ -96,16 +117,13 @@ export default class Character{
     if (this.bank-value >= 0){
       player.setVariable('PLAYER_BANK', this.bank-value);
       target.player.setVariable('PLAYER_BANK', this.character.bank+value);
-      Bank.addTransfer(value,this.name,target.name);
+      let transaction = new Transaction("Transfer",value,this.name);
+      transaction.save();
       this.bank = this.bank-value;
       target.bank = target.bank+value;
       return true;
     }
     return false;
-  }
-
-  get balance(){
-    return Bank.getBalance(this.name);
   }
 
   giveItem(item, amount){
