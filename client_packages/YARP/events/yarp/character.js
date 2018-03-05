@@ -12,7 +12,7 @@ let faceModel = {
 let camera = null;
 let characters = null;
 
-mp.events.add('showPlayerCharacters', (charactersJson) => {
+mp.events.add('yarp_showPlayerCharacters', (charactersJson) => {
 	// Almacenamos los personajes del jugador
 	characters = charactersJson;
 
@@ -29,7 +29,7 @@ mp.events.add('loadCharacter', (characterJson) => {
 	mp.game.invoke('0xB0C54402D009BA38');
 });
 
-mp.events.add('showCharacterCreationMenu', () => {
+mp.events.add('yarp_showCharacterCreationMenu', () => {
 	// Eliminamos el navegador
 	mp.events.call('destroyBrowser');
 

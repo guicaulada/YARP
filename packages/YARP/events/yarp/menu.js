@@ -4,7 +4,7 @@ mp.events.add('loadStoreMenu', (player, file, id) => {
   let items = [];
   //Treating config items for menu
   for(item_id in store.items) {
-    let item = cfg.items[item_id];
+    let item = yarp.items[item_id];
     if (item != null){
       items[i] = item;
       items[i].price = store.items[item_id];
@@ -16,7 +16,7 @@ mp.events.add('loadStoreMenu', (player, file, id) => {
 });
 
 mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {
-  let item = cfg.items[item_id];
+  let item = yarp.items[item_id];
   item.id = item_id;
   if (item != null){
     let price = cfg[file][id].items[item_id]*amount;
@@ -33,7 +33,7 @@ mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {
 });
 
 mp.events.add('purchaseAmmuWeapon', (player, file, id, weapon_id, amount) => {
-  let weapon = cfg.weapons[weapon_id];
+  let weapon = yarp.weapons[weapon_id];
   if (weapon != null){
     let body_price = cfg[file][id].weapons[weapon_id].body;
     let ammo_price = cfg[file][id].weapons[weapon_id].ammo;
@@ -62,7 +62,7 @@ mp.events.add('loadAmmuMenu', (player, file, id) => {
   let weapons = [];
   //Treating config items for menu
   for(weapon_id in ammu.weapons) {
-    let weapon = cfg.weapons[weapon_id];
+    let weapon = yarp.weapons[weapon_id];
     if (weapon != null){
       weapons[i] = weapon;
       weapons[i].price = ammu.weapons[weapon_id].body;

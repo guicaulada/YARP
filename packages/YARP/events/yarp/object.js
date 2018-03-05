@@ -22,7 +22,7 @@ mp.events.add('showObjectsList', (player, result, args) => {
   let max = page*100;
   let min = max - 100;
   let i = 0;
-  for (object in cfg.objects){
+  for (object in yarp.objects){
     if (i >= min && i <= max) {
       menu.options[object] = {};
       menu.options[object].type = "default";

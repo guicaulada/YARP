@@ -63,4 +63,4 @@ setInterval(function(){
       }
 		}
 	);
-},1000*yarp.cfg.save_interval);
+},1000*yarp.cfg.save_interval.value);

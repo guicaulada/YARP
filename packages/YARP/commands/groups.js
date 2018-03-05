@@ -3,7 +3,7 @@ var cfg = require('../exports/config.js');
 
 mp.events.addCommand("addgroup", (player, msg, group, type) => {
   if (group != null){
-    if (db.users.hasPermission(player,"cmd.addgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.addgroup") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddGroup(group, type)){
         player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} has been created!`);
       } else {
@@ -17,7 +17,7 @@ mp.events.addCommand("addgroup", (player, msg, group, type) => {
 
 mp.events.addCommand("rmgroup", (player, msg, group) => {
   if (group != null){
-    if (db.users.hasPermission(player,"cmd.rmgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.rmgroup") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemoveGroup(group)){
         player.outputChatBox(`!{cyan}COMMAND: !{white}Group ${group} has been removed!`);
       } else {
@@ -31,7 +31,7 @@ mp.events.addCommand("rmgroup", (player, msg, group) => {
 
 mp.events.addCommand("addperm", (player, msg, group, perm) => {
   if (group != null && perm != null){
-    if (db.users.hasPermission(player,"cmd.addperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.addperm") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryAddPermission(group,perm)){
         player.outputChatBox(`!{cyan}COMMAND: !{white}Permission ${perm} added to ${group}!`);
       } else {
@@ -45,7 +45,7 @@ mp.events.addCommand("addperm", (player, msg, group, perm) => {
 
 mp.events.addCommand("rmperm", (player, msg, group, perm) => {
   if (group != null && perm != null){
-    if (db.users.hasPermission(player,"cmd.rmperm") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.rmperm") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       if (db.groups.tryRemovePermission(group,perm)){
         player.outputChatBox(`!{cyan}COMMAND: !{white}Permission ${perm} removed from ${group}!`);
       } else {
@@ -60,7 +60,7 @@ mp.events.addCommand("rmperm", (player, msg, group, perm) => {
 mp.events.addCommand("givecgroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.users.hasPermission(player,"cmd.givecgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.givecgroup") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
       var target = `${args[1]} ${args[2]}`;
       if (db.characters.tryGiveGroupByName(target, group)){
@@ -77,7 +77,7 @@ mp.events.addCommand("givecgroup", (player, msg) => {
 mp.events.addCommand("takecgroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.users.hasPermission(player,"cmd.takecgroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.takecgroup") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
       var target = `${args[1]} ${args[2]}`;
       if (db.characters.tryTakeGroupByName(target, group)){
@@ -94,7 +94,7 @@ mp.events.addCommand("takecgroup", (player, msg) => {
 mp.events.addCommand("giveugroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.users.hasPermission(player,"cmd.giveugroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.giveugroup") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
       var target = args[1];
       if (db.users.tryGiveGroupBySocialClub(target, group)){
@@ -111,7 +111,7 @@ mp.events.addCommand("giveugroup", (player, msg) => {
 mp.events.addCommand("takeugroup", (player, msg) => {
   if (msg != null){
     var args = msg.split(" ");
-    if (db.users.hasPermission(player,"cmd.takeugroup") || cfg.base.admins.indexOf(player.socialClub) > -1){
+    if (db.users.hasPermission(player,"cmd.takeugroup") || yarp.cfg.base.admins.indexOf(player.socialClub) > -1){
       var group = args[0];
       var target = args[1];
       if (db.users.tryTakeGroupBySocialClub(target, group)){

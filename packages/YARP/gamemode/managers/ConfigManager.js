@@ -4,6 +4,7 @@
  */
 module.exports = class ConfigManager{
   static add(config){
+    yarp.cfg[config._id] = config.value;
     return yarp.db.insertOne("configs", config);
   }
 

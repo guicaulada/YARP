@@ -21,6 +21,12 @@ mp.events.add('browserDomReady', (browser) => {
 	}
 });
 
+mp.events.add('browserCreated', (browser) => {
+});
+
+mp.events.add('browserLoadingFailed', (browser) => {
+});
+
 mp.events.add('executeFunction', (arguments) => {
 	var input = '';
 	for(var i = 1; i < arguments.length; i++) {

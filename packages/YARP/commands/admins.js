@@ -34,7 +34,7 @@ mp.events.addCommand('veh', (player, model) => {
       let menu = {}
       menu.title = "Vehicles";
       menu.options = {};
-      for (vehicle in cfg.vehicles){
+      for (vehicle in yarp.cfg.vehicles){
         menu.options[vehicle] = {};
         menu.options[vehicle].type = "default";
         menu.options[vehicle].event = ['spawnVehicle'];
