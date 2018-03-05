@@ -1,6 +1,7 @@
 mp.events.add('playerJoin', (player) => {
     console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-    UserManager.findById(player.socialClub).then(user => {
+    player.call('yarp_setWorldTime', [JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+    yarp.UserManager.findById(player.socialClub).then(user => {
       if(user != null){
         if (user.banned) {
           player.outputChatBox("!{red}You have been banned.");
@@ -9,7 +10,7 @@ mp.events.add('playerJoin', (player) => {
             player.kick("You have been banned.");
           },1000);
         }
-        else if (yarp.cfg.gamemode.whitelist && !user.whitelisted) {
+        else if (yarp.cfg.whitelist && !user.whitelisted) {
           player.outputChatBox("!{yellow}You are not whitelisted.");
           console.log(`${player.socialClub} is not whitelisted.`);
           setTimeout(function(){
@@ -17,17 +18,17 @@ mp.events.add('playerJoin', (player) => {
           },1000);
         }
         else {
-          player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+          player.call('yarp_showLoginMenu');
         }
       } else {
-        player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+        player.call('yarp_showRegistrationMenu', [player.socialClub]);
       }
     })
 });
 
 mp.events.add('playerDeath', (player) => {
     player.call('removeWeapons');
-    player.spawn(yarp.cfg.gamemode.spawn[Math.floor(Math.random() * yarp.cfg.gamemode.spawn.length)]);
+    player.spawn(yarp.cfg.spawn[Math.floor(Math.random() * yarp.cfg.spawn.length)]);
     db.characters.removeAllWeapons(player);
     player.health = 100;
 });
@@ -45,7 +46,7 @@ mp.events.add('playerChat', (player, message) => {
   console.log(`${player.name}: ${message}`);
 	mp.players.broadcast(`${player.name}: ${message}`);
 });
-
+/*
 for (file in cfg){
   for (id in cfg[file]){
     let item = cfg[file][id];
@@ -129,3 +130,4 @@ setInterval(function(){
 mp.events.add('removeInRangeItem', (player, file, id) => {
   inRangeItems[player][file+id] = null;
 });
+*/

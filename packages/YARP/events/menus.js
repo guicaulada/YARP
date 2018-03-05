@@ -102,18 +102,22 @@ mp.events.add('selectorAddGroup', (player, args) => {
   }
 });
 
-mp.events.add('verifyAuthentication', (player,password) => {
-  UserManager.findByLogin(player.socialClub,password).then(user => {
-    if(user != null){
-      CharacterManager.getBySocialClub(user._id).then(characters => {
+mp.events.add('yarp_verifyLogin', (player,password) => {
+  yarp.UserManager.findByLogin(player.socialClub,password).then(user => {
+    if(user === false){
+      player.call('yarp_showLoginMenu', [JSON.stringify(user)]);
+    } else if (user === null) {
+      user = new yarp.User(player.socialClub,password);
+      yarp.UserManager.add(user);
+    }
+    if (user) {
+      yarp.CharacterManager.findBySocialClub(user._id).then(characters => {
         if(characters.length == 0){
-          player.call('showCharacterCreationMenu');
+          player.call('yarp_showCharacterCreationMenu');
         } else {
-          player.call('showPlayerCharacters', [JSON.stringify(characters)]);
+          player.call('yarp_showPlayerCharacters', [JSON.stringify(characters)]);
         }
       });
-    } else {
-      player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
     }
   });
 });

@@ -1,5 +1,3 @@
-var utils = require('./YARP/exports/utils.js');
-
 let playerWeapons = {};
 let weaponsConfig = {};
 
@@ -10,14 +8,14 @@ mp.events.add('setWeaponsConfig', (weaponsJson) => {
 mp.events.add('render', () => {
   for (weaponModel in weaponsConfig) {
     let weaponHash = mp.game.joaat(weaponModel)
-    if (utils.gotWeapon(weaponHash)){
+    if (yarp.utils.gotWeapon(weaponHash)){
       let onPlayer = false;
       if (playerWeapons[weaponModel] != null) {
         onPlayer = true;
       }
-      if (!onPlayer && weaponHash != utils.getCurrentWeapon()) {
+      if (!onPlayer && weaponHash != yarp.utils.getCurrentWeapon()) {
         SetGear(weaponModel);
-      } else if (onPlayer && weaponHash == utils.getCurrentWeapon()) {
+      } else if (onPlayer && weaponHash == yarp.utils.getCurrentWeapon()) {
         RemoveGear(weaponModel);
       }
     } else if (playerWeapons[weaponModel] != null) {
@@ -27,7 +25,7 @@ mp.events.add('render', () => {
 });
 
 mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
-	mp.events.callRemote('updateWeaponAmmo', utils.getCurrentWeapon(), -1);
+	mp.events.callRemote('updateWeaponAmmo', yarp.utils.getCurrentWeapon(), -1);
 });
 
 mp.events.add('removeWeapon', (weaponName) => {
@@ -39,13 +37,13 @@ mp.events.add('removeWeapons', (weaponName) => {
 });
 
 function RemoveGear(weapon){
-	utils.deleteObject(playerWeapons[weapon]);
+	yarp.utils.deleteObject(playerWeapons[weapon]);
   playerWeapons[weapon] = null;
 }
 
 function RemoveGears(){
 	for (weapon in playerWeapons){
-		utils.deleteObject(playerWeapons[weapon])
+		yarp.utils.deleteObject(playerWeapons[weapon])
 	}
 	playerWeapons = {};
 }
@@ -72,7 +70,7 @@ function SetGear(weapon){
 		model    = weaponsConfig[weapon].model;
 	}
 
-	utils.spawnObject(model, pos, function(obj){
+	yarp.utils.spawnObject(model, pos, function(obj){
 		let boneIndex = mp.players.local.getBoneIndex(bone);
 		let bonePos 	= mp.players.local.getWorldPositionOfBone(boneIndex);
 		obj.attachTo(mp.players.local.handle, boneIndex, boneX, boneY, boneZ, boneXRot, boneYRot, boneZRot, false, false, false, false, 2, true);

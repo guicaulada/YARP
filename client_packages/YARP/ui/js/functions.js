@@ -4,7 +4,7 @@ let catalogSelectedOption = 0;
 
 function loginAccount() {
     var password = document.getElementById('pass').value;
-    mp.trigger('verifyAuthentication', password);
+    mp.trigger('yarp_verifyLogin', password);
 };
 
 function selectName() {

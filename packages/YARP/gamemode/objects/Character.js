@@ -2,10 +2,6 @@
 /**
  * @file Character class
  */
-let Transaction = require('./Transaction');
-let TransactionManager = require('../managers/TransactionManager');
-let ItemManager = require('../managers/ItemManager');
-let GroupManager = require('../managers/GroupManager');
 module.exports = class Character{
   constructor(socialClub, id, age, sex, face){
     this._id = id;
@@ -38,12 +34,8 @@ module.exports = class Character{
     return null;
   }
 
-  get balance(){
-    return TransactionManager.getBalance(this.name);
-  }
-
   updateLastLogin(ip){
-    this.lastLogin = `${ip} | ${utils.getTimestamp(new Date())}`;
+    this.lastLogin = `${ip} | ${yarp.utils.getTimestamp(new Date())}`;
   }
 
   addGroup(group){
@@ -74,7 +66,7 @@ module.exports = class Character{
     if (this.bank-value >= 0){
       player.setVariable('PLAYER_BANK', this.bank-value);
       let transaction = new Transaction("Payment",value,this.name);
-      transaction.save();
+      yarp.TransactionManager.add(transaction);
       this.bank = this.bank-value;
       return true;
     }
@@ -86,7 +78,7 @@ module.exports = class Character{
       player.setVariable('PLAYER_WALLET', this.wallet-value);
       player.setVariable('PLAYER_BANK', this.bank+value);
       let transaction = new Transaction("Deposit",value,this.name);
-      transaction.save();
+      yarp.TransactionManager.add(transaction);
       this.wallet = this.wallet-value;
       this.bank = this.bank+value;
       return true;
@@ -99,7 +91,7 @@ module.exports = class Character{
       player.setVariable('PLAYER_WALLET', this.wallet+value);
       player.setVariable('PLAYER_BANK', this.bank-value);
       let transaction = new Transaction("Withdraw",value,this.name);
-      transaction.save();
+      yarp.TransactionManager.add(transaction);
       this.wallet = this.wallet+value;
       this.bank = this.bank-value;
       return true;
@@ -112,7 +104,7 @@ module.exports = class Character{
       player.setVariable('PLAYER_BANK', this.bank-value);
       target.player.setVariable('PLAYER_BANK', this.character.bank+value);
       let transaction = new Transaction("Transfer",value,this.name);
-      transaction.save();
+      yarp.TransactionManager.add(transaction);
       this.bank = this.bank-value;
       target.bank = target.bank+value;
       return true;
@@ -199,7 +191,7 @@ module.exports = class Character{
         break;
       }
     } else {
-      GroupManager.indexById().then(groups => {
+      yarp.GroupManager.indexById().then(groups => {
         this.groups.forEach(function(name){
           let group = groups[name];
           if (group != null) {

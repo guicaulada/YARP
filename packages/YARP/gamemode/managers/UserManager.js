@@ -2,6 +2,7 @@
 /**
  * @file UserManager class
  */
+let bcrypt = require('bcryptjs');
 module.exports = class UserManager{
   static add(user){
     return yarp.db.insertOne("users", user);
@@ -16,12 +17,16 @@ module.exports = class UserManager{
   }
 
   static findByLogin(id, password){
-    yarp.db.findOne("users", {_id: id}).then(user => {
-      if(bcrypt.compareSync(password, user.password)){
-        return user;
-      } else {
-        return null;
-      }
+    return new Promise((resolve, reject) =>{
+      this.findById(id).then(user => {
+        if (user === null) {
+          resolve(null);
+        } else if(bcrypt.compareSync(password, user.password)){
+          resolve(user);
+        } else {
+          resolve(false);
+        }
+      });
     });
   }
 

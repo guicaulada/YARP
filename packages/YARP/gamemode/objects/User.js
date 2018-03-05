@@ -3,7 +3,6 @@
  * @file User class
  */
 let bcrypt = require('bcryptjs');
-let GroupManager = require('../managers/GroupManager');
 module.exports = class User{
   constructor(socialClub, password){
     if (socialClub && password){
@@ -41,7 +40,7 @@ module.exports = class User{
   }
 
   getGroupByType(type){
-    GroupManager.indexById().then(groups => {
+    yarp.GroupManager.indexById().then(groups => {
       this.groups.forEach(function(name){
         let group = groups[name];
         if (group != null) {
@@ -57,7 +56,7 @@ module.exports = class User{
     let result = false;
     let removed = false;
     let readd = false;
-    GroupManager.indexById().then(groups => {
+    yarp.GroupManager.indexById().then(groups => {
       this.groups.forEach(function(name){
         let group = groups[name];
         if (group != null) {

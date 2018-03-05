@@ -2,15 +2,11 @@
 /**
  * @file Group class
  */
-let GroupManager = require('../managers/GroupManager');
 module.exports = class Group{
   constructor(id,type){
     this._id = id;
     this.type = type || 'default';
     this.permissions = [];
-  }
-  add(){
-    GroupManager.add(this);
   }
   addPermission(permission){
     if (this.permissions.indexOf(permission) == -1) {

@@ -1,11 +1,12 @@
-exports.utils = require('./YARP/exports/utils.js');
-require('./YARP/modules/base.js');
-require('./YARP/modules/browser.js');
-require('./YARP/modules/characters.js');
-require('./YARP/modules/commands.js');
-require('./YARP/modules/menus.js');
-require('./YARP/modules/inventory.js');
-require('./YARP/modules/weapons.js');
-require('./YARP/modules/money.js');
-require('./YARP/modules/banks.js');
-require('./YARP/modules/gui.js');
+global.yarp = {}
+yarp.utils = require('./YARP/gamemode/globals/utils.js');
+require('./YARP/events/base.js');
+require('./YARP/events/browser.js');
+require('./YARP/events/characters.js');
+require('./YARP/events/commands.js');
+require('./YARP/events/menus.js');
+require('./YARP/events/inventory.js');
+require('./YARP/events/weapons.js');
+require('./YARP/events/money.js');
+require('./YARP/events/banks.js');
+require('./YARP/events/gui.js');
