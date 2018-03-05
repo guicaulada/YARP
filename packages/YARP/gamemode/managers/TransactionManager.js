@@ -4,13 +4,17 @@
  */
 module.exports = class TransactionManager{
   static add(transaction){
-    yarp.db.insertOne("transactions", transaction);
+    return yarp.db.insertOne("transactions", transaction);
   }
 
   static getBalance(name){
-    let as_source = yarp.db.findMany("transactions", {source: name});
-    let as_target = yarp.db.findMany("transactions", {target: name});
-    return as_source.concat(as_target);
+    return new Promise((resolve, reject) =>{
+      yarp.db.findMany("transactions", {source: name}).then((as_source) => {
+        yarp.db.findMany("transactions", {target: name}).then((as_target) => {
+          resolve(as_source.concat(as_target));
+        });
+      });
+    });
   }
 
   static findAll(){
@@ -22,12 +26,16 @@ module.exports = class TransactionManager{
   }
 
   static indexById(){
-    let result = {};
-    let collection = this.findAll();
-    for (object of collection){
-      result[object._id] = object;
-    }
-    return result;
+    return new Promise((resolve, reject) =>{
+      let result = {};
+      this.findAll().then((collection) =>{
+        if (!collection) reject(collection);
+        for (let i = 0; i < collection.length; i++){
+          result[collection[i]._id] = collection[i];
+        }
+        resolve(result);
+      });
+    });
   }
 
   static getNewId(){

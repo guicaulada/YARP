@@ -4,8 +4,7 @@
  */
 module.exports = class UserManager{
   static add(user){
-    user._id = this.getNewId();
-    yarp.db.insertOne("users", user);
+    return yarp.db.insertOne("users", user);
   }
 
   static findAll(){
@@ -16,12 +15,26 @@ module.exports = class UserManager{
     return yarp.db.findOne("users", {_id: id});
   }
 
+  static findByLogin(id, password){
+    yarp.db.findOne("users", {_id: id}).then(user => {
+      if(bcrypt.compareSync(password, user.password)){
+        return user;
+      } else {
+        return null;
+      }
+    });
+  }
+
   static indexById(){
-    let result = {};
-    let collection = this.findAll();
-    for (object of collection){
-      result[object._id] = object;
-    }
-    return result;
+    return new Promise((resolve, reject) =>{
+      let result = {};
+      this.findAll().then((collection) =>{
+        if (!collection) reject(collection);
+        for (let i = 0; i < collection.length; i++){
+          result[collection[i]._id] = collection[i];
+        }
+        resolve(result);
+      });
+    });
   }
 }

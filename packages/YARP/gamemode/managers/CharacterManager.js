@@ -4,7 +4,7 @@
  */
 module.exports = class CharacterManager{
   static add(character){
-    yarp.db.insertOne("characters", character);
+    return yarp.db.insertOne("characters", character);
   }
 
   static findAll(){
@@ -15,12 +15,20 @@ module.exports = class CharacterManager{
     return yarp.db.findOne("characters", {_id: id});
   }
 
+  static findBySocialClub(socialClub){
+    return yarp.db.findMany("characters", {socialClub: socialClub});
+  }
+
   static indexById(){
-    let result = {};
-    let collection = this.findAll();
-    for (object of collection){
-      result[object._id] = object;
-    }
-    return result;
+    return new Promise((resolve, reject) =>{
+      let result = {};
+      this.findAll().then((collection) =>{
+        if (!collection) reject(collection);
+        for (let i = 0; i < collection.length; i++){
+          result[collection[i]._id] = collection[i];
+        }
+        resolve(result);
+      });
+    });
   }
 }

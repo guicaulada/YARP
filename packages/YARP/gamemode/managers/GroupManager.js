@@ -4,7 +4,7 @@
  */
 module.exports = class GroupManager{
   static add(group){
-    yarp.db.insertOne("groups", group);
+    return yarp.db.insertOne("groups", group);
   }
 
   static findByType(type){
@@ -20,11 +20,15 @@ module.exports = class GroupManager{
   }
 
   static indexById(){
-    let result = {};
-    let collection = this.findAll();
-    for (object of collection){
-      result[object._id] = object;
-    }
-    return result;
+    return new Promise((resolve, reject) =>{
+      let result = {};
+      this.findAll().then((collection) =>{
+        if (!collection) reject(collection);
+        for (let i = 0; i < collection.length; i++){
+          result[collection[i]._id] = collection[i];
+        }
+        resolve(result);
+      });
+    });
   }
 }

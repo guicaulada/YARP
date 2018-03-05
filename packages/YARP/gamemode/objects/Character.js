@@ -167,44 +167,39 @@ module.exports = class Character{
     let removed = false;
     let readd = false;
     if (permission[0] == '#') {
-      if (character != null){
-        let parts = permission.split('.');
-        let item = this.inventory[parts[0]];
-        let operation = parts[1][0];
-        let value = Number(parts[1].splice(1,parts[1].length))
-        switch(operation) {
-          case '>':
-          result = (item > value);
-          break;
-          case '<':
-          result = (item < value);
-          break;
-          default:
-          result = (item == value);
-          break;
-        }
+      let parts = permission.split('.');
+      let item = this.inventory[parts[0]];
+      let operation = parts[1][0];
+      let value = Number(parts[1].splice(1,parts[1].length))
+      switch(operation) {
+        case '>':
+        result = (item > value);
+        break;
+        case '<':
+        result = (item < value);
+        break;
+        default:
+        result = (item == value);
+        break;
       }
     } else if (permission[0] == '@') {
-      if (character != null){
-        let parts = permission.split('.');
-        let skill = this.skills[parts[0]];
-        let operation = parts[1][0];
-        let value = Number(parts[1].splice(1,parts[1].length))
-        switch(operation) {
-          case '>':
-          result = (skill > value);
-          break;
-          case '<':
-          result = (skill < value);
-          break;
-          default:
-          result = (skill == value);
-          break;
-        }
+      let parts = permission.split('.');
+      let skill = this.skills[parts[0]];
+      let operation = parts[1][0];
+      let value = Number(parts[1].splice(1,parts[1].length))
+      switch(operation) {
+        case '>':
+        result = (skill > value);
+        break;
+        case '<':
+        result = (skill < value);
+        break;
+        default:
+        result = (skill == value);
+        break;
       }
     } else {
-      if (character != null){
-        var groups = GroupManager.indexById();
+      GroupManager.indexById().then(groups => {
         this.groups.forEach(function(name){
           let group = groups[name];
           if (group != null) {
@@ -222,7 +217,7 @@ module.exports = class Character{
             }
           }
         });
-      }
+      });
     }
     if (removed && !readd){
       result = false;

@@ -1,34 +1,33 @@
 mp.events.add('playerJoin', (player) => {
     console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-    var user = db.users.getUserByPlayer(player);
-    if(user != null){
-      if (user.banned) {
-        player.outputChatBox("!{red}You have been banned.");
-        console.log(`${player.socialClub} is banned.`);
-        setTimeout(function(){
-          player.kick("You have been banned.");
-        },1000);
-      }
-      else if (cfg.base.whitelist && !user.whitelisted) {
-        player.outputChatBox("!{yellow}You are not whitelisted.");
-        console.log(`${player.socialClub} is not whitelisted.`);
-        setTimeout(function(){
-          player.kick("You are not whitelisted.");
-        },1000);
-      }
-      else {
+    UserManager.findById(player.socialClub).then(user => {
+      if(user != null){
+        if (user.banned) {
+          player.outputChatBox("!{red}You have been banned.");
+          console.log(`${player.socialClub} is banned.`);
+          setTimeout(function(){
+            player.kick("You have been banned.");
+          },1000);
+        }
+        else if (yarp.cfg.gamemode.whitelist && !user.whitelisted) {
+          player.outputChatBox("!{yellow}You are not whitelisted.");
+          console.log(`${player.socialClub} is not whitelisted.`);
+          setTimeout(function(){
+            player.kick("You are not whitelisted.");
+          },1000);
+        }
+        else {
+          player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+        }
+      } else {
         player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
       }
-    }
-    else {
-      user = {socialClub: player.socialClub};
-      player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
-    }
+    })
 });
 
 mp.events.add('playerDeath', (player) => {
     player.call('removeWeapons');
-    player.spawn(cfg.base.spawn[Math.floor(Math.random() * cfg.base.spawn.length)]);
+    player.spawn(yarp.cfg.gamemode.spawn[Math.floor(Math.random() * yarp.cfg.gamemode.spawn.length)]);
     db.characters.removeAllWeapons(player);
     player.health = 100;
 });

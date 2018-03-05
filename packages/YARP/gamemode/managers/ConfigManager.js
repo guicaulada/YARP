@@ -4,7 +4,7 @@
  */
 module.exports = class ConfigManager{
   static add(config){
-    yarp.db.insertOne("configs", config);
+    return yarp.db.insertOne("configs", config);
   }
 
   static findAll(){
@@ -16,11 +16,15 @@ module.exports = class ConfigManager{
   }
 
   static indexById(){
-    let result = {};
-    let collection = this.findAll();
-    for (object of collection){
-      result[object._id] = object;
-    }
-    return result;
+    return new Promise((resolve, reject) =>{
+      let result = {};
+      this.findAll().then((collection) =>{
+        if (!collection) reject(collection);
+        for (let i = 0; i < collection.length; i++){
+          result[collection[i]._id] = collection[i];
+        }
+        resolve(result);
+      });
+    });
   }
 }

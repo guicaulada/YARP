@@ -103,19 +103,17 @@ mp.events.add('selectorAddGroup', (player, args) => {
 });
 
 mp.events.add('verifyAuthentication', (player,password) => {
-  var user = db.users.getAuthUser(player, password);
-  if(user != null){
-    var characters = db.characters.getCharactersByPlayer(player);
-    if(characters.length == 0){
-      player.call('showCharacterCreationMenu');
+  UserManager.findByLogin(player.socialClub,password).then(user => {
+    if(user != null){
+      CharacterManager.getBySocialClub(user._id).then(characters => {
+        if(characters.length == 0){
+          player.call('showCharacterCreationMenu');
+        } else {
+          player.call('showPlayerCharacters', [JSON.stringify(characters)]);
+        }
+      });
     } else {
-      var characters = db.characters.getCharactersByPlayer(player);
-      for (let i = 0; i < characters.length; i++){
-        characters[i].job = db.characters.getGroupByType(characters[i].name, "job");
-      }
-      player.call('showPlayerCharacters', [JSON.stringify(characters)]);
+      player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
     }
-  } else {
-    player.call('showAuthenticationMenu', [JSON.stringify(user),JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
-  }
+  });
 });

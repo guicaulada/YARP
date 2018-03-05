@@ -2,6 +2,7 @@
 /**
  * @file User class
  */
+let bcrypt = require('bcryptjs');
 let GroupManager = require('../managers/GroupManager');
 module.exports = class User{
   constructor(socialClub, password){
@@ -39,32 +40,46 @@ module.exports = class User{
     }
   }
 
+  getGroupByType(type){
+    GroupManager.indexById().then(groups => {
+      this.groups.forEach(function(name){
+        let group = groups[name];
+        if (group != null) {
+          if (group.type == type){
+            return name;
+          }
+        }
+      });
+    });
+  }
+
   hasPermission(permission){
     let result = false;
     let removed = false;
     let readd = false;
-    var groups = GroupManager.indexById();
-    this.groups.forEach(function(name){
-      let group = groups[name];
-      if (group != null) {
-        if (group.permissions.indexOf("*") > -1){
-          result = true;
-        }
-        if (group.permissions.indexOf(permission) > -1){
-          result = true;
-        }
-        if (group.permissions.indexOf(`-${permission}`) > -1){
-          removed = true;
+    GroupManager.indexById().then(groups => {
+      this.groups.forEach(function(name){
+        let group = groups[name];
+        if (group != null) {
+          if (group.permissions.indexOf("*") > -1){
+            result = true;
           }
-        if (group.permissions.indexOf(`+${permission}`) > -1){
-          readd = true;
+          if (group.permissions.indexOf(permission) > -1){
+            result = true;
+          }
+          if (group.permissions.indexOf(`-${permission}`) > -1){
+            removed = true;
+          }
+          if (group.permissions.indexOf(`+${permission}`) > -1){
+            readd = true;
+          }
         }
+      });
+      if (removed && !readd){
+        result = false;
       }
+      return result;
     });
-    if (removed && !readd){
-      result = false;
-    }
-    return result;
   }
 
   hasPermissions(permissions){
