@@ -109,7 +109,7 @@ mp.events.add('yarp_verifyLogin', (player,password) => {
   }
   if (user.verifyPassword(password)) {
     user.updateLastLogin(player.ip);
-    yarp.Manager.save(user);
+    user.save();
     if(Object.keys(user.characters).length == 0){
       player.call('yarp_showCharacterCreationMenu');
     } else {

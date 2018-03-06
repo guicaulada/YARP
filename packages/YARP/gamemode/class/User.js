@@ -12,7 +12,7 @@ module.exports = class User{
       this.whitelisted = id.whitelisted;
       this.banned = id.banned;
       this.groups = id.groups;
-    } else if (id && password){
+    } else if ((id && password) != null){
       this._id = id;
       this.password = bcrypt.hashSync(password, 10);
       this.lastLogin =  "";
@@ -20,6 +20,10 @@ module.exports = class User{
       this.banned = false;
       this.groups = [];
     }
+  }
+
+  save(){
+    yarp.Manager.save(this);
   }
 
   get player(){
@@ -33,7 +37,7 @@ module.exports = class User{
 
   get characters(){
     let characters = {};
-    for (id in yarp.characters){
+    for (let id in yarp.characters){
       let character = yarp.characters[id]
       if (character.socialClub == this._id){
         characters[id] = character;
@@ -83,28 +87,30 @@ module.exports = class User{
     });
   }
 
+  hasGroup(id){
+   return (this.groups.indexOf(id) > -1);
+  }
+
   hasPermission(permission){
     let result = false;
     let removed = false;
     let readd = false;
-    yarp.GroupManager.indexById().then(groups => {
-      this.groups.forEach(function(name){
-        let group = groups[name];
-        if (group != null) {
-          if (group.permissions.indexOf("*") > -1){
-            result = true;
-          }
-          if (group.permissions.indexOf(permission) > -1){
-            result = true;
-          }
-          if (group.permissions.indexOf(`-${permission}`) > -1){
-            removed = true;
-          }
-          if (group.permissions.indexOf(`+${permission}`) > -1){
-            readd = true;
-          }
+    this.groups.forEach(function(id){
+      let group = yarp.groups[id];
+      if (group != null) {
+        if (group.permissions.indexOf("*") > -1){
+          result = true;
         }
-      });
+        if (group.permissions.indexOf(permission) > -1){
+          result = true;
+        }
+        if (group.permissions.indexOf(`-${permission}`) > -1){
+          removed = true;
+        }
+        if (group.permissions.indexOf(`+${permission}`) > -1){
+          readd = true;
+        }
+      }
       if (removed && !readd){
         result = false;
       }

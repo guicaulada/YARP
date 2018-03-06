@@ -2,7 +2,7 @@ mp.events.add('yarp_createCharacter', (player, id, age, sex, faceJson) => {
   let character = yarp.characters[id];
   if(character == null){
     character = new yarp.Character(id, player.socialClub, age, sex, JSON.parse(faceJson));
-    yarp.Manager.save(character)
+    character.save();
     player.call('yarp_characterCreatedSuccessfully');
     player.call('yarp_showPlayerCharacters', [JSON.stringify(character.user.characters)]);
   } else {
@@ -19,14 +19,19 @@ mp.events.add('yarp_setCharacterIntoCreator', (player) => {
   player.heading = 180;
 });
 
-mp.events.add('yarp_loadCharacter', (player, characterJson) => {
-  var character = JSON.parse(characterJson);
-  player.notify(`Last connection from ~g~${character.lastLogin.ip}~w~ at ~g~${character.lastLogin.date}`);
+mp.events.add('yarp_loadCharacter', (player,id) => {
+  let character = yarp.characters[id];
+  let lastLogin = character.lastLogin.split(" ");
+  if (lastLogin[2]){
+    player.notify(`Last connection from ~g~${lastLogin[0]}~w~ at ~g~${lastLogin[1]} ${lastLogin[2]}`);
+  }
+  character.updateLastLogin(player.ip);
+  character.save();
   player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
   player.model = character.model;
-  player.name = character.name;
-  player.position = { "x" : character.position.x, "y" : character.position.y, "z" : character.position.z };
-  player.heading = character.position.h;
+  player.name = character._id;
+  player.position = character.position;
+  player.heading = character.heading;
   player.health = character.health;
   player.armour = character.armour;
   for (weapon in character.weapons){

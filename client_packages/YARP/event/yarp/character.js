@@ -16,9 +16,9 @@ mp.events.add('yarp_showPlayerCharacters', (charactersJson) => {
 	mp.events.call('createBrowser', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
-mp.events.add('yarp_loadCharacter', (characterJson) => {
+mp.events.add('yarp_loadCharacter', (id) => {
 	mp.events.call('destroyBrowser');
-	mp.events.callRemote('yarp_loadCharacter', characterJson);
+	mp.events.callRemote('yarp_loadCharacter', id);
 	mp.game.invoke('0xB0C54402D009BA38');
 });
 

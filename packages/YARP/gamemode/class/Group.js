@@ -4,11 +4,39 @@
  */
 module.exports = class Group{
   constructor(id,type){
-    if (id && type) {
+    if ((typeof id) === 'object'){
+      this._id = id._id;
+      this.type = id.type;
+      this.permissions = id.permissions;
+    } else if ((typeof id) === 'string') {
       this._id = id;
-      this.type = type || 'default';
+      this.type = type;
       this.permissions = [];
     }
+  }
+
+  save(){
+    yarp.Manager.save(this);
+  }
+  get users(){
+    let users = {};
+    for (id in yarp.users){
+      let user = yarp.users[id];
+      if (user.hasGroup(this._id)){
+        users[id] = user;
+      }
+    }
+    return users;
+  }
+  get characters(){
+    let characters = {};
+    for (id in yarp.characters){
+      let character = yarp.characters[id];
+      if (character.hasGroup(this._id)){
+        characters[id] = character;
+      }
+    }
+    return characters;
   }
   addPermission(permission){
     if (this.permissions.indexOf(permission) == -1) {

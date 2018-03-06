@@ -914,12 +914,12 @@ function populateCharacterList(charactersJson) {
 			character.job = "Citizen";
 		}
 		// Añadimos el contenido de cada elemento
-		itemDescription.textContent = `${character.name}, ${character.age}\r\n${character.job}`;
+		itemDescription.textContent = `${character._id}, ${character.age}\r\n${character.job}`;
 
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Cargamos el personaje
-			mp.trigger('yarp_loadCharacter', JSON.stringify(character));
+			mp.trigger('yarp_loadCharacter', character._id);
 		});
 
 		// Ordenamos la jerarquía de elementos

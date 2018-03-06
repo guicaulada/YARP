@@ -38,19 +38,20 @@ module.exports = new Promise((resolve, reject) => {
     yarp.Manager.indexById(yarp.Config).then(cfg => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Configs");
       yarp.configs = cfg;
-      if (!yarp.configs.setup){
+      if (!yarp.configs.setup || !yarp.configs.setup.value){
         yarp.Manager.save(new yarp.Config('admins', ['Sighmir']));
         yarp.Manager.save(new yarp.Config('whitelist', false));
         yarp.Manager.save(new yarp.Config('swallet', 100));
         yarp.Manager.save(new yarp.Config('sbank', 1500));
         yarp.Manager.save(new yarp.Config('save_interval', 10));
         yarp.Manager.save(new yarp.Config('max_weight', 30));
-        yarp.Manager.save(new yarp.Config('first_spawn', { "x" : -888.8746, "y" : -2313.2836, "z" : -3.5077, "h" : 90 }));
+        yarp.Manager.save(new yarp.Config('first_spawn', new mp.Vector3(-888.8746, -2313.2836, 3.5077)));
+        yarp.Manager.save(new yarp.Config('first_heading', 90));
         yarp.Manager.save(new yarp.Config('spawn', [
-          { "x": -425.517, "y": 1123.620, "z": 325.8544 },
-          { "x": -415.777, "y": 1168.791, "z": 325.854 },
-          { "x": -432.534, "y": 1157.461, "z": 325.854 },
-          { "x": -401.850, "y": 1149.482, "z": 325.854 }
+          new mp.Vector3(-425.517, 1123.620, 325.8544),
+          new mp.Vector3(-415.777, 1168.791, 325.854),
+          new mp.Vector3(-432.534, 1157.461, 325.854),
+          new mp.Vector3(-401.850, 1149.482, 325.854)
         ]));
         yarp.Manager.save(new yarp.Config('setup', true));
       }

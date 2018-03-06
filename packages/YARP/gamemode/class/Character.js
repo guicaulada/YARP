@@ -4,19 +4,40 @@
  */
 module.exports = class Character{
   constructor(id, socialClub, age, sex, face){
-    if (id && socialClub && age && sex && face){
+    if ((typeof id) === 'object'){
+      this._id = id._id;
+      this.socialClub = id.socialClub;
+      this.lastLogin = id.lastLogin;
+      this.age = id.age;
+      this.model = id.model;
+      this.wallet = id.wallet;
+      this.bank = id.bank;
+      this.face = id.face;
+      this.health = id.health;
+      this.armour = id.armour;
+      this.position = id.position;
+      this.heading = id.heading;
+      this.groups = id.groups;
+      this.weapons = id.weapons;
+      this.skills = id.skills;
+      this.weight = id.weight;
+      this.inventory = id.inventory;
+      this.customization = id.costumization;
+      this.decoration = id.decoration;
+      this.clothes = id.clothes;
+    } else if ((id && socialClub && age && sex && face) != null){
       this._id = id;
       this.socialClub = socialClub;
       this.lastLogin = "";
       this.age = age;
       this.model = sex;
-      this.wallet = yarp.configs.swallet;
-      this.bank = yarp.configs.sbank;
+      this.wallet = yarp.configs.swallet.value;
+      this.bank = yarp.configs.sbank.value;
       this.face = face;
       this.health = 100;
       this.armour = 0;
-      this.position = { "x" : yarp.configs.first_spawn.value.x, "y" : yarp.configs.first_spawn.value.y, "z" : yarp.configs.first_spawn.value.z};
-      this.heading = yarp.configs.first_spawn.value.h
+      this.position = yarp.configs.first_spawn.value;
+      this.heading = yarp.configs.first_heading.value;
       this.groups = [];
       this.weapons = {};
       this.skills = {};
@@ -24,8 +45,12 @@ module.exports = class Character{
       this.inventory = {};
       this.customization = {};
       this.decoration = {};
-      this.clothes = {}
+      this.clothes = {};
     }
+  }
+
+  save(){
+    yarp.Manager.save(this);
   }
 
   get player(){
@@ -39,7 +64,7 @@ module.exports = class Character{
 
   get user(){
     mp.players.forEach((player, i) => {
-      if (player.name == this._id){
+      if (player.socialClub == this.socialClub){
         return yarp.users[player.socialClub];
       }
     });
@@ -166,6 +191,10 @@ module.exports = class Character{
     return null;
   }
 
+  hasGroup(id){
+   return (this.groups.indexOf(id) > -1);
+  }
+
   hasPermission(permission){
     let result = false;
     let removed = false;
@@ -203,24 +232,22 @@ module.exports = class Character{
         break;
       }
     } else {
-      yarp.GroupManager.indexById().then(groups => {
-        this.groups.forEach(function(name){
-          let group = groups[name];
-          if (group != null) {
-            if (group.permissions.indexOf("*") > -1){
-              result = true;
-            }
-            if (group.permissions.indexOf(permission) > -1){
-              result = true;
-            }
-            if (group.permissions.indexOf(`-${permission}`) > -1){
-              removed = true;
-            }
-            if (group.permissions.indexOf(`+${permission}`) > -1){
-              readd = true;
-            }
+      this.groups.forEach(function(id){
+        let group = yarp.groups[id];
+        if (group != null) {
+          if (group.permissions.indexOf("*") > -1){
+            result = true;
           }
-        });
+          if (group.permissions.indexOf(permission) > -1){
+            result = true;
+          }
+          if (group.permissions.indexOf(`-${permission}`) > -1){
+            removed = true;
+          }
+          if (group.permissions.indexOf(`+${permission}`) > -1){
+            readd = true;
+          }
+        }
       });
     }
     if (removed && !readd){

@@ -4,7 +4,21 @@
  */
 module.exports = class Text{
   constructor(id,msg,position,range,key,offset,scale,color,viewDistance,font,outline,hidden,cb){
-    if (id && msg && position && range && key && offset && scale && color && viewDistance && font && outline && hidden && cb){
+    if ((typeof id) === 'object'){
+      this._id = id._id;
+      this.msg = id.msg;
+      this.position = id.position;
+      this.range = id.range;
+      this.key = id.key;
+      this.offset = id.offset;
+      this.scale = id.scale;
+      this.color = id.color;
+      this.viewDistance = id.viewDistance;
+      this.font = id.font;
+      this.outline = id.outline;
+      this.hidden = id.hidden;
+      this.cb = id.cb;
+    } else if ((id && msg && position && range && key && offset && scale && color && viewDistance && font && outline && hidden && cb) != null){
       this._id = id;
       this.msg = msg || "Press E to access";
       this.position = position;
@@ -19,5 +33,9 @@ module.exports = class Text{
       this.hidden = hidden || true;
       this.cb = cb;
     }
+  }
+
+  save(){
+    yarp.Manager.save(this);
   }
 }
