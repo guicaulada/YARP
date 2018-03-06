@@ -894,9 +894,9 @@ function populateCharacterList(charactersJson) {
 
 	// Añadimos el texto de cabecera
 	header.textContent = 'Character list';
-	for(let i = 0; i < characters.length; i++) {
+	for(id in characters) {
 		// Obtenemos el componente
-		let character = characters[i];
+		let character = characters[id];
 
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
@@ -919,7 +919,7 @@ function populateCharacterList(charactersJson) {
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Cargamos el personaje
-			mp.trigger('loadCharacter', JSON.stringify(character));
+			mp.trigger('yarp_loadCharacter', JSON.stringify(character));
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -930,7 +930,7 @@ function populateCharacterList(charactersJson) {
 	}
 
 	// Añadimos los botones
-	if (characters.length < 5){
+	//if (Object.keys(characters).length < 5){
 		let createButton = document.createElement('div');
 
 		// Añadimos las clases a cada botón
@@ -942,12 +942,12 @@ function populateCharacterList(charactersJson) {
 		// Ponemos la función para cada elemento
 		createButton.onclick = (function() {
 			// Mostramos el menú de creación de personaje
-			mp.trigger('showCharacterCreationMenu');
+			mp.trigger('yarp_showCharacterCreationMenu');
 		});
 
 		// Ordenamos la jerarquía de elementos
 		options.appendChild(createButton);
-	}
+	//}
 }
 
 function populateTattooMenu(tattooZoneArray, businessName, priceMultiplier) {
@@ -1219,7 +1219,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 
 			// Actualizamos la apariencia
-			mp.trigger('updateFacialHair', i, selectedOptions[i]);
+			mp.trigger('yarp_updateFacialHair', i, selectedOptions[i]);
 		});
 
 		itemSubstract.onclick = (function() {
@@ -1243,7 +1243,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 
 			// Actualizamos la apariencia
-			mp.trigger('updateFacialHair', i, selectedOptions[i]);
+			mp.trigger('yarp_updateFacialHair', i, selectedOptions[i]);
 		});
 
 		// Ordenamos la jerarquía de elementos
