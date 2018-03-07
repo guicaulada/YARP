@@ -22,6 +22,9 @@ module.exports = class User{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(User);
+  }
   save(){
     yarp.Manager.save(this);
   }
@@ -75,15 +78,13 @@ module.exports = class User{
   }
 
   getGroupByType(type){
-    yarp.GroupManager.indexById().then(groups => {
-      this.groups.forEach(function(name){
-        let group = groups[name];
-        if (group != null) {
-          if (group.type == type){
-            return name;
-          }
+    this.groups.forEach(function(id){
+      let group = yarp.groups[id];
+      if (group != null) {
+        if (group.type == type){
+          return name;
         }
-      });
+      }
     });
   }
 

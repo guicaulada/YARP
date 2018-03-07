@@ -12,18 +12,21 @@ let characters = null;
 
 mp.events.add('yarp_showPlayerCharacters', (charactersJson) => {
 	characters = charactersJson;
+	mp.game.ui.displayRadar(false);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
 	mp.events.call('createBrowser', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
 mp.events.add('yarp_loadCharacter', (id) => {
 	mp.events.call('destroyBrowser');
+	mp.game.ui.displayRadar(true);
 	mp.events.callRemote('yarp_loadCharacter', id);
 	mp.game.invoke('0xB0C54402D009BA38');
 });
 
 mp.events.add('yarp_showCharacterCreationMenu', () => {
 	mp.events.call('destroyBrowser');
+	mp.game.ui.displayRadar(false);
 	mp.events.callRemote('yarp_setCharacterIntoCreator');
 	mp.game.invoke('0xB0C54402D009BA38');
 	initializeCharacterCreation(mp.players.local);

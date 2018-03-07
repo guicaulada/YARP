@@ -13,6 +13,9 @@ module.exports = class Config{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Config);
+  }
   save(){
     yarp.Manager.save(this);
   }

@@ -50,19 +50,20 @@ mp.events.add('yarp_updateWeaponAmmo', (player, weaponHash, amount) => {
     },1000);
   }
 });
-/*
+
 setInterval(function(){
   mp.players.forEach(
 		(player, id) => {
-      if (player.position.x != 0 && player.position.y != 0 && player.position.z != 0 && player.health != 0) {
+      if ((player.position.x && player.position.y && player.position.z && player.health) != 0) {
         let character = yarp.characters[player.name];
-        character.position = player.position
-        character.heading = player.heading;
-        character.health = player.health;
-        character.armour = player.armour;
-        yarp.CharacterManager.save(character);
+        if (character) {
+          character.position = player.position;
+          character.heading = player.heading;
+          character.health = player.health;
+          character.armour = player.armour;
+          character.save();
+        }
       }
 		}
 	);
 },1000*yarp.configs.save_interval.value);
-*/

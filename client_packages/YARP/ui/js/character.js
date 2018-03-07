@@ -127,7 +127,7 @@ function showPrevFatherFace() {
 		currentFatherFace--;
 	}
 	$("#face-father-shape").text("Type " + (currentFatherFace + 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
+	mp.trigger('yarp_updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
 }
 
 function showNextFatherFace() {
@@ -137,7 +137,7 @@ function showNextFatherFace() {
 		currentFatherFace++;
 	}
 	$("#face-father-shape").text("Type " + (currentFatherFace + 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
+	mp.trigger('yarp_updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
 }
 
 function showPrevMotherFace() {
@@ -147,7 +147,7 @@ function showPrevMotherFace() {
 		currentMotherFace--;
 	}
 	$("#face-mother-shape").text("Type " + (currentMotherFace - 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
+	mp.trigger('yarp_updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
 }
 
 function showNextMotherFace() {
@@ -157,7 +157,7 @@ function showNextMotherFace() {
 		currentMotherFace++;
 	}
 	$("#face-mother-shape").text("Type " + (currentMotherFace - 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
+	mp.trigger('yarp_updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
 }
 
 function showPrevFatherSkin() {
@@ -167,7 +167,7 @@ function showPrevFatherSkin() {
 		currentFatherSkin--;
 	}
 	$("#father-skin").text("Type " + (currentFatherSkin + 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
+	mp.trigger('yarp_updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
 }
 
 function showNextFatherSkin() {
@@ -177,7 +177,7 @@ function showNextFatherSkin() {
 		currentFatherSkin++;
 	}
 	$("#father-skin").text("Type " + (currentFatherSkin + 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
+	mp.trigger('yarp_updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
 }
 
 function showPrevMotherSkin() {
@@ -187,7 +187,7 @@ function showPrevMotherSkin() {
 		currentMotherSkin--;
 	}
 	$("#mother-skin").text("Type " + (currentMotherSkin + 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
+	mp.trigger('yarp_updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
 }
 
 function showNextMotherSkin() {
@@ -197,17 +197,17 @@ function showNextMotherSkin() {
 		currentMotherSkin++;
 	}
 	$("#mother-skin").text("Type " + (currentMotherSkin + 1));
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
+	mp.trigger('yarp_updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
 }
 
 function updateFaceMix() {
 	let faceMixValue = document.getElementById('headMix').value;
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'headMix', faceMixValue, true);
+	mp.trigger('yarp_updatePlayerCreation', 'headMix', faceMixValue, true);
 }
 
 function updateSkinMix() {
 	let skinMixValue = document.getElementById('skinMix').value;
-	mp.trigger('yarp_yarp_updatePlayerCreation', 'skinMix', skinMixValue, true);
+	mp.trigger('yarp_updatePlayerCreation', 'skinMix', skinMixValue, true);
 }
 
 function showPrevHairModel() {

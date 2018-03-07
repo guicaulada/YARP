@@ -15,6 +15,9 @@ module.exports = class Group{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Group);
+  }
   save(){
     yarp.Manager.save(this);
   }

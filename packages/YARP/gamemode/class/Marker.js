@@ -43,6 +43,9 @@ module.exports = class Marker{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Marker);
+  }
   save(){
     yarp.Manager.save(this);
   }

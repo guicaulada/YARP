@@ -25,6 +25,9 @@ module.exports = class Npc{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Npc);
+  }
   save(){
     yarp.Manager.save(this);
   }

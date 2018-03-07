@@ -19,6 +19,9 @@ module.exports = class Item{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Item);
+  }
   save(){
     yarp.Manager.save(this);
   }

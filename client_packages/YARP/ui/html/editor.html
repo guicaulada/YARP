@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Textarea Tabs + Syntax Highlighting</title>
+  <link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css'>
+  <link rel="stylesheet" href="../css/editor.css">
+</head>
+<body scroll="no" style="overflow: hidden">
+  <div class="editor-holder">
+	<ul class="toolbar">
+		<li><a href="#" id="indent" title="Toggle tabs or spaces"><i class="fa fa-indent"></i></a></li>
+		<li><a href="#" id="fullscreen" title="Toggle fullscreen mode"><i class="fa fa-expand"></i></a></li>
+	</ul>
+	<div class="scroller">
+		<textarea class="editor allow-tabs" spellcheck="false">
+function(){
+  console.log("Hell yeah you can code from inside the game!")
+}
+    </textarea>
+		<pre><code class="syntax-highight javascript"></code></pre>
+	</div>
+</div>
+
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://use.fontawesome.com/b2c0f76220.js'></script>
+<script src='https://raw.githubusercontent.com/emmetio/textarea/master/emmet.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/languages/javascript.min.js'></script>
+<script src="../js/editor.js"></script>
+
+</body>
+
+</html>

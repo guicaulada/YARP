@@ -17,6 +17,7 @@ module.exports = new Promise((resolve, reject) => {
     console.log(chalk.yellowBright("[YARP] ")+"Loading Classes");
     yarp.Blip = require('./class/Blip');
     yarp.Character = require('./class/Character');
+    yarp.Command = require('./class/Command');
     yarp.Config = require('./class/Config');
     yarp.Group = require('./class/Group');
     yarp.Item = require('./class/Item');
@@ -27,64 +28,65 @@ module.exports = new Promise((resolve, reject) => {
     yarp.User = require('./class/User');
 
     //Loading Data
-    yarp.Manager.indexById(yarp.Blip).then(blips => {
+    yarp.Blip.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Blips");
-      yarp.blips = blips;
     });
-    yarp.Manager.indexById(yarp.Character).then(characters => {
+    yarp.Character.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Characters");
-      yarp.characters = characters;
     });
-    yarp.Manager.indexById(yarp.Config).then(cfg => {
-      console.log(chalk.yellowBright("[YARP] ")+"Loading Configs");
-      yarp.configs = cfg;
-      if (!yarp.configs.setup || !yarp.configs.setup.value){
-        yarp.Manager.save(new yarp.Config('admins', ['Sighmir']));
-        yarp.Manager.save(new yarp.Config('whitelist', false));
-        yarp.Manager.save(new yarp.Config('swallet', 100));
-        yarp.Manager.save(new yarp.Config('sbank', 1500));
-        yarp.Manager.save(new yarp.Config('save_interval', 10));
-        yarp.Manager.save(new yarp.Config('max_weight', 30));
-        yarp.Manager.save(new yarp.Config('first_spawn', new mp.Vector3(-888.8746, -2313.2836, 3.5077)));
-        yarp.Manager.save(new yarp.Config('first_heading', 90));
-        yarp.Manager.save(new yarp.Config('spawn', [
-          new mp.Vector3(-425.517, 1123.620, 325.8544),
-          new mp.Vector3(-415.777, 1168.791, 325.854),
-          new mp.Vector3(-432.534, 1157.461, 325.854),
-          new mp.Vector3(-401.850, 1149.482, 325.854)
-        ]));
-        yarp.Manager.save(new yarp.Config('setup', true));
+    yarp.Command.load().then(() => {
+      console.log(chalk.yellowBright("[YARP] ")+"Loading Commands");
+      for (let id in yarp.commands){
+        mp.events.addCommand(id, eval(yarp.commands[id].cb));
       }
+      if (!yarp.commands["code"]){
+        new yarp.Command("code","developer","Let's you write code to be executed from inside the game. A very powerful command.",`
+        (player) => {
+          if (yarp.configs.admins.value.indexOf(player.socialClub) > -1){
+            player.call('createBrowser', [['package://YARP/ui/html/editor.html', 'prepareCodeBlock']]);
+          }
+        }
+        `).save();
+      }
+    })
+    yarp.Config.load().then(() => {
+      new yarp.Config('admins', ['Sighmir']).save();
+      new yarp.Config('whitelist', false).save();
+      new yarp.Config('swallet', 100).save();
+      new yarp.Config('sbank', 1500).save();
+      new yarp.Config('save_interval', 10).save();
+      new yarp.Config('max_weight', 30).save();
+      new yarp.Config('first_spawn', new mp.Vector3(-888.8746, -2313.2836, 3.5077)).save();
+      new yarp.Config('first_heading', 90).save();
+      new yarp.Config('spawn', [
+        new mp.Vector3(-425.517, 1123.620, 325.8544),
+        new mp.Vector3(-415.777, 1168.791, 325.854),
+        new mp.Vector3(-432.534, 1157.461, 325.854),
+        new mp.Vector3(-401.850, 1149.482, 325.854)
+      ]).save();
+      console.log(chalk.yellowBright("[YARP] ")+"Loading Configs");
     });
-
-    yarp.Manager.indexById(yarp.Group).then(groups => {
+    yarp.Group.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Groups");
-      yarp.groups = groups;
     });
-    yarp.Manager.indexById(yarp.Item).then(items => {
+    yarp.Item.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Items");
-      yarp.items = items;
     });
-    yarp.Manager.indexById(yarp.Marker).then(markers => {
+    yarp.Marker.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Markers");
-      yarp.markers = markers;
     });
-    yarp.Manager.indexById(yarp.Npc).then(npcs => {
+    yarp.Npc.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Npcs");
-      yarp.npcs = npcs;
     });
-    yarp.Manager.indexById(yarp.Text).then(texts => {
+    yarp.Text.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Texts");
-      yarp.texts = texts;
     });
-    yarp.Manager.indexById(yarp.Transaction).then(transactions => {
+    yarp.Transaction.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Transactions");
-      yarp.transactions = transactions;
     });
-    yarp.Manager.indexById(yarp.User).then(users => {
+    yarp.User.load().then(() => {
       console.log(chalk.yellowBright("[YARP] ")+"Loading Users");
-      yarp.users = users;
-      resolve();
+      resolve()
     });
   })
 });

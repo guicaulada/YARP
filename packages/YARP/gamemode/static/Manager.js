@@ -10,16 +10,16 @@ module.exports = class Manager{
     yarp.db.save(collection, object);
   }
 
-  static indexById(Class){
-    let collection = (new Class).constructor.name.toLowerCase()+"s";
-    let result = {};
+  static load(Class){
     return new Promise((resolve, reject) =>{
+      let collection = (new Class).constructor.name.toLowerCase()+"s";
+      let result = {};
       yarp.db.find(collection,{}).then((res) =>{
-        if (!res) reject(res);
         for (let i = 0; i < res.length; i++){
           result[res[i]._id] = new Class(res[i]);
         }
-        resolve(result);
+        yarp[collection] = result;
+        resolve();
       });
     });
   }

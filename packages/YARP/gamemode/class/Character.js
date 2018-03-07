@@ -49,6 +49,9 @@ module.exports = class Character{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Character);
+  }
   save(){
     yarp.Manager.save(this);
   }
@@ -63,12 +66,7 @@ module.exports = class Character{
   }
 
   get user(){
-    mp.players.forEach((player, i) => {
-      if (player.socialClub == this.socialClub){
-        return yarp.users[player.socialClub];
-      }
-    });
-    return null;
+    return yarp.users[this.socialClub];
   }
 
   updateLastLogin(ip){

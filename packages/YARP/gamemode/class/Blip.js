@@ -33,6 +33,9 @@ module.exports = class Blip{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Blip);
+  }
   save(){
     yarp.Manager.save(this);
   }

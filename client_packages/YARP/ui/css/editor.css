@@ -1,0 +1,173 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color:rgba(0, 0, 0, 0);
+}
+
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.editor-holder {
+  width: 800px;
+  height: 500px;
+  margin-top: 50px;
+  border-radius: 3px;
+  position: relative;
+  top: 0;
+  margin-left: -400px;
+  left: 50%;
+  background: #1f1f1f !important;
+  overflow: auto;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+          box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.editor-holder.fullscreen {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  left: 0;
+}
+.editor-holder .toolbar {
+  width: 100%;
+  list-style: none;
+  position: absolute;
+  top: -2px;
+  margin: 0;
+  left: 0;
+  z-index: 3;
+  padding: 8px;
+  background: #afafaf;
+}
+.editor-holder .toolbar li {
+  display: inline-block;
+}
+.editor-holder .toolbar a {
+  line-height: 20px;
+  background: rgba(144, 144, 144, 0.6);
+  color: grey;
+  -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.28);
+          box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.28);
+  display: block;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.editor-holder .toolbar a:hover {
+  background: rgba(144, 144, 144, 0.8);
+}
+.editor-holder .toolbar a.active {
+  background: rgba(144, 144, 144, 0.8);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.editor-holder .toolbar i {
+  color: #565656;
+  padding: 8px;
+}
+.editor-holder textarea, .editor-holder code {
+  width: 100%;
+  height: auto;
+  min-height: 450px;
+  font-size: 14px;
+  border: 0;
+  margin: 0;
+  top: 46px;
+  left: 0;
+  padding: 20px !important;
+  line-height: 21px;
+  position: absolute;
+  font-family: Consolas,Liberation Mono,Courier,monospace;
+  overflow: visible;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.editor-holder textarea {
+  background: transparent !important;
+  z-index: 2;
+  height: auto;
+  resize: none;
+  color: #fff;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  -webkit-text-fill-color: transparent;
+}
+.editor-holder textarea::-webkit-input-placeholder {
+  color: white;
+}
+.editor-holder textarea:focus {
+  outline: 0;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.editor-holder code {
+  z-index: 1;
+}
+pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+pre code {
+  background: #1f1f1f !important;
+  color: #adadad;
+}
+pre code .hljs {
+  color: #a9b7c6;
+  background: #282b2e;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+}
+pre code .hljs-number,
+pre code .hljs-literal,
+pre code .hljs-symbol,
+pre code .hljs-bullet {
+  color: #6897BB;
+}
+pre code .hljs-keyword,
+pre code .hljs-selector-tag,
+pre code .hljs-deletion {
+  color: #cc7832;
+}
+pre code .hljs-variable,
+pre code .hljs-template-variable,
+pre code .hljs-link {
+  color: #629755;
+}
+pre code .hljs-comment,
+pre code .hljs-quote {
+  color: #808080;
+}
+pre code .hljs-meta {
+  color: #bbb529;
+}
+pre code .hljs-string,
+pre code .hljs-attribute,
+pre code .hljs-addition {
+  color: #6A8759;
+}
+pre code .hljs-section,
+pre code .hljs-title,
+pre code .hljs-type {
+  color: #ffc66d;
+}
+pre code .hljs-name,
+pre code .hljs-selector-id,
+pre code .hljs-selector-class {
+  color: #e8bf6a;
+}
+pre code .hljs-emphasis {
+  font-style: italic;
+}
+pre code .hljs-strong {
+  font-weight: bold;
+}

@@ -21,6 +21,9 @@ module.exports = class Transaction{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Transaction);
+  }
   save(){
     yarp.Manager.save(this);
   }

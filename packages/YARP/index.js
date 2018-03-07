@@ -21,12 +21,8 @@ require('./gamemode/yarp.js').then(() => {
   require('./event/yarp/menu.js');
   //require('./events/yarp/object.js');
 
-  //Load YARP Commands
-  console.log(chalk.yellowBright("[YARP] ")+"Loading YARP Commands");
-  //require('./commands/admins.js');
-  //require('./commands/groups.js');
-  //require('./commands/users.js');
   console.log(chalk.greenBright("[YARP] ")+"Loading Complete");
+
   mp.players.forEach((player, i) => {
     mp.events.call('playerJoin', player)
   });

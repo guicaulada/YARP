@@ -35,6 +35,9 @@ module.exports = class Text{
     }
   }
 
+  static load(){
+    return yarp.Manager.load(Text);
+  }
   save(){
     yarp.Manager.save(this);
   }
