@@ -10,9 +10,12 @@ mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
 });
 
 mp.events.add('playerDeath', (player) => {
+    let character = yarp.characters[player.name];
+    character.weapons = {};
+    character.save();
     player.call('removeWeapons');
+    player.removeAllWeapons();
     player.spawn(yarp.configs.spawn.value[Math.floor(Math.random() * yarp.configs.spawn.value.length)]);
-    db.characters.removeAllWeapons(player);
     player.health = 100;
 });
 

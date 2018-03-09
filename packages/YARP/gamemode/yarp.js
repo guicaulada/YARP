@@ -43,7 +43,7 @@ module.exports = new Promise((resolve, reject) => {
         new yarp.Command("code","developer","Let's you write code to be executed from inside the game. A very powerful command.",`
         (player) => {
           if (yarp.configs.admins.value.indexOf(player.socialClub) > -1){
-            player.call('createBrowser', [['package://YARP/ui/html/editor.html', 'prepareCodeBlock']]);
+            player.call('createBrowser', [['package://YARP/ui/html/editor.html', 'setupCodeEditor']]);
           }
         }
         `).save();

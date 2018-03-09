@@ -15,6 +15,7 @@ require('./gamemode/yarp.js').then(() => {
   //Load YARP Events
   console.log(chalk.yellowBright("[YARP] ")+"Loading YARP Events");
   //require('./events/yarp/bank.js');
+  require('./event/yarp/base.js');
   require('./event/yarp/character.js');
   //require('./events/yarp/inventory.js');
   //require('./events/yarp/item.js');

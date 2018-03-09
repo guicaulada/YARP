@@ -19,7 +19,6 @@ mp.events.add('showSelectorMenu', (file, id, selector, optionsJson) => {
 	mp.events.call('createBrowser', ['package://YARP/ui/html/sideMenu.html', 'populateSelectorOptions', file, id, selector, optionsJson]);
 });
 
-//I know this is redundant, but it's safer.
 mp.events.add('selectSelectorOption', (file, id, option) => {
   mp.events.callRemote('selectSelectorOption', file, id, option);
 });

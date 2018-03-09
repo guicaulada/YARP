@@ -33,12 +33,4 @@ module.exports = class Utility {
   static round(value, decimals){
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
   }
-
-  static getClass(obj) {
-    if (typeof obj === "undefined")
-      return "undefined";
-    if (obj === null)
-      return "null";
-    return Object.prototype.toString.call(obj).match(/^\[object\s(.*)\]$/)[1];
-  }
 }
