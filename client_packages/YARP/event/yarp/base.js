@@ -13,6 +13,9 @@ mp.events.add('yarp_runServerCode', (code) => {
   mp.events.callRemote('yarp_runServerCode', code)
 });
 
+mp.events.add('yarp_createGamemodeObject', (Class, object) => {
+  mp.events.callRemote('yarp_createGamemodeObject', Class, object)
+});
 
 mp.events.add('yarp_runClientCode', (code) => {
   eval(code);

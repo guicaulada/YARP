@@ -4,6 +4,13 @@ mp.events.add('playerChat', (player, message) => {
 });
 
 mp.events.add('playerCommand', (player, command) => {
+	const args = command.split(/[ ]+/);
+	const commandName = args.splice(0, 1)[0];
+
+	if (yarp.commands[commandName]) {
+    let fn = new Function('player','args',yarp.commands[commandName].cb);
+    fn(player,args);
+	}
 });
 
 mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
@@ -15,7 +22,7 @@ mp.events.add('playerDeath', (player) => {
     character.save();
     player.call('removeWeapons');
     player.removeAllWeapons();
-    player.spawn(yarp.configs.spawn.value[Math.floor(Math.random() * yarp.configs.spawn.value.length)]);
+    player.spawn(yarp.variables.spawn.value[Math.floor(Math.random() * yarp.variables.spawn.value.length)]);
     player.health = 100;
 });
 
@@ -30,7 +37,7 @@ mp.events.add('playerJoin', (player) => {
       setTimeout(function(){
         player.kick("You have been banned.");
       },1000);
-    } else if (yarp.configs.whitelist.value && !user.whitelisted) {
+    } else if (yarp.variables.whitelist.value && !user.whitelisted) {
       player.outputChatBox("!{yellow}You are not whitelisted.");
       console.log(`${player.socialClub} is not whitelisted.`);
       setTimeout(function(){

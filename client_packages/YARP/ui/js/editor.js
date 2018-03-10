@@ -1,4 +1,38 @@
 
+function setupObjectForm(Class, JSONargs) {
+  var objectClass = Class;
+  var objectArgs = JSON.parse(JSONargs);
+  var container = document.getElementById("object-form-items");
+  for (var i=0; i < objectArgs.length; i++){
+    var div = document.createElement("div");
+    div.classList.add('col-lg-12');
+    div.classList.add('col-lg-offset-2');
+    div.classList.add('d-block');
+    div.classList.add('mx-auto');
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = objectArgs[i];
+    input.placeholder = objectArgs[i];
+    input.required = true;
+    input.classList.add("form-control");
+    input.classList.add("form-control-sm");
+    div.appendChild(input);
+    container.appendChild(div);
+  }
+  $('#cancel').click(function(e) {
+    mp.trigger("destroyBrowser");
+  });
+  $('#object-form').submit(function(e){
+    e.preventDefault();
+    var args = {};
+    for (var i=0;i<objectArgs.length;i++){
+      args[objectArgs[i]] = document.getElementsByName(objectArgs[i])[0].value
+    }
+    mp.trigger("destroyBrowser");
+    mp.trigger('yarp_createGamemodeObject', objectClass, JSON.stringify(args));
+  })
+};
+
 function setupCodeEditor(){
   	//code here...
     var fullscreen = false;

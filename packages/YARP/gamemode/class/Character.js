@@ -3,57 +3,36 @@
  * @file Character class
  */
 module.exports = class Character{
-  constructor(id, socialClub, age, sex, face){
-    if ((typeof id) === 'object'){
-      this._id = id._id;
-      this.socialClub = id.socialClub;
-      this.lastLogin = id.lastLogin;
-      this.age = id.age;
-      this.model = id.model;
-      this.wallet = id.wallet;
-      this.bank = id.bank;
-      this.face = id.face;
-      this.health = id.health;
-      this.armour = id.armour;
-      this.position = id.position;
-      this.heading = id.heading;
-      this.groups = id.groups;
-      this.weapons = id.weapons;
-      this.skills = id.skills;
-      this.weight = id.weight;
-      this.inventory = id.inventory;
-      this.customization = id.costumization;
-      this.decoration = id.decoration;
-      this.clothes = id.clothes;
-    } else if ((id && socialClub && age && sex && face) != null){
-      this._id = id;
-      this.socialClub = socialClub;
-      this.lastLogin = "";
-      this.age = age;
-      this.model = sex;
-      this.wallet = yarp.configs.swallet.value;
-      this.bank = yarp.configs.sbank.value;
-      this.face = face;
-      this.health = 100;
-      this.armour = 0;
-      this.position = yarp.configs.first_spawn.value;
-      this.heading = yarp.configs.first_heading.value;
-      this.groups = [];
-      this.weapons = {};
-      this.skills = {};
-      this.weight = 0;
-      this.inventory = {};
-      this.customization = {};
-      this.decoration = {};
-      this.clothes = {};
+  constructor(_id, socialClub, lastLogin, age, model, wallet, bank, face, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
+    if ((typeof _id) === 'object' || (_id && socialClub && age && sex && face) != null){
+      this._id = _id._id || _id;
+      this.socialClub = _id.socialClub || socialClub;
+      this.lastLogin = _id.lastLogin || "";
+      this.age = _id.age || age;
+      this.model = _id.model || model;
+      this.wallet = _id.wallet || yarp.variables.swallet.value;
+      this.bank = _id.bank || yarp.variables.sbank.value;
+      this.face = _id.face || face;
+      this.health = _id.health || 100;
+      this.armour = _id.armour || 0;
+      this.position = _id.position || yarp.variables.first_spawn.value;
+      this.heading = _id.heading || yarp.variables.first_heading.value;
+      this.groups = _id.groups || [];
+      this.weapons = _id.weapons || {};
+      this.skills = _id.skills || {};
+      this.weight = _id.weight || 0;
+      this.inventory = _id.inventory || {};
+      this.customization = _id.costomization || {};
+      this.decoration = _id.decoration || {};
+      this.clothes = _id.clothes || {};
     }
   }
 
   static load(){
-    return yarp.Manager.load(Character);
+    return yarp.mng.load(Character);
   }
   save(){
-    yarp.Manager.save(this);
+    yarp.mng.save(this);
   }
 
   get player(){
@@ -73,16 +52,23 @@ module.exports = class Character{
     this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
   }
 
-  addGroup(group){
-    if (this.groups.indexOf(permission) == -1) {
-      this.groups.push(permission);
+  giveGroup(group){
+    if (this.groups.indexOf(group) == -1) {
+      let type = yarp.groups[group].type;
+      if (type){
+        let same_type = this.getGroupByType(type);
+        if (same_type){
+          this.takeGroup(same_type);
+        }
+      }
+      this.groups.push(group);
       return true;
     }
     return false;
   }
-  removeGroup(group){
+  takeGroup(group){
     if (this.groups.indexOf(group) > -1) {
-      this.groups.splice(this.groups.indexOf(permission), 1);
+      this.groups.splice(this.groups.indexOf(group), 1);
       return true;
     }
     return false;
@@ -148,7 +134,7 @@ module.exports = class Character{
   }
 
   giveItem(item, amount){
-    if (this.weight + item.weight < yarp.configs.max_weight){
+    if (this.weight + item.weight < yarp.variables.max_weight.value){
       if (this.inventory[item.id] != null){
         this.inventory[item.id] = this.inventory[item.id] + amount;
       } else {
@@ -171,11 +157,20 @@ module.exports = class Character{
     return false;
   }
 
-  giveWeapon(hash, amount){
-    if (this.weapons[hash] != null){
-      this.weapons[hash] = this.weapons[hash]+amount;
-    } else {
-      this.weapons[hash] = amount;
+  giveWeapon(id, amount){
+    if (!this.weapons[id]) {
+      this.weapons[id] = 0;
+    }
+    this.weapons[id] =+ amount;
+  }
+
+  takeWeapon(id, amount){
+    if (!this.weapons[id]) {
+      return;
+    }
+    this.weapons[id] =- amount;
+    if (this.weapons[id] <= 0) {
+      this.weapons[id] = 0;
     }
   }
 
@@ -261,5 +256,9 @@ module.exports = class Character{
       }
     }
     return true;
+  }
+
+  isDev(){
+    return yarp.variables.devs.value.indexOf(this.socialClub) > -1
   }
 }

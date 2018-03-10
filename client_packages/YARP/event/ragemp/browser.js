@@ -12,9 +12,9 @@ mp.events.add('createBrowser', (arguments) => {
 
 mp.events.add('browserDomReady', (browser) => {
 	if(customBrowser === browser) {
-		mp.gui.cursor.visible = true;
 		mp.gui.chat.activate(false);
 		mp.gui.chat.show(false);
+		mp.gui.cursor.visible = true;
 		if(parameters.length > 0) {
 			mp.events.call('executeFunction', parameters);
 		}
@@ -51,11 +51,5 @@ mp.events.add('destroyBrowser', (args) => {
 			args = args.slice(1 , args.length);
 			mp.events.call(cbr, args);
 		}
-	}
-});
-
-mp.events.add('render', () => {
-	if (customBrowser != null && !mp.gui.cursor.visible){
-		mp.gui.cursor.visible = true;
 	}
 });

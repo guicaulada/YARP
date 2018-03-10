@@ -1,6 +1,7 @@
 ﻿let bankSelectedOption = 0;
 let vehicleArray = null;
 let catalogSelectedOption = 0;
+let objectArgs = [];
 
 function loginAccount() {
     var password = document.getElementById('pass').value;

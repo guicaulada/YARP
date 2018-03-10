@@ -4,29 +4,22 @@
  */
 let bcrypt = require('bcryptjs');
 module.exports = class User{
-  constructor(id, password){
-    if ((typeof id) === 'object'){
-      this._id = id._id;
-      this.password = id.password;
-      this.lastLogin =  id.lastLogin;
-      this.whitelisted = id.whitelisted;
-      this.banned = id.banned;
-      this.groups = id.groups;
-    } else if ((id && password) != null){
-      this._id = id;
-      this.password = bcrypt.hashSync(password, 10);
-      this.lastLogin =  "";
-      this.whitelisted = false;
-      this.banned = false;
-      this.groups = [];
+  constructor(_id, password, lastLogin, whitelisted, banned, groups){
+    if ((typeof _id) === 'object' || (_id && password) != null){
+      this._id = _id._id || _id;
+      this.password = _id.password || bcrypt.hashSync(password, 10);
+      this.lastLogin = _id.lastLogin || "";
+      this.whitelisted =  _id.whitelisted || false;
+      this.banned = _id.banned || false;
+      this.groups = _id.groups || [];
     }
   }
 
   static load(){
-    return yarp.Manager.load(User);
+    return yarp.mng.load(User);
   }
   save(){
-    yarp.Manager.save(this);
+    yarp.mng.save(this);
   }
 
   get player(){
@@ -66,15 +59,26 @@ module.exports = class User{
     return bcrypt.compareSync(password, this.password);
   }
 
-  addGroup(group){
-    if (this.groups.indexOf(permission) == -1) {
-      this.groups.push(permission);
+  giveGroup(group){
+    if (this.groups.indexOf(group) == -1) {
+      let type = yarp.groups[group].type;
+      if (type){
+        let same_type = this.getGroupByType(type);
+        if (same_type){
+          this.takeGroup(same_type);
+        }
+      }
+      this.groups.push(group);
+      return true;
     }
+    return false;
   }
-  removeGroup(group){
+  takeGroup(group){
     if (this.groups.indexOf(group) > -1) {
-      this.groups.splice(this.groups.indexOf(permission), 1);
+      this.groups.splice(this.groups.indexOf(group), 1);
+      return true;
     }
+    return false;
   }
 
   getGroupByType(type){
@@ -112,11 +116,11 @@ module.exports = class User{
           readd = true;
         }
       }
-      if (removed && !readd){
-        result = false;
-      }
-      return result;
     });
+    if (removed && !readd){
+      result = false;
+    }
+    return result;
   }
 
   hasPermissions(permissions){
@@ -126,5 +130,9 @@ module.exports = class User{
       }
     }
     return true;
+  }
+
+  isDev(){
+    return yarp.variables.devs.value.indexOf(this._id) > -1
   }
 }

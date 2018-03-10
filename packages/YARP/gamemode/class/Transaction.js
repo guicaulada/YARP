@@ -3,28 +3,21 @@
  * @file Item class
  */
 module.exports = class Transaction{
-  constructor(id,type,value,source,target,date){
-    if ((typeof id) === 'object'){
-      this._id = id._id;
-      this.type = id.type;
-      this.value = id.value;
-      this.source = id.source;
-      this.target = id.target;
-      this.date = id.date;
-    } else if ((id && type && value && source && target && date) != null) {
-      this._id = id;
-      this.type = type;
-      this.value = value;
-      this.source = source;
-      this.target = target;
-      this.date = yarp.utils.getTimestamp(date);
+  constructor(_id,type,value,source,target,date){
+    if ((typeof _id) === 'object' || (_id && type && value && source && target && date) != null) {
+      this._id = _id._id || _id;
+      this.type = _id.type || type;
+      this.value = _id.value || value;
+      this.source = _id.source || source;
+      this.target = _id.target || target;
+      this.date = _id.date || yarp.utils.getTimestamp(date);
     }
   }
 
   static load(){
-    return yarp.Manager.load(Transaction);
+    return yarp.mng.load(Transaction);
   }
   save(){
-    yarp.Manager.save(this);
+    yarp.mng.save(this);
   }
 }

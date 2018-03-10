@@ -104,7 +104,7 @@ mp.events.add('selectorAddGroup', (player, args) => {
 
 mp.events.add('yarp_verifyLogin', (player,password) => {
   let user = yarp.users[player.socialClub]
-  if(user === null){
+  if(user == null){
     user = new yarp.User(player.socialClub,password);
   }
   if (user.verifyPassword(password)) {

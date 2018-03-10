@@ -6,8 +6,12 @@ module.exports = class Manager{
 
   static save(object){
     let collection = object.constructor.name.toLowerCase()+"s";
-    yarp[collection][object._id] = object;
-    yarp.db.save(collection, object);
+    if (object._id){
+      yarp[collection][object._id] = object;
+      yarp.db.save(collection, object);
+    } else {
+      console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be saved in "+collection+", missing _id.");
+    }
   }
 
   static load(Class){

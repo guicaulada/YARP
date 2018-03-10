@@ -3,23 +3,21 @@
  * @file Group class
  */
 module.exports = class Group{
-  constructor(id,type){
-    if ((typeof id) === 'object'){
-      this._id = id._id;
-      this.type = id.type;
-      this.permissions = id.permissions;
-    } else if ((typeof id) === 'string') {
-      this._id = id;
-      this.type = type;
-      this.permissions = [];
+  constructor(_id,type,permissions){
+    if ((typeof _id) === 'object' || (_id && type && permissions) != null) {
+      this._id = _id._id || _id;
+      this.type = _id.type || type;
+      this.permissions = _id.permissions || yarp.groups[_id].permissions.concat(permissions.filter(function (item) {
+                                              return yarp.groups[_id].permissions.indexOf(item) < 0;
+                                            }));
     }
   }
 
   static load(){
-    return yarp.Manager.load(Group);
+    return yarp.mng.load(Group);
   }
   save(){
-    yarp.Manager.save(this);
+    yarp.mng.save(this);
   }
   get users(){
     let users = {};
