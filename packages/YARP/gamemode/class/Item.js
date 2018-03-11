@@ -9,7 +9,7 @@ module.exports = class Item{
       this.name = _id.name || name;
       this.weight = _id.weight || weight;
       this.img = _id.img || img;
-      this.cb = _id.cb || cb;
+      this.cb = _id.cb || cb.toString();
     }
   }
 

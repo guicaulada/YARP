@@ -8,8 +8,8 @@ mp.events.add('playerCommand', (player, command) => {
 	const commandName = args.splice(0, 1)[0];
 
 	if (yarp.commands[commandName]) {
-    let fn = new Function('player','args',yarp.commands[commandName].cb);
-    fn(player,args);
+    let cb = eval(yarp.commands[commandName].cb);
+    cb(player,args);
 	}
 });
 

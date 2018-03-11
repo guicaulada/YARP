@@ -12,7 +12,7 @@ module.exports = class Npc{
       this.heading = _id.heading || heading || 0;
       this.viewDistance = _id.viewDistance || viewDistance || 100;
       this.hidden = _id.hidden || hidden || true;
-      this.cb = _id.cb || cb;
+      this.cb = _id.cb || cb.toString();
     }
   }
 

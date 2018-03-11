@@ -20,8 +20,8 @@ module.exports = class Marker{
       this.spin = _id.spin || spin || false;
       this.stayOnTop = _id.stayOnTop || stayOnTop || false;
       this.hidden = _id.hidden || hidden || true;
-      this.cb_in = _id.cb_in || cb_in;
-      this.cb_out = _id.cb_out || cb_out;
+      this.cb_in = _id.cb_in || cb_in.toString();
+      this.cb_out = _id.cb_out || cb_out.toString();
     }
   }
 

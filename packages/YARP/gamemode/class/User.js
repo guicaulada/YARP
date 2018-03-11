@@ -7,11 +7,11 @@ module.exports = class User{
   constructor(_id, password, lastLogin, whitelisted, banned, groups){
     if ((typeof _id) === 'object' || (_id && password) != null){
       this._id = _id._id || _id;
-      this.password = _id.password || bcrypt.hashSync(password, 10);
-      this.lastLogin = _id.lastLogin || "";
-      this.whitelisted =  _id.whitelisted || false;
-      this.banned = _id.banned || false;
-      this.groups = _id.groups || [];
+      this.password = _id.password || password || bcrypt.hashSync(password, 10);
+      this.lastLogin = _id.lastLogin || lastLogin || "";
+      this.whitelisted =  _id.whitelisted || whitelisted || false;
+      this.banned = _id.banned || banned || false;
+      this.groups = _id.groups || groups || [];
     }
   }
 

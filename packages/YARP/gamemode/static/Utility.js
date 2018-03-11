@@ -43,4 +43,38 @@ module.exports = class Utility {
       result = [];
     return result;
   }
+
+  static parseParams(obj){
+    let obj_p = "";
+    if (typeof obj === "string") {
+      return "\""+obj+"\"";
+    }
+    else if (typeof obj === "boolean" || typeof obj === "number") {
+      return obj.toString();
+    }
+    else if (obj instanceof Array) {
+      obj_p = "["
+      for (let o of obj){
+        obj_p = obj_p+" "+this.parseParams(o)+","
+      }
+      if (obj.length > 0){
+        obj_p = obj_p.slice(0, -1);
+      }
+      return obj_p+" ]";
+    }
+    else if (obj instanceof Object) {
+      obj_p = "{"
+      for (let k in obj) {
+        obj_p = obj_p+" \""+k+"\": "+this.parseParams(obj[k])+",";
+      }
+      if (Object.keys(obj).length > 0){
+        obj_p = obj_p.slice(0, -1);
+      }
+      return obj_p+" }";
+    }
+    else if (obj instanceof Function) {
+      return obj.toString();
+    }
+    return obj_p;
+  }
 }

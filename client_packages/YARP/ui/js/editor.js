@@ -1,3 +1,4 @@
+var editor = null
 
 function setupObjectForm(Class, JSONargs) {
   var objectClass = Class;
@@ -33,11 +34,11 @@ function setupObjectForm(Class, JSONargs) {
   })
 };
 
-function setupCodeEditor(){
+function setupCodeEditor(text){
   	//code here...
     var fullscreen = false;
   	var code = $(".codemirror-textarea")[0];
-  	var editor = CodeMirror.fromTextArea(code, {
+  	editor = CodeMirror.fromTextArea(code, {
       mode : {name: "javascript", json: true},
       theme : "monokai",
   		lineNumbers : true,
@@ -79,4 +80,7 @@ function setupCodeEditor(){
     });
     editor.setSize($('.wrapper').width(), $('.wrapper').height());
     $('[data-toggle="tooltip"]').tooltip();
+    if (text) {
+      editor.getDoc().setValue(text);
+    }
 }

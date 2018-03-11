@@ -8,7 +8,7 @@ module.exports = class Command{
       this._id = _id._id || _id;
       this.category = _id.category || category;
       this.hint = _id.hint || hint;
-      this.cb = _id.cb || cb;
+      this.cb = _id.cb || cb.toString();
     }
   }
 

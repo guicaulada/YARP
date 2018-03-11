@@ -17,7 +17,7 @@ module.exports = class Text{
       this.font = _id.font || font || 2;
       this.outline = _id.outline || outline || true;
       this.hidden = _id.hidden || hidden || true;
-      this.cb = _id.cb || cb;
+      this.cb = _id.cb || cb.toString();
     }
   }
 

@@ -10,7 +10,7 @@ module.exports = class Transaction{
       this.value = _id.value || value;
       this.source = _id.source || source;
       this.target = _id.target || target;
-      this.date = _id.date || yarp.utils.getTimestamp(date);
+      this.date = _id.date || date || yarp.utils.getTimestamp(date);
     }
   }
 

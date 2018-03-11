@@ -4,27 +4,27 @@
  */
 module.exports = class Character{
   constructor(_id, socialClub, lastLogin, age, model, wallet, bank, face, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
-    if ((typeof _id) === 'object' || (_id && socialClub && age && sex && face) != null){
+    if ((typeof _id) === 'object' || (_id && socialClub && age && model && face) != null){
       this._id = _id._id || _id;
       this.socialClub = _id.socialClub || socialClub;
-      this.lastLogin = _id.lastLogin || "";
+      this.lastLogin = _id.lastLogin || lastLogin || "";
       this.age = _id.age || age;
       this.model = _id.model || model;
-      this.wallet = _id.wallet || yarp.variables.swallet.value;
-      this.bank = _id.bank || yarp.variables.sbank.value;
+      this.wallet = _id.wallet || wallet || yarp.variables.swallet.value;
+      this.bank = _id.bank || bank || yarp.variables.sbank.value;
       this.face = _id.face || face;
-      this.health = _id.health || 100;
-      this.armour = _id.armour || 0;
-      this.position = _id.position || yarp.variables.first_spawn.value;
-      this.heading = _id.heading || yarp.variables.first_heading.value;
-      this.groups = _id.groups || [];
-      this.weapons = _id.weapons || {};
-      this.skills = _id.skills || {};
-      this.weight = _id.weight || 0;
-      this.inventory = _id.inventory || {};
-      this.customization = _id.costomization || {};
-      this.decoration = _id.decoration || {};
-      this.clothes = _id.clothes || {};
+      this.health = _id.health || health || 100;
+      this.armour = _id.armour || armour || 0;
+      this.position = _id.position || position || yarp.variables.first_spawn.value;
+      this.heading = _id.heading || heading || yarp.variables.first_heading.value;
+      this.groups = _id.groups || groups || [];
+      this.weapons = _id.weapons || weapons || {};
+      this.skills = _id.skills || skills || {};
+      this.weight = _id.weight || weight || 0;
+      this.inventory = _id.inventory || inventory || {};
+      this.customization = _id.customization || customization || {};
+      this.decoration = _id.decoration || decoration || {};
+      this.clothes = _id.clothes || clothes || {};
     }
   }
 

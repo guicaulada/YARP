@@ -52,11 +52,10 @@ body {
 }
 
 .wrapper {
-  position: absolute;
-  top : 150px;
-  left : 150px;
-  width: 400px;
-  height: 400px;
+  margin: auto;
+  margin-top: 100px;
+  width: 1024px;
+  height: 576px;
 }
 
 .toolbar {
