@@ -11,9 +11,12 @@ module.exports = class Variable{
   }
 
   static load(){
-    return yarp.mng.load(Variable);
+    return yarp.dbm.load(Variable);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

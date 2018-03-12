@@ -14,9 +14,12 @@ module.exports = class Item{
   }
 
   static load(){
-    return yarp.mng.load(Item);
+    return yarp.dbm.load(Item);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

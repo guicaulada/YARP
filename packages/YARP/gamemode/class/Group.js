@@ -14,10 +14,13 @@ module.exports = class Group{
   }
 
   static load(){
-    return yarp.mng.load(Group);
+    return yarp.dbm.load(Group);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
   get users(){
     let users = {};

@@ -6,9 +6,9 @@ module.exports = new Promise((resolve, reject) => {
   //Define Utilities and Database
   yarp.utils = require('./static/Utility');
   yarp.db = require('./static/MongoDB');
-  yarp.mng = require('./static/Manager');
+  yarp.dbm = require('./static/DBManager');
 
-  yarp.db.getInstance().then(() => {
+  yarp.db.connect().then(() => {
 
     //Loading Manager
     console.log(chalk.yellowBright("[YARP] ")+"Loading Manager");

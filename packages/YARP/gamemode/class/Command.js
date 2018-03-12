@@ -13,9 +13,25 @@ module.exports = class Command{
   }
 
   static load(){
-    return yarp.mng.load(Command);
+    return yarp.dbm.load(Command);
   }
+
+  static get categories(){
+    let res = {};
+    for (let k in yarp.commands){
+      let cmd = yarp.commands[k];
+      if (!res[cmd.category]){
+        res[cmd.category] = [];
+      }
+      res[cmd.category].push(cmd._id);
+    }
+    return res;
+  }
+
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

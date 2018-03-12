@@ -154,41 +154,41 @@ function initializeCharacterCreation(player) {
 }
 
 function updatePlayerFace(player, face) {
-	player.setHeadBlendData(parseInt(face.firstHeadShape), parseInt(face.secondHeadShape), 0, parseInt(face.firstSkinTone), parseInt(face.secondSkinTone), 0, parseInt(face.headMix), parseInt(face.skinMix), 0, false);
-	player.setComponentVariation(2, parseInt(face.hairModel), 0, 0);
-	player.setHairColor(parseInt(face.firstHairColor), parseInt(face.secondHairColor));
-	player.setEyeColor(parseInt(face.eyesColor));
-	player.setHeadOverlay(1, parseInt(face.beardModel), 0.99, parseInt(face.beardColor), 0);
-	player.setHeadOverlay(10, parseInt(face.chestModel), 0.99, parseInt(face.chestColor), 0);
-	player.setHeadOverlay(2, parseInt(face.eyebrowsModel), 0.99, parseInt(face.eyebrowsColor), 0);
-	player.setHeadOverlay(5, parseInt(face.blushModel), 0.99, parseInt(face.blushColor), 0);
-	player.setHeadOverlay(8, parseInt(face.lipstickModel), 0.99, parseInt(face.lipstickColor), 0);
-	player.setHeadOverlay(0, parseInt(face.blemishesModel), 0.99, 0, 0);
-	player.setHeadOverlay(3, parseInt(face.ageingModel), 0.99, 0, 0);
-	player.setHeadOverlay(6, parseInt(face.complexionModel), 0.99, 0, 0);
-	player.setHeadOverlay(7, parseInt(face.sundamageModel), 0.99, 0, 0);
-	player.setHeadOverlay(9, parseInt(face.frecklesModel), 0.99, 0, 0);
-	player.setHeadOverlay(4, parseInt(face.makeupModel), 0.99, 0, 0);
-	player.setFaceFeature(0, parseInt(face.noseWidth));
-	player.setFaceFeature(1, parseInt(face.noseHeight));
-	player.setFaceFeature(2, parseInt(face.noseLength));
-	player.setFaceFeature(3, parseInt(face.noseBridge));
-	player.setFaceFeature(4, parseInt(face.noseTip));
-	player.setFaceFeature(5, parseInt(face.noseShift));
-	player.setFaceFeature(6, parseInt(face.browHeight));
-	player.setFaceFeature(7, parseInt(face.browWidth));
-	player.setFaceFeature(8, parseInt(face.cheekboneHeight));
-	player.setFaceFeature(9, parseInt(face.cheekboneWidth));
-	player.setFaceFeature(10, parseInt(face.cheeksWidth));
-	player.setFaceFeature(11, parseInt(face.eyes));
-	player.setFaceFeature(12, parseInt(face.lips));
-	player.setFaceFeature(13, parseInt(face.jawWidth));
-	player.setFaceFeature(14, parseInt(face.jawHeight));
-	player.setFaceFeature(15, parseInt(face.chinLength));
-	player.setFaceFeature(16, parseInt(face.chinPosition));
-	player.setFaceFeature(17, parseInt(face.chinWidth));
-	player.setFaceFeature(18, parseInt(face.chinShape));
-	player.setFaceFeature(19, parseInt(face.neckWidth));
+	player.setHeadBlendData(Number(face.firstHeadShape), Number(face.secondHeadShape), 0, Number(face.firstSkinTone), Number(face.secondSkinTone), 0, Number(face.headMix), Number(face.skinMix), 0, false);
+	player.setComponentVariation(2, Number(face.hairModel), 0, 0);
+	player.setHairColor(Number(face.firstHairColor), Number(face.secondHairColor));
+	player.setEyeColor(Number(face.eyesColor));
+	player.setHeadOverlay(1, Number(face.beardModel), 0.99, Number(face.beardColor), 0);
+	player.setHeadOverlay(10, Number(face.chestModel), 0.99, Number(face.chestColor), 0);
+	player.setHeadOverlay(2, Number(face.eyebrowsModel), 0.99, Number(face.eyebrowsColor), 0);
+	player.setHeadOverlay(5, Number(face.blushModel), 0.99, Number(face.blushColor), 0);
+	player.setHeadOverlay(8, Number(face.lipstickModel), 0.99, Number(face.lipstickColor), 0);
+	player.setHeadOverlay(0, Number(face.blemishesModel), 0.99, 0, 0);
+	player.setHeadOverlay(3, Number(face.ageingModel), 0.99, 0, 0);
+	player.setHeadOverlay(6, Number(face.complexionModel), 0.99, 0, 0);
+	player.setHeadOverlay(7, Number(face.sundamageModel), 0.99, 0, 0);
+	player.setHeadOverlay(9, Number(face.frecklesModel), 0.99, 0, 0);
+	player.setHeadOverlay(4, Number(face.makeupModel), 0.99, 0, 0);
+	player.setFaceFeature(0, Number(face.noseWidth));
+	player.setFaceFeature(1, Number(face.noseHeight));
+	player.setFaceFeature(2, Number(face.noseLength));
+	player.setFaceFeature(3, Number(face.noseBridge));
+	player.setFaceFeature(4, Number(face.noseTip));
+	player.setFaceFeature(5, Number(face.noseShift));
+	player.setFaceFeature(6, Number(face.browHeight));
+	player.setFaceFeature(7, Number(face.browWidth));
+	player.setFaceFeature(8, Number(face.cheekboneHeight));
+	player.setFaceFeature(9, Number(face.cheekboneWidth));
+	player.setFaceFeature(10, Number(face.cheeksWidth));
+	player.setFaceFeature(11, Number(face.eyes));
+	player.setFaceFeature(12, Number(face.lips));
+	player.setFaceFeature(13, Number(face.jawWidth));
+	player.setFaceFeature(14, Number(face.jawHeight));
+	player.setFaceFeature(15, Number(face.chinLength));
+	player.setFaceFeature(16, Number(face.chinPosition));
+	player.setFaceFeature(17, Number(face.chinWidth));
+	player.setFaceFeature(18, Number(face.chinShape));
+	player.setFaceFeature(19, Number(face.neckWidth));
 }
 
 function updatePlayerTattoos(player, tattooArray) {

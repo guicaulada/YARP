@@ -24,6 +24,7 @@ yarp.Group.load().then(() => {
   ]).save();
   new yarp.Group('user',false,[
     "cmd.inventory",
-    "cmd.money"
+    "cmd.money",
+    "cmd.hint"
   ]).save();
 });

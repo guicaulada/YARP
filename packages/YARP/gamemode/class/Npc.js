@@ -17,9 +17,12 @@ module.exports = class Npc{
   }
 
   static load(){
-    return yarp.mng.load(Npc);
+    return yarp.dbm.load(Npc);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

@@ -22,9 +22,12 @@ module.exports = class Text{
   }
 
   static load(){
-    return yarp.mng.load(Text);
+    return yarp.dbm.load(Text);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

@@ -26,9 +26,12 @@ module.exports = class Marker{
   }
 
   static load(){
-    return yarp.mng.load(Marker);
+    return yarp.dbm.load(Marker);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

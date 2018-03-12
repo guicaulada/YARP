@@ -21,9 +21,12 @@ module.exports = class Blip{
   }
 
   static load(){
-    return yarp.mng.load(Blip);
+    return yarp.dbm.load(Blip);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }

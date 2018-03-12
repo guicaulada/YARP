@@ -3,16 +3,16 @@
  * @file Character class
  */
 module.exports = class Character{
-  constructor(_id, socialClub, lastLogin, age, model, wallet, bank, face, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
+  constructor(_id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
     if ((typeof _id) === 'object' || (_id && socialClub && age && model && face) != null){
       this._id = _id._id || _id;
       this.socialClub = _id.socialClub || socialClub;
-      this.lastLogin = _id.lastLogin || lastLogin || "";
       this.age = _id.age || age;
       this.model = _id.model || model;
+      this.face = _id.face || face;
+      this.lastLogin = _id.lastLogin || lastLogin || "";
       this.wallet = _id.wallet || wallet || yarp.variables.swallet.value;
       this.bank = _id.bank || bank || yarp.variables.sbank.value;
-      this.face = _id.face || face;
       this.health = _id.health || health || 100;
       this.armour = _id.armour || armour || 0;
       this.position = _id.position || position || yarp.variables.first_spawn.value;
@@ -29,10 +29,13 @@ module.exports = class Character{
   }
 
   static load(){
-    return yarp.mng.load(Character);
+    return yarp.dbm.load(Character);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 
   get player(){

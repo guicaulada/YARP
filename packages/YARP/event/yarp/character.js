@@ -1,7 +1,7 @@
-mp.events.add('yarp_createCharacter', (player, id, age, sex, faceJson) => {
+mp.events.add('yarp_createCharacter', (player, id, age, model, faceJson) => {
   let character = yarp.characters[id];
   if(character == null){
-    character = new yarp.Character(id, player.socialClub, age, sex, JSON.parse(faceJson));
+    character = new yarp.Character(id, player.socialClub, age, model, JSON.parse(faceJson));
     character.save();
     player.call('yarp_characterCreatedSuccessfully');
     player.call('yarp_showPlayerCharacters', [JSON.stringify(character.user.characters)]);

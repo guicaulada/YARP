@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Character creator</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/character.css" />
     <link rel="stylesheet" href="../css/scrollbar.css" />
 </head>
@@ -47,11 +48,11 @@
             <label for="age" class="color-lightgrey">Age: </label>
             <div class="age-input">
                 <span class="input-group-btn age-group-btn data-dwn">
-                    <button id="btn-age-minus" class="btn-age btn btn-default btn-info" data-dir="minus" data-field="age"><span class="glyphicon glyphicon-minus"></span></button>
+                    <button id="btn-age-minus" class="btn-age btn btn-default btn-info" data-dir="minus" data-field="age"><span class="fa fa-minus"></span></button>
                 </span>
                 <input id="age" type="number" class="age-input-field character-input form-control text-center" name="age" value="18" min="12" max="90" />
                 <span class="input-group-btn age-group-btn data-up">
-                    <button id="btn-age-plus" class="btn-age btn btn-default btn-info" data-dir="plus" data-field="age"><span class="glyphicon glyphicon-plus"></span></button>
+                    <button id="btn-age-plus" class="btn-age btn btn-default btn-info" data-dir="plus" data-field="age"><span class="fa fa-plus"></span></button>
                 </span>
             </div>
             <!--<input id="age" class="character-input width-12" type="number" name="age" min="12" max="90" value="18" />-->
@@ -89,17 +90,17 @@
                 <div>
                     <h2>Father's face</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevFatherFace();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevFatherFace();"></span>
                         <span id="face-father-shape" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextFatherFace();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextFatherFace();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Mother's face</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevMotherFace();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevMotherFace();"></span>
                         <span id="face-mother-shape" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextMotherFace();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextMotherFace();"></span>
                     </div>
                 </div>
                 <div>
@@ -109,17 +110,17 @@
                 <div>
                     <h2>Father's skin tone</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevFatherSkin();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevFatherSkin();"></span>
                         <span id="father-skin" class="color-lightgrey">Tone 1</span>
-                        <span class="right-arrow" onclick="showNextFatherSkin();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextFatherSkin();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Mother's skin tone</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevMotherSkin();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevMotherSkin();"></span>
                         <span id="mother-skin" class="color-lightgrey">Tone 1</span>
-                        <span class="right-arrow" onclick="showNextMotherSkin();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextMotherSkin();"></span>
                     </div>
                 </div>
                 <div>
@@ -133,57 +134,57 @@
                 <div>
                     <h2>Hairstyle</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevHairModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevHairModel();"></span>
                         <span id="hair-model" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextHairModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextHairModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Hair color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevHairFirstColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevHairFirstColor();"></span>
                         <span id="hair-first-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextHairFirstColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextHairFirstColor();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Highlight color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevHairSecondColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevHairSecondColor();"></span>
                         <span id="hair-second-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextHairSecondColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextHairSecondColor();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Beard style</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevBeardModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevBeardModel();"></span>
                         <span id="beard-model" class="color-lightgrey">No beard</span>
-                        <span class="right-arrow" onclick="showNextBeardModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextBeardModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Beard color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevBeardColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevBeardColor();"></span>
                         <span id="beard-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextBeardColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextBeardColor();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Chest hair style</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevChestModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevChestModel();"></span>
                         <span id="chest-model" class="color-lightgrey">No hair</span>
-                        <span class="right-arrow" onclick="showNextChestModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextChestModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Chest hair color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevChestColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevChestColor();"></span>
                         <span id="chest-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextChestColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextChestColor();"></span>
                     </div>
                 </div>
             </div>
@@ -193,41 +194,41 @@
                 <div>
                     <h2>Blemishes</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevBlemishesModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevBlemishesModel();"></span>
                         <span id="blemishes-model" class="color-lightgrey">No blemishes</span>
-                        <span class="right-arrow" onclick="showNextBlemishesModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextBlemishesModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Ageing</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevAgeingModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevAgeingModel();"></span>
                         <span id="ageing-model" class="color-lightgrey">No ageing</span>
-                        <span class="right-arrow" onclick="showNextAgeingModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextAgeingModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Complexion</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevComplexionModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevComplexionModel();"></span>
                         <span id="complexion-model" class="color-lightgrey">No complexion</span>
-                        <span class="right-arrow" onclick="showNextComplexionModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextComplexionModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Sunburn</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevSundamageModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevSundamageModel();"></span>
                         <span id="sundamage-model" class="color-lightgrey">No sunburn</span>
-                        <span class="right-arrow" onclick="showNextSundamageModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextSundamageModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Freckles</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevFrecklesModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevFrecklesModel();"></span>
                         <span id="freckles-model" class="color-lightgrey">No freckles</span>
-                        <span class="right-arrow" onclick="showNextFrecklesModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextFrecklesModel();"></span>
                     </div>
                 </div>
             </div>
@@ -237,25 +238,25 @@
                 <div>
                     <h2>Eye color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevEyesColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevEyesColor();"></span>
                         <span id="eyes-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextEyesColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextEyesColor();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Eybrows style</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevEyebrowsModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevEyebrowsModel();"></span>
                         <span id="eyebrows-model" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextEyebrowsModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextEyebrowsModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Eyebrows color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevEyebrowsColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevEyebrowsColor();"></span>
                         <span id="eyebrows-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextEyebrowsColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextEyebrowsColor();"></span>
                     </div>
                 </div>
             </div>
@@ -349,41 +350,41 @@
                 <div>
                     <h2>Makeup style</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevMakeupModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevMakeupModel();"></span>
                         <span id="makeup-model" class="color-lightgrey">No makeup</span>
-                        <span class="right-arrow" onclick="showNextMakeupModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextMakeupModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Blush style</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevBlushModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevBlushModel();"></span>
                         <span id="blush-model" class="color-lightgrey">No blush</span>
-                        <span class="right-arrow" onclick="showNextBlushModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextBlushModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Blush color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevBlushColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevBlushColor();"></span>
                         <span id="blush-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextBlushColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextBlushColor();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Lipstick style</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevLipstickModel();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevLipstickModel();"></span>
                         <span id="lipstick-model" class="color-lightgrey">No lipstick</span>
-                        <span class="right-arrow" onclick="showNextLipstickModel();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextLipstickModel();"></span>
                     </div>
                 </div>
                 <div>
                     <h2>Liptick color</h2>
                     <div class="arrow-picker">
-                        <span class="left-arrow" onclick="showPrevLipstickColor();"></span>
+                        <span class="fa fa-arrow-left" onclick="showPrevLipstickColor();"></span>
                         <span id="lipstick-color" class="color-lightgrey">Type 1</span>
-                        <span class="right-arrow" onclick="showNextLipstickColor();"></span>
+                        <span class="fa fa-arrow-right" onclick="showNextLipstickColor();"></span>
                     </div>
                 </div>
             </div>

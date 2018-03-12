@@ -6,11 +6,14 @@ mp.events.add('playerChat', (player, message) => {
 mp.events.add('playerCommand', (player, command) => {
 	const args = command.split(/[ ]+/);
 	const commandName = args.splice(0, 1)[0];
+  command = yarp.commands[commandName];
 
-	if (yarp.commands[commandName]) {
-    let cb = eval(yarp.commands[commandName].cb);
+	if (command) {
+    let cb = eval(command.cb);
     cb(player,args);
-	}
+	} else {
+    player.outputChatBox("!{yellow}HINT!{white}: Command doesn't exist.");
+  }
 });
 
 mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
@@ -27,6 +30,7 @@ mp.events.add('playerDeath', (player) => {
 });
 
 mp.events.add('playerJoin', (player) => {
+  player.name = player.socialClub;
   console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
   player.call('yarp_setWorldTime', [JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
   let user = yarp.users[player.socialClub]

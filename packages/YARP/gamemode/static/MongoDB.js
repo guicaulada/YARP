@@ -8,7 +8,7 @@ const URL = 'mongodb://localhost:27017/yarp';
 
 module.exports = class MongoDB {
 
-  static getInstance(){
+  static connect(){
     return new Promise((resolve, reject) =>{
       if (db) {
         resolve(db);
@@ -23,10 +23,10 @@ module.exports = class MongoDB {
     });
   }
 
-  static save(collection,query){
+  static insert(collection,docs,options){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).save(query, function(err, res) {
+      this.connect().then((db) => {
+        db.collection(collection).insert(docs, options, function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
           resolve(res);
         });
@@ -34,10 +34,10 @@ module.exports = class MongoDB {
     });
   }
 
-  static insertOne(collection,query){
+  static remove(collection,selector,options){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).insertOne(query, function(err, res) {
+      this.connect().then((db) => {
+        db.collection(collection).remove(selector, options, function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
           resolve(res);
         });
@@ -45,10 +45,10 @@ module.exports = class MongoDB {
     });
   }
 
-  static insertMany(collection,query){
+  static save(collection,doc,options){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).insertMany(query, function(err, res) {
+      this.connect().then((db) => {
+        db.collection(collection).save(doc, options, function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
           resolve(res);
         });
@@ -56,10 +56,10 @@ module.exports = class MongoDB {
     });
   }
 
-  static findOne(collection,query){
+  static update(collection,selector,doc,options){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).findOne(query, function(err, res) {
+      this.connect().then((db) => {
+        db.collection(collection).save(selector, doc, options, function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
           resolve(res);
         });
@@ -67,72 +67,10 @@ module.exports = class MongoDB {
     });
   }
 
-  static find(collection,query,values,option){
-    if (values == null && option == null){
-      return new Promise((resolve, reject) =>{
-        this.getInstance().then((db) => {
-          db.collection(collection).find(query).toArray(function(err, res) {
-            if (err) console.log(chalk.redBright("[YARP] ")+err);
-            resolve(res);
-          });
-        });
-      });
-    } else if (option == null){
-      return new Promise((resolve, reject) =>{
-        this.getInstance().then((db) => {
-          db.collection(collection).find(query,values).toArray(function(err, res) {
-            if (err) console.log(chalk.redBright("[YARP] ")+err);
-            resolve(res);
-          });
-        });
-      });
-    } else if ((typeof option) === 'object'){
-      return new Promise((resolve, reject) =>{
-        this.getInstance().then((db) => {
-          db.collection(collection).find(query).sort(sort).toArray(function(err, res) {
-            if (err) console.log(chalk.redBright("[YARP] ")+err);
-            resolve(res);
-          });
-        });
-      });
-    } else if ((typeof option) === 'number'){
-      return new Promise((resolve, reject) =>{
-        this.getInstance().then((db) => {
-          db.collection(collection).find(query).limit(limit).toArray(function(err, res) {
-            if (err) console.log(chalk.redBright("[YARP] ")+err);
-            resolve(res);
-          });
-        });
-      });
-    }
-  }
-
-  static deleteOne(collection,query){
+  static destinct(collection,key,query,option){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).deleteOne(query, function(err, obj) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
-          resolve(obj.result);
-        });
-      });
-    });
-  }
-
-  static deleteMany(collection,query){
-    return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).deleteMany(query, function(err, obj) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
-          resolve(obj.result);
-        });
-      });
-    });
-  }
-
-  static updateOne(collection,query,values){
-    return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).updateOne({$set: query}, values, function(err, res) {
+      this.connect().then((db) => {
+        db.collection(collection).destinct(key,query,option, function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
           resolve(res);
         });
@@ -140,31 +78,54 @@ module.exports = class MongoDB {
     });
   }
 
-  static updateMany(collection,query,values){
+  static count(collection,query,option){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).updateMany({$set: query}, values, function(err, obj) {
+      this.connect().then((db) => {
+        db.collection(collection).count(query,option, function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
-          resolve(obj.result);
+          resolve(res);
         });
       });
     });
   }
 
-  static aggregate(collection,from,query,local,foreign,as){
+  static find(collection,query,options){
     return new Promise((resolve, reject) =>{
-      this.getInstance().then((db) => {
-        db.collection(collection).aggregate([
-        {
-          $lookup:
-          {
-            from: from,
-            localField: local,
-            foreignField: foreign,
-            as: as
-          }
-        }
-      ]).toArray(function(err, res) {
+      this.connect().then((db) => {
+        db.collection(collection).find(query,options).toArray(function(err, res) {
+          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          resolve(res);
+        });
+      });
+    });
+  }
+
+  static indexes(collection){
+    return new Promise((resolve, reject) =>{
+      this.connect().then((db) => {
+        db.collection(collection).indexes(function(err, res) {
+          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          resolve(res);
+        });
+      });
+    });
+  }
+
+  static aggregate(collection,query,options){
+    return new Promise((resolve, reject) =>{
+      this.connect().then((db) => {
+        db.collection(collection).aggregate(query,options,function(err, res) {
+          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          resolve(res);
+        });
+      });
+    });
+  }
+
+  static stats(collection){
+    return new Promise((resolve, reject) =>{
+      this.connect().then((db) => {
+        db.collection(collection).stats(function(err, res) {
           if (err) console.log(chalk.redBright("[YARP] ")+err);
           resolve(res);
         });

@@ -15,9 +15,12 @@ module.exports = class Transaction{
   }
 
   static load(){
-    return yarp.mng.load(Transaction);
+    return yarp.dbm.load(Transaction);
   }
   save(){
-    yarp.mng.save(this);
+    yarp.dbm.save(this);
+  }
+  remove(){
+    yarp.dbm.remove(this);
   }
 }
