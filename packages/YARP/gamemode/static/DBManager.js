@@ -4,7 +4,12 @@
  */
 module.exports = class DBManager{
 
-  static save(object){
+
+  static async connect(){
+    await yarp.db.connect();
+  }
+
+  static async save(object){
     let collection = object.constructor.name.toLowerCase()+"s";
     if (object._id){
       yarp[collection][object._id] = object;
@@ -14,7 +19,7 @@ module.exports = class DBManager{
     }
   }
 
-  static remove(object){
+  static async remove(object){
     let collection = object.constructor.name.toLowerCase()+"s";
     if (object._id){
       yarp.db.remove(collection, {_id: object._id});
@@ -24,17 +29,13 @@ module.exports = class DBManager{
     }
   }
 
-  static load(Class){
-    return new Promise((resolve, reject) =>{
-      let collection = (new Class).constructor.name.toLowerCase()+"s";
-      let result = {};
-      yarp.db.find(collection).then((res) =>{
-        for (let i = 0; i < res.length; i++){
-          result[res[i]._id] = new Class(res[i]);
-        }
-        yarp[collection] = result;
-        resolve();
-      });
-    });
+  static async load(Class){
+    let collection = (new Class).constructor.name.toLowerCase()+"s";
+    let result = {};
+    let res = await yarp.db.find(collection);
+    for (let i = 0; i < res.length; i++){
+      result[res[i]._id] = new Class(res[i]);
+    }
+    yarp[collection] = result;
   }
 }
