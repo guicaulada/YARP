@@ -26,18 +26,18 @@ module.exports = class User{
   }
 
   get player(){
-    mp.players.forEach((player, i) => {
+    for (let player of mp.players.toArray()) {
       if (player.socialClub == this._id){
         return player;
       }
-    });
+    }
     return null;
   }
 
   get characters(){
     let characters = {};
     for (let id in yarp.characters){
-      let character = yarp.characters[id]
+      let character = yarp.characters[id];
       if (character.socialClub == this._id){
         characters[id] = character;
       }
@@ -62,6 +62,44 @@ module.exports = class User{
     return bcrypt.compareSync(password, this.password);
   }
 
+  joinedGroup(group){
+    let player = this.player;
+    if (group) {
+      if (yarp.groups[group].cb_in){
+        let cb = eval(yarp.groups[group].cb_in);
+        cb(player);
+        mp.events.call('yarp_userJoinedGroup',player,this,group);
+      }
+    } else {
+      for (let group of this.groups){
+        if (yarp.groups[group].cb_in){
+          let cb = eval(yarp.groups[group].cb_in);
+          cb(player);
+          mp.events.call('yarp_userJoinedGroup',player,this,group);
+        }
+      }
+    }
+  }
+
+  leftGroup(group){
+    let player = this.player;
+    if (group) {
+      if (yarp.groups[group].cb_out){
+        let cb = eval(yarp.groups[group].cb_out);
+        cb(player);
+        mp.events.call('yarp_userLeftGroup',player,this,group);
+      }
+    } else {
+      for (let group of this.groups){
+        if (yarp.groups[group].cb_out){
+          let cb = eval(yarp.groups[group].cb_out);
+          cb(player);
+          mp.events.call('yarp_userLeftGroup',player,this,group);
+        }
+      }
+    }
+  }
+
   giveGroup(group){
     if (this.groups.indexOf(group) == -1) {
       let type = yarp.groups[group].type;
@@ -69,9 +107,11 @@ module.exports = class User{
         let same_type = this.getGroupByType(type);
         if (same_type){
           this.takeGroup(same_type);
+          this.leftGroup(group);
         }
       }
       this.groups.push(group);
+      this.joinedGroup(group);
       return true;
     }
     return false;
@@ -79,6 +119,7 @@ module.exports = class User{
   takeGroup(group){
     if (this.groups.indexOf(group) > -1) {
       this.groups.splice(this.groups.indexOf(group), 1);
+      this.leftGroup(group);
       return true;
     }
     return false;

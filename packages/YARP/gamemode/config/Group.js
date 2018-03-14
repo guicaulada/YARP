@@ -8,7 +8,7 @@ yarp.Group.load().then(() => {
     "cmd.code",
     "cmd.givegroup",
     "cmd.givegroup"
-  ]).save();
+  ], (player) => {player.notify("You are superadmin.");}, false).save();
   new yarp.Group('admin',false,[
     "cmd.kill",
     "cmd.hp",
@@ -21,10 +21,10 @@ yarp.Group.load().then(() => {
     "cmd.tp",
     "cmd.jtp",
     "cmd.jpos"
-  ]).save();
+  ], false, false).save();
   new yarp.Group('user',false,[
     "cmd.inventory",
     "cmd.money",
     "cmd.hint"
-  ]).save();
+  ], false, false).save();
 });

@@ -3,13 +3,16 @@
  * @file Group class
  */
 module.exports = class Group{
-  constructor(_id,type,permissions){
-    if ((typeof _id) === 'object' || (_id && type && permissions) != null) {
+  constructor(_id,type,permissions,cb_in,cb_out){
+    if ((typeof _id) === 'object' || (_id && type && permissions && cb_in && cb_out) != null) {
       this._id = _id._id || _id;
       this.type = _id.type || type;
-      this.permissions = _id.permissions || yarp.groups[_id].permissions.concat(permissions.filter(function (item) {
-                                              return yarp.groups[_id].permissions.indexOf(item) < 0;
-                                            }));
+      this.permissions = _id.permissions || (((yarp.groups && yarp.groups[_id]) != null) ?
+        yarp.groups[_id].permissions.concat(permissions.filter(function (item) {
+          return yarp.groups[_id].permissions.indexOf(item) < 0;
+        })) : permissions);
+      this.cb_in = _id.cb_in || ((cb_in) ? cb_in.toString() : false);
+      this.cb_out = _id.cb_out || ((cb_out) ? cb_out.toString() : false);
     }
   }
 

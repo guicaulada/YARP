@@ -57,6 +57,8 @@ mp.events.add('playerJoin', (player) => {
 });
 
 mp.events.add('playerQuit', (player, exitType, reason) => {
+  yarp.users[player.socialClub].leftGroup();
+  yarp.characters[player.name].leftGroup();
   if (exitType != "kicked") {
     var str = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
   } else {

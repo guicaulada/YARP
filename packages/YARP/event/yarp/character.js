@@ -37,6 +37,8 @@ mp.events.add('yarp_loadCharacter', (player,id) => {
   for (weapon in character.weapons){
     player.giveWeapon(Number(weapon), Number(character.weapons[weapon]));
   }
+  character.user.joinedGroup();
+  character.joinedGroup();
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
   player.call('yarp_updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);

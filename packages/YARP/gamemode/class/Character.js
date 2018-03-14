@@ -39,11 +39,11 @@ module.exports = class Character{
   }
 
   get player(){
-    mp.players.forEach((player, i) => {
+    for (let player of mp.players.toArray()) {
       if (player.name == this._id){
         return player;
       }
-    });
+    }
     return null;
   }
 
@@ -55,6 +55,44 @@ module.exports = class Character{
     this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
   }
 
+  joinedGroup(group){
+    let player = this.player;
+    if (group) {
+      if (yarp.groups[group].cb_in){
+        let cb = eval(yarp.groups[group].cb_in);
+        cb(player);
+        mp.events.call('yarp_characterJoinedGroup',player,this,group);
+      }
+    } else {
+      for (let group of this.groups){
+        if (yarp.groups[group].cb_in){
+          let cb = eval(yarp.groups[group].cb_in);
+          cb(player);
+          mp.events.call('yarp_characterJoinedGroup',player,this,group);
+        }
+      }
+    }
+  }
+
+  leftGroup(group){
+    let player = this.player;
+    if (group) {
+      if (yarp.groups[group].cb_out){
+        let cb = eval(yarp.groups[group].cb_out);
+        cb(player);
+        mp.events.call('yarp_characterLeftGroup',player,this,group);
+      }
+    } else {
+      for (let group of this.groups){
+        if (yarp.groups[group].cb_out){
+          let cb = eval(yarp.groups[group].cb_out);
+          cb(player);
+          mp.events.call('yarp_characterLeftGroup',player,this,group);
+        }
+      }
+    }
+  }
+
   giveGroup(group){
     if (this.groups.indexOf(group) == -1) {
       let type = yarp.groups[group].type;
@@ -62,9 +100,11 @@ module.exports = class Character{
         let same_type = this.getGroupByType(type);
         if (same_type){
           this.takeGroup(same_type);
+          this.leftGroup(group);
         }
       }
       this.groups.push(group);
+      this.joinedGroup(group);
       return true;
     }
     return false;
@@ -72,6 +112,7 @@ module.exports = class Character{
   takeGroup(group){
     if (this.groups.indexOf(group) > -1) {
       this.groups.splice(this.groups.indexOf(group), 1);
+      this.leftGroup(group);
       return true;
     }
     return false;

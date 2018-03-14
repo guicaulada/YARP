@@ -4,7 +4,7 @@
  */
 module.exports = class Command{
   constructor(_id,category,hint,cb){
-    if ((typeof _id) === 'object' || (_id && hint && category && cb) != null){
+    if ((typeof _id) === 'object' || (_id && category && hint && cb) != null){
       this._id = _id._id || _id;
       this.category = _id.category || category;
       this.hint = _id.hint || hint;
