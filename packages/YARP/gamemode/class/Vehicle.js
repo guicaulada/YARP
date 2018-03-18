@@ -3,7 +3,7 @@
  * @file Vehicle class
  */
 module.exports = class Vehicle{
-  constructor(id,model,position,heading,owner,plate,color,alpha,locked,engine,dimension,hidden){
+  constructor(id,model,position,heading,owner,plate,color,alpha,locked,engine,dimension,visible){
     if ((typeof id) === 'object' || (id && model && position) != null) {
       this._id = id._id || id;
       this._model = id._model || model;
@@ -16,7 +16,7 @@ module.exports = class Vehicle{
       this._locked = id._locked || locked || false;
       this._engine = id._engine || engine || false;
       this._dimension = id._dimension || dimension || 0;
-      this._hidden = id._hidden || hidden || false;
+      this._visible = id._visible || visible || false;
       this.mp = mp.vehicles.new(mp.joaat(this._model), this._position,
       {
         heading: this._heading,
@@ -32,12 +32,22 @@ module.exports = class Vehicle{
     }
   }
 
+  set position(value){
+    this.mp.position = value;
+    this._position = value;
+  }
+
+  set heading(value){
+    this.mp.rotation = new mp.Vector3(0,0,value);
+    this._heading = value;
+  }
+
   static config(file){
     let vehicles = require(file);
     for (let id in vehicles){
       let vehicle = vehicles[id];
       for (let i=0; i < vehicle.positions.length; i++){
-        new yarp.Vehicle(id+" "+i,vehicle.model,vehicle.positions[i],vehicle.owner,vehicle.heading,vehicle.plate+i,vehicle.color,vehicle.alpha,vehicle.locked,vehicle.engine,vehicle.dimension,vehicle.hidden)
+        new yarp.Vehicle(id+" "+(i+1),vehicle.model,vehicle.positions[i],vehicle.owner,vehicle.heading,vehicle.plate+i,vehicle.color,vehicle.alpha,vehicle.locked,vehicle.engine,vehicle.dimension,vehicle.visible)
       }
     }
   }

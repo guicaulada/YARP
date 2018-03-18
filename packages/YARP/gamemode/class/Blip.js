@@ -3,7 +3,7 @@
  * @file Blip class
  */
 module.exports = class Blip{
-  constructor(id,name,sprite,position,scale,color,alpha,viewDistance,fade,rotation,dimension,hidden){
+  constructor(id,name,sprite,position,scale,color,alpha,viewDistance,fade,rotation,dimension,visible){
     if ((typeof id) === 'object' || (id && name && sprite && position) != null) {
       this._id = id._id || id;
       this._name = id._name || name;
@@ -16,7 +16,7 @@ module.exports = class Blip{
       this._fade = id._fade || fade || true;
       this._rotation = id._rotation || rotation || 0;
       this._dimension = id._dimension || dimension || 0;
-      this._hidden = id._hidden || hidden || false;
+      this._visible = id._visible || visible || true;
       this.mp = mp.blips.new(this._sprite, this._position,
       {
         name: this._name,
@@ -40,7 +40,7 @@ module.exports = class Blip{
     for (let id in blips){
       let blip = blips[id];
       for (let i=0; i < blip.positions.length; i++){
-        new yarp.Blip(id+" "+i,id,blip.sprite,blip.positions[i],blip.scale,blip.color,blip.alpha,blip.viewDistance,blip.fade,blip.rotation,blip.dimension,blip.hidden)
+        new yarp.Blip(id+" "+i,id,blip.sprite,blip.positions[i],blip.scale,blip.color,blip.alpha,blip.viewDistance,blip.fade,blip.rotation,blip.dimension,blip.visible)
       }
     }
   }

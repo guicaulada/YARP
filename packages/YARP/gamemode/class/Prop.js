@@ -3,7 +3,7 @@
  * @file Prop class
  */
 module.exports = class Prop{
-  constructor(id,model,position,owner,alpha,rotation,dimension,hidden, cb){
+  constructor(id,model,position,owner,alpha,rotation,dimension,visible){
     if ((typeof id) === 'object' || (id && model && position) != null) {
       this._id = id._id || id;
       this._model = id._model || model;
@@ -12,7 +12,7 @@ module.exports = class Prop{
       this._alpha = id._alpha || alpha || 255;
       this._rotation = id._rotation || rotation || [];
       this._dimension = id._dimension || dimension || 0;
-      this._hidden = id._hidden || hidden || false;
+      this._visible = id._visible || visible || false;
       this.mp = mp.objects.new(mp.joaat(this._model), this._position,
       {
         rotation: this._rotation,
@@ -29,7 +29,7 @@ module.exports = class Prop{
     for (let id in props){
       let prop = props[id];
       for (let i=0; i < prop.positions.length; i++){
-        new yarp.Prop(id+" "+i,prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.hidden)
+        new yarp.Prop(id+" "+(i+1),prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.visible)
       }
     }
   }

@@ -3,13 +3,14 @@
  * @file Item class
  */
 module.exports = class Item{
-  constructor(id,name,category,weight,model,cb){
+  constructor(id,name,category,weight,model,call){
     if ((typeof id) === 'object' || (id && name && category && weight && model && cb) != null) {
       this._id = id._id || id;
       this._name = id._name || name;
+      this._category = id._category || category;
       this._weight = id._weight || weight;
       this._model = id._model || model;
-      this._cb = id._cb || cb.toString();
+      this._call = id._call || ((call) ? call.toString() : false);
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }

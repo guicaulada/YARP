@@ -3,21 +3,28 @@
  * @file Label class
  */
 module.exports = class Label{
-  constructor(id,msg,position,range,key,offset,scale,color,viewDistance,font,outline,hidden,cb){
-    if ((typeof id) === 'object' || (id && msg && position && range && key && offset && scale && color && viewDistance && font && outline && hidden && cb) != null){
+  constructor(id,position,text,range,key,color,viewDistance,font,los,dimension,visible,call){
+    if ((typeof id) === 'object' || (id && position) != null){
       this._id = id._id || id;
       this._text = id._text || text || "Press E to access";
       this._position = id._position || position;
       this._range = id._range || range || 3;
       this._key = id._key || key || 69;
-      this._offset = id._offset || offset || {"x": 0, "y": 0, "z": 1},
-      this._scale = id._scale || scale || {"x": 1.0, "y": 1.0},
-      this._color = id._color || color || {"r": 51, "g": 204, "b": 51, "a": 255},
+      this._color = id._color || color || [51, 204, 51, 255],
       this._viewDistance = id._drawDistance || drawDistance || 10,
       this._font = id._font || font || 2;
-      this._outline = id._outline || outline || true;
-      this._hidden = id._hidden || hidden || true;
-      this._cb = id._cb || cb.toString();
+      this._los = id._los || los || true;
+      this._dimension = id._dimension || dimension || 0;
+      this._visible = id._visible || visible || true;
+      this._call = id._call || ((call) ? call.toString() : false);
+      this.mp = mp.labels.new(this._text, this._position,
+      {
+        los: this._los,
+        font: this._font,
+        drawDistance: this._drawDistance,
+        color: this._color,
+        dimension: this._dimension
+      });
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }

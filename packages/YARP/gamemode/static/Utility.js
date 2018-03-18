@@ -50,6 +50,10 @@ module.exports = class Utility {
     }
   }
 
+  static offsetVector(vector,offset){
+    return new mp.Vector3(vector.x+offset.x,vector.y+offset.y,vector.z+offset.z);
+  }
+
   static randomString(digits,possible){
     var text = "";
 

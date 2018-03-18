@@ -3,10 +3,10 @@
  * @file Event class
  */
 module.exports = class Event{
-  constructor(id,cb){
-    if ((typeof id) === 'object' || (id && cb) != null) {
+  constructor(id,call){
+    if ((typeof id) === 'object' || (id && call) != null) {
       this._id = id._id || id;
-      this._cb = id._cb || cb;
+      this._call = id._call || call;
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
