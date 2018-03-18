@@ -3,28 +3,30 @@
  * @file Character class
  */
 module.exports = class Character{
-  constructor(_id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
-    if ((typeof _id) === 'object' || (_id && socialClub && age && model && face) != null){
-      this._id = _id._id || _id;
-      this.socialClub = _id.socialClub || socialClub;
-      this.age = _id.age || age;
-      this.model = _id.model || model;
-      this.face = _id.face || face;
-      this.lastLogin = _id.lastLogin || lastLogin || "";
-      this.wallet = _id.wallet || wallet || yarp.variables.swallet.value;
-      this.bank = _id.bank || bank || yarp.variables.sbank.value;
-      this.health = _id.health || health || 100;
-      this.armour = _id.armour || armour || 0;
-      this.position = _id.position || position || yarp.variables.first_spawn.value;
-      this.heading = _id.heading || heading || yarp.variables.first_heading.value;
-      this.groups = _id.groups || groups || [];
-      this.weapons = _id.weapons || weapons || {};
-      this.skills = _id.skills || skills || {};
-      this.weight = _id.weight || weight || 0;
-      this.inventory = _id.inventory || inventory || {};
-      this.customization = _id.customization || customization || {};
-      this.decoration = _id.decoration || decoration || {};
-      this.clothes = _id.clothes || clothes || {};
+  constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
+    if ((typeof id) === 'object' || (id && socialClub) != null){
+      this._id = id._id || id;
+      this._socialClub = id._socialClub || socialClub;
+      this._age = id._age || age || 18;
+      this._model = id._model || model || "mp_m_freemode_01";
+      this._face = id._face || face || {};
+      this._lastLogin = id._lastLogin || lastLogin || "";
+      this._wallet = id._wallet || wallet || yarp.variables["Starting Wallet"].value;
+      this._bank = id._bank || bank || yarp.variables["Starting Bank"].value;
+      this._health = id._health || health || 100;
+      this._armour = id._armour || armour || 0;
+      this._position = id._position || position || yarp.variables["First Spawn"].value;
+      this._heading = id._heading || heading || yarp.variables["First Heading"].value;
+      this._groups = id._groups || groups || [];
+      this._weapons = id._weapons || weapons || {};
+      this._skills = id._skills || skills || {};
+      this._weight = id._weight || weight || 0;
+      this._inventory = id._inventory || inventory || {};
+      this._customization = id._customization || customization || {};
+      this._decoration = id._decoration || decoration || {};
+      this._clothes = id._clothes || clothes || {};
+      yarp.dbm.register(this);
+      this.makeGetterSetter();
     }
   }
 
@@ -40,7 +42,7 @@ module.exports = class Character{
 
   get player(){
     for (let player of mp.players.toArray()) {
-      if (player.name == this._id){
+      if (player.name == this.id){
         return player;
       }
     }
@@ -58,15 +60,15 @@ module.exports = class Character{
   joinedGroup(group){
     let player = this.player;
     if (group) {
-      if (yarp.groups[group].cb_in){
-        let cb = eval(yarp.groups[group].cb_in);
+      if (yarp.groups[group].enter){
+        let cb = eval(yarp.groups[group].enter);
         cb(player);
         mp.events.call('yarp_characterJoinedGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
-        if (yarp.groups[group].cb_in){
-          let cb = eval(yarp.groups[group].cb_in);
+        if (yarp.groups[group].enter){
+          let cb = eval(yarp.groups[group].enter);
           cb(player);
           mp.events.call('yarp_characterJoinedGroup',player,this,group);
         }
@@ -77,15 +79,15 @@ module.exports = class Character{
   leftGroup(group){
     let player = this.player;
     if (group) {
-      if (yarp.groups[group].cb_out){
-        let cb = eval(yarp.groups[group].cb_out);
+      if (yarp.groups[group].leave){
+        let cb = eval(yarp.groups[group].leave);
         cb(player);
         mp.events.call('yarp_characterLeftGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
-        if (yarp.groups[group].cb_out){
-          let cb = eval(yarp.groups[group].cb_out);
+        if (yarp.groups[group].leave){
+          let cb = eval(yarp.groups[group].leave);
           cb(player);
           mp.events.call('yarp_characterLeftGroup',player,this,group);
         }
@@ -178,7 +180,7 @@ module.exports = class Character{
   }
 
   giveItem(item, amount){
-    if (this.weight + item.weight < yarp.variables.max_weight.value){
+    if (this.weight + item.weight < yarp.variables["Max Weight"].value){
       if (this.inventory[item.id] != null){
         this.inventory[item.id] = this.inventory[item.id] + amount;
       } else {
@@ -303,6 +305,23 @@ module.exports = class Character{
   }
 
   isDev(){
-    return yarp.variables.devs.value.indexOf(this.socialClub) > -1
+    return yarp.variables["Developers"].value.indexOf(this.socialClub) > -1
+  }
+  makeGetterSetter(){
+    for (let key in this){
+      if (key[0] == "_"){
+        let gsp = key.slice(1, key.length)
+        if (!(gsp in this)){
+          Object.defineProperty(this, gsp, {
+            get: function () {
+              return this[key];
+            },
+            set: function (value) {
+              this[key] = value;
+            }
+          });
+        }
+      }
+    }
   }
 }

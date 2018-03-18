@@ -26,6 +26,6 @@ mp.events.add('yarp_verifyLogin', (player,password) => {
       player.call('yarp_showPlayerCharacters', [JSON.stringify(user.characters)]);
     }
   } else {
-    player.call('yarp_showLoginMenu');
+    player.call('createBrowser', ["menu", ['package://YARP/ui/html/accountLogin.html']]);
   }
 });

@@ -24,7 +24,7 @@ mp.events.add('showPlayerInventory', (inventoryJson, target) => {
 			break;
 	}
 	// Mostramos la ventana con los objetos del inventario
-	mp.events.call('createBrowser', ['package://YARP/statics/html/inventory.html', 'populateInventory', inventoryJson, title]);
+	mp.events.call('createBrowser', "inventory", ['package://YARP/statics/html/inventory.html', 'populateInventory', inventoryJson, title]);
 });
 
 mp.events.add('getInventoryOptions', (itemType, itemHash) => {
@@ -56,7 +56,7 @@ mp.events.add('getInventoryOptions', (itemType, itemHash) => {
     optionsArray.push("Drop");
   }
 	// Mostramos las opciones en el navegador
-	mp.events.call('executeFunction', ['showInventoryOptions', optionsArray]);
+	mp.events.call('browserExecute', "inventory", ['showInventoryOptions', optionsArray]);
 });
 
 mp.events.add('executeInventoryAction', (item_id, action) => {

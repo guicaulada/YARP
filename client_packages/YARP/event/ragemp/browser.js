@@ -1,22 +1,24 @@
 //Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
-var customBrowser = null;
-var parameters = [];
+var browsers = {};
+var parameters = {};
 
-mp.events.add('createBrowser', (arguments) => {
-	if(customBrowser != null) {
-		mp.events.call('destroyBrowser');
+mp.events.add('createBrowser', (id,arguments) => {
+	if(browsers[id] != null) {
+		mp.events.call('destroyBrowser', id);
 	}
-	parameters = arguments.slice(1, arguments.length);
-	customBrowser = mp.browsers.new(arguments[0]);
+	parameters[id] = arguments.slice(1, arguments.length);
+	browsers[id] = mp.browsers.new(arguments[0]);
 });
 
 mp.events.add('browserDomReady', (browser) => {
-	if(customBrowser === browser) {
-		mp.gui.chat.activate(false);
-		mp.gui.chat.show(false);
-		mp.gui.cursor.visible = true;
-		if(parameters.length > 0) {
-			mp.events.call('executeFunction', parameters);
+	for (id in browsers){
+		if(browsers[id] === browser) {
+			mp.gui.chat.activate(false);
+			mp.gui.chat.show(false);
+			mp.gui.cursor.visible = true;
+			if(parameters[id].length > 0) {
+				mp.events.call('browserExecute', id, parameters[id]);
+			}
 		}
 	}
 });
@@ -27,7 +29,7 @@ mp.events.add('browserCreated', (browser) => {
 mp.events.add('browserLoadingFailed', (browser) => {
 });
 
-mp.events.add('executeFunction', (arguments) => {
+mp.events.add('browserExecute', (id, arguments) => {
 	var input = '';
 	for(var i = 1; i < arguments.length; i++) {
 		if(input.length > 0) {
@@ -36,20 +38,27 @@ mp.events.add('executeFunction', (arguments) => {
 			input = '\'' + arguments[i] + '\'';
 		}
 	}
-	customBrowser.execute(`${arguments[0]}(${input});`);
+	browsers[id].execute(`${arguments[0]}(${input});`);
 });
 
-mp.events.add('destroyBrowser', (args) => {
-	if(customBrowser != null){
+mp.events.add('destroyBrowser', (id, arguments) => {
+	if(browsers[id] != null){
 		mp.gui.cursor.visible = false;
 		mp.gui.chat.activate(true);
 		mp.gui.chat.show(true);
-		customBrowser.destroy();
-		customBrowser = null;
-		if(args != null){
-			var cbr = args[0];
-			args = args.slice(1 , args.length);
-			mp.events.call(cbr, args);
+		browsers[id].destroy();
+		browsers[id] = null;
+		if(arguments != null){
+			var cb = arguments[0];
+			arguments = arguments.slice(1 , arguments.length);
+			mp.events.call(cb, arguments);
 		}
 	}
+});
+
+
+mp.keys.bind(0x12, false, function() {
+	mp.gui.cursor.visible = !mp.gui.cursor.visible;
+	mp.gui.chat.activate(!mp.gui.cursor.visible);
+	mp.gui.chat.show(!mp.gui.cursor.visible);
 });

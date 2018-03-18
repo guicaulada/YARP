@@ -9,13 +9,30 @@ module.exports = class DBManager{
     await yarp.db.connect();
   }
 
+  static async register(object){
+    let collection = object.constructor.name.toLowerCase()+"s";
+    if (object._id){
+      if (!yarp[collection]) yarp[collection] = {};
+      yarp[collection][object._id] = object;
+    } else {
+      console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be registered in "+collection+", missing id.");
+    }
+  }
+
   static async save(object){
     let collection = object.constructor.name.toLowerCase()+"s";
     if (object._id){
       yarp[collection][object._id] = object;
-      yarp.db.save(collection, object);
+      let mp = object.mp;
+      delete object.mp;
+      try {
+        await yarp.db.save(collection, object);
+      } catch(err) {
+        console.log(chalk.redBright("[YARP] ")+"ManagerError: "+err.message);
+      }
+      object.mp = mp;
     } else {
-      console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be saved in "+collection+", missing _id.");
+      console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be saved in "+collection+", missing id.");
     }
   }
 
@@ -25,7 +42,7 @@ module.exports = class DBManager{
       yarp.db.remove(collection, {_id: object._id});
       yarp[collection][object._id] = null;
     } else {
-      console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be removed in "+collection+", missing _id.");
+      console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be removed in "+collection+", missing id.");
     }
   }
 

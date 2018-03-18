@@ -18,7 +18,7 @@ function populateInventory(inventoryJson, title) {
 	titleContainer.textContent = title;
 	closeImage.src = '../img/close.png';
 	closeImage.onclick = (function(){
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "inventory");
 	});
 	titleContainer.appendChild(closeImage);
 

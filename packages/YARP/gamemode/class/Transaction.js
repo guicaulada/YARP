@@ -3,14 +3,16 @@
  * @file Item class
  */
 module.exports = class Transaction{
-  constructor(_id,type,value,source,target,date){
-    if ((typeof _id) === 'object' || (_id && type && value && source && target && date) != null) {
-      this._id = _id._id || _id;
-      this.type = _id.type || type;
-      this.value = _id.value || value;
-      this.source = _id.source || source;
-      this.target = _id.target || target;
-      this.date = _id.date || date || yarp.utils.getTimestamp(date);
+  constructor(id,type,value,source,target,date){
+    if ((typeof id) === 'object' || (id && type && value && source && target && date) != null) {
+      this._id = id._id || id;
+      this._type = id._type || type;
+      this._value = id._value || value;
+      this._source = id._source || source;
+      this._target = id._target || target;
+      this._date = id._date || date || yarp.utils.getTimestamp(date);
+      yarp.dbm.register(this);
+      this.makeGetterSetter();
     }
   }
 
@@ -22,5 +24,22 @@ module.exports = class Transaction{
   }
   remove(){
     yarp.dbm.remove(this);
+  }
+  makeGetterSetter(){
+    for (let key in this){
+      if (key[0] == "_"){
+        let gsp = key.slice(1, key.length)
+        if (!(gsp in this)){
+          Object.defineProperty(this, gsp, {
+            get: function () {
+              return this[key];
+            },
+            set: function (value) {
+              this[key] = value;
+            }
+          });
+        }
+      }
+    }
   }
 }

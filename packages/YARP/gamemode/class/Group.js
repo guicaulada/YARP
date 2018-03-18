@@ -3,21 +3,31 @@
  * @file Group class
  */
 module.exports = class Group{
-  constructor(_id,type,permissions,cb_in,cb_out){
-    if ((typeof _id) === 'object' || (_id && type && permissions && cb_in && cb_out) != null) {
-      this._id = _id._id || _id;
-      this.type = _id.type || type;
-      this.permissions = _id.permissions || (((yarp.groups && yarp.groups[_id]) != null) ?
-        yarp.groups[_id].permissions.concat(permissions.filter(function (item) {
-          return yarp.groups[_id].permissions.indexOf(item) < 0;
-        })) : permissions);
-      this.cb_in = _id.cb_in || ((cb_in) ? cb_in.toString() : false);
-      this.cb_out = _id.cb_out || ((cb_out) ? cb_out.toString() : false);
+  constructor(id,type,permissions,enter,leave){
+    if ((typeof id) === 'object' || (id) != null) {
+      this._id = id._id || id;
+      this._type = id._type || type || false;
+      this._permissions = id._permissions || (((yarp.groups && yarp.groups[id]) != null) ?
+        yarp.groups[id].permissions.concat(permissions.filter(function (item) {
+          return yarp.groups[id].permissions.indexOf(item) < 0;
+        })) : (permissions || []));
+      this._enter = id._enter || ((enter) ? enter.toString() : false);
+      this._leave = id._leave || ((leave) ? leave.toString() : false);
+      yarp.dbm.register(this);
+      this.makeGetterSetter();
     }
   }
 
   static load(){
     return yarp.dbm.load(Group);
+  }
+
+  static config(file){
+    let groups = require(file);
+    for (let id in groups){
+      let group = groups[id];
+      new yarp.Group(id,group.type,group.permissions,group.enter,group.leave);
+    }
   }
   save(){
     yarp.dbm.save(this);
@@ -29,7 +39,7 @@ module.exports = class Group{
     let users = {};
     for (id in yarp.users){
       let user = yarp.users[id];
-      if (user.hasGroup(this._id)){
+      if (user.hasGroup(this.id)){
         users[id] = user;
       }
     }
@@ -39,7 +49,7 @@ module.exports = class Group{
     let characters = {};
     for (id in yarp.characters){
       let character = yarp.characters[id];
-      if (character.hasGroup(this._id)){
+      if (character.hasGroup(this.id)){
         characters[id] = character;
       }
     }
@@ -83,5 +93,22 @@ module.exports = class Group{
       }
     }
     return true;
+  }
+  makeGetterSetter(){
+    for (let key in this){
+      if (key[0] == "_"){
+        let gsp = key.slice(1, key.length)
+        if (!(gsp in this)){
+          Object.defineProperty(this, gsp, {
+            get: function () {
+              return this[key];
+            },
+            set: function (value) {
+              this[key] = value;
+            }
+          });
+        }
+      }
+    }
   }
 }

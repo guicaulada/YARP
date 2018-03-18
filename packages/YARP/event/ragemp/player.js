@@ -6,11 +6,12 @@ mp.events.add('playerChat', (player, message) => {
 mp.events.add('playerCommand', (player, command) => {
 	const args = command.split(/[ ]+/);
 	const commandName = args.splice(0, 1)[0];
+  console.log(`${player.name}: /${command}`);
   command = yarp.commands[commandName];
 
 	if (command) {
-    let cb = eval(command.cb);
-    cb(player,args);
+    let call = eval(command.call);
+    call(player,args);
 	} else {
     player.outputChatBox("!{yellow}HINT!{white}: Command doesn't exist.");
   }
@@ -25,7 +26,7 @@ mp.events.add('playerDeath', (player) => {
     character.save();
     player.call('removeWeapons');
     player.removeAllWeapons();
-    player.spawn(yarp.variables.spawn.value[Math.floor(Math.random() * yarp.variables.spawn.value.length)]);
+    player.spawn(yarp.variables["Spawns"].value[Math.floor(Math.random() * yarp.variables["Spawns"].value.length)]);
     player.health = 100;
 });
 
@@ -41,7 +42,7 @@ mp.events.add('playerJoin', (player) => {
       setTimeout(function(){
         player.kick("You have been banned.");
       },1000);
-    } else if (yarp.variables.whitelist.value && !user.whitelisted) {
+    } else if (yarp.variables["Whitelisted"].value && !user.whitelisted) {
       player.outputChatBox("!{yellow}You are not whitelisted.");
       console.log(`${player.socialClub} is not whitelisted.`);
       setTimeout(function(){
@@ -49,16 +50,16 @@ mp.events.add('playerJoin', (player) => {
       },1000);
     }
     else {
-      player.call('yarp_showLoginMenu');
+      player.call('createBrowser', ["menu", ['package://YARP/ui/html/accountLogin.html']]);
     }
   } else {
-    player.call('yarp_showRegistrationMenu', [player.socialClub]);
+    player.call('createBrowser', ["menu", ['package://YARP/ui/html/accountRegister.html','setAccountName', player.socialClub]]);
   }
 });
 
 mp.events.add('playerQuit', (player, exitType, reason) => {
-  yarp.users[player.socialClub].leftGroup();
-  yarp.characters[player.name].leftGroup();
+  if (yarp.users[player.socialClub]) yarp.users[player.socialClub].leftGroup();
+  if (yarp.characters[player.name]) yarp.characters[player.name].leftGroup();
   if (exitType != "kicked") {
     var str = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
   } else {

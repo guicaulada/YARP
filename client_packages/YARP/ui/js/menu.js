@@ -96,7 +96,7 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -274,7 +274,7 @@ function populateAmmuWeapons(file, id, ammu, weaponJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -452,7 +452,7 @@ function populateStoreItems(file, id, store, itemsJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -537,7 +537,7 @@ function populateTunningHome() {
 
 	exitButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -748,7 +748,7 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -875,7 +875,7 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -914,7 +914,7 @@ function populateCharacterList(charactersJson) {
 			character.job = "Citizen";
 		}
 		// Añadimos el contenido de cada elemento
-		itemDescription.textContent = `${character._id}, ${character.age}\r\n${character.job}`;
+		itemDescription.textContent = `${character._id}, ${character._age}\r\n${character.job}`;
 
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
@@ -1281,7 +1281,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 	cancelButton.onclick = (function() {
 		// Cancelamos el peinado y cerramos la ventana de pedidos
 		mp.trigger('cancelHairdresserChanges');
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1395,7 +1395,7 @@ function populateTownHallMenu(townHallOptionsJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana del ayuntamiento
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1587,12 +1587,12 @@ function populatePoliceControlsMenu(policeControlJson) {
 	acceptButton.onclick = (function() {
 		// Procesamos la opción y borramos el navegador
 		mp.trigger('proccessPoliceControlAction');
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de controles
-		mp.trigger('destroyBrowser');
+		mp.trigger('destroyBrowser', "menu");
 	});
 
 	// Ordenamos la jerarquía de elementos

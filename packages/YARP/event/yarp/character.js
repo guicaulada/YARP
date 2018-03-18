@@ -68,4 +68,4 @@ setInterval(function(){
       }
 		}
 	);
-},1000*yarp.variables.save_interval.value);
+},1000*yarp.variables["Save Interval"].value);

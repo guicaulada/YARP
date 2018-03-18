@@ -4,14 +4,16 @@
  */
 let bcrypt = require('bcryptjs');
 module.exports = class User{
-  constructor(_id, password, lastLogin, whitelisted, banned, groups){
-    if ((typeof _id) === 'object' || (_id && password) != null){
-      this._id = _id._id || _id;
-      this.password = _id.password || bcrypt.hashSync(password, 10);
-      this.lastLogin = _id.lastLogin || lastLogin || "";
-      this.whitelisted =  _id.whitelisted || whitelisted || false;
-      this.banned = _id.banned || banned || false;
-      this.groups = _id.groups || groups || [];
+  constructor(id, password, lastLogin, whitelisted, banned, groups){
+    if ((typeof id) === 'object' || (id && password) != null){
+      this._id = id._id || id;
+      this._password = id._password || bcrypt.hashSync(password, 10);
+      this._lastLogin = id._lastLogin || lastLogin || "";
+      this._whitelisted = id._whitelisted || whitelisted || false;
+      this._banned = id._banned || banned || false;
+      this._groups = id._groups || groups || [];
+      yarp.dbm.register(this);
+      this.makeGetterSetter();
     }
   }
 
@@ -27,7 +29,7 @@ module.exports = class User{
 
   get player(){
     for (let player of mp.players.toArray()) {
-      if (player.socialClub == this._id){
+      if (player.socialClub == this.id){
         return player;
       }
     }
@@ -38,7 +40,7 @@ module.exports = class User{
     let characters = {};
     for (let id in yarp.characters){
       let character = yarp.characters[id];
-      if (character.socialClub == this._id){
+      if (character.socialClub == this.id){
         characters[id] = character;
       }
     }
@@ -47,7 +49,7 @@ module.exports = class User{
 
   get character(){
     mp.players.forEach((player, i) => {
-      if (player.socialClub == this._id){
+      if (player.socialClub == this.id){
         return yarp.characters[player.name];
       }
     });
@@ -65,15 +67,15 @@ module.exports = class User{
   joinedGroup(group){
     let player = this.player;
     if (group) {
-      if (yarp.groups[group].cb_in){
-        let cb = eval(yarp.groups[group].cb_in);
+      if (yarp.groups[group].enter){
+        let cb = eval(yarp.groups[group].enter);
         cb(player);
         mp.events.call('yarp_userJoinedGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
-        if (yarp.groups[group].cb_in){
-          let cb = eval(yarp.groups[group].cb_in);
+        if (yarp.groups[group].enter){
+          let cb = eval(yarp.groups[group].enter);
           cb(player);
           mp.events.call('yarp_userJoinedGroup',player,this,group);
         }
@@ -84,15 +86,15 @@ module.exports = class User{
   leftGroup(group){
     let player = this.player;
     if (group) {
-      if (yarp.groups[group].cb_out){
-        let cb = eval(yarp.groups[group].cb_out);
+      if (yarp.groups[group].leave){
+        let cb = eval(yarp.groups[group].leave);
         cb(player);
         mp.events.call('yarp_userLeftGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
-        if (yarp.groups[group].cb_out){
-          let cb = eval(yarp.groups[group].cb_out);
+        if (yarp.groups[group].leave){
+          let cb = eval(yarp.groups[group].leave);
           cb(player);
           mp.events.call('yarp_userLeftGroup',player,this,group);
         }
@@ -177,6 +179,23 @@ module.exports = class User{
   }
 
   isDev(){
-    return yarp.variables.devs.value.indexOf(this._id) > -1
+    return yarp.variables["Developers"].value.indexOf(this.id) > -1
+  }
+  makeGetterSetter(){
+    for (let key in this){
+      if (key[0] == "_"){
+        let gsp = key.slice(1, key.length)
+        if (!(gsp in this)){
+          Object.defineProperty(this, gsp, {
+            get: function () {
+              return this[key];
+            },
+            set: function (value) {
+              this[key] = value;
+            }
+          });
+        }
+      }
+    }
   }
 }

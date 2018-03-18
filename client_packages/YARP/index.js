@@ -18,5 +18,4 @@ require('./YARP/event/yarp/character.js');
 require('./YARP/event/yarp/command.js');
 require('./YARP/event/yarp/inventory.js');
 require('./YARP/event/yarp/menu.js');
-require('./YARP/event/yarp/money.js');
 require('./YARP/event/yarp/weapon.js');

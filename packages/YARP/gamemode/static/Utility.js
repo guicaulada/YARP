@@ -34,6 +34,43 @@ module.exports = class Utility {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
   }
 
+  static makeGetterSetter(Class){
+    for (let key in this.getParamNames(Class)){
+      if (key[0] == "_"){
+        let gsp = key.slice(1, key.length)
+        Object.defineProperty(this, gsp, {
+          get: function () {
+            return this[key];
+          },
+          set: function (value) {
+            this[key] = value;
+          }
+        });
+      }
+    }
+  }
+
+  static randomString(digits,possible){
+    var text = "";
+
+    for (var i = 0; i < digits; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  static getSubstrings(string){
+    var current;
+    var pattern = /".*?"/g;
+    var result = [];
+    while(current = pattern.exec(string)) {
+      if (current) {
+        result.push(current[0].replace(new RegExp("\"", 'g'), ""));
+      }
+    }
+    return result;
+  }
+
   static getParamNames(func) {
     var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
     var ARGUMENT_NAMES = /([^\s,]+)/g;

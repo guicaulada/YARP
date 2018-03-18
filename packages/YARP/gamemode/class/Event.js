@@ -3,10 +3,12 @@
  * @file Event class
  */
 module.exports = class Event{
-  constructor(_id,cb){
-    if ((typeof _id) === 'object' || (_id && cb) != null) {
-      this._id = _id._id || _id;
-      this.cb = _id.cb || cb;
+  constructor(id,cb){
+    if ((typeof id) === 'object' || (id && cb) != null) {
+      this._id = id._id || id;
+      this._cb = id._cb || cb;
+      yarp.dbm.register(this);
+      this.makeGetterSetter();
     }
   }
 
@@ -18,5 +20,22 @@ module.exports = class Event{
   }
   remove(){
     yarp.dbm.remove(this);
+  }
+  makeGetterSetter(){
+    for (let key in this){
+      if (key[0] == "_"){
+        let gsp = key.slice(1, key.length)
+        if (!(gsp in this)){
+          Object.defineProperty(this, gsp, {
+            get: function () {
+              return this[key];
+            },
+            set: function (value) {
+              this[key] = value;
+            }
+          });
+        }
+      }
+    }
   }
 }

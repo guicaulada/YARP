@@ -1,166 +1,286 @@
-'use strict';
+"use strict";
 /**
  * @file Command config
  */
-new yarp.Command("code","superadmin","Write code to be executed from inside the game. A very powerful command.", (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.code") || yarp.users[player.socialClub].isDev()){
-    player.call('createBrowser', [['package://YARP/ui/html/editor.html', 'setupCodeEditor']]);
-  }
-}).save();
-new yarp.Command("new","superadmin","Create any gamemode object from inside the game. A very powerful command.", (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.new") || yarp.users[player.socialClub].isDev()){
-    let Class = args[0];
-    if (Class) {
-      player.call('createBrowser', [['package://YARP/ui/html/editor.html', 'setupCodeEditor',`new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(", ")}).save();`]]);
-    }
-  }
-}).save();
-new yarp.Command("rem","superadmin","Remove any gamemode object from inside the game. A very powerful command.", (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.rem") || yarp.users[player.socialClub].isDev()){
-    let Class = args[0];
-    let _id = args[1];
-    if (args[2]){
-      _id = _id+" "+args[2];
-    }
-    if (yarp[Class]) {
-      let obj = yarp[Class.toLowerCase()+"s"][_id];
-      if (obj) {
-        obj.remove();
-      }
-    }
-  }
-}).save();
-new yarp.Command("edit","superadmin","Edit any gamemode object from inside the game. A very powerful command.", (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.new") || yarp.users[player.socialClub].isDev()){
-    let Class = args[0];
-    let _id = args[1];
-    if (args[2]){
-      _id = _id+" "+args[2];
-    }
-    if (yarp[Class]) {
-      let obj = yarp[Class.toLowerCase()+"s"][_id];
-      if (obj) {
-        let parsed = yarp.utils.parseParams(obj);
-        for (k in obj){
-          parsed = parsed.replace(`"${k}": `,'');
-        }
-        player.call('createBrowser', [['package://YARP/ui/html/editor.html', 'setupCodeEditor',`new yarp.${Class}(${parsed.slice(1,-1)}).save();`]]);
-      }
-    }
-  }
-}).save();
-new yarp.Command("givegroup", "superadmin", 'Give a group to an user or character.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.givegroup") || yarp.users[player.socialClub].isDev()){
-    if (yarp.users[args[0]]){
-      yarp.users[args[0]].giveGroup(args[1]);
-      yarp.users[args[0]].save();
-    } else if (yarp.characters[args[0]]){
-      yarp.characters[args[0]].giveGroup(args[1]);
-      yarp.characters[args[0]].save();
-    }
-  }
-}).save();
-new yarp.Command("takegroup", "superadmin", 'Take a group from an user or character.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.takegroup") || yarp.users[player.socialClub].isDev()){
-    if (yarp.users[args[0]]){
-      yarp.users[args[0]].takeGroup(args[1]);
-      yarp.users[args[0]].save();
-    } else if (yarp.characters[args[0]]){
-      yarp.characters[args[0]].takeGroup(args[1]);
-      yarp.characters[args[0]].save();
-    }
-  }
-}).save();
-new yarp.Command('kill', 'admin', 'Kill yourself.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.kill")){
-    player.health = 0;
-  }
-}).save();
-new yarp.Command('hp', 'admin', 'Regenerates player health.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.hp")){
-    player.health = 100;
-  }
-}).save();
-new yarp.Command('armour', 'admin', 'Regenerates player armour.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.armour")){
-    player.armour = 100;
-  }
-}).save();
-new yarp.Command("weapon", "admin", 'Gives specified weapon and ammo.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.weapon")){
-    let ammo = Number(args[1]) || 10000;
-    yarp.characters[player.name].giveWeapon(args[0], ammo);
-    yarp.characters[player.name].save();
-    player.giveWeapon(mp.joaat(args[0]), ammo);
-  }
-}).save();
-new yarp.Command('veh', "admin", 'Spawns specified vehicle model.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.veh")){
-    let veh = mp.vehicles.new(mp.joaat(args[0]), player.position);
-    player.putIntoVehicle(veh, -1);
-  }
-}).save();
-new yarp.Command('noclip', 'admin', 'Toggle No-clip.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.noclip")){
-    player.call('toggleNoclip')
-  }
-}).save();
-new yarp.Command('charpos', 'admin', 'Toggle character position display.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.charpos")){
-    player.call('toggleCharpos')
-  }
-}).save();
-new yarp.Command('camdir', 'admin', 'Toggle camera direction display.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.camdir")){
-    player.call('toggleCamdir')
-  }
-}).save();
-new yarp.Command("tp", 'admin', 'Teleport to specified x y z.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.tp")){
-    player.position = new mp.Vector3(args[0], args[1], args[2]);
-  }
-}).save();
-new yarp.Command("jtp", 'admin', 'Teleport to specified JSON location.', (player,args) => {
-    if (yarp.users[player.socialClub].hasPermission("cmd.jtp")){
-    player.position = JSON.parse(args.join(" "));
-  }
-}).save();
-new yarp.Command("jpos", "admin", 'Write your location + commentary on jpos.log.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.jpos")){
-    var fs = require('fs');
-    let comment = "";
-    if (args.length > 0){
-      comment = " : " + args.join(" ");
-    }
-    fs.appendFile("jpos.log", JSON.stringify(player.position) + comment +"\n");
-  }
-}).save();
-new yarp.Command('inventory', "user", 'Open your inventory.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.inventory")){
-    let inventoryJson = JSON.stringify(yarp.characters[player.name].inventory);
-    player.call('showPlayerInventory', [inventoryJson, 0])
-  }
-}).save();
-new yarp.Command("money", "user", 'Write your location + commentary on jpos.log.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.money")){
-    player.outputChatBox(`Wallet: !{51, 204, 51}${yarp.characters[player.name].wallet}`);
-    player.outputChatBox(`Bank: !{0, 153, 255}${yarp.characters[player.name].bank}`);
-  }
-}).save();
-new yarp.Command("?", "user", 'Lists existing commands for each category.', (player,args) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.hint")){
-    if (!args[0]){
-      player.outputChatBox(`!{yellow}HINT!{white}: ${Object.keys(yarp.Command.categories).join(", ")}`);
-      } else {
-      let category = yarp.Command.categories[args[0]];
-      if (category){
-        player.outputChatBox(`!{yellow}HINT!{white}: ${category.join(", ")}`);
-      } else {
-        let command = yarp.commands[args[0]];
-        if (command) {
-          player.outputChatBox(`!{yellow}HINT!{white}: ${command.hint}`);
-        }
-      }
-    }
-  }
-}).save();
+module.exports = {
+   "superadmin": {
+     "code": {
+       hint: "Write code to be executed from inside the game. A very powerful command.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.code") || yarp.users[player.socialClub].isDev()){
+           player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor"]]);
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "new": {
+       hint: "Create any gamemode object from inside the game. A very powerful command.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.new") || yarp.users[player.socialClub].isDev()){
+           let Class = args[0];
+           args = yarp.utils.getSubstrings(args.join(" "));
+           if (Class) {
+             if (args.length > 0){
+               eval(`new yarp[Class](${args.join(", ")})`)
+             } else {
+               player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor",`new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(", ")})`]]);
+             }
+           }
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "rem": {
+       hint: "Remove any gamemode object from inside the game. A very powerful command.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.rem") || yarp.users[player.socialClub].isDev()){
+           let Class = args[0];
+           args = yarp.utils.getSubstrings(args.join(" "));
+           let id = args[0];
+           if (yarp[Class]) {
+             let obj = yarp[Class.toLowerCase()+"s"][id];
+             if (obj) {
+               obj.remove();
+             }
+           }
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "edit": {
+       hint: "Edit any gamemode object from inside the game. A very powerful command.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.new") || yarp.users[player.socialClub].isDev()){
+           let Class = args[0];
+           args = yarp.utils.getSubstrings(args.join(" "));
+           let id = args[0];
+           if (yarp[Class]) {
+             let collection = Class.toLowerCase()+"s";
+             let obj = yarp[collection][id];
+             if (obj) {
+               if (args.length > 1){
+                 let text = "";
+                 for (let i = 1; i < args.length; i++){
+                   text = text+`yarp.${collection}["${id}"].${args[i]} = ${obj[args[i]]};\\n`;
+                 }
+                 player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor",text]]);
+               } else {
+                 player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor",`yarp.${collection}["${id}"];`]]);
+               }
+             }
+           }
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "givegroup": {
+       hint: "Give a group to an user or character.",
+       call: (player,args) => {
+         args = yarp.utils.getSubstrings(args.join(" "));
+         if (yarp.users[player.socialClub].hasPermission("cmd.givegroup") || yarp.users[player.socialClub].isDev()){
+           if (yarp.groups[args[1]]){
+             if (yarp.users[args[0]]){
+               yarp.users[args[0]].giveGroup(args[1]);
+               yarp.users[args[0]].save();
+             } else if (yarp.characters[args[0]]){
+               yarp.characters[args[0]].giveGroup(args[1]);
+               yarp.characters[args[0]].save();
+             }
+           }
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "takegroup": {
+       hint: "Take a group from an user or character.",
+       call: (player,args) => {
+         args = yarp.utils.getSubstrings(args.join(" "));
+         if (yarp.users[player.socialClub].hasPermission("cmd.takegroup") || yarp.users[player.socialClub].isDev()){
+           if (yarp.groups[args[1]]){
+             if (yarp.users[args[0]]){
+               yarp.users[args[0]].takeGroup(args[1]);
+               yarp.users[args[0]].save();
+             } else if (yarp.characters[args[0]]){
+               yarp.characters[args[0]].takeGroup(args[1]);
+               yarp.characters[args[0]].save();
+             }
+           }
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     }
+   },
+   "admin": {
+     "kill": {
+       hint: "Kill yourself.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.kill")){
+           player.health = 0;
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "hp": {
+       hint: "Regenerates player health.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.hp")){
+           player.health = 100;
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "armour": {
+       hint: "Regenerates player armour.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.armour")){
+           player.armour = 100;
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "weapon": {
+       hint: "Gives specified weapon and ammo.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.weapon")){
+           let ammo = Number(args[1]) || 10000;
+           yarp.characters[player.name].giveWeapon(args[0], ammo);
+           yarp.characters[player.name].save();
+           player.giveWeapon(mp.joaat(args[0]), ammo);
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "veh": {
+       hint: "Spawns specified vehicle model.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.veh")){
+           let veh = mp.vehicles.new(mp.joaat(args[0]), player.position);
+           player.putIntoVehicle(veh, -1);
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "noclip": {
+       hint: "Toggle No-clip.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.noclip")){
+           player.call("toggleNoclip")
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "charpos": {
+       hint: "Toggle character position display.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.charpos")){
+           player.call("toggleCharpos")
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "camdir": {
+       hint: "Toggle camera direction display.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.camdir")){
+           player.call("toggleCamdir")
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "tp": {
+       hint: "Teleport to specified x y z.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.tp")){
+           player.position = new mp.Vector3(args[0], args[1], args[2]);
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "jtp": {
+       hint: "Teleport to specified JSON location.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.jtp")){
+           player.position = JSON.parse(args.join(" "));
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "jpos": {
+       hint: "Write your location + commentary on jpos.log.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.jpos")){
+           var fs = require("fs");
+           let comment = "";
+           if (args.length > 0){
+             comment = " : " + args.join(" ");
+           }
+           fs.appendFile("jpos.log", JSON.stringify(player.position) + comment +"\n");
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     }
+   },
+   "user": {
+     "inventory": {
+       hint: "Open your inventory.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.inventory")){
+           let inventoryJson = JSON.stringify(yarp.characters[player.name].inventory);
+           player.call("showPlayerInventory", [inventoryJson, 0])
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "money": {
+       hint: "Write your location + commentary on jpos.log.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.money")){
+           player.outputChatBox(`Wallet: !{51, 204, 51}${yarp.characters[player.name].wallet}`);
+           player.outputChatBox(`Bank: !{0, 153, 255}${yarp.characters[player.name].bank}`);
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     },
+     "?": {
+       hint: "Lists existing commands for each category.",
+       call: (player,args) => {
+         if (yarp.users[player.socialClub].hasPermission("cmd.hint")){
+           if (!args[0]){
+             player.outputChatBox(`!{yellow}HINT!{white}: ${Object.keys(yarp.Command.categories).join(", ")}`);
+           } else {
+             let category = yarp.Command.categories[args[0]];
+             if (category){
+               player.outputChatBox(`!{yellow}HINT!{white}: ${category.join(", ")}`);
+             } else {
+               let command = yarp.commands[args[0]];
+               if (command) {
+                 player.outputChatBox(`!{yellow}HINT!{white}: ${command.hint}`);
+               }
+             }
+           }
+         } else {
+           player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+         }
+       }
+     }
+   }
+}

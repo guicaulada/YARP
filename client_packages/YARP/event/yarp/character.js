@@ -14,18 +14,18 @@ mp.events.add('yarp_showPlayerCharacters', (charactersJson) => {
 	characters = charactersJson;
 	mp.game.ui.displayRadar(false);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-	mp.events.call('createBrowser', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
+	mp.events.call('createBrowser', "character", ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
 mp.events.add('yarp_loadCharacter', (id) => {
-	mp.events.call('destroyBrowser');
+	mp.events.call('destroyBrowser', "character");
 	mp.game.ui.displayRadar(true);
 	mp.events.callRemote('yarp_loadCharacter', id);
 	mp.game.invoke('0xB0C54402D009BA38');
 });
 
 mp.events.add('yarp_showCharacterCreationMenu', () => {
-	mp.events.call('destroyBrowser');
+	mp.events.call('destroyBrowser', "character");
 	mp.game.ui.displayRadar(false);
 	mp.events.callRemote('yarp_setCharacterIntoCreator');
 	mp.game.invoke('0xB0C54402D009BA38');
@@ -36,7 +36,7 @@ mp.events.add('yarp_showCharacterCreationMenu', () => {
 	mp.game.ui.displayHud(false);
 	mp.gui.chat.activate(false);
 	mp.gui.chat.show(false);
-	mp.events.call('createBrowser', ['package://YARP/ui/html/characterCreator.html']);
+	mp.events.call('createBrowser', "character", ['package://YARP/ui/html/characterCreator.html']);
 });
 
 mp.events.add('yarp_updatePlayerSex', (sex) => {
@@ -65,7 +65,7 @@ mp.events.add('yarp_rotateCharacter', (rotation) => {
 });
 
 mp.events.add('yarp_characterNameDuplicated', () => {
-	mp.events.call('executeFunction', ['showPlayerDuplicatedWarn']);
+	mp.events.call('browserExecute', "character", ['showPlayerDuplicatedWarn']);
 });
 
 mp.events.add('yarp_acceptCharacterCreation', (name, age, model) => {
@@ -80,9 +80,9 @@ mp.events.add('yarp_cancelCharacterCreation', () => {
 	mp.game.ui.displayHud(true);
 	mp.gui.chat.activate(true);
 	mp.gui.chat.show(true);
-	mp.events.call('destroyBrowser');
+	mp.events.call('destroyBrowser', "character");
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-	mp.events.call('createBrowser', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters]);
+	mp.events.call('createBrowser', "character", ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters]);
 });
 
 mp.events.add('yarp_characterCreatedSuccessfully', () => {
@@ -92,7 +92,7 @@ mp.events.add('yarp_characterCreatedSuccessfully', () => {
 	mp.game.ui.displayHud(true);
 	mp.gui.chat.activate(true);
 	mp.gui.chat.show(true);
-	mp.events.call('destroyBrowser');
+	mp.events.call('destroyBrowser', "character");
 });
 
 mp.events.add('yarp_updatePlayerCustomSkin', (player, faceJson, tattooJson) => {

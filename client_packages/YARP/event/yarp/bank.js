@@ -5,7 +5,7 @@ mp.events.add('showATM', () => {
 	mp.gui.chat.show(false);
 
 	// Creamos la ventana del banco
-	mp.events.call('createBrowser', ['package://YARP/statics/html/bankMenu.html']);
+	mp.events.call('createBrowser', "bank", ['package://YARP/statics/html/bankMenu.html']);
 });
 
 mp.events.add('updateBankAccountMoney', () => {
@@ -13,7 +13,7 @@ mp.events.add('updateBankAccountMoney', () => {
 	let money = mp.players.local.getVariable('PLAYER_BANK');
 
 	// Actualizamos el valor del dinero
-	mp.events.call('executeFunction', ['updateAccountMoney', money]);
+	mp.events.call('browserExecute', "bank", ['updateAccountMoney', money]);
 });
 
 mp.events.add('executeBankOperation', (operation, amount, target) => {
@@ -24,9 +24,9 @@ mp.events.add('executeBankOperation', (operation, amount, target) => {
 mp.events.add('bankOperationResponse', (response) => {
 	// Miramos la acción del cajero
 	if (response == '') {
-		mp.events.call('executeFunction', ['bankBack']);
+		mp.events.call('browserExecute', "bank", ['bankBack']);
 	} else {
-		mp.events.call('executeFunction', ['showOperationError', response]);
+		mp.events.call('browserExecute', "bank", ['showOperationError', response]);
 	}
 });
 
@@ -37,12 +37,12 @@ mp.events.add('loadPlayerBankBalance', () => {
 
 mp.events.add('showPlayerBankBalance', (operationJson, playerName) => {
 	// Mostramos las operaciones del jugador
-	mp.events.call('executeFunction', ['showBankOperations', operationJson, playerName]);
+	mp.events.call('browserExecute', "bank", ['showBankOperations', operationJson, playerName]);
 });
 
 mp.events.add('closeATM', () => {
 	// Borramos el menú del cajero
-	mp.events.call('destroyBrowser');
+	mp.events.call('destroyBrowser', "bank");
 
 	// Reactivamos el chat
 	mp.gui.chat.activate(true);

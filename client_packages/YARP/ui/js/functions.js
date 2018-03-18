@@ -5,6 +5,7 @@ let objectArgs = [];
 
 function loginAccount() {
     var password = document.getElementById('pass').value;
+    mp.trigger('destroyBrowser', "menu");
     mp.trigger('yarp_verifyLogin', password);
 };
 
@@ -325,7 +326,7 @@ function testVehicle() {
 function namePoliceControl() {
     var name = document.getElementById('name').value;
     mp.trigger('yarp_policeControlSelectedName', name);
-    mp.trigger('destroyBrowser');
+    mp.trigger('destroyBrowser', "police");
 }
 
 function preloadContact() {
