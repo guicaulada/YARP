@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @file Group config
- */
+* @file Group config
+*/
 module.exports = {
   "Super Admin": {
     permissions: [

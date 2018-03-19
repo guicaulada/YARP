@@ -3,11 +3,11 @@
  * @file Command class
  */
 module.exports = class Command{
-  constructor(id,category,hint,call){
-    if ((typeof id) === 'object' || (id && category && hint && call) != null){
+  constructor(id,call,category,hint){
+    if ((typeof id) === 'object' || (id && call) != null){
       this._id = id._id || id;
-      this._category = id._category || category;
-      this._hint = id._hint || hint;
+      this._category = id._category || category || "None";
+      this._hint = id._hint || hint || "There's no hint.";
       this._call = id._call || ((call) ? call.toString() : false);
       yarp.dbm.register(this);
       this.makeGetterSetter();
@@ -18,13 +18,12 @@ module.exports = class Command{
     return yarp.dbm.load(Command);
   }
 
-
   static config(file){
     let commands = require(file);
     for (let category in commands){
       for (let id in commands[category]){
         let command = commands[category][id];
-        new yarp.Command(id,category,command.hint,command.call.toString());
+        new yarp.Command(id,command.call,category,command.hint);
       }
     }
   }

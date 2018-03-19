@@ -37,6 +37,7 @@ module.exports = class Character{
     yarp.dbm.save(this);
   }
   remove(){
+    this.mp.destroy();
     yarp.dbm.remove(this);
   }
 

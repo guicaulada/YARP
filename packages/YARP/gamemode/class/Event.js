@@ -6,7 +6,8 @@ module.exports = class Event{
   constructor(id,call){
     if ((typeof id) === 'object' || (id && call) != null) {
       this._id = id._id || id;
-      this._call = id._call || call;
+      this._call = id._call || ((call) ? call.toString() : "() => {}");
+      this.mp = new mp.Event(this._id, eval(this._call));
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
@@ -15,10 +16,19 @@ module.exports = class Event{
   static load(){
     return yarp.dbm.load(Event);
   }
+
+  static config(file){
+    let events = require(file);
+    for (let id in events){
+      let event = events[id];
+      new yarp.Event(id,event.call);
+    }
+  }
   save(){
     yarp.dbm.save(this);
   }
   remove(){
+    this.mp.destroy();
     yarp.dbm.remove(this);
   }
   makeGetterSetter(){

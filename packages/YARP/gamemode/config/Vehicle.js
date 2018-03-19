@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @file Vehicle config
- */
+* @file Vehicle config
+*/
 module.exports = {
   "Spawn Blistas": {
     model: "blista",

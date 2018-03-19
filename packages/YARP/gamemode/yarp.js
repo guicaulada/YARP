@@ -20,6 +20,7 @@ module.exports = (async () => {
     yarp.Blip = require('./class/Blip');
     yarp.Character = require('./class/Character');
     yarp.Checkpoint = require('./class/Checkpoint');
+    yarp.Colshape = require('./class/Colshape');
     yarp.Command = require('./class/Command');
     yarp.Event = require('./class/Event');
     yarp.Group = require('./class/Group');
@@ -43,6 +44,7 @@ module.exports = (async () => {
     await yarp.Blip.load();
     await yarp.Character.load();
     await yarp.Checkpoint.load();
+    await yarp.Colshape.load();
     await yarp.Command.load();
     await yarp.Event.load();
     await yarp.Group.load();
@@ -65,20 +67,21 @@ module.exports = (async () => {
     console.log(chalk.yellowBright("[YARP] ")+"Loading Configs");
     yarp.Blip.config('../config/Blip');
     //yarp.Character.config('../config/Character');
-    //yarp.Checkpoint.config('../config/Checkpoint');
+    yarp.Checkpoint.config('../config/Checkpoint');
+    yarp.Colshape.config('../config/Colshape');
     yarp.Command.config('../config/Command');
-    //yarp.Event.config('../config/Event');
+    yarp.Event.config('../config/Event');
     yarp.Group.config('../config/Group');
-    //yarp.Item.config('../config/Item');
-    //yarp.Label.config('../config/Label');
-    //yarp.Marker.config('../config/Marker');
+    yarp.Item.config('../config/Item');
+    yarp.Label.config('../config/Label');
+    yarp.Marker.config('../config/Marker');
     //yarp.Npc.config('../config/Npc');
     yarp.Prop.config('../config/Prop');
     //yarp.Transaction.config('../config/Transaction');
     //yarp.User.config('../config/User');
     yarp.Variable.config('../config/Variable');
     yarp.Vehicle.config('../config/Vehicle');
-    //yarp.Weapon.config('../config/Weapon');
+    yarp.Weapon.config('../config/Weapon');
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"ConfigError: "+err.message);
   }

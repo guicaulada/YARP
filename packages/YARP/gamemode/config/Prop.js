@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @file Prop config
- */
+* @file Prop config
+*/
 module.exports = {
   "Test Sign": {
     model: "stt_prop_corner_sign_05",

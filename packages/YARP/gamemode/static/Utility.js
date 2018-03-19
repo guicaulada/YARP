@@ -34,22 +34,6 @@ module.exports = class Utility {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
   }
 
-  static makeGetterSetter(Class){
-    for (let key in this.getParamNames(Class)){
-      if (key[0] == "_"){
-        let gsp = key.slice(1, key.length)
-        Object.defineProperty(this, gsp, {
-          get: function () {
-            return this[key];
-          },
-          set: function (value) {
-            this[key] = value;
-          }
-        });
-      }
-    }
-  }
-
   static offsetVector(vector,offset){
     return new mp.Vector3(vector.x+offset.x,vector.y+offset.y,vector.z+offset.z);
   }
