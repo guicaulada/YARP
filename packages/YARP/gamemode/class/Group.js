@@ -18,10 +18,6 @@ module.exports = class Group{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Group);
-  }
-
   static config(file){
     let groups = require(file);
     for (let id in groups){
@@ -29,12 +25,15 @@ module.exports = class Group{
       new yarp.Group(id,group.type,group.permissions,group.enter,group.leave);
     }
   }
+
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     yarp.dbm.remove(this);
   }
+
   get users(){
     let users = {};
     for (id in yarp.users){
@@ -45,6 +44,7 @@ module.exports = class Group{
     }
     return users;
   }
+
   get characters(){
     let characters = {};
     for (id in yarp.characters){
@@ -55,16 +55,19 @@ module.exports = class Group{
     }
     return characters;
   }
+
   addPermission(permission){
     if (this.permissions.indexOf(permission) == -1) {
       this.permissions.push(permission);
     }
   }
+
   removePermission(permission){
     if (this.permissions.indexOf(permission) > -1) {
       this.permissions.splice(this.permissions.indexOf(permission), 1);
     }
   }
+
   hasPermission(permission){
     let result = false;
     let removed = false;
@@ -86,6 +89,7 @@ module.exports = class Group{
     }
     return result;
   }
+
   hasPermissions(permissions){
     for (let i = 0; i < permissions.length; i++){
       if (!this.hasPermission(permissions[i])) {
@@ -94,6 +98,7 @@ module.exports = class Group{
     }
     return true;
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

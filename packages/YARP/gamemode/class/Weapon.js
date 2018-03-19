@@ -20,10 +20,6 @@ module.exports = class Weapon{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Weapon);
-  }
-
   static config(file){
     let weapons = require(file);
     for (let category in weapons){
@@ -33,12 +29,15 @@ module.exports = class Weapon{
       }
     }
   }
+
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

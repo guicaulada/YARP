@@ -34,16 +34,15 @@ module.exports = class Prop{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Prop);
-  }
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

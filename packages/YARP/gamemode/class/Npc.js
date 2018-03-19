@@ -17,15 +17,14 @@ module.exports = class Npc{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Npc);
-  }
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

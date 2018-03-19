@@ -28,6 +28,7 @@ module.exports = (async () => {
     yarp.Label = require('./class/Label');
     yarp.Marker = require('./class/Marker');
     yarp.Npc = require('./class/Npc');
+    yarp.Pool = require('./class/Pool');
     yarp.Prop = require('./class/Prop');
     yarp.Transaction = require('./class/Transaction');
     yarp.User = require('./class/User');
@@ -38,26 +39,50 @@ module.exports = (async () => {
     console.log(chalk.redBright("[YARP] ")+"ClassError: "+err.message);
   }
 
-  //Loading Configs
+  //Loading Pools
+  try {
+    console.log(chalk.yellowBright("[YARP] ")+"Loading Pools");
+    yarp.blips = new yarp.Pool(yarp.Blip);
+    yarp.characters = new yarp.Pool(yarp.Character);
+    yarp.checkpoints = new yarp.Pool(yarp.Checkpoint);
+    yarp.colshapes = new yarp.Pool(yarp.Colshape);
+    yarp.commands = new yarp.Pool(yarp.Command);
+    yarp.events = new yarp.Pool(yarp.Event);
+    yarp.groups = new yarp.Pool(yarp.Group);
+    yarp.items = new yarp.Pool(yarp.Item);
+    yarp.labels = new yarp.Pool(yarp.Label);
+    yarp.markers = new yarp.Pool(yarp.Marker);
+    yarp.npcs = new yarp.Pool(yarp.Npc);
+    yarp.props = new yarp.Pool(yarp.Prop);
+    yarp.transactions = new yarp.Pool(yarp.Transaction);
+    yarp.users = new yarp.Pool(yarp.User);
+    yarp.variables = new yarp.Pool(yarp.Variable);
+    yarp.vehicles = new yarp.Pool(yarp.Vehicle);
+    yarp.weapons = new yarp.Pool(yarp.Weapon);
+  } catch(err) {
+    console.log(chalk.redBright("[YARP] ")+"PoolError: "+err.message);
+  }
+
+  //Loading Data
   console.log(chalk.yellowBright("[YARP] ")+"Loading Data");
   try {
-    await yarp.Blip.load();
-    await yarp.Character.load();
-    await yarp.Checkpoint.load();
-    await yarp.Colshape.load();
-    await yarp.Command.load();
-    await yarp.Event.load();
-    await yarp.Group.load();
-    await yarp.Item.load();
-    await yarp.Label.load();
-    await yarp.Marker.load();
-    await yarp.Npc.load();
-    await yarp.Prop.load();
-    await yarp.Transaction.load();
-    await yarp.User.load();
-    await yarp.Variable.load();
-    await yarp.Vehicle.load();
-    await yarp.Weapon.load();
+    await yarp.blips.load();
+    await yarp.characters.load();
+    await yarp.checkpoints.load();
+    await yarp.colshapes.load();
+    await yarp.commands.load();
+    await yarp.events.load();
+    await yarp.groups.load();
+    await yarp.items.load();
+    await yarp.labels.load();
+    await yarp.markers.load();
+    await yarp.npcs.load();
+    await yarp.props.load();
+    await yarp.transactions.load();
+    await yarp.users.load();
+    await yarp.variables.load();
+    await yarp.vehicles.load();
+    await yarp.weapons.load();
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"DataError: "+err.message);
   }
@@ -86,7 +111,6 @@ module.exports = (async () => {
     console.log(chalk.redBright("[YARP] ")+"ConfigError: "+err.message);
   }
 
-
   try {
     //Load RAGE.MP Events
     console.log(chalk.yellowBright("[YARP] ")+"Loading Events");
@@ -105,6 +129,7 @@ module.exports = (async () => {
     //require('./events/yarp/inventory.js');
     //require('./events/yarp/item.js');
     require('../event/yarp/menu.js');
+    require('../event/yarp/tick.js');
     //require('./events/yarp/prop.js');
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"EventError: "+err.message);

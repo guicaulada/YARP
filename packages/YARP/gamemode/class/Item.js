@@ -19,10 +19,6 @@ module.exports = class Item{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Item);
-  }
-
   static config(file){
     let items = require(file);
     for (let category in items){
@@ -36,9 +32,11 @@ module.exports = class Item{
   save(){
     yarp.dbm.save(this);
   }
+  
   remove(){
     yarp.dbm.remove(this);
   }
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

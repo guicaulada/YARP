@@ -209,35 +209,16 @@ module.exports = {
          }
       },
       "tp": {
-         hint: "Teleport to specified x y z.",
+         hint: "Teleport to specified gamemode object.",
          call: (player,args) => {
             if (yarp.users[player.socialClub].hasPermission("cmd.tp")){
-               player.position = new mp.Vector3(args[0], args[1], args[2]);
-            } else {
-               player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
-            }
-         }
-      },
-      "jtp": {
-         hint: "Teleport to specified JSON location.",
-         call: (player,args) => {
-            if (yarp.users[player.socialClub].hasPermission("cmd.jtp")){
-               player.position = JSON.parse(args.join(" "));
-            } else {
-               player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
-            }
-         }
-      },
-      "jpos": {
-         hint: "Write your location + commentary on jpos.log.",
-         call: (player,args) => {
-            if (yarp.users[player.socialClub].hasPermission("cmd.jpos")){
-               var fs = require("fs");
-               let comment = "";
-               if (args.length > 0){
-                  comment = " : " + args.join(" ");
+               let Class = args[0];
+               let id = args[1];
+               if (yarp[Class]) {
+                  let collection = Class.toLowerCase()+"s";
+                  let obj = yarp[collection][id];
+                  player.position = obj.position;
                }
-               fs.appendFile("jpos.log", JSON.stringify(player.position) + comment +"\n");
             } else {
                player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
             }
@@ -272,11 +253,11 @@ module.exports = {
          call: (player,args) => {
             if (yarp.users[player.socialClub].hasPermission("cmd.hint")){
                if (!args[0]){
-                  player.outputChatBox(`!{yellow}HINT!{white}: ${Object.keys(yarp.Command.categories).join(", ")}`);
+                  player.outputChatBox(`!{yellow}HINT!{white}: ${Object.keys(yarp.commands.categories).join(", ")}`);
                } else {
-                  let category = yarp.Command.categories[args[0]];
+                  let category = yarp.commands.categories[args[0]];
                   if (category){
-                     player.outputChatBox(`!{yellow}HINT!{white}: ${category.join(", ")}`);
+                     player.outputChatBox(`!{yellow}HINT!{white}: ${Object.keys(category).join(", ")}`);
                   } else {
                      let command = yarp.commands[args[0]];
                      if (command) {

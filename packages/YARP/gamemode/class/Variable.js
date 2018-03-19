@@ -12,22 +12,21 @@ module.exports = class Variable{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Variable);
-  }
-
   static config(file){
     let variables = require(file);
     for (let id in variables){
       new yarp.Variable(id,variables[id]);
     }
   }
+
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     yarp.dbm.remove(this);
   }
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

@@ -48,11 +48,9 @@ module.exports = class DBManager{
 
   static async load(Class){
     let collection = (new Class).constructor.name.toLowerCase()+"s";
-    let result = {};
     let res = await yarp.db.find(collection);
     for (let i = 0; i < res.length; i++){
-      result[res[i]._id] = new Class(res[i]);
+      yarp[collection][res[i]._id] = new Class(res[i]);
     }
-    yarp[collection] = result;
   }
 }

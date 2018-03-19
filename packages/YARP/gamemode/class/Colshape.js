@@ -31,6 +31,7 @@ module.exports = class Colshape{
       this.makeGetterSetter();
     }
   }
+
   static config(file){
     let colshapes = require(file);
     for (let id in colshapes){
@@ -40,16 +41,16 @@ module.exports = class Colshape{
       }
     }
   }
-  static load(){
-    return yarp.dbm.load(Colshape);
-  }
+
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

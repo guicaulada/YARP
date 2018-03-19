@@ -26,6 +26,7 @@ module.exports = {
     ],
   },
   "Store": {
+    call: (player) => {player.notify("Stores under development.")},
     positions: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
       new mp.Vector3(1960.7580566406, 3749.26367187, 31.3437423706055),

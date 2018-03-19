@@ -1,8 +1,4 @@
 
-mp.events.add('showStoreMenu', (file, id, store, itemsJson) => {
-	mp.events.call('createBrowser', "menu", ['package://YARP/ui/html/sideMenu.html', 'populateStoreItems', file, id, store, itemsJson]);
-});
-
 mp.events.add('purchaseStoreItem', (file, id, item, amount) => {
   mp.events.callRemote('purchaseStoreItem', file, id, item, amount);
 });

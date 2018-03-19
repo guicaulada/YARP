@@ -16,15 +16,14 @@ module.exports = class Transaction{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Transaction);
-  }
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

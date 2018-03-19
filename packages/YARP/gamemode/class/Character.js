@@ -30,12 +30,10 @@ module.exports = class Character{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Character);
-  }
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     this.mp.destroy();
     yarp.dbm.remove(this);
@@ -112,6 +110,7 @@ module.exports = class Character{
     }
     return false;
   }
+
   takeGroup(group){
     if (this.groups.indexOf(group) > -1) {
       this.groups.splice(this.groups.indexOf(group), 1);
@@ -308,6 +307,7 @@ module.exports = class Character{
   isDev(){
     return yarp.variables["Developers"].value.indexOf(this.socialClub) > -1
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

@@ -17,12 +17,10 @@ module.exports = class User{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(User);
-  }
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     yarp.dbm.remove(this);
   }
@@ -181,6 +179,7 @@ module.exports = class User{
   isDev(){
     return yarp.variables["Developers"].value.indexOf(this.id) > -1
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

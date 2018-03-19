@@ -34,8 +34,16 @@ module.exports = class Utility {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
   }
 
-  static offsetVector(vector,offset){
+  static Vector3Offset(vector,offset){
     return new mp.Vector3(vector.x+offset.x,vector.y+offset.y,vector.z+offset.z);
+  }
+
+  static Vector3Distance(vector1,vector2){
+    let dx = vector1.x - vector2.x;
+    let dy = vector1.y - vector2.y;
+    let dz = vector1.z - vector2.z;
+
+    return Math.sqrt( dx * dx + dy * dy + dz * dz );
   }
 
   static randomString(digits,possible){

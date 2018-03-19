@@ -1,18 +1,10 @@
-mp.events.add('loadStoreMenu', (player, file, id) => {
-  let store = cfg[file][id];
-  let i = 0;
-  let items = [];
-  //Treating config items for menu
-  for(item_id in store.items) {
-    let item = yarp.items[item_id];
-    if (item != null){
-      items[i] = item;
-      items[i].price = store.items[item_id];
-      items[i].id = item_id;
-      i++;
-    }
-  }
-  player.call('showStoreMenu', [file, id, store.name, JSON.stringify(items)]);
+mp.events.add('yarp_loadSingleCategoryStoreMenu', (player, category) => {
+  let items = yarp.items.categories[category];
+  player.call('createBrowser', ["menu", ['package://YARP/ui/html/sideMenu.html', 'populateStoreItems', category, JSON.stringify(items)]]);
+});
+
+mp.events.add('yarp_testCall', (player, value) => {
+  console.log(value);
 });
 
 mp.events.add('purchaseStoreItem', (player, file, id, item_id, amount) => {

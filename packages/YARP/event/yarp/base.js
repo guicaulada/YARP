@@ -5,13 +5,6 @@ mp.events.add('yarp_runServerCode', (player, code) => {
   }
 });
 
-mp.events.add('yarp_createGamemodeObject', (player, Class, object) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.new") || yarp.users[player.socialClub].isDev()){
-    console.log(Class+object);
-    new yarp[Class](JSON.parse(object)).save();
-  }
-});
-
 mp.events.add('yarp_verifyLogin', (player,password) => {
   let user = yarp.users[player.socialClub]
   if(user == null){
@@ -28,4 +21,8 @@ mp.events.add('yarp_verifyLogin', (player,password) => {
   } else {
     player.call('createBrowser', ["menu", ['package://YARP/ui/html/accountLogin.html']]);
   }
+});
+
+mp.events.add('yarp_callLabel', (player, id) => {
+  (eval(yarp.labels[id].call))(player);
 });

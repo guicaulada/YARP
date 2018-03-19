@@ -13,10 +13,6 @@ module.exports = class Event{
     }
   }
 
-  static load(){
-    return yarp.dbm.load(Event);
-  }
-
   static config(file){
     let events = require(file);
     for (let id in events){
@@ -24,13 +20,16 @@ module.exports = class Event{
       new yarp.Event(id,event.call);
     }
   }
+
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

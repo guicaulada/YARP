@@ -32,9 +32,7 @@ module.exports = class Blip{
       this.makeGetterSetter();
     }
   }
-  static load(){
-    return yarp.dbm.load(Blip);
-  }
+
   static config(file){
     let blips = require(file);
     for (let id in blips){
@@ -44,13 +42,16 @@ module.exports = class Blip{
       }
     }
   }
+
   save(){
     yarp.dbm.save(this);
   }
+
   remove(){
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
+  
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){
