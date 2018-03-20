@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Item events
+*/
+
 mp.events.add('restoreHunger', (player, value) => {
   if (player.health+value[0] < 100) {
     player.health = player.health + value[0]

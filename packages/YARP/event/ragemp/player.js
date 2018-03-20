@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Player events
+*/
+
 mp.events.add('playerChat', (player, message) => {
   console.log(`${player.name}: ${message}`);
 	mp.players.broadcast(`${player.name}: ${message}`);
@@ -33,7 +38,7 @@ mp.events.add('playerDeath', (player) => {
 mp.events.add('playerJoin', (player) => {
   player.name = player.socialClub;
   console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-  player.call('yarp_setWorldTime', [JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
+  player.call('setWorldTime', [JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
   let user = yarp.users[player.socialClub]
   if(user != null){
     if (user.banned) {
@@ -74,5 +79,21 @@ mp.events.add("playerReady", player => {
 mp.events.add("playerSpawn", player => {
 });
 
+let currentWeapons = {};
 mp.events.add("playerWeaponChange", (player, oldWeapon, newWeapon) => {
+  let character = yarp.characters[player.name];
+  if (character) {
+    for (let id in character.weapons){
+      if (mp.joaat(id) == newWeapon){
+        currentWeapons[player.id] = id;
+      }
+    }
+  }
+});
+
+mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson, weaponHash) => {
+  let character = yarp.characters[player.name];
+  if (character) {
+    character.takeAmmo(currentWeapons[player.id],1);
+  }
 });

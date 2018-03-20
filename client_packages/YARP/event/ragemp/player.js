@@ -26,4 +26,5 @@ mp.events.add("playerSpawn", () => {
 });
 
 mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
+	mp.events.callRemote('playerWeaponShot', JSON.stringify(targetPosition), JSON.stringify(targetEntity));
 });

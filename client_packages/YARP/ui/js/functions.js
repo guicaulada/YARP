@@ -6,18 +6,18 @@ let objectArgs = [];
 function loginAccount() {
     var password = document.getElementById('pass').value;
     mp.trigger('destroyBrowser', "menu");
-    mp.trigger('yarp_verifyLogin', password);
+    mp.trigger('verifyLogin', password);
 };
 
 function selectName() {
     var name = capitalizeFirstLetter(document.getElementById('name').value);
     var surname = capitalizeFirstLetter(document.getElementById('surname').value);
     var realName = name + " " + surname;
-    mp.trigger('yarp_createCharacter', realName);
+    mp.trigger('createCharacter', realName);
 }
 
 function getPlayerList() {
-    mp.trigger('yarp_getConnectedPlayers');
+    mp.trigger('getConnectedPlayers');
 };
 
 function populatePlayerList(playerJSON) {
@@ -56,7 +56,7 @@ function withdrawMoney() {
     $('#bank-withdraw').removeClass('hidden');
     $('#bank-accept').removeClass('hidden');
     $('#bank-exit').html('Cancel');
-	mp.trigger('yarp_updateBankAccountMoney');
+	mp.trigger('updateBankAccountMoney');
 }
 
 function depositMoney() {
@@ -65,7 +65,7 @@ function depositMoney() {
     $('#bank-deposit').removeClass('hidden');
     $('#bank-accept').removeClass('hidden');
     $('#bank-exit').html('Cancel');
-	mp.trigger('yarp_updateBankAccountMoney');
+	mp.trigger('updateBankAccountMoney');
 }
 
 function transferMoney() {
@@ -74,7 +74,7 @@ function transferMoney() {
     $('#bank-transfer').removeClass('hidden');
     $('#bank-accept').removeClass('hidden');
     $('#bank-exit').html('Cancel');
-	mp.trigger('yarp_updateBankAccountMoney');
+	mp.trigger('updateBankAccountMoney');
 }
 
 function updateAccountMoney(money) {
@@ -97,7 +97,7 @@ function showBalance() {
     $('#bank-menu').addClass('hidden');
     $('#bank-balance').removeClass('hidden');
     $('#bank-exit').html('Cancel');
-	mp.trigger("yarp_loadPlayerBankBalance");
+	mp.trigger('loadPlayerBankBalance');
 }
 
 function showBankOperations(bankOperationsJson, playerName) {
@@ -192,7 +192,7 @@ function bankBack() {
             $('#bank-menu').removeClass('hidden');
             break;
         default:
-            mp.trigger('yarp_closeATM');
+            mp.trigger('closeATM');
             break;
     }
     $('#bank-accept').addClass('hidden');
@@ -206,7 +206,7 @@ function catalogBack() {
             $('#vehicle-container').removeClass('hidden');
             break;
     }
-    mp.trigger("yarp_closeCatalog");
+    mp.trigger('closeCatalog');
     $('#catalog-exit').html('Exit');
     catalogSelectedOption = 0;
 }
@@ -227,11 +227,11 @@ function bankAccept() {
             amount = $('#bank-transfer-amount').val();
             break;
     }
-    mp.trigger('yarp_executeBankOperation', bankSelectedOption, amount, target);
+    mp.trigger('executeBankOperation', bankSelectedOption, amount, target);
 }
 
 function getVehicleList() {
-    mp.trigger('yarp_getCarShopVehicleList');
+    mp.trigger('getCarShopVehicleList');
 }
 
 function populateVehicleList(dealership, vehicleJSON) {
@@ -292,13 +292,13 @@ $("input[type='checkbox']").change(function () {
 $(document).ready(function () {
     $('#colorpicker').farbtastic(function (color) {
         var colorMain = document.getElementById('color-main').checked;
-        mp.trigger("yarp_previewVehicleChangeColor", color, colorMain);
+        mp.trigger('previewVehicleChangeColor', color, colorMain);
     });
 });
 
 function checkVehiclePayable() {
 	// Comprobamos si el jugador tiene el dinero para el vehículo
-	mp.trigger('yarp_checkVehiclePayable');
+	mp.trigger('checkVehiclePayable');
 }
 
 function showVehiclePurchaseButton() {
@@ -308,30 +308,30 @@ function showVehiclePurchaseButton() {
 
 function rotatePreviewVehicle() {
     var rotation = parseFloat(document.getElementById('vehicle-slider').value);
-    mp.trigger("yarp_rotatePreviewVehicle", rotation);
+    mp.trigger('rotatePreviewVehicle', rotation);
 }
 
 function goBackToCatalog() {
-    mp.trigger('yarp_showCatalog');
+    mp.trigger('showCatalog');
 }
 
 function purchaseVehicle() {
-    mp.trigger('yarp_purchaseVehicle');
+    mp.trigger('purchaseVehicle');
 }
 
 function testVehicle() {
-	mp.trigger('yarp_testVehicle');
+	mp.trigger('testVehicle');
 }
 
 function namePoliceControl() {
     var name = document.getElementById('name').value;
-    mp.trigger('yarp_policeControlSelectedName', name);
+    mp.trigger('policeControlSelectedName', name);
     mp.trigger('destroyBrowser', "police");
 }
 
 function preloadContact() {
 	// Cargamos los datos del contacto seleccionado
-    mp.trigger('yarp_preloadContactData');
+    mp.trigger('preloadContactData');
 }
 
 function populateContactData(number, name) {
@@ -345,23 +345,23 @@ function setContactData() {
     let name = document.getElementById('name').value;
 
 	// Llamamos al cliente para que dé de alta
-    mp.trigger('yarp_setContactData', number, name);
+    mp.trigger('setContactData', number, name);
 }
 
 function sendPhoneMessage() {
 	// Recogemos y enviamos el mensaje
 	let message = document.getElementById('message').value;
-    mp.trigger('yarp_sendPhoneMessage', message);
+    mp.trigger('sendPhoneMessage', message);
 }
 
 function cancelMessage() {
 	// Cancelamos el envío del SMS
-    mp.trigger('yarp_cancelPhoneMessage');
+    mp.trigger('cancelPhoneMessage');
 }
 
 function getFirstTestQuestion() {
 	// Cogemos la primera pregunta y sus respuestas
-	mp.trigger('yarp_getNextTestQuestion');
+	mp.trigger('getNextTestQuestion');
 }
 
 function populateQuestionAnswers(question, answersJSON) {
@@ -405,5 +405,5 @@ function setAccountName(sclub){
 function submitAnswer() {
 	// Recogemos la respuesta y la enviamos
 	let answer = $('input[name=answer]:checked', '#testForm').val();
-	mp.trigger('yarp_submitAnswer', answer);
+	mp.trigger('submitAnswer', answer);
 }

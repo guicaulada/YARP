@@ -134,6 +134,17 @@ module.exports = {
             }
          }
       },
+      "givemoney": {
+        hint: "Give yourself money.",
+        call: (player,args) => {
+           if (yarp.users[player.socialClub].hasPermission("cmd.givemoney")){
+              yarp.characters[player.name].giveMoney(args[0]);
+              player.notify("Received ~g~$"+args[0])
+           } else {
+              player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+           }
+        }
+      },
       "hp": {
          hint: "Regenerates player health.",
          call: (player,args) => {

@@ -1,6 +1,7 @@
 ﻿let tunningComponents = [];
 let tattooZones = [];
 let selectedOptions = [];
+let categorioes = [];
 let purchasedAmount = 1;
 let multiplier = 0.0;
 let selected = null;
@@ -104,23 +105,26 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 	options.appendChild(cancelButton);
 }
 
-function populateAmmuWeapons(file, id, ammu, weaponJson) {
+function populateStoreItems(category, itemsJson) {
 	// Inicializamos los valores
 	purchasedAmount = 1;
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let weapons = JSON.parse(weaponJson);
+	let items = JSON.parse(itemsJson);
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
-
+	let list = [];
+	for (key in items){
+		list.push(items[key]);
+	}
 	// Añadimos la cabecera del menú
-	header.textContent = ammu;
+	header.textContent = category;
 
-	for(let i = 0; i < weapons.length; i++) {
+	for(let i = 0; i < list.length; i++) {
 		// Obtenemos el objeto en curso
-		let weapon = weapons[i];
+		let item = list[i];
 
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
@@ -156,9 +160,9 @@ function populateAmmuWeapons(file, id, ammu, weaponJson) {
 		itemSubstract.classList.add('item-substract', 'hidden');
 
 		// Añadimos el contenido de cada elemento
-		itemImage.src = '../img/inventory/' + weapon.img + '.png';
-		itemDescription.textContent = weapon.name  + '($'+weapon.price+')';
-		itemPrice.innerHTML = '<b>Ammo: </b>$' +weapon.ammo+ '';
+		itemImage.src = '../img/inventory/' + item._model + '.png';
+		itemDescription.textContent = item._name;
+		itemPrice.innerHTML = '<b>Price: </b>$' + item._price;
 		itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 		itemAdd.textContent = '+';
 		itemSubstract.textContent = '-';
@@ -268,7 +272,7 @@ function populateAmmuWeapons(file, id, ammu, weaponJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseAmmuWeapon', file, id, weapons[selected].id, purchasedAmount);
+			mp.trigger('purchaseStoreItem', list[selected]._id, purchasedAmount);
 		}
 	});
 
@@ -282,23 +286,37 @@ function populateAmmuWeapons(file, id, ammu, weaponJson) {
 	options.appendChild(cancelButton);
 }
 
-function populateStoreItems(file, id, store, itemsJson) {
+function populateAmmuWeapons(category, weaponJson) {
 	// Inicializamos los valores
 	purchasedAmount = 1;
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let items = JSON.parse(itemsJson);
+	let weapons = JSON.parse(weaponJson);
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
+	let list = [];
+
+	// Limpiamos el contenido
+	while(content.firstChild) {
+		content.removeChild(content.firstChild);
+	}
+
+	// Limpiamos las opciones
+	while(options.firstChild) {
+		options.removeChild(options.firstChild);
+	}
 
 	// Añadimos la cabecera del menú
-	header.textContent = store;
+	header.textContent = category;
 
-	for(let i = 0; i < items.length; i++) {
+	for (key in weapons){
+		list.push(weapons[key]);
+	}
+	for(let i = 0; i < list.length; i++) {
 		// Obtenemos el objeto en curso
-		let item = items[i];
+		let weapon = list[i];
 
 		// Creamos los elementos para mostrar cada objeto
 		let itemContainer = document.createElement('div');
@@ -334,9 +352,9 @@ function populateStoreItems(file, id, store, itemsJson) {
 		itemSubstract.classList.add('item-substract', 'hidden');
 
 		// Añadimos el contenido de cada elemento
-		itemImage.src = '../img/inventory/' + item.img + '.png';
-		itemDescription.textContent = item.name;
-		itemPrice.innerHTML = '<b>Price: </b>$' + item.price;
+		itemImage.src = '../img/inventory/' + weapon._model + '.png';
+		itemDescription.textContent = weapon._name  + '($'+weapon._price+')';
+		itemPrice.innerHTML = '<b>Ammo: </b>$' +weapon._ammo+ '';
 		itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 		itemAdd.textContent = '+';
 		itemSubstract.textContent = '-';
@@ -440,24 +458,106 @@ function populateStoreItems(file, id, store, itemsJson) {
 
 	// Añadimos el texto de los botones
 	purchaseButton.textContent = 'Buy';
-	cancelButton.textContent = 'Exit';
+	cancelButton.textContent = 'Back';
 
 	// Ponemos la función para cada elemento
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseStoreItem', file, id, items[selected].id, purchasedAmount);
+			mp.trigger('purchaseAmmuWeapon', list[selected]._id, purchasedAmount);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', "menu");
+		populateAmmuCategories();
 	});
 
 	// Ordenamos la jerarquía de elementos
 	options.appendChild(purchaseButton);
 	options.appendChild(cancelButton);
+}
+
+function populateAmmuCategories(categoriesJson) {
+
+	// Inicializamos las opciones
+	selected = null;
+
+	// Añadimos el título al menú
+	let header = document.getElementById('header');
+	header.textContent = 'Categories';
+
+	// Obtenemos la lista de componentes
+	if (categoriesJson) {
+		categories = JSON.parse(categoriesJson);
+	}
+
+	// Obtenemos el nodo contenedor
+	let content = document.getElementById('content');
+	let options = document.getElementById('options');
+	let list = [];
+	for (key in categories){
+		list.push(key);
+	}
+
+	// Limpiamos el contenido
+	while(content.firstChild) {
+		content.removeChild(content.firstChild);
+	}
+
+	// Limpiamos las opciones
+	while(options.firstChild) {
+		options.removeChild(options.firstChild);
+	}
+
+	for(let i = 0; i < list.length; i++) {
+		// Creamos los elementos para mostrar cada objeto
+		let itemContainer = document.createElement('div');
+		let infoContainer = document.createElement('div');
+		let descContainer = document.createElement('div');
+		let itemDescription = document.createElement('span');
+
+		// Añadimos las clases a cada elemento
+		itemContainer.classList.add('item-row');
+		infoContainer.classList.add('item-content');
+		descContainer.classList.add('item-header');
+		itemDescription.classList.add('item-description');
+
+		// Añadimos el contenido de cada elemento
+		itemDescription.textContent = list[i];
+
+		// Ponemos la función para cada elemento
+		itemContainer.onclick = (function() {
+			// Seleccionamos el elemento pulsado
+			selected = i;
+
+			// Mostramos la página de componentes
+			populateAmmuWeapons(list[selected], JSON.stringify(categories[list[selected]]));
+		});
+
+		// Ordenamos la jerarquía de elementos
+		content.appendChild(itemContainer);
+		itemContainer.appendChild(infoContainer);
+		infoContainer.appendChild(descContainer);
+		descContainer.appendChild(itemDescription);
+	}
+
+	// Añadimos el botón
+	let exitButton = document.createElement('div');
+
+	// Añadimos las clases al botón
+	exitButton.classList.add('single-button', 'cancel-button');
+
+	// Añadimos el texto de los botones
+	exitButton.textContent = 'Exit';
+
+	exitButton.onclick = (function() {
+		// Cerramos la ventana de compra
+		mp.trigger('destroyBrowser', "menu");
+	});
+
+	// Ordenamos la jerarquía de elementos
+	options.appendChild(exitButton);
 }
 
 function populateTunningMenu(tunningComponentsJSON) {
@@ -919,7 +1019,7 @@ function populateCharacterList(charactersJson) {
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Cargamos el personaje
-			mp.trigger('yarp_loadCharacter', character._id);
+			mp.trigger('loadCharacter', character._id);
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -942,7 +1042,7 @@ function populateCharacterList(charactersJson) {
 		// Ponemos la función para cada elemento
 		createButton.onclick = (function() {
 			// Mostramos el menú de creación de personaje
-			mp.trigger('yarp_showCharacterCreationMenu');
+			mp.trigger('showCharacterCreationMenu');
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -1219,7 +1319,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 
 			// Actualizamos la apariencia
-			mp.trigger('yarp_updateFacialHair', i, selectedOptions[i]);
+			mp.trigger('updateFacialHair', i, selectedOptions[i]);
 		});
 
 		itemSubstract.onclick = (function() {
@@ -1243,7 +1343,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 
 			// Actualizamos la apariencia
-			mp.trigger('yarp_updateFacialHair', i, selectedOptions[i]);
+			mp.trigger('updateFacialHair', i, selectedOptions[i]);
 		});
 
 		// Ordenamos la jerarquía de elementos

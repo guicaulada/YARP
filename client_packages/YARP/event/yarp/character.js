@@ -10,24 +10,24 @@ let faceModel = {
 let camera = null;
 let characters = null;
 
-mp.events.add('yarp_showPlayerCharacters', (charactersJson) => {
+mp.events.add('showPlayerCharacters', (charactersJson) => {
 	characters = charactersJson;
 	mp.game.ui.displayRadar(false);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
 	mp.events.call('createBrowser', "character", ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
-mp.events.add('yarp_loadCharacter', (id) => {
+mp.events.add('loadCharacter', (id) => {
 	mp.events.call('destroyBrowser', "character");
 	mp.game.ui.displayRadar(true);
-	mp.events.callRemote('yarp_loadCharacter', id);
+	mp.events.callRemote('loadCharacter', id);
 	mp.game.invoke('0xB0C54402D009BA38');
 });
 
-mp.events.add('yarp_showCharacterCreationMenu', () => {
+mp.events.add('showCharacterCreationMenu', () => {
 	mp.events.call('destroyBrowser', "character");
 	mp.game.ui.displayRadar(false);
-	mp.events.callRemote('yarp_setCharacterIntoCreator');
+	mp.events.callRemote('setCharacterIntoCreator');
 	mp.game.invoke('0xB0C54402D009BA38');
 	initializeCharacterCreation(mp.players.local);
 	camera = mp.cameras.new('default', new mp.Vector3(152.6008, -1003.25, -98), new mp.Vector3(-20.0, 0.0, 0.0), 90);
@@ -39,12 +39,12 @@ mp.events.add('yarp_showCharacterCreationMenu', () => {
 	mp.events.call('createBrowser', "character", ['package://YARP/ui/html/characterCreator.html']);
 });
 
-mp.events.add('yarp_updatePlayerSex', (sex) => {
+mp.events.add('updatePlayerSex', (sex) => {
 	initializeCharacterCreation(mp.players.local);
-	mp.events.callRemote('yarp_changeCharacterSex', sex);
+	mp.events.callRemote('changeCharacterSex', sex);
 });
 
-mp.events.add('yarp_updatePlayerCreation', (partName, value, isPercentage) => {
+mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {
 	if(isPercentage) {
 		value = parseFloat(value / 100);
 	}
@@ -52,7 +52,7 @@ mp.events.add('yarp_updatePlayerCreation', (partName, value, isPercentage) => {
 	updatePlayerFace(mp.players.local, faceModel);
 });
 
-mp.events.add('yarp_cameraPointTo', (bodyPart) => {
+mp.events.add('cameraPointTo', (bodyPart) => {
 	if(bodyPart == 0) {
 		camera.setCoord(152.6008, -1003.25, -98);
 	} else {
@@ -60,20 +60,20 @@ mp.events.add('yarp_cameraPointTo', (bodyPart) => {
 	}
 });
 
-mp.events.add('yarp_rotateCharacter', (rotation) => {
+mp.events.add('rotateCharacter', (rotation) => {
 	mp.players.local.setHeading(rotation);
 });
 
-mp.events.add('yarp_characterNameDuplicated', () => {
+mp.events.add('characterNameDuplicated', () => {
 	mp.events.call('browserExecute', "character", ['showPlayerDuplicatedWarn']);
 });
 
-mp.events.add('yarp_acceptCharacterCreation', (name, age, model) => {
+mp.events.add('acceptCharacterCreation', (name, age, model) => {
 	let faceJson = JSON.stringify(faceModel);
-	mp.events.callRemote('yarp_createCharacter', name, age, model, faceJson);
+	mp.events.callRemote('createCharacter', name, age, model, faceJson);
 });
 
-mp.events.add('yarp_cancelCharacterCreation', () => {
+mp.events.add('cancelCharacterCreation', () => {
 	mp.game.cam.renderScriptCams(false, false, 0, true, false);
 	camera.destroy();
 	camera = null;
@@ -85,7 +85,7 @@ mp.events.add('yarp_cancelCharacterCreation', () => {
 	mp.events.call('createBrowser', "character", ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters]);
 });
 
-mp.events.add('yarp_characterCreatedSuccessfully', () => {
+mp.events.add('characterCreatedSuccessfully', () => {
 	mp.game.cam.renderScriptCams(false, false, 0, true, false);
 	camera.destroy();
 	camera = null;
@@ -95,7 +95,7 @@ mp.events.add('yarp_characterCreatedSuccessfully', () => {
 	mp.events.call('destroyBrowser', "character");
 });
 
-mp.events.add('yarp_updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
+mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
 	let face = JSON.parse(faceJson);
 	let tattoo = JSON.parse(tattooJson);
 	updatePlayerFace(player, face);

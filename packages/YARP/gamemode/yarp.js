@@ -117,19 +117,17 @@ module.exports = (async () => {
     //require('./events/ragemp/checkpoint.js');
     //require('./events/ragemp/colshape.js');
     //require('./events/ragemp/entity.js');
-    require('../event/ragemp/player.js');
+    require('../event/ragemp/Player.js');
     //require('./events/ragemp/stream.js');
     //require('./events/ragemp/vehicle.js');
     //require('./events/ragemp/waypoint.js');
 
     //Load YARP Events
-    //require('./events/yarp/bank.js');
-    require('../event/yarp/base.js');
-    require('../event/yarp/character.js');
-    //require('./events/yarp/inventory.js');
-    //require('./events/yarp/item.js');
-    require('../event/yarp/menu.js');
-    require('../event/yarp/tick.js');
+    require('../event/yarp/Bank.js');
+    require('../event/yarp/Character.js');
+    require('../event/yarp/Gamemode.js');
+    require('../event/yarp/Item.js');
+    require('../event/yarp/Menu.js');
     //require('./events/yarp/prop.js');
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"EventError: "+err.message);

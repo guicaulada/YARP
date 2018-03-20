@@ -62,14 +62,14 @@ module.exports = class Character{
       if (yarp.groups[group].enter){
         let cb = eval(yarp.groups[group].enter);
         cb(player);
-        mp.events.call('yarp_characterJoinedGroup',player,this,group);
+        mp.events.call('characterJoinedGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
         if (yarp.groups[group].enter){
           let cb = eval(yarp.groups[group].enter);
           cb(player);
-          mp.events.call('yarp_characterJoinedGroup',player,this,group);
+          mp.events.call('characterJoinedGroup',player,this,group);
         }
       }
     }
@@ -81,14 +81,14 @@ module.exports = class Character{
       if (yarp.groups[group].leave){
         let cb = eval(yarp.groups[group].leave);
         cb(player);
-        mp.events.call('yarp_characterLeftGroup',player,this,group);
+        mp.events.call('characterLeftGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
         if (yarp.groups[group].leave){
           let cb = eval(yarp.groups[group].leave);
           cb(player);
-          mp.events.call('yarp_characterLeftGroup',player,this,group);
+          mp.events.call('characterLeftGroup',player,this,group);
         }
       }
     }
@@ -120,18 +120,23 @@ module.exports = class Character{
     return false;
   }
 
-  chargeWallet(value){
+  giveMoney(value){
+    this.player.setVariable('PLAYER_WALLET', this.wallet+value);
+    this.wallet = this.wallet+value;
+  }
+
+  tryWalletPayment(value){
     if (this.wallet-value >= 0){
-      player.setVariable('PLAYER_WALLET', this.wallet-value);
+      this.player.setVariable('PLAYER_WALLET', this.wallet-value);
       this.wallet = this.wallet-value;
       return true;
     }
     return false;
   }
 
-  chargeBank(value){
+  tryBankPayment(value){
     if (this.bank-value >= 0){
-      player.setVariable('PLAYER_BANK', this.bank-value);
+      this.player.setVariable('PLAYER_BANK', this.bank-value);
       let transaction = new Transaction("Payment",value,this.name);
       yarp.TransactionManager.add(transaction);
       this.bank = this.bank-value;
@@ -140,10 +145,27 @@ module.exports = class Character{
     return false;
   }
 
+  tryFullPayment(value){
+    if (this.wallet-value >= 0){
+      this.player.setVariable('PLAYER_WALLET', this.wallet-value);
+      this.wallet = this.wallet-value;
+      return true;
+    } else {
+      if (this.withdraw(value-this.wallet)) {
+        if (this.wallet-value >= 0){
+          this.player.setVariable('PLAYER_WALLET', this.wallet-value);
+          this.wallet = this.wallet-value;
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   deposit(value){
     if (this.wallet-value >= 0){
-      player.setVariable('PLAYER_WALLET', this.wallet-value);
-      player.setVariable('PLAYER_BANK', this.bank+value);
+      this.player.setVariable('PLAYER_WALLET', this.wallet-value);
+      this.player.setVariable('PLAYER_BANK', this.bank+value);
       let transaction = new Transaction("Deposit",value,this.name);
       yarp.TransactionManager.add(transaction);
       this.wallet = this.wallet-value;
@@ -155,8 +177,8 @@ module.exports = class Character{
 
   withdraw(value){
     if (this.bank-value >= 0){
-      player.setVariable('PLAYER_WALLET', this.wallet+value);
-      player.setVariable('PLAYER_BANK', this.bank-value);
+      this.player.setVariable('PLAYER_WALLET', this.wallet+value);
+      this.player.setVariable('PLAYER_BANK', this.bank-value);
       let transaction = new Transaction("Withdraw",value,this.name);
       yarp.TransactionManager.add(transaction);
       this.wallet = this.wallet+value;
@@ -168,7 +190,7 @@ module.exports = class Character{
 
   transfer(target, value){
     if (this.bank-value >= 0){
-      player.setVariable('PLAYER_BANK', this.bank-value);
+      this.player.setVariable('PLAYER_BANK', this.bank-value);
       target.player.setVariable('PLAYER_BANK', this.character.bank+value);
       let transaction = new Transaction("Transfer",value,this.name);
       yarp.TransactionManager.add(transaction);
@@ -186,7 +208,7 @@ module.exports = class Character{
       } else {
         this.inventory[item.id] = amount;
       }
-      this.weight = utils.round(this.weight + (amount*item.weight),1);
+      this.weight = yarp.utils.round(this.weight + (amount*item.weight),1);
       return true;
     }
     return false;
@@ -203,21 +225,31 @@ module.exports = class Character{
     return false;
   }
 
-  giveWeapon(id, amount){
-    if (!this.weapons[id]) {
-      this.weapons[id] = 0;
+  giveWeapon(weapon, amount){
+    if (!this.weapons[weapon.id]) {
+      this.weapons[weapon.id] = 0;
     }
-    this.weapons[id] =+ amount;
+    this.weapons[weapon.id] += amount;
+    this.player.giveWeapon(mp.joaat(weapon.id), amount);
+    this.equipWeapon(weapon);
   }
 
-  takeWeapon(id, amount){
+  takeAmmo(id, amount){
     if (!this.weapons[id]) {
       return;
     }
-    this.weapons[id] =- amount;
+    this.weapons[id] -= amount;
     if (this.weapons[id] <= 0) {
       this.weapons[id] = 0;
     }
+  }
+
+  hasWeapon(id){
+    return (this.weapons[id] != null)
+  }
+
+  equipWeapon(weapon) {
+    this.player.call('equipWeapon', [JSON.stringify(weapon)]);
   }
 
   getGroupByType(type){
@@ -307,7 +339,7 @@ module.exports = class Character{
   isDev(){
     return yarp.variables["Developers"].value.indexOf(this.socialClub) > -1
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

@@ -68,14 +68,14 @@ module.exports = class User{
       if (yarp.groups[group].enter){
         let cb = eval(yarp.groups[group].enter);
         cb(player);
-        mp.events.call('yarp_userJoinedGroup',player,this,group);
+        mp.events.call('userJoinedGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
         if (yarp.groups[group].enter){
           let cb = eval(yarp.groups[group].enter);
           cb(player);
-          mp.events.call('yarp_userJoinedGroup',player,this,group);
+          mp.events.call('userJoinedGroup',player,this,group);
         }
       }
     }
@@ -87,14 +87,14 @@ module.exports = class User{
       if (yarp.groups[group].leave){
         let cb = eval(yarp.groups[group].leave);
         cb(player);
-        mp.events.call('yarp_userLeftGroup',player,this,group);
+        mp.events.call('userLeftGroup',player,this,group);
       }
     } else {
       for (let group of this.groups){
         if (yarp.groups[group].leave){
           let cb = eval(yarp.groups[group].leave);
           cb(player);
-          mp.events.call('yarp_userLeftGroup',player,this,group);
+          mp.events.call('userLeftGroup',player,this,group);
         }
       }
     }

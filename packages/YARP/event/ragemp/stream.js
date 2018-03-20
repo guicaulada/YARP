@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Stream events
+*/
+
 mp.events.add("playerStreamIn", (player, forPlayer) => {
 });
 

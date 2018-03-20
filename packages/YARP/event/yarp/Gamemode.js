@@ -1,7 +1,18 @@
 'use strict';
 /**
-* @file Tick function
+* @file Gamemode events
 */
+
+mp.events.add('runServerCode', (player, code) => {
+  if (yarp.users[player.socialClub].hasPermission("cmd.code") || yarp.users[player.socialClub].isDev()){
+    eval(code);
+  }
+});
+
+mp.events.add('callLabel', (player, id) => {
+  (eval(yarp.labels[id].call))(player);
+});
+
 
 function tick() {
   mp.players.forEach((player,id) => {
@@ -48,14 +59,14 @@ function tick() {
       if (i < 0) {
         if (yarp.utils.Vector3Distance(player.position,label.position) < label.range){
           if (label.call){
-            player.call('yarp_enterLabel',[label.id,label.key])
+            player.call('enterLabel',[label.id,label.key])
           }
           label.players.push(id)
         }
       } else {
         if (yarp.utils.Vector3Distance(player.position,label.position) > label.range){
           if (label.call){
-            player.call('yarp_leaveLabel')
+            player.call('leaveLabel')
           }
           label.players.splice(i,1)
         }

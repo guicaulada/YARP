@@ -36,12 +36,12 @@ function setupCodeEditor(text){
     });
 
     $('#server').click(function(){
-      mp.trigger('yarp_runServerCode', editor.getValue());
+      mp.trigger('runServerCode', editor.getValue());
       editor.getDoc().setValue('');
     });
 
     $('#client').click(function(){
-      mp.trigger('yarp_runClientCode', editor.getValue());
+      mp.trigger('runClientCode', editor.getValue());
       editor.getDoc().setValue('');
     });
     editor.setSize($('.wrapper').width(), $('.wrapper').height());

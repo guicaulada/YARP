@@ -15,6 +15,7 @@ module.exports = {
   "Admin": {
     permissions: [
       "cmd.kill",
+      "cmd.givemoney",
       "cmd.hp",
       "cmd.armour",
       "cmd.weapon",

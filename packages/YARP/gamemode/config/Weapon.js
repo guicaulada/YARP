@@ -47,7 +47,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_ar_compactrifle"
     },
     "WEAPON_SPECIALCARBINE": {
       name: "Special Carbine",
@@ -121,7 +121,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_ex_apmine"
     },
   	"WEAPON_PETROLCAN": {
       name: "Petrol Can",
@@ -204,7 +204,7 @@ module.exports = {
       bone: 58271,
       position: new mp.Vector3(-0.01, 0.1,  -0.07),
       rotation: new mp.Vector3(-55.0,  0.10, 0.0),
-      model: ""
+      model: "w_pi_revolver"
     },
     "WEAPON_PISTOL50": {
       name: ".50 Pistol",
@@ -231,7 +231,7 @@ module.exports = {
       bone: 58271,
       position: new mp.Vector3(-0.01, 0.1,  -0.07),
       rotation: new mp.Vector3(-55.0,  0.10, 0.0),
-      model: ""
+      model: "w_pi_marksmanpistol"
     },
     "WEAPON_FLAREGUN": {
       name: "Flare Gun",
@@ -278,7 +278,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.1, -0.15, 0.0),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_sg_dbshotgun"
     },
     "WEAPON_PUMPSHOTGUN": {
       name: "Pump Shotgun",
@@ -296,7 +296,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.1, -0.15, 0.0),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_sg_sawnoff"
     },
     "WEAPON_HEAVYSHOTGUN": {
       name: "Heavy Shotgun",
@@ -323,7 +323,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.1, 0.15, 0.0),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_sg_autoshotgun"
     },
   },
   "Machine": {
@@ -343,7 +343,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_sb_minismg"
     },
   	"WEAPON_GUSENBERG": {
       name: "Gusenberg",
@@ -388,7 +388,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_sb_machinepistol"
     },
     "WEAPON_COMBATMG": {
       name: "Combat  MG",
@@ -406,7 +406,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "w_mg_combatpdw"
     },
   },
   "Melee": {
@@ -426,7 +426,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0, 0.0, 0.0),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "prop_w_me_dagger"
+      model: "prop_tool_torch"
     },
     "WEAPON_GOLFCLUB": {
       name: "Golfclub",
@@ -489,7 +489,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "prop_w_me_dagger"
+      model: "w_me_knuckle"
     },
     "WEAPON_MACHETE": {
       name: "Machete",
@@ -507,7 +507,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "prop_w_me_dagger"
+      model: "prop_w_me_switchblade"
     },
     "WEAPON_NIGHTSTICK": {
       name: "Nightstick",
@@ -527,7 +527,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_me_hammer"
+      model: "prop_cs_wrench"
     },
   	"WEAPON_PIPEBOMB": {
       name: "Pipe Bomb",
@@ -536,7 +536,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "prop_bomb_01"
     },
   	"WEAPON_POOLCUE": {
       name: "Pool Cue",
@@ -554,7 +554,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "prop_cs_cuffs_01"
     },
   	"WEAPON_GARBAGEBAG": {
       name: "Garbage Bag",
@@ -563,7 +563,7 @@ module.exports = {
       bone: 24818,
       position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
+      model: "prop_ld_rub_binbag_01"
     },
   	"WEAPON_DIGISCANNER": {
       name: "Digi Scanner",
@@ -592,24 +592,24 @@ module.exports = {
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
       model: "prop_w_me_dagger"
     },
-  	"WEAPON_REMOTESNIPER": {
-      name: "Remote Sniper",
-      price: 20000,
-      ammo: 200,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
-    },
-  	"WEAPON_STINGER": {
-      name: "Stinger",
-      price: 20000,
-      ammo: 200,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
-    },
+  	// "WEAPON_REMOTESNIPER": {
+    //   name: "Remote Sniper",
+    //   price: 20000,
+    //   ammo: 200,
+    //   bone: 24818,
+    //   position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+    //   rotation: new mp.Vector3(0.0, 0.0, 0.0),
+    //   model: ""
+    // },
+  	// "WEAPON_STINGER": {
+    //   name: "Stinger",
+    //   price: 20000,
+    //   ammo: 200,
+    //   bone: 24818,
+    //   position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+    //   rotation: new mp.Vector3(0.0, 0.0, 0.0),
+    //   model: ""
+    // },
   },
   "Sniper": {
     "WEAPON_HEAVYSNIPER": {
@@ -640,69 +640,69 @@ module.exports = {
       model: "w_sr_sniperrifle"
     },
   },
-  "Heavy": {
-  	"WEAPON_RPG": {
-      name: "RPG",
-      price: 24300,
-      ammo: 243,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_lr_rpg"
-    },
-    "WEAPON_COMPACTLAUNCHER": {
-      name: "Compact Launcher",
-      price: 28000,
-      ammo: 280,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: ""
-    },
-  	"WEAPON_FIREWORK": {
-      name: "Firework",
-      price: 18000,
-      ammo: 180,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_lr_firework"
-    },
-  	"WEAPON_GRENADELAUNCHER": {
-      name: "Grenade Launcher",
-      price: 14700,
-      ammo: 147,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_lr_grenadelauncher"
-    },
-  	"WEAPON_HOMINGLAUNCHER": {
-      name: "Homing Launcher",
-      price: 34000,
-      ammo: 340,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_lr_homing"
-    },
-  	"WEAPON_MINIGUN": {
-      name: "Minigun",
-      price: 50000,
-      ammo: 500,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_mg_minigun"
-    },
-  	"WEAPON_RAILGUN": {
-      name: "Rail Gun",
-      price: 100000,
-      ammo: 1000,
-      bone: 24818,
-      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-      rotation: new mp.Vector3(0.0, 0.0, 0.0),
-      model: "w_ar_railgun"
-    },
-  }
+  // "Heavy": {
+  // 	"WEAPON_RPG": {
+  //     name: "RPG",
+  //     price: 24300,
+  //     ammo: 243,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: "w_lr_rpg"
+  //   },
+  //   "WEAPON_COMPACTLAUNCHER": {
+  //     name: "Compact Launcher",
+  //     price: 28000,
+  //     ammo: 280,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: ""
+  //   },
+  // 	"WEAPON_FIREWORK": {
+  //     name: "Firework",
+  //     price: 18000,
+  //     ammo: 180,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: "w_lr_firework"
+  //   },
+  // 	"WEAPON_GRENADELAUNCHER": {
+  //     name: "Grenade Launcher",
+  //     price: 14700,
+  //     ammo: 147,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: "w_lr_grenadelauncher"
+  //   },
+  // 	"WEAPON_HOMINGLAUNCHER": {
+  //     name: "Homing Launcher",
+  //     price: 34000,
+  //     ammo: 340,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: "w_lr_homing"
+  //   },
+  // 	"WEAPON_MINIGUN": {
+  //     name: "Minigun",
+  //     price: 50000,
+  //     ammo: 500,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: "w_mg_minigun"
+  //   },
+  // 	"WEAPON_RAILGUN": {
+  //     name: "Rail Gun",
+  //     price: 100000,
+  //     ammo: 1000,
+  //     bone: 24818,
+  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
+  //     model: "w_ar_railgun"
+  //   },
+  // }
 }

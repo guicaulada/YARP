@@ -1,5 +1,5 @@
 global.yarp = {}
-yarp.utils = require('./YARP/gamemode/static/utils.js');
+yarp.utils = require('./YARP/gamemode/static/Utility.js');
 yarp.gui = require('./YARP/gamemode/static/gui.js');
 
 //Load RAGE.MP Events

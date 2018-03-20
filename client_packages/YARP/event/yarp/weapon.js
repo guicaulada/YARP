@@ -1,51 +1,52 @@
-let playerWeapons = {};
-let weaponsConfig = {};
+'use strict';
+/**
+* @file Weapon events
+*/
 
-mp.events.add('setWeaponsConfig', (weaponsJson) => {
-	weaponsConfig = JSON.parse(weaponsJson);
+let equiped = {};
+let objects = {};
+mp.events.add('equipWeapon', (weaponJson) => {
+	let weapon = JSON.parse(weaponJson);
+	equiped[weapon.id] = weapon;
 });
 
 mp.events.add('render', () => {
-  for (weaponModel in weaponsConfig) {
-    let weaponHash = mp.game.joaat(weaponModel)
-    if (yarp.utils.gotWeapon(weaponHash)){
-      let onPlayer = false;
-      if (playerWeapons[weaponModel] != null) {
-        onPlayer = true;
+  for (let id in equiped) {
+    let hash = mp.game.joaat(id)
+    if (yarp.utils.gotWeapon(hash)){
+      let geared = false;
+      if (objects[id] != null) {
+        geared = true;
       }
-      if (!onPlayer && weaponHash != yarp.utils.getCurrentWeapon()) {
-        SetGear(weaponModel);
-      } else if (onPlayer && weaponHash == yarp.utils.getCurrentWeapon()) {
-        RemoveGear(weaponModel);
+      if (!geared && hash != yarp.utils.getCurrentWeapon()) {
+        SetGear(id);
+      } else if (geared && hash == yarp.utils.getCurrentWeapon()) {
+        RemoveGear(id);
       }
-    } else if (playerWeapons[weaponModel] != null) {
-      RemoveGear(weaponModel);
+    } else if (objects[id] != null) {
+      RemoveGear(id);
     }
   }
 });
 
-mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
-	mp.events.callRemote('updateWeaponAmmo', yarp.utils.getCurrentWeapon(), -1);
+mp.events.add('removeWeapon', (id) => {
+	RemoveGear(id)
 });
 
-mp.events.add('removeWeapon', (weaponName) => {
-	RemoveGear(weaponName)
-});
-
-mp.events.add('removeWeapons', (weaponName) => {
+mp.events.add('removeWeapons', () => {
 	RemoveGears()
 });
 
-function RemoveGear(weapon){
-	yarp.utils.deleteObject(playerWeapons[weapon]);
-  playerWeapons[weapon] = null;
+function RemoveGear(id){
+	yarp.utils.deleteObject(objects[id]);
+  objects[id] = null;
 }
 
 function RemoveGears(){
-	for (weapon in playerWeapons){
-		yarp.utils.deleteObject(playerWeapons[weapon])
+	for (id in objects){
+		yarp.utils.deleteObject(objects[id])
 	}
-	playerWeapons = {};
+	objects = {};
 }
 
 function SetGear(weapon){
@@ -59,21 +60,21 @@ function SetGear(weapon){
 	let boneZRot   = 0.0;
 	let model      = null;
 
-	if(weaponsConfig[weapon] != null ){
-		bone     = weaponsConfig[weapon].bone;
-		boneX    = weaponsConfig[weapon].x;
-		boneY    = weaponsConfig[weapon].y;
-		boneZ    = weaponsConfig[weapon].z;
-		boneXRot = weaponsConfig[weapon].xRot;
-		boneYRot = weaponsConfig[weapon].yRot;
-		boneZRot = weaponsConfig[weapon].zRot;
-		model    = weaponsConfig[weapon].model;
+	if(equiped[id] != null ){
+		bone     = weapon._bone;
+		boneX    = weapon._position.x;
+		boneY    = weapon._position.y;
+		boneZ    = weapon._position.z;
+		boneXRot = weapon._rotation.x;
+		boneYRot = weapon._rotation.y;
+		boneZRot = weapon._rotation.z;
+		model    = weapon._model;
 	}
 
 	yarp.utils.spawnObject(model, pos, function(obj){
 		let boneIndex = mp.players.local.getBoneIndex(bone);
 		let bonePos 	= mp.players.local.getWorldPositionOfBone(boneIndex);
 		obj.attachTo(mp.players.local.handle, boneIndex, boneX, boneY, boneZ, boneXRot, boneYRot, boneZRot, false, false, false, false, 2, true);
-    playerWeapons[weapon] = obj;
+    objects[weapon.id] = obj;
 	})
 }

@@ -26,7 +26,7 @@ module.exports = {
     ],
   },
   "Store": {
-    call: (player) => {player.notify("Stores under development.")},
+    call: (player) => {mp.events.call("showItemStore", player, "Food")},
     positions: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
       new mp.Vector3(1960.7580566406, 3749.26367187, 31.3437423706055),
@@ -71,6 +71,7 @@ module.exports = {
     ],
   },
   "Ammu-Nation": {
+    call: (player) => {mp.events.call("showFullWeaponStore", player)},
     positions: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
       new mp.Vector3(252.696, -48.2487, 69.941),

@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Entity events
+*/
+
 mp.events.add("entityCreated", entity => {
 });
 

@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Bank events
+*/
+
 mp.events.add('loadATM', (player) => {
   player.call('showATM');
 });
