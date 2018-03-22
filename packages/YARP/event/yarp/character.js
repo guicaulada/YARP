@@ -41,6 +41,7 @@ mp.events.add('loadCharacter', (player,id) => {
   player.armour = character.armour;
   for (let id in character.weapons){
     player.giveWeapon(mp.joaat(id), character.weapons[id]);
+    player.call('equipWeapon', [JSON.stringify(yarp.weapons[id])]);
   }
   character.user.joinedGroup();
   character.joinedGroup();

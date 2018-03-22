@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Player events
+*/
+
 mp.events.add('playerChat', (message) => {
 });
 

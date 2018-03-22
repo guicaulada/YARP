@@ -52,6 +52,16 @@ module.exports = class Character{
     return yarp.users[this.socialClub];
   }
 
+  get balance(){
+    let balance = [];
+    for (transaction of yarp.transactions.toArray()) {
+      if ((transaction.source || transaction.target) == this.id) {
+        balance.push(transaction);
+      }
+    }
+    return balance;
+  }
+
   updateLastLogin(ip){
     this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
   }
@@ -162,7 +172,7 @@ module.exports = class Character{
     return false;
   }
 
-  deposit(value){
+  tryDeposit(value){
     if (this.wallet-value >= 0){
       this.player.setVariable('PLAYER_WALLET', this.wallet-value);
       this.player.setVariable('PLAYER_BANK', this.bank+value);
@@ -175,7 +185,7 @@ module.exports = class Character{
     return false;
   }
 
-  withdraw(value){
+  tryWithdraw(value){
     if (this.bank-value >= 0){
       this.player.setVariable('PLAYER_WALLET', this.wallet+value);
       this.player.setVariable('PLAYER_BANK', this.bank-value);
@@ -188,7 +198,7 @@ module.exports = class Character{
     return false;
   }
 
-  transfer(target, value){
+  tryTransfer(target, value){
     if (this.bank-value >= 0){
       this.player.setVariable('PLAYER_BANK', this.bank-value);
       target.player.setVariable('PLAYER_BANK', this.character.bank+value);
@@ -231,7 +241,7 @@ module.exports = class Character{
     }
     this.weapons[weapon.id] += amount;
     this.player.giveWeapon(mp.joaat(weapon.id), amount);
-    this.equipWeapon(weapon);
+    this.player.call('equipWeapon', [JSON.stringify(weapon)]);
   }
 
   takeAmmo(id, amount){
@@ -246,10 +256,6 @@ module.exports = class Character{
 
   hasWeapon(id){
     return (this.weapons[id] != null)
-  }
-
-  equipWeapon(weapon) {
-    this.player.call('equipWeapon', [JSON.stringify(weapon)]);
   }
 
   getGroupByType(type){

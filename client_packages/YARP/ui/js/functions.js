@@ -192,7 +192,7 @@ function bankBack() {
             $('#bank-menu').removeClass('hidden');
             break;
         default:
-            mp.trigger('closeATM');
+            mp.trigger('destroyBrowser', "bank");
             break;
     }
     $('#bank-accept').addClass('hidden');

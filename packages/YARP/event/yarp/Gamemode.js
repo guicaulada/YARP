@@ -59,14 +59,14 @@ function tick() {
       if (i < 0) {
         if (yarp.utils.Vector3Distance(player.position,label.position) < label.range){
           if (label.call){
-            player.call('enterLabel',[label.id,label.key])
+            player.call('playerEnterLabel',[label.id,label.key])
           }
           label.players.push(id)
         }
       } else {
         if (yarp.utils.Vector3Distance(player.position,label.position) > label.range){
           if (label.call){
-            player.call('leaveLabel')
+            player.call('playerLeaveLabel')
           }
           label.players.splice(i,1)
         }

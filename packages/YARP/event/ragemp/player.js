@@ -29,7 +29,7 @@ mp.events.add('playerDeath', (player) => {
     let character = yarp.characters[player.name];
     character.weapons = {};
     character.save();
-    player.call('removeWeapons');
+    player.call('unequipAllWeapons');
     player.removeAllWeapons();
     player.spawn(yarp.variables["Spawns"].value[Math.floor(Math.random() * yarp.variables["Spawns"].value.length)]);
     player.health = 100;
@@ -86,6 +86,9 @@ mp.events.add("playerWeaponChange", (player, oldWeapon, newWeapon) => {
     for (let id in character.weapons){
       if (mp.joaat(id) == newWeapon){
         currentWeapons[player.id] = id;
+        player.call('unequipWeapon', [id]);
+      } else if ((mp.joaat(id) == oldWeapon) && (newWeapon != 1970349056)){
+        player.call('equipWeapon', [JSON.stringify(yarp.weapons[id])]);
       }
     }
   }

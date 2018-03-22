@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Stream events
+*/
+
 mp.events.add('entityStreamIn', (entity) => {
 	if(entity.getType() === 4) {
 		let model = entity.getModel();

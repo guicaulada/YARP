@@ -1,7 +1,11 @@
+'use strict';
+/**
+* @file Command events
+*/
 
-var camdir = false;
-var noclip = false;
-var charpos = false;
+let camdir = false;
+let noclip = false;
+let charpos = false;
 
 //Command Events
 mp.events.add('toggleCamdir', () => {

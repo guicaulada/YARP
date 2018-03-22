@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file Vehicle events
+*/
+
 mp.events.add("playerStartEnterVehicle", (vehicle, seat) => {
 });
 
