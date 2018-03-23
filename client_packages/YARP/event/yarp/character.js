@@ -26,14 +26,14 @@ mp.events.add('loadCharacter', (id) => {
 	mp.events.call('destroyBrowser', "character");
 	mp.game.ui.displayRadar(true);
 	mp.events.callRemote('loadCharacter', id);
-	mp.game.invoke('0xB0C54402D009BA38');
+	mp.game.invoke('0xE09906A20E6D76F');
 });
 
 mp.events.add('showCharacterCreationMenu', () => {
 	mp.events.call('destroyBrowser', "character");
 	mp.game.ui.displayRadar(false);
 	mp.events.callRemote('setCharacterIntoCreator');
-	mp.game.invoke('0xB0C54402D009BA38');
+	mp.game.invoke('0xE09906A20E6D76F');
 	initializeCharacterCreation(mp.players.local);
 	camera = mp.cameras.new('default', new mp.Vector3(152.6008, -1003.25, -98), new mp.Vector3(-20.0, 0.0, 0.0), 90);
   camera.setActive(true);
