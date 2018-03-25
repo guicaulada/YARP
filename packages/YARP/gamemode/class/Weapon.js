@@ -3,7 +3,7 @@
  * @file Weapon class
  */
 module.exports = class Weapon{
-  constructor(id,name,category,weight,price,ammo,model,bone,position,rotation){
+  constructor(id,name,category,weight,price,ammo,model,bone,position,rotation,visible){
     if ((typeof id) === 'object' || (id && name) != null) {
       this._id = id._id || id;
       this._name = id._name || name;
@@ -15,6 +15,8 @@ module.exports = class Weapon{
       this._bone = id._bone || bone || 0;
       this._position = id._position || position || new mp.Vector3(0,0,0);
       this._rotation = id._rotation || rotation || new mp.Vector3(0,0,0);
+      this._visible = id._visible || visible || true;
+      if (!this._visible) this._alpha = 0;
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
@@ -25,7 +27,7 @@ module.exports = class Weapon{
     for (let category in weapons){
       for (let id in weapons[category]){
         let weapon = weapons[category][id];
-        new yarp.Weapon(id,weapon.name,category,weapon.weight,weapon.price,weapon.ammo,weapon.model,weapon.bone,weapon.position,weapon.rotation);
+        new yarp.Weapon(id,weapon.name,category,weapon.weight,weapon.price,weapon.ammo,weapon.model,weapon.bone,weapon.position,weapon.rotation,weapon.visible);
       }
     }
   }
@@ -37,7 +39,7 @@ module.exports = class Weapon{
   remove(){
     yarp.dbm.remove(this);
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

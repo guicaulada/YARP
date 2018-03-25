@@ -1,27 +1,37 @@
 'use strict';
 /**
- * @file Command class
+ * @file Hotkey class
  */
-module.exports = class Command{
-  constructor(id,call,category,hint){
-    if ((typeof id) === 'object' || (id && call) != null){
+module.exports = class Hotkey{
+  constructor(id,key,call,args,hint,category){
+    if ((typeof id) === 'object' || (id && key && call) != null){
       this._id = id._id || id;
+      this._key = id._key || key || "NONE";
       this._category = id._category || category || "None";
       this._hint = id._hint || hint || "There's no hint.";
       this._call = id._call || ((call) ? call.toString() : null);
+      this._args = id._args || args || [];
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
   }
 
   static config(file){
-    let commands = require(file);
-    for (let category in commands){
-      for (let id in commands[category]){
-        let command = commands[category][id];
-        new yarp.Command(id,command.call,category,command.hint);
+    let hotkeys = require(file);
+    for (let category in hotkeys){
+      for (let id in hotkeys[category]){
+        let hotkey = hotkeys[category][id];
+        new yarp.Hotkey(id,hotkey.key,hotkey.call,hotkey.hint,category);
       }
     }
+  }
+
+  bind(player) {
+    player.call('playerBindKey',[this.id,this.key]);
+  }
+
+  unbind(player) {
+    player.call('playerUnbindKey',[this.id]);
   }
 
   save(){

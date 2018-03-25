@@ -17,6 +17,7 @@ module.exports = class Blip{
       this._rotation = id._rotation || rotation || 0;
       this._dimension = id._dimension || dimension || 0;
       this._visible = id._visible || visible || true;
+      if (!this._visible) this._aplha = 0;
       this.mp = mp.blips.new(this._sprite, this._position,
       {
         name: this._name,
@@ -51,7 +52,7 @@ module.exports = class Blip{
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

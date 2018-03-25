@@ -16,7 +16,8 @@ module.exports = class Vehicle{
       this._locked = id._locked || locked || false;
       this._engine = id._engine || engine || false;
       this._dimension = id._dimension || dimension || 0;
-      this._visible = id._visible || visible || false;
+      this._visible = id._visible || visible || true;
+      if (!this._visible) this._alpha = 0;
       this.mp = mp.vehicles.new(mp.joaat(this._model), this._position,
       {
         heading: this._heading,
@@ -55,7 +56,7 @@ module.exports = class Vehicle{
   save(){
     yarp.dbm.save(this);
   }
-  
+
   remove(){
     this.mp.destroy();
     yarp.dbm.remove(this);

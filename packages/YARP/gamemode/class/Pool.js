@@ -11,6 +11,14 @@ module.exports = class Pool {
     return yarp.dbm.load(this._Class);
   }
 
+  config(file){
+    if (this._Class.config != null && (typeof file) === 'string') {
+      return this._Class.config(file);
+    } else {
+      return null;
+    }
+  }
+
   get categories(){
     let categories = {};
     for (let id in this){

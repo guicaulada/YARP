@@ -235,13 +235,28 @@ module.exports = class Character{
     return false;
   }
 
-  giveWeapon(weapon, amount){
-    if (!this.weapons[weapon.id]) {
-      this.weapons[weapon.id] = 0;
+  hasItem(id){
+    return (this.items[id] != null)
+  }
+
+  hasItems(items){
+    for (let i = 0; i < items.length; i++){
+      if (!this.hasItems(items[i])) {
+        return false;
+      }
     }
-    this.weapons[weapon.id] += amount;
-    this.player.giveWeapon(mp.joaat(weapon.id), amount);
-    this.player.call('equipWeapon', [JSON.stringify(weapon)]);
+    return true;
+  }
+
+  giveWeapon(weapon, amount){
+    if (weapon) {
+      if (!this.weapons[weapon.id]) {
+        this.weapons[weapon.id] = 0;
+      }
+      this.weapons[weapon.id] += amount;
+      this.player.giveWeapon(mp.joaat(weapon.id), amount);
+      this.player.call('equipWeapon', [JSON.stringify(weapon)]);
+    }
   }
 
   takeAmmo(id, amount){
@@ -258,6 +273,15 @@ module.exports = class Character{
     return (this.weapons[id] != null)
   }
 
+  hasWeapons(weapons){
+    for (let i = 0; i < weapons.length; i++){
+      if (!this.hasWeapon(weapons[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   getGroupByType(type){
     for (name of this.groups){
       var group = GroupManager.getByName(name);
@@ -268,8 +292,30 @@ module.exports = class Character{
     return null;
   }
 
+  getGroupsByTypes(types){
+    let groups = [];
+    this.groups.forEach(function(id){
+      let group = yarp.groups[id];
+      if (group != null) {
+        if (types.indexOf(group.type) >= 0){
+          groups.push(group);
+        }
+      }
+    });
+    return groups;
+  }
+
   hasGroup(id){
    return (this.groups.indexOf(id) > -1);
+  }
+
+  hasGroups(groups){
+    for (let i = 0; i < groups.length; i++){
+      if (!this.hasGroup(groups[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   hasPermission(permission){

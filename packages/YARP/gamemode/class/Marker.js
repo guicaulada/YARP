@@ -14,9 +14,10 @@ module.exports = class Marker{
       this._direction = id._direction || direction || new mp.Vector3(0, 0, 0);
       this._rotation = id._rotation || rotation || new mp.Vector3(0, 0, 0);
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : false);
-      this._leave = id._leave || ((leave) ? leave.toString() : false);
+      this._enter = id._enter || ((enter) ? enter.toString() : null);
+      this._leave = id._leave || ((leave) ? leave.toString() : null);
       this.players = [];
+      if (!this._visible) this._color[4] = 0;
       this.mp = mp.markers.new(this._type, this._position, this._radius,
       {
         direction: this._direction,

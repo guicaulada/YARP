@@ -46,11 +46,11 @@ module.exports = class User{
   }
 
   get character(){
-    mp.players.forEach((player, i) => {
+    for (let player of mp.players.toArray()) {
       if (player.socialClub == this.id){
         return yarp.characters[player.name];
       }
-    });
+    }
     return null;
   }
 
@@ -116,6 +116,7 @@ module.exports = class User{
     }
     return false;
   }
+
   takeGroup(group){
     if (this.groups.indexOf(group) > -1) {
       this.groups.splice(this.groups.indexOf(group), 1);
@@ -136,8 +137,30 @@ module.exports = class User{
     });
   }
 
+  getGroupsByTypes(types){
+    let groups = [];
+    this.groups.forEach(function(id){
+      let group = yarp.groups[id];
+      if (group != null) {
+        if (types.indexOf(group.type) >= 0){
+          groups.push(group);
+        }
+      }
+    });
+    return groups;
+  }
+
   hasGroup(id){
    return (this.groups.indexOf(id) > -1);
+  }
+
+  hasGroups(groups){
+    for (let i = 0; i < groups.length; i++){
+      if (!this.hasGroup(groups[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   hasPermission(permission){
@@ -179,7 +202,7 @@ module.exports = class User{
   isDev(){
     return yarp.variables["Developers"].value.indexOf(this.id) > -1
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

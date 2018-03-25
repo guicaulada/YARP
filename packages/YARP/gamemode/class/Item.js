@@ -13,7 +13,7 @@ module.exports = class Item{
       this._spoil = id._spoil || spoil || 24;
       this._weight = id._weight || weight || 0.5;
       this._model = id._model || model || "";
-      this._call = id._call || ((call) ? call.toString() : false);
+      this._call = id._call || ((call) ? call.toString() : null);
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }

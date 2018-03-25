@@ -170,9 +170,9 @@ module.exports = {
          call: (player,args) => {
             if (yarp.users[player.socialClub].hasPermission("cmd.weapon")){
                let ammo = Number(args[1]) || 10000;
-               yarp.characters[player.name].giveWeapon(args[0], ammo);
+               let id = "weapon_"+args[0]
+               yarp.characters[player.name].giveWeapon(yarp.weapons[id.toUpperCase()], ammo);
                yarp.characters[player.name].save();
-               player.giveWeapon(mp.joaat(args[0]), ammo);
             } else {
                player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
             }
@@ -219,7 +219,7 @@ module.exports = {
             }
          }
       },
-      "tp": {
+      "tptoo": {
          hint: "Teleport to specified gamemode object.",
          call: (player,args) => {
             if (yarp.users[player.socialClub].hasPermission("cmd.tp")){
@@ -230,6 +230,20 @@ module.exports = {
                   let obj = yarp[collection][id];
                   player.position = obj.position;
                }
+            } else {
+               player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+            }
+         }
+      },
+      "tp": {
+         hint: "Teleport to specified position.",
+         call: (player,args) => {
+            if (yarp.users[player.socialClub].hasPermission("cmd.tp")){
+              //Sanitize arguments
+              args[0] = args[0].replace(/,/g, "").replace(/}/g, "");
+              args[1] = args[1].replace(/,/g, "").replace(/}/g, "");
+              args[2] = args[2].replace(/,/g, "").replace(/}/g, "");
+              player.position = new mp.Vector3(Number(args[0]), Number(args[1]), Number(args[2]));
             } else {
                player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
             }

@@ -15,19 +15,23 @@ mp.events.add('playerCommand', (player, command) => {
   command = yarp.commands[commandName];
 
 	if (command) {
-    let call = eval(command.call);
-    call(player,args);
+    (eval(command.call))(player,args);
 	} else {
     player.outputChatBox("!{yellow}HINT!{white}: Command doesn't exist.");
   }
 });
 
 mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
+  let character = yarp.characters[player.name];
+  character.health -= healthLoss;
+  character.armour -= armorLoss;
 });
 
 mp.events.add('playerDeath', (player) => {
     let character = yarp.characters[player.name];
     character.weapons = {};
+    character.health = 100;
+    character.armour = 0;
     character.save();
     player.call('unequipAllWeapons');
     player.removeAllWeapons();

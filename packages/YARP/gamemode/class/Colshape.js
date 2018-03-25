@@ -12,8 +12,8 @@ module.exports = class Colshape{
       this._depth = id._depth || depth || 10;
       this._height = id._height || height || 10;
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : false);
-      this._leave = id._leave || ((leave) ? leave.toString() : false);
+      this._enter = id._enter || ((enter) ? enter.toString() : null);
+      this._leave = id._leave || ((leave) ? leave.toString() : null);
       switch(this._type){
         case 1:
           this.mp = mp.colshapes.newRectangle(this._position.x, this._position.y, this._width, this._height);
@@ -50,7 +50,7 @@ module.exports = class Colshape{
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

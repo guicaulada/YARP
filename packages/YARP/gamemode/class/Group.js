@@ -8,11 +8,11 @@ module.exports = class Group{
       this._id = id._id || id;
       this._type = id._type || type || false;
       this._permissions = id._permissions || (((yarp.groups && yarp.groups[id]) != null) ?
-        yarp.groups[id].permissions.concat(permissions.filter(function (item) {
-          return yarp.groups[id].permissions.indexOf(item) < 0;
+        yarp.groups[id].permissions.concat(permissions.filter(function (permission) {
+          return yarp.groups[id].permissions.indexOf(permission) < 0;
         })) : (permissions || []));
-      this._enter = id._enter || ((enter) ? enter.toString() : false);
-      this._leave = id._leave || ((leave) ? leave.toString() : false);
+      this._enter = id._enter || ((enter) ? enter.toString() : null);
+      this._leave = id._leave || ((leave) ? leave.toString() : null);
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
@@ -98,7 +98,7 @@ module.exports = class Group{
     }
     return true;
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

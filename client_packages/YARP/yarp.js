@@ -7,6 +7,7 @@ require('./YARP/event/ragemp/Checkpoint.js');
 require('./YARP/event/ragemp/Colshape.js');
 require('./YARP/event/ragemp/Player.js');
 require('./YARP/event/ragemp/Stream.js');
+require('./YARP/event/ragemp/Ui.js');
 require('./YARP/event/ragemp/Vehicle.js');
 require('./YARP/event/ragemp/Waypoint.js');
 

@@ -57,8 +57,6 @@ setInterval(function(){
       if (character) {
         character.position = player.position;
         character.heading = player.heading;
-        character.health = player.health;
-        character.armour = player.armour;
         character.save();
       }
     }

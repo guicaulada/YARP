@@ -17,14 +17,28 @@ mp.events.add('runClientCode', (code) => {
   eval(code);
 });
 
-let label = 0;
-mp.events.add('playerEnterLabel', (id,key) => {
-  label = key;
-  mp.keys.bind(key, false, () => {
-    mp.events.callRemote('callLabel', id);
-  });
+let keybinds = {};
+mp.events.add('playerBindKey', (id,key) => {
+  if ((typeof key) === 'string') key = yarp.utils.virtualKeys[key.toUpperCase()];
+  keybinds[id] = {
+    key: key,
+    call: () => {
+      mp.events.callRemote('playerBoundKeyPressed', id)
+    }
+  }
+  mp.keys.bind(keybinds[id].key, false, keybinds[id].call);
 });
 
-mp.events.add('playerLeaveLabel', (id,key) => {
-  mp.keys.unbind(label, false);
+mp.events.add('playerUnbindKey', (id) => {
+  mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
+});
+
+mp.events.add('playerOpenDoor', (doorJson) => {
+  let door = JSON.parse(doorJson);
+  mp.game.object.doorControl(door._model, door._position.x, door._position.y, door._position.z, false, 0.0, 50.0, 0.0);
+});
+
+mp.events.add('playerCloseDoor', (doorJson) => {
+  let door = JSON.parse(doorJson);
+  mp.game.object.doorControl(door._model, door._position.x, door._position.y, door._position.z, true, 0.0, 50.0, 0.0);
 });

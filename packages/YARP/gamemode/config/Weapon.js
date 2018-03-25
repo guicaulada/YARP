@@ -640,69 +640,69 @@ module.exports = {
       model: "w_sr_sniperrifle"
     },
   },
-  // "Heavy": {
-  // 	"WEAPON_RPG": {
-  //     name: "RPG",
-  //     price: 24300,
-  //     ammo: 243,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: "w_lr_rpg"
-  //   },
-  //   "WEAPON_COMPACTLAUNCHER": {
-  //     name: "Compact Launcher",
-  //     price: 28000,
-  //     ammo: 280,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: ""
-  //   },
-  // 	"WEAPON_FIREWORK": {
-  //     name: "Firework",
-  //     price: 18000,
-  //     ammo: 180,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: "w_lr_firework"
-  //   },
-  // 	"WEAPON_GRENADELAUNCHER": {
-  //     name: "Grenade Launcher",
-  //     price: 14700,
-  //     ammo: 147,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: "w_lr_grenadelauncher"
-  //   },
-  // 	"WEAPON_HOMINGLAUNCHER": {
-  //     name: "Homing Launcher",
-  //     price: 34000,
-  //     ammo: 340,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: "w_lr_homing"
-  //   },
-  // 	"WEAPON_MINIGUN": {
-  //     name: "Minigun",
-  //     price: 50000,
-  //     ammo: 500,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: "w_mg_minigun"
-  //   },
-  // 	"WEAPON_RAILGUN": {
-  //     name: "Rail Gun",
-  //     price: 100000,
-  //     ammo: 1000,
-  //     bone: 24818,
-  //     position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-  //     rotation: new mp.Vector3(0.0, 0.0, 0.0),
-  //     model: "w_ar_railgun"
-  //   },
-  // }
+  "Heavy": {
+  	"WEAPON_RPG": {
+      name: "RPG",
+      price: 24300,
+      ammo: 243,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: "w_lr_rpg"
+    },
+    "WEAPON_COMPACTLAUNCHER": {
+      name: "Compact Launcher",
+      price: 28000,
+      ammo: 280,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: ""
+    },
+  	"WEAPON_FIREWORK": {
+      name: "Firework",
+      price: 18000,
+      ammo: 180,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: "w_lr_firework"
+    },
+  	"WEAPON_GRENADELAUNCHER": {
+      name: "Grenade Launcher",
+      price: 14700,
+      ammo: 147,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: "w_lr_grenadelauncher"
+    },
+  	"WEAPON_HOMINGLAUNCHER": {
+      name: "Homing Launcher",
+      price: 34000,
+      ammo: 340,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: "w_lr_homing"
+    },
+  	"WEAPON_MINIGUN": {
+      name: "Minigun",
+      price: 50000,
+      ammo: 500,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: "w_mg_minigun"
+    },
+  	"WEAPON_RAILGUN": {
+      name: "Rail Gun",
+      price: 100000,
+      ammo: 1000,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: "w_ar_railgun"
+    },
+  }
 }

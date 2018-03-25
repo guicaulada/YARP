@@ -12,7 +12,8 @@ module.exports = class Prop{
       this._alpha = id._alpha || alpha || 255;
       this._rotation = id._rotation || rotation || [];
       this._dimension = id._dimension || dimension || 0;
-      this._visible = id._visible || visible || false;
+      this._visible = id._visible || visible || true;
+      if (!this._visible) this._alpha = 0;
       this.mp = mp.objects.new(mp.joaat(this._model), this._position,
       {
         rotation: this._rotation,
@@ -42,7 +43,7 @@ module.exports = class Prop{
     this.mp.destroy();
     yarp.dbm.remove(this);
   }
-  
+
   makeGetterSetter(){
     for (let key in this){
       if (key[0] == "_"){

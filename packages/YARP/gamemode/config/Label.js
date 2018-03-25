@@ -3,19 +3,38 @@
 * @file Label config
 */
 module.exports = {
+  "FIB Elevator Up": {
+    enter: (player) => {mp.events.call('bindFIBElevatorUp',player)},
+    leave: (player) => {mp.events.call('unbindFIBElevatorUp',player)},
+    visible: false,
+    positions: [
+      new mp.Vector3(139.219,-762.7094,45.752)
+    ],
+  },
+  "FIB Elevator Down": {
+    enter: (player) => {mp.events.call('bindFIBElevatorDown',player)},
+    leave: (player) => {mp.events.call('unbindFIBElevatorDown',player)},
+    visible: false,
+    positions: [
+      new mp.Vector3(136.0667,-761.8372,234.1520)
+    ],
+  },
   "Airport": {
+    visible: false,
     positions: [
       new mp.Vector3(-1032.690, -2728.141, 13.757),
       new mp.Vector3(1743.6820, 3286.2510, 40.087)
     ],
   },
   "Cable Car": {
+    visible: false,
     positions: [
       new mp.Vector3(-737.746, 5595.192, 41.655),
       new mp.Vector3(457.097, 5571.724, 781.184)
     ],
   },
   "Tattoo Shop": {
+    visible: false,
     positions: [
       new mp.Vector3(1322.645, -1651.976, 52.275),
       new mp.Vector3(-1153.676, -1425.68, 4.954),
@@ -26,7 +45,9 @@ module.exports = {
     ],
   },
   "Store": {
-    call: (player) => {mp.events.call("showItemStore", player, "Food")},
+    enter: (player) => {mp.events.call('bindItemStore',player,"Food")},
+    leave: (player) => {mp.events.call('unbindItemStore',player)},
+    visible: false,
     positions: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
       new mp.Vector3(1960.7580566406, 3749.26367187, 31.3437423706055),
@@ -48,6 +69,7 @@ module.exports = {
     ],
   },
   "Barbershop": {
+    visible: false,
     positions: [
       new mp.Vector3(-827.333, -190.916, 37.599),
       new mp.Vector3(130.512, -1715.535, 29.226),
@@ -59,6 +81,7 @@ module.exports = {
     ],
   },
   "Bank": {
+    visible: false,
     positions: [
       new mp.Vector3(147.04908752441, -1044.9448242188, 29.36802482605),
       new mp.Vector3(-2957.6674804688, 481.45776367188, 15.697026252747),
@@ -71,7 +94,9 @@ module.exports = {
     ],
   },
   "Ammu-Nation": {
-    call: (player) => {mp.events.call("showFullWeaponStore", player)},
+    enter: (player) => {mp.events.call('bindFullWeaponStore',player)},
+    leave: (player) => {mp.events.call('unbindFullWeaponStore',player)},
+    visible: false,
     positions: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
       new mp.Vector3(252.696, -48.2487, 69.941),
@@ -87,6 +112,7 @@ module.exports = {
     ],
   },
   "Carwash": {
+    visible: false,
     positions: [
       new mp.Vector3(26.5906, -1392.0261, 29.3634),
       new mp.Vector3(167.1034, -1719.4704, 29.2916),
@@ -95,6 +121,7 @@ module.exports = {
     ],
   },
   "Clothing": {
+    visible: false,
     positions: [
       new mp.Vector3(88.291, -1391.929, 29.200),
       new mp.Vector3(-718.985, -158.059, 36.996),
@@ -113,6 +140,7 @@ module.exports = {
     ],
   },
   "Gang Zone": {
+    visible: false,
     positions: [
       new mp.Vector3(298.68, -2010.10, 20.07),
       new mp.Vector3(86.64, -1924.60, 20.79),
@@ -125,6 +153,7 @@ module.exports = {
     ],
   },
   "Gas Station": {
+    visible: false,
     positions: [
       new mp.Vector3(49.41872, 2778.793, 58.04395),
       new mp.Vector3(263.8949, 2606.463, 44.98339),
@@ -158,6 +187,7 @@ module.exports = {
     ],
   },
   "Hospital": {
+    visible: false,
     positions: [
       new mp.Vector3(1839.6, 3672.93, 34.28),
       new mp.Vector3(-247.76, 6331.23, 32.43),
@@ -170,6 +200,7 @@ module.exports = {
     ],
   },
   "House": {
+    visible: false,
     positions: [
       new mp.Vector3(-952.359436, -1077.50219, 2.6772258),
       new mp.Vector3(-59.124889373, -616.554, 37.35677),
@@ -185,6 +216,7 @@ module.exports = {
     ],
   },
   "LS Customs": {
+    visible: false,
     positions: [
       new mp.Vector3(-337.3863, -136.9247, 39.0737),
       new mp.Vector3(-1155.536, -2007.183, 13.244),
@@ -194,6 +226,7 @@ module.exports = {
     ],
   },
   "Race": {
+    visible: false,
     positions: [
       new mp.Vector3(-1277.629, -2030.913, 1.2823),
       new mp.Vector3(2384.969, 4277.583, 30.379),
@@ -201,6 +234,7 @@ module.exports = {
     ],
   },
   "Police Station": {
+    visible: false,
     positions: [
       new mp.Vector3(425.130, -979.558, 30.711),
       new mp.Vector3(1859.234, 3678.742, 33.690),
@@ -209,144 +243,172 @@ module.exports = {
     ],
   },
   "Smoke on the Water": {
+    visible: false,
     positions: [
       new mp.Vector3(-1171.42, -1572.72, 3.6636)
     ],
   },
   "MazeBank Arena": {
+    visible: false,
     positions: [
       new mp.Vector3(-250.604, -2030.000, 30.000)
     ],
   },
   "Bahama Mamas": {
+    visible: false,
     positions: [
       new mp.Vector3(925.329, 46.152, 80.908)
     ],
   },
   "Downtown CO.": {
+    visible: false,
     positions: [
       new mp.Vector3(900.461, -181.466, 73.89)
     ],
   },
   "Tequil-La La": {
+    visible: false,
     positions: [
       new mp.Vector3(-565.171, 276.625, 83.286)
     ],
   },
   "Theater": {
+    visible: false,
     positions: [
       new mp.Vector3(-455.752, 180.466, 104.301)
     ],
   },
   "Weed Farm": {
+    visible: false,
     positions: [
       new mp.Vector3(2208.777, 5578.235, 53.735)
     ],
   },
   "FIB": {
+    visible: false,
     positions: [
       new mp.Vector3(105.455, -745.483, 44.754)
     ],
   },
   "Lifeinvader": {
+    visible: false,
     positions: [
       new mp.Vector3(-1047.900, -233.000, 39.000)
     ],
   },
   "Cluckin Bell": {
+    visible: false,
     positions: [
       new mp.Vector3(-72.68752, 6253.72656, 31.08991)
     ],
   },
   "Comedy Club": {
+    visible: false,
     positions: [
       new mp.Vector3(-447.4833, 280.3197, 77.5215)
     ],
   },
   "Yacht": {
+    visible: false,
     positions: [
       new mp.Vector3(-2045.800, -1031.200, 11.900)
     ],
   },
   "Ranch": {
+    visible: false,
     positions: [
       new mp.Vector3(2441.200, 4968.500, 51.700)
     ],
   },
   "PlayBoy": {
+    visible: false,
     positions: [
       new mp.Vector3(-1475.234, 167.088, 55.841)
     ],
   },
   "Chop Shop": {
+    visible: false,
     positions: [
       new mp.Vector3(479.056, -1316.825, 28.203)
     ],
   },
   "Rebel Radio": {
+    visible: false,
     positions: [
       new mp.Vector3(736.153, 2583.143, 79.634)
     ],
   },
   "Morgue": {
+    visible: false,
     positions: [
       new mp.Vector3(243.351, -1376.014, 39.534)
     ],
   },
   "Golf": {
+    visible: false,
     positions: [
       new mp.Vector3(-1336.715, 59.051, 55.246)
     ],
   },
   "Hippie Camp": {
+    visible: false,
     positions: [
       new mp.Vector3(2476.712, 3789.645, 41.226)
     ],
   },
   "Torture": {
+    visible: false,
     positions: [
       new mp.Vector3(132.583, -2202.327, 7.187)
     ],
   },
   "Body Training": {
+    visible: false,
     positions: [
       new mp.Vector3(-1202.962, -1566.140, 4.610)
     ],
   },
   "Lester": {
+    visible: false,
     positions: [
       new mp.Vector3(1274.292, -1712.663, 54.771),
       new mp.Vector3(705.859, -964.651, 30.396)
     ],
   },
   "Epsilon": {
+    visible: false,
     positions: [
       new mp.Vector3(245.1564, 370.211, 104.7382)
     ],
   },
   "Franklin": {
+    visible: false,
     positions: [
       new mp.Vector3(7.900, 548.100, 175.500),
       new mp.Vector3(-14.128, -1445.483, 30.648)
     ],
   },
   "Michael": {
+    visible: false,
     positions: [
       new mp.Vector3(-852.400, 160.000, 65.600)
     ],
   },
   "Trevor": {
+    visible: false,
     positions: [
       new mp.Vector3(1985.700, 3812.200, 32.200),
       new mp.Vector3(-1159.034, -1521.180, 10.633)
     ],
   },
   "Legal Jobs": {
+    visible: false,
     positions: [
       new mp.Vector3(-268.363, -957.255, 31.223)
     ],
   },
   "Ilegal Jobs": {
+    visible: false,
     positions: [
       new mp.Vector3(707.324, -966.986, 30.412)
     ],

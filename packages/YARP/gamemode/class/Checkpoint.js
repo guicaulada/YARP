@@ -13,8 +13,8 @@ module.exports = class Checkpoint{
       this._direction = id._direction || direction || new mp.Vector3(0,0,0);
       this._dimension = id._dimension || dimension || 0;
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : false);
-      this._leave = id._leave || ((leave) ? leave.toString() : false);
+      this._enter = id._enter || ((enter) ? enter.toString() : null);
+      this._leave = id._leave || ((leave) ? leave.toString() : null);
       this.players = [];
       this.mp = mp.checkpoints.new(this._type, this._position, this._radius,
       {
