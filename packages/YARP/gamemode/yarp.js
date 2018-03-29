@@ -11,7 +11,7 @@ module.exports = (async () => {
     yarp.dbm = require('./static/DBManager');
     await yarp.dbm.connect();
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"RequirementError: "+err.message);
+    console.log(chalk.redBright("[YARP] ")+"RequirementError: "+err.message+"\n"+err.stack);
   }
 
   //Loading Classes
@@ -38,7 +38,7 @@ module.exports = (async () => {
     yarp.Vehicle = require('./class/Vehicle');
     yarp.Weapon = require('./class/Weapon');
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"ClassError: "+err.message);
+    console.log(chalk.redBright("[YARP] ")+"ClassError: "+err.message+"\n"+err.stack);
   }
 
   //Loading Pools
@@ -64,7 +64,7 @@ module.exports = (async () => {
     yarp.vehicles = new yarp.Pool(yarp.Vehicle);
     yarp.weapons = new yarp.Pool(yarp.Weapon);
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"PoolError: "+err.message);
+    console.log(chalk.redBright("[YARP] ")+"PoolError: "+err.message+"\n"+err.stack);
   }
 
   //Loading Data
@@ -90,7 +90,7 @@ module.exports = (async () => {
     await yarp.vehicles.load();
     await yarp.weapons.load();
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"DataError: "+err.message);
+    console.log(chalk.redBright("[YARP] ")+"DataError: "+err.message+"\n"+err.stack);
   }
 
   //Loading Config
@@ -116,7 +116,7 @@ module.exports = (async () => {
     yarp.vehicles.config('../config/Vehicle');
     yarp.weapons.config('../config/Weapon');
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"ConfigError: "+err.message);
+    console.log(chalk.redBright("[YARP] ")+"ConfigError: "+err.message+"\n"+err.stack);
   }
 
   try {
@@ -131,13 +131,12 @@ module.exports = (async () => {
     require('../event/ragemp/Waypoint.js');
 
     //Load YARP Events
-    require('../event/yarp/Bank.js');
     require('../event/yarp/Character.js');
     require('../event/yarp/Gamemode.js');
     require('../event/yarp/Item.js');
     require('../event/yarp/Menu.js');
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"EventError: "+err.message);
+    console.log(chalk.redBright("[YARP] ")+"EventError: "+err.message+"\n"+err.stack);
   }
 
   //Loading Complete

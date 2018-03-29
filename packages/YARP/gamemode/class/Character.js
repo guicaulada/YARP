@@ -3,7 +3,7 @@
  * @file Character class
  */
 module.exports = class Character{
-  constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes){
+  constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes, enter, leave){
     if ((typeof id) === 'object' || (id && socialClub) != null){
       this._id = id._id || id;
       this._socialClub = id._socialClub || socialClub;
@@ -25,8 +25,28 @@ module.exports = class Character{
       this._customization = id._customization || customization || {};
       this._decoration = id._decoration || decoration || {};
       this._clothes = id._clothes || clothes || {};
+      this._enter = id._enter || ((enter) ? enter.toString() : null);
+      this._leave = id._leave || ((leave) ? leave.toString() : null);
       yarp.dbm.register(this);
       this.makeGetterSetter();
+    }
+  }
+
+  static config(file){
+    let characters = require(file);
+    for (let id in characters){
+      let character = characters[id];
+      if (yarp.characters[id]) {
+        for (let group in character.groups){
+          yarp.characters[id].giveGroup(group);
+        }
+        if (character.enter) {
+          yarp.characters[id].enter = character.enter.toString();
+        }
+        if (character.leave) {
+          yarp.characters[id].leave = character.leave.toString();
+        }
+      }
     }
   }
 
@@ -62,70 +82,85 @@ module.exports = class Character{
     return balance;
   }
 
-  updateLastLogin(ip){
-    this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
-  }
-
-  joinedGroup(group){
+  entered() {
     let player = this.player;
-    if (group) {
+    if (this.enter) {
+      (eval(this.enter))(player)
+    }
+    for (let group of this.groups){
       if (yarp.groups[group].enter){
         let cb = eval(yarp.groups[group].enter);
         cb(player);
         mp.events.call('characterJoinedGroup',player,this,group);
       }
-    } else {
-      for (let group of this.groups){
-        if (yarp.groups[group].enter){
-          let cb = eval(yarp.groups[group].enter);
-          cb(player);
-          mp.events.call('characterJoinedGroup',player,this,group);
-        }
-      }
     }
   }
 
-  leftGroup(group){
+  left() {
     let player = this.player;
-    if (group) {
+    if (this.leave) {
+      (eval(this.leave))(player)
+    }
+    for (let group of this.groups){
       if (yarp.groups[group].leave){
         let cb = eval(yarp.groups[group].leave);
         cb(player);
         mp.events.call('characterLeftGroup',player,this,group);
       }
-    } else {
-      for (let group of this.groups){
-        if (yarp.groups[group].leave){
-          let cb = eval(yarp.groups[group].leave);
-          cb(player);
-          mp.events.call('characterLeftGroup',player,this,group);
-        }
+    }
+  }
+
+  updateLastLogin(ip){
+    this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
+  }
+
+  joinedGroup(group){
+    if (yarp.groups[group]) {
+      let player = this.player;
+      if (yarp.groups[group].enter){
+        let cb = eval(yarp.groups[group].enter);
+        cb(player);
+        mp.events.call('userJoinedGroup',player,this,group);
+      }
+    }
+  }
+
+  leftGroup(group){
+    if (yarp.groups[group]) {
+      let player = this.player;
+      if (yarp.groups[group].leave){
+        let cb = eval(yarp.groups[group].leave);
+        cb(player);
+        mp.events.call('userLeftGroup',player,this,group);
       }
     }
   }
 
   giveGroup(group){
-    if (this.groups.indexOf(group) == -1) {
-      let type = yarp.groups[group].type;
-      if (type){
-        let same_type = this.getGroupByType(type);
-        if (same_type){
-          this.takeGroup(same_type);
-          this.leftGroup(group);
+    if (yarp.groups[group]) {
+      if (this.groups.indexOf(group) == -1) {
+        let type = yarp.groups[group].type;
+        if (type){
+          let same_type = this.getGroupByType(type);
+          if (same_type){
+            this.takeGroup(same_type);
+          }
         }
+        this.groups.push(group);
+        this.joinedGroup(group);
+        return true;
       }
-      this.groups.push(group);
-      this.joinedGroup(group);
-      return true;
     }
     return false;
   }
 
   takeGroup(group){
-    if (this.groups.indexOf(group) > -1) {
-      this.groups.splice(this.groups.indexOf(group), 1);
-      this.leftGroup(group);
-      return true;
+    if (yarp.groups[group]) {
+      if (this.groups.indexOf(group) > -1) {
+        this.groups.splice(this.groups.indexOf(group), 1);
+        this.leftGroup(group);
+        return true;
+      }
     }
     return false;
   }
@@ -386,10 +421,6 @@ module.exports = class Character{
       }
     }
     return true;
-  }
-
-  isDev(){
-    return yarp.variables["Developers"].value.indexOf(this.socialClub) > -1
   }
 
   makeGetterSetter(){

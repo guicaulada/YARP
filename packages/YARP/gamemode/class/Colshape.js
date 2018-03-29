@@ -3,7 +3,7 @@
  * @file Colshape class
  */
 module.exports = class Colshape{
-  constructor(id,position,type,width,height,depth,enter,leave){
+  constructor(id,position,type,width,height,depth,enter,leave,permissions,items){
     if ((typeof id) === 'object' || (id && position) != null) {
       this._id = id._id || id;
       this._type = id._type || type || 0;
@@ -14,6 +14,14 @@ module.exports = class Colshape{
       this._visible = id._visible || visible || true;
       this._enter = id._enter || ((enter) ? enter.toString() : null);
       this._leave = id._leave || ((leave) ? leave.toString() : null);
+      this._permissions = id._permissions || (((yarp.doors && yarp.doors[id]) != null) ?
+        yarp.doors[id].permissions.concat(permissions.filter(function (permission) {
+          return yarp.doors[id].permissions.indexOf(permission) < 0;
+        })) : (permissions || []));
+      this._items = id._items || (((yarp.doors && yarp.doors[id]) != null) ?
+        yarp.doors[id].items.concat(items.filter(function (item) {
+          return yarp.doors[id].items.indexOf(item) < 0;
+        })) : (items || []));
       switch(this._type){
         case 1:
           this.mp = mp.colshapes.newRectangle(this._position.x, this._position.y, this._width, this._height);
@@ -37,7 +45,7 @@ module.exports = class Colshape{
     for (let id in colshapes){
       let colshape = colshapes[id];
       for (let i=0; i < colshape.positions.length; i++){
-        new yarp.Colshape(id+" "+(i+1),colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave)
+        new yarp.Colshape(id+" "+(i+1),colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
       }
     }
   }

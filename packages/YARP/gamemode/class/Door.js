@@ -3,7 +3,7 @@
  * @file Door class
  */
 module.exports = class Door{
-  constructor(id,model,position,range,permissions,items){
+  constructor(id,model,position,range,enter,leave,permissions,items){
     if ((typeof id) === 'object' || (id && model && position) != null){
       this._id = id._id || id;
       this._model = id._model || model;
@@ -17,6 +17,7 @@ module.exports = class Door{
         yarp.doors[id].items.concat(items.filter(function (item) {
           return yarp.doors[id].items.indexOf(item) < 0;
         })) : (items || []));
+      this.state = false;
       this.players = [];
       yarp.dbm.register(this);
       this.makeGetterSetter();
@@ -28,7 +29,7 @@ module.exports = class Door{
     for (let id in doors){
       let door = doors[id];
       for (let i=0; i < door.positions.length; i++){
-        new yarp.Door(id+" "+(i+1),door.model,door.positions[i],door.range,door.permissions,door.items);
+        new yarp.Door(id+" "+(i+1),door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
       }
     }
   }
@@ -39,6 +40,16 @@ module.exports = class Door{
 
   remove(){
     yarp.dbm.remove(this);
+  }
+
+  open(){
+    this.state = true;
+    mp.players.call('playerOpenDoor',[JSON.stringify(this)]);
+  }
+
+  close(){
+    this.state = false;
+    mp.players.call('playerCloseDoor',[JSON.stringify(this)]);
   }
 
   makeGetterSetter(){

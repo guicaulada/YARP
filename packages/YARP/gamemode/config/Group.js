@@ -24,8 +24,7 @@ module.exports = {
       "cmd.camdir",
       "cmd.noclip",
       "cmd.tp",
-      "cmd.jtp",
-      "cmd.jpos"
+      "cmd.gmtp"
     ]
   },
   "User": {

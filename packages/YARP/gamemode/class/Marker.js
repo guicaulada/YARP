@@ -3,7 +3,7 @@
  * @file Marker class
  */
 module.exports = class Marker{
-  constructor(id,position,type,radius,color,direction,rotation,visible,range,enter,leave){
+  constructor(id,position,type,radius,color,direction,rotation,visible,range,enter,leave,permissions,items){
     if ((typeof id) === 'object' || (id && position) != null){
       this._id = id._id || id;
       this._type = id._type || type || 1;
@@ -16,6 +16,14 @@ module.exports = class Marker{
       this._visible = id._visible || visible || true;
       this._enter = id._enter || ((enter) ? enter.toString() : null);
       this._leave = id._leave || ((leave) ? leave.toString() : null);
+      this._permissions = id._permissions || (((yarp.markers && yarp.markers[id]) != null) ?
+        yarp.markers[id].permissions.concat(permissions.filter(function (permission) {
+          return yarp.markers[id].permissions.indexOf(permission) < 0;
+        })) : (permissions || []));
+      this._items = id._items || (((yarp.markers && yarp.markers[id]) != null) ?
+        yarp.markers[id].items.concat(items.filter(function (item) {
+          return yarp.markers[id].items.indexOf(item) < 0;
+        })) : (items || []));
       this.players = [];
       if (!this._visible) this._color[4] = 0;
       this.mp = mp.markers.new(this._type, this._position, this._radius,
@@ -36,7 +44,7 @@ module.exports = class Marker{
     for (let id in markers){
       let marker = markers[id];
       for (let i=0; i < marker.positions.length; i++){
-        new yarp.Marker(id+" "+(i+1),marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.range,marker.enter,marker.leave)
+        new yarp.Marker(id+" "+(i+1),marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
       }
     }
   }

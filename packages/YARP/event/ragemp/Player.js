@@ -15,16 +15,27 @@ mp.events.add('playerCommand', (player, command) => {
   command = yarp.commands[commandName];
 
 	if (command) {
-    (eval(command.call))(player,args);
-	} else {
-    player.outputChatBox("!{yellow}HINT!{white}: Command doesn't exist.");
+    let user = yarp.users[player.socialClub];
+    let character = user.character;
+    if (user.hasPermissions(command.permissions) || character.hasPermissions(command.permissions)){
+      if (character.hasItems(command.items)) {
+        if(command.position && command.range) {
+          if (yarp.utils.Vector3Distance(player.position,command.position) < command.range){
+            (eval(command.call))(player,args);
+          }
+        } else {
+          (eval(command.call))(player,args);
+        }
+      } else {
+        player.outputChatBox("!{yellow}HINT!{white}: You don't have the required items.");
+      }
+	  } else {
+      player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+    }
   }
 });
 
 mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
-  let character = yarp.characters[player.name];
-  character.health -= healthLoss;
-  character.armour -= armorLoss;
 });
 
 mp.events.add('playerDeath', (player) => {
@@ -67,14 +78,13 @@ mp.events.add('playerJoin', (player) => {
 });
 
 mp.events.add('playerQuit', (player, exitType, reason) => {
-  if (yarp.users[player.socialClub]) yarp.users[player.socialClub].leftGroup();
-  if (yarp.characters[player.name]) yarp.characters[player.name].leftGroup();
-  if (exitType != "kicked") {
-    var str = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
-  } else {
-    var str = `${player.name}(${player.socialClub}/${player.ip}) kicked. Reason: ${reason} (${exitType})`;
+  if (yarp.users[player.socialClub]) yarp.users[player.socialClub].left();
+  if (yarp.characters[player.name]) yarp.characters[player.name].left();
+  let msg = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
+  if (exitType == "kicked") {
+    msg = `${player.name}(${player.socialClub}/${player.ip}) kicked. Reason: ${reason} (${exitType})`;
   }
-  console.log(str);
+  console.log(msg);
 });
 
 mp.events.add("playerReady", player => {

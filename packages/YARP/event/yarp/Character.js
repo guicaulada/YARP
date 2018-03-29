@@ -20,7 +20,7 @@ mp.events.add('changeCharacterSex', (player, sex) => {
 });
 
 mp.events.add('setCharacterIntoCreator', (player) => {
-  player.position = {"x" : 152.5, "y" : -1001.25, "z" : -99.5};
+  player.position = new mp.Vector3(152.5, -1001.25, -99.5);
   player.heading = 180;
 });
 
@@ -43,22 +43,9 @@ mp.events.add('loadCharacter', (player,id) => {
     player.giveWeapon(mp.joaat(id), character.weapons[id]);
     player.call('equipWeapon', [JSON.stringify(yarp.weapons[id])]);
   }
-  character.user.joinedGroup();
-  character.joinedGroup();
+  character.user.entered();
+  character.entered();
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });
-
-setInterval(function(){
-  mp.players.forEach((player, id) => {
-    if ((player.position.x && player.position.y && player.position.z && player.health) != 0) {
-      let character = yarp.characters[player.name];
-      if (character) {
-        character.position = player.position;
-        character.heading = player.heading;
-        character.save();
-      }
-    }
-	});
-},1000*yarp.variables["Save Interval"].value);

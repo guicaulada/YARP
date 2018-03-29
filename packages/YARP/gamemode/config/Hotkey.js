@@ -2,3 +2,16 @@
 /**
  * @file Hotkey config
  */
+
+module.exports = {
+   "utility": {
+      "Event": {
+         key: "KEY_E",
+         call: (player,args) => {player.call(args[0], args[1]);}
+      },
+      "Teleport": {
+         key: "KEY_E",
+         call: (player,args) => {player.position = args[0];}
+      }
+   }
+}

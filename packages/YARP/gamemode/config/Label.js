@@ -4,16 +4,28 @@
 */
 module.exports = {
   "FIB Elevator Up": {
-    enter: (player) => {mp.events.call('bindFIBElevatorUp',player)},
-    leave: (player) => {mp.events.call('unbindFIBElevatorUp',player)},
+    enter: (player) => {
+      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to take the elevator."]);
+      yarp.hotkeys["Teleport"].bind(player, [yarp.labels["FIB Elevator Down 1"].position]);
+    },
+    leave: (player) => {
+      player.call("clearHelpText");
+      yarp.hotkeys["Teleport"].unbind(player);
+    },
     visible: false,
     positions: [
       new mp.Vector3(139.219,-762.7094,45.752)
     ],
   },
   "FIB Elevator Down": {
-    enter: (player) => {mp.events.call('bindFIBElevatorDown',player)},
-    leave: (player) => {mp.events.call('unbindFIBElevatorDown',player)},
+    enter: (player) => {
+      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to take the elevator."]);
+      yarp.hotkeys["Teleport"].bind(player, [yarp.labels["FIB Elevator Up 1"].position]);
+    },
+    leave: (player) => {
+      player.call("clearHelpText");
+      yarp.hotkeys["Teleport"].unbind(player);
+    },
     visible: false,
     positions: [
       new mp.Vector3(136.0667,-761.8372,234.1520)
@@ -45,8 +57,14 @@ module.exports = {
     ],
   },
   "Store": {
-    enter: (player) => {mp.events.call('bindItemStore',player,"Food")},
-    leave: (player) => {mp.events.call('unbindItemStore',player)},
+    enter: (player) => {
+      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to shop."]);
+      yarp.hotkeys["Event"].bind(player,['createBrowser', ["menu", ['package://YARP/ui/html/sideMenu.html', 'populateStoreItems', "Food", JSON.stringify(yarp.items.categories["Food"])]]]);
+    },
+    leave: (player) => {
+      player.call("clearHelpText");
+      yarp.hotkeys["Event"].unbind(player);
+    },
     visible: false,
     positions: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
@@ -81,6 +99,14 @@ module.exports = {
     ],
   },
   "Bank": {
+    enter: (player) => {
+      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to use the bank."]);
+      yarp.hotkeys["Event"].bind(player,['createBrowser', ["menu", ['package://YARP/statics/html/bankMenu.html']]]);
+    },
+    leave: (player) => {
+      player.call("clearHelpText");
+      yarp.hotkeys["Event"].unbind(player);
+    },
     visible: false,
     positions: [
       new mp.Vector3(147.04908752441, -1044.9448242188, 29.36802482605),
@@ -94,8 +120,14 @@ module.exports = {
     ],
   },
   "Ammu-Nation": {
-    enter: (player) => {mp.events.call('bindFullWeaponStore',player)},
-    leave: (player) => {mp.events.call('unbindFullWeaponStore',player)},
+    enter: (player) => {
+      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to shop."]);
+      yarp.hotkeys["Event"].bind(player,['createBrowser', ["menu", ['package://YARP/ui/html/sideMenu.html', 'populateAmmuCategories', JSON.stringify(yarp.weapons.categories)]]]);
+    },
+    leave: (player) => {
+      player.call("clearHelpText");
+      yarp.hotkeys["Event"].unbind(player);
+    },
     visible: false,
     positions: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),

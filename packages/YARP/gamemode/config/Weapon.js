@@ -592,24 +592,24 @@ module.exports = {
       rotation: new mp.Vector3(0.0, 0.0, 0.0),
       model: "prop_w_me_dagger"
     },
-  	// "WEAPON_REMOTESNIPER": {
-    //   name: "Remote Sniper",
-    //   price: 20000,
-    //   ammo: 200,
-    //   bone: 24818,
-    //   position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-    //   rotation: new mp.Vector3(0.0, 0.0, 0.0),
-    //   model: ""
-    // },
-  	// "WEAPON_STINGER": {
-    //   name: "Stinger",
-    //   price: 20000,
-    //   ammo: 200,
-    //   bone: 24818,
-    //   position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
-    //   rotation: new mp.Vector3(0.0, 0.0, 0.0),
-    //   model: ""
-    // },
+  	"WEAPON_REMOTESNIPER": {
+      name: "Remote Sniper",
+      price: 20000,
+      ammo: 200,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: ""
+    },
+  	"WEAPON_STINGER": {
+      name: "Stinger",
+      price: 20000,
+      ammo: 200,
+      bone: 24818,
+      position: new mp.Vector3(0.0 , 0.0 , 0.0 ),
+      rotation: new mp.Vector3(0.0, 0.0, 0.0),
+      model: ""
+    },
   },
   "Sniper": {
     "WEAPON_HEAVYSNIPER": {
