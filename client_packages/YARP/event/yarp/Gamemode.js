@@ -30,7 +30,10 @@ mp.events.add('playerBindKey', (id,key) => {
 });
 
 mp.events.add('playerUnbindKey', (id) => {
-  mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
+  if (keybinds[id]) {
+    mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
+    keybinds[id] = null;
+  }
 });
 
 mp.events.add('playerOpenDoor', (doorJson) => {

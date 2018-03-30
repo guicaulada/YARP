@@ -129,6 +129,7 @@ module.exports = (async () => {
     require('../event/ragemp/Stream.js');
     require('../event/ragemp/Vehicle.js');
     require('../event/ragemp/Waypoint.js');
+    require('../event/ragemp/World.js');
 
     //Load YARP Events
     require('../event/yarp/Character.js');

@@ -37,7 +37,7 @@ module.exports = class Character{
     for (let id in characters){
       let character = characters[id];
       if (yarp.characters[id]) {
-        for (let group in character.groups){
+        for (let group of character.groups){
           yarp.characters[id].giveGroup(group);
         }
         if (character.enter) {
@@ -117,10 +117,12 @@ module.exports = class Character{
   joinedGroup(group){
     if (yarp.groups[group]) {
       let player = this.player;
-      if (yarp.groups[group].enter){
-        let cb = eval(yarp.groups[group].enter);
-        cb(player);
-        mp.events.call('userJoinedGroup',player,this,group);
+      if (player){
+        if (yarp.groups[group].enter){
+          let cb = eval(yarp.groups[group].enter);
+          cb(player);
+          mp.events.call('userJoinedGroup',player,this,group);
+        }
       }
     }
   }
@@ -128,10 +130,12 @@ module.exports = class Character{
   leftGroup(group){
     if (yarp.groups[group]) {
       let player = this.player;
-      if (yarp.groups[group].leave){
-        let cb = eval(yarp.groups[group].leave);
-        cb(player);
-        mp.events.call('userLeftGroup',player,this,group);
+      if (player){
+        if (yarp.groups[group].leave){
+          let cb = eval(yarp.groups[group].leave);
+          cb(player);
+          mp.events.call('userLeftGroup',player,this,group);
+        }
       }
     }
   }

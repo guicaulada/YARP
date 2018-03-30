@@ -32,7 +32,7 @@ module.exports = class User{
     for (let id in users){
       let user = users[id];
       if (yarp.users[id]) {
-        for (let group in user.groups){
+        for (let group of user.groups){
           yarp.users[id].giveGroup(group);
         }
         if (user.enter) {
@@ -113,10 +113,12 @@ module.exports = class User{
   joinedGroup(group){
     if (yarp.groups[group]) {
       let player = this.player;
-      if (yarp.groups[group].enter){
-        let cb = eval(yarp.groups[group].enter);
-        cb(player);
-        mp.events.call('userJoinedGroup',player,this,group);
+      if (player){
+        if (yarp.groups[group].enter){
+          let cb = eval(yarp.groups[group].enter);
+          cb(player);
+          mp.events.call('userJoinedGroup',player,this,group);
+        }
       }
     }
   }
@@ -124,10 +126,12 @@ module.exports = class User{
   leftGroup(group){
     if (yarp.groups[group]) {
       let player = this.player;
-      if (yarp.groups[group].leave){
-        let cb = eval(yarp.groups[group].leave);
-        cb(player);
-        mp.events.call('userLeftGroup',player,this,group);
+      if (player){
+        if (yarp.groups[group].leave){
+          let cb = eval(yarp.groups[group].leave);
+          cb(player);
+          mp.events.call('userLeftGroup',player,this,group);
+        }
       }
     }
   }

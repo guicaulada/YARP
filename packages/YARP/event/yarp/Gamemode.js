@@ -14,20 +14,22 @@ mp.events.add('playerBoundKeyPressed', (player, id) => {
   let character = user.character;
   let hotkey = yarp.hotkeys[id];
   if (hotkey.call){
-    if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)){
-      if (character.hasItems(hotkey.items)) {
-        if(hotkey.position && hotkey.range) {
-          if (yarp.utils.Vector3Distance(player.position,hotkey.position) < hotkey.range){
+    if (hotkey.args[player.id]) {
+      if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)){
+        if (character.hasItems(hotkey.items)) {
+          if(hotkey.position && hotkey.range) {
+            if (yarp.utils.Vector3Distance(player.position,hotkey.position) < hotkey.range){
+              (eval(hotkey.call))(player,hotkey.args[player.id]);
+            }
+          } else {
             (eval(hotkey.call))(player,hotkey.args[player.id]);
           }
         } else {
-          (eval(hotkey.call))(player,hotkey.args[player.id]);
+          player.call("displayHelpText",["You don't have the required items."]);
         }
-      } else {
-        player.call("displayHelpText",["You don't have the required items."]);
+	   } else {
+        player.call("displayHelpText",["You don't have permission."]);
       }
-	  } else {
-      player.call("displayHelpText",["You don't have permission."]);
     }
   }
 });

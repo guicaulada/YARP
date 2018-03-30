@@ -9,7 +9,7 @@ mp.events.add("playerStartEnterVehicle", (player, vehicle, seat) => {
 mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
 });
 
-mp.events.add("playerStartExitVehicle", player => {
+mp.events.add("playerStartExitVehicle", (player) => {
 });
 
 mp.events.add("playerExitVehicle", (player, vehicle) => {

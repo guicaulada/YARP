@@ -37,7 +37,7 @@ module.exports = class Hotkey{
   }
 
   bind(player, args) {
-    this.args[player.id] = args;
+    this.args[player.id] = args || [];
     player.call('playerBindKey',[this.id,this.key]);
   }
 

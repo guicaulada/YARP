@@ -12,6 +12,6 @@ module.exports = {
       "Teleport": {
          key: "KEY_E",
          call: (player,args) => {player.position = args[0];}
-      }
-   }
+      },
+   },
 }
