@@ -186,7 +186,7 @@ module.exports = {
          permissions: ["cmd.gmtp"],
          call: (player,args) => {
             let Class = args[0];
-            let id = args[1];
+            let id = yarp.utils.getSubstrings(args.join(" "))[0];
             if (yarp[Class]) {
                let collection = Class.toLowerCase()+"s";
                let obj = yarp[collection][id];
