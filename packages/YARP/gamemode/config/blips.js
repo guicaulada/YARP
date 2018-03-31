@@ -3,21 +3,21 @@
 * @file Blip config
 */
 module.exports = {
-  "Airport": {
+  'Airport': {
     sprite: 90,
     positions: [
       new mp.Vector3(-1032.690, -2728.141, 13.757),
       new mp.Vector3(1743.6820, 3286.2510, 40.087)
     ],
   },
-  "Cable Car": {
+  'Cable Car': {
     sprite: 36,
     positions: [
       new mp.Vector3(-737.746, 5595.192, 41.655),
       new mp.Vector3(457.097, 5571.724, 781.184)
     ],
   },
-  "Tattoo Shop": {
+  'Tattoo Shop': {
     sprite: 75,
     positions: [
       new mp.Vector3(1322.645, -1651.976, 52.275),
@@ -28,7 +28,7 @@ module.exports = {
       new mp.Vector3(-293.713, 6200.04, 31.487)
     ],
   },
-  "Store": {
+  'Store': {
     sprite: 52,
     positions: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
@@ -50,7 +50,7 @@ module.exports = {
       new mp.Vector3(-621.989135742188, -230.804443359375, 38.0570297241211)
     ],
   },
-  "Barbershop": {
+  'Barbershop': {
     sprite: 71,
     positions: [
       new mp.Vector3(-827.333, -190.916, 37.599),
@@ -62,7 +62,7 @@ module.exports = {
       new mp.Vector3(-285.238, 6236.365, 31.455)
     ],
   },
-  "Bank": {
+  'Bank': {
     sprite: 207,
     positions: [
       new mp.Vector3(147.04908752441, -1044.9448242188, 29.36802482605),
@@ -75,7 +75,7 @@ module.exports = {
       new mp.Vector3(255.001098632813, 225.855895996094, 101.005694274902)
     ],
   },
-  "Ammu-Nation": {
+  'Ammu-Nation': {
     sprite: 110,
     positions: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
@@ -91,7 +91,7 @@ module.exports = {
       new mp.Vector3(-1305.45056, -394.0068, 36.695)
     ],
   },
-  "Carwash": {
+  'Carwash': {
     sprite: 100,
     positions: [
       new mp.Vector3(26.5906, -1392.0261, 29.3634),
@@ -100,7 +100,7 @@ module.exports = {
       new mp.Vector3(-699.6325, -932.7043, 19.0139)
     ],
   },
-  "Clothing": {
+  'Clothing': {
     sprite: 73,
     positions: [
       new mp.Vector3(88.291, -1391.929, 29.200),
@@ -119,7 +119,7 @@ module.exports = {
       new mp.Vector3(-1091.373, 2702.356, 19.422)
     ],
   },
-  "Gang Zone": {
+  'Gang Zone': {
     sprite: 437,
     positions: [
       new mp.Vector3(298.68, -2010.10, 20.07),
@@ -132,7 +132,7 @@ module.exports = {
       new mp.Vector3(-455.752, -1711.884, 18.642)
     ],
   },
-  "Gas Station": {
+  'Gas Station': {
     sprite: 361,
     positions: [
       new mp.Vector3(49.41872, 2778.793, 58.04395),
@@ -166,7 +166,7 @@ module.exports = {
       new mp.Vector3(-66.330, -2532.570, 6.140)
     ],
   },
-  "Hospital": {
+  'Hospital': {
     sprite: 61,
     positions: [
       new mp.Vector3(1839.6, 3672.93, 34.28),
@@ -179,7 +179,7 @@ module.exports = {
       new mp.Vector3(-874.64, -307.71, 39.58)
     ],
   },
-  "House": {
+  'House': {
     sprite: 357,
     positions: [
       new mp.Vector3(-952.359436, -1077.50219, 2.6772258),
@@ -195,7 +195,7 @@ module.exports = {
       new mp.Vector3(-1468.14, -541.815, 73.4442)
     ],
   },
-  "LS Customs": {
+  'LS Customs': {
     sprite: 72,
     positions: [
       new mp.Vector3(-337.3863, -136.9247, 39.0737),
@@ -205,7 +205,7 @@ module.exports = {
       new mp.Vector3(110.8406, 6626.568, 32.287)
     ],
   },
-  "Race": {
+  'Race': {
     sprite: 316,
     positions: [
       new mp.Vector3(-1277.629, -2030.913, 1.2823),
@@ -213,7 +213,7 @@ module.exports = {
       new mp.Vector3(1577.881, 3836.107, 30.7717)
     ],
   },
-  "Police Station": {
+  'Police Station': {
     sprite: 60,
     positions: [
       new mp.Vector3(425.130, -979.558, 30.711),
@@ -222,172 +222,172 @@ module.exports = {
       new mp.Vector3(818.221, -1289.883, 26.300)
     ],
   },
-  "Smoke on the Water": {
+  'Smoke on the Water': {
     sprite: 140,
     positions: [
       new mp.Vector3(-1171.42, -1572.72, 3.6636)
     ],
   },
-  "MazeBank Arena": {
+  'MazeBank Arena': {
     sprite: 135,
     positions: [
       new mp.Vector3(-250.604, -2030.000, 30.000)
     ],
   },
-  "Bahama Mamas": {
+  'Bahama Mamas': {
     sprite: 207,
     positions: [
       new mp.Vector3(925.329, 46.152, 80.908)
     ],
   },
-  "Downtown CO.": {
+  'Downtown CO.': {
     sprite: 375,
     positions: [
       new mp.Vector3(900.461, -181.466, 73.89)
     ],
   },
-  "Tequil-La La": {
+  'Tequil-La La': {
     sprite: 93,
     positions: [
       new mp.Vector3(-565.171, 276.625, 83.286)
     ],
   },
-  "Theater": {
+  'Theater': {
     sprite: 135,
     positions: [
       new mp.Vector3(-455.752, 180.466, 104.301)
     ],
   },
-  "Weed Farm": {
+  'Weed Farm': {
     sprite: 140,
     positions: [
       new mp.Vector3(2208.777, 5578.235, 53.735)
     ],
   },
-  "FIB": {
+  'FIB': {
     sprite: 106,
     positions: [
       new mp.Vector3(105.455, -745.483, 44.754)
     ],
   },
-  "Lifeinvader": {
+  'Lifeinvader': {
     sprite: 77,
     positions: [
       new mp.Vector3(-1047.900, -233.000, 39.000)
     ],
   },
-  "Cluckin Bell": {
+  'Cluckin Bell': {
     sprite: 357,
     positions: [
       new mp.Vector3(-72.68752, 6253.72656, 31.08991)
     ],
   },
-  "Comedy Club": {
+  'Comedy Club': {
     sprite: 102,
     positions: [
       new mp.Vector3(-447.4833, 280.3197, 77.5215)
     ],
   },
-  "Yacht": {
+  'Yacht': {
     sprite: 410,
     positions: [
       new mp.Vector3(-2045.800, -1031.200, 11.900)
     ],
   },
-  "Ranch": {
+  'Ranch': {
     sprite: 438,
     positions: [
       new mp.Vector3(2441.200, 4968.500, 51.700)
     ],
   },
-  "PlayBoy": {
+  'PlayBoy': {
     sprite: 439,
     positions: [
       new mp.Vector3(-1475.234, 167.088, 55.841)
     ],
   },
-  "Chop Shop": {
+  'Chop Shop': {
     sprite: 446,
     positions: [
       new mp.Vector3(479.056, -1316.825, 28.203)
     ],
   },
-  "Rebel Radio": {
+  'Rebel Radio': {
     sprite: 136,
     positions: [
       new mp.Vector3(736.153, 2583.143, 79.634)
     ],
   },
-  "Morgue": {
+  'Morgue': {
     sprite: 310,
     positions: [
       new mp.Vector3(243.351, -1376.014, 39.534)
     ],
   },
-  "Golf": {
+  'Golf': {
     sprite: 109,
     positions: [
       new mp.Vector3(-1336.715, 59.051, 55.246)
     ],
   },
-  "Hippie Camp": {
+  'Hippie Camp': {
     sprite: 140,
     positions: [
       new mp.Vector3(2476.712, 3789.645, 41.226)
     ],
   },
-  "Torture": {
+  'Torture': {
     sprite: 79,
     positions: [
       new mp.Vector3(132.583, -2202.327, 7.187)
     ],
   },
-  "Body Training": {
+  'Body Training': {
     sprite: 311,
     positions: [
       new mp.Vector3(-1202.962, -1566.140, 4.610)
     ],
   },
-  "Lester": {
+  'Lester': {
     sprite: 77,
     positions: [
       new mp.Vector3(1274.292, -1712.663, 54.771),
       new mp.Vector3(705.859, -964.651, 30.396)
     ],
   },
-  "Epsilon": {
+  'Epsilon': {
     sprite: 206,
     positions: [
       new mp.Vector3(245.1564, 370.211, 104.7382)
     ],
   },
-  "Franklin": {
+  'Franklin': {
     sprite: 210,
     positions: [
       new mp.Vector3(7.900, 548.100, 175.500),
       new mp.Vector3(-14.128, -1445.483, 30.648)
     ],
   },
-  "Michael": {
+  'Michael': {
     sprite: 124,
     positions: [
       new mp.Vector3(-852.400, 160.000, 65.600)
     ],
   },
-  "Trevor": {
+  'Trevor': {
     sprite: 208,
     positions: [
       new mp.Vector3(1985.700, 3812.200, 32.200),
       new mp.Vector3(-1159.034, -1521.180, 10.633)
     ],
   },
-  "Legal Jobs": {
+  'Legal Jobs': {
     sprite: 351,
     positions: [
       new mp.Vector3(-268.363, -957.255, 31.223)
     ],
   },
-  "Ilegal Jobs": {
+  'Ilegal Jobs': {
     sprite: 351,
     positions: [
       new mp.Vector3(707.324, -966.986, 30.412)

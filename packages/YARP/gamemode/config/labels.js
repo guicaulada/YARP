@@ -3,49 +3,49 @@
 * @file Label config
 */
 module.exports = {
-  "FIB Elevator Up": {
+  'FIB Elevator Up': {
     enter: (player) => {
-      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to take the elevator."]);
-      yarp.hotkeys["Teleport"].bind(player, [yarp.labels["FIB Elevator Down 1"].position]);
+      player.call('displayHelpText',['Press ~INPUT_PICKUP~ to take the elevator.']);
+      yarp.hotkeys['Teleport'].bind(player, [yarp.labels['FIB Elevator Down 1'].position]);
     },
     leave: (player) => {
-      player.call("clearHelpText");
-      yarp.hotkeys["Teleport"].unbind(player);
+      player.call('clearHelpText');
+      yarp.hotkeys['Teleport'].unbind(player);
     },
     visible: false,
     positions: [
       new mp.Vector3(139.219,-762.7094,45.752)
     ],
   },
-  "FIB Elevator Down": {
+  'FIB Elevator Down': {
     enter: (player) => {
-      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to take the elevator."]);
-      yarp.hotkeys["Teleport"].bind(player, [yarp.labels["FIB Elevator Up 1"].position]);
+      player.call('displayHelpText',['Press ~INPUT_PICKUP~ to take the elevator.']);
+      yarp.hotkeys['Teleport'].bind(player, [yarp.labels['FIB Elevator Up 1'].position]);
     },
     leave: (player) => {
-      player.call("clearHelpText");
-      yarp.hotkeys["Teleport"].unbind(player);
+      player.call('clearHelpText');
+      yarp.hotkeys['Teleport'].unbind(player);
     },
     visible: false,
     positions: [
       new mp.Vector3(136.0667,-761.8372,234.1520)
     ],
   },
-  "Airport": {
+  'Airport': {
     visible: false,
     positions: [
       new mp.Vector3(-1032.690, -2728.141, 13.757),
       new mp.Vector3(1743.6820, 3286.2510, 40.087)
     ],
   },
-  "Cable Car": {
+  'Cable Car': {
     visible: false,
     positions: [
       new mp.Vector3(-737.746, 5595.192, 41.655),
       new mp.Vector3(457.097, 5571.724, 781.184)
     ],
   },
-  "Tattoo Shop": {
+  'Tattoo Shop': {
     visible: false,
     positions: [
       new mp.Vector3(1322.645, -1651.976, 52.275),
@@ -56,7 +56,7 @@ module.exports = {
       new mp.Vector3(-293.713, 6200.04, 31.487)
     ],
   },
-  "Barbershop": {
+  'Barbershop': {
     visible: false,
     positions: [
       new mp.Vector3(-827.333, -190.916, 37.599),
@@ -68,14 +68,14 @@ module.exports = {
       new mp.Vector3(-285.238, 6236.365, 31.455)
     ],
   },
-  "Bank": {
+  'Bank': {
     enter: (player) => {
-      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to use the bank."]);
-      yarp.hotkeys["Event"].bind(player,['createBrowser', ["menu", ['package://YARP/statics/html/bankMenu.html']]]);
+      player.call('displayHelpText',['Press ~INPUT_PICKUP~ to use the bank.']);
+      yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/statics/html/bankMenu.html']]]);
     },
     leave: (player) => {
-      player.call("clearHelpText");
-      yarp.hotkeys["Event"].unbind(player);
+      player.call('clearHelpText');
+      yarp.hotkeys['Event'].unbind(player);
     },
     visible: false,
     positions: [
@@ -89,14 +89,14 @@ module.exports = {
       new mp.Vector3(255.001098632813, 225.855895996094, 101.005694274902)
     ],
   },
-  "Ammu-Nation": {
+  'Ammu-Nation': {
     enter: (player) => {
-      player.call("displayHelpText",["Press ~INPUT_PICKUP~ to shop."]);
-      yarp.hotkeys["Event"].bind(player,['createBrowser', ["menu", ['package://YARP/ui/html/sideMenu.html', 'populateAmmuCategories', JSON.stringify(yarp.weapons.categories)]]]);
+      player.call('displayHelpText',['Press ~INPUT_PICKUP~ to shop.']);
+      yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateAmmuCategories', JSON.stringify(yarp.weapons.categories)]]]);
     },
     leave: (player) => {
-      player.call("clearHelpText");
-      yarp.hotkeys["Event"].unbind(player);
+      player.call('clearHelpText');
+      yarp.hotkeys['Event'].unbind(player);
     },
     visible: false,
     positions: [
@@ -113,7 +113,7 @@ module.exports = {
       new mp.Vector3(-1305.45056, -394.0068, 36.695)
     ],
   },
-  "Carwash": {
+  'Carwash': {
     visible: false,
     positions: [
       new mp.Vector3(26.5906, -1392.0261, 29.3634),
@@ -122,7 +122,7 @@ module.exports = {
       new mp.Vector3(-699.6325, -932.7043, 19.0139)
     ],
   },
-  "Clothing": {
+  'Clothing': {
     visible: false,
     positions: [
       new mp.Vector3(88.291, -1391.929, 29.200),
@@ -141,7 +141,7 @@ module.exports = {
       new mp.Vector3(-1091.373, 2702.356, 19.422)
     ],
   },
-  "Gang Zone": {
+  'Gang Zone': {
     visible: false,
     positions: [
       new mp.Vector3(298.68, -2010.10, 20.07),
@@ -154,7 +154,7 @@ module.exports = {
       new mp.Vector3(-455.752, -1711.884, 18.642)
     ],
   },
-  "Gas Station": {
+  'Gas Station': {
     visible: false,
     positions: [
       new mp.Vector3(49.41872, 2778.793, 58.04395),
@@ -188,7 +188,7 @@ module.exports = {
       new mp.Vector3(-66.330, -2532.570, 6.140)
     ],
   },
-  "Hospital": {
+  'Hospital': {
     visible: false,
     positions: [
       new mp.Vector3(1839.6, 3672.93, 34.28),
@@ -201,7 +201,7 @@ module.exports = {
       new mp.Vector3(-874.64, -307.71, 39.58)
     ],
   },
-  "House": {
+  'House': {
     visible: false,
     positions: [
       new mp.Vector3(-952.359436, -1077.50219, 2.6772258),
@@ -217,7 +217,7 @@ module.exports = {
       new mp.Vector3(-1468.14, -541.815, 73.4442)
     ],
   },
-  "LS Customs": {
+  'LS Customs': {
     visible: false,
     positions: [
       new mp.Vector3(-337.3863, -136.9247, 39.0737),
@@ -227,7 +227,7 @@ module.exports = {
       new mp.Vector3(110.8406, 6626.568, 32.287)
     ],
   },
-  "Race": {
+  'Race': {
     visible: false,
     positions: [
       new mp.Vector3(-1277.629, -2030.913, 1.2823),
@@ -235,7 +235,7 @@ module.exports = {
       new mp.Vector3(1577.881, 3836.107, 30.7717)
     ],
   },
-  "Police Station": {
+  'Police Station': {
     visible: false,
     positions: [
       new mp.Vector3(425.130, -979.558, 30.711),
@@ -244,172 +244,172 @@ module.exports = {
       new mp.Vector3(818.221, -1289.883, 26.300)
     ],
   },
-  "Smoke on the Water": {
+  'Smoke on the Water': {
     visible: false,
     positions: [
       new mp.Vector3(-1171.42, -1572.72, 3.6636)
     ],
   },
-  "MazeBank Arena": {
+  'MazeBank Arena': {
     visible: false,
     positions: [
       new mp.Vector3(-250.604, -2030.000, 30.000)
     ],
   },
-  "Bahama Mamas": {
+  'Bahama Mamas': {
     visible: false,
     positions: [
       new mp.Vector3(925.329, 46.152, 80.908)
     ],
   },
-  "Downtown CO.": {
+  'Downtown CO.': {
     visible: false,
     positions: [
       new mp.Vector3(900.461, -181.466, 73.89)
     ],
   },
-  "Tequil-La La": {
+  'Tequil-La La': {
     visible: false,
     positions: [
       new mp.Vector3(-565.171, 276.625, 83.286)
     ],
   },
-  "Theater": {
+  'Theater': {
     visible: false,
     positions: [
       new mp.Vector3(-455.752, 180.466, 104.301)
     ],
   },
-  "Weed Farm": {
+  'Weed Farm': {
     visible: false,
     positions: [
       new mp.Vector3(2208.777, 5578.235, 53.735)
     ],
   },
-  "FIB": {
+  'FIB': {
     visible: false,
     positions: [
       new mp.Vector3(105.455, -745.483, 44.754)
     ],
   },
-  "Lifeinvader": {
+  'Lifeinvader': {
     visible: false,
     positions: [
       new mp.Vector3(-1047.900, -233.000, 39.000)
     ],
   },
-  "Cluckin Bell": {
+  'Cluckin Bell': {
     visible: false,
     positions: [
       new mp.Vector3(-72.68752, 6253.72656, 31.08991)
     ],
   },
-  "Comedy Club": {
+  'Comedy Club': {
     visible: false,
     positions: [
       new mp.Vector3(-447.4833, 280.3197, 77.5215)
     ],
   },
-  "Yacht": {
+  'Yacht': {
     visible: false,
     positions: [
       new mp.Vector3(-2045.800, -1031.200, 11.900)
     ],
   },
-  "Ranch": {
+  'Ranch': {
     visible: false,
     positions: [
       new mp.Vector3(2441.200, 4968.500, 51.700)
     ],
   },
-  "PlayBoy": {
+  'PlayBoy': {
     visible: false,
     positions: [
       new mp.Vector3(-1475.234, 167.088, 55.841)
     ],
   },
-  "Chop Shop": {
+  'Chop Shop': {
     visible: false,
     positions: [
       new mp.Vector3(479.056, -1316.825, 28.203)
     ],
   },
-  "Rebel Radio": {
+  'Rebel Radio': {
     visible: false,
     positions: [
       new mp.Vector3(736.153, 2583.143, 79.634)
     ],
   },
-  "Morgue": {
+  'Morgue': {
     visible: false,
     positions: [
       new mp.Vector3(243.351, -1376.014, 39.534)
     ],
   },
-  "Golf": {
+  'Golf': {
     visible: false,
     positions: [
       new mp.Vector3(-1336.715, 59.051, 55.246)
     ],
   },
-  "Hippie Camp": {
+  'Hippie Camp': {
     visible: false,
     positions: [
       new mp.Vector3(2476.712, 3789.645, 41.226)
     ],
   },
-  "Torture": {
+  'Torture': {
     visible: false,
     positions: [
       new mp.Vector3(132.583, -2202.327, 7.187)
     ],
   },
-  "Body Training": {
+  'Body Training': {
     visible: false,
     positions: [
       new mp.Vector3(-1202.962, -1566.140, 4.610)
     ],
   },
-  "Lester": {
+  'Lester': {
     visible: false,
     positions: [
       new mp.Vector3(1274.292, -1712.663, 54.771),
       new mp.Vector3(705.859, -964.651, 30.396)
     ],
   },
-  "Epsilon": {
+  'Epsilon': {
     visible: false,
     positions: [
       new mp.Vector3(245.1564, 370.211, 104.7382)
     ],
   },
-  "Franklin": {
+  'Franklin': {
     visible: false,
     positions: [
       new mp.Vector3(7.900, 548.100, 175.500),
       new mp.Vector3(-14.128, -1445.483, 30.648)
     ],
   },
-  "Michael": {
+  'Michael': {
     visible: false,
     positions: [
       new mp.Vector3(-852.400, 160.000, 65.600)
     ],
   },
-  "Trevor": {
+  'Trevor': {
     visible: false,
     positions: [
       new mp.Vector3(1985.700, 3812.200, 32.200),
       new mp.Vector3(-1159.034, -1521.180, 10.633)
     ],
   },
-  "Legal Jobs": {
+  'Legal Jobs': {
     visible: false,
     positions: [
       new mp.Vector3(-268.363, -957.255, 31.223)
     ],
   },
-  "Ilegal Jobs": {
+  'Ilegal Jobs': {
     visible: false,
     positions: [
       new mp.Vector3(707.324, -966.986, 30.412)

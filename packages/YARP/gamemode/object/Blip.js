@@ -7,7 +7,7 @@ module.exports = class Blip extends yarp.gmo{
     super();
     if ((typeof id) === 'object' || (id && position) != null) {
       this._id = id._id || id;
-      this._name = id._name || name || "Blip";
+      this._name = id._name || name || 'Blip';
       this._sprite = id._sprite || sprite || 1;
       this._position = id._position || position;
       this._scale = id._scale || scale || 1;
@@ -40,7 +40,7 @@ module.exports = class Blip extends yarp.gmo{
     for (let id in blips){
       let blip = blips[id];
       for (let i=0; i < blip.positions.length; i++){
-        new yarp.Blip(id+" "+(i+1),blip.positions[i],id,blip.sprite,blip.scale,blip.color,blip.alpha,blip.drawDistance,blip.fade,blip.rotation,blip.dimension,blip.visible)
+        new yarp.Blip(id+' '+(i+1),blip.positions[i],id,blip.sprite,blip.scale,blip.color,blip.alpha,blip.drawDistance,blip.fade,blip.rotation,blip.dimension,blip.visible)
       }
     }
   }

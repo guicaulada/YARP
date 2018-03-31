@@ -9,11 +9,11 @@ module.exports = class User extends yarp.gmo{
     if ((typeof id) === 'object' || (id && password) != null){
       this._id = id._id || id;
       this._password = id._password || bcrypt.hashSync(password, 10);
-      this._lastLogin = id._lastLogin || lastLogin || "";
+      this._lastLogin = id._lastLogin || lastLogin || '';
       this._whitelisted = id._whitelisted || whitelisted || false;
       this._banned = id._banned || banned || false;
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       this._groups = id._groups || groups || [];
       yarp.dbm.register(this);
       this.makeGetterSetter();
@@ -188,7 +188,7 @@ module.exports = class User extends yarp.gmo{
     this.groups.forEach(function(id){
       let group = yarp.groups[id];
       if (group != null) {
-        if (group.permissions.indexOf("*") > -1){
+        if (group.permissions.indexOf('*') > -1){
           result = true;
         }
         if (group.permissions.indexOf(permission) > -1){

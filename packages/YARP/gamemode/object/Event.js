@@ -7,7 +7,7 @@ module.exports = class Event extends yarp.gmo{
     super();
     if ((typeof id) === 'object' || (id && call) != null) {
       this._id = id._id || id;
-      this._call = id._call || ((call) ? call.toString() : "() => {}");
+      this._call = id._call || ((call) ? call.toString() : '() => {}');
       this._permissions = id._permissions || (((yarp.events && yarp.events[id]) != null) ?
         yarp.events[id].permissions.concat(permissions.filter(function (permission) {
           return yarp.events[id].permissions.indexOf(permission) < 0;

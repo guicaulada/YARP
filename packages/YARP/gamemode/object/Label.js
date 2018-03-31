@@ -7,7 +7,7 @@ module.exports = class Label extends yarp.gmo{
     super();
     if ((typeof id) === 'object' || (id && position) != null){
       this._id = id._id || id;
-      this._text = id._text || text || "";
+      this._text = id._text || text || '';
       this._position = id._position || position;
       this._range = id._range || range || 3;
       this._color = id._color || color || [51, 204, 51, 255],
@@ -16,8 +16,8 @@ module.exports = class Label extends yarp.gmo{
       this._los = id._los || los || true;
       this._dimension = id._dimension || dimension || 0;
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       this._permissions = id._permissions || (((yarp.labels && yarp.labels[id]) != null) ?
         yarp.labels[id].permissions.concat(permissions.filter(function (permission) {
           return yarp.labels[id].permissions.indexOf(permission) < 0;
@@ -46,7 +46,7 @@ module.exports = class Label extends yarp.gmo{
     for (let id in labels){
       let label = labels[id];
       for (let i=0; i < label.positions.length; i++){
-        new yarp.Label(id+" "+(i+1),label.positions[i],label.text,label.color,label.drawDistance,label.font,label.los,label.dimension,label.visible,label.range,label.enter,label.leave,label.permissions,label.items)
+        new yarp.Label(id+' '+(i+1),label.positions[i],label.text,label.color,label.drawDistance,label.font,label.los,label.dimension,label.visible,label.range,label.enter,label.leave,label.permissions,label.items)
       }
     }
   }

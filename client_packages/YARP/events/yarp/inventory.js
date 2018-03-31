@@ -7,22 +7,22 @@ let targetType = null;
 
 mp.events.add('showPlayerInventory', (inventoryJson, target) => {
 	targetType = target;
-  let title = "";
+  let title = '';
   switch(targetType) {
 		case 0:
-			title = "Inventory";
+			title = 'Inventory';
 			break;
 		case 1:
-			title = "Inventory";
+			title = 'Inventory';
 			break;
 		case 2:
-			title = "Trunk";
+			title = 'Trunk';
 			break;
 		case 3:
-			title = "Trunk";
+			title = 'Trunk';
 			break;
 	}
-	mp.events.call('createBrowser', "inventory", ['package://YARP/statics/html/inventory.html', 'populateInventory', inventoryJson, title]);
+	mp.events.call('createBrowser', 'inventory', ['package://YARP/statics/html/inventory.html', 'populateInventory', inventoryJson, title]);
 });
 
 mp.events.add('getInventoryOptions', (itemType, itemHash) => {
@@ -31,23 +31,23 @@ mp.events.add('getInventoryOptions', (itemType, itemHash) => {
 
 	switch(targetType) {
 		case 0:
-			optionsArray.push("Use");
+			optionsArray.push('Use');
 			dropable = true;
 			break;
 		case 1:
-			optionsArray.push("Request");
+			optionsArray.push('Request');
 			break;
 		case 2:
-			optionsArray.push("Take");
+			optionsArray.push('Take');
 			break;
 		case 3:
-			optionsArray.push("Store");
+			optionsArray.push('Store');
 			break;
 	}
   if(dropable){
-    optionsArray.push("Drop");
+    optionsArray.push('Drop');
   }
-	mp.events.call('browserExecute', "inventory", ['showInventoryOptions', optionsArray]);
+	mp.events.call('browserExecute', 'inventory', ['showInventoryOptions', optionsArray]);
 });
 
 mp.events.add('executeInventoryAction', (item_id, action) => {

@@ -3,35 +3,37 @@
 * @file Group config
 */
 module.exports = {
-  "Super Admin": {
+  'Super Admin': {
     permissions: [
-      "cmd.code",
-      "cmd.givegroup",
-      "cmd.givegroup"
+      'cmd.code',
+      'cmd.edit',
+      'cmd.new',
+      'cmd.givegroup',
+      'cmd.takegroup'
     ],
-    enter: (player) => {player.notify("You are superadmin.");},
-    //leave: (player) => {console.log("A superadmin left.");}
+    enter: (player) => {player.notify('You are superadmin.');},
+    //leave: (player) => {console.log('A superadmin left.');}
   },
-  "Admin": {
+  'Admin': {
     permissions: [
-      "cmd.kill",
-      "cmd.givemoney",
-      "cmd.hp",
-      "cmd.armour",
-      "cmd.weapon",
-      "cmd.veh",
-      "cmd.charpos",
-      "cmd.camdir",
-      "cmd.noclip",
-      "cmd.tp",
-      "cmd.gmtp"
+      'cmd.kill',
+      'cmd.givemoney',
+      'cmd.hp',
+      'cmd.armour',
+      'cmd.weapon',
+      'cmd.veh',
+      'cmd.charpos',
+      'cmd.camdir',
+      'cmd.noclip',
+      'cmd.tp',
+      'cmd.gmtp'
     ]
   },
-  "User": {
+  'User': {
     permissions: [
-      "cmd.inventory",
-      "cmd.money",
-      "cmd.hint"
+      'cmd.inventory',
+      'cmd.money',
+      'cmd.hint'
     ]
   }
 }

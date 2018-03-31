@@ -18,7 +18,7 @@ function populateInventory(inventoryJson, title) {
 	titleContainer.textContent = title;
 	closeImage.src = '../img/close.png';
 	closeImage.onclick = (function(){
-		mp.trigger('destroyBrowser', "inventory");
+		mp.trigger('destroyBrowser', 'inventory');
 	});
 	titleContainer.appendChild(closeImage);
 
@@ -73,7 +73,7 @@ function populateInventory(inventoryJson, title) {
 
 function showInventoryOptions(optionsArray) {
 	// Añadimos las opciones
-	let options = optionsArray.split(",");
+	let options = optionsArray.split(',');
 	let inventoryOptions = document.getElementById('options');
 	let inventoryContainer = document.getElementById('inventory');
 	while (inventoryOptions.firstChild) {

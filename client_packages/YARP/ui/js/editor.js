@@ -1,18 +1,17 @@
 var editor = null
 
 function setupCodeEditor(text){
-  	//code here...
-    var fullscreen = false;
-  	var code = $(".codemirror-textarea")[0];
+   var fullscreen = false;
+  	var code = $('.codemirror-textarea')[0];
   	editor = CodeMirror.fromTextArea(code, {
-      mode : {name: "javascript", json: true},
-      theme : "monokai",
+      mode : {name: 'javascript', json: true},
+      theme : 'monokai',
   		lineNumbers : true,
       matchBrackets : true,
       closeBrackets : true,
       foldGutter : true,
       styleSelectedText : true,
-      scrollbarStyle : "null",
+      scrollbarStyle : 'null',
       tabSize : 2,
       lineWrapping : true
   	});
@@ -20,7 +19,7 @@ function setupCodeEditor(text){
       $('.wrapper').draggable();
     });
     $('#draggable_handle').on('mouseup', function(){
-      $('.wrapper').draggable("destroy");
+      $('.wrapper').draggable('destroy');
     });
     $('.wrapper').resizable({
       maxHeight: 1080,
@@ -32,7 +31,7 @@ function setupCodeEditor(text){
       }
     });
     $('#cancel').click(function(){
-      mp.trigger('destroyBrowser', "editor");
+      mp.trigger('destroyBrowser', 'editor');
       mp.trigger('unbindToggleChat');
     });
 
@@ -46,9 +45,9 @@ function setupCodeEditor(text){
       editor.getDoc().setValue('');
     });
     editor.setSize($('.wrapper').width(), $('.wrapper').height());
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle=\'tooltip\']').tooltip();
     if (text) {
-      text = text.split(`"`).join(`\"`)
+      text = text.split('\'').join('\'')
       editor.getDoc().setValue(text);
     }
 }

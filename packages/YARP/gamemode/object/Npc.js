@@ -12,7 +12,7 @@ module.exports = class Npc extends yarp.gmo{
       this._heading = id._heading || heading || 0;
       this._drawDistance = id._drawDistance || drawDistance || 100;
       this._visible = id._visible || visible || true;
-      this._call = id._call || ((call) ? call.toString() : "() => {}");
+      this._call = id._call || ((call) ? call.toString() : '() => {}');
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }

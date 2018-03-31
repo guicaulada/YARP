@@ -37,9 +37,9 @@ mp.events.add('browserExecute', (id, arguments) => {
 	var input = '';
 	for(var i = 1; i < arguments.length; i++) {
 		if(input.length > 0) {
-			input += ', \'' + arguments[i] + '\'';
+			input += ', `' + arguments[i] + '`';
 		} else {
-			input = '\'' + arguments[i] + '\'';
+			input = '`' + arguments[i] + '`';
 		}
 	}
 	browsers[id].execute(`${arguments[0]}(${input});`);

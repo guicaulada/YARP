@@ -4,8 +4,8 @@
  */
 
 module.exports = {
-  "Sighmir": {
-    groups: ["Super Admin", "Admin", "User"],
-    enter: (player) => {player.notify("~b~You should drink more water.");}
+  'Sighmir': {
+    groups: ['Super Admin', 'Admin', 'User'],
+    enter: (player) => {player.notify('~b~You should drink more water.');}
   }
 }

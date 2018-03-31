@@ -4,7 +4,7 @@ global.yarp = {};
 global.chalk = require('chalk');
 module.exports = (async () => {
   //Loading Requirements
-  console.log(chalk.yellowBright("[YARP] ")+"Loading Requirements");
+  console.log(chalk.yellowBright('[YARP] ')+'Loading Requirements');
   try {
     yarp.utils = require('./static/Utility');
     yarp.db = require('./static/MongoDB');
@@ -12,11 +12,11 @@ module.exports = (async () => {
     yarp.gmo = require('./abstract/GMObject');
     await yarp.dbm.connect();
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"RequirementError: "+err.message+"\n"+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'RequirementError: '+err.message+'\n'+err.stack);
   }
 
   //Loading Classes
-  console.log(chalk.yellowBright("[YARP] ")+"Loading Objects");
+  console.log(chalk.yellowBright('[YARP] ')+'Loading Objects');
   try {
     yarp.Blip = require('./object/Blip');
     yarp.Character = require('./object/Character');
@@ -40,12 +40,12 @@ module.exports = (async () => {
     yarp.Vehicle = require('./object/Vehicle');
     yarp.Weapon = require('./object/Weapon');
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"ClassError: "+err.message+"\n"+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'ClassError: '+err.message+'\n'+err.stack);
   }
 
   //Loading Pools
   try {
-    console.log(chalk.yellowBright("[YARP] ")+"Loading Pools");
+    console.log(chalk.yellowBright('[YARP] ')+'Loading Pools');
     yarp.blips = new yarp.Pool(yarp.Blip);
     yarp.characters = new yarp.Pool(yarp.Character);
     yarp.checkpoints = new yarp.Pool(yarp.Checkpoint);
@@ -67,11 +67,11 @@ module.exports = (async () => {
     yarp.vehicles = new yarp.Pool(yarp.Vehicle);
     yarp.weapons = new yarp.Pool(yarp.Weapon);
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"PoolError: "+err.message+"\n"+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'PoolError: '+err.message+'\n'+err.stack);
   }
 
   //Loading Data
-  console.log(chalk.yellowBright("[YARP] ")+"Loading Data");
+  console.log(chalk.yellowBright('[YARP] ')+'Loading Data');
   try {
     await yarp.blips.load();
     await yarp.characters.load();
@@ -94,12 +94,12 @@ module.exports = (async () => {
     await yarp.vehicles.load();
     await yarp.weapons.load();
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"DataError: "+err.message+"\n"+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'DataError: '+err.message+'\n'+err.stack);
   }
 
   //Loading Config
   try {
-    console.log(chalk.yellowBright("[YARP] ")+"Loading Configs");
+    console.log(chalk.yellowBright('[YARP] ')+'Loading Configs');
     yarp.blips.config('../config/blips');
     yarp.characters.config('../config/characters');
     yarp.checkpoints.config('../config/checkpoints');
@@ -121,12 +121,12 @@ module.exports = (async () => {
     yarp.vehicles.config('../config/vehicles');
     yarp.weapons.config('../config/weapons');
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"ConfigError: "+err.message+"\n"+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'ConfigError: '+err.message+'\n'+err.stack);
   }
 
   try {
     //Load RAGE.MP Events
-    console.log(chalk.yellowBright("[YARP] ")+"Loading Events");
+    console.log(chalk.yellowBright('[YARP] ')+'Loading Events');
     require('../events/ragemp/checkpoint.js');
     require('../events/ragemp/colshape.js');
     require('../events/ragemp/entity.js');
@@ -142,11 +142,11 @@ module.exports = (async () => {
     require('../events/yarp/item.js');
     require('../events/yarp/menu.js');
   } catch(err) {
-    console.log(chalk.redBright("[YARP] ")+"EventError: "+err.message+"\n"+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'EventError: '+err.message+'\n'+err.stack);
   }
 
   //Loading Complete
-  console.log(chalk.greenBright("[YARP] ")+"Loading Complete");
+  console.log(chalk.greenBright('[YARP] ')+'Loading Complete');
 
   //Rejoin Players
   mp.players.forEach((player, i) => {

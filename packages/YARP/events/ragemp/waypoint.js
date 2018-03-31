@@ -3,8 +3,8 @@
 * @file Waypoint events
 */
 
-mp.events.add("playerCreateWaypoint", (player, position) => {
+mp.events.add('playerCreateWaypoint', (player, position) => {
 });
 
-mp.events.add("playerReachWaypoint", (player) => {
+mp.events.add('playerReachWaypoint', (player) => {
 });

@@ -32,7 +32,7 @@ mp.events.add('loadCharacter', (player,id) => {
   }
   character.updateLastLogin(player.ip);
   character.save();
-  player.outputChatBox("!{green}Welcome to Sighmir's YARP Server.");
+  player.outputChatBox('!{green}Welcome to Sighmir\'s YARP Server.');
   player.model = character.model;
   player.name = character._id;
   player.position = character.position;

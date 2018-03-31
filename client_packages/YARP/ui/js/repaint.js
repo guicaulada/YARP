@@ -1,5 +1,5 @@
 ﻿let predefinedColors = [
-	{'id': 0, 'type': 0, 'desc': 'Negro'}, {'id': 1, 'type': 0, 'desc': 'Negro grafito'}, {'id': 2, 'type': 0, 'desc': 'Negro metalizado'}, {'id': 3, 'type': 0, 'desc': 'Plateado oscuro'}, 
+	{'id': 0, 'type': 0, 'desc': 'Negro'}, {'id': 1, 'type': 0, 'desc': 'Negro grafito'}, {'id': 2, 'type': 0, 'desc': 'Negro metalizado'}, {'id': 3, 'type': 0, 'desc': 'Plateado oscuro'},
 	{'id': 4, 'type': 0, 'desc': 'Plateado'}, {'id': 5, 'type': 0, 'desc': 'Azul plateado'}, {'id': 6, 'type': 0, 'desc': 'Gris acero'}, {'id': 7, 'type': 0, 'desc': 'Plateado oscurecido'},
     {'id': 8, 'type': 0, 'desc': 'Plateado piedra'}, {'id': 9, 'type': 0, 'desc': 'Plateado medianoche'}, {'id': 10, 'type': 0, 'desc': 'Metalizado arma'}, {'id': 11, 'type': 0, 'desc': 'Gris antracita'},
     {'id': 12, 'type': 1, 'desc': 'Negro'}, {'id': 13, 'type': 1, 'desc': 'Gris'}, {'id': 14, 'type': 1, 'desc': 'Gris claro'}, {'id': 15, 'type': 2, 'desc': 'Negro'},
@@ -56,13 +56,13 @@ $(document).ready(function () {
     $('#first-custom-color').farbtastic(function(color) {
 		// Cambiamos el color primario del vehículo
 		selectedFirstCustomColor = hexToRgb(color).r + ',' + hexToRgb(color).g + ',' + hexToRgb(color).b;
-		resourceCall("repaintVehicle", selectedColorType, selectedFirstCustomColor, selectedSecondCustomColor, -1, 0);
+		resourceCall('repaintVehicle', selectedColorType, selectedFirstCustomColor, selectedSecondCustomColor, -1, 0);
     });
 
     $('#second-custom-color').farbtastic(function(color) {
 		// Cambiamos el color secundario del vehículo
 		selectedSecondCustomColor = hexToRgb(color).r + ',' + hexToRgb(color).g + ',' + hexToRgb(color).b;
-		resourceCall("repaintVehicle", selectedColorType, selectedFirstCustomColor, selectedSecondCustomColor, -1, 0);
+		resourceCall('repaintVehicle', selectedColorType, selectedFirstCustomColor, selectedSecondCustomColor, -1, 0);
     });
 });
 
@@ -86,7 +86,7 @@ $('.tabs-menu').on('click', 'div', function() {
 				$('#predefined').removeClass('no-display');
 
 				// Repintamos el vehículo
-				resourceCall("repaintVehicle", index, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
+				resourceCall('repaintVehicle', index, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
 				break;
 			case 1:
 				// Cargamos la pestaña de colores personalizados
@@ -97,7 +97,7 @@ $('.tabs-menu').on('click', 'div', function() {
 				$('#custom').removeClass('no-display');
 
 				// Repintamos el vehículo
-				resourceCall("repaintVehicle", index, selectedFirstCustomColor, selectedSecondCustomColor, -1, 0);
+				resourceCall('repaintVehicle', index, selectedFirstCustomColor, selectedSecondCustomColor, -1, 0);
 				break;
 		}
 
@@ -180,7 +180,7 @@ function showPrevColorType(colorOrder) {
 			}
 
 			// Cambiamos el color del vehículo
-			resourceCall("repaintVehicle", selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
+			resourceCall('repaintVehicle', selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
 
 			break;
 		}
@@ -215,7 +215,7 @@ function showNextColorType(colorOrder) {
 			}
 
 			// Cambiamos el color del vehículo
-			resourceCall("repaintVehicle", selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
+			resourceCall('repaintVehicle', selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
 
 			break;
 		}
@@ -251,7 +251,7 @@ function showPrevColorDesc(colorOrder) {
 			}
 
 			// Cambiamos el color del vehículo
-			resourceCall("repaintVehicle", selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
+			resourceCall('repaintVehicle', selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
 
 			break;
 		}
@@ -264,7 +264,7 @@ function showNextColorDesc(colorOrder) {
 
 	// Obtenemos el identificador del tipo
 	let colorTypeId = getColorTypeIdentifier(colorType);
-	
+
 	// Obtenemos la sublista de colores
 	let colorSublist = getColorSublist(colorTypeId);
 
@@ -287,7 +287,7 @@ function showNextColorDesc(colorOrder) {
 			}
 
 			// Cambiamos el color del vehículo
-			resourceCall("repaintVehicle", selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
+			resourceCall('repaintVehicle', selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
 
 			break;
 		}
@@ -297,9 +297,9 @@ function showNextColorDesc(colorOrder) {
 function selectPearlescentColor() {
 	// Obtenemos el color
 	selectedPearlescentColor = $('#pearlescent-color').val();
-	
+
 	// Cambiamos el color del vehículo
-	resourceCall("repaintVehicle", selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
+	resourceCall('repaintVehicle', selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, 0);
 }
 
 function acceptRepaint() {
@@ -308,12 +308,12 @@ function acceptRepaint() {
 
 	if(price > 0) {
 		// Cambiamos el color del vehículo y cobramos
-		resourceCall("repaintVehicle", selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, price);
+		resourceCall('repaintVehicle', selectedColorType, selectedFirstColor, selectedSecondColor, selectedPearlescentColor, price);
 	}
 }
 
 function cancelRepaint() {
-	resourceCall("cancelVehicleRepaint");
+	resourceCall('cancelVehicleRepaint');
 }
 
 function hexToRgb(hex) {

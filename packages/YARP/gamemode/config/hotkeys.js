@@ -4,18 +4,18 @@
  */
 
 module.exports = {
-   "utility": {
-      "Event": {
-         key: "KEY_E",
+   'utility': {
+      'Event': {
+         key: 'KEY_E',
          call: (player,args) => {player.call(args[0], args[1]);}
       },
-      "Teleport": {
-         key: "KEY_E",
+      'Teleport': {
+         key: 'KEY_E',
          call: (player,args) => {player.position = args[0];}
       },
-      "ToggleChat": {
+      'ToggleChat': {
          key: 0x12,
-         call: (player,args) => {player.call("toggleChat");}
+         call: (player,args) => {player.call('toggleChat');}
       },
    },
 }

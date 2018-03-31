@@ -12,8 +12,8 @@ module.exports = class Group extends yarp.gmo{
         yarp.groups[id].permissions.concat(permissions.filter(function (permission) {
           return yarp.groups[id].permissions.indexOf(permission) < 0;
         })) : (permissions || []));
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
@@ -57,7 +57,7 @@ module.exports = class Group extends yarp.gmo{
     let result = false;
     let removed = false;
     let readd = false;
-    if (this.permissions.indexOf("*") > -1){
+    if (this.permissions.indexOf('*') > -1){
       result = true;
     }
     if (this.permissions.indexOf(permission) > -1){

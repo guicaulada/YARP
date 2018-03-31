@@ -27,15 +27,15 @@ mp.events.add('playerCommand', (player, command) => {
           command.call(player,args);
         }
       } else {
-        player.outputChatBox("!{yellow}HINT!{white}: You don't have the required items.");
+        player.outputChatBox('!{yellow}HINT!{white}: You don\'t have the required items.');
       }
 	  } else {
-      player.outputChatBox("!{yellow}HINT!{white}: You don't have permission.");
+      player.outputChatBox('!{yellow}HINT!{white}: You don\'t have permission.');
     }
   }
 });
 
-mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
+mp.events.add('playerDamage', (player, healthLoss, armorLoss) => {
 });
 
 mp.events.add('playerDeath', (player) => {
@@ -46,7 +46,7 @@ mp.events.add('playerDeath', (player) => {
     character.save();
     player.call('unequipAllWeapons');
     player.removeAllWeapons();
-    player.spawn(yarp.variables["Spawns"].value[Math.floor(Math.random() * yarp.variables["Spawns"].value.length)]);
+    player.spawn(yarp.variables['Spawns'].value[Math.floor(Math.random() * yarp.variables['Spawns'].value.length)]);
     player.health = 100;
 });
 
@@ -57,23 +57,23 @@ mp.events.add('playerJoin', (player) => {
   let user = yarp.users[player.socialClub]
   if(user != null){
     if (user.banned) {
-      player.outputChatBox("!{red}You have been banned.");
+      player.outputChatBox('!{red}You have been banned.');
       console.log(`${player.socialClub} is banned.`);
       setTimeout(function(){
-        player.kick("You have been banned.");
+        player.kick('You have been banned.');
       },1000);
-    } else if (yarp.variables["Whitelisted"].value && !user.whitelisted) {
-      player.outputChatBox("!{yellow}You are not whitelisted.");
+    } else if (yarp.variables['Whitelisted'].value && !user.whitelisted) {
+      player.outputChatBox('!{yellow}You are not whitelisted.');
       console.log(`${player.socialClub} is not whitelisted.`);
       setTimeout(function(){
-        player.kick("You are not whitelisted.");
+        player.kick('You are not whitelisted.');
       },1000);
     }
     else {
-      player.call('createBrowser', ["menu", ['package://YARP/ui/html/accountLogin.html']]);
+      player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountLogin.html']]);
     }
   } else {
-    player.call('createBrowser', ["menu", ['package://YARP/ui/html/accountRegister.html','setAccountName', player.socialClub]]);
+    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountRegister.html','setAccountName', player.socialClub]]);
   }
 });
 
@@ -81,20 +81,20 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
   if (yarp.users[player.socialClub]) yarp.users[player.socialClub].leave();
   if (yarp.characters[player.name]) yarp.characters[player.name].leave();
   let msg = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
-  if (exitType == "kicked") {
+  if (exitType == 'kicked') {
     msg = `${player.name}(${player.socialClub}/${player.ip}) kicked. Reason: ${reason} (${exitType})`;
   }
   console.log(msg);
 });
 
-mp.events.add("playerReady", player => {
+mp.events.add('playerReady', player => {
 });
 
-mp.events.add("playerSpawn", player => {
+mp.events.add('playerSpawn', player => {
 });
 
 let currentWeapons = {};
-mp.events.add("playerWeaponChange", (player, oldWeapon, newWeapon) => {
+mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
   let character = yarp.characters[player.name];
   if (character) {
     for (let id in character.weapons){

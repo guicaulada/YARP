@@ -22,8 +22,8 @@ module.exports = class Checkpoint extends yarp.gmo{
       this._direction = id._direction || direction || new mp.Vector3(0,0,0);
       this._dimension = id._dimension || dimension || 0;
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       this.players = [];
       this.mp = mp.checkpoints.new(this._type, this._position, this._radius,
       {
@@ -42,7 +42,7 @@ module.exports = class Checkpoint extends yarp.gmo{
     for (let id in checkpoints){
       let checkpoint = checkpoints[id];
       for (let i=0; i < checkpoint.positions.length; i++){
-        new yarp.Checkpoint(id+" "+(i+1),checkpoint.positions[i],checkpoint.type,checkpoint.radius,checkpoint.color,checkpoint.direction,checkpoint.dimension,checkpoint.visible,checkpoint.range,checkpoint.enter,checkpoint.leave,checkpoint.permissions,checkpoint.items)
+        new yarp.Checkpoint(id+' '+(i+1),checkpoint.positions[i],checkpoint.type,checkpoint.radius,checkpoint.color,checkpoint.direction,checkpoint.dimension,checkpoint.visible,checkpoint.range,checkpoint.enter,checkpoint.leave,checkpoint.permissions,checkpoint.items)
       }
     }
   }

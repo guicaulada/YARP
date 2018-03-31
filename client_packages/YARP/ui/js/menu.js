@@ -1,7 +1,8 @@
 ﻿let tunningComponents = [];
 let tattooZones = [];
 let selectedOptions = [];
-let categorioes = [];
+let categories = [];
+let store = {};
 let purchasedAmount = 1;
 let multiplier = 0.0;
 let selected = null;
@@ -97,7 +98,7 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -116,12 +117,23 @@ function populateStoreItems(category, itemsJson) {
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 	let list = [];
-	for (key in items){
-		list.push(items[key]);
+
+	// Limpiamos el contenido
+	while(content.firstChild) {
+		content.removeChild(content.firstChild);
 	}
+
+	// Limpiamos las opciones
+	while(options.firstChild) {
+		options.removeChild(options.firstChild);
+	}
+
 	// Añadimos la cabecera del menú
 	header.textContent = category;
 
+	for (key in items){
+		list.push(items[key]);
+	}
 	for(let i = 0; i < list.length; i++) {
 		// Obtenemos el objeto en curso
 		let item = list[i];
@@ -162,7 +174,7 @@ function populateStoreItems(category, itemsJson) {
 		// Añadimos el contenido de cada elemento
 		itemImage.src = '../img/inventory/' + item._model + '.png';
 		itemDescription.textContent = item._name;
-		itemPrice.innerHTML = '<b>Price: </b>$' + item._price;
+		itemPrice.innerHTML = '<b>Price: </b>$' +item.price;
 		itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
 		itemAdd.textContent = '+';
 		itemSubstract.textContent = '-';
@@ -204,199 +216,7 @@ function populateStoreItems(category, itemsJson) {
 			let adderButton = document.getElementsByClassName('item-adder')[selected];
 			let substractButton = document.getElementsByClassName('item-substract')[selected];
 
-			if(purchasedAmount == 10) {
-				// Ha llegado al máximo
-				adderButton.classList.add('hidden');
-			} else if(substractButton.classList.contains('hidden') === true) {
-				// Volvemos el elemento visible
-				substractButton.classList.remove('hidden');
-			}
-
-			// Actualizamos la cantidad
-			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
-			amountSpan.innerHTML = '<b>Amount: </b>' + purchasedAmount;
-		});
-
-		itemSubstract.onclick = (function() {
-			// Restamos una unidad
-			purchasedAmount--;
-
-			// Obtenemos ambos botones
-			let adderButton = document.getElementsByClassName('item-adder')[selected];
-			let substractButton = document.getElementsByClassName('item-substract')[selected];
-
-			if(purchasedAmount == 1) {
-				// Ha llegado al mínimo
-				substractButton.classList.add('hidden');
-			} else if(adderButton.classList.contains('hidden') === true) {
-				// Volvemos el elemento visible
-				adderButton.classList.remove('hidden');
-			}
-
-			// Actualizamos la cantidad
-			let amountSpan = document.getElementsByClassName('item-amount-description')[selected];
-			amountSpan.innerHTML = '<b>Amount: </b>' + purchasedAmount;
-		});
-
-		// Ordenamos la jerarquía de elementos
-		content.appendChild(itemContainer);
-		itemContainer.appendChild(imageContainer);
-		itemContainer.appendChild(infoContainer);
-		imageContainer.appendChild(itemImage);
-		infoContainer.appendChild(descContainer);
-		descContainer.appendChild(itemDescription);
-		infoContainer.appendChild(purchaseContainer);
-		purchaseContainer.appendChild(priceContainer);
-		priceContainer.appendChild(itemPrice);
-		purchaseContainer.appendChild(itemAmountContainer);
-		itemAmountContainer.appendChild(amountTextContainer);
-		amountTextContainer.appendChild(itemAmount);
-		itemAmountContainer.appendChild(addSubstractContainer);
-		addSubstractContainer.appendChild(itemSubstract);
-		addSubstractContainer.appendChild(itemAdd);
-	}
-
-	// Añadimos los botones
-	let purchaseButton = document.createElement('div');
-	let cancelButton = document.createElement('div');
-
-	// Añadimos las clases a cada botón
-	purchaseButton.classList.add('double-button', 'accept-button');
-	cancelButton.classList.add('double-button', 'cancel-button');
-
-	// Añadimos el texto de los botones
-	purchaseButton.textContent = 'Buy';
-	cancelButton.textContent = 'Exit';
-
-	// Ponemos la función para cada elemento
-	purchaseButton.onclick = (function() {
-		// Mandamos la acción de compra si ha seleccionado algo
-		if(selected != null) {
-			mp.trigger('purchaseStoreItem', list[selected]._id, purchasedAmount);
-		}
-	});
-
-	cancelButton.onclick = (function() {
-		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', "menu");
-	});
-
-	// Ordenamos la jerarquía de elementos
-	options.appendChild(purchaseButton);
-	options.appendChild(cancelButton);
-}
-
-function populateAmmuWeapons(category, weaponJson) {
-	// Inicializamos los valores
-	purchasedAmount = 1;
-	selected = null;
-
-	// Obtenemos la lista de objetos a mostrar
-	let weapons = JSON.parse(weaponJson);
-	let header = document.getElementById('header');
-	let content = document.getElementById('content');
-	let options = document.getElementById('options');
-	let list = [];
-
-	// Limpiamos el contenido
-	while(content.firstChild) {
-		content.removeChild(content.firstChild);
-	}
-
-	// Limpiamos las opciones
-	while(options.firstChild) {
-		options.removeChild(options.firstChild);
-	}
-
-	// Añadimos la cabecera del menú
-	header.textContent = category;
-
-	for (key in weapons){
-		list.push(weapons[key]);
-	}
-	for(let i = 0; i < list.length; i++) {
-		// Obtenemos el objeto en curso
-		let weapon = list[i];
-
-		// Creamos los elementos para mostrar cada objeto
-		let itemContainer = document.createElement('div');
-		let imageContainer = document.createElement('div');
-		let infoContainer = document.createElement('div');
-		let descContainer = document.createElement('div');
-		let purchaseContainer = document.createElement('div');
-		let priceContainer = document.createElement('div');
-		let itemAmountContainer = document.createElement('div');
-		let amountTextContainer = document.createElement('div');
-		let addSubstractContainer = document.createElement('div');
-		let itemImage = document.createElement('img');
-		let itemDescription = document.createElement('span');
-		let itemPrice = document.createElement('span');
-		let itemAmount = document.createElement('span');
-		let itemAdd = document.createElement('span');
-		let itemSubstract = document.createElement('span');
-
-		// Añadimos las clases a cada elemento
-		itemContainer.classList.add('item-row');
-		imageContainer.classList.add('item-image');
-		infoContainer.classList.add('item-content');
-		descContainer.classList.add('item-header');
-		purchaseContainer.classList.add('item-purchase');
-		priceContainer.classList.add('item-price-container');
-		itemAmountContainer.classList.add('item-amount-container', 'hidden');
-		amountTextContainer.classList.add('item-amount-desc-container');
-		addSubstractContainer.classList.add('item-add-substract-container');
-		itemDescription.classList.add('item-description');
-		itemPrice.classList.add('item-price');
-		itemAmount.classList.add('item-amount-description');
-		itemAdd.classList.add('item-adder');
-		itemSubstract.classList.add('item-substract', 'hidden');
-
-		// Añadimos el contenido de cada elemento
-		itemImage.src = '../img/inventory/' + weapon._model + '.png';
-		itemDescription.textContent = weapon._name  + '($'+weapon._price+')';
-		itemPrice.innerHTML = '<b>Ammo: </b>$' +weapon._ammo+ '';
-		itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
-		itemAdd.textContent = '+';
-		itemSubstract.textContent = '-';
-
-		// Ponemos la función para cada elemento
-		itemContainer.onclick = (function() {
-			// Comprobamos que se ha pulsado en un elemento no seleccionado
-			if(selected !== i) {
-				// Miramos si había algún elemento seleccionado
-				if(selected != null) {
-					let previousSelected = document.getElementsByClassName('item-row')[selected];
-					let previousAmountNode = findFirstChildByClass(previousSelected, 'item-amount-container');
-					previousSelected.classList.remove('active-item');
-					previousAmountNode.classList.add('hidden');
-				}
-
-				// Seleccionamos el elemento pulsado
-				let currentSelected = document.getElementsByClassName('item-row')[i];
-				let currentAmountNode = findFirstChildByClass(currentSelected, 'item-amount-container');
-				currentSelected.classList.add('active-item');
-				currentAmountNode.classList.remove('hidden');
-
-				// Guardamos el nuevo índice seleccionado
-				purchasedAmount = 1;
-				selected = i;
-
-				// Actualizamos el texto del elemento
-				itemAmount.innerHTML = '<b>Amount: </b>' + purchasedAmount;
-				document.getElementsByClassName('item-adder')[selected].classList.remove('hidden');
-				document.getElementsByClassName('item-substract')[selected].classList.add('hidden');
-			}
-		});
-
-		itemAdd.onclick = (function() {
-			// Sumamos una unidad
-			purchasedAmount++;
-
-			// Obtenemos ambos botones
-			let adderButton = document.getElementsByClassName('item-adder')[selected];
-			let substractButton = document.getElementsByClassName('item-substract')[selected];
-
-			if(purchasedAmount == 10) {
+			if(purchasedAmount == item.amount) {
 				// Ha llegado al máximo
 				adderButton.classList.add('hidden');
 			} else if(substractButton.classList.contains('hidden') === true) {
@@ -464,13 +284,13 @@ function populateAmmuWeapons(category, weaponJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseAmmuWeapon', list[selected]._id, purchasedAmount);
+			mp.trigger('purchaseStoreItem', store.id, list[selected]._id, purchasedAmount);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		populateAmmuCategories();
+		populateStoreCategories();
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -478,25 +298,22 @@ function populateAmmuWeapons(category, weaponJson) {
 	options.appendChild(cancelButton);
 }
 
-function populateAmmuCategories(categoriesJson) {
-
+function populateStoreCategories(storeJson) {
 	// Inicializamos las opciones
 	selected = null;
 
 	// Añadimos el título al menú
 	let header = document.getElementById('header');
-	header.textContent = 'Categories';
-
-	// Obtenemos la lista de componentes
-	if (categoriesJson) {
-		categories = JSON.parse(categoriesJson);
+	if (storeJson) {
+		store = JSON.parse(storeJson);
 	}
+	header.textContent = store.name;
 
 	// Obtenemos el nodo contenedor
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 	let list = [];
-	for (key in categories){
+	for (key in store.categories){
 		list.push(key);
 	}
 
@@ -532,7 +349,7 @@ function populateAmmuCategories(categoriesJson) {
 			selected = i;
 
 			// Mostramos la página de componentes
-			populateAmmuWeapons(list[selected], JSON.stringify(categories[list[selected]]));
+			populateStoreItems(list[selected], JSON.stringify(store.categories[list[selected]]));
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -553,7 +370,7 @@ function populateAmmuCategories(categoriesJson) {
 
 	exitButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -637,7 +454,7 @@ function populateTunningHome() {
 
 	exitButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -848,7 +665,7 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -975,7 +792,7 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1011,7 +828,7 @@ function populateCharacterList(charactersJson) {
 		itemDescription.classList.add('item-description');
 		itemDescription.setAttribute('style', 'white-space: pre;');
 		if (character.job == null) {
-			character.job = "Citizen";
+			character.job = 'Citizen';
 		}
 		// Añadimos el contenido de cada elemento
 		itemDescription.textContent = `${character._id}, ${character._age}\r\n${character.job}`;
@@ -1381,7 +1198,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 	cancelButton.onclick = (function() {
 		// Cancelamos el peinado y cerramos la ventana de pedidos
 		mp.trigger('cancelHairdresserChanges');
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1495,7 +1312,7 @@ function populateTownHallMenu(townHallOptionsJson) {
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana del ayuntamiento
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1687,12 +1504,12 @@ function populatePoliceControlsMenu(policeControlJson) {
 	acceptButton.onclick = (function() {
 		// Procesamos la opción y borramos el navegador
 		mp.trigger('proccessPoliceControlAction');
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de controles
-		mp.trigger('destroyBrowser', "menu");
+		mp.trigger('destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1705,7 +1522,7 @@ function findFirstChildByClass(element, className) {
 	function recurse(element, className, found) {
 		for (let i = 0; i < element.childNodes.length && !found; i++) {
 			let el = element.childNodes[i];
-			let classes = el.className != undefined? el.className.split(" ") : [];
+			let classes = el.className != undefined? el.className.split(' ') : [];
 			for (let j = 0, jl = classes.length; j < jl; j++) {
 				if (classes[j] == className) {
 					found = true;

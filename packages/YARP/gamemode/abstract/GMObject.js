@@ -5,7 +5,7 @@
 module.exports = class GMObject{
   constructor() {
     if (this.constructor === GMObject) {
-      throw new TypeError('Abstract class "GMObject" cannot be instantiated directly.');
+      throw new TypeError('Abstract class GMObject cannot be instantiated directly.');
     }
   }
 
@@ -20,7 +20,7 @@ module.exports = class GMObject{
 
   get data() {
     let data = {};
-    for (let key in Object.keys(this)) {
+    for (let key of Object.keys(this)) {
       if (key[0] == '_') {
         data[key] = this[key];
       }
@@ -54,7 +54,7 @@ module.exports = class GMObject{
 
   makeGetterSetter(){
     for (let key in this){
-      if (key[0] == "_"){
+      if (key[0] == '_'){
         let gsp = key.slice(1, key.length)
         if (!(gsp in this)){
           Object.defineProperty(this, gsp, {

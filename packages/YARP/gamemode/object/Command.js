@@ -7,9 +7,9 @@ module.exports = class Command extends yarp.gmo{
     super();
     if ((typeof id) === 'object' || (id && call) != null){
       this._id = id._id || id;
-      this._category = id._category || category || "None";
-      this._hint = id._hint || hint || "There's no hint.";
-      this._call = id._call || ((call) ? call.toString() : "() => {}");
+      this._category = id._category || category || 'None';
+      this._hint = id._hint || hint || 'There\'s no hint.';
+      this._call = id._call || ((call) ? call.toString() : '() => {}');
       this._position = id._position || position || null;
       this._range = id._range || range || null;
       this._permissions = id._permissions || (((yarp.commands && yarp.commands[id]) != null) ?

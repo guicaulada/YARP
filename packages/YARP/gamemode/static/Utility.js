@@ -47,7 +47,7 @@ module.exports = class Utility {
   }
 
   static randomString(digits,possible){
-    var text = "";
+    var text = '';
 
     for (var i = 0; i < digits; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -57,11 +57,11 @@ module.exports = class Utility {
 
   static getSubstrings(string){
     var current;
-    var pattern = /".*?"/g;
+    var pattern = /'.*?'/g;
     var result = [];
     while(current = pattern.exec(string)) {
       if (current) {
-        result.push(current[0].replace(new RegExp("\"", 'g'), ""));
+        result.push(current[0].replace(new RegExp('\'', 'g'), ''));
       }
     }
     return result;
@@ -78,32 +78,32 @@ module.exports = class Utility {
   }
 
   static parseParams(obj){
-    let obj_p = "";
-    if (typeof obj === "string") {
-      return "\""+obj+"\"";
+    let obj_p = '';
+    if (typeof obj === 'string') {
+      return '\''+obj+'\'';
     }
-    else if (typeof obj === "boolean" || typeof obj === "number") {
+    else if (typeof obj === 'boolean' || typeof obj === 'number') {
       return obj.toString();
     }
     else if (obj instanceof Array) {
-      obj_p = "["
+      obj_p = '['
       for (let o of obj){
-        obj_p = obj_p+" "+this.parseParams(o)+","
+        obj_p = obj_p+' '+this.parseParams(o)+','
       }
       if (obj.length > 0){
         obj_p = obj_p.slice(0, -1);
       }
-      return obj_p+" ]";
+      return obj_p+' ]';
     }
     else if (obj instanceof Object) {
-      obj_p = "{"
+      obj_p = '{'
       for (let k in obj) {
-        obj_p = obj_p+" \""+k+"\": "+this.parseParams(obj[k])+",";
+        obj_p = obj_p+' \''+k+'\': '+this.parseParams(obj[k])+',';
       }
       if (Object.keys(obj).length > 0){
         obj_p = obj_p.slice(0, -1);
       }
-      return obj_p+" }";
+      return obj_p+' }';
     }
     else if (obj instanceof Function) {
       return obj.toString();

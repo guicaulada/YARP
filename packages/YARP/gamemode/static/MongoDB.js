@@ -14,9 +14,9 @@ module.exports = class MongoDB {
         resolve(db);
       } else {
         MongoClient.connect(URL, function (err, client) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           db = client.db('yarp');
-          console.log(chalk.yellowBright("[YARP] ")+"Connected to "+URL);
+          console.log(chalk.yellowBright('[YARP] ')+'Connected to '+URL);
           resolve(db);
         });
       }
@@ -27,7 +27,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).insert(docs, options, function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -38,7 +38,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).remove(selector, options, function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -49,7 +49,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).save(doc, options, function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -60,7 +60,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).save(selector, doc, options, function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -71,7 +71,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).destinct(key,query,option, function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -82,7 +82,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).count(query,option, function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -93,7 +93,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).find(query,options).toArray(function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -104,7 +104,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).indexes(function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -115,7 +115,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).aggregate(query,options,function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -126,7 +126,7 @@ module.exports = class MongoDB {
     return new Promise((resolve, reject) =>{
       this.connect().then((db) => {
         db.collection(collection).stats(function(err, res) {
-          if (err) console.log(chalk.redBright("[YARP] ")+err);
+          if (err) console.log(chalk.redBright('[YARP] ')+err);
           resolve(res);
         });
       });
@@ -135,7 +135,7 @@ module.exports = class MongoDB {
 }
 
 process.on('SIGHUP', function() {
-  console.log(chalk.redBright("[YARP] ")+"Closing Connection. Bye-bye.");
+  console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');
   yarp.db.close();
   process.exit();
 });

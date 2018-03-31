@@ -23,7 +23,7 @@ let currentBlushModel = -1;
 let currentBlushColor = 0;
 let currentLipstickModel = -1;
 let currentLipstickColor = 0;
-let currentModel = "mp_m_freemode_01";
+let currentModel = 'mp_m_freemode_01';
 
 function hideError() {
 	$('#error').addClass('no-display');
@@ -34,39 +34,39 @@ function toggleMenu() {
 }
 
 function toggleCharacterInfo() {
-	if($("#character-customize").is(":hidden") == false) {
-		$("#character-customize").fadeOut('slow');
+	if($('#character-customize').is(':hidden') == false) {
+		$('#character-customize').fadeOut('slow');
 	}
 	$('#basic-info').slideToggle('slow');
 }
 
 function toggleCharacterCustomize() {
-	if($("#basic-info").is(":hidden") == false) {
-		$("#basic-info").fadeOut('slow');
+	if($('#basic-info').is(':hidden') == false) {
+		$('#basic-info').fadeOut('slow');
 	}
 	$('#character-customize').slideToggle('slow');
 }
 
-$("div#sex").on("click", "img", function() {
-	if($(this).hasClass("enabled") == false) {
-		currentModel = "mp_m_freemode_01";
-		if($("#sex-male").hasClass("enabled") == true) {
-			$("#sex-male").attr("src", "../img/character/male-disabled.png");
-			$("#sex-female").attr("src", "../img/character/female-enabled.png");
-			$("#sex-male").removeClass("enabled");
-			$("#sex-female").addClass("enabled");
-			currentModel = "mp_f_freemode_01";
+$('div#sex').on('click', 'img', function() {
+	if($(this).hasClass('enabled') == false) {
+		currentModel = 'mp_m_freemode_01';
+		if($('#sex-male').hasClass('enabled') == true) {
+			$('#sex-male').attr('src', '../img/character/male-disabled.png');
+			$('#sex-female').attr('src', '../img/character/female-enabled.png');
+			$('#sex-male').removeClass('enabled');
+			$('#sex-female').addClass('enabled');
+			currentModel = 'mp_f_freemode_01';
 		} else {
-			$("#sex-male").attr("src", "../img/character/male-enabled.png");
-			$("#sex-female").attr("src", "../img/character/female-disabled.png");
-			$("#sex-female").removeClass("enabled");
-			$("#sex-male").addClass("enabled");
+			$('#sex-male').attr('src', '../img/character/male-enabled.png');
+			$('#sex-female').attr('src', '../img/character/female-disabled.png');
+			$('#sex-female').removeClass('enabled');
+			$('#sex-male').addClass('enabled');
 		}
 		mp.trigger('updatePlayerSex', currentModel);
 	}
 });
 
-$("nav#slider ul").on("click", "li", function() {
+$('nav#slider ul').on('click', 'li', function() {
 	// Miramos qué indice tiene la opción pulsada
 	let position = $(this).index();
 	let text = $(this).text();
@@ -75,12 +75,12 @@ $("nav#slider ul").on("click", "li", function() {
 	$('#slider').slideToggle('fast');
 
 	// Miramos qué opción se ha pulsado
-	$.each($("#option-panels > div"), function(index, value) {
+	$.each($('#option-panels > div'), function(index, value) {
 		if(index == position) {
-			$(this).removeClass("no-display");
-			$("#current-option").text(text);
+			$(this).removeClass('no-display');
+			$('#current-option').text(text);
 		} else {
-			$(this).addClass("no-display");
+			$(this).addClass('no-display');
 		}
 	});
 });
@@ -96,7 +96,7 @@ function createCharacter() {
 		let characterAge = $('#age').val();
 		let characterName = $('#character-name').val()[0].toUpperCase() + $('#character-name').val().substr(1);
 		let characterSurname = $('#character-surname').val()[0].toUpperCase() + $('#character-surname').val().substr(1);
-		mp.trigger('acceptCharacterCreation', characterName.trim() + " " + characterSurname.trim(), characterAge, currentModel);
+		mp.trigger('acceptCharacterCreation', characterName.trim() + ' ' + characterSurname.trim(), characterAge, currentModel);
 	}
 }
 
@@ -106,7 +106,7 @@ function cancelCreation() {
 }
 
 function showPlayerDuplicatedWarn() {
-	$('#error-message').html("There already is a character with this name");
+	$('#error-message').html('There already is a character with this name');
 	$('#error').removeClass('no-display');
 }
 
@@ -126,7 +126,7 @@ function showPrevFatherFace() {
 	} else {
 		currentFatherFace--;
 	}
-	$("#face-father-shape").text("Type " + (currentFatherFace + 1));
+	$('#face-father-shape').text('Type ' + (currentFatherFace + 1));
 	mp.trigger('updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
 }
 
@@ -136,7 +136,7 @@ function showNextFatherFace() {
 	} else {
 		currentFatherFace++;
 	}
-	$("#face-father-shape").text("Type " + (currentFatherFace + 1));
+	$('#face-father-shape').text('Type ' + (currentFatherFace + 1));
 	mp.trigger('updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
 }
 
@@ -146,7 +146,7 @@ function showPrevMotherFace() {
 	} else {
 		currentMotherFace--;
 	}
-	$("#face-mother-shape").text("Type " + (currentMotherFace - 1));
+	$('#face-mother-shape').text('Type ' + (currentMotherFace - 1));
 	mp.trigger('updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
 }
 
@@ -156,7 +156,7 @@ function showNextMotherFace() {
 	} else {
 		currentMotherFace++;
 	}
-	$("#face-mother-shape").text("Type " + (currentMotherFace - 1));
+	$('#face-mother-shape').text('Type ' + (currentMotherFace - 1));
 	mp.trigger('updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
 }
 
@@ -166,7 +166,7 @@ function showPrevFatherSkin() {
 	} else {
 		currentFatherSkin--;
 	}
-	$("#father-skin").text("Type " + (currentFatherSkin + 1));
+	$('#father-skin').text('Type ' + (currentFatherSkin + 1));
 	mp.trigger('updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
 }
 
@@ -176,7 +176,7 @@ function showNextFatherSkin() {
 	} else {
 		currentFatherSkin++;
 	}
-	$("#father-skin").text("Type " + (currentFatherSkin + 1));
+	$('#father-skin').text('Type ' + (currentFatherSkin + 1));
 	mp.trigger('updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
 }
 
@@ -186,7 +186,7 @@ function showPrevMotherSkin() {
 	} else {
 		currentMotherSkin--;
 	}
-	$("#mother-skin").text("Type " + (currentMotherSkin + 1));
+	$('#mother-skin').text('Type ' + (currentMotherSkin + 1));
 	mp.trigger('updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
 }
 
@@ -196,7 +196,7 @@ function showNextMotherSkin() {
 	} else {
 		currentMotherSkin++;
 	}
-	$("#mother-skin").text("Type " + (currentMotherSkin + 1));
+	$('#mother-skin').text('Type ' + (currentMotherSkin + 1));
 	mp.trigger('updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
 }
 
@@ -218,7 +218,7 @@ function showPrevHairModel() {
 	} else {
 	    currentHairModel--;
     }
-	$("#hair-model").text("Type " + (currentHairModel + 1));
+	$('#hair-model').text('Type ' + (currentHairModel + 1));
 	mp.trigger('updatePlayerCreation', 'hairModel', currentHairModel, false);
 }
 
@@ -230,7 +230,7 @@ function showNextHairModel() {
 	} else {
 		currentHairModel++;
 	}
-	$("#hair-model").text("Type " + (currentHairModel + 1));
+	$('#hair-model').text('Type ' + (currentHairModel + 1));
 
 	mp.trigger('updatePlayerCreation', 'hairModel', currentHairModel, false);
 }
@@ -241,7 +241,7 @@ function showPrevHairFirstColor() {
 	} else {
 		currentHairFirstColor--;
 	}
-	$("#hair-first-color").text("Type " + (currentHairFirstColor + 1));
+	$('#hair-first-color').text('Type ' + (currentHairFirstColor + 1));
 	mp.trigger('updatePlayerCreation', 'firstHairColor', currentHairFirstColor, false);
 }
 
@@ -251,7 +251,7 @@ function showNextHairFirstColor() {
 	} else {
 		currentHairFirstColor++;
 	}
-	$("#hair-first-color").text("Type " + (currentHairFirstColor + 1));
+	$('#hair-first-color').text('Type ' + (currentHairFirstColor + 1));
 	mp.trigger('updatePlayerCreation', 'firstHairColor', currentHairFirstColor, false);
 }
 
@@ -261,7 +261,7 @@ function showPrevHairSecondColor() {
 	} else {
 		currentHairSecondColor--;
 	}
-	$("#hair-second-color").text("Type " + (currentHairSecondColor + 1));
+	$('#hair-second-color').text('Type ' + (currentHairSecondColor + 1));
 	mp.trigger('updatePlayerCreation', 'secondHairColor', currentHairSecondColor, false);
 }
 
@@ -271,7 +271,7 @@ function showNextHairSecondColor() {
 	} else {
 		currentHairSecondColor++;
 	}
-	$("#hair-second-color").text("Type " + (currentHairSecondColor + 1));
+	$('#hair-second-color').text('Type ' + (currentHairSecondColor + 1));
 	mp.trigger('updatePlayerCreation', 'secondHairColor', currentHairSecondColor, false);
 }
 
@@ -282,9 +282,9 @@ function showPrevBeardModel() {
 		currentBeardModel--;
 	}
 	if(currentBeardModel == -1) {
-		$("#beard-model").text("No beard");
+		$('#beard-model').text('No beard');
 	} else {
-		$("#beard-model").text("Type " + (currentBeardModel + 1));
+		$('#beard-model').text('Type ' + (currentBeardModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'beardModel', currentBeardModel, false);
 }
@@ -296,9 +296,9 @@ function showNextBeardModel() {
 		currentBeardModel++;
 	}
 	if(currentBeardModel == -1) {
-		$("#beard-model").text("No beard");
+		$('#beard-model').text('No beard');
 	} else {
-		$("#beard-model").text("Type " + (currentBeardModel + 1));
+		$('#beard-model').text('Type ' + (currentBeardModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'beardModel', currentBeardModel, false);
 }
@@ -309,7 +309,7 @@ function showPrevBeardColor() {
 	} else {
 		currentBeardColor--;
 	}
-	$("#beard-color").text("Type " + (currentBeardColor + 1));
+	$('#beard-color').text('Type ' + (currentBeardColor + 1));
 	mp.trigger('updatePlayerCreation', 'beardColor', currentBeardColor, false);
 }
 
@@ -319,7 +319,7 @@ function showNextBeardColor() {
 	} else {
 		currentBeardColor++;
 	}
-	$("#beard-color").text("Type " + (currentBeardColor + 1));
+	$('#beard-color').text('Type ' + (currentBeardColor + 1));
 	mp.trigger('updatePlayerCreation', 'beardColor', currentBeardColor, false);
 }
 
@@ -330,9 +330,9 @@ function showPrevChestModel() {
 		currentChestModel--;
 	}
 	if(currentChestModel == -1) {
-		$("#chest-model").text("No hair");
+		$('#chest-model').text('No hair');
 	} else {
-		$("#chest-model").text("Type " + (currentChestModel + 1));
+		$('#chest-model').text('Type ' + (currentChestModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'chestModel', currentChestModel, false);
 }
@@ -344,9 +344,9 @@ function showNextChestModel() {
 		currentChestModel++;
 	}
 	if(currentChestModel == -1) {
-		$("#chest-model").text("No hair");
+		$('#chest-model').text('No hair');
 	} else {
-		$("#chest-model").text("Type " + (currentChestModel + 1));
+		$('#chest-model').text('Type ' + (currentChestModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'chestModel', currentChestModel, false);
 }
@@ -357,7 +357,7 @@ function showPrevChestColor() {
 	} else {
 		currentChestColor--;
 	}
-	$("#chest-color").text("Type " + (currentChestColor + 1));
+	$('#chest-color').text('Type ' + (currentChestColor + 1));
 	mp.trigger('updatePlayerCreation', 'chestColor', currentChestColor, false);
 }
 
@@ -367,7 +367,7 @@ function showNextChestColor() {
 	} else {
 		currentChestColor++;
 	}
-	$("#chest-color").text("Type " + (currentChestColor + 1));
+	$('#chest-color').text('Type ' + (currentChestColor + 1));
 	mp.trigger('updatePlayerCreation', 'chestColor', currentChestColor, false);
 }
 
@@ -378,9 +378,9 @@ function showPrevBlemishesModel() {
 		currentBlemishesModel--;
 	}
 	if(currentBlemishesModel == -1) {
-		$("#blemishes-model").text("No blemishes");
+		$('#blemishes-model').text('No blemishes');
 	} else {
-		$("#blemishes-model").text("Type " + (currentBlemishesModel + 1));
+		$('#blemishes-model').text('Type ' + (currentBlemishesModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'blemishesModel', currentBlemishesModel, false);
 }
@@ -392,9 +392,9 @@ function showNextBlemishesModel() {
 		currentBlemishesModel++;
 	}
 	if(currentBlemishesModel == -1) {
-		$("#blemishes-model").text("No blemishes");
+		$('#blemishes-model').text('No blemishes');
 	} else {
-		$("#blemishes-model").text("Type " + (currentBlemishesModel + 1));
+		$('#blemishes-model').text('Type ' + (currentBlemishesModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'blemishesModel', currentBlemishesModel, false);
 }
@@ -406,9 +406,9 @@ function showPrevAgeingModel() {
 		currentAgeingModel--;
 	}
 	if(currentAgeingModel == -1) {
-		$("#ageing-model").text("No ageing");
+		$('#ageing-model').text('No ageing');
 	} else {
-		$("#ageing-model").text("Type " + (currentAgeingModel + 1));
+		$('#ageing-model').text('Type ' + (currentAgeingModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'ageingModel', currentAgeingModel, false);
 }
@@ -420,9 +420,9 @@ function showNextAgeingModel() {
 		currentAgeingModel++;
 	}
 	if(currentAgeingModel == -1) {
-		$("#ageing-model").text("No ageing");
+		$('#ageing-model').text('No ageing');
 	} else {
-		$("#ageing-model").text("Type " + (currentAgeingModel + 1));
+		$('#ageing-model').text('Type ' + (currentAgeingModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'ageingModel', currentAgeingModel, false);
 }
@@ -434,9 +434,9 @@ function showPrevComplexionModel() {
 		currentComplexionModel--;
 	}
 	if(currentComplexionModel == -1) {
-		$("#complexion-model").text("No complexion");
+		$('#complexion-model').text('No complexion');
 	} else {
-		$("#complexion-model").text("Type " + (currentComplexionModel + 1));
+		$('#complexion-model').text('Type ' + (currentComplexionModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'complexionModel', currentComplexionModel, false);
 }
@@ -448,9 +448,9 @@ function showNextComplexionModel() {
 		currentComplexionModel++;
 	}
 	if(currentComplexionModel == -1) {
-		$("#complexion-model").text("No complexion");
+		$('#complexion-model').text('No complexion');
 	} else {
-		$("#complexion-model").text("Type " + (currentComplexionModel + 1));
+		$('#complexion-model').text('Type ' + (currentComplexionModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'complexionModel', currentComplexionModel, false);
 }
@@ -462,9 +462,9 @@ function showPrevSundamageModel() {
 		currentSundamageModel--;
 	}
 	if(currentSundamageModel == -1) {
-		$("#sundamage-model").text("No sunburn");
+		$('#sundamage-model').text('No sunburn');
 	} else {
-		$("#sundamage-model").text("Type " + (currentSundamageModel + 1));
+		$('#sundamage-model').text('Type ' + (currentSundamageModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'sundamageModel', currentSundamageModel, false);
 }
@@ -476,9 +476,9 @@ function showNextSundamageModel() {
 		currentSundamageModel++;
 	}
 	if(currentSundamageModel == -1) {
-		$("#sundamage-model").text("No sunburn");
+		$('#sundamage-model').text('No sunburn');
 	} else {
-		$("#sundamage-model").text("Type " + (currentSundamageModel + 1));
+		$('#sundamage-model').text('Type ' + (currentSundamageModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'sundamageModel', currentSundamageModel, false);
 }
@@ -490,9 +490,9 @@ function showPrevFrecklesModel() {
 		currentFrecklesModel--;
 	}
 	if(currentFrecklesModel == -1) {
-		$("#freckles-model").text("No freckles");
+		$('#freckles-model').text('No freckles');
 	} else {
-		$("#freckles-model").text("Type " + (currentFrecklesModel + 1));
+		$('#freckles-model').text('Type ' + (currentFrecklesModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'frecklesModel', currentFrecklesModel, false);
 }
@@ -504,9 +504,9 @@ function showNextFrecklesModel() {
 		currentFrecklesModel++;
 	}
 	if(currentFrecklesModel == -1) {
-		$("#freckles-model").text("No freckles");
+		$('#freckles-model').text('No freckles');
 	} else {
-		$("#freckles-model").text("Type " + (currentFrecklesModel + 1));
+		$('#freckles-model').text('Type ' + (currentFrecklesModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'frecklesModel', currentFrecklesModel, false);
 }
@@ -517,7 +517,7 @@ function showPrevEyesColor() {
 	} else {
 		currentEyesColor--;
 	}
-	$("#eyes-color").text("Type " + (currentEyesColor + 1));
+	$('#eyes-color').text('Type ' + (currentEyesColor + 1));
 	mp.trigger('updatePlayerCreation', 'eyesColor', currentEyesColor, false);
 }
 
@@ -527,7 +527,7 @@ function showNextEyesColor() {
 	} else {
 		currentEyesColor++;
 	}
-	$("#eyes-color").text("Type " + (currentEyesColor + 1));
+	$('#eyes-color').text('Type ' + (currentEyesColor + 1));
 	mp.trigger('updatePlayerCreation', 'eyesColor', currentEyesColor, false);
 }
 
@@ -537,7 +537,7 @@ function showPrevEyebrowsModel() {
 	} else {
 		currentEyebrowsModel--;
 	}
-	$("#eyebrows-model").text("Type " + (currentEyebrowsModel + 1));
+	$('#eyebrows-model').text('Type ' + (currentEyebrowsModel + 1));
 	mp.trigger('updatePlayerCreation', 'eyebrowsModel', currentEyebrowsModel, false);
 }
 
@@ -547,7 +547,7 @@ function showNextEyebrowsModel() {
 	} else {
 		currentEyebrowsModel++;
 	}
-	$("#eyebrows-model").text("Type " + (currentEyebrowsModel + 1));
+	$('#eyebrows-model').text('Type ' + (currentEyebrowsModel + 1));
 	mp.trigger('updatePlayerCreation', 'eyebrowsModel', currentEyebrowsModel, false);
 }
 
@@ -557,7 +557,7 @@ function showPrevEyebrowsColor() {
 	} else {
 		currentEyebrowsColor--;
 	}
-	$("#eyebrows-color").text("Type " + (currentEyebrowsColor + 1));
+	$('#eyebrows-color').text('Type ' + (currentEyebrowsColor + 1));
 	mp.trigger('updatePlayerCreation', 'eyebrowsColor', currentEyebrowsColor, false);
 }
 
@@ -567,7 +567,7 @@ function showNextEyebrowsColor() {
 	} else {
 		currentEyebrowsColor++;
 	}
-	$("#eyebrows-color").text("Type " + (currentEyebrowsColor + 1));
+	$('#eyebrows-color').text('Type ' + (currentEyebrowsColor + 1));
 	mp.trigger('updatePlayerCreation', 'eyebrowsColor', currentEyebrowsColor, false);
 }
 
@@ -678,9 +678,9 @@ function showPrevMakeupModel() {
 		currentMakeupModel--;
 	}
 	if(currentMakeupModel == -1) {
-		$("#makeup-model").text("No makeup");
+		$('#makeup-model').text('No makeup');
 	} else {
-		$("#makeup-model").text("Type " + (currentMakeupModel + 1));
+		$('#makeup-model').text('Type ' + (currentMakeupModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'makeupModel', currentMakeupModel, false);
 }
@@ -692,9 +692,9 @@ function showNextMakeupModel() {
 		currentMakeupModel++;
 	}
 	if(currentMakeupModel == -1) {
-		$("#makeup-model").text("No makeup");
+		$('#makeup-model').text('No makeup');
 	} else {
-		$("#makeup-model").text("Type " + (currentMakeupModel + 1));
+		$('#makeup-model').text('Type ' + (currentMakeupModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'makeupModel', currentMakeupModel, false);
 }
@@ -706,9 +706,9 @@ function showPrevBlushModel() {
 		currentBlushModel--;
 	}
 	if(currentBlushModel == -1) {
-		$("#blush-model").text("No blush");
+		$('#blush-model').text('No blush');
 	} else {
-		$("#blush-model").text("Type " + (currentBlushModel + 1));
+		$('#blush-model').text('Type ' + (currentBlushModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'blushModel', currentBlushModel, false);
 }
@@ -720,9 +720,9 @@ function showNextBlushModel() {
 		currentBlushModel++;
 	}
 	if(currentBlushModel == -1) {
-		$("#blush-model").text("No blush");
+		$('#blush-model').text('No blush');
 	} else {
-		$("#blush-model").text("Type " + (currentBlushModel + 1));
+		$('#blush-model').text('Type ' + (currentBlushModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'blushModel', currentBlushModel, false);
 }
@@ -733,7 +733,7 @@ function showPrevBlushColor() {
 	} else {
 		currentBlushColor--;
 	}
-	$("#blush-color").text("Type " + (currentBlushColor + 1));
+	$('#blush-color').text('Type ' + (currentBlushColor + 1));
 	mp.trigger('updatePlayerCreation', 'blushColor', currentBlushColor, false);
 }
 
@@ -743,7 +743,7 @@ function showNextBlushColor() {
 	} else {
 		currentBlushColor++;
 	}
-	$("#blush-color").text("Type " + (currentBlushColor + 1));
+	$('#blush-color').text('Type ' + (currentBlushColor + 1));
 	mp.trigger('updatePlayerCreation', 'blushColor', currentBlushColor, false);
 }
 
@@ -754,9 +754,9 @@ function showPrevLipstickModel() {
 		currentLipstickModel--;
 	}
 	if(currentLipstickModel == -1) {
-		$("#lipstick-model").text("No lipstick");
+		$('#lipstick-model').text('No lipstick');
 	} else {
-		$("#lipstick-model").text("Type " + (currentLipstickModel + 1));
+		$('#lipstick-model').text('Type ' + (currentLipstickModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'lipstickModel', currentLipstickModel, false);
 }
@@ -768,9 +768,9 @@ function showNextLipstickModel() {
 		currentLipstickModel++;
 	}
 	if(currentLipstickModel == -1) {
-		$("#lipstick-model").text("No lipstick");
+		$('#lipstick-model').text('No lipstick');
 	} else {
-		$("#lipstick-model").text("Type " + (currentLipstickModel + 1));
+		$('#lipstick-model').text('Type ' + (currentLipstickModel + 1));
 	}
 	mp.trigger('updatePlayerCreation', 'lipstickModel', currentLipstickModel, false);
 }
@@ -781,7 +781,7 @@ function showPrevLipstickColor() {
 	} else {
 		currentLipstickColor--;
 	}
-	$("#lipstick-color").text("Type " + (currentLipstickColor + 1));
+	$('#lipstick-color').text('Type ' + (currentLipstickColor + 1));
 	mp.trigger('updatePlayerCreation', 'lipstickColor', currentLipstickColor, false);
 }
 
@@ -791,7 +791,7 @@ function showNextLipstickColor() {
 	} else {
 		currentLipstickColor++;
 	}
-	$("#lipstick-color").text("Type " + (currentLipstickColor + 1));
+	$('#lipstick-color').text('Type ' + (currentLipstickColor + 1));
 	mp.trigger('updatePlayerCreation', 'lipstickColor', currentLipstickColor, false);
 }
 
@@ -800,7 +800,7 @@ $('.btn-number').click(function(e){
 
     fieldName = $(this).attr('data-field');
     type      = $(this).attr('data-type');
-    var input = $("input[name='"+fieldName+"']");
+    var input = $('input[name=''+fieldName+'']');
     var currentVal = parseInt(input.val());
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
@@ -837,13 +837,13 @@ $('.input-number').change(function() {
 
     name = $(this).attr('name');
     if(valueCurrent >= minValue) {
-        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+        $('.btn-number[data-type='minus'][data-field=''+name+'']').removeAttr('disabled')
     } else {
         alert('Sorry, the minimum value was reached');
         $(this).val($(this).data('oldValue'));
     }
     if(valueCurrent <= maxValue) {
-        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+        $('.btn-number[data-type='plus'][data-field=''+name+'']').removeAttr('disabled')
     } else {
         alert('Sorry, the maximum value was reached');
         $(this).val($(this).data('oldValue'));
@@ -851,7 +851,7 @@ $('.input-number').change(function() {
 
 
 });
-$(".input-number").keydown(function (e) {
+$('.input-number').keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
              // Allow: Ctrl+A
@@ -870,7 +870,7 @@ $(".input-number").keydown(function (e) {
 
 /* Composure/Psycho */
 
-$(".btn-age").on("click", function() {
+$('.btn-age').on('click', function() {
 	var $button = $(this);
 
 	if ($button.attr('data-dir') == 'minus') {

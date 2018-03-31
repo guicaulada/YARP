@@ -9,15 +9,15 @@ module.exports = class Character extends yarp.gmo{
       this._id = id._id || id;
       this._socialClub = id._socialClub || socialClub;
       this._age = id._age || age || 18;
-      this._model = id._model || model || "mp_m_freemode_01";
+      this._model = id._model || model || 'mp_m_freemode_01';
       this._face = id._face || face || {};
-      this._lastLogin = id._lastLogin || lastLogin || "";
-      this._wallet = id._wallet || wallet || yarp.variables["Starting Wallet"].value;
-      this._bank = id._bank || bank || yarp.variables["Starting Bank"].value;
+      this._lastLogin = id._lastLogin || lastLogin || '';
+      this._wallet = id._wallet || wallet || yarp.variables['Starting Wallet'].value;
+      this._bank = id._bank || bank || yarp.variables['Starting Bank'].value;
       this._health = id._health || health || 100;
       this._armour = id._armour || armour || 0;
-      this._position = id._position || position || yarp.variables["First Spawn"].value;
-      this._heading = id._heading || heading || yarp.variables["First Heading"].value;
+      this._position = id._position || position || yarp.variables['First Spawn'].value;
+      this._heading = id._heading || heading || yarp.variables['First Heading'].value;
       this._groups = id._groups || groups || [];
       this._weapons = id._weapons || weapons || {};
       this._skills = id._skills || skills || {};
@@ -28,8 +28,8 @@ module.exports = class Character extends yarp.gmo{
       this._customization = id._customization || customization || {};
       this._decoration = id._decoration || decoration || {};
       this._clothes = id._clothes || clothes || {};
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
@@ -166,7 +166,7 @@ module.exports = class Character extends yarp.gmo{
   tryBankPayment(value){
     if (this.bank-value >= 0){
       this.player.setVariable('PLAYER_BANK', this.bank-value);
-      let transaction = new Transaction("Payment",value,this.name);
+      let transaction = new Transaction('Payment',value,this.name);
       yarp.TransactionManager.add(transaction);
       this.bank = this.bank-value;
       return true;
@@ -180,7 +180,7 @@ module.exports = class Character extends yarp.gmo{
       this.wallet = this.wallet-value;
       return true;
     } else {
-      if (this.withdraw(value-this.wallet)) {
+      if (this.tryWithdraw(value-this.wallet)) {
         if (this.wallet-value >= 0){
           this.player.setVariable('PLAYER_WALLET', this.wallet-value);
           this.wallet = this.wallet-value;
@@ -195,7 +195,7 @@ module.exports = class Character extends yarp.gmo{
     if (this.wallet-value >= 0){
       this.player.setVariable('PLAYER_WALLET', this.wallet-value);
       this.player.setVariable('PLAYER_BANK', this.bank+value);
-      let transaction = new Transaction("Deposit",value,this.name);
+      let transaction = new Transaction('Deposit',value,this.name);
       yarp.TransactionManager.add(transaction);
       this.wallet = this.wallet-value;
       this.bank = this.bank+value;
@@ -208,7 +208,7 @@ module.exports = class Character extends yarp.gmo{
     if (this.bank-value >= 0){
       this.player.setVariable('PLAYER_WALLET', this.wallet+value);
       this.player.setVariable('PLAYER_BANK', this.bank-value);
-      let transaction = new Transaction("Withdraw",value,this.name);
+      let transaction = new Transaction('Withdraw',value,this.name);
       yarp.TransactionManager.add(transaction);
       this.wallet = this.wallet+value;
       this.bank = this.bank-value;
@@ -221,7 +221,7 @@ module.exports = class Character extends yarp.gmo{
     if (this.bank-value >= 0){
       this.player.setVariable('PLAYER_BANK', this.bank-value);
       target.player.setVariable('PLAYER_BANK', this.character.bank+value);
-      let transaction = new Transaction("Transfer",value,this.name);
+      let transaction = new Transaction('Transfer',value,this.name);
       yarp.TransactionManager.add(transaction);
       this.bank = this.bank-value;
       target.bank = target.bank+value;
@@ -231,7 +231,7 @@ module.exports = class Character extends yarp.gmo{
   }
 
   giveItem(item, amount){
-    if (this.weight + item.weight < yarp.variables["Max Weight"].value){
+    if (this.weight + item.weight < yarp.variables['Max Weight'].value){
       if (this.inventory[item.id] != null){
         this.inventory[item.id] = this.inventory[item.id] + amount;
       } else {
@@ -286,6 +286,13 @@ module.exports = class Character extends yarp.gmo{
     if (this.weapons[id] <= 0) {
       this.weapons[id] = 0;
     }
+  }
+
+  giveAmmo(id, amount){
+    if (!this.weapons[id]) {
+      return;
+    }
+    this.weapons[id] += amount;
   }
 
   hasWeapon(id){
@@ -377,7 +384,7 @@ module.exports = class Character extends yarp.gmo{
       this.groups.forEach(function(id){
         let group = yarp.groups[id];
         if (group != null) {
-          if (group.permissions.indexOf("*") > -1){
+          if (group.permissions.indexOf('*') > -1){
             result = true;
           }
           if (group.permissions.indexOf(permission) > -1){

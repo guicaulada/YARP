@@ -22,7 +22,7 @@ module.exports = class Pool {
   get categories(){
     let categories = {};
     for (let id in this){
-      if (id[0] != "_") {
+      if (id[0] != '_') {
         let obj = this[id];
         if (obj.category){
           if (!categories[obj.category]){
@@ -40,7 +40,7 @@ module.exports = class Pool {
   get length(){
     let count = 0;
     for (let id in this) {
-      if (id[0] != "_") {
+      if (id[0] != '_') {
         count++;
       }
     }
@@ -50,7 +50,7 @@ module.exports = class Pool {
   get size(){
     let count = 0;
     for (let id in this) {
-      if (id[0] != "_") {
+      if (id[0] != '_') {
         count++;
       }
     }
@@ -68,7 +68,7 @@ module.exports = class Pool {
   toArray(call){
     let array = [];
     for (let id in this) {
-      if (id[0] != "_") {
+      if (id[0] != '_') {
         array.push(this[id]);
       }
     }
@@ -77,7 +77,7 @@ module.exports = class Pool {
 
   async forEach(call){
     for (let id in this) {
-      if (id[0] != "_") {
+      if (id[0] != '_') {
         call(this[id]);
       }
     }
@@ -85,7 +85,7 @@ module.exports = class Pool {
 
   async forEachInRange(position,range,call){
     for (let id in this) {
-      if (id[0] != "_" && yarp.utils.Vector3Distance(this[id].position, position) <= range) {
+      if (id[0] != '_' && yarp.utils.Vector3Distance(this[id].position, position) <= range) {
         call(this[id]);
       }
     }
@@ -93,7 +93,7 @@ module.exports = class Pool {
 
   async forEachInDimension(dimension,call){
     for (let id in this) {
-      if (id[0] != "_" && this[id].dimension == dimension) {
+      if (id[0] != '_' && this[id].dimension == dimension) {
         call(this[id]);
       }
     }

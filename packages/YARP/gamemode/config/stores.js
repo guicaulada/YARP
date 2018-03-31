@@ -3,11 +3,37 @@
 * @file Label config
 */
 module.exports = {
-  "7/11": {
-    name: "7/11",
-    price: "110000000",
+  '7/11': {
+    name: '7/11',
+    price: '110000000',
+    inventory: {
+      'fries': {
+        price: 5,
+        amount: 100
+      },
+      'burger': {
+        price: 10,
+        amount: 100
+      },
+      'hotdog': {
+        price: 15,
+        amount: 100
+      },
+      'beer': {
+        price: 5,
+        amount: 100
+      },
+      'juice': {
+        price: 10,
+        amount: 100
+      },
+      'soda': {
+        price: 15,
+        amount: 100
+      },
+    },
     markers: {
-      "7/11 Buy": {
+      '7/11 Buy': {
         positions: [
           new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
           new mp.Vector3(1960.7580566406, 3749.26367187, 31.3437423706055),
@@ -30,14 +56,14 @@ module.exports = {
       },
     },
     labels: {
-      "7/11 Buy": {
+      '7/11 Buy': {
         enter: (player) => {
-          player.call("displayHelpText",["Press ~INPUT_PICKUP~ to shop."]);
-          yarp.hotkeys["Event"].bind(player,['createBrowser', ["menu", ['package://YARP/ui/html/sideMenu.html', 'populateStoreItems', "Food", JSON.stringify(yarp.items.categories["Food"])]]]);
+          player.call('displayHelpText',['Press ~INPUT_PICKUP~ to shop.']);
+          yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateStoreCategories', JSON.stringify({id:this.store.id, name:this.store.name, categories:this.store.categories})]]]);
         },
         leave: (player) => {
-          player.call("clearHelpText");
-          yarp.hotkeys["Event"].unbind(player);
+          player.call('clearHelpText');
+          yarp.hotkeys['Event'].unbind(player);
         },
         visible: false,
         positions: [

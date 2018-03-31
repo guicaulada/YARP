@@ -18,8 +18,8 @@ module.exports = class Door extends yarp.gmo{
         yarp.doors[id].items.concat(items.filter(function (item) {
           return yarp.doors[id].items.indexOf(item) < 0;
         })) : (items || []));
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       this.state = false;
       this.players = [];
       yarp.dbm.register(this);
@@ -42,7 +42,7 @@ module.exports = class Door extends yarp.gmo{
     for (let id in doors){
       let door = doors[id];
       for (let i=0; i < door.positions.length; i++){
-        new yarp.Door(id+" "+(i+1),door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
+        new yarp.Door(id+' '+(i+1),door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
       }
     }
   }

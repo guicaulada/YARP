@@ -15,8 +15,8 @@ module.exports = class Marker extends yarp.gmo{
       this._direction = id._direction || direction || new mp.Vector3(0, 0, 0);
       this._rotation = id._rotation || rotation || new mp.Vector3(0, 0, 0);
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       this._permissions = id._permissions || (((yarp.markers && yarp.markers[id]) != null) ?
         yarp.markers[id].permissions.concat(permissions.filter(function (permission) {
           return yarp.markers[id].permissions.indexOf(permission) < 0;
@@ -45,7 +45,7 @@ module.exports = class Marker extends yarp.gmo{
     for (let id in markers){
       let marker = markers[id];
       for (let i=0; i < marker.positions.length; i++){
-        new yarp.Marker(id+" "+(i+1),marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
+        new yarp.Marker(id+' '+(i+1),marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
       }
     }
   }

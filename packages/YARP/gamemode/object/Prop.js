@@ -23,8 +23,8 @@ module.exports = class Prop extends yarp.gmo{
         yarp.props[id].items.concat(items.filter(function (item) {
           return yarp.props[id].items.indexOf(item) < 0;
         })) : (items || []));
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       if (!this._visible) this._alpha = 0;
       this.players = [];
       this.mp = mp.objects.new(mp.joaat(this._model), this._position,
@@ -43,7 +43,7 @@ module.exports = class Prop extends yarp.gmo{
     for (let id in props){
       let prop = props[id];
       for (let i=0; i < prop.positions.length; i++){
-        new yarp.Prop(id+" "+(i+1),prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.visible,prop.range,prop.enter,prop.leave,prop.permissions,prop.items)
+        new yarp.Prop(id+' '+(i+1),prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.visible,prop.range,prop.enter,prop.leave,prop.permissions,prop.items)
       }
     }
   }

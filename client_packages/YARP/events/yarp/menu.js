@@ -3,8 +3,8 @@
 * @file Menu events
 */
 
-mp.events.add('purchaseStoreItem', (id, amount) => {
-  mp.events.callRemote('purchaseStoreItem', id, amount);
+mp.events.add('purchaseStoreItem', (storeid, itemid, amount) => {
+  mp.events.callRemote('purchaseStoreItem', storeid, itemid, amount);
 });
 
 mp.events.add('purchaseAmmuWeapon', (id, amount) => {

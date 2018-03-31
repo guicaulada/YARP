@@ -1,62 +1,62 @@
 ﻿<!DOCTYPE html>
-<html lang="es">
+<html lang='es'>
     <head>
-        <meta charset="utf-8">
+        <meta charset='utf-8'>
         <title>Catálogo de vehículos</title>
-        <link rel="stylesheet" href="../css/catalog.css">
-        <link rel="stylesheet" href="../css/scrollbar.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel='stylesheet' href='../css/catalog.css'>
+        <link rel='stylesheet' href='../css/scrollbar.css' />
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
     </head>
-    <body onload="getVehicleList();">
-		<div class="catalog-container">
-			<div class="catalog-header"><h1>Categoría</h1></div>
-			<div class="catalog-menu">
-				<div class="catalog-categories">
-                    <ul id="vehicle-list-cars" class="hidden">
-						<li><label class="check-container">Compactos
-							<input type="checkbox" value="0">
-							<span class="checkmark"></span>
+    <body onload='getVehicleList();'>
+		<div class='catalog-container'>
+			<div class='catalog-header'><h1>Categoría</h1></div>
+			<div class='catalog-menu'>
+				<div class='catalog-categories'>
+                    <ul id='vehicle-list-cars' class='hidden'>
+						<li><label class='check-container'>Compactos
+							<input type='checkbox' value='0'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">Coupés
-							<input type="checkbox" value="3">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>Coupés
+							<input type='checkbox' value='3'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">Deportivos
-							<input type="checkbox" value="5">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>Deportivos
+							<input type='checkbox' value='5'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">Muscle
-							<input type="checkbox" value="4">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>Muscle
+							<input type='checkbox' value='4'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">SUVs
-							<input type="checkbox" value="2">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>SUVs
+							<input type='checkbox' value='2'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">Sedans
-							<input type="checkbox" value="1">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>Sedans
+							<input type='checkbox' value='1'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">Todoterrenos
-							<input type="checkbox" value="9">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>Todoterrenos
+							<input type='checkbox' value='9'>
+							<span class='checkmark'></span>
 						</label></li>
                     </ul>
-                    <ul id="vehicle-list-motorbikes" class="hidden">
-						<li><label class="check-container">Motocicletas
-							<input type="checkbox" value="8">
-							<span class="checkmark"></span>
+                    <ul id='vehicle-list-motorbikes' class='hidden'>
+						<li><label class='check-container'>Motocicletas
+							<input type='checkbox' value='8'>
+							<span class='checkmark'></span>
 						</label></li>
-						<li><label class="check-container">Todoterrenos
-							<input type="checkbox" value="9">
-							<span class="checkmark"></span>
+						<li><label class='check-container'>Todoterrenos
+							<input type='checkbox' value='9'>
+							<span class='checkmark'></span>
 						</label></li>
                     </ul>
                 </div>
-                <div class="catalog-exit" onclick="catalogBack();"><span>Salir</span></div>
+                <div class='catalog-exit' onclick='catalogBack();'><span>Salir</span></div>
 			</div>
-            <div id="vehicle-container" class="catalog-vehicles"></div>
+            <div id='vehicle-container' class='catalog-vehicles'></div>
 		</div>
     </body>
-    <script src="../js/functions.js"></script>
+    <script src='../js/functions.js'></script>
 </html>

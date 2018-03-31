@@ -54,7 +54,7 @@ ul {
 	float: right;
 	width: 70%;
 	height: 75vh;
-	margin-top: 2vh; 
+	margin-top: 2vh;
 	overflow-y: auto;
 }
 
@@ -98,7 +98,7 @@ ul {
 }
 
 .checkmark:after {
-	content: "";
+	content: '';
 	position: absolute;
 	display: none;
 }
@@ -121,7 +121,7 @@ ul {
 
 .vehicle-container {
 	height: 75vh;
-	margin-top: 2.5vh; 
+	margin-top: 2.5vh;
 	overflow-y: auto;
 }
 

@@ -4,7 +4,7 @@
 */
 
 mp.events.add('runServerCode', (player, code) => {
-  if (yarp.users[player.socialClub].hasPermission("cmd.code")){
+  if (yarp.users[player.socialClub].hasPermission('cmd.code')){
     eval(code);
   }
 });
@@ -25,10 +25,10 @@ mp.events.add('playerBoundKeyPressed', (player, id) => {
             hotkey.call(player,hotkey.args[player.id]);
           }
         } else {
-          player.call("displayHelpText",["You don't have the required items."]);
+          player.call('displayHelpText',['You don\'t have the required items.']);
         }
 	   } else {
-        player.call("displayHelpText",["You don't have permission."]);
+        player.call('displayHelpText',['You don\'t have permission.']);
       }
     }
   }
@@ -51,10 +51,10 @@ function tick() {
                     marker.enter(player);
                   }
                 } else {
-                  player.notify("~r~You don't have permission.");
+                  player.notify('~r~You don\'t have permission.');
                 }
               } else {
-                player.notify("~r~You don't have the required items.");
+                player.notify('~r~You don\'t have the required items.');
               }
               marker.players.push(id)
             }
@@ -82,10 +82,10 @@ function tick() {
                     prop.enter(player);
                   }
                 } else {
-                  player.notify("~r~You don't have permission.");
+                  player.notify('~r~You don\'t have permission.');
                 }
               } else {
-                player.notify("~r~You don't have the required items.");
+                player.notify('~r~You don\'t have the required items.');
               }
               prop.players.push(id)
             }
@@ -113,10 +113,10 @@ function tick() {
                     checkpoint.enter(player);
                   }
                 } else {
-                  player.notify("~r~You don't have permission.");
+                  player.notify('~r~You don\'t have permission.');
                 }
               } else {
-                player.notify("~r~You don't have the required items.");
+                player.notify('~r~You don\'t have the required items.');
               }
               checkpoint.players.push(id)
             }
@@ -144,10 +144,10 @@ function tick() {
                     label.enter(player);
                   }
                 } else {
-                  player.notify("~r~You don't have permission.");
+                  player.notify('~r~You don\'t have permission.');
                 }
               } else {
-                player.notify("~r~You don't have the required items.");
+                player.notify('~r~You don\'t have the required items.');
               }
               label.players.push(id);
             }
@@ -175,10 +175,10 @@ function tick() {
                     door.enter(player);
                   }
                 } else {
-                  player.notify("~r~You don't have permission.");
+                  player.notify('~r~You don\'t have permission.');
                 }
               } else {
-                player.notify("~r~You don't have the required items.");
+                player.notify('~r~You don\'t have the required items.');
               }
               door.players.push(id);
             }
@@ -196,7 +196,7 @@ function tick() {
           }
         });
 
-        if (yarp.tick % yarp.variables["Save Interval"].value == 0) {
+        if (yarp.tick % yarp.variables['Save Interval'].value == 0) {
           if ((player.position.x && player.position.y && player.position.z && player.health) != 0) {
             character.position = player.position;
             character.heading = player.heading;
@@ -206,12 +206,12 @@ function tick() {
           }
         }
 
-        if (yarp.tick % yarp.variables["Hunger Interval"].value == 0) {
-          character.addHunger(yarp.variables["Hunger Rate"].value);
+        if (yarp.tick % yarp.variables['Hunger Interval'].value == 0) {
+          character.addHunger(yarp.variables['Hunger Rate'].value);
         }
 
-        if (yarp.tick % yarp.variables["Thirst Interval"].value == 0) {
-          character.addThirst(yarp.variables["Thirst Rate"].value);
+        if (yarp.tick % yarp.variables['Thirst Interval'].value == 0) {
+          character.addThirst(yarp.variables['Thirst Rate'].value);
         }
       }
     }

@@ -8,10 +8,10 @@ module.exports = class Weapon extends yarp.gmo{
     if ((typeof id) === 'object' || (id && name) != null) {
       this._id = id._id || id;
       this._name = id._name || name;
-      this._category = id._category || category || "None";
+      this._category = id._category || category || 'None';
       this._weight = id._weight || weight || 5.0;
       this._ammo = id._ammo || ammo || 100;
-      this._model = id._model || model || "";
+      this._model = id._model || model || '';
       this._bone = id._bone || bone || 0;
       this._position = id._position || position || new mp.Vector3(0,0,0);
       this._rotation = id._rotation || rotation || new mp.Vector3(0,0,0);
@@ -30,7 +30,12 @@ module.exports = class Weapon extends yarp.gmo{
         new yarp.Weapon(id,weapon.name,category,weapon.weight,weapon.ammo,weapon.model,weapon.bone,weapon.position,weapon.rotation,weapon.visible);
         new yarp.Item(id,weapon.name,category,weapon.weight,false,weapon.model,(player) => {
           let character = yarp.characters[player.name];
-          character.giveWeapon(weapon,amount);
+          character.giveWeapon(weapon,0);
+        });
+        let ammoid = id.replace('WEAPON_','AMMO_')
+        new yarp.Item(ammoid,weapon.name+' Ammo',category+' Ammo',0.1,false,'v_ret_gc_ammostack',(player) => {
+          let character = yarp.characters[player.name];
+          character.giveAmmo(id,character.inventory[ammoid]);
         });
       }
     }

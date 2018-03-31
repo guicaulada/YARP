@@ -8,7 +8,7 @@ module.exports = class Store extends yarp.gmo{
     if ((typeof id) === 'object' || (id) != null){
       this._id = id._id || id;
       this._owner = id._owner || owner || null;
-      this._name = id._name || name || "Store";
+      this._name = id._name || name || 'Store';
       this._money = id._money || money || 0;
       this._price = id._price || price || 0;
       this._inventory = id._inventory || inventory || {};
@@ -19,7 +19,7 @@ module.exports = class Store extends yarp.gmo{
         for (let i=0; i < marker.positions.length; i++){
           this.addMarker(
             new yarp.Marker(
-              id+" "+(i+1),
+              id+' '+(i+1),
               marker.positions[i],
               marker.type,
               marker.radius,
@@ -41,7 +41,7 @@ module.exports = class Store extends yarp.gmo{
         for (let i=0; i < label.positions.length; i++){
           this.addLabel(
             new yarp.Label(
-              id+" "+(i+1),
+              id+' '+(i+1),
               label.positions[i],
               label.text,
               label.color,
@@ -62,6 +62,20 @@ module.exports = class Store extends yarp.gmo{
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }
+  }
+
+  get categories(){
+    let categories = {};
+    for (let id in this.inventory){
+      let item = yarp.items[id];
+      if (!categories[item.category]){
+        categories[item.category] = {}
+      }
+      categories[item.category][item.id] = item.data;
+      categories[item.category][item.id].price = this.inventory[id].price;
+      categories[item.category][item.id].amount = this.inventory[id].amount;
+    }
+    return categories;
   }
 
   addMarker(marker){
@@ -88,7 +102,9 @@ module.exports = class Store extends yarp.gmo{
     let stores = require(file);
     for (let id in stores){
       let store = stores[id]
-      new yarp.Store(id,store.name,store.inventory,store.owner,store.money,store.price,store.markers,store.labels);
+      if (!yarp.stores[id]){
+        new yarp.Store(id,store.name,store.inventory,store.owner,store.money,store.price,store.markers,store.labels);
+      }
     }
   }
 }

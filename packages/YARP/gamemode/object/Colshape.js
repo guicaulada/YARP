@@ -13,8 +13,8 @@ module.exports = class Colshape extends yarp.gmo{
       this._depth = id._depth || depth || 10;
       this._height = id._height || height || 10;
       this._visible = id._visible || visible || true;
-      this._enter = id._enter || ((enter) ? enter.toString() : "() => {}");
-      this._leave = id._leave || ((leave) ? leave.toString() : "() => {}");
+      this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
+      this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
       this._permissions = id._permissions || (((yarp.doors && yarp.doors[id]) != null) ?
         yarp.doors[id].permissions.concat(permissions.filter(function (permission) {
           return yarp.doors[id].permissions.indexOf(permission) < 0;
@@ -46,7 +46,7 @@ module.exports = class Colshape extends yarp.gmo{
     for (let id in colshapes){
       let colshape = colshapes[id];
       for (let i=0; i < colshape.positions.length; i++){
-        new yarp.Colshape(id+" "+(i+1),colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
+        new yarp.Colshape(id+' '+(i+1),colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
       }
     }
   }

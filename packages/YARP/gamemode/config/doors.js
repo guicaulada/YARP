@@ -4,7 +4,7 @@
  */
 module.exports = {
   //Banks
-  "Bank Main": {
+  'Bank Main': {
     model: 110411286,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -17,7 +17,7 @@ module.exports = {
       new mp.Vector3(259.0879, 212.8062, 106.4049)
     ]
   },
-  "Bank Upstairs": {
+  'Bank Upstairs': {
     model: 1956494919,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -27,7 +27,7 @@ module.exports = {
       new mp.Vector3(256.6172, 206.1522, 110.4328)
     ]
   },
-  "Bank Office": {
+  'Bank Office': {
     model: 964838196,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -37,7 +37,7 @@ module.exports = {
     ]
   },
   //Stores
-  "Discount Store": {
+  'Discount Store': {
     model: -1148826190,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -45,7 +45,7 @@ module.exports = {
       new mp.Vector3(82.38156, -1390.476, 29.52609)
     ]
   },
-  "Popular LSC": {
+  'Popular LSC': {
     model: 868499217,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -53,7 +53,7 @@ module.exports = {
       new mp.Vector3(82.38156, -1390.752, 29.52609)
     ]
   },
-  "Carcer LSC": {
+  'Carcer LSC': {
     model: 270330101,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -61,7 +61,7 @@ module.exports = {
       new mp.Vector3(723.116, -1088.831, 23.23201)
     ]
   },
-  "Greenwich LSC": {
+  'Greenwich LSC': {
     model: -550347177,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -70,7 +70,7 @@ module.exports = {
       new mp.Vector3(-1145.898, -1991.144, 14.18357)
     ]
   },
-  "Route 68 LSC": {
+  'Route 68 LSC': {
     model: -822900180,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -81,7 +81,7 @@ module.exports = {
       new mp.Vector3(108.8502, 6617.877, 32.67305)
     ]
   },
-  "Route 68 Office": {
+  'Route 68 Office': {
     model: 1335311341,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -90,7 +90,7 @@ module.exports = {
       new mp.Vector3(105.1518, 6614.655, 32.58521)
     ]
   },
-  "Route 68 Office Int": {
+  'Route 68 Office Int': {
     model: 1544229216,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -100,7 +100,7 @@ module.exports = {
     ]
   },
   // Ammunations
-  "Ammu-Nation Right": {
+  'Ammu-Nation Right': {
     model: -8873588,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -113,7 +113,7 @@ module.exports = {
       new mp.Vector3(-1314.5981, -390.8461, 36.5870)
     ]
   },
-  "Ammu-Nation Left": {
+  'Ammu-Nation Left': {
     model: 97297972,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -126,7 +126,7 @@ module.exports = {
       new mp.Vector3(-1314.5981, -389.6211, 36.5870)
     ]
   },
-  "Ammu-Nation Office": {
+  'Ammu-Nation Office': {
     model: 452874391,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -135,7 +135,7 @@ module.exports = {
     ]
   },
   //Clothing
-  "Ponsonbys": {
+  'Ponsonbys': {
     model: -1922281023,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -148,7 +148,7 @@ module.exports = {
       new mp.Vector3(-157.1293, -306.4341, 39.99308)
     ]
   },
-  "Sub Urban": {
+  'Sub Urban': {
     model: 1780022985,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -160,7 +160,7 @@ module.exports = {
     ]
   },
   //Liquor
-  "Robs Liquor Glass": {
+  'Robs Liquor Glass': {
     model: -1212951353,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -171,7 +171,7 @@ module.exports = {
       new mp.Vector3(1141.038, -980.3225, 46.55986)
     ]
   },
-  "Robs Liquor Wood": {
+  'Robs Liquor Wood': {
     model: 1173348778,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -187,7 +187,7 @@ module.exports = {
     ]
   },
   //Barber
-  "Bob Mulet": {
+  'Bob Mulet': {
     model: 145369505,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -195,7 +195,7 @@ module.exports = {
       new mp.Vector3(-822.4442, -188.3924, 37.81895)
     ]
   },
-  "Hair on Hawick": {
+  'Hair on Hawick': {
     model: -1663512092,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -203,7 +203,7 @@ module.exports = {
       new mp.Vector3(-823.2001, -187.0831, 37.81895)
     ]
   },
-  "OSheas": {
+  'OSheas': {
     model: -1844444717,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -213,7 +213,7 @@ module.exports = {
     ]
   },
   //Motorsport
-  "Premium Deluxe Parking": {
+  'Premium Deluxe Parking': {
     model: 1417577297,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -222,7 +222,7 @@ module.exports = {
       new mp.Vector3(-60.54582, -1094.749, 26.88872)
     ]
   },
-  "Premium Deluxe Main": {
+  'Premium Deluxe Main': {
     model: 2059227086,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -231,7 +231,7 @@ module.exports = {
       new mp.Vector3(-59.89302, -1092.952, 26.88362)
     ]
   },
-  "Premium Deluxe Right": {
+  'Premium Deluxe Right': {
     model: -2051651622,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -241,7 +241,7 @@ module.exports = {
     ]
   },
   //Houses
-  "Franklin House": {
+  'Franklin House': {
     model: 520341586,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -249,7 +249,7 @@ module.exports = {
       new mp.Vector3(-14.86892, -1441.182, 31.19323)
     ]
   },
-  "Franklin House Garage": {
+  'Franklin House Garage': {
     model: 703855057,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -258,7 +258,7 @@ module.exports = {
     ]
   },
   //Police
-  "Mission Row Main Right": {
+  'Mission Row Main Right': {
     model: 320433149,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -266,7 +266,7 @@ module.exports = {
       new mp.Vector3(434.7479, -983.2151, 30.83926)
     ]
   },
-  "Mission Row Main Left": {
+  'Mission Row Main Left': {
     model: -1215222675,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -274,7 +274,7 @@ module.exports = {
       new mp.Vector3(434.7479, -980.6184, 30.83926)
     ]
   },
-  "Mission Row Back": {
+  'Mission Row Back': {
     model: -2023754432,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -284,7 +284,7 @@ module.exports = {
       new mp.Vector3(452.6248, -987.3626, 30.8393)
     ]
   },
-  "Mission Row Cells": {
+  'Mission Row Cells': {
     model: -1033001619,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -292,7 +292,7 @@ module.exports = {
       new mp.Vector3(463.4782, -1003.538, 25.00599)
     ]
   },
-  "Mission Row Cell": {
+  'Mission Row Cell': {
     model: 631614199,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -303,7 +303,7 @@ module.exports = {
       new mp.Vector3(464.5701, -992.6641, 25.06443)
     ]
   },
-  "Mission Row Capitan": {
+  'Mission Row Capitan': {
     model: -1320876379,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -311,7 +311,7 @@ module.exports = {
       new mp.Vector3(446.5728, -980.0106, 30.8393)
     ]
   },
-  "Mission Row Armory": {
+  'Mission Row Armory': {
     model: 185711165,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -322,7 +322,7 @@ module.exports = {
       new mp.Vector3(446.0079, -989.4454, 30.8393)
     ]
   },
-  "Mission Row Secure": {
+  'Mission Row Secure': {
     model: 749848321,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -331,7 +331,7 @@ module.exports = {
       new mp.Vector3(461.2865, -985.3206, 30.83926)
     ]
   },
-  "Mission Row Lockers": {
+  'Mission Row Lockers': {
     model: 1557126584,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -339,7 +339,7 @@ module.exports = {
       new mp.Vector3(450.1041, -985.7384, 30.8393)
     ]
   },
-  "Mission Row Roof": {
+  'Mission Row Roof': {
     model: -340230128,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -347,7 +347,7 @@ module.exports = {
       new mp.Vector3(464.3613, -984.678, 43.83443)
     ]
   },
-  "Mission Row Briefing": {
+  'Mission Row Briefing': {
     model: -131296141,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -356,7 +356,7 @@ module.exports = {
       new mp.Vector3(443.0298, -994.5412, 30.8393)
     ]
   },
-  "Mission Row Gate": {
+  'Mission Row Gate': {
     model: -1603817716,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -365,7 +365,7 @@ module.exports = {
     ]
   },
   //Others
-  "Vanilla Unicorn Main": {
+  'Vanilla Unicorn Main': {
     model: -1116041313,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -373,7 +373,7 @@ module.exports = {
       new mp.Vector3(127.9552, -1298.503, 29.41962)
     ]
   },
-  "Vanilla Unicorn Back": {
+  'Vanilla Unicorn Back': {
     model: 668467214,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -381,7 +381,7 @@ module.exports = {
       new mp.Vector3(96.09197, -1284.854, 29.43878)
     ]
   },
-  "Vanilla Unicorn Office": {
+  'Vanilla Unicorn Office': {
     model: -626684119,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -389,7 +389,7 @@ module.exports = {
       new mp.Vector3(99.08321, -1293.701, 29.41868)
     ]
   },
-  "Vanilla Unicorn Dress": {
+  'Vanilla Unicorn Dress': {
     model: -495720969,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -397,7 +397,7 @@ module.exports = {
       new mp.Vector3(113.9822, -1297.43, 29.41868)
     ]
   },
-  "Vanilla Unicorn Private": {
+  'Vanilla Unicorn Private': {
     model: -1881825907,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},
@@ -405,7 +405,7 @@ module.exports = {
       new mp.Vector3(116.0046, -1294.692, 29.41947)
     ]
   },
-  "Penitentiary": {
+  'Penitentiary': {
     model: 741314661,
     enter: (player) => {this.open();},
     leave: (player) => {this.close();},

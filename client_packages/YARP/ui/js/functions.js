@@ -5,20 +5,20 @@ let objectArgs = [];
 
 function loginAccount() {
     var password = document.getElementById('pass').value;
-    mp.trigger('destroyBrowser', "menu");
+    mp.trigger('destroyBrowser', 'menu');
     mp.trigger('verifyLogin', password);
-};
+}
 
 function selectName() {
     var name = capitalizeFirstLetter(document.getElementById('name').value);
     var surname = capitalizeFirstLetter(document.getElementById('surname').value);
-    var realName = name + " " + surname;
+    var realName = name + ' ' + surname;
     mp.trigger('createCharacter', realName);
 }
 
 function getPlayerList() {
     mp.trigger('getConnectedPlayers');
-};
+}
 
 function populatePlayerList(playerJSON) {
     var playerArray = JSON.parse(playerJSON);
@@ -27,15 +27,15 @@ function populatePlayerList(playerJSON) {
         tableBody.removeChild(tableBody.firstChild);
     }
     for (var i = 0; i < playerArray.length; i++) {
-        if (playerArray[i].playerName != "") {
-            var tableRow = document.createElement("TR");
-            var playerIdColumn = document.createElement("TD");
-            var playerNameColumn = document.createElement("TD");
-            var playerPingColumn = document.createElement("TD");
+        if (playerArray[i].playerName != '') {
+            var tableRow = document.createElement('TR');
+            var playerIdColumn = document.createElement('TD');
+            var playerNameColumn = document.createElement('TD');
+            var playerPingColumn = document.createElement('TD');
 
             playerIdColumn.innerHTML = playerArray[i].playerId;
             playerNameColumn.innerHTML = playerArray[i].playerName;
-            playerPingColumn.innerHTML = playerArray[i].playerPing + " ms";
+            playerPingColumn.innerHTML = playerArray[i].playerPing + ' ms';
 
             tableRow.appendChild(playerIdColumn);
             tableRow.appendChild(playerNameColumn);
@@ -44,7 +44,7 @@ function populatePlayerList(playerJSON) {
             tableBody.appendChild(tableRow);
         }
     }
-};
+}
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -108,33 +108,33 @@ function showBankOperations(bankOperationsJson, playerName) {
     }
     for (var i = 0; i < bankOperationsArray.length; i++) {
 		// Creamos los elementos de fila
-		var tableRow = document.createElement("TR");
-		var dateColumn = document.createElement("TD");
-		var operationColumn = document.createElement("TD");
-		var involvedColumn = document.createElement("TD");
-		var amountColumn = document.createElement("TD");
+		var tableRow = document.createElement('TR');
+		var dateColumn = document.createElement('TD');
+		var operationColumn = document.createElement('TD');
+		var involvedColumn = document.createElement('TD');
+		var amountColumn = document.createElement('TD');
 
 		// Añadimos los datos del array
 		dateColumn.innerHTML = bankOperationsArray[i].date;
 		operationColumn.innerHTML = bankOperationsArray[i].type;
 		switch(bankOperationsArray[i].type) {
-			case "Transfer":
+			case 'Transfer':
 				if(bankOperationsArray[i].source === playerName) {
-					amountColumn.innerHTML = "-" + bankOperationsArray[i].amount + "$";
+					amountColumn.innerHTML = '-' + bankOperationsArray[i].amount + '$';
 					involvedColumn.innerHTML = bankOperationsArray[i].target;
 				} else {
-					amountColumn.innerHTML = bankOperationsArray[i].amount + "$";
+					amountColumn.innerHTML = bankOperationsArray[i].amount + '$';
 					involvedColumn.innerHTML = bankOperationsArray[i].source;
 				}
 				break;
-			case "Withdraw":
-				amountColumn.innerHTML = "-" + bankOperationsArray[i].amount + "$";
+			case 'Withdraw':
+				amountColumn.innerHTML = '-' + bankOperationsArray[i].amount + '$';
 				break;
-			case "Payment":
-				amountColumn.innerHTML = "-" + bankOperationsArray[i].amount + "$";
+			case 'Payment':
+				amountColumn.innerHTML = '-' + bankOperationsArray[i].amount + '$';
 				break;
 			default:
-				amountColumn.innerHTML = bankOperationsArray[i].amount + "$";
+				amountColumn.innerHTML = bankOperationsArray[i].amount + '$';
 				break;
 		}
 
@@ -192,7 +192,7 @@ function bankBack() {
             $('#bank-menu').removeClass('hidden');
             break;
         default:
-            mp.trigger('destroyBrowser', "bank");
+            mp.trigger('destroyBrowser', 'bank');
             break;
     }
     $('#bank-accept').addClass('hidden');
@@ -212,7 +212,7 @@ function catalogBack() {
 }
 
 function bankAccept() {
-    var target = " ";
+    var target = ' ';
     var amount = 0;
 
     switch (bankSelectedOption) {
@@ -272,9 +272,9 @@ function populateVehicleList(dealership, vehicleJSON) {
     }
 }
 
-$("input[type='checkbox']").change(function () {
+$('input[type=\'checkbox\']').change(function () {
     var vehicleTypes = [];
-    $('input[type=checkbox]').each(function () {
+    $('input[type=\'checkbox\']').each(function () {
         if (this.checked) {
             vehicleTypes.push(parseInt($(this).val()));
         }
@@ -326,7 +326,7 @@ function testVehicle() {
 function namePoliceControl() {
     var name = document.getElementById('name').value;
     mp.trigger('policeControlSelectedName', name);
-    mp.trigger('destroyBrowser', "police");
+    mp.trigger('destroyBrowser', 'police');
 }
 
 function preloadContact() {
@@ -377,13 +377,13 @@ function populateQuestionAnswers(question, answersJSON) {
 	// Rellenamos la lista de respuestas
 	for(let i = 0; i < answers.length; i++) {
 		// Creamos los objetos a dibujar
-		let div = document.createElement("div");
-		let label = document.createElement("label");
-		let radio = document.createElement("input");
+		let div = document.createElement('div');
+		let label = document.createElement('label');
+		let radio = document.createElement('input');
 
 		// Añadimos las propiedades
-		radio.type = "radio";
-		radio.name = "answer";
+		radio.type = 'radio';
+		radio.name = 'answer';
 		radio.value = answers[i].id;
 
 		// Ponemos el texto de la respuesta
@@ -399,11 +399,11 @@ function populateQuestionAnswers(question, answersJSON) {
 }
 
 function setAccountName(sclub){
-  document.getElementById('acct').value = `${sclub}`;
+  document.getElementById('acct').value = sclub;
 }
 
 function submitAnswer() {
 	// Recogemos la respuesta y la enviamos
-	let answer = $('input[name=answer]:checked', '#testForm').val();
+	let answer = $('input[name=\'answer\']:checked', '#testForm').val();
 	mp.trigger('submitAnswer', answer);
 }

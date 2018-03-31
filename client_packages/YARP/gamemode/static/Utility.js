@@ -60,7 +60,7 @@ exports = class Utility {
       y = y/len;
       z = z/len;
     }
-    return {"x":x,"y":y,"z":z};
+    return new mp.Vector3(x,y,z);
   }
 
   static get weaponSlots(){

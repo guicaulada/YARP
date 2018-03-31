@@ -3,8 +3,8 @@
 * @file Vehicle events
 */
 
-mp.events.add("playerStartEnterVehicle", (vehicle, seat) => {
+mp.events.add('playerStartEnterVehicle', (vehicle, seat) => {
 });
 
-mp.events.add("playerEnterVehicle", (vehicle, seat) => {
+mp.events.add('playerEnterVehicle', (vehicle, seat) => {
 });
