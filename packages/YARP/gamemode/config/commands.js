@@ -9,6 +9,7 @@ module.exports = {
          permissions: ["cmd.code"],
          call: (player,args) => {
             player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor"]]);
+            yarp.hotkeys["ToggleChat"].bind(player);
          }
       },
       "new": {
@@ -29,6 +30,7 @@ module.exports = {
                   eval(`new yarp[Class](${args.join(", ")})`)
                } else {
                   player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor",`new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(", ")})`]]);
+                  yarp.hotkeys["ToggleChat"].bind(player);
                }
             }
          }
@@ -65,8 +67,10 @@ module.exports = {
                         text = text+`yarp.${collection}["${id}"].${args[i]} = ${obj[args[i]]};\\n`;
                      }
                      player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor",text]]);
+                     yarp.hotkeys["ToggleChat"].bind(player);
                   } else {
                      player.call("createBrowser", ["editor", ["package://YARP/ui/html/editor.html", "setupCodeEditor",`yarp.${collection}["${id}"];`]]);
+                     yarp.hotkeys["ToggleChat"].bind(player);
                   }
                }
             }

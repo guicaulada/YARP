@@ -7,6 +7,10 @@ mp.events.add('loadBankBalance', (player) => {
   player.call('browserExecute', ["menu", ['showBankOperations', JSON.stringify(yarp.characters[player.name].balance), player.name]]);
 });
 
+mp.events.add('unbindToggleChat', (player) => {
+  yarp.hotkeys["ToggleChat"].unbind(player);
+});
+
 mp.events.add('purchaseStoreItem', (player, id, amount) => {
   let character = yarp.characters[player.name];
   let item = yarp.items[id];

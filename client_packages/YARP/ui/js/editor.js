@@ -33,6 +33,7 @@ function setupCodeEditor(text){
     });
     $('#cancel').click(function(){
       mp.trigger('destroyBrowser', "editor");
+      mp.trigger('unbindToggleChat');
     });
 
     $('#server').click(function(){

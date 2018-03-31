@@ -3,7 +3,7 @@
  * @file Character class
  */
 module.exports = class Character extends yarp.gmo{
-  constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes, enter, leave){
+  constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, hunger, thirst, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes, enter, leave){
     super();
     if ((typeof id) === 'object' || (id && socialClub) != null){
       this._id = id._id || id;
@@ -22,6 +22,8 @@ module.exports = class Character extends yarp.gmo{
       this._weapons = id._weapons || weapons || {};
       this._skills = id._skills || skills || {};
       this._weight = id._weight || weight || 0;
+      this._hunger = id._hunger || hunger || 0;
+      this._thirst = id._thirst || thirst || 0;
       this._inventory = id._inventory || inventory || {};
       this._customization = id._customization || customization || {};
       this._decoration = id._decoration || decoration || {};
@@ -403,6 +405,22 @@ module.exports = class Character extends yarp.gmo{
       }
     }
     return true;
+  }
+
+  addHunger(value){
+    if (this.hunger+value > 100){
+      this.health -= value;
+    } else {
+      this.hunger += value;
+    }
+  }
+
+  addThirst(value){
+    if (this.thirst+value > 100){
+      this.thirst -= value;
+    } else {
+      this.thirst += value;
+    }
   }
 
   static config(file){

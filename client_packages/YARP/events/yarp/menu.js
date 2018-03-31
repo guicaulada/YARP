@@ -14,3 +14,7 @@ mp.events.add('purchaseAmmuWeapon', (id, amount) => {
 mp.events.add('verifyLogin', (password) => {
   mp.events.callRemote('verifyLogin', password);
 });
+
+mp.events.add('unbindToggleChat', (code) => {
+  mp.events.callRemote('unbindToggleChat');
+});

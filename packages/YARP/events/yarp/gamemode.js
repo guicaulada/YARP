@@ -207,11 +207,11 @@ function tick() {
         }
 
         if (yarp.tick % yarp.variables["Hunger Interval"].value == 0) {
-          character.hunger += yarp.variables["Hunger Rate"].value;
+          character.addHunger(yarp.variables["Hunger Rate"].value);
         }
 
         if (yarp.tick % yarp.variables["Thirst Interval"].value == 0) {
-          character.hunger += yarp.variables["Thirst Rate"].value;
+          character.addThirst(yarp.variables["Thirst Rate"].value);
         }
       }
     }

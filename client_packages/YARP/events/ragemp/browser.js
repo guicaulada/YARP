@@ -60,8 +60,7 @@ mp.events.add('destroyBrowser', (id, arguments) => {
 	}
 });
 
-
-mp.keys.bind(0x12, false, function() {
+mp.events.add('toggleChat', () => {
 	mp.gui.cursor.visible = !mp.gui.cursor.visible;
 	mp.gui.chat.activate(!mp.gui.cursor.visible);
 	mp.gui.chat.show(!mp.gui.cursor.visible);

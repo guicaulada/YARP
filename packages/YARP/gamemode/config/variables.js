@@ -8,9 +8,9 @@ module.exports = {
   "Starting Bank": 1500,
   "Save Interval": 20, //A tick is 0.05ms so 20 = 10 seconds
   "Hunger Interval": 20,
-  "Hunger Rate": 20,
+  "Hunger Rate": 1,
   "Thirst Interval": 20,
-  "Thirst Rate": 20,
+  "Thirst Rate": 1,
   "Max Weight": 30,
   "First Spawn": new mp.Vector3(-888.8746, -2313.2836, 3.5077),
   "First Heading": 90,
