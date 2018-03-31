@@ -9,34 +9,36 @@ module.exports = (async () => {
     yarp.utils = require('./static/Utility');
     yarp.db = require('./static/MongoDB');
     yarp.dbm = require('./static/DBManager');
+    yarp.gmo = require('./abstract/GMObject');
     await yarp.dbm.connect();
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"RequirementError: "+err.message+"\n"+err.stack);
   }
 
   //Loading Classes
-  console.log(chalk.yellowBright("[YARP] ")+"Loading Classes");
+  console.log(chalk.yellowBright("[YARP] ")+"Loading Objects");
   try {
-    yarp.Blip = require('./class/Blip');
-    yarp.Character = require('./class/Character');
-    yarp.Checkpoint = require('./class/Checkpoint');
-    yarp.Colshape = require('./class/Colshape');
-    yarp.Command = require('./class/Command');
-    yarp.Door = require('./class/Door');
-    yarp.Event = require('./class/Event');
-    yarp.Group = require('./class/Group');
-    yarp.Hotkey = require('./class/Hotkey');
-    yarp.Item = require('./class/Item');
-    yarp.Label = require('./class/Label');
-    yarp.Marker = require('./class/Marker');
-    yarp.Npc = require('./class/Npc');
-    yarp.Pool = require('./class/Pool');
-    yarp.Prop = require('./class/Prop');
-    yarp.Transaction = require('./class/Transaction');
-    yarp.User = require('./class/User');
-    yarp.Variable = require('./class/Variable');
-    yarp.Vehicle = require('./class/Vehicle');
-    yarp.Weapon = require('./class/Weapon');
+    yarp.Blip = require('./object/Blip');
+    yarp.Character = require('./object/Character');
+    yarp.Checkpoint = require('./object/Checkpoint');
+    yarp.Colshape = require('./object/Colshape');
+    yarp.Command = require('./object/Command');
+    yarp.Door = require('./object/Door');
+    yarp.Event = require('./object/Event');
+    yarp.Group = require('./object/Group');
+    yarp.Hotkey = require('./object/Hotkey');
+    yarp.Item = require('./object/Item');
+    yarp.Label = require('./object/Label');
+    yarp.Marker = require('./object/Marker');
+    yarp.Npc = require('./object/Npc');
+    yarp.Pool = require('./object/Pool');
+    yarp.Prop = require('./object/Prop');
+    yarp.Store = require('./object/Store');
+    yarp.Transaction = require('./object/Transaction');
+    yarp.User = require('./object/User');
+    yarp.Variable = require('./object/Variable');
+    yarp.Vehicle = require('./object/Vehicle');
+    yarp.Weapon = require('./object/Weapon');
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"ClassError: "+err.message+"\n"+err.stack);
   }
@@ -58,6 +60,7 @@ module.exports = (async () => {
     yarp.markers = new yarp.Pool(yarp.Marker);
     yarp.npcs = new yarp.Pool(yarp.Npc);
     yarp.props = new yarp.Pool(yarp.Prop);
+    yarp.stores = new yarp.Pool(yarp.Store);
     yarp.transactions = new yarp.Pool(yarp.Transaction);
     yarp.users = new yarp.Pool(yarp.User);
     yarp.variables = new yarp.Pool(yarp.Variable);
@@ -84,6 +87,7 @@ module.exports = (async () => {
     await yarp.markers.load();
     await yarp.npcs.load();
     await yarp.props.load();
+    await yarp.stores.load();
     await yarp.transactions.load();
     await yarp.users.load();
     await yarp.variables.load();
@@ -96,25 +100,26 @@ module.exports = (async () => {
   //Loading Config
   try {
     console.log(chalk.yellowBright("[YARP] ")+"Loading Configs");
-    yarp.blips.config('../config/Blip');
-    yarp.characters.config('../config/Character');
-    yarp.checkpoints.config('../config/Checkpoint');
-    yarp.colshapes.config('../config/Colshape');
-    yarp.commands.config('../config/Command');
-    yarp.doors.config('../config/Door');
-    yarp.events.config('../config/Event');
-    yarp.groups.config('../config/Group');
-    yarp.hotkeys.config('../config/Hotkey');
-    yarp.items.config('../config/Item');
-    yarp.labels.config('../config/Label');
-    yarp.markers.config('../config/Marker');
-    yarp.npcs.config('../config/Npc');
-    yarp.props.config('../config/Prop');
-    yarp.transactions.config('../config/Transaction');
-    yarp.users.config('../config/User');
-    yarp.variables.config('../config/Variable');
-    yarp.vehicles.config('../config/Vehicle');
-    yarp.weapons.config('../config/Weapon');
+    yarp.blips.config('../config/blips');
+    yarp.characters.config('../config/characters');
+    yarp.checkpoints.config('../config/checkpoints');
+    yarp.colshapes.config('../config/colshapes');
+    yarp.commands.config('../config/commands');
+    yarp.doors.config('../config/doors');
+    yarp.events.config('../config/events');
+    yarp.groups.config('../config/groups');
+    yarp.hotkeys.config('../config/hotkeys');
+    yarp.items.config('../config/items');
+    yarp.labels.config('../config/labels');
+    yarp.markers.config('../config/markers');
+    yarp.npcs.config('../config/npcs');
+    yarp.props.config('../config/props');
+    yarp.stores.config('../config/stores');
+    yarp.transactions.config('../config/transactions');
+    yarp.users.config('../config/users');
+    yarp.variables.config('../config/variables');
+    yarp.vehicles.config('../config/vehicles');
+    yarp.weapons.config('../config/weapons');
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"ConfigError: "+err.message+"\n"+err.stack);
   }
@@ -122,20 +127,20 @@ module.exports = (async () => {
   try {
     //Load RAGE.MP Events
     console.log(chalk.yellowBright("[YARP] ")+"Loading Events");
-    require('../event/ragemp/Checkpoint.js');
-    require('../event/ragemp/Colshape.js');
-    require('../event/ragemp/Entity.js');
-    require('../event/ragemp/Player.js');
-    require('../event/ragemp/Stream.js');
-    require('../event/ragemp/Vehicle.js');
-    require('../event/ragemp/Waypoint.js');
-    require('../event/ragemp/World.js');
+    require('../events/ragemp/checkpoint.js');
+    require('../events/ragemp/colshape.js');
+    require('../events/ragemp/entity.js');
+    require('../events/ragemp/player.js');
+    require('../events/ragemp/stream.js');
+    require('../events/ragemp/vehicle.js');
+    require('../events/ragemp/waypoint.js');
+    require('../events/ragemp/world.js');
 
     //Load YARP Events
-    require('../event/yarp/Character.js');
-    require('../event/yarp/Gamemode.js');
-    require('../event/yarp/Item.js');
-    require('../event/yarp/Menu.js');
+    require('../events/yarp/character.js');
+    require('../events/yarp/gamemode.js');
+    require('../events/yarp/item.js');
+    require('../events/yarp/menu.js');
   } catch(err) {
     console.log(chalk.redBright("[YARP] ")+"EventError: "+err.message+"\n"+err.stack);
   }

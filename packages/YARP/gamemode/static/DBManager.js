@@ -3,8 +3,6 @@
  * @file DB Manager class
  */
 module.exports = class DBManager{
-
-
   static async connect(){
     await yarp.db.connect();
   }
@@ -22,15 +20,8 @@ module.exports = class DBManager{
   static async save(object){
     let collection = object.constructor.name.toLowerCase()+"s";
     if (object._id){
-      yarp[collection][object._id] = object;
-      let mp = object.mp;
-      delete object.mp;
-      try {
-        await yarp.db.save(collection, object);
-      } catch(err) {
-        console.log(chalk.redBright("[YARP] ")+"ManagerError: "+err.message);
-      }
-      object.mp = mp;
+      let obj = object.data;
+      yarp.db.save(collection, object);
     } else {
       console.log(chalk.redBright("[YARP] ")+"ManagerError: object could not be saved in "+collection+", missing id.");
     }
