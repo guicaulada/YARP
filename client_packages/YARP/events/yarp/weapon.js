@@ -30,7 +30,10 @@ mp.events.add('unequipWeapon', (id) => {
 
 mp.events.add('unequipAllWeapons', () => {
 	for (id in equiped){
-		equiped[id].destroy();
+		if (equiped[id] != null){
+			equiped[id].destroy();
+			equiped[id] = null;
+		}
 	}
 	equiped = {};
 });

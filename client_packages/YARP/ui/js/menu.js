@@ -106,7 +106,7 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 	options.appendChild(cancelButton);
 }
 
-function populateStoreItems(category, itemsJson) {
+function populateSaleItems(id, category, itemsJson) {
 	// Inicializamos los valores
 	purchasedAmount = 1;
 	selected = null;
@@ -284,13 +284,13 @@ function populateStoreItems(category, itemsJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseStoreItem', store.id, list[selected]._id, purchasedAmount);
+			mp.trigger('purchaseSaleItem', id, list[selected]._id, purchasedAmount);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		populateStoreCategories();
+		populateSaleCategories(id);
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -298,22 +298,22 @@ function populateStoreItems(category, itemsJson) {
 	options.appendChild(cancelButton);
 }
 
-function populateStoreCategories(storeJson) {
+function populateSaleCategories(id,saleJson) {
 	// Inicializamos las opciones
 	selected = null;
 
 	// Añadimos el título al menú
 	let header = document.getElementById('header');
-	if (storeJson) {
-		store = JSON.parse(storeJson);
+	if (saleJson) {
+		sale = JSON.parse(saleJson);
 	}
-	header.textContent = store.name;
+	header.textContent = id;
 
 	// Obtenemos el nodo contenedor
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 	let list = [];
-	for (key in store.categories){
+	for (key in sale){
 		list.push(key);
 	}
 
@@ -349,7 +349,7 @@ function populateStoreCategories(storeJson) {
 			selected = i;
 
 			// Mostramos la página de componentes
-			populateStoreItems(list[selected], JSON.stringify(store.categories[list[selected]]));
+			populateSaleItems(id, list[selected], JSON.stringify(sale[list[selected]]));
 		});
 
 		// Ordenamos la jerarquía de elementos

@@ -16,11 +16,11 @@ module.exports = {
          hint: 'Create any gamemode object from inside the game. A very powerful command.',
          permissions: ['cmd.new'],
          call: (player,args) => {
-            let Class = args[0];
             args = yarp.utils.getSubstrings(args.join(' '));
+            let Class = args[0];
             if (Class) {
                if (args.length > 0){
-                  for (let i = 0; i < args.length; i++){
+                  for (let i = 1; i < args.length; i++){
                      try {
                         let arg = eval(args[i]);
                      } catch(err) {
@@ -39,9 +39,9 @@ module.exports = {
          hint: 'Remove any gamemode object from inside the game. A very powerful command.',
          permissions: ['cmd.rem'],
          call: (player,args) => {
-            let Class = args[0];
             args = yarp.utils.getSubstrings(args.join(' '));
-            let id = args[0];
+            let Class = args[0];
+            let id = args[1];
             if (yarp[Class]) {
                let obj = yarp[Class.toLowerCase()+'s'][id];
                if (obj) {
@@ -54,16 +54,16 @@ module.exports = {
          hint: 'Edit any gamemode object from inside the game. A very powerful command.',
          permissions: ['cmd.edit'],
          call: (player,args) => {
-            let Class = args[0];
             args = yarp.utils.getSubstrings(args.join(' '));
-            let id = args[0];
+            let Class = args[0];
+            let id = args[1];
             if (yarp[Class]) {
                let collection = Class.toLowerCase()+'s';
                let obj = yarp[collection][id];
                if (obj) {
-                  if (args.length > 1){
+                  if (args.length > 2){
                      let text = '';
-                     for (let i = 1; i < args.length; i++){
+                     for (let i = 2; i < args.length; i++){
                         text = text+`yarp.${collection}['${id}'].${args[i]} = ${obj[args[i]]};\\n`;
                      }
                      player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor',text]]);
@@ -81,13 +81,16 @@ module.exports = {
          permissions: ['cmd.givegroup'],
          call: (player,args) => {
             args = yarp.utils.getSubstrings(args.join(' '));
-            if (yarp.groups[args[1]]){
-               if (yarp.users[args[0]]){
-                  yarp.users[args[0]].giveGroup(args[1]);
-                  yarp.users[args[0]].save();
-               } else if (yarp.characters[args[0]]){
-                  yarp.characters[args[0]].giveGroup(args[1]);
-                  yarp.characters[args[0]].save();
+            let user = yarp.users[args[0]];
+            let character = yarp.characters[args[0]]
+            let group = yarp.groups[args[1]];
+            if (group){
+               if (user){
+                  user.giveGroup(group.id);
+                  user.save();
+               } else if (character){
+                  character.giveGroup(group.id);
+                  character.save();
                }
             }
          }
@@ -97,13 +100,16 @@ module.exports = {
          permissions: ['cmd.takegroup'],
          call: (player,args) => {
             args = yarp.utils.getSubstrings(args.join(' '));
-            if (yarp.groups[args[1]]){
-               if (yarp.users[args[0]]){
-                  yarp.users[args[0]].takeGroup(args[1]);
-                  yarp.users[args[0]].save();
-               } else if (yarp.characters[args[0]]){
-                  yarp.characters[args[0]].takeGroup(args[1]);
-                  yarp.characters[args[0]].save();
+            let user = yarp.users[args[0]];
+            let character = yarp.characters[args[0]]
+            let group = yarp.groups[args[1]];
+            if (group){
+               if (user){
+                  user.takeGroup(group.id);
+                  user.save();
+               } else if (character){
+                  character.takeGroup(group.id);
+                  character.save();
                }
             }
          }
@@ -189,8 +195,9 @@ module.exports = {
          hint: 'Teleport to specified gamemode object.',
          permissions: ['cmd.gmtp'],
          call: (player,args) => {
+            args = yarp.utils.getSubstrings(args.join(' '));
             let Class = args[0];
-            let id = yarp.utils.getSubstrings(args.join(' '))[0];
+            let id = args[1];
             if (yarp[Class]) {
                let collection = Class.toLowerCase()+'s';
                let obj = yarp[collection][id];

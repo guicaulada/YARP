@@ -11,21 +11,20 @@ mp.events.add('unbindToggleChat', (player) => {
   yarp.hotkeys['ToggleChat'].unbind(player);
 });
 
-mp.events.add('purchaseStoreItem', (player, storeid, itemid, amount) => {
+mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
   let character = yarp.characters[player.name];
-  let store = yarp.stores[storeid];
-  if (store) {
-    let item = store.inventory[itemid];
-    let total = item.price*amount;
+  let location = yarp.locations[locationid];
+  if (location) {
+    let item = yarp.items[itemid];
+    let store_item = location.inventory[itemid];
+    let total = store_item.price*amount;
     if (character.tryFullPayment(total)){
-      character.giveItem(yarp.items[itemid],amount);
-      item.amount -= amount;
+      store_item.amount -= amount;
+      character.giveItem(item,amount);
       player.notify('Paid ~r~$'+total);
-      player.notify('Received ~g~'+amount+' '+yarp.items[itemid].name);
+      player.notify('Received ~g~'+amount+' '+item.name);
       character.save();
     }
-  } else {
-    console.log(store);
   }
 });
 

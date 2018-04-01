@@ -22,6 +22,8 @@ mp.events.add('playerCommand', (player, command) => {
         if(command.position && command.range) {
           if (yarp.utils.Vector3Distance(player.position,command.position) < command.range){
             command.call(player,args);
+          } else {
+            player.outputChatBox('!{yellow}HINT!{white}: You are at the wrong position.');
           }
         } else {
           command.call(player,args);

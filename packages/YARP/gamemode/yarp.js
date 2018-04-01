@@ -29,11 +29,11 @@ module.exports = (async () => {
     yarp.Hotkey = require('./object/Hotkey');
     yarp.Item = require('./object/Item');
     yarp.Label = require('./object/Label');
+    yarp.Location = require('./object/Location');
     yarp.Marker = require('./object/Marker');
     yarp.Npc = require('./object/Npc');
     yarp.Pool = require('./object/Pool');
     yarp.Prop = require('./object/Prop');
-    yarp.Store = require('./object/Store');
     yarp.Transaction = require('./object/Transaction');
     yarp.User = require('./object/User');
     yarp.Variable = require('./object/Variable');
@@ -57,10 +57,10 @@ module.exports = (async () => {
     yarp.hotkeys = new yarp.Pool(yarp.Hotkey);
     yarp.items = new yarp.Pool(yarp.Item);
     yarp.labels = new yarp.Pool(yarp.Label);
+    yarp.locations = new yarp.Pool(yarp.Location);
     yarp.markers = new yarp.Pool(yarp.Marker);
     yarp.npcs = new yarp.Pool(yarp.Npc);
     yarp.props = new yarp.Pool(yarp.Prop);
-    yarp.stores = new yarp.Pool(yarp.Store);
     yarp.transactions = new yarp.Pool(yarp.Transaction);
     yarp.users = new yarp.Pool(yarp.User);
     yarp.variables = new yarp.Pool(yarp.Variable);
@@ -84,10 +84,10 @@ module.exports = (async () => {
     await yarp.hotkeys.load();
     await yarp.items.load();
     await yarp.labels.load();
+    await yarp.locations.load();
     await yarp.markers.load();
     await yarp.npcs.load();
     await yarp.props.load();
-    await yarp.stores.load();
     await yarp.transactions.load();
     await yarp.users.load();
     await yarp.variables.load();
@@ -111,10 +111,10 @@ module.exports = (async () => {
     yarp.hotkeys.config('../config/hotkeys');
     yarp.items.config('../config/items');
     yarp.labels.config('../config/labels');
+    yarp.locations.config('../config/locations');
     yarp.markers.config('../config/markers');
     yarp.npcs.config('../config/npcs');
     yarp.props.config('../config/props');
-    yarp.stores.config('../config/stores');
     yarp.transactions.config('../config/transactions');
     yarp.users.config('../config/users');
     yarp.variables.config('../config/variables');

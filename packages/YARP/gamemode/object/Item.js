@@ -3,7 +3,7 @@
  * @file Item class
  */
 module.exports = class Item extends yarp.gmo{
-  constructor(id,name,category,weight,price,spoil,model,call){
+  constructor(id,name,category,weight,spoil,model,call){
     super();
     if ((typeof id) === 'object' || (id && name) != null) {
       this._id = id._id || id;
@@ -19,12 +19,20 @@ module.exports = class Item extends yarp.gmo{
     }
   }
 
+  isWeapon() {
+    return this.id.includes('WEAPON_')
+  }
+
+  isAmmo() {
+    return this.id.includes('AMMO_')
+  }
+
   static config(file){
     let items = require(file);
     for (let category in items){
       for (let id in items[category]){
         let item = items[category][id];
-        new yarp.Item(id,item.name,category,item.weight,item.price,item.spoil,item.model,item.call);
+        new yarp.Item(id,item.name,category,item.weight,item.spoil,item.model,item.call);
       }
     }
   }

@@ -19,6 +19,10 @@ mp.events.add('runClientCode', (code) => {
 
 let keybinds = {};
 mp.events.add('playerBindKey', (id,key) => {
+  if (keybinds[id]) {
+    mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
+    keybinds[id] = null;
+  }
   if ((typeof key) === 'string') key = yarp.utils.virtualKeys[key.toUpperCase()];
   keybinds[id] = {
     key: key,
