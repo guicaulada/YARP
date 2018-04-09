@@ -268,31 +268,53 @@ module.exports = class Character extends yarp.gmo{
   }
 
   giveWeapon(weapon, amount){
-    if (weapon) {
-      if (!this.weapons[weapon.id]) {
-        this.weapons[weapon.id] = 0;
+    if (!this.hasWeapon(weapon.id)) {
+      this.weapons[weapon.id] = 0;
+    }
+    if (!amount) amount = 0;
+    this.weapons[weapon.id] += amount;
+    this.player.giveWeapon(mp.joaat(weapon.id), amount);
+    this.player.call('equipWeapon', [JSON.stringify(weapon)]);
+  }
+
+  takeWeapon(weapon, amount){
+    if (this.hasWeapon(weapon.id)) {
+      this.weapons.splice(this.weapons.indexOf(weapon.id),1);
+    }
+    //this.player.giveWeapon(mp.joaat(weapon.id), amount); How to take a weapon ?
+    this.player.call('unequipWeapon', [JSON.stringify(weapon)]);
+  }
+
+  takeWeaponAmmo(id, amount){
+    if (this.hasWeapon(id)) {
+      this.weapons[id] -= amount;
+      if (this.weapons[id] <= 0) {
+        this.weapons[id] = 0;
       }
-      this.weapons[weapon.id] += amount;
-      this.player.giveWeapon(mp.joaat(weapon.id), amount);
-      this.player.call('equipWeapon', [JSON.stringify(weapon)]);
+    }
+  }
+
+  giveWeaponAmmo(id, amount){
+    if (this.hasWeapon(id)) {
+      this.weapons[id] += amount;
     }
   }
 
   takeAmmo(id, amount){
-    if (!this.weapons[id]) {
-      return;
-    }
-    this.weapons[id] -= amount;
-    if (this.weapons[id] <= 0) {
-      this.weapons[id] = 0;
+    let weapon = id.replace('AMMO_','WEAPON_');
+    if (this.hasWeapon(weapon)) {
+      this.weapons[weapon] -= amount;
+      if (this.weapons[weapon] <= 0) {
+        this.weapons[weapon] = 0;
+      }
     }
   }
 
   giveAmmo(id, amount){
-    if (!this.weapons[id]) {
-      return;
+    let weapon = id.replace('AMMO_','WEAPON_');
+    if (this.hasWeapon(weapon)) {
+      this.weapons[weapon] += amount;
     }
-    this.weapons[id] += amount;
   }
 
   hasWeapon(id){

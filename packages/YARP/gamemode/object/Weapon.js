@@ -32,7 +32,7 @@ module.exports = class Weapon extends yarp.gmo{
           let character = yarp.characters[player.name];
           character.giveWeapon(weapon,0);
         });
-        let ammoid = id.replace('WEAPON_','AMMO_')
+        let ammoid = id.replace('WEAPON_','AMMO_');
         new yarp.Item(ammoid,weapon.name+' Ammo',category+' Ammo',0.1,false,'v_ret_gc_ammostack',(player) => {
           let character = yarp.characters[player.name];
           character.giveAmmo(id,character.inventory[ammoid]);

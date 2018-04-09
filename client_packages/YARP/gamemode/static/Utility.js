@@ -133,4 +133,71 @@ exports = class Utility {
       RWIN: 0x5C,SCROLL: 0x91,SLEEP: 0x5F,SNAPSHOT: 0x2C,UP: 0x26,VOLUME_DOWN: 0xAE,VOLUME_MUTE: 0xAD,VOLUME_UP: 0xAF,XBUTTON1: 0x05,XBUTTON2: 0x06
     }
   }
+
+  static getTimezone(timezone) {
+    let date = new Date();
+    let h = date.getUTCHours() + timezone;
+    let m = date.getUTCMinutes();
+    let s = date.getUTCSeconds();
+    let dd = date.getUTCDate();
+    let mm = date.getUTCMonth()+1; // Janeiro eah 0
+    let yy = date.getUTCFullYear();
+    if (timezone <= 0) {
+      if (h < 0) { // checa se a hora eah negativa (timezone ta um dia atras)
+        h = 24 + h;
+        dd--; // poe um dia atras
+      }
+      if (dd == 0) { // checa se o dia igual a 0 (timezone ta um mes atras)
+        mm--; // poe um mes atras
+        if (mm == 0) { // checa se o mes igual a 0 (timezone ta um ano atras)
+          mm = 12; // poe um ano atras
+          yy--; // yy = yy - 1; ^
+        }
+        if (mm == 2) { // se o mes que ta atras for igual a Fevereiro
+          if (yy % 100 != 0 && yy % 4 == 0 || yy % 400 == 0) { // se o ano for bissexto
+            dd = 29; // dia igual a 29
+          } else {
+            dd = 28; // se nao for bissexto igual a 28
+          }
+        } else if (mm % 2 == 0) { // se nao for mes 2 mas o mes for numero par
+          dd = 30; // entoa dia igual a 30
+        } else {
+          dd = 31; // se nao dia igual a 31
+        }
+      }
+    } else {
+      if (h > 23) { // checa se a hora eah maior que 24 (timezone ta um dia na frente)
+        h = h - 24;
+        dd++; // poe um dia na frente
+      }
+      if (mm == 2) { // se o mes for Fevereiro
+        if (yy % 100 != 0 && yy % 4 == 0 || yy % 400 == 0) { // se o ano for bissexto
+          if (dd > 29) { // se o dia for maior que 29
+            dd = 1; // poe no proximo mes
+            mm++; // ^
+          }
+        } else {
+          if (dd > 28) { // se o dia for maior que 28
+            dd = 1; // poe no proximo mes
+            mm++; // ^
+          }
+        }
+      } else if (mm % 2 == 0) { // se nao for mes 2 mas o mes for numero par
+        if (dd > 30) { // se o dia for maior que 30
+          dd = 1; // poe no proximo mes
+          mm++; // ^
+        }
+      } else {
+        if (dd > 31) { // se o dia for maior que 28
+          dd = 1; // poe no proximo mes
+          mm++; // ^
+        }
+      }
+      if (mm > 12) { // se mes maior que 12
+        mm = 1; // acrescenta um ano
+        yy++ // ^
+      }
+    }
+    return {h:h,m:m,s:s,dd:dd,mm:mm,yy:yy};
+  }
 }

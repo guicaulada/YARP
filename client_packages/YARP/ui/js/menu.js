@@ -112,7 +112,7 @@ function populateSaleItems(id, category, itemsJson) {
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let items = JSON.parse(itemsJson);
+	let items = JSON.parse(itemsJson.replace(/\s+/g, ' '));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
@@ -305,7 +305,7 @@ function populateSaleCategories(id,saleJson) {
 	// Añadimos el título al menú
 	let header = document.getElementById('header');
 	if (saleJson) {
-		sale = JSON.parse(saleJson);
+		sale = JSON.parse(saleJson.replace(/\s+/g, ' '));
 	}
 	header.textContent = id;
 

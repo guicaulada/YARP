@@ -20,7 +20,13 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
     let total = store_item.price*amount;
     if (character.tryFullPayment(total)){
       store_item.amount -= amount;
-      character.giveItem(item,amount);
+      if (item.isWeapon()) {
+        character.giveWeapon(yarp.weapons[item.id]);
+      } else if (item.isAmmo()) {
+        character.giveAmmo(item.id);
+      } else {
+        character.giveItem(item,amount);
+      }
       player.notify('Paid ~r~$'+total);
       player.notify('Received ~g~'+amount+' '+item.name);
       character.save();
