@@ -1,21 +1,26 @@
-<!-- Please give detailed answers to help us solve your issue -->
-## *Who* is the bug affecting?
-<!-- Ex. All users, only one user, only users of a certain group -->
+<!-- Note: for support questions, please use our discord. This repository's issues are reserved for feature requests and bug reports. -->
 
-## *What* is affected by this bug?
-<!-- Ex. buying items, sending message, entering ammu-nation -->
+* **I'm submitting a ...**
+  - [ ] bug report <!-- Please add [Bug] on the beggining of the title -->
+  - [ ] feature request  <!-- Please add [Request] on the beggining of the title -->
 
-## *When* does this occur?
-<!-- Ex. After pressing E, on top of the marker, at the ammu-nation -->
 
-## *Where* on the framework does it happen?
-<!-- Ex. It happens on the menu that appears on the right side -->
 
-## *How* do we replicate the issue?
-<!-- Please be specific as possible. Use dashes (-) or numbers (1.) to create a list of steps -->
+* **What is the current behavior?**
 
-## Expected behavior (i.e. solution)
-<!-- What should have happened? -->
 
-## Other comments
-<!-- Anything else you wan't to mention? -->
+
+* **If the current behavior is a bug, please provide the steps to reproduce the problem**
+
+
+
+* **What is the expected behavior?**
+
+
+
+* **What is the motivation / use case for changing the behavior?**
+
+
+
+* **Other information** 
+<!-- e.g. detailed explanation, stacktraces, screenshots, related issues, suggestions how to fix, links for us to have context, eg. stackoverflow, gitter, etc -->
