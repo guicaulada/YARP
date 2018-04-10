@@ -694,7 +694,7 @@
 ### Variable names
 
   - `err` is reserved for errors received via promises. Use `error` for local function variables
-  - `yarp` is reserved for global variables. Don't use it.
+  - `yarp` and `chalk` are global variables. Don't use it.
 
 ### Callback
 
