@@ -2,6 +2,7 @@
 /**
 * @file Ui events
 */
+
 mp.events.add('displayHelpText', (text) => {
   mp.game.ui.setTextComponentFormat('STRING');
   mp.game.ui.addTextComponentSubstringPlayerName(text);

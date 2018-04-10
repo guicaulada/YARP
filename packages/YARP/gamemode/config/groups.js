@@ -2,6 +2,7 @@
 /**
 * @file Group config
 */
+
 module.exports = {
   'Super Admin': {
     permissions: [

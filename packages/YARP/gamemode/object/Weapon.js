@@ -2,6 +2,7 @@
 /**
  * @file Weapon class
  */
+ 
 module.exports = class Weapon extends yarp.gmo{
   constructor(id,name,category,weight,ammo,model,bone,position,rotation,visible){
     super();

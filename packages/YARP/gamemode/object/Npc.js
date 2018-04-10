@@ -2,6 +2,7 @@
 /**
  * @file Npc class
  */
+ 
 module.exports = class Npc extends yarp.gmo{
   constructor(id,model,position,heading,despawn,drawDistance,visible,call){
     super();

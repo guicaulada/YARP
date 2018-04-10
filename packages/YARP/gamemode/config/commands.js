@@ -2,6 +2,7 @@
 /**
 * @file Command config
 */
+
 module.exports = {
    'superadmin': {
       'code': {

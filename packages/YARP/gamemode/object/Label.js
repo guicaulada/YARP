@@ -2,6 +2,7 @@
 /**
 * @file Label class
 */
+
 module.exports = class Label extends yarp.gmo{
   constructor(id,position,text,color,drawDistance,font,los,dimension,visible,range,enter,leave,permissions,items){
     super();

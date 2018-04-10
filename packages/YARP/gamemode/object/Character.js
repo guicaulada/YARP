@@ -2,6 +2,7 @@
 /**
  * @file Character class
  */
+ 
 module.exports = class Character extends yarp.gmo{
   constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, hunger, thirst, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes, enter, leave){
     super();

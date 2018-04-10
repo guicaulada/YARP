@@ -2,6 +2,7 @@
 /**
 * @file Label config
 */
+
 module.exports = {
   '7/11': {
     price: 110000000,

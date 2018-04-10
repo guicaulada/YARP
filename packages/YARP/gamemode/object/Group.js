@@ -2,6 +2,7 @@
 /**
  * @file Group class
  */
+ 
 module.exports = class Group extends yarp.gmo{
   constructor(id,type,permissions,enter,leave){
     super();

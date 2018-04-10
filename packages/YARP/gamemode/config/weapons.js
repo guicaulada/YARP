@@ -2,6 +2,7 @@
 /**
  * @file Weapon config
  */
+
 module.exports = {
   'Assault': {
     'WEAPON_ADVANCEDRIFLE': {

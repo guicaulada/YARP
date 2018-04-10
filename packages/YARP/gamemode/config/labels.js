@@ -2,6 +2,7 @@
 /**
 * @file Label config
 */
+
 module.exports = {
   'Ammu-Nation': {
     enter: (player) => {

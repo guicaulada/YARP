@@ -1,8 +1,8 @@
 'use strict';
 /**
 * @file Inventory events
+* Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/inventory.js
 */
-//Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/inventory.js
 let targetType = null;
 
 mp.events.add('showPlayerInventory', (inventoryJson, target) => {

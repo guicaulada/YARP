@@ -2,6 +2,7 @@
 /**
  * @file Door config
  */
+ 
 module.exports = {
   //Banks
   'Bank Main': {

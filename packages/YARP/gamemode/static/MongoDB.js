@@ -2,9 +2,10 @@
 /**
  * @file MongoDB class
  */
-var db;
-var MongoClient = require('mongodb').MongoClient;
+
+const MongoClient = require('mongodb').MongoClient;
 const URL = 'mongodb://localhost:27017/yarp';
+var db;
 
 module.exports = class MongoDB {
 

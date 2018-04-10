@@ -2,6 +2,7 @@
 /**
  * @file Variable class
  */
+ 
 module.exports = class Variable extends yarp.gmo{
   constructor(id,value){
     super();

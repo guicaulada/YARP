@@ -2,6 +2,7 @@
 /**
  * @file Hotkey class
  */
+ 
 module.exports = class Hotkey extends yarp.gmo{
   constructor(id,key,call,hint,category,permissions,items,position,range){
     super();

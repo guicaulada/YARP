@@ -2,6 +2,7 @@
 /**
  * @file Item class
  */
+ 
 module.exports = class Transaction extends yarp.gmo{
   constructor(type,value,source,target,date){
     super();

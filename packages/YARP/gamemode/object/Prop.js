@@ -2,6 +2,7 @@
 /**
  * @file Prop class
  */
+ 
 module.exports = class Prop extends yarp.gmo{
   constructor(id,model,position,owner,alpha,rotation,dimension,visible,range,enter,leave,permissions,items){
     super();

@@ -2,6 +2,7 @@
 /**
  * @file Colshape class
  */
+ 
 module.exports = class Colshape extends yarp.gmo{
   constructor(id,position,type,width,height,depth,enter,leave,permissions,items){
     super();

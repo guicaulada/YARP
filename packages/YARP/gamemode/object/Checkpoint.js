@@ -2,6 +2,7 @@
 /**
  * @file Checkpoint class
  */
+ 
 module.exports = class Checkpoint extends yarp.gmo{
   constructor(id,position,type,radius,color,direction,dimension,visible,range,enter,leave,permissions,items){
     super();

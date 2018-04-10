@@ -2,6 +2,7 @@
 /**
  * @file Pool class
  */
+ 
 module.exports = class Pool {
   constructor(Class){
     this._Class = Class;

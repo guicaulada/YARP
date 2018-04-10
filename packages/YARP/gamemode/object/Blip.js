@@ -2,6 +2,7 @@
 /**
  * @file Blip class
  */
+ 
 module.exports = class Blip extends yarp.gmo{
   constructor(id,position,name,sprite,scale,color,alpha,drawDistance,fade,rotation,dimension,visible){
     super();

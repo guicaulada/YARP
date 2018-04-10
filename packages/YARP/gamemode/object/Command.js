@@ -2,6 +2,7 @@
 /**
  * @file Command class
  */
+ 
 module.exports = class Command extends yarp.gmo{
   constructor(id,call,category,hint,permissions,items,position,range){
     super();

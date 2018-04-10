@@ -2,6 +2,7 @@
 /**
 * @file Marker config
 */
+
 module.exports = {
   'Ammu-Nation': {
     positions: [

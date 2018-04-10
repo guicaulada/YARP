@@ -1,8 +1,9 @@
 'use strict';
 /**
 * @file Browser events
+* Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
 */
-//Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
+
 var browsers = {};
 var parameters = {};
 

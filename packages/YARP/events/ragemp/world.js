@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file World events
+*/
+
 mp.world.removeIpl('facelobbyfake');
 mp.world.removeIpl('fakeint');
 mp.world.removeIpl('fiblobbyfake');

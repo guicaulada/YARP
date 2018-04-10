@@ -1,3 +1,8 @@
+'use strict';
+/**
+* @file YARP server main
+*/
+
 global.yarp = {}
 yarp.utils = require('./YARP/gamemode/static/Utility.js');
 

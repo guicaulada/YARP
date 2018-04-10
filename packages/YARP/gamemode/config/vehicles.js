@@ -2,6 +2,7 @@
 /**
 * @file Vehicle config
 */
+
 module.exports = {
   'Spawn Blistas': {
     model: 'blista',

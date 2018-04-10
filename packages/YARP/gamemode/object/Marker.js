@@ -2,6 +2,7 @@
 /**
  * @file Marker class
  */
+ 
 module.exports = class Marker extends yarp.gmo{
   constructor(id,position,type,radius,color,direction,rotation,visible,range,enter,leave,permissions,items){
     super();

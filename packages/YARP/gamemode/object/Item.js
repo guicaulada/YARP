@@ -2,6 +2,7 @@
 /**
  * @file Item class
  */
+ 
 module.exports = class Item extends yarp.gmo{
   constructor(id,name,category,weight,spoil,model,call){
     super();

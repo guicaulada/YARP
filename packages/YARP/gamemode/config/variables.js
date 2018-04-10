@@ -2,6 +2,7 @@
 /**
 * @file Variable config
 */
+
 module.exports = {
   'Whitelisted': false,
   'Starting Wallet': 100,

@@ -2,6 +2,7 @@
 /**
  * @file Vehicle class
  */
+ 
 module.exports = class Vehicle extends yarp.gmo{
   constructor(id,model,position,heading,owner,plate,color,alpha,locked,engine,dimension,visible,permissions,items){
     super();

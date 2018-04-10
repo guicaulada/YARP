@@ -2,6 +2,7 @@
 /**
  * @file Event class
  */
+ 
 module.exports = class Event extends yarp.gmo{
   constructor(id,call,permissions,items){
     super();

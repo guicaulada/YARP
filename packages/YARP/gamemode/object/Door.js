@@ -2,6 +2,7 @@
 /**
  * @file Door class
  */
+ 
 module.exports = class Door extends yarp.gmo{
   constructor(id,model,position,range,enter,leave,permissions,items){
     super();

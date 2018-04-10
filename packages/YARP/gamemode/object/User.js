@@ -2,7 +2,8 @@
 /**
  * @file User class
  */
-let bcrypt = require('bcryptjs');
+
+const bcrypt = require('bcryptjs');
 module.exports = class User extends yarp.gmo{
   constructor(id, password, lastLogin, whitelisted, banned, groups, enter, leave){
     super();

@@ -2,6 +2,7 @@
 /**
  * @file Gamemode Object class
  */
+ 
 module.exports = class GMObject{
   constructor() {
     if (this.constructor === GMObject) {

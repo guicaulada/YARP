@@ -2,6 +2,7 @@
 /**
  * @file DB Manager class
  */
+ 
 module.exports = class DBManager{
   static async connect(){
     await yarp.db.connect();

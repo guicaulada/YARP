@@ -2,6 +2,7 @@
 /**
  * @file Variable class
  */
+ 
 module.exports = class Location extends yarp.gmo{
   constructor(id,inventory,owner,money,price){
     super();

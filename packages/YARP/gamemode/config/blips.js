@@ -2,6 +2,7 @@
 /**
 * @file Blip config
 */
+
 module.exports = {
   'Airport': {
     sprite: 90,

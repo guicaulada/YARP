@@ -2,6 +2,7 @@
 /**
  * @file Item config
  */
+ 
 module.exports = {
   'Food': {
     'fries': {
