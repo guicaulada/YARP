@@ -6,21 +6,26 @@
 
 #### Strict Mode
 
-  - The first line of every file should be `'use strict';`. If the file contains a shebang, strict mode should be enabled on the second line.
-  - The strict mode directive should be followed by a blank line.
+  - The first line of every file should be `'use strict';`.
+  - The strict mode directive should be followed by the documentation of the file and a blank line.
   ```javascript
   'use strict';
-
+  /**
+  * @file Checkpoint events
+  */
+  
   // Right
   console.log('even when not required');
 
-  #!/usr/bin/env node
-  'use strict';
-
-  // Also right
-
   // Wrong
   'use strict';
+  console.log('even when not required')
+
+  // Also wrong
+  'use strict';
+  /**
+  * @file Checkpoint events
+  */
   console.log('even when not required')
   ```
 
@@ -40,7 +45,7 @@
   - Any variable that is only assigned once should be defined using `const`.
   - Any variable that is assigned multiple times should be defined using `let`.
   - Variables should not be declared using `var`.
-  - Declare on first use, not at top of function; [self](#prototype-members) being an exception
+  - Declare on first use, not at top of function.
   - Do not chain declarations unless inside `for` parentheses (repeat `const` or `let` for each variable in a separate statement)
   - Give descriptive names
     - Do not use similar names or synonyms for different variables unless following a convention
@@ -53,7 +58,7 @@
 #### Scope
 
   - No implicit or single statement scopes
-  - All scopes must be wrapped in `{}`
+  - All scopes must be wrapped in `{}` unless you have a really good reason not to.
   ```javascript
   // Right
 
@@ -73,8 +78,7 @@
 
   - Iterator variable should be declared inside the `for` parentheses, unless already defined
   - Iterator variables should be named `i` if possible. Nested `for` loops use `j`, `k`, etc.
-  - Use `for` with arrays, `for...in` for objects (and always check `hasOwnProperty()`)
-  - Always `++i`, never `i++`
+  - Use `for` with arrays, `for...in` for objects.
 
   ```javascript
   // Right
@@ -98,26 +102,14 @@
 
 #### Prototype members
 
-  - Prefix private members with `_`
+  - Prefix persistent members with `_`
   ```javascript
-  Example.prototype.method = function () {
-
-      this.public = 'external';
-      this._private = 'internal';
-  };
-  ```
-
-  - Define `self` for passing `this` into nested functions
-  ```javascript
-  Example.prototype.method = function () {
-
-      const self = this;
-
-      call(123, function (err) {
-
-          self.display(err);
-      });
-  };
+  class Hotkeys{
+    constructor() {
+      this._key = id._key || key || 'NONE'; // Persists to the database
+      this.args = {}; // Doesn't persist
+    }
+  }
   ```
 
 #### Function declaration
@@ -148,10 +140,16 @@
 
 #### Enforcing new on Constructor
 
-  - Use `this instanceof` to check if a constructor function was called with new. (This allows for future prototypical inheritance.)
+  - You can use `this instanceof` to check if a constructor function was called with new. (This allows for future prototypical inheritance and abstract classes.)
 
   ```javascript
-  Hoek.assert(this instanceof Server, 'Server must be instantiated using new');
+  class GMObject{
+    constructor() {
+      if (this.constructor === GMObject) {
+        throw new TypeError('Abstract class GMObject cannot be instantiated directly.');
+      }
+    }
+  }
   ```
 
 ### Style
@@ -159,7 +157,7 @@
 #### Whitespace
 
   - Always spaces, never tabs
-  - 4 spaces indents
+  - 2 spaces indents
   - No trailing whitespace at end-of-line
 
   ```javascript
@@ -182,10 +180,14 @@
 
 #### String literals
 
-  - Always `'` never `"`
+  - Always `'` never `"` and ``` ` ``` only for data
   ```javascript
   // Right
   const string = 'text in single quotes';
+  
+  // Also right
+  const quotes = 'quotes';
+  const string = `text in data ${quotes}`;
 
   // Wrong
   const string = "text in single quotes";
@@ -195,18 +197,17 @@
 
   - all files need to end with a newline (or more accurately end of line).  IDEs will often do a line separator instead.  This is to ensure it is unix friendly.  The "cat" command is a good example of seeing this behavior.  Git does a good job of pointing these out when doing pull requests.  
 
-  - Two empty lines between module functions or assignments (end of function to comment about next function)
+  - One empty lines between functions (end of function to comment about next function)
   ```javascript
-  exports.get = function () {
+  function () {
 
       // Some code
   };
                                                               // 1
-                                                              // 2
   /**
    * jsDoc comment
    */
-  internals.utility = function () {
+  function () {
 
       //Some code
   };
@@ -246,9 +247,9 @@
   ```
 
   - Newline after `}`
-    - Only exception is when followed by `,`, `;`, `);` which must be followed by a newline
-    - Includes before `else`, `catch`, etc.
-    - Empty line after `}` if not last statement in scope
+    - Only exception is when followed by `,`, `;`, `);` which must be followed by a newline (not a necesarily a blank line)
+    - Except before `else`, `catch`, etc.
+    - It's recommended to have a blank line after `}` if not last statement in scope
 
   ```javascript
   // Right
@@ -261,13 +262,11 @@
           },
           message: 'hello'
       };
-
+      
       execute(value, (err) => {
-
           console.log(err);
       });
-  }
-  else {
+  } else {
       console.log('otherwise');
   }
 
@@ -276,15 +275,14 @@
   if (condition) {
       value = {
           func: () => {
-
               console.log('example');
           }, message: 'hello'
       };
       execute(value, (err) => {
-
           console.log(err); }
       );
-  } else {
+  } 
+  else {
       console.log('otherwise');
   }
   ```
@@ -297,7 +295,7 @@
   ```javascript
   // Right
 
-  exports.method = function () {
+  function () {
 
       if (condition) {
           if (otherCondition) {
@@ -323,7 +321,7 @@
 
   // Wrong
 
-  exports.method = function () {
+  function () {
         if (condition) {
 
           if (otherCondition) {
@@ -690,90 +688,18 @@
   - Variable should be indented to the first character of the value in the first line
   ```javascript
   const message = 'hello' +
-                ' and welcome';
+                  ' and welcome';
   ```
-
-## Node
-
-### Require
-
-  - Use uppercase variable names for imported modules
-  - All require statements must be declared at the top of the module
-  - Always use relative paths
-
-### Module globals
-
-  - Every module can only have two top level globals (except for imported modules):
-    - `exports` - defined automatically by node
-    - `internals` - must be declared as an object at the top of each module immediate following the `require` section
-  - Any variable global to the module must be a property of `internals`, including constants
-  - If a module has automatically executing code, it must be contained within a function (using the `internals` namespace) and called at the top of the module after the `internals` declaration.
-
-  ````javascript
-  // Right
-
-  const Hapi = require('hapi');
-  const Hoek = require('hoek');
-  const Package = require('./package.json');
-
-  const internals = {
-      foo: 'bar'
-  };
-
-  internals.init = function () {
-
-      const server = new Hapi.Server();
-      ...
-  };
-
-  internals.init();
-
-  // Also right
-
-  const Hapi = require('hapi');
-
-  const internals = {};
-
-  internals.package = require('./package.json');
-  internals.foo = 'bar';
-  internals.init = function () {
-
-     const server = new Hapi.server();
-     ...
-  };
-
-  internals.init();
-
-  // Wrong
-
-  const hapi = require('hapi'); // Use uppercase name
-
-  const foo = 'bar'; // No global vars outside of internals
-
-  const internals = {
-      Foo: 'bar' // Don't use uppercase vars inside internals
-  };
-
-  const server = new Hapi.Server(); // No global vars outside of internals and exports / Set up your module inside an init() function
-  ...
-
-  const Hoek = require('hoek'); // Declare modules at the top of the module
-
-  ````
-
+  
 ### Variable names
 
-  - `err` is reserved for errors received via a callback. Use `error` for local function variables
+  - `err` is reserved for errors received via promises. Use `error` for local function variables
+  - `yarp` is reserved for global variables. Don't use it.
 
 ### Callback
 
-  - First argument must always be `err`
-  - Inline callbacks must use arrow functions
-  - If a function takes a `callback` argument, it **must** be called on `process.nextTick()`. Otherwise, the argument name **must** be `next` to clearly declare that it may get called on same tick
-  - Callbacks should always be called with explicit `return`
+  - Use promises. Don't use callbacks.
 
 ### Promises
 
-  - Public interfaces should (not must) return a promise when no callback is provided
-  - Promises should not be used internally
-  - Only native promises are allowed. Third party promise implementations are not allowed
+  - Public interfaces should (not must) return a promise
