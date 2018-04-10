@@ -1,4 +1,4 @@
-<!-- Note: for support questions, please use our discord. This repository's issues are reserved for feature requests and bug reports. -->
+<!-- Note: for support questions, add Sighmir#1621 on Discord. This repository's issues are reserved for feature requests and bug reports. -->
 
 * **I'm submitting a ...**
   - [ ] bug report <!-- Please add [Bug] on the beggining of the title -->
