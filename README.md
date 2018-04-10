@@ -1,7 +1,8 @@
 # Yet Another RolePlay - RAGE-MP
 
 YARP aim`s to be an object oriented framework that allows you to create persistent objects dynamically.  
-This project is still under development, many changes can happen to the code.
+### /!\ This project is still under development, many changes can happen to the code. /!\
+### /!\ This project is NOT ready for production, use only for development. /!\
 
 ## Requirements
 * [RAGE-MP](http://rage.mp) - RAGE Multiplayer is an multiplayer modification for Grand Theft Auto V that is alternative to GTA Online.
