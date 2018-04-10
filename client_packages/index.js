@@ -1,1 +1,1 @@
-require('./YARP/yarp.js');
+require('./YARP/index.js');
