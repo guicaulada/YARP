@@ -1,34 +1,35 @@
-<!--- Label your pull request with [Fix <issue>], [Feature <issue>] or [Change <issue>] -->
-<!--- The issue number is only needed if it closes an issue -->
-<!--- Provide a general summary of your changes on the title -->
-<!--- Ex: [Fix #14] Fixed white background on items -->
-<!--- Ex: [Feature #234] Store can now sell vehicles -->
-<!--- Ex: [Change] Improved atributes of class Location -->
+* **Please check if the request fulfills these requirements**
+- [ ] The commit message follows our guidelines
+- [ ] Your code follows the coding convetions for the project
+- [ ] Tests for the changes have been made
+- [ ] Docs have been added / updated if needed
 
 
-## Description
-<!--- Describe your changes in detail -->
 
-## Motivation and context
-<!--- Why is this change required? What problem does it solve? -->
-<!--- If it fixes an open issue, please link to the issue here. -->
+* **What kind of change does this introduce?**
+- [ ] bug fix <!-- Please add [Fix <issue>] on the beggining of the title -->
+- [ ] new feature  <!-- Please add [Feature <issue>] on the beggining of the title -->
+- [ ] change  <!-- Please add [Change <issue>] on the beggining of the title -->
+- [ ] update  <!-- Please add [Update <issue>] on the beggining of the title -->
+<!-- <issue> is the number of the issue that is related to this pull request eg: #78 -->
+<!-- If there's no issue related to your pull request just close the brackets eg: [Feature] -->
 
-## How has this been tested?
-<!--- Please describe in detail how you tested your changes. -->
-<!--- Which tests did you ran? How? -->
-<!--- Do your changes affect other areas of the code? Which areas? -->
 
-## Screenshots (if appropriate):
 
-## Types of changes
-<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+* **What is the current behavior?**
 
-## Checklist:
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
-<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
-- [ ] My code follows the code style of this project.
-- [ ] My change requires a change to the documentation.
-- [ ] I have updated the documentation accordingly.
+
+
+* **What is the new behavior?**
+
+
+
+* **Does this introduce a breaking change?**
+<!-- What changes users might need to make on their packages? -->
+
+
+
+* **Other information**:
+<!-- e.g. detailed explanation, stacktraces, screenshots, related issues, links for us to have context, eg. stackoverflow, gitter, etc -->
+
+
