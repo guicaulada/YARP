@@ -1,4 +1,10 @@
-<!--- Provide a general summary of your changes in the Title above -->
+<!--- Label your pull request with [Fix <issue>], [Feature <issue>] or [Change <issue>] -->
+<!--- The issue number is only needed if it closes an issue -->
+<!--- Provide a general summary of your changes on the title -->
+<!--- Ex: [Fix #14] Fixed white background on items -->
+<!--- Ex: [Feature #234] Store can now sell vehicles -->
+<!--- Ex: [Change] Improved atributes of class Location -->
+
 
 ## Description
 <!--- Describe your changes in detail -->
@@ -9,8 +15,8 @@
 
 ## How has this been tested?
 <!--- Please describe in detail how you tested your changes. -->
-<!--- Include details of your testing environment, tests ran to see how -->
-<!--- your change affects other areas of the code, etc. -->
+<!--- Which tests did you ran? How? -->
+<!--- Do your changes affect other areas of the code? Which areas? -->
 
 ## Screenshots (if appropriate):
 
