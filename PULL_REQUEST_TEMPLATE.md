@@ -1,16 +1,16 @@
 * **Please check if the request fulfills these requirements**
-- [ ] The commit message follows our guidelines
-- [ ] Your code follows the coding convetions for the project
-- [ ] Tests for the changes have been made
-- [ ] Docs have been added / updated if needed
+  - [ ] The commit message follows our guidelines
+  - [ ] Your code follows the coding convetions for the project
+  - [ ] Tests for the changes have been made
+  - [ ] Docs have been added / updated if needed
 
 
 
 * **What kind of change does this introduce?**
-- [ ] bug fix <!-- Please add [Fix <issue>] on the beggining of the title -->
-- [ ] new feature  <!-- Please add [Feature <issue>] on the beggining of the title -->
-- [ ] change  <!-- Please add [Change <issue>] on the beggining of the title -->
-- [ ] update  <!-- Please add [Update <issue>] on the beggining of the title -->
+  - [ ] bug fix <!-- Please add [Fix <issue>] on the beggining of the title -->
+  - [ ] new feature  <!-- Please add [Feature <issue>] on the beggining of the title -->
+  - [ ] change  <!-- Please add [Change <issue>] on the beggining of the title -->
+  - [ ] update  <!-- Please add [Update <issue>] on the beggining of the title -->
 <!-- <issue> is the number of the issue that is related to this pull request eg: #78 -->
 <!-- If there's no issue related to your pull request just close the brackets eg: [Feature] -->
 
