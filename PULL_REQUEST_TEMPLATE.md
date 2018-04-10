@@ -29,7 +29,7 @@
 
 
 
-* **Other information**:
+* **Other information**
 <!-- e.g. detailed explanation, stacktraces, screenshots, related issues, links for us to have context, eg. stackoverflow, gitter, etc -->
 
 
