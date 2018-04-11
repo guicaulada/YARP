@@ -18,3 +18,7 @@ mp.events.add('verifyLogin', (password) => {
 mp.events.add('unbindToggleChat', (code) => {
   mp.events.callRemote('unbindToggleChat');
 });
+
+mp.events.add('callInventoryOption', (item_id, option) => {
+	mp.events.callRemote('callInventoryOption', item_id, option);
+});

@@ -2,20 +2,28 @@
 let selected_id = null;
 let selectedAmount = null;
 let currentSelected = null;
+let inventory = null
 
 function populateInventory(inventoryJson, title) {
 	// Inicializamos la selección
 	selected = null;
 
 	// Obtenemos el array de objetos
-	let inventory = JSON.parse(inventoryJson);
+	if (inventoryJson) {
+		inventory = JSON.parse(inventoryJson);
+	}
 
 	// Obtenemos los contenedores de elementos
 	let titleContainer = document.getElementById('identifier');
 	let inventoryContainer = document.getElementById('inventory');
 	let closeImage = document.createElement('img');
+	while (inventoryContainer.firstChild) {
+	    inventoryContainer.removeChild(inventoryContainer.firstChild);
+	}
 
-	titleContainer.textContent = title;
+	if (title) {
+		titleContainer.textContent = title;
+	}
 	closeImage.src = '../img/close.png';
 	closeImage.onclick = (function(){
 		mp.trigger('destroyBrowser', 'inventory');
@@ -36,7 +44,7 @@ function populateInventory(inventoryJson, title) {
 			amountContainer.classList.add('inventory-amount');
 
 			// Añadimos el contenido de cada elemento
-			itemImage.src = '../img/inventory/' + item.img + '.png';
+			itemImage.src = '../img/inventory/' + item.model + '.png';
 			amountContainer.textContent = item.amount;
 
 			// Añadimos la función de click sobre el elemento
@@ -59,7 +67,7 @@ function populateInventory(inventoryJson, title) {
 					selectedAmount = amountContainer;
 
 					// Obtenemos las opciones a mostrar
-					mp.trigger('getInventoryOptions');
+					showInventoryOptions(item.options);
 				}
 			});
 
@@ -73,7 +81,10 @@ function populateInventory(inventoryJson, title) {
 
 function showInventoryOptions(optionsArray) {
 	// Añadimos las opciones
-	let options = optionsArray.split(',');
+	let options = [];
+	for (id in optionsArray) {
+		options.push(id);
+	}
 	let inventoryOptions = document.getElementById('options');
 	let inventoryContainer = document.getElementById('inventory');
 	while (inventoryOptions.firstChild) {
@@ -86,20 +97,27 @@ function showInventoryOptions(optionsArray) {
 		itemOption.classList.add('inventory-option');
 		itemOption.textContent = options[i];
 		itemOption.onclick = (function(){
-			mp.trigger('executeInventoryAction', selected_id, options[i]);
-			if (Number(selectedAmount.textContent) - 1 > 0)
-			  selectedAmount.textContent = Number(selectedAmount.textContent) - 1;
-			else {
-				inventoryContainer.removeChild(currentSelected);
-				selected = null;
-				selected_id = null;
-				selectedAmount = null;
-				currentSelected = null;
-				while (inventoryOptions.firstChild) {
-						inventoryOptions.removeChild(inventoryOptions.firstChild);
-				}
-			}
+			mp.trigger('callInventoryOption', selected_id, options[i]);
 		});
 		inventoryOptions.appendChild(itemOption);
+	}
+}
+
+function updateInventory(amount) {
+	let inventoryOptions = document.getElementById('options');
+	let inventoryContainer = document.getElementById('inventory');
+	if (amount > 0)
+		selectedAmount.textContent = Number(amount);
+	else {
+		inventoryContainer.removeChild(currentSelected);
+		inventory.splice(currentSelected, 1);
+		selected = null;
+		selected_id = null;
+		selectedAmount = null;
+		currentSelected = null;
+		populateInventory();
+		while (inventoryOptions.firstChild) {
+				inventoryOptions.removeChild(inventoryOptions.firstChild);
+		}
 	}
 }

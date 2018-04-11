@@ -3,6 +3,14 @@
 * @file Menu events
 */
 
+mp.events.add('callInventoryOption', (player, item_id, option) => {
+  let item = yarp.items[item_id]
+  item.options[option](player);
+  let character = yarp.characters[player.name]
+  character.takeItem(item,1);
+  player.call('browserExecute', ['inventory', ['updateInventory', character.inventory[item_id]]]);
+});
+
 mp.events.add('loadBankBalance', (player) => {
   player.call('browserExecute', ['menu', ['showBankOperations', JSON.stringify(yarp.characters[player.name].balance), player.name]]);
 });

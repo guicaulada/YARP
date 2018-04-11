@@ -2,7 +2,7 @@
 /**
  * @file Character class
  */
- 
+
 module.exports = class Character extends yarp.gmo{
   constructor(id, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, hunger, thirst, position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes, enter, leave){
     super();
@@ -31,6 +31,7 @@ module.exports = class Character extends yarp.gmo{
       this._clothes = id._clothes || clothes || {};
       this._enter = id._enter || ((enter) ? enter.toString() : '() => {}');
       this._leave = id._leave || ((leave) ? leave.toString() : '() => {}');
+      this.players = [];
       yarp.dbm.register(this);
       this.makeGetterSetter();
     }

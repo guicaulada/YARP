@@ -41,6 +41,100 @@ function tick() {
     if (user) {
       let character = user.character;
       if (character) {
+
+        yarp.checkpoints.forEach((checkpoint) => {
+          let i = checkpoint.players.indexOf(id);
+          if (i < 0) {
+            if (yarp.utils.Vector3Distance(player.position,checkpoint.position) < checkpoint.range){
+              if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)){
+                if (character.hasItems(checkpoint.items)) {
+                  if (checkpoint.enter){
+                    checkpoint.enter(player);
+                  }
+                } else {
+                  player.notify('~r~You don\'t have permission.');
+                }
+              } else {
+                player.notify('~r~You don\'t have the required items.');
+              }
+              checkpoint.players.push(id)
+            }
+          } else {
+            if (yarp.utils.Vector3Distance(player.position,checkpoint.position) > checkpoint.range){
+              if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)){
+                if (character.hasItems(checkpoint.items)) {
+                  if (checkpoint.leave){
+                    checkpoint.leave(player);
+                  }
+                }
+              }
+              checkpoint.players.splice(i,1)
+            }
+          }
+        });
+
+        yarp.doors.forEach((door) => {
+          let i = door.players.indexOf(id);
+          if (i < 0) {
+            if (yarp.utils.Vector3Distance(player.position,door.position) < door.range){
+              if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)){
+                if (character.hasItems(door.items)) {
+                  if (door.enter){
+                    door.enter(player);
+                  }
+                } else {
+                  player.notify('~r~You don\'t have permission.');
+                }
+              } else {
+                player.notify('~r~You don\'t have the required items.');
+              }
+              door.players.push(id);
+            }
+          } else {
+            if (yarp.utils.Vector3Distance(player.position,door.position) > door.range){
+              if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)){
+                if (character.hasItems(door.items)) {
+                  if (door.leave){
+                    door.leave(player);
+                  }
+                }
+              }
+              door.players.splice(i,1);
+            }
+          }
+        });
+
+        yarp.labels.forEach((label) => {
+          let i = label.players.indexOf(id);
+          if (i < 0) {
+            if (yarp.utils.Vector3Distance(player.position,label.position) < label.range){
+              if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)){
+                if (character.hasItems(label.items)) {
+                  if (label.enter){
+                    label.enter(player);
+                  }
+                } else {
+                  player.notify('~r~You don\'t have permission.');
+                }
+              } else {
+                player.notify('~r~You don\'t have the required items.');
+              }
+              label.players.push(id);
+            }
+          } else {
+            if (yarp.utils.Vector3Distance(player.position,label.position) > label.range){
+              if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)){
+                if (character.hasItems(label.items)) {
+                  if (label.leave){
+                    label.leave(player);
+                  }
+                }
+              }
+              label.players.splice(i,1);
+            }
+          }
+        });
+
         yarp.markers.forEach((marker) => {
           let i = marker.players.indexOf(id);
           if (i < 0) {
@@ -103,14 +197,14 @@ function tick() {
           }
         });
 
-        yarp.checkpoints.forEach((checkpoint) => {
-          let i = checkpoint.players.indexOf(id);
+        yarp.props.forEach((prop) => {
+          let i = prop.players.indexOf(id);
           if (i < 0) {
-            if (yarp.utils.Vector3Distance(player.position,checkpoint.position) < checkpoint.range){
-              if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)){
-                if (character.hasItems(checkpoint.items)) {
-                  if (checkpoint.enter){
-                    checkpoint.enter(player);
+            if (yarp.utils.Vector3Distance(player.position,prop.position) < prop.range){
+              if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)){
+                if (character.hasItems(prop.items)) {
+                  if (prop.enter){
+                    prop.enter(player);
                   }
                 } else {
                   player.notify('~r~You don\'t have permission.');
@@ -118,80 +212,43 @@ function tick() {
               } else {
                 player.notify('~r~You don\'t have the required items.');
               }
-              checkpoint.players.push(id)
+              prop.players.push(id)
             }
           } else {
-            if (yarp.utils.Vector3Distance(player.position,checkpoint.position) > checkpoint.range){
-              if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)){
-                if (character.hasItems(checkpoint.items)) {
-                  if (checkpoint.leave){
-                    checkpoint.leave(player);
+            if (yarp.utils.Vector3Distance(player.position,prop.position) > prop.range){
+              if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)){
+                if (character.hasItems(prop.items)) {
+                    if (prop.leave){
+                    prop.leave(player);
                   }
                 }
               }
-              checkpoint.players.splice(i,1)
+              prop.players.splice(i,1)
             }
           }
         });
 
-        yarp.labels.forEach((label) => {
-          let i = label.players.indexOf(id);
-          if (i < 0) {
-            if (yarp.utils.Vector3Distance(player.position,label.position) < label.range){
-              if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)){
-                if (character.hasItems(label.items)) {
-                  if (label.enter){
-                    label.enter(player);
+        mp.players.forEach((player2,id2) => {
+          if (id != id2) {
+            let i = character.players.indexOf(id);
+            let user2 = yarp.users[player2.socialClub];
+            if (user2) {
+              let character2 = user2.character;
+              if (character) {
+                if (i < 0) {
+                  if (yarp.utils.Vector3Distance(player.position,player2.position) < 3){
+                    player.call('displayHelpText',['Press ~INPUT_PICKUP~ to interact.']);
+                    yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]]]);
+                    character.players.push(id2);
                   }
                 } else {
-                  player.notify('~r~You don\'t have permission.');
-                }
-              } else {
-                player.notify('~r~You don\'t have the required items.');
-              }
-              label.players.push(id);
-            }
-          } else {
-            if (yarp.utils.Vector3Distance(player.position,label.position) > label.range){
-              if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)){
-                if (character.hasItems(label.items)) {
-                  if (label.leave){
-                    label.leave(player);
+                  if (yarp.utils.Vector3Distance(player.position,player2.position) > 3){
+                    player.call('clearHelpText');
+                    yarp.hotkeys['Event'].unbind(player);
+                    prop.players.splice(id2,1)
                   }
                 }
               }
-              label.players.splice(i,1);
-            }
-          }
-        });
-
-        yarp.doors.forEach((door) => {
-          let i = door.players.indexOf(id);
-          if (i < 0) {
-            if (yarp.utils.Vector3Distance(player.position,door.position) < door.range){
-              if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)){
-                if (character.hasItems(door.items)) {
-                  if (door.enter){
-                    door.enter(player);
-                  }
-                } else {
-                  player.notify('~r~You don\'t have permission.');
-                }
-              } else {
-                player.notify('~r~You don\'t have the required items.');
-              }
-              door.players.push(id);
-            }
-          } else {
-            if (yarp.utils.Vector3Distance(player.position,door.position) > door.range){
-              if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)){
-                if (character.hasItems(door.items)) {
-                  if (door.leave){
-                    door.leave(player);
-                  }
-                }
-              }
-              door.players.splice(i,1);
             }
           }
         });

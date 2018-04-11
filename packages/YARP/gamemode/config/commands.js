@@ -223,8 +223,18 @@ module.exports = {
          hint: 'Open your inventory.',
          permissions: ['cmd.inventory'],
          call: (player,args) => {
-            let inventoryJson = JSON.stringify(yarp.characters[player.name].inventory);
-            player.call('showPlayerInventory', [inventoryJson, 0])
+            let list = [];
+            let inventory = yarp.characters[player.name].inventory;
+            for (let id in inventory) {
+               let item = yarp.items[id];
+               list.push({
+                  id: item.id,
+                  model: item.model,
+                  amount: inventory[id],
+                  options: item._options
+               });
+            }
+         	player.call('createBrowser', ['inventory', ['package://YARP/ui/html/inventory.html', 'populateInventory', JSON.stringify(list), "Inventory"]]);
          }
       },
       'money': {
