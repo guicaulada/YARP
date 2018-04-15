@@ -1,14 +1,8 @@
 'use strict';
 /**
- * @file Loads the classes on server-side.
- * @namespace loaders
+ * Loads the classes on server-side asynchronously.
  */
 
-/**
- * Loads the classes asynchronously.
- * @async
- * @function
- */
 module.exports = async () => {
   // Loading classes
   console.log(chalk.yellowBright('[YARP] ')+'Loading Objects');

@@ -40,24 +40,6 @@
 <dt><a href="#yarp">yarp</a> : <code>object</code></dt>
 <dd><p>Loads the gamemode on server-side.</p>
 </dd>
-<dt><a href="#loaders">loaders</a> : <code>object</code></dt>
-<dd><p>Loads the classes on server-side.</p>
-</dd>
-<dt><a href="#loaders">loaders</a> : <code>object</code></dt>
-<dd><p>Loads the configs on server-side.</p>
-</dd>
-<dt><a href="#loaders">loaders</a> : <code>object</code></dt>
-<dd><p>Loads the data on server-side.</p>
-</dd>
-<dt><a href="#loaders">loaders</a> : <code>object</code></dt>
-<dd><p>Loads the events on server-side.</p>
-</dd>
-<dt><a href="#loaders">loaders</a> : <code>object</code></dt>
-<dd><p>Loads the pools on server-side.</p>
-</dd>
-<dt><a href="#loaders">loaders</a> : <code>object</code></dt>
-<dd><p>Loads the requirements on server-side.</p>
-</dd>
 </dl>
 
 <a name="checkpoint"></a>
@@ -4671,39 +4653,3 @@ Returns the time in a set timezone.
 | --- | --- | --- |
 | timezone | <code>number</code> | The timezone difference to GMT. |
 
-<a name="loaders"></a>
-
-## loaders : <code>object</code>
-Loads the classes on server-side.
-
-**Kind**: global namespace  
-<a name="loaders"></a>
-
-## loaders : <code>object</code>
-Loads the configs on server-side.
-
-**Kind**: global namespace  
-<a name="loaders"></a>
-
-## loaders : <code>object</code>
-Loads the data on server-side.
-
-**Kind**: global namespace  
-<a name="loaders"></a>
-
-## loaders : <code>object</code>
-Loads the events on server-side.
-
-**Kind**: global namespace  
-<a name="loaders"></a>
-
-## loaders : <code>object</code>
-Loads the pools on server-side.
-
-**Kind**: global namespace  
-<a name="loaders"></a>
-
-## loaders : <code>object</code>
-Loads the requirements on server-side.
-
-**Kind**: global namespace  

@@ -1,14 +1,8 @@
 'use strict';
 /**
- * @file Loads the pools on server-side.
- * @namespace loaders
+ * Loads the pools on server-side asynchronously.
  */
 
-/**
- * Loads the pools asynchronously.
- * @async
- * @function
- */
 module.exports = async () => {
   // Loading pools
   try {

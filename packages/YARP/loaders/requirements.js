@@ -1,14 +1,8 @@
 'use strict';
 /**
- * @file Loads the requirements on server-side.
- * @namespace loaders
+ * Loads the requirements on server-side asynchronously.
  */
 
-/**
- * Loads the requirements asynchronously.
- * @async
- * @function
- */
 module.exports = async () => {
   // Loading requirements
   console.log(chalk.yellowBright('[YARP] ')+'Loading Requirements');

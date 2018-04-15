@@ -1,14 +1,8 @@
 'use strict';
 /**
- * @file Loads the data on server-side.
- * @namespace loaders
+ * Loads the data on server-side asynchronously.
  */
 
-/**
- * Loads the data asynchronously.
- * @async
- * @function
- */
 module.exports = async () => {
   // Loading data
   console.log(chalk.yellowBright('[YARP] ')+'Loading Data');

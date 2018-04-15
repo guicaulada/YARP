@@ -1,14 +1,8 @@
 'use strict';
 /**
- * @file Loads the events on server-side.
- * @namespace loaders
+ * Loads the events on server-side asynchronously.
  */
 
-/**
- * Loads the events asynchronously.
- * @async
- * @function
- */
 module.exports = async () => {
   // Loading events
   try {

@@ -1,14 +1,8 @@
 'use strict';
 /**
- * @file Loads the configs on server-side.
- * @namespace loaders
+ * Loads the configs on server-side asynchronously.
  */
 
-/**
- * Loads the configs asynchronously.
- * @async
- * @function
- */
 module.exports = async () => {
   // Loading configs
   try {
