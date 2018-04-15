@@ -1,8 +1,18 @@
 'use strict';
 /**
-* @file Menu events
-*/
+ * @file Menu events
+ * @namespace menu
+ */
 
+/**
+ * Call inventory option.
+ * @event callInventoryOption
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ * @param {string} item_id - Item id.
+ * @param {string} option - Option id.
+ * @fires browserExecute
+ */
 mp.events.add('callInventoryOption', (player, item_id, option) => {
   let item = yarp.items[item_id]
   item.options[option](player);
@@ -11,14 +21,39 @@ mp.events.add('callInventoryOption', (player, item_id, option) => {
   player.call('browserExecute', ['inventory', ['updateInventory', character.inventory[item_id]]]);
 });
 
+/**
+ * Loads bank balance.
+ * @event loadBankBalance
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ * @param {string} item_id - Item id.
+ * @param {string} option - Option id.
+ * @fires browserExecute
+ */
 mp.events.add('loadBankBalance', (player) => {
   player.call('browserExecute', ['menu', ['showBankOperations', JSON.stringify(yarp.characters[player.name].balance), player.name]]);
 });
 
+/**
+ * Unbind toggle chat hotkey.
+ * @event unbindToggleChat
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ */
 mp.events.add('unbindToggleChat', (player) => {
   yarp.hotkeys['ToggleChat'].unbind(player);
 });
 
+/**
+ * Purchase item for sale.
+ * @event purchaseSaleItem
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ * @param {string} locationid - Location id.
+ * @param {string} itemid - Item id.
+ * @param {string} amount - Amount to purchase.
+ * @fires browserExecute
+ */
 mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
   let character = yarp.characters[player.name];
   let location = yarp.locations[locationid];
@@ -42,6 +77,15 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
   }
 });
 
+/**
+ * Purchase weapon for sale.
+ * @event purchaseAmmuWeapon
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ * @param {string} id - Weapon id.
+ * @param {string} amount - Amount to purchase.
+ * @fires browserExecute
+ */
 mp.events.add('purchaseAmmuWeapon', (player, id, amount) => {
   let character = yarp.characters[player.name];
   let weapon = yarp.weapons[id];
@@ -57,6 +101,16 @@ mp.events.add('purchaseAmmuWeapon', (player, id, amount) => {
   }
 });
 
+/**
+ * Execute bank operation.
+ * @event executeBankOperation
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ * @param {number} operation - Operation id.
+ * @param {string} amount - Amount of money.
+ * @param {string} [target] - Target of transfer.
+ * @fires browserExecute
+ */
 mp.events.add('executeBankOperation', (player, operation, amount, target) => {
   let character = yarp.characters[player.name];
   if (chartacter) {
@@ -92,6 +146,16 @@ mp.events.add('executeBankOperation', (player, operation, amount, target) => {
   }
 });
 
+/**
+ *Verify user login.
+ * @event verifyLogin
+ * @memberof menu
+ * @param {object} player - The player that called the event.
+ * @param {string} password - User password.
+ * @fires showCharacterCreationMenu
+ * @fires showPlayerCharacters
+ * @fires createBrowser
+ */
 mp.events.add('verifyLogin', (player,password) => {
   let user = yarp.users[player.socialClub];
   if(user == null){

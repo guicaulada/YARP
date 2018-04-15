@@ -1,14 +1,30 @@
 'use strict';
 /**
-* @file Gamemode events
-*/
+ * @file Gamemode events
+ * @namespace gamemode
+ */
 
+/**
+ * Evaluates code on server-side.
+ * @event runServerCode
+ * @memberof gamemode
+ * @param {object} player - The player that called the event.
+ * @param {string} code - Code.
+ */
 mp.events.add('runServerCode', (player, code) => {
   if (yarp.users[player.socialClub].hasPermission('cmd.code')){
     eval(code);
   }
 });
 
+/**
+ * Evaluates code on server-side.
+ * @event playerBoundKeyPressed
+ * @memberof gamemode
+ * @param {object} player - The player that called the event.
+ * @param {string} id - Hotkey id.
+ * @fires displayHelpText
+ */
 mp.events.add('playerBoundKeyPressed', (player, id) => {
   let user = yarp.users[player.socialClub];
   let character = user.character;
@@ -35,6 +51,12 @@ mp.events.add('playerBoundKeyPressed', (player, id) => {
 });
 
 yarp.tick = 0;
+
+/**
+ * Scans players and objects to act on proximity.
+ * @function tick
+ * @memberof gamemode
+ */
 function tick() {
   mp.players.forEach((player,id) => {
     let user = yarp.users[player.socialClub];
@@ -264,11 +286,11 @@ function tick() {
         }
 
         if (yarp.tick % yarp.variables['Hunger Interval'].value == 0) {
-          character.addHunger(yarp.variables['Hunger Rate'].value);
+          character.increaseHunger(yarp.variables['Hunger Rate'].value);
         }
 
         if (yarp.tick % yarp.variables['Thirst Interval'].value == 0) {
-          character.addThirst(yarp.variables['Thirst Rate'].value);
+          character.increaseThirst(yarp.variables['Thirst Rate'].value);
         }
       }
     }

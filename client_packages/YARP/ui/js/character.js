@@ -62,7 +62,7 @@ $('div#sex').on('click', 'img', function() {
 			$('#sex-female').removeClass('enabled');
 			$('#sex-male').addClass('enabled');
 		}
-		mp.trigger('updatePlayerSex', currentModel);
+		mp.trigger('updatePlayerModel', currentModel);
 	}
 });
 

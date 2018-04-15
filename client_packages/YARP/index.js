@@ -1,7 +1,7 @@
 'use strict';
 /**
-* @file YARP server main
-*/
+ * @file YARP server main
+ */
 
 global.yarp = {}
 yarp.utils = require('./YARP/gamemode/static/Utility.js');
@@ -21,6 +21,5 @@ require('./YARP/events/yarp/bank.js');
 require('./YARP/events/yarp/character.js');
 require('./YARP/events/yarp/command.js');
 require('./YARP/events/yarp/gamemode.js');
-require('./YARP/events/yarp/inventory.js');
 require('./YARP/events/yarp/menu.js');
 require('./YARP/events/yarp/weapon.js');

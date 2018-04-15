@@ -1,8 +1,16 @@
 'use strict';
 /**
-* @file Item events
-*/
+ * @file Item events
+ * @namespace item
+ */
 
+/**
+ * Restore hunger event.
+ * @event restoreHunger
+ * @memberof item
+ * @param {object} player - The player that called the event.
+ * @param {number} value - Amount to restore.
+ */
 mp.events.add('restoreHunger', (player, value) => {
   let character = yarp.characters[player.name];
   let hunger = character.hunger-value[0];
@@ -14,6 +22,13 @@ mp.events.add('restoreHunger', (player, value) => {
   }
 });
 
+/**
+ * Restore thirst event.
+ * @event restoreThirst
+ * @memberof item
+ * @param {object} player - The player that called the event.
+ * @param {number} value - Amount to restore.
+ */
 mp.events.add('restoreThirst', (player, value) => {
   let character = yarp.characters[player.name];
   let thirst = character.thirst-value[0];

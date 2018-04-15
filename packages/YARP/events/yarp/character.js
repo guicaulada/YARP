@@ -1,8 +1,22 @@
 'use strict';
 /**
-* @file Character events
-*/
+ * @file Character events
+ * @namespace character
+ */
 
+/**
+ * Create character event.
+ * @event createCharacter
+ * @memberof character
+ * @param {object} player - The player that called the event.
+ * @param {string} id - Character id.
+ * @param {number} age - Character age.
+ * @param {string} model - Character model.
+ * @param {string} faceJson - Character face JSON.
+ * @fires characterCreatedSuccessfully
+ * @fires showPlayerCharacters
+ * @fires characterNameDuplicated
+ */
 mp.events.add('createCharacter', (player, id, age, model, faceJson) => {
   let character = yarp.characters[id];
   if(character == null){
@@ -15,15 +29,37 @@ mp.events.add('createCharacter', (player, id, age, model, faceJson) => {
   }
 });
 
-mp.events.add('changeCharacterSex', (player, sex) => {
-  player.model = mp.joaat(sex);
+/**
+ * Change character model event.
+ * @event changeCharacterModel
+ * @memberof character
+ * @param {object} player - The player that called the event.
+ * @param {string} model - Character model.
+ */
+mp.events.add('changeCharacterModel', (player, model) => {
+  player.model = mp.joaat(model);
 });
 
+/**
+ * Set character into creator event.
+ * @event setCharacterIntoCreator
+ * @memberof character
+ * @param {object} player - The player that called the event.
+ */
 mp.events.add('setCharacterIntoCreator', (player) => {
   player.position = new mp.Vector3(152.5, -1001.25, -99.5);
   player.heading = 180;
 });
 
+/**
+ * Load character event.
+ * @event loadCharacter
+ * @memberof character
+ * @param {object} player - The player that called the event.
+ * @param {string} id - Character id.
+ * @fires equipWeapon
+ * @fires updatePlayerCustomSkin
+ */
 mp.events.add('loadCharacter', (player,id) => {
   let character = yarp.characters[id];
   let lastLogin = character.lastLogin.split(" ");
@@ -32,7 +68,7 @@ mp.events.add('loadCharacter', (player,id) => {
   }
   character.updateLastLogin(player.ip);
   character.save();
-  player.outputChatBox('!{green}Welcome to Sighmir\'s YARP Server.');
+  player.outputChatBox('!{green}Welcome to Sighmir\'s YARP ');
   player.model = character.model;
   player.name = character._id;
   player.position = character.position;

@@ -33,6 +33,29 @@ function displaySpeedometer() {
 	}
 }
 
+let old_wallet = 0;
+function displayWallet() {
+  let value_add = 0;
+  let new_wallet = mp.players.local.getVariable('PLAYER_WALLET');
+  if(new_wallet != null){
+    value_add = new_wallet-old_wallet;
+    old_wallet = new_wallet;
+    if(new_wallet < 0){
+      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(new_wallet)}`, [0.95, 0.1], {scale: [0.65,0.65], color:[224, 50, 50, 255], font: 7});
+    }else{
+      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(new_wallet)}`, [0.95, 0.1], {scale: [0.65,0.65], color:[114, 204, 114, 255], font: 7});
+    }
+  }
+  if(value_add != null){
+    if(value_add < 0){
+      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(value_add))}`, [0.95, 0.145], {scale: [0.65,0.65], color:[224, 50, 50, 255], font: 7});
+    }else if(value_add > 0){
+      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(value_add)}`, [0.95, 0.145], {scale: [0.65,0.65], color:[114, 204, 114, 255], font: 7});
+    }
+  }
+}
+
 mp.events.add('render', () => {
   displaySpeedometer();
+  displayWallet();
 });

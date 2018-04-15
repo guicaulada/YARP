@@ -1,13 +1,28 @@
 'use strict';
 /**
-* @file Player events
-*/
+ * @file Player events
+ * @namespace player
+ */
 
+/**
+ * Chat event.
+ * @event playerChat
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @param {string} message - Message sent.
+ */
 mp.events.add('playerChat', (player, message) => {
   console.log(`${player.name}: ${message}`);
 	mp.players.broadcast(`${player.name}: ${message}`);
 });
 
+/**
+ * Command event.
+ * @event playerCommand
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @param {string} command - Message sent.
+ */
 mp.events.add('playerCommand', (player, command) => {
 	const args = command.split(/[ ]+/);
 	const commandName = args.splice(0, 1)[0];
@@ -40,6 +55,13 @@ mp.events.add('playerCommand', (player, command) => {
 mp.events.add('playerDamage', (player, healthLoss, armorLoss) => {
 });
 
+/**
+ * Death event.
+ * @event playerDeath
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @fires unequipAllWeapons
+ */
 mp.events.add('playerDeath', (player) => {
     let character = yarp.characters[player.name];
     character.weapons = {};
@@ -52,6 +74,13 @@ mp.events.add('playerDeath', (player) => {
     player.health = 100;
 });
 
+/**
+ * Join event.
+ * @event playerJoin
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @fires createBrowser
+ */
 mp.events.add('playerJoin', (player) => {
   player.name = player.socialClub;
   console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
@@ -79,6 +108,14 @@ mp.events.add('playerJoin', (player) => {
   }
 });
 
+/**
+ * Quit event.
+ * @event playerQuit
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @param {string} exitType - Exit type.
+ * @param {string} reason - Exit reason.
+ */
 mp.events.add('playerQuit', (player, exitType, reason) => {
   if (yarp.users[player.socialClub]) yarp.users[player.socialClub].leave();
   if (yarp.characters[player.name]) yarp.characters[player.name].leave();
@@ -89,12 +126,34 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
   console.log(msg);
 });
 
+/**
+ * Player ready.
+ * @event playerReady
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ */
 mp.events.add('playerReady', player => {
 });
 
+/**
+ * Player spawned.
+ * @event playerSpawn
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ */
 mp.events.add('playerSpawn', player => {
 });
 
+/**
+ * Weapon change event.
+ * @event playerWeaponChange
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @param {number} oldWeapon - Old weapon hash.
+ * @param {number} newWeapon - New weapon hash.
+ * @fires unequipWeapon
+ * @fires equipWeapon
+ */
 let currentWeapons = {};
 mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
   let character = yarp.characters[player.name];
@@ -110,6 +169,15 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
   }
 });
 
+/**
+ * Weapon shot event.
+ * @event playerWeaponShot
+ * @memberof player
+ * @param {object} player - The player that called the event.
+ * @param {string} targetPositionJson - Target position JSON.
+ * @param {string} targetEntityJson - Target entity JSON.
+ * @param {number} weaponHash - Weapon hash.
+ */
 mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson, weaponHash) => {
   let character = yarp.characters[player.name];
   if (character) {

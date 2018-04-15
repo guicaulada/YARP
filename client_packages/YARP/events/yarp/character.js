@@ -44,9 +44,9 @@ mp.events.add('showCharacterCreationMenu', () => {
 	mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/characterCreator.html']);
 });
 
-mp.events.add('updatePlayerSex', (sex) => {
+mp.events.add('updatePlayerModel', (model) => {
 	initializeCharacterCreation(mp.players.local);
-	mp.events.callRemote('changeCharacterSex', sex);
+	mp.events.callRemote('changeCharacterModel', model);
 });
 
 mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {

@@ -49,6 +49,10 @@ exports = class Utility {
     return weapons;
   }
 
+  static numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   static getCameraDirection(){
     // Credits to https://github.com/ImagicTheCat/vRP/blob/vrpex/vrp/client/base.lua#L46 - Thank you for teaching me so much.
     const heading = mp.game.cam.getGameplayCamRelativeHeading()+mp.players.local.getHeading();
