@@ -30,7 +30,7 @@ YARP aim`s to be an object oriented framework that allows you to create persiste
 
 ## Usage
 
-YARP is still under development, information will be added here in the future.
+YARP is still under development, information will be added here in the future. See [documentation](https://github.com/Sighmir/YARP/blob/master/DOCUMENTATION.md).
 
 ## License
 
