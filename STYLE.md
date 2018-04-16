@@ -1,5 +1,7 @@
 # Coding Conventions
 
+#### TL;DR: Keep your code similar to mine.
+
 ## JavaScript
 
 ### Language
