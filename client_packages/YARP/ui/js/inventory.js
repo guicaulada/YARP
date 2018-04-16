@@ -23,12 +23,12 @@ function populateInventory(inventoryJson, title) {
 
 	if (title) {
 		titleContainer.textContent = title;
+		closeImage.src = '../img/close.png';
+		closeImage.onclick = (function(){
+			mp.trigger('destroyBrowser', 'inventory');
+		});
+		titleContainer.appendChild(closeImage);
 	}
-	closeImage.src = '../img/close.png';
-	closeImage.onclick = (function(){
-		mp.trigger('destroyBrowser', 'inventory');
-	});
-	titleContainer.appendChild(closeImage);
 
 	for(let i = 0; i < inventory.length; i++) {
 		// Obtenemos el objeto del inventario
@@ -110,7 +110,7 @@ function updateInventory(amount) {
 		selectedAmount.textContent = Number(amount);
 	else {
 		inventoryContainer.removeChild(currentSelected);
-		inventory.splice(currentSelected, 1);
+		inventory.splice(selected, 1);
 		selected = null;
 		selected_id = null;
 		selectedAmount = null;

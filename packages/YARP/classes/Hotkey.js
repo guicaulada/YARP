@@ -50,7 +50,7 @@ class Hotkey extends yarp.GMObject{
    * @fires playerBindKey
    */
   bind(player, args) {
-    this.args[player.id] = [];
+    this.args[player.id] = args;
     player.call('playerBindKey',[this.id,this.key]);
   }
 

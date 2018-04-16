@@ -343,6 +343,9 @@ class Character extends yarp.GMObject{
       if (this.inventory[item.id] - amount >= 0){
         this.inventory[item.id] = this.inventory[item.id] - amount;
         this.weight = yarp.utils.round(this.weight - (amount*item.weight),1);
+        if (this.inventory[item.id] <= 0) {
+          delete this.inventory[item.id];
+        }
         return true;
       }
     }

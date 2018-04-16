@@ -43,9 +43,9 @@ global.chalk = require('chalk');
   });
 })();
 
-let exit = () => {
-  yarp.db.close();
+function exit(){
   console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');
+  yarp.db.close();
   for (let player of mp.players.toArray()) {
     player.kick('The server is closing.');
   }
