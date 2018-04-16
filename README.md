@@ -18,7 +18,7 @@ YARP aim`s to be an object oriented framework that allows you to create persiste
 3. Using a command prompt window install these modules on your server-files folder.
    * Run the command prompt as administrator.
    * ```cd C:/server-files``` *(use your server path)*
-   * ```npm install mongodb bcryptjs chalk```
+   * ```npm install```
 
 ## Features
 * **Whitelist**
