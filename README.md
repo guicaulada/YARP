@@ -1,4 +1,4 @@
-# Yet Another RolePlay - RAGE-MP
+# Yet Another Roleplay - RAGE-MP
 
 YARP aim`s to be an object oriented framework that allows you to create persistent objects dynamically.  
 ### /!\ This project is still under development, many changes can happen to the code. /!\
