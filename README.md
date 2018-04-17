@@ -9,7 +9,8 @@ YARP aim`s to be an object oriented framework that allows you to create persiste
 * [nodejs](https://nodejs.org) - A JavaScript runtime built on Chrome`s V8 JavaScript engine.
 * [mongodb](https://www.npmjs.com/package/mongodb) - A document database with the scalability and flexibility that you want with the querying and indexing that you need.
 * [bcryptjs](https://www.npmjs.com/package/bcryptjs) - Optimized bcrypt in JavaScript with zero dependencies.
-* [chalk](https://www.npmjs.com/package/chalk) - Terminal string styling done right.
+* [chalk](https://www.npmjs.com/package/chalk) - Terminal string styling done right.  
+* [python](https://www.python.org/download/releases/2.7.8/) - Python is a programming language that lets you work more quickly and integrate your systems more effectively.  
 
 ## Installation
 
