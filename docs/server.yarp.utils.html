@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: client.colshape</title>
+    <title>JSDoc: Namespace: utils</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: client.colshape</h1>
+    <h1 class="page-title">Namespace: utils</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>client.colshape</h2>
+        <h2>utils</h2>
         
     
 </header>
@@ -37,7 +37,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Colshape events</div>
+            <div class="description">Holds utility functions for the server.</div>
         
 
         
@@ -72,7 +72,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_ragemp_colshape.js.html">client_packages/YARP/events/ragemp/colshape.js</a>, <a href="client_packages_YARP_events_ragemp_colshape.js.html#line2">line 2</a>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line2">line 2</a>
     </li></ul></dd>
     
 
@@ -103,11 +103,7 @@
     
 
     
-
-    
-
-    
-        <h3 class="subsection-title">Events</h3>
+        <h3 class="subsection-title">Methods</h3>
 
         
             
@@ -115,7 +111,7 @@
     
 
     
-    <h4 class="name" id=".event:playerEnterColshape">playerEnterColshape</h4>
+    <h4 class="name" id=".getParamNames"><span class="type-signature">(static) </span>getParamNames<span class="signature">(func)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -123,7 +119,7 @@
 
 
 <div class="description">
-    Player enter coolshape.
+    Offsets a Vector3.
 </div>
 
 
@@ -159,13 +155,13 @@
 
         <tr>
             
-                <td class="name"><code>shape</code></td>
+                <td class="name"><code>func</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">function</span>
 
 
             
@@ -175,7 +171,7 @@
 
             
 
-            <td class="description last">The colshape that was entered.</td>
+            <td class="description last">The function to be analyzed.</td>
         </tr>
 
     
@@ -216,7 +212,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_ragemp_colshape.js.html">client_packages/YARP/events/ragemp/colshape.js</a>, <a href="client_packages_YARP_events_ragemp_colshape.js.html#line7">line 7</a>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -239,6 +235,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of parameter names.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -250,7 +268,7 @@
     
 
     
-    <h4 class="name" id=".event:playerExitColshape">playerExitColshape</h4>
+    <h4 class="name" id=".getSubstrings"><span class="type-signature">(static) </span>getSubstrings<span class="signature">(string)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -258,7 +276,7 @@
 
 
 <div class="description">
-    Player exit coolshape.
+    Get substrings from string.
 </div>
 
 
@@ -294,13 +312,13 @@
 
         <tr>
             
-                <td class="name"><code>shape</code></td>
+                <td class="name"><code>string</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -310,7 +328,7 @@
 
             
 
-            <td class="description last">The colshape that was left.</td>
+            <td class="description last">String to analyze.</td>
         </tr>
 
     
@@ -351,7 +369,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_ragemp_colshape.js.html">client_packages/YARP/events/ragemp/colshape.js</a>, <a href="client_packages_YARP_events_ragemp_colshape.js.html#line16">line 16</a>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -374,12 +392,1229 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of substrings.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id=".getTimestamp"><span class="type-signature">(static) </span>getTimestamp<span class="signature">(date)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Format dates to dd/mm/yy h:m:s.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">new Date().</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The formatted date.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getTimezoneDate"><span class="type-signature">(static) </span>getTimezoneDate<span class="signature">(timezone)</span><span class="type-signature"> &rarr; {Date}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the time in a set timezone.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>timezone</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The timezone difference to GMT.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line164">line 164</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Timezone date.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Date</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".paramsToString"><span class="type-signature">(static) </span>paramsToString<span class="signature">(obj)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Offsets a Vector3.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The object to be analyzed.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Object representation in string.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".randomString"><span class="type-signature">(static) </span>randomString<span class="signature">(digits, possible)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Generate a random string.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>digits</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Amaount of symbols on the string.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>possible</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">String with possible symbols.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Randomly generated string.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".round"><span class="type-signature">(static) </span>round<span class="signature">(value, decimals)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Round numbers by the amount of decimals.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Value to be rounded.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>decimals</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">How many decimals.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The rounded number.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".Vector3Distance"><span class="type-signature">(static) </span>Vector3Distance<span class="signature">(vector1, vector2)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get the distance between two Vector3.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>vector1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Vector3</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">First Vector3.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vector2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Vector3</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Second Vector3.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line57">line 57</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Distance between them.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".Vector3Offset"><span class="type-signature">(static) </span>Vector3Offset<span class="signature">(vector, offset)</span><span class="type-signature"> &rarr; {Vector3}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Offset a Vector3.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>vector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Vector3</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Vector3 to be offset.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Vector3</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Vector3 offset amount.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="packages_YARP_modules_utils.js.html">packages/YARP/modules/utils.js</a>, <a href="packages_YARP_modules_utils.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Offset Vector3.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Vector3</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
     
 </article>
 

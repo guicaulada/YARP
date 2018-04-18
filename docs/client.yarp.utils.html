@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: client.menu</title>
+    <title>JSDoc: Namespace: utils</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: client.menu</h1>
+    <h1 class="page-title">Namespace: utils</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>client.menu</h2>
+        <h2>utils</h2>
         
     
 </header>
@@ -37,7 +37,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Menu events</div>
+            <div class="description">Holds utility functions for the client.</div>
         
 
         
@@ -72,7 +72,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line2">line 2</a>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line2">line 2</a>
     </li></ul></dd>
     
 
@@ -103,11 +103,7 @@
     
 
     
-
-    
-
-    
-        <h3 class="subsection-title">Events</h3>
+        <h3 class="subsection-title">Methods</h3>
 
         
             
@@ -115,7 +111,7 @@
     
 
     
-    <h4 class="name" id=".event:callInventoryOption">callInventoryOption</h4>
+    <h4 class="name" id=".getAllWeapons"><span class="type-signature">(static) </span>getAllWeapons<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -123,7 +119,7 @@
 
 
 <div class="description">
-    Call an inventory item option.
+    Gets all character weapons and ammo.
 </div>
 
 
@@ -132,78 +128,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>itemid</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The item id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>option</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The option id.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -239,7 +163,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line53">line 53</a>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line95">line 95</a>
     </li></ul></dd>
     
 
@@ -254,10 +178,6 @@
 
 
 
-<h5>Fires:</h5>
-<ul>
-    <li>event:callInventoryOption</li>
-</ul>
 
 
 
@@ -266,7 +186,28 @@
 
 
 
+<h5>Returns:</h5>
 
+        
+<div class="param-desc">
+    - Dictionary weapon > ammo.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -278,7 +219,7 @@
     
 
     
-    <h4 class="name" id=".event:executeBankOperation">executeBankOperation</h4>
+    <h4 class="name" id=".getCameraDirection"><span class="type-signature">(static) </span>getCameraDirection<span class="signature">()</span><span class="type-signature"> &rarr; {Vector3}</span></h4>
     
 
     
@@ -286,7 +227,331 @@
 
 
 <div class="description">
-    Updates bank account money on UI.
+    Gets character camera direction.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The position the camera is poiting.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Vector3</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getCurrentWeapon"><span class="type-signature">(static) </span>getCurrentWeapon<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets the current weapon.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Weapon hash.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getDoorTypes"><span class="type-signature">(static) </span>getDoorTypes<span class="signature">()</span><span class="type-signature"> &rarr; {Set}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets a set containing all door types.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line161">line 161</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - All door types.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Set</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getTimezoneDate"><span class="type-signature">(static) </span>getTimezoneDate<span class="signature">(timezone)</span><span class="type-signature"> &rarr; {Date}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the time in a set timezone.
 </div>
 
 
@@ -322,7 +587,7 @@
 
         <tr>
             
-                <td class="name"><code>operation</code></td>
+                <td class="name"><code>timezone</code></td>
             
 
             <td class="type">
@@ -338,14 +603,256 @@
 
             
 
-            <td class="description last">1 = Withdraw, 2 = Deposit, 3 = Transfer.</td>
+            <td class="description last">The timezone difference to GMT.</td>
         </tr>
 
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line234">line 234</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Timezone date.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Date</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getVirtualKeys"><span class="type-signature">(static) </span>getVirtualKeys<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets weapon type from weapon slot.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Dictionary of virtual keys
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getWeaponAmmo"><span class="type-signature">(static) </span>getWeaponAmmo<span class="signature">(weaponhash)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets weapon ammo.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>amount</code></td>
+                <td class="name"><code>weaponhash</code></td>
             
 
             <td class="type">
@@ -361,30 +868,7 @@
 
             
 
-            <td class="description last">Amount of money.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Character name.</td>
+            <td class="description last">Weapon hash.</td>
         </tr>
 
     
@@ -425,7 +909,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line76">line 76</a>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -440,10 +924,6 @@
 
 
 
-<h5>Fires:</h5>
-<ul>
-    <li>event:executeBankOperation</li>
-</ul>
 
 
 
@@ -452,98 +932,28 @@
 
 
 
-
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id=".event:loadPlayerBankBalance">loadPlayerBankBalance</h4>
-    
-
-    
-
-
-
-<div class="description">
-    Loads the bank balance from the transactions pool.
+<div class="param-desc">
+    - Weapon ammo.
 </div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
 
 
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line89">line 89</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-<h5>Fires:</h5>
-<ul>
-    <li>event:loadPlayerBankBalance</li>
-</ul>
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -555,7 +965,7 @@
     
 
     
-    <h4 class="name" id=".event:purchaseAmmuWeapon">purchaseAmmuWeapon</h4>
+    <h4 class="name" id=".getWeaponClipSize"><span class="type-signature">(static) </span>getWeaponClipSize<span class="signature">(weaponhash)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -563,7 +973,7 @@
 
 
 <div class="description">
-    Attach a weapon model to the character.
+    Gets the clip size for a specific weapon.
 </div>
 
 
@@ -599,13 +1009,13 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>weaponhash</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -615,30 +1025,7 @@
 
             
 
-            <td class="description last">The weapon id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>amount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The bought amount.</td>
+            <td class="description last">Weapon hash.</td>
         </tr>
 
     
@@ -679,7 +1066,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line20">line 20</a>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -694,10 +1081,6 @@
 
 
 
-<h5>Fires:</h5>
-<ul>
-    <li>event:purchaseAmmuWeapon</li>
-</ul>
 
 
 
@@ -706,7 +1089,28 @@
 
 
 
+<h5>Returns:</h5>
 
+        
+<div class="param-desc">
+    - The weapon clip size.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -718,7 +1122,7 @@
     
 
     
-    <h4 class="name" id=".event:purchaseSaleItem">purchaseSaleItem</h4>
+    <h4 class="name" id=".getWeaponTypeInSlot"><span class="type-signature">(static) </span>getWeaponTypeInSlot<span class="signature">()</span><span class="type-signature"> &rarr; {Set}</span></h4>
     
 
     
@@ -726,7 +1130,115 @@
 
 
 <div class="description">
-    Attach a weapon model to the character.
+    Gets a set containing all weapon slots.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line145">line 145</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - All weapon slots.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Set</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getWeaponTypeInSlot"><span class="type-signature">(static) </span>getWeaponTypeInSlot<span class="signature">(weaponSlot)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets weapon type from weapon slot.
 </div>
 
 
@@ -762,13 +1274,13 @@
 
         <tr>
             
-                <td class="name"><code>storeid</code></td>
+                <td class="name"><code>weaponSlot</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -778,53 +1290,7 @@
 
             
 
-            <td class="description last">The store id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>itemid</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The item id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>amount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The bought amount.</td>
+            <td class="description last">Weapon slot hash.</td>
         </tr>
 
     
@@ -865,7 +1331,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line7">line 7</a>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -880,10 +1346,6 @@
 
 
 
-<h5>Fires:</h5>
-<ul>
-    <li>event:purchaseSaleItem</li>
-</ul>
 
 
 
@@ -892,98 +1354,28 @@
 
 
 
-
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id=".event:unbindToggleChat">unbindToggleChat</h4>
-    
-
-    
-
-
-
-<div class="description">
-    Unbinds the toggle chat hotkey.
+<div class="param-desc">
+    - Weapon type hash.
 </div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
 
 
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line43">line 43</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-<h5>Fires:</h5>
-<ul>
-    <li>event:unbindToggleChat</li>
-</ul>
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -995,7 +1387,7 @@
     
 
     
-    <h4 class="name" id=".event:updateBankAccountMoney">updateBankAccountMoney</h4>
+    <h4 class="name" id=".giveWeaponComponent"><span class="type-signature">(static) </span>giveWeaponComponent<span class="signature">(weaponSlot, component)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1003,98 +1395,7 @@
 
 
 <div class="description">
-    Updates bank account money on UI.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line65">line 65</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<h5>Fires:</h5>
-<ul>
-    <li>event:browserExecute</li>
-</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".event:verifyLogin">verifyLogin</h4>
-    
-
-    
-
-
-
-<div class="description">
-    Verifies the user password.
+    Gives a certain weapon component.
 </div>
 
 
@@ -1130,13 +1431,13 @@
 
         <tr>
             
-                <td class="name"><code>password</code></td>
+                <td class="name"><code>weaponSlot</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -1146,7 +1447,30 @@
 
             
 
-            <td class="description last">The typed password.</td>
+            <td class="description last">Weapon hash.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>component</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Component hash.</td>
         </tr>
 
     
@@ -1187,7 +1511,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client_packages_YARP_events_yarp_menu.js.html">client_packages/YARP/events/yarp/menu.js</a>, <a href="client_packages_YARP_events_yarp_menu.js.html#line32">line 32</a>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -1201,11 +1525,6 @@
 
 
 
-
-<h5>Fires:</h5>
-<ul>
-    <li>event:verifyLogin</li>
-</ul>
 
 
 
@@ -1221,6 +1540,617 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id=".gotWeapon"><span class="type-signature">(static) </span>gotWeapon<span class="signature">(weaponhash)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Verifies if the characer has a weapon.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>weaponhash</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Weapon hash.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - True/false if has or not weapon.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".numberWithCommas"><span class="type-signature">(static) </span>numberWithCommas<span class="signature">(x)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Format numbers to contain commas.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Number to be formatted.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Formatted number.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".removeWeapon"><span class="type-signature">(static) </span>removeWeapon<span class="signature">(weaponhash)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Removes a weapon.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>weaponhash</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Weapon hash.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".setWeaponAmmo"><span class="type-signature">(static) </span>setWeaponAmmo<span class="signature">(weaponSlot, ammo)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets weapon ammo.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>weaponSlot</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Weapon hash.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ammo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ammo amount.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client_packages_YARP_modules_utils.js.html">client_packages/YARP/modules/utils.js</a>, <a href="client_packages_YARP_modules_utils.js.html#line41">line 41</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
     
 </article>
 

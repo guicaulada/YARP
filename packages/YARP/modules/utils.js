@@ -1,8 +1,7 @@
 'use strict';
 /**
- * Holds utility functions.
- * @module utils
- * @namespace yarp.utils
+ * Holds utility functions for the server.
+ * @namespace server.yarp.utils
  */
 
 let utils = {};
@@ -10,7 +9,7 @@ let utils = {};
 /**
  * Format dates to dd/mm/yy h:m:s.
  * @function getTimestamp
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {Date} date - new Date().
  * @returns {string} - The formatted date.
  */
@@ -34,7 +33,7 @@ utils.getTimestamp = (date) => {
 /**
  * Round numbers by the amount of decimals.
  * @function round
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {number} value - Value to be rounded.
  * @param {number} decimals - How many decimals.
  * @returns {number} - The rounded number.
@@ -46,7 +45,7 @@ utils.round = (value, decimals) => {
 /**
  * Offset a Vector3.
  * @function Vector3Offset
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {Vector3} vector - Vector3 to be offset.
  * @param {Vector3} offset - Vector3 offset amount.
  * @returns {Vector3} - Offset Vector3.
@@ -58,7 +57,7 @@ utils.Vector3Offset = (vector,offset) => {
 /**
  * Get the distance between two Vector3.
  * @function Vector3Distance
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {Vector3} vector1 - First Vector3.
  * @param {Vector3} vector2 - Second Vector3.
  * @returns {number} - Distance between them.
@@ -73,7 +72,7 @@ utils.Vector3Distance = (vector1,vector2) => {
 /**
  * Generate a random string.
  * @function randomString
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {number} digits - Amaount of symbols on the string.
  * @param {string} possible - String with possible symbols.
  * @returns {string} - Randomly generated string.
@@ -88,7 +87,7 @@ utils.randomString = (digits,possible) => {
 /**
  * Get substrings from string.
  * @function getSubstrings
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {string} string - String to analyze.
  * @returns {Array} - Array of substrings.
  */
@@ -107,7 +106,7 @@ utils.getSubstrings = (string,symbol) => {
 /**
  * Offsets a Vector3.
  * @function getParamNames
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {function} func - The function to be analyzed.
  * @returns {Array} - Array of parameter names.
  */
@@ -124,7 +123,7 @@ utils.getParamNames = (func) => {
 /**
  * Offsets a Vector3.
  * @function paramsToString
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {object} obj - The object to be analyzed.
  * @returns {string} - Object representation in string.
  */
@@ -165,7 +164,7 @@ utils.paramsToString = (obj) => {
 /**
  * Returns the time in a set timezone.
  * @function getTimezoneDate
- * @memberof yarp.utils
+ * @memberof server.yarp.utils
  * @param {number} timezone - The timezone difference to GMT.
  * @returns {Date} - Timezone date.
  */

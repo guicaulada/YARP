@@ -1,8 +1,7 @@
 'use strict';
 /**
- * Holds utility functions.
- * @module utils
- * @namespace yarp.utils
+ * Holds utility functions for the client.
+ * @namespace client.yarp.utils
  */
 
 let utils = {};
@@ -10,7 +9,7 @@ let utils = {};
 /**
  * Gets weapon type from weapon slot.
  * @function getWeaponTypeInSlot
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponSlot - Weapon slot hash.
  * @returns {number} - Weapon type hash.
  */
@@ -21,7 +20,7 @@ utils.getWeaponTypeInSlot = (weaponSlot) => {
 /**
  * Gets weapon ammo.
  * @function getWeaponAmmo
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponhash - Weapon hash.
  * @returns {number} - Weapon ammo.
  */
@@ -32,7 +31,7 @@ utils.getWeaponAmmo = (weaponhash) => {
 /**
  * Removes a weapon.
  * @function removeWeapon
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponhash - Weapon hash.
  */
 utils.removeWeapon = (weaponhash) => {
@@ -42,7 +41,7 @@ utils.removeWeapon = (weaponhash) => {
 /**
  * Sets weapon ammo.
  * @function setWeaponAmmo
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponSlot - Weapon hash.
  * @param {number} ammo - Ammo amount.
  */
@@ -53,7 +52,7 @@ utils.setWeaponAmmo = (weaponhash, ammo) => {
 /**
  * Gets the current weapon.
  * @function getCurrentWeapon
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @returns {number} - Weapon hash.
  */
 utils.getCurrentWeapon = () => {
@@ -63,7 +62,7 @@ utils.getCurrentWeapon = () => {
 /**
  * Gives a certain weapon component.
  * @function giveWeaponComponent
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponSlot - Weapon hash.
  * @param {number} component - Component hash.
  */
@@ -74,7 +73,7 @@ utils.giveWeaponComponent = (weaponhash, component) => {
 /**
  * Gets the clip size for a specific weapon.
  * @function getWeaponClipSize
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponhash - Weapon hash.
  * @returns {number} - The weapon clip size.
  */
@@ -85,7 +84,7 @@ utils.getWeaponClipSize = (weaponhash) => {
 /**
  * Verifies if the characer has a weapon.
  * @function gotWeapon
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} weaponhash - Weapon hash.
  * @returns {boolean} - True/false if has or not weapon.
  */
@@ -96,7 +95,7 @@ utils.gotWeapon = (weaponhash) => {
 /**
  * Gets all character weapons and ammo.
  * @function getAllWeapons
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @returns {object} - Dictionary weapon > ammo.
  */
 utils.getAllWeapons = () => {
@@ -113,7 +112,7 @@ utils.getAllWeapons = () => {
 /**
  * Format numbers to contain commas.
  * @function numberWithCommas
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} x - Number to be formatted.
  * @returns {string} - Formatted number.
  */
@@ -124,7 +123,7 @@ utils.numberWithCommas = (x) => {
 /**
  * Gets character camera direction.
  * @function getCameraDirection
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @returns {Vector3} - The position the camera is poiting.
  */
 utils.getCameraDirection = () => {
@@ -146,7 +145,7 @@ utils.getCameraDirection = () => {
 /**
  * Gets a set containing all weapon slots.
  * @function getWeaponTypeInSlot
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @returns {Set} - All weapon slots.
  */
 utils.getWeaponSlots = () => {
@@ -162,7 +161,7 @@ utils.getWeaponSlots = () => {
 /**
  * Gets a set containing all door types.
  * @function getDoorTypes
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @returns {Set} - All door types.
  */
 utils.getDoorTypes = () => {
@@ -199,7 +198,7 @@ utils.getDoorTypes = () => {
 /**
  * Gets weapon type from weapon slot.
  * @function getVirtualKeys
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @returns {object} - Dictionary of virtual keys
  */
 utils.getVirtualKeys = () => {
@@ -235,7 +234,7 @@ utils.getVirtualKeys = () => {
 /**
  * Returns the time in a set timezone.
  * @function getTimezoneDate
- * @memberof yarp.utils
+ * @memberof client.yarp.utils
  * @param {number} timezone - The timezone difference to GMT.
  * @returns {Date} - Timezone date.
  */

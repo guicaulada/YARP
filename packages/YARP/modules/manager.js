@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Provides safe asynchronous interaction between MongoDB and YARP.
- * @module manager
  * @namespace yarp.mng
  */
 

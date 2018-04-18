@@ -1,7 +1,6 @@
 'use strict';
 /**
  * MongoDB promise library.
- * @module mongo
  * @namespace yarp.db
  * @see https://mongodb.github.io/node-mongodb-native/api-generated/collection.html
  */
