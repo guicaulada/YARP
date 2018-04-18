@@ -1,8 +1,16 @@
 'use strict';
 /**
 * @file Stream events
+* @namespace client.stream
 */
 
+/**
+ * Notifies when an entity started being streamed.
+ * @event entityStreamIn
+ * @memberof client.stream
+ * @param {object} entity - Streamed entity.
+ * @fires getPlayerCustomSkin
+ */
 mp.events.add('entityStreamIn', (entity) => {
 	if(entity.getType() === 4) {
 		let model = entity.getModel();
@@ -16,5 +24,11 @@ mp.events.add('entityStreamIn', (entity) => {
 	}
 });
 
+/**
+ * Notifies when an entity stopped being streamed.
+ * @event entityStreamIn
+ * @memberof client.stream
+ * @param {object} entity - Entity that stopped streaming.
+ */
 mp.events.add('entityStreamOut', (entity) => {
 });

@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Character events
- * @namespace character
+ * @namespace server.character
  */
 
 /**
  * Create character event.
  * @event createCharacter
- * @memberof character
+ * @memberof server.character
  * @param {object} player - The player that called the event.
  * @param {string} id - Character id.
  * @param {number} age - Character age.
@@ -32,7 +32,7 @@ mp.events.add('createCharacter', (player, id, age, model, faceJson) => {
 /**
  * Change character model event.
  * @event changeCharacterModel
- * @memberof character
+ * @memberof server.character
  * @param {object} player - The player that called the event.
  * @param {string} model - Character model.
  */
@@ -43,7 +43,7 @@ mp.events.add('changeCharacterModel', (player, model) => {
 /**
  * Set character into creator event.
  * @event setCharacterIntoCreator
- * @memberof character
+ * @memberof server.character
  * @param {object} player - The player that called the event.
  */
 mp.events.add('setCharacterIntoCreator', (player) => {
@@ -54,7 +54,7 @@ mp.events.add('setCharacterIntoCreator', (player) => {
 /**
  * Load character event.
  * @event loadCharacter
- * @memberof character
+ * @memberof server.character
  * @param {object} player - The player that called the event.
  * @param {string} id - Character id.
  * @fires equipWeapon

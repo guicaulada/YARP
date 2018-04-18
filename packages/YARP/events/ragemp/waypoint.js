@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Waypoint events
- * @namespace waypoint
+ * @namespace server.waypoint
  */
 
 /**
  * Waypoint created.
  * @event playerCreateWaypoint
- * @memberof waypoint
+ * @memberof server.waypoint
  * @param {object} player - The player that called the event.
  * @param {Vector3} position - Waypoiny position.
  */
@@ -17,7 +17,7 @@ mp.events.add('playerCreateWaypoint', (player, position) => {
 /**
  * Waypoint reached.
  * @event playerReachWaypoint
- * @memberof waypoint
+ * @memberof server.waypoint
  * @param {object} player - The player that called the event.
  */
 mp.events.add('playerReachWaypoint', (player) => {

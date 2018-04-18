@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Menu events
- * @namespace menu
+ * @namespace server.menu
  */
 
 /**
  * Call inventory option.
  * @event callInventoryOption
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  * @param {string} item_id - Item id.
  * @param {string} option - Option id.
@@ -24,7 +24,7 @@ mp.events.add('callInventoryOption', (player, item_id, option) => {
 /**
  * Loads bank balance.
  * @event loadBankBalance
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  * @param {string} item_id - Item id.
  * @param {string} option - Option id.
@@ -37,7 +37,7 @@ mp.events.add('loadBankBalance', (player) => {
 /**
  * Unbind toggle chat hotkey.
  * @event unbindToggleChat
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  */
 mp.events.add('unbindToggleChat', (player) => {
@@ -47,7 +47,7 @@ mp.events.add('unbindToggleChat', (player) => {
 /**
  * Purchase item for sale.
  * @event purchaseSaleItem
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  * @param {string} locationid - Location id.
  * @param {string} itemid - Item id.
@@ -80,7 +80,7 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
 /**
  * Purchase weapon for sale.
  * @event purchaseAmmuWeapon
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  * @param {string} id - Weapon id.
  * @param {string} amount - Amount to purchase.
@@ -104,7 +104,7 @@ mp.events.add('purchaseAmmuWeapon', (player, id, amount) => {
 /**
  * Execute bank operation.
  * @event executeBankOperation
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  * @param {number} operation - Operation id.
  * @param {string} amount - Amount of money.
@@ -149,7 +149,7 @@ mp.events.add('executeBankOperation', (player, operation, amount, target) => {
 /**
  *Verify user login.
  * @event verifyLogin
- * @memberof menu
+ * @memberof server.menu
  * @param {object} player - The player that called the event.
  * @param {string} password - User password.
  * @fires showCharacterCreationMenu

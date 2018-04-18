@@ -1,16 +1,19 @@
 {
   "name": "yarp",
   "version": "1.0.0",
-  "description": "A RAGE-MP Roleplay Gamemode",
-  "main": "index.js",
+  "description": "A RAGE-MP Roleplay Framework",
+  "main": "packages/YARP/index.js",
+  "directories": {
+    "doc": "docs"
+  },
   "dependencies": {
+    "chalk": "^2.4.0",
     "bcryptjs": "^2.4.3",
-    "chalk": "^2.3.2",
     "mongodb": "^3.0.6"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "server.exe"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,17 @@
 'use strict';
 /**
 * @file Weapon events
+* @namespace client.weapon
 */
 
 let equiped = {};
+
+/**
+ * Attach a weapon model to the character.
+ * @event equipWeapon
+ * @memberof client.weapon
+ * @param {string} weaponJson - The weapon data in JSON.
+ */
 mp.events.add('equipWeapon', (weaponJson) => {
 	let weapon = JSON.parse(weaponJson);
 	let model = mp.game.joaat(weapon._model);
@@ -23,6 +31,12 @@ mp.events.add('equipWeapon', (weaponJson) => {
 	}
 });
 
+/**
+ * Deletes specific equiped weapon.
+ * @event unequipWeapon
+ * @memberof client.weapon
+ * @param {string} id - The weapon id.
+ */
 mp.events.add('unequipWeapon', (id) => {
 	if (equiped[id] != null){
 		equiped[id].destroy();
@@ -30,6 +44,11 @@ mp.events.add('unequipWeapon', (id) => {
 	}
 });
 
+/**
+ * Deletes every equiped weapon.
+ * @event unequipAllWeapons
+ * @memberof client.weapon
+ */
 mp.events.add('unequipAllWeapons', () => {
 	for (id in equiped){
 		if (equiped[id] != null){

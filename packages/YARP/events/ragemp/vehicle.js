@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Vehicle events
- * @namespace vehicle
+ * @namespace server.vehicle
  */
 
 /**
  * Entering vehicle.
  * @event playerStartEnterVehicle
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} player - The player that called the event.
  * @param {object} vehicle - The vehicle of the event.
  * @param {number} seat - The seat he is sitting on.
@@ -18,7 +18,7 @@ mp.events.add('playerStartEnterVehicle', (player, vehicle, seat) => {
 /**
  * Entered vehicle.
  * @event playerEnterVehicle
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} player - The player that called the event.
  * @param {object} vehicle - The vehicle of the event.
  * @param {number} seat - The seat he is sitting on.
@@ -29,7 +29,7 @@ mp.events.add('playerEnterVehicle', (player, vehicle, seat) => {
 /**
  * Exiting vehicle.
  * @event playerStartExitVehicle
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} player - The player that called the event.
  */
 mp.events.add('playerStartExitVehicle', (player) => {
@@ -38,7 +38,7 @@ mp.events.add('playerStartExitVehicle', (player) => {
 /**
  * Exited vehicle.
  * @event playerExitVehicle
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} player - The player that called the event.
  * @param {object} vehicle - The vehicle of the event.
  */
@@ -48,7 +48,7 @@ mp.events.add('playerExitVehicle', (player, vehicle) => {
 /**
  * Attached trailer.
  * @event trailerAttached
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} vehicle - The vehicle that called the event.
  * @param {object} trailer - The trailer of the event.
  */
@@ -58,7 +58,7 @@ mp.events.add('trailerAttached', (vehicle, trailer) => {
 /**
  * Vehicle damaged.
  * @event vehicleDamage
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} vehicle - The vehicle that called the event.
  * @param {number} bodyHealthLoss - Body health loss.
  * @param {number} engineHealthLoss - Engine health loss.
@@ -69,7 +69,7 @@ mp.events.add('vehicleDamage', (vehicle, bodyHealthLoss, engineHealthLoss) => {
 /**
  * Vehicle death.
  * @event vehicleDeath
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} vehicle - The vehicle that called the event.
  */
 mp.events.add('vehicleDeath', (vehicle) => {
@@ -78,7 +78,7 @@ mp.events.add('vehicleDeath', (vehicle) => {
 /**
  * Vehicle death.
  * @event vehicleHornToggle
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} vehicle - The vehicle that called the event.
  * @param {boolean} toggle - Horn on or off.
  */
@@ -88,7 +88,7 @@ mp.events.add('vehicleHornToggle', (vehicle, toggle) => {
 /**
  * Vehicle death.
  * @event vehicleSirenToggle
- * @memberof vehicle
+ * @memberof server.vehicle
  * @param {object} vehicle - The vehicle that called the event.
  * @param {boolean} toggle - Siren on or off.
  */

@@ -1,8 +1,10 @@
 'use strict';
 /**
 * @file Character events
-* Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/character.js
+* @namespace client.character
 */
+
+//Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/character.js
 
 let faceModel = {
 	'firstHeadShape': 0, 'secondHeadShape': 0, 'firstSkinTone': 0, 'secondSkinTone': 0, 'headMix': 0.5, 'skinMix': 0.5, 'hairModel': 0, 'firstHairColor': 0, 'secondHairColor': 0,
@@ -15,6 +17,13 @@ let faceModel = {
 let camera = null;
 let characters = null;
 
+/**
+ * Show user characters on side menu.
+ * @event showPlayerCharacters
+ * @memberof client.character
+ * @param {string} charactersJson - User characters JSON.
+ * @fires createBrowser
+ */
 mp.events.add('showPlayerCharacters', (charactersJson) => {
 	characters = charactersJson;
 	mp.game.ui.displayRadar(false);
@@ -22,6 +31,13 @@ mp.events.add('showPlayerCharacters', (charactersJson) => {
 	mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
 });
 
+/**
+ * Load the caracter data.
+ * @event loadCharacter
+ * @memberof client.character
+ * @param {string} id - Character name.
+ * @fires loadCharacter
+ */
 mp.events.add('loadCharacter', (id) => {
 	mp.events.call('destroyBrowser', 'character');
 	mp.game.ui.displayRadar(true);
@@ -29,8 +45,13 @@ mp.events.add('loadCharacter', (id) => {
 	mp.game.invoke('0xE09906A20E6D76F');
 });
 
+/**
+ * Displays the character creation menu.
+ * @event showCharacterCreationMenu
+ * @memberof client.character
+ * @fires createBrowser
+ */
 mp.events.add('showCharacterCreationMenu', () => {
-	mp.events.call('destroyBrowser', 'character');
 	mp.game.ui.displayRadar(false);
 	mp.events.callRemote('setCharacterIntoCreator');
 	mp.game.invoke('0xE09906A20E6D76F');
@@ -44,11 +65,26 @@ mp.events.add('showCharacterCreationMenu', () => {
 	mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/characterCreator.html']);
 });
 
+/**
+ * Changes the character model.
+ * @event updatePlayerModel
+ * @memberof client.character
+ * @param {string} model - Ped model.
+ * @fires changeCharacterModel
+ */
 mp.events.add('updatePlayerModel', (model) => {
 	initializeCharacterCreation(mp.players.local);
 	mp.events.callRemote('changeCharacterModel', model);
 });
 
+/**
+ * Update character creation.
+ * @event updatePlayerCreation
+ * @memberof client.character
+ * @param {string} partName - The part name.
+ * @param {number} value - The part value.
+ * @param {boolean} isPercentage - If the value is a parcentage or not.
+ */
 mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {
 	if(isPercentage) {
 		value = parseFloat(value / 100);
@@ -57,6 +93,12 @@ mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {
 	updatePlayerFace(mp.players.local, faceModel);
 });
 
+/**
+ * Switches focus between body and face.
+ * @event cameraPointTo
+ * @memberof client.character
+ * @param {number} bodyPart - Body or face (0/1).
+ */
 mp.events.add('cameraPointTo', (bodyPart) => {
 	if(bodyPart == 0) {
 		camera.setCoord(152.6008, -1003.25, -98);
@@ -65,19 +107,46 @@ mp.events.add('cameraPointTo', (bodyPart) => {
 	}
 });
 
+/**
+ * Sets the character heading.
+ * @event rotateCharacter
+ * @memberof client.character
+ * @param {number} rotation - Heading.
+ */
 mp.events.add('rotateCharacter', (rotation) => {
 	mp.players.local.setHeading(rotation);
 });
 
+/**
+ * Warns that the character name is a duplicate.
+ * @event characterNameDuplicated
+ * @memberof client.character
+ * @fires browserExecute
+ */
 mp.events.add('characterNameDuplicated', () => {
 	mp.events.call('browserExecute', 'character', ['showPlayerDuplicatedWarn']);
 });
 
+/**
+ * Tries to create the character.
+ * @event acceptCharacterCreation
+ * @memberof client.character
+ * @param {string} name - Character name.
+ * @param {number} age - Character age.
+ * @param {string} model - Character model (male/female).
+ * @fires createCharacter
+ */
 mp.events.add('acceptCharacterCreation', (name, age, model) => {
 	let faceJson = JSON.stringify(faceModel);
 	mp.events.callRemote('createCharacter', name, age, model, faceJson);
 });
 
+/**
+ * Cancels and exits character creation.
+ * @event cancelCharacterCreation
+ * @memberof client.character
+ * @fires createBrowser
+ */
 mp.events.add('cancelCharacterCreation', () => {
 	mp.game.cam.renderScriptCams(false, false, 0, true, false);
 	camera.destroy();
@@ -85,11 +154,16 @@ mp.events.add('cancelCharacterCreation', () => {
 	mp.game.ui.displayHud(true);
 	mp.gui.chat.activate(true);
 	mp.gui.chat.show(true);
-	mp.events.call('destroyBrowser', 'character');
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
 	mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters]);
 });
 
+/**
+ * Cancels and exits character creation.
+ * @event characterCreatedSuccessfully
+ * @memberof client.character
+ * @fires destroyBrowser
+ */
 mp.events.add('characterCreatedSuccessfully', () => {
 	mp.game.cam.renderScriptCams(false, false, 0, true, false);
 	camera.destroy();
@@ -100,6 +174,14 @@ mp.events.add('characterCreatedSuccessfully', () => {
 	mp.events.call('destroyBrowser', 'character');
 });
 
+/**
+ * Updates player features.
+ * @event updatePlayerCustomSkin
+ * @memberof client.character
+ * @param {object} player - The player to be updated.
+ * @param {string} faceJson - The face data in JSON.
+ * @param {string} tattooJson - The tattoo data in JSON.
+ */
 mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
 	let face = JSON.parse(faceJson);
 	let tattoo = JSON.parse(tattooJson);
@@ -107,6 +189,13 @@ mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
 	updatePlayerTattoos(player, tattoo);
 });
 
+/**
+ * Initializes player features.
+ * @function initializeCharacterCreation
+ * @memberof client.character
+ * @param {object} player - The player to initialize.
+ * @returns {object} - The face model.
+ */
 function initializeCharacterCreation(player) {
 	faceModel.firstHeadShape = player === 'undefined' ? 0 : player.getVariable('FIRST_HEAD_SHAPE');
 	faceModel.secondHeadShape = player === 'undefined' ? 0 : player.getVariable('SECOND_HEAD_SHAPE');
@@ -158,6 +247,13 @@ function initializeCharacterCreation(player) {
 	return faceModel;
 }
 
+/**
+ * Updates player features.
+ * @function updatePlayerFace
+ * @memberof client.character
+ * @param {object} player - The player to update.
+ * @param {object} face - The face object.
+ */
 function updatePlayerFace(player, face) {
 	player.setHeadBlendData(Number(face.firstHeadShape), Number(face.secondHeadShape), 0, Number(face.firstSkinTone), Number(face.secondSkinTone), 0, Number(face.headMix), Number(face.skinMix), 0, false);
 	player.setComponentVariation(2, Number(face.hairModel), 0, 0);
@@ -196,6 +292,13 @@ function updatePlayerFace(player, face) {
 	player.setFaceFeature(19, Number(face.neckWidth));
 }
 
+/**
+ * Updates player features.
+ * @function updatePlayerTattoos
+ * @memberof client.character
+ * @param {object} player - The player to update.
+ * @param {Array<object>} tattooArray - Object tattoo with hash and library.
+ */
 function updatePlayerTattoos(player, tattooArray) {
 	for (let i = 0; i < tattooArray.length; i++) {
 		let library = mp.game.joaat(tattooArray[i].library);

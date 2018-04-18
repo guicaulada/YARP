@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Player events
- * @namespace player
+ * @namespace server.player
  */
 
 /**
  * Chat event.
  * @event playerChat
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @param {string} message - Message sent.
  */
@@ -19,7 +19,7 @@ mp.events.add('playerChat', (player, message) => {
 /**
  * Command event.
  * @event playerCommand
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @param {string} command - Message sent.
  */
@@ -58,7 +58,7 @@ mp.events.add('playerDamage', (player, healthLoss, armorLoss) => {
 /**
  * Death event.
  * @event playerDeath
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @fires unequipAllWeapons
  */
@@ -77,7 +77,7 @@ mp.events.add('playerDeath', (player) => {
 /**
  * Join event.
  * @event playerJoin
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @fires createBrowser
  */
@@ -111,7 +111,7 @@ mp.events.add('playerJoin', (player) => {
 /**
  * Quit event.
  * @event playerQuit
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @param {string} exitType - Exit type.
  * @param {string} reason - Exit reason.
@@ -129,7 +129,7 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
 /**
  * Player ready.
  * @event playerReady
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  */
 mp.events.add('playerReady', player => {
@@ -138,7 +138,7 @@ mp.events.add('playerReady', player => {
 /**
  * Player spawned.
  * @event playerSpawn
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  */
 mp.events.add('playerSpawn', player => {
@@ -147,7 +147,7 @@ mp.events.add('playerSpawn', player => {
 /**
  * Weapon change event.
  * @event playerWeaponChange
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @param {number} oldWeapon - Old weapon hash.
  * @param {number} newWeapon - New weapon hash.
@@ -172,7 +172,7 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
 /**
  * Weapon shot event.
  * @event playerWeaponShot
- * @memberof player
+ * @memberof server.player
  * @param {object} player - The player that called the event.
  * @param {string} targetPositionJson - Target position JSON.
  * @param {string} targetEntityJson - Target entity JSON.

@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Gamemode events
- * @namespace gamemode
+ * @namespace server.gamemode
  */
 
 /**
  * Evaluates code on server-side.
  * @event runServerCode
- * @memberof gamemode
+ * @memberof server.gamemode
  * @param {object} player - The player that called the event.
  * @param {string} code - Code.
  */
@@ -20,7 +20,7 @@ mp.events.add('runServerCode', (player, code) => {
 /**
  * Evaluates code on server-side.
  * @event playerBoundKeyPressed
- * @memberof gamemode
+ * @memberof server.gamemode
  * @param {object} player - The player that called the event.
  * @param {string} id - Hotkey id.
  * @fires displayHelpText
@@ -55,7 +55,7 @@ yarp.tick = 0;
 /**
  * Scans players and objects to act on proximity.
  * @function tick
- * @memberof gamemode
+ * @memberof server.gamemode
  */
 function tick() {
   mp.players.forEach((player,id) => {

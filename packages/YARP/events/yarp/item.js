@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Item events
- * @namespace item
+ * @namespace server.item
  */
 
 /**
  * Restore hunger event.
  * @event restoreHunger
- * @memberof item
+ * @memberof server.item
  * @param {object} player - The player that called the event.
  * @param {number} value - Amount to restore.
  */
@@ -25,7 +25,7 @@ mp.events.add('restoreHunger', (player, value) => {
 /**
  * Restore thirst event.
  * @event restoreThirst
- * @memberof item
+ * @memberof server.item
  * @param {object} player - The player that called the event.
  * @param {number} value - Amount to restore.
  */

@@ -1,21 +1,36 @@
 'use strict';
 /**
 * @file Command events
+* @namespace client.command
 */
 
 let camdir = false;
 let noclip = false;
 let charpos = false;
 
-//Command Events
+/**
+ * Toggle direction display.
+ * @event toggleCamdir
+ * @memberof client.command
+ */
 mp.events.add('toggleCamdir', () => {
     camdir = !camdir
 });
 
+/**
+ * Toggle position display.
+ * @event toggleCharpos
+ * @memberof client.command
+ */
 mp.events.add('toggleCharpos', () => {
     charpos = !charpos
 });
 
+/**
+ * Toggle noclip.
+ * @event toggleNoclip
+ * @memberof client.command
+ */
 mp.events.add('toggleNoclip', () => {
     noclip = !noclip
     mp.players.local.setInvincible(noclip);
@@ -30,7 +45,11 @@ mp.events.add('toggleNoclip', () => {
     }
 });
 
-//Key codes http://keycode.info/
+/**
+ * Renders noclip and dir/pos display.
+ * @event render
+ * @memberof client.command
+ */
 mp.events.add('render', () => {
   if (noclip){
     if (mp.keys.isDown(87) === true) {

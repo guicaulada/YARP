@@ -1,13 +1,13 @@
 'use strict';
 /**
  * @file Colshape events
- * @namespace colshape
+ * @namespace server.colshape
  */
 
 /**
  * Player enter coolshape.
  * @event playerEnterColshape
- * @memberof colshape
+ * @memberof server.colshape
  * @param {object} player - The player that called the event.
  * @param {object} shape - The colshape that was entered.
  */
@@ -17,7 +17,7 @@ mp.events.add('playerEnterColshape', (player,shape) => {
 /**
  * Player exit coolshape.
  * @event playerExitColshape
- * @memberof colshape
+ * @memberof server.colshape
  * @param {object} player - The player that called the event.
  * @param {object} shape - The colshape that was left.
  */

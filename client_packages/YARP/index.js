@@ -4,7 +4,7 @@
  */
 
 global.yarp = {}
-yarp.utils = require('./YARP/gamemode/static/Utility.js');
+yarp.utils = require('./YARP/modules/utils.js');
 
 //Load RAGE.MP Events
 require('./YARP/events/ragemp/browser.js');
@@ -17,7 +17,6 @@ require('./YARP/events/ragemp/vehicle.js');
 require('./YARP/events/ragemp/waypoint.js');
 
 //Load YARP Events
-require('./YARP/events/yarp/bank.js');
 require('./YARP/events/yarp/character.js');
 require('./YARP/events/yarp/command.js');
 require('./YARP/events/yarp/gamemode.js');
