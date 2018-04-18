@@ -3,9 +3,12 @@
  * @file Loads the gamemode on server-side.
  * @author Guilherme Caulada (Sighmir)
  * @copyright Copyright (C) 2018  Sighmir
- * @namespace yarp
+ * @namespace server
  */
 
+/**
+ * @namespace yarp
+ */
 global.yarp = {};
 global.chalk = require('chalk');
 
