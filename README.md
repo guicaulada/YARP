@@ -35,7 +35,7 @@ YARP is still under development, information will be added here in the future. S
 
 ## License
 
-    YARP - Yet Another RolePlay
+    YARP - Yet Another Roleplay
     Copyright (C) 2018  Sighmir
 
     This program is free software: you can redistribute it and/or modify
