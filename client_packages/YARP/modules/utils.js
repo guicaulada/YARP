@@ -14,6 +14,7 @@ let utils = {};
  * @returns {number} - Weapon type hash.
  */
 utils.getWeaponTypeInSlot = (weaponSlot) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0xB50B73D3F4DD1613', mp.players.local.handle, weaponSlot);
 }
 
@@ -25,6 +26,7 @@ utils.getWeaponTypeInSlot = (weaponSlot) => {
  * @returns {number} - Weapon ammo.
  */
 utils.getWeaponAmmo = (weaponhash) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0x5088CF774DF6D935', mp.players.local.handle, weaponhash);
 }
 
@@ -35,6 +37,7 @@ utils.getWeaponAmmo = (weaponhash) => {
  * @param {number} weaponhash - Weapon hash.
  */
 utils.removeWeapon = (weaponhash) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0xABBEF2EAC74A02EB', mp.players.local.handle, weaponhash);
 }
 
@@ -46,6 +49,7 @@ utils.removeWeapon = (weaponhash) => {
  * @param {number} ammo - Ammo amount.
  */
 utils.setWeaponAmmo = (weaponhash, ammo) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0xF28A81E331A3F337', mp.players.local.handle, weaponhash, ammo);
 }
 
@@ -56,6 +60,7 @@ utils.setWeaponAmmo = (weaponhash, ammo) => {
  * @returns {number} - Weapon hash.
  */
 utils.getCurrentWeapon = () => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0x4D008FF908B623E2', mp.players.local.handle)
 }
 
@@ -67,6 +72,7 @@ utils.getCurrentWeapon = () => {
  * @param {number} component - Component hash.
  */
 utils.giveWeaponComponent = (weaponhash, component) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0x3A41B9B06FB233AE', mp.players.local.handle, weaponhash, component);
 }
 
@@ -78,6 +84,7 @@ utils.giveWeaponComponent = (weaponhash, component) => {
  * @returns {number} - The weapon clip size.
  */
 utils.getWeaponClipSize = (weaponhash) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0x29E49EE03BC36422', weaponhash);
 }
 
@@ -89,6 +96,7 @@ utils.getWeaponClipSize = (weaponhash) => {
  * @returns {boolean} - True/false if has or not weapon.
  */
 utils.gotWeapon = (weaponhash) => {
+  // Credits to kemperrr#9752.
   return mp.game.invoke('0xA8388473C755363D', mp.players.local.handle, weaponhash, false);
 }
 
@@ -99,6 +107,7 @@ utils.gotWeapon = (weaponhash) => {
  * @returns {object} - Dictionary weapon > ammo.
  */
 utils.getAllWeapons = () => {
+  // Credits to kemperrr#9752.
   const weapons = {};
   this.weaponSlots.forEach(weaponSlot => {
     const weapon = this.getWeaponTypeInSlot(mp.players.local.handle, weaponSlot);
