@@ -14,7 +14,7 @@ let utils = {};
  * @returns {number} - Weapon type hash.
  */
 utils.getWeaponTypeInSlot = (weaponSlot) => {
-  return mp.game.invoke('0xBBDDEBFD9564D52C', mp.players.local.handle, weaponSlot);
+  return mp.game.invoke('0xB50B73D3F4DD1613', mp.players.local.handle, weaponSlot);
 }
 
 /**
@@ -25,7 +25,7 @@ utils.getWeaponTypeInSlot = (weaponSlot) => {
  * @returns {number} - Weapon ammo.
  */
 utils.getWeaponAmmo = (weaponhash) => {
-  return mp.game.invoke('0x2406A9C8DA99D3F4', mp.players.local.handle, weaponhash);
+  return mp.game.invoke('0x5088CF774DF6D935', mp.players.local.handle, weaponhash);
 }
 
 /**
@@ -35,7 +35,7 @@ utils.getWeaponAmmo = (weaponhash) => {
  * @param {number} weaponhash - Weapon hash.
  */
 utils.removeWeapon = (weaponhash) => {
-  return mp.game.invoke('0xA48F593CC7A71FCC', mp.players.local.handle, weaponhash);
+  return mp.game.invoke('0xABBEF2EAC74A02EB', mp.players.local.handle, weaponhash);
 }
 
 /**
@@ -46,7 +46,7 @@ utils.removeWeapon = (weaponhash) => {
  * @param {number} ammo - Ammo amount.
  */
 utils.setWeaponAmmo = (weaponhash, ammo) => {
-  return mp.game.invoke('0xC8207C41C6D1E3CF', mp.players.local.handle, weaponhash, ammo);
+  return mp.game.invoke('0xF28A81E331A3F337', mp.players.local.handle, weaponhash, ammo);
 }
 
 /**
@@ -56,7 +56,7 @@ utils.setWeaponAmmo = (weaponhash, ammo) => {
  * @returns {number} - Weapon hash.
  */
 utils.getCurrentWeapon = () => {
-  return mp.game.invoke('0x6678C142FAC881BA', mp.players.local.handle)
+  return mp.game.invoke('0x4D008FF908B623E2', mp.players.local.handle)
 }
 
 /**
@@ -67,7 +67,7 @@ utils.getCurrentWeapon = () => {
  * @param {number} component - Component hash.
  */
 utils.giveWeaponComponent = (weaponhash, component) => {
-  return mp.game.invoke('0xAD084726D7F23594', mp.players.local.handle, weaponhash, component);
+  return mp.game.invoke('0x3A41B9B06FB233AE', mp.players.local.handle, weaponhash, component);
 }
 
 /**
@@ -78,7 +78,7 @@ utils.giveWeaponComponent = (weaponhash, component) => {
  * @returns {number} - The weapon clip size.
  */
 utils.getWeaponClipSize = (weaponhash) => {
-  return mp.game.invoke('0xADBCA3534D2F6BEB', weaponhash);
+  return mp.game.invoke('0x29E49EE03BC36422', weaponhash);
 }
 
 /**
@@ -89,7 +89,7 @@ utils.getWeaponClipSize = (weaponhash) => {
  * @returns {boolean} - True/false if has or not weapon.
  */
 utils.gotWeapon = (weaponhash) => {
-  return mp.game.invoke('0xBEF481E5CF03DC93', mp.players.local.handle, weaponhash, false);
+  return mp.game.invoke('0xA8388473C755363D', mp.players.local.handle, weaponhash, false);
 }
 
 /**
