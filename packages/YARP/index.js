@@ -17,7 +17,6 @@ global.chalk = require('chalk');
  * @async
  * @function
  */
- console.log(chalk.greenBright('[YARP] ')+'Loading Complete');
 (async () => {
   // Loading requirements
   await require('./loaders/requirements.js')();
@@ -46,11 +45,12 @@ global.chalk = require('chalk');
   });
 })();
 
-function exit(){
+const exit = async () => {
   console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');
-  yarp.db.close();
+  await mp.players.broadcast(`!{red}The server is closing.`);
   for (let player of mp.players.toArray()) {
     player.kick('The server is closing.');
+    console.log(`${player.name}(${player.socialClub}/${player.ip}) quit. Reason: The server is closing. (kicked)`)
   }
   process.exit();
 }

@@ -121,7 +121,7 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
   if (yarp.characters[player.name]) yarp.characters[player.name].leave();
   let msg = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
   if (exitType == 'kicked') {
-    msg = `${player.name}(${player.socialClub}/${player.ip}) kicked. Reason: ${reason} (${exitType})`;
+    msg = `${player.name}(${player.socialClub}/${player.ip}) quit. Reason: ${reason} (${exitType})`;
   }
   console.log(msg);
 });
