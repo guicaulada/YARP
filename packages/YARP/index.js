@@ -47,7 +47,7 @@ global.chalk = require('chalk');
 
 const exit = async () => {
   console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');
-  await mp.players.broadcast(`!{red}The server is closing.`);
+  await mp.players.broadcast(`!{red}The server is closing. Rejoin with F1.`);
   for (let player of mp.players.toArray()) {
     player.kick('The server is closing.');
     console.log(`${player.name}(${player.socialClub}/${player.ip}) quit. Reason: The server is closing. (kicked)`)
