@@ -234,16 +234,4 @@ mongo.stats = (collection) => {
   });
 }
 
-/**
- * Closes the connection.
- * @function close
- * @memberof yarp.db
- */
-mongo.close = () => {
-  if (_db) {
-    _db.close();
-    _db = null;
-  }
-}
-
 module.exports = mongo;
