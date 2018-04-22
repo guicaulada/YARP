@@ -83,5 +83,6 @@ mp.events.add('loadCharacter', (player,id) => {
   character.enter();
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
+  player.setVariable('PLAYER_XP', character.xp);
   player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });

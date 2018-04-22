@@ -292,6 +292,10 @@ function tick() {
         if (yarp.tick % yarp.variables['Thirst Interval'].value == 0) {
           character.increaseThirst(yarp.variables['Thirst Rate'].value);
         }
+
+        if (yarp.tick % yarp.variables['XP Interval'].value == 0) {
+          character.increaseXp(yarp.variables['XP Rate'].value);
+        }
       }
     }
   });
