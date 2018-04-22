@@ -413,9 +413,10 @@ class Character extends yarp.GMObject{
     if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
     if (this.hasWeapon(weapon.id)) {
       this.weapons.splice(this.weapons.indexOf(weapon.id),1);
-    }
-    //this.player.giveWeapon(mp.joaat(weapon.id), amount); How to take a weapon ?
-    this.player.call('unequipWeapon', [JSON.stringify(weapon)]);
+    } 
+    let player = this.player;
+    player.call('takeWeapon', [weapon.id]);
+    player.call('unequipWeapon', [JSON.stringify(weapon)]);
   }
 
   /**
@@ -432,6 +433,8 @@ class Character extends yarp.GMObject{
       if (this.weapons[id] <= 0) {
         this.weapons[id] = 0;
       }
+      let player = this.player;
+      player.call('setWeaponAmmo', [id, this.weapons[id]]);
     }
   }
 
@@ -446,6 +449,9 @@ class Character extends yarp.GMObject{
   giveWeaponAmmo(id, amount){
     if (this.hasWeapon(id)) {
       this.weapons[id] += amount;
+      let player = this.player;
+      player.call('setWeaponAmmo', [id, this.weapons[id]]);
+      player.invoke('0xF28A81E331A3F337', player, mp.joaat(id), this.weapons[id]);
     }
   }
 
@@ -458,12 +464,14 @@ class Character extends yarp.GMObject{
    * @param {number} amount - Amount of bullets.
    */
   takeAmmo(id, amount){
-    let weapon = id.replace('AMMO_','WEAPON_');
-    if (this.hasWeapon(weapon)) {
-      this.weapons[weapon] -= amount;
-      if (this.weapons[weapon] <= 0) {
-        this.weapons[weapon] = 0;
+    let weaponId = id.replace('AMMO_','WEAPON_');
+    if (this.hasWeapon(weaponId)) {
+      this.weapons[weaponId] -= amount;
+      if (this.weapons[weaponId] <= 0) {
+        this.weapons[weaponId] = 0;
       }
+      let player = this.player;
+      player.call('setWeaponAmmo', [weaponId, this.weapons[weaponId]]);
     }
   }
 
@@ -476,9 +484,11 @@ class Character extends yarp.GMObject{
    * @param {number} amount - Amount of bullets.
    */
   giveAmmo(id, amount){
-    let weapon = id.replace('AMMO_','WEAPON_');
-    if (this.hasWeapon(weapon)) {
-      this.weapons[weapon] += amount;
+    let weaponId = id.replace('AMMO_','WEAPON_');
+    if (this.hasWeapon(weaponId)) {
+      this.weapons[weaponId] += amount;
+      let player = this.player;
+      player.call('setWeaponAmmo', [weaponId, this.weapons[weaponId]]);
     }
   }
 

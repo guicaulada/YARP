@@ -58,3 +58,13 @@ mp.events.add('unequipAllWeapons', () => {
 	}
 	equiped = {};
 });
+
+mp.events.add('takeWeapon', (weaponhash) => {
+	if ((typeof weaponhash) === 'string') weaponhash = mp.game.joaat(weaponhash);
+	yarp.utils.removeWeapon(weaponhash);
+})
+
+mp.events.add('setWeaponAmmo', (weaponhash, ammo) => {
+	if ((typeof weaponhash) === 'string') weaponhash = mp.game.joaat(weaponhash);
+	yarp.utils.setWeaponAmmo(weaponhash, ammo);
+})

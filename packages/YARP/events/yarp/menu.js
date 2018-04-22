@@ -66,7 +66,7 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
       if (item.isWeapon()) {
         character.giveWeapon(yarp.weapons[item.id]);
       } else if (item.isAmmo()) {
-        character.giveAmmo(item.id);
+        character.giveAmmo(item.id,amount);
       } else {
         character.giveItem(item,amount);
       }
@@ -74,30 +74,6 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemid, amount) => {
       player.notify('Received ~g~'+amount+' '+item.name);
       character.save();
     }
-  }
-});
-
-/**
- * Purchase weapon for sale.
- * @event purchaseAmmuWeapon
- * @memberof server.menu
- * @param {object} player - The player that called the event.
- * @param {string} id - Weapon id.
- * @param {string} amount - Amount to purchase.
- * @fires browserExecute
- */
-mp.events.add('purchaseAmmuWeapon', (player, id, amount) => {
-  let character = yarp.characters[player.name];
-  let weapon = yarp.weapons[id];
-  let total = weapon.ammo*amount;
-  if (!character.hasWeapon(id)){
-    total = total + weapon.price;
-  }
-  if (character.tryFullPayment(total)){
-    character.giveWeapon(weapon,amount);
-    player.notify('Paid ~r~$'+total);
-    player.notify('Received ~g~'+weapon.name+' +'+amount);
-    character.save();
   }
 });
 
