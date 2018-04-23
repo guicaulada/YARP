@@ -1,10 +1,12 @@
 <!-- Note: for support questions, add Sighmir#1621 on Discord. This repository's issues are reserved for feature requests and bug reports. -->
 
 * **I'm submitting a ...**
-  - [ ] bug report <!-- Please add [Bug] on the beggining of the title -->
-  - [ ] feature request  <!-- Please add [Request] on the beggining of the title -->
-
-
+  - [ ] bug report <!-- Please add "bug(<scope>): " on the beggining of the title -->
+  - [ ] feature request  <!-- Please add "request(<scope>): " on the beggining of the title -->
+<!--
+  The <scope> could be anything specifying place of the bug. For example Character, events.gamemode, stores, labels, etc...
+  You can use `*` when the bug affects more than a single scope.
+-->
 
 * **What is the current behavior?**
 
