@@ -4,11 +4,12 @@ let config = {
   'Ammu-Nation': {
     enter: (player) => {
       player.call('displayHelpText',['Press ~INPUT_PICKUP~ to shop.']);
-      let location = yarp.locations['Ammu-Nation'];
+      let location = yarp.locations[this.id];
       yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateSaleCategories', location.id,JSON.stringify(location.sale)]]]);
     },
     leave: (player) => {
       player.call('clearHelpText');
+      player.call('destroyBrowser',['menu']);
       yarp.hotkeys['Event'].unbind(player);
     },
     visible: false,
@@ -29,11 +30,12 @@ let config = {
   '7/11': {
     enter: (player) => {
       player.call('displayHelpText',['Press ~INPUT_PICKUP~ to shop.']);
-      let location = yarp.locations['7/11'];
+      let location = yarp.locations[this.id];
       yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateSaleCategories', location.id,JSON.stringify(location.sale)]]]);
     },
     leave: (player) => {
       player.call('clearHelpText');
+      player.call('destroyBrowser', ['menu']);
       yarp.hotkeys['Event'].unbind(player);
     },
     visible: false,

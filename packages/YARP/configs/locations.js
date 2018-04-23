@@ -1,18 +1,22 @@
 'use strict';
 
-let config = {
-  '7/11': {
+let config = {};
+
+for (let i = 0; i < 16; ++i) {
+  config[`7/11 ${i}`] = {
     price: 110000000,
-    inventory: {
-      'fries': {price: 5, amount: 100},
-      'burger': {price: 10, amount: 100},
-      'hotdog': {price: 15, amount: 100},
-      'beer': {price: 5, amount: 100},
-      'juice': {price: 10, amount: 100},
-      'soda': {price: 15, amount: 100},
+      inventory: {
+      'fries': { price: 5, amount: 100 },
+      'burger': { price: 10, amount: 100 },
+      'hotdog': { price: 15, amount: 100 },
+      'beer': { price: 5, amount: 100 },
+      'juice': { price: 10, amount: 100 },
+      'soda': { price: 15, amount: 100 },
     }
-  },
-  'Ammu-Nation': {
+  };
+}
+for (let i = 0; i < 11; ++i) {
+  config[`Ammu-Nation ${i}`] = {
     price: 220000000,
     inventory: {
       // Weapons
@@ -105,7 +109,7 @@ let config = {
       'AMMO_MARKSMANRIFLE': {price: 120, amount:100},
       'AMMO_SNIPERRIFLE': {price: 100, amount:100},
     }
-  },
-};
+  };
+}
 
 module.exports = config;
