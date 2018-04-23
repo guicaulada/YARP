@@ -219,37 +219,6 @@ function tick() {
           }
         });
 
-        yarp.props.forEach((prop) => {
-          let i = prop.players.indexOf(id);
-          if (i < 0) {
-            if (yarp.utils.Vector3Distance(player.position,prop.position) < prop.range){
-              if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)){
-                if (character.hasItems(prop.items)) {
-                  if (prop.enter){
-                    prop.enter(player);
-                  }
-                } else {
-                  player.notify('~r~You don\'t have permission.');
-                }
-              } else {
-                player.notify('~r~You don\'t have the required items.');
-              }
-              prop.players.push(id)
-            }
-          } else {
-            if (yarp.utils.Vector3Distance(player.position,prop.position) > prop.range){
-              if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)){
-                if (character.hasItems(prop.items)) {
-                    if (prop.leave){
-                    prop.leave(player);
-                  }
-                }
-              }
-              prop.players.splice(i,1)
-            }
-          }
-        });
-
         mp.players.forEach((player2,id2) => {
           if (id != id2) {
             let i = character.players.indexOf(id);
