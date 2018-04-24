@@ -133,7 +133,7 @@ let config = {
         hint: 'Give yourself money.',
         permissions: ['cmd.givemoney'],
         call: (player,args) => {
-           yarp.characters[player.name].giveMoney(args[0]);
+           yarp.characters[player.name].giveMoney(Number(args[0]));
            player.notify('Received ~g~$'+args[0])
         }
       },
