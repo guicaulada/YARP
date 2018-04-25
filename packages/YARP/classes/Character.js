@@ -528,8 +528,8 @@ class Character extends yarp.GMObject{
    * @fires characterJoinedGroup
    */
   giveGroup(group){
-    if (yarp.groups[group]) {
-      if (this.groups.indexOf(group) == -1) {
+    if (this.groups.indexOf(group) == -1) {
+      if (yarp.groups[group]) {
         let type = yarp.groups[group].type;
         if (type){
           let same_type = this.getGroupByType(type);
@@ -537,14 +537,14 @@ class Character extends yarp.GMObject{
             this.takeGroup(same_type);
           }
         }
-        this.groups.push(group);
         let player = this.player;
         if (player) {
           yarp.groups[group].enter(player);
           mp.events.call('characterJoinedGroup',player,this,group);
         }
-        return true;
       }
+      this.groups.push(group);
+      return true;
     }
     return false;
   }
@@ -559,16 +559,16 @@ class Character extends yarp.GMObject{
    * @fires characterLeftGroup
    */
   takeGroup(group){
-    if (yarp.groups[group]) {
-      if (this.groups.indexOf(group) > -1) {
-        this.groups.splice(this.groups.indexOf(group), 1);
+    if (this.groups.indexOf(group) > -1) {
+      if (yarp.groups[group]) {
         let player = this.player;
         if (player) {
           yarp.groups[group].leave(player);
           mp.events.call('characterLeftGroup',player,this,group);
         }
-        return true;
       }
+      this.groups.splice(this.groups.indexOf(group), 1);
+      return true;
     }
     return false;
   }
@@ -582,14 +582,14 @@ class Character extends yarp.GMObject{
    * @returns {string} - Group id.
    */
   getGroupByType(type){
-    this.groups.forEach(function(id){
+    for (let id of this.groups) {
       let group = yarp.groups[id];
       if (group != null) {
         if (group.type == type){
-          return name;
+          return id;
         }
       }
-    });
+    }
   }
 
   /**
@@ -602,14 +602,14 @@ class Character extends yarp.GMObject{
    */
   getGroupsByTypes(types){
     let groups = [];
-    this.groups.forEach(function(id){
+    for (let id of this.groups) {
       let group = yarp.groups[id];
       if (group != null) {
         if (types.indexOf(group.type) >= 0){
           groups.push(group);
         }
       }
-    });
+    }
     return groups;
   }
 
@@ -703,7 +703,7 @@ class Character extends yarp.GMObject{
           break;
       }
     } else {
-      this.groups.forEach(function(id){
+      for (let id of this.groups) {
         let group = yarp.groups[id];
         if (group != null) {
           if (group.permissions.indexOf('*') > -1){
@@ -719,7 +719,7 @@ class Character extends yarp.GMObject{
             readd = true;
           }
         }
-      });
+      }
     }
     if (removed && !readd){
       result = false;
