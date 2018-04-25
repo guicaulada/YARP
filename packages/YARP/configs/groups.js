@@ -34,6 +34,13 @@ let config = {
       'cmd.money',
       'cmd.hint'
     ]
+  },
+  'Cop': {
+    type: 'job',
+    enter: (player) => {player.notify('You are a cop.')},
+    permissions: [
+      'cmd.radio'
+    ]
   }
 }
 
