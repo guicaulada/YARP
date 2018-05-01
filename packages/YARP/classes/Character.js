@@ -181,6 +181,19 @@ class Character extends yarp.GMObject{
     this.player.setVariable('PLAYER_WALLET', this.wallet);
   }
 
+
+  /**
+   * Give bank money.
+   * @instance
+   * @function giveBankMoney
+   * @memberof yarp.Character
+   * @param {number} value - Amount to give.
+   */
+  giveBankMoney(value){
+    this.bank += value;
+    this.player.setVariable("PLAYER_BANK", this.bank);
+  }
+
   /**
    * Try wallet payment.
    * @instance
