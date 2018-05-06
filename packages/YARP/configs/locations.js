@@ -2,6 +2,7 @@
 
 let config = {};
 
+// i = 1; i <= amount of stores
 for (let i = 1; i <= 17; ++i) {
   config[`7/11 ${i}`] = {
     price: 110000000,
@@ -15,6 +16,8 @@ for (let i = 1; i <= 17; ++i) {
     }
   };
 }
+
+// i = 1; i <= amount of ammunations
 for (let i = 1; i <= 11; ++i) {
   config[`Ammu-Nation ${i}`] = {
     price: 220000000,
