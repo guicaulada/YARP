@@ -2,7 +2,7 @@
 
 let config = {};
 
-for (let i = 1; i < 17; ++i) {
+for (let i = 1; i <= 17; ++i) {
   config[`7/11 ${i}`] = {
     price: 110000000,
       inventory: {
@@ -15,7 +15,7 @@ for (let i = 1; i < 17; ++i) {
     }
   };
 }
-for (let i = 1; i < 12; ++i) {
+for (let i = 1; i <= 11; ++i) {
   config[`Ammu-Nation ${i}`] = {
     price: 220000000,
     inventory: {
