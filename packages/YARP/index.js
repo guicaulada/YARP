@@ -56,7 +56,8 @@ const exit = async () => {
 }
 
 process.on('SIGHUP', exit);
-process.on('SIGKILL', exit);
+if (process.platform === 'win32')
+  process.on('SIGKILL', exit);
 process.on('SIGQUIT', exit);
 process.on('SIGTERM', exit);
 process.on('SIGINT', exit);
