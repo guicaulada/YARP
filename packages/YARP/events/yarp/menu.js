@@ -136,6 +136,7 @@ mp.events.add('verifyLogin', (player,password) => {
   let user = yarp.users[player.socialClub];
   if(user == null){
     user = new yarp.User(player.socialClub,password);
+    user.giveGroup(yarp.variables['Default Group'].value);
   }
   if (user.verifyPassword(password)) {
     user.updateLastLogin(player.ip);

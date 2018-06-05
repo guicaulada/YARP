@@ -12,15 +12,21 @@
  */
 
 class Transaction extends yarp.GMObject{
-  constructor(type,value,source,target,date){
+  constructor(
+    type,
+    value,
+    source,
+    target = source,
+    date = new Date()
+  ){
     super();
     if ((type && value && source) != null) {
       this._id = yarp.transactions.length;
       this._type = type;
       this._value = value;
       this._source = source;
-      this._target = target || source;
-      this._date = (date) ? yarp.utils.getTimestamp(date) : yarp.utils.getTimestamp(new Date());
+      this._target = target;
+      this._date = yarp.utils.getTimestamp(date);
       yarp.mng.register(this);
       this.makeGetterSetter();
     }

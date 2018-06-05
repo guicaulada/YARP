@@ -17,17 +17,26 @@ const bcrypt = require('bcryptjs');
  * @param {function} [leave=() => {}] - User leave function.
  */
 class User extends yarp.GMObject{
-  constructor(id,password,lastLogin,whitelisted,banned,groups,enter,leave){
+  constructor(
+    id,
+    password,
+    lastLogin = '',
+    whitelisted = false,
+    banned = false,
+    groups = [],
+    enter = () => {},
+    leave = () => {}
+  ){
     super();
     if ((id && password) != null){
       this._id = id;
       this._password = (password.length == 60) ? password : bcrypt.hashSync(password, 10);
-      this._lastLogin = lastLogin || '';
-      this._whitelisted = whitelisted || false;
-      this._banned = banned || false;
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
-      this._groups = groups || [];
+      this._lastLogin = lastLogin;
+      this._whitelisted = whitelisted;
+      this._banned = banned;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
+      this._groups = groups;
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -338,6 +347,23 @@ class User extends yarp.GMObject{
           }
           if (group.permissions.indexOf(`+${permission}`) > -1){
             readd = true;
+          }
+          if ((!result) || (!readd && removed)) {
+            for (let inh of group.inherits) {
+              let child = yarp.groups[inh];
+              if (child.permissions.indexOf('*') > -1) {
+                result = true;
+              }
+              if (child.permissions.indexOf(permission) > -1) {
+                result = true;
+              }
+              if (child.permissions.indexOf(`-${permission}`) > -1) {
+                removed = true;
+              }
+              if (child.permissions.indexOf(`+${permission}`) > -1) {
+                readd = true;
+              }
+            }
           }
         }
       }

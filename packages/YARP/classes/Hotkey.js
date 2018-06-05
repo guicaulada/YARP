@@ -16,24 +16,28 @@
  */
 
 class Hotkey extends yarp.GMObject{
-  constructor(id,key,call,hint,category,permissions,items,position,range){
+  constructor(
+    id,
+    key = 'KEY_E',
+    call = () => {},
+    hint = 'There\'s no hint.',
+    category = 'None',
+    permissions = [],
+    items = {},
+    position = false,
+    range = false
+  ){
     super();
-    if ((id && key && call) != null){
+    if ((id) != null){
       this._id = id;
       this._key = key;
-      this._category = category || 'None';
-      this._hint = hint || 'There\'s no hint.';
+      this._category = category;
+      this._hint = hint;
       this._call = call.toString();
-      this._position = position || null;
-      this._range = range || null;
-      this._permissions = ((permissions) ? (((yarp.hotkeys && yarp.hotkeys[id]) != null) ?
-        yarp.hotkeys[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.hotkeys[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.hotkeys && yarp.hotkeys[id]) != null) ?
-        yarp.hotkeys[id].items.concat(items.filter(function (item) {
-          return yarp.hotkeys[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._position = position;
+      this._range = range;
+      this._permissions = permissions;
+      this._items = items;
       this.args = {};
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -90,7 +94,18 @@ class Hotkey extends yarp.GMObject{
     for (let category in hotkeys){
       for (let id in hotkeys[category]){
         let hotkey = hotkeys[category][id];
-        new Hotkey(id,hotkey.key,hotkey.call,hotkey.hint,category,hotkey.permissions,hotkey.items);
+        if (!yarp.hotkeys[id]) {
+          new Hotkey(id,hotkey.key,hotkey.call,hotkey.hint,category,hotkey.permissions,hotkey.items);
+        } else {
+          yarp.hotkeys[id].key = hotkey.key;
+          yarp.hotkeys[id].category = category;
+          yarp.hotkeys[id].hint = hotkey.hint;
+          yarp.hotkeys[id].call = hotkey.call.toString();
+          yarp.hotkeys[id].position = hotkey.position;
+          yarp.hotkeys[id].range = hotkey.range;
+          yarp.hotkeys[id].permissions = hotkey.permissions;
+          yarp.hotkeys[id].items = hotkey.items;
+        }
       }
     }
   }

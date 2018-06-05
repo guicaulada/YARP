@@ -2,6 +2,7 @@
 
 let config = {
   'Super Admin': {
+    inherits: ['Admin'],
     permissions: [
       'cmd.code',
       'cmd.edit',

@@ -17,26 +17,31 @@
  */
 
 class Colshape extends yarp.GMObject{
-  constructor(id,position,type,width,height,depth,enter,leave,permissions,items){
+  constructor(
+    id,
+    position,
+    type = 1,
+    width = 10,
+    height = 10,
+    depth = 10,
+    enter = () => {},
+    leave = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
     if ((id && position) != null) {
       this._id = id;
-      this._type = type || 0;
+      this._type = type;
       this._position = position;
-      this._width = width || 10;
-      this._depth = depth || 10;
-      this._height = height || 10;
-      this._visible = visible || true;
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
-      this._permissions = ((permissions) ? (((yarp.colshapes && yarp.colshapes[id]) != null) ?
-        yarp.colshapes[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.colshapes[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.colshapes && yarp.colshapes[id]) != null) ?
-        yarp.colshapes[id].items.concat(items.filter(function (item) {
-          return yarp.colshapes[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._width = width;
+      this._depth = depth;
+      this._height = height;
+      this._visible = visible;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
+      this._permissions = permissions;
+      this._items = items;
       switch(this._type){
         case 1:
           this.mp = mp.colshapes.newRectangle(this._position.x, this._position.y, this._width, this._height);
@@ -45,10 +50,10 @@ class Colshape extends yarp.GMObject{
           this.mp = mp.colshapes.newCuboid(this._position.x, this._position.y, this._position.z, this._width, this._depth, this._height);
           break;
         case 3:
-          this.mp = mp.colshapes.newSphere(this._position.x, this._position.y, this._position.z, this._width);
+          this.mp = mp.colshapes.newCircle(this._position.x, this._position.y, this._width);
           break;
         default:
-          this.mp = mp.colshapes.newCircle(this._position.x, this._position.y, this._width);
+          this.mp = mp.colshapes.newSphere(this._position.x, this._position.y, this._position.z, this._width);
       }
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -78,7 +83,21 @@ class Colshape extends yarp.GMObject{
     for (let id in colshapes){
       let colshape = colshapes[id];
       for (let i=0; i < colshape.positions.length; i++){
-        new Colshape(id+' '+(i+1),colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
+        let nid = id +' ' + (i + 1);
+        if (!yarp.colshapes[nid]){
+          new Colshape(nid,colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
+        } else {
+          yarp.colshapes[nid].type = colshape.type;
+          yarp.colshapes[nid].position = colshape.positions[i];
+          yarp.colshapes[nid].width = colshape.width;
+          yarp.colshapes[nid].depth = colshape.depth;
+          yarp.colshapes[nid].height = colshape.height;
+          yarp.colshapes[nid].visible = colshape.visible;
+          yarp.colshapes[nid].enter = colshape.enter.toString();
+          yarp.colshapes[nid].leave = colshape.leave.toString();
+          yarp.colshapes[nid].permissions = colshape.permissions;
+          yarp.colshapes[nid].items = colshape.items;
+        }
       }
     }
   }

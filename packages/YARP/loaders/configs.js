@@ -5,8 +5,8 @@
 
 module.exports = async () => {
   // Loading configs
+  console.log(chalk.yellowBright('[YARP] ')+'Loading Configs');
   try {
-    console.log(chalk.yellowBright('[YARP] ')+'Loading Configs');
     yarp.blips.config('../configs/blips.js');
     yarp.characters.config('../configs/characters.js');
     yarp.checkpoints.config('../configs/checkpoints.js');
@@ -24,7 +24,6 @@ module.exports = async () => {
     yarp.props.config('../configs/props.js');
     yarp.transactions.config('../configs/transactions.js');
     yarp.users.config('../configs/users.js');
-    yarp.variables.config('../configs/variables.js');
     yarp.vehicles.config('../configs/vehicles.js');
     yarp.weapons.config('../configs/weapons.js');
   } catch(err) {

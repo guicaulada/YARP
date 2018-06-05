@@ -14,6 +14,7 @@ let config = {
   'Max Weight': 30,
   'First Spawn': new mp.Vector3(-888.8746, -2313.2836, 3.5077),
   'First Heading': 90,
+  'Default Group': 'User',
   'Spawns': [
     new mp.Vector3(1839.6, 3672.93, 34.28),
     new mp.Vector3(-247.76, 6331.23, 32.43),

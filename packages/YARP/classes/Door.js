@@ -15,23 +15,26 @@
  */
 
 class Door extends yarp.GMObject{
-  constructor(id,model,position,range,enter,leave,permissions,items){
+  constructor(
+    id,
+    model,
+    position,
+    range = 3,
+    enter = () => {},
+    leave = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
     if ((id && model && position) != null){
       this._id = id;
       this._model = model;
       this._position = position;
-      this._range = range || 3;
-      this._permissions = ((permissions) ? (((yarp.doors && yarp.doors[id]) != null) ?
-        yarp.doors[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.doors[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.doors && yarp.doors[id]) != null) ?
-        yarp.doors[id].items.concat(items.filter(function (item) {
-          return yarp.doors[id].items.indexOf(item) < 0;
-        })) : items) : []);
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
+      this._range = range;
+      this._permissions = permissions;
+      this._items = items;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
       this.state = false;
       this.players = [];
       yarp.mng.register(this);
@@ -84,7 +87,18 @@ class Door extends yarp.GMObject{
     for (let id in doors){
       let door = doors[id];
       for (let i=0; i < door.positions.length; i++){
-        new Door(id+' '+(i+1),door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.doors[nid]) {
+          new Door(nid,door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
+        } else {
+          yarp.doors[nid].model = door.model;
+          yarp.doors[nid].position = door.positions[i];
+          yarp.doors[nid].range = door.range;
+          yarp.doors[nid].permissions = door.permissions;
+          yarp.doors[nid].items = door.items;
+          yarp.doors[nid].enter = door.enter.toString();
+          yarp.doors[nid].leave = door.leave.toString();
+        }
       }
     }
   }

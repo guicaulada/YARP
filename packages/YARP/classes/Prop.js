@@ -20,28 +20,36 @@
  */
 
 class Prop extends yarp.GMObject{
-  constructor(id,model,position,owner,alpha,rotation,dimension,visible,range,enter,leave,permissions,items){
+  constructor(
+    id,
+    model,
+    position,
+    owner = false,
+    alpha = 255,
+    rotation = [],
+    dimension = 0,
+    visible = true,
+    range = 3,
+    enter = () => {},
+    leave = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
     if ((id && model && position) != null) {
       this._id = id;
       this._model = model;
       this._position = position;
-      this._owner = owner || null;
-      this._alpha = alpha || 255;
-      this._rotation = rotation || [];
-      this._dimension = dimension || 0;
-      this._visible = visible || true;
-      this._range = range || 3;
-      this._permissions = ((permissions) ? (((yarp.props && yarp.props[id]) != null) ?
-        yarp.props[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.props[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.props && yarp.props[id]) != null) ?
-        yarp.props[id].items.concat(items.filter(function (item) {
-          return yarp.props[id].items.indexOf(item) < 0;
-        })) : items) : []);
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
+      this._owner = owner;
+      this._alpha = alpha;
+      this._rotation = rotation;
+      this._dimension = dimension;
+      this._visible = visible;
+      this._range = range;
+      this._permissions = permissions;
+      this._items = items;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
       if (!this._visible) this._alpha = 0;
       this.players = [];
       this.mp = mp.objects.new(mp.joaat(this._model), this._position,
@@ -78,7 +86,24 @@ class Prop extends yarp.GMObject{
     for (let id in props){
       let prop = props[id];
       for (let i=0; i < prop.positions.length; i++){
-        new Prop(id+' '+(i+1),prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.visible,prop.range,prop.enter,prop.leave,prop.permissions,prop.items)
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.props[nid]) {
+          new Prop(nid,prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.visible,prop.range,prop.enter,prop.leave,prop.permissions,prop.items)
+        } else {
+          yarp.props[nid].model = prop.model;
+          yarp.props[nid].position = prop.positions[i];
+          yarp.props[nid].owner = prop.owner;
+          yarp.props[nid].alpha = prop.alpha;
+          yarp.props[nid].rotation = prop.rotation;
+          yarp.props[nid].dimension = prop.dimension;
+          yarp.props[nid].visible = prop.visible;
+          yarp.props[nid].range = prop.range;
+          yarp.props[nid].permissions = prop.permissions;
+          yarp.props[nid].items = prop.items;
+          yarp.props[nid].enter = prop.enter.toString();
+          yarp.props[nid].leave = prop.leave.toString();
+          if (!yarp.props[nid].visible) yarp.props[nid].alpha = 0;
+        }
       }
     }
   }

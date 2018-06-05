@@ -12,14 +12,20 @@
  */
 
 class Location extends yarp.GMObject{
-  constructor(id,inventory,owner,money,price){
+  constructor(
+    id,
+    inventory = {},
+    owner = false,
+    money = 0,
+    price = 0
+  ){
     super();
     if ((id) != null){
       this._id = id;
-      this._owner = owner || null;
-      this._money = money || 0;
-      this._price = price || 0;
-      this._inventory = inventory || {};
+      this._owner = owner;
+      this._money = money;
+      this._price = price ;
+      this._inventory = inventory;
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -73,6 +79,11 @@ class Location extends yarp.GMObject{
       let location = locations[id]
       if (!yarp.locations[id]){
         new Location(id,location.inventory,location.owner,location.money,location.price);
+      } else {
+        yarp.locations[id].owner = location.owner;
+        yarp.locations[id].money = location.money;
+        yarp.locations[id].price = location.price;
+        yarp.locations[id].inventory = location.inventory;
       }
     }
   }

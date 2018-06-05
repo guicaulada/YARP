@@ -23,32 +23,43 @@
  */
 
 class Vehicle extends yarp.GMObject{
-  constructor(id,model,position,heading,owner,plate,color,alpha,locked,engine,dimension,visible,permissions,items,enter,leave){
+  constructor(
+    id,
+    model,
+    position,
+    heading = 0,
+    owner = false,
+    plate = false,
+    color = [0,0.0],
+    alpha = 255,
+    locked = false,
+    engine = false,
+    dimension = 0,
+    visible = true,
+    enter = () => {},
+    leave = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
     if ((id && model && position) != null) {
       this._id = id;
       this._model = model;
       this._position = position;
-      this._heading = heading || 0;
-      this._owner = owner || null;
-      this._plate = plate || yarp.utils.randomString(8,'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-      this._color = color || [0,0,0];
-      this._alpha = alpha || 255;
-      this._locked = locked || false;
-      this._engine = engine || false;
-      this._dimension = dimension || 0;
-      this._visible = visible || true;
-      this._permissions = ((permissions) ? (((yarp.vehicles && yarp.vehicles[id]) != null) ?
-        yarp.vehicles[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.vehicles[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.vehicles && yarp.vehicles[id]) != null) ?
-        yarp.vehicles[id].items.concat(items.filter(function (item) {
-          return yarp.vehicles[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._heading = heading;
+      this._owner = owner;
+      this._plate = (plate) ? plate : yarp.utils.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+      this._color = color;
+      this._alpha = alpha;
+      this._locked = locked;
+      this._engine = engine;
+      this._dimension = dimension ;
+      this._visible = visible;
+      this._permissions = permissions;
+      this._items = items;
       if (!this._visible) this._alpha = 0;
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
+      this._enter = enter.toString();
+      this._leave = leave.toString();
       this.players = [];
       this.mp = mp.vehicles.new(mp.joaat(this._model), this._position,
       {
@@ -112,7 +123,27 @@ class Vehicle extends yarp.GMObject{
     for (let id in vehicles){
       let vehicle = vehicles[id];
       for (let i=0; i < vehicle.positions.length; i++){
-        new Vehicle(id+' '+(i+1),vehicle.model,vehicle.positions[i],vehicle.owner,vehicle.heading,vehicle.plate+i,vehicle.color,vehicle.alpha,vehicle.locked,vehicle.engine,vehicle.dimension,vehicle.visible,vehicle.permissions,vehicle.items)
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.vehicles[nid]) {
+          new Vehicle(nid, vehicle.model, vehicle.positions[i], vehicle.owner, vehicle.heading, vehicle.plate + i, vehicle.color, vehicle.alpha, vehicle.locked, vehicle.engine, vehicle.dimension, vehicle.visible, vehicle.permissions, vehicle.items)
+        } else {
+          yarp.vehicles[nid].model = vehicle.model;
+          yarp.vehicles[nid].position = vehicle.positions[i];
+          yarp.vehicles[nid].heading = vehicle.heading;
+          yarp.vehicles[nid].owner = vehicle.owner;
+          yarp.vehicles[nid].plate = (vehicle.plate) ? vehicle.plate : yarp.utils.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+          yarp.vehicles[nid].color = vehicle.color;
+          yarp.vehicles[nid].alpha = vehicle.alpha;
+          yarp.vehicles[nid].locked = vehicle.locked;
+          yarp.vehicles[nid].engine = vehicle.engine;
+          yarp.vehicles[nid].dimension = vehicle.dimension;
+          yarp.vehicles[nid].visible = vehicle.visible;
+          yarp.vehicles[nid].permissions = vehicle.permissions;
+          yarp.vehicles[nid].items = vehicle.items;
+          if (!yarp.vehicles[nid].visible) yarp.vehicles[nid].alpha = 0;
+          yarp.vehicles[nid].enter = vehicle.enter.toString();
+          yarp.vehicles[nid].leave = vehicle.leave.toString();
+        }
       }
     }
   }

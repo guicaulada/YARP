@@ -18,21 +18,34 @@
  */
 
 class Blip extends yarp.GMObject{
-  constructor(id,position,name,sprite,scale,color,alpha,drawDistance,fade,rotation,dimension,visible){
+  constructor(
+    id,
+    position,
+    name = 'Blip',
+    sprite = 1,
+    scale = 1,
+    color = 4,
+    alpha = 255,
+    drawDistance = 100,
+    fade = true,
+    rotation = new mp.Vector3(0, 0, 0),
+    dimension = 0,
+    visible = true
+  ){
     super();
     if ((id && position) != null) {
       this._id = id;
-      this._name = name || 'Blip';
-      this._sprite = sprite || 1;
+      this._name = name;
+      this._sprite = sprite;
       this._position = position;
-      this._scale = scale || 1;
-      this._color = color || 4;
-      this._alpha = alpha || 255;
-      this._drawDistance = drawDistance || 100;
-      this._fade = fade || true;
-      this._rotation = rotation || new mp.Vector3(0,0,0);
-      this._dimension = dimension || 0;
-      this._visible = visible || true;
+      this._scale = scale;
+      this._color = color;
+      this._alpha = alpha;
+      this._drawDistance = drawDistance;
+      this._fade = fade;
+      this._rotation = rotation;
+      this._dimension = dimension;
+      this._visible = visible;
       if (!this._visible) this._alpha = 0;
       this.mp = mp.blips.new(this._sprite, this._position,
       {
@@ -73,7 +86,23 @@ class Blip extends yarp.GMObject{
     for (let id in blips){
       let blip = blips[id];
       for (let i=0; i < blip.positions.length; i++){
-        new Blip(id+' '+(i+1),blip.positions[i],id,blip.sprite,blip.scale,blip.color,blip.alpha,blip.drawDistance,blip.fade,blip.rotation,blip.dimension)
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.blips[nid]){
+          new Blip(nid,blip.positions[i],id,blip.sprite,blip.scale,blip.color,blip.alpha,blip.drawDistance,blip.fade,blip.rotation,blip.dimension)
+        } else {
+          yarp.blips[nid].name = blip.name;
+          yarp.blips[nid].sprite = blip.sprite;
+          yarp.blips[nid].position = blip.positions[i];
+          yarp.blips[nid].scale = blip.scale;
+          yarp.blips[nid].color = blip.color;
+          yarp.blips[nid].alpha = blip.alpha;
+          yarp.blips[nid].drawDistance = blip.drawDistance;
+          yarp.blips[nid].fade = blip.fade;
+          yarp.blips[nid].rotation = blip.rotation;
+          yarp.blips[nid].dimension = blip.dimension;
+          yarp.blips[nid].visible = blip.visible;
+          if (!yarp.blips[nid].visible) yarp.blips[nid].alpha = 0;
+        }
       }
     }
   }

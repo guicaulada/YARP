@@ -14,16 +14,24 @@
  */
 
 class Npc extends yarp.GMObject{
-  constructor(id,model,position,heading,drawDistance,dimension,call){
+  constructor(
+    id,
+    model,
+    position,
+    heading = 0,
+    drawDistance = 100,
+    dimension = 0,
+    call = () => {}
+  ){
     super();
     if ((id && model && position) != null){
       this._id = id;
       this._model = model;
       this._position = position;
-      this._heading = heading || 0;
-      this._drawDistance = drawDistance || 100;
-      this._dimension = dimension || 0;
-      this._call = ((call) ? call.toString() : '() => {}');
+      this._heading = heading;
+      this._drawDistance = drawDistance;
+      this._dimension = dimension;
+      this._call = call.toString();
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -52,7 +60,17 @@ class Npc extends yarp.GMObject{
     for (let id in npcs){
       let npc = npcs[id];
       for (let i=0; i < npc.positions.length; i++){
-        new Npc(id+' '+(i+1),npc.model,npc.positions[i],npc.heading,npc.drawDistance,npc.dimension,npc.call);
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.npcs[nid]) {
+          new Npc(nid, npc.model, npc.positions[i], npc.heading, npc.drawDistance, npc.dimension, npc.call);
+        } else {
+          yarp.npcs[nid].model = npc.model;
+          yarp.npcs[nid].position = npc.positions[i];
+          yarp.npcs[nid].heading = npc.heading;
+          yarp.npcs[nid].drawDistance = npc.drawDistance;
+          yarp.npcs[nid].dimension = npc.dimension;
+          yarp.npcs[nid].call = npc.call.toString();
+        }
       }
     }
   }

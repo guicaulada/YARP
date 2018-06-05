@@ -21,29 +21,38 @@
  */
 
 class Label extends yarp.GMObject{
-  constructor(id,position,text,color,drawDistance,font,los,dimension,visible,range,enter,leave,permissions,items){
+  constructor(
+    id,
+    position,
+    text = '',
+    color = [51, 204, 51, 255],
+    drawDistance = 10,
+    font = 2,
+    los = true,
+    dimension = 0,
+    visible = true,
+    range = 3,
+    enter = () => {},
+    leave = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
     if ((id && position) != null){
       this._id = id;
-      this._text = text || '';
+      this._text = text;
       this._position = position;
-      this._range = range || 3;
-      this._color = color || [51, 204, 51, 255],
-      this._drawDistance = drawDistance || 10,
-      this._font = font || 2;
-      this._los = los || true;
-      this._dimension = dimension || 0;
-      this._visible = visible || true;
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
-      this._permissions = ((permissions) ? (((yarp.labels && yarp.labels[id]) != null) ?
-        yarp.labels[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.labels[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.labels && yarp.labels[id]) != null) ?
-        yarp.labels[id].items.concat(items.filter(function (item) {
-          return yarp.labels[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._range = range;
+      this._color = color;
+      this._drawDistance = drawDistance;
+      this._font = font;
+      this._los = los;
+      this._dimension = dimension ;
+      this._visible = visible;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
+      this._permissions = permissions;
+      this._items = items;
       this.players = [];
       if (!this._visible) this._color[4] = 0;
       this.mp = mp.labels.new(this._text, this._position,
@@ -82,7 +91,24 @@ class Label extends yarp.GMObject{
     for (let id in labels){
       let label = labels[id];
       for (let i=0; i < label.positions.length; i++){
-        new Label(id+' '+(i+1),label.positions[i],label.text,label.color,label.drawDistance,label.font,label.los,label.dimension,label.visible,label.range,label.enter,label.leave,label.permissions,label.items)
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.labels[nid]) {
+          new Label(nid,label.positions[i],label.text,label.color,label.drawDistance,label.font,label.los,label.dimension,label.visible,label.range,label.enter,label.leave,label.permissions,label.items)
+        } else {
+          yarp.labels[nid].text = label.text;
+          yarp.labels[nid].position = label.positions[i];
+          yarp.labels[nid].range = label.range;
+          yarp.labels[nid].color = label.color;
+          yarp.labels[nid].drawDistance = label.drawDistance;
+          yarp.labels[nid].font = label.font;
+          yarp.labels[nid].los = label.los;
+          yarp.labels[nid].dimension = label.dimension;
+          yarp.labels[nid].visible = label.visible;
+          yarp.labels[nid].enter = label.enter.toString();
+          yarp.labels[nid].leave = label.leave.toString();
+          yarp.labels[nid].permissions = label.permissions;
+          yarp.labels[nid].items = label.items;
+        }
       }
     }
   }

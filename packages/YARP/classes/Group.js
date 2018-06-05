@@ -13,17 +13,22 @@
  */
 
 class Group extends yarp.GMObject{
-  constructor(id,type,permissions,enter,leave){
+  constructor(
+    id,
+    type = false,
+    inherits = [],
+    permissions = [],
+    enter = () => {},
+    leave = () => {}
+  ){
     super();
     if ((id) != null) {
       this._id = id;
-      this._type = type || null;
-      this._permissions = ((permissions) ? (((yarp.groups && yarp.groups[id]) != null) ?
-        yarp.groups[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.groups[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
+      this._type = type;
+      this._inherits = inherits;
+      this._permissions = permissions;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -115,6 +120,22 @@ class Group extends yarp.GMObject{
     if (this.permissions.indexOf(`+${permission}`) > -1){
       readd = true;
     }
+    if ((!result) || (!readd && removed)) {
+      for (group of this.inherits) {
+        if (group.permissions.indexOf('*') > -1) {
+          result = true;
+        }
+        if (group.permissions.indexOf(permission) > -1) {
+          result = true;
+        }
+        if (group.permissions.indexOf(`-${permission}`) > -1) {
+          removed = true;
+        }
+        if (group.permissions.indexOf(`+${permission}`) > -1) {
+          readd = true;
+        }
+      }
+    }
     if (removed && !readd){
       result = false;
     }
@@ -147,7 +168,7 @@ class Group extends yarp.GMObject{
    * @param {object} object - Class object.
    */
   static load(obj){
-    return new Group(obj._id,obj._type,obj._permissions,obj._enter,obj._leave);
+    return new Group(obj._id,obj._type, obj._inherits,obj._permissions,obj._enter,obj._leave);
   }
 
   /**
@@ -161,7 +182,15 @@ class Group extends yarp.GMObject{
     let groups = require(file);
     for (let id in groups){
       let group = groups[id];
-      new Group(id,group.type,group.permissions,group.enter,group.leave);
+      if (!yarp.groups[id]) {
+        new Group(id, group.type, group.inherits, group.permissions, group.enter, group.leave);
+      } else {
+        yarp.groups[id].type = group.type;
+        yarp.groups[id].inherits = group.inherits;
+        yarp.groups[id].permissions = group.permissions;
+        yarp.groups[id].enter = group.enter.toString();
+        yarp.groups[id].leave = group.leave.toString();
+      }
     }
   }
 }

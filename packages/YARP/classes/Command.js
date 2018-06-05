@@ -15,23 +15,26 @@
  */
 
 class Command extends yarp.GMObject{
-  constructor(id,call,category,hint,permissions,items,position,range){
+  constructor(
+    id,
+    call = () => {},
+    category = 'None',
+    hint = 'There\'s no hint.',
+    permissions = [],
+    items = {},
+    position = false,
+    range = false
+  ){
     super();
-    if ((id && call) != null){
+    if ((id) != null){
       this._id = id;
-      this._category = category || 'None';
-      this._hint = hint || 'There\'s no hint.';
+      this._category = category;
+      this._hint = hint;
       this._call = call.toString();
-      this._position = position || null;
-      this._range = range || null;
-      this._permissions = ((permissions) ? (((yarp.commands && yarp.commands[id]) != null) ?
-        yarp.commands[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.commands[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.commands && yarp.commands[id]) != null) ?
-        yarp.commands[id].items.concat(items.filter(function (item) {
-          return yarp.commands[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._position = position;
+      this._range = range;
+      this._permissions = permissions;
+      this._items = items;
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -60,7 +63,17 @@ class Command extends yarp.GMObject{
     for (let category in commands){
       for (let id in commands[category]){
         let command = commands[category][id];
-        new Command(id,command.call,category,command.hint,command.permissions,command.items);
+        if (!yarp.commands[id]) {
+          new Command(id,command.call,category,command.hint,command.permissions,command.items, command.position, command.range);
+        } else {
+          yarp.commands[id].category = category;
+          yarp.commands[id].hint = command.hint;
+          yarp.commands[id].call = command.call.toString();
+          yarp.commands[id].position = command.position;
+          yarp.commands[id].range = command.range;
+          yarp.commands[id].permissions = command.permissions;
+          yarp.commands[id].items = command.items;
+        }
       }
     }
   }

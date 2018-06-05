@@ -11,19 +11,18 @@
  */
 
 class Event extends yarp.GMObject{
-  constructor(id,call,permissions,items){
+  constructor(
+    id,
+    call = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
-    if ((id && call) != null) {
+    if ((id) != null) {
       this._id = id;
-      this._call = ((call) ? call.toString() : '() => {}');
-      this._permissions = ((permissions) ? (((yarp.events && yarp.events[id]) != null) ?
-        yarp.events[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.events[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.events && yarp.events[id]) != null) ?
-        yarp.events[id].items.concat(items.filter(function (item) {
-          return yarp.events[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._call = call.toString();
+      this._permissions = permissions;
+      this._items = items;
       this.mp = new mp.Event(this._id, eval(this._call));
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -52,7 +51,13 @@ class Event extends yarp.GMObject{
     let events = require(file);
     for (let id in events){
       let event = events[id];
-      new Event(id,event.call,event.permissions,event.items);
+      if (!yarp.events[id]) {
+        new Event(id,event.call,event.permissions,event.items);
+      } else {
+        yarp.events[id].call = event.call.toString();
+        yarp.events[id].permissions = event.permissions;
+        yarp.events[id].items = event.items;
+      }
     }
   }
 }

@@ -21,29 +21,38 @@
  */
 
 class Marker extends yarp.GMObject{
-  constructor(id,position,type,radius,color,direction,rotation,visible,dimension,range,enter,leave,permissions,items){
+  constructor(
+    id,
+    position,
+    type = 1,
+    radius = 1,
+    color = [255, 255, 0, 255],
+    direction = new mp.Vector3(0, 0, 0),
+    rotation = new mp.Vector3(0, 0, 0),
+    visible = true,
+    dimension = 0,
+    range = 3,
+    enter = () => {},
+    leave = () => {},
+    permissions = [],
+    items = {}
+  ){
     super();
     if ((id && position) != null){
       this._id = id;
-      this._type = type || 1;
+      this._type = type;
       this._position = yarp.utils.Vector3Offset(position,new mp.Vector3(0,0,-1));
-      this._range = range || 3;
-      this._radius = radius || 1,
-      this._color = color || [255,255,0,255],
-      this._direction = direction || new mp.Vector3(0, 0, 0);
-      this._rotation = rotation || new mp.Vector3(0, 0, 0);
-      this._visible = visible || true;
-      this._dimension = dimension || 0;
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
-      this._permissions = ((permissions) ? (((yarp.markers && yarp.markers[id]) != null) ?
-        yarp.markers[id].permissions.concat(permissions.filter(function (permission) {
-          return yarp.markers[id].permissions.indexOf(permission) < 0;
-        })) : permissions) : []);
-      this._items = ((items) ? (((yarp.markers && yarp.markers[id]) != null) ?
-        yarp.markers[id].items.concat(items.filter(function (item) {
-          return yarp.markers[id].items.indexOf(item) < 0;
-        })) : items) : []);
+      this._range = range;
+      this._radius = radius;
+      this._color = color;
+      this._direction = direction;
+      this._rotation = rotation;
+      this._visible = visible;
+      this._dimension = dimension;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
+      this._permissions = permissions;
+      this._items = items;
       if (!this._visible) this._color[4] = 0;
       this.players = [];
       this.mp = mp.markers.new(this._type, this._position, this._radius,
@@ -82,7 +91,25 @@ class Marker extends yarp.GMObject{
     for (let id in markers){
       let marker = markers[id];
       for (let i=0; i < marker.positions.length; i++){
-        new Marker(id+' '+(i+1),marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.dimension,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
+        let nid = id + ' ' + (i + 1);
+        if (!yarp.markers[nid]) {
+          new Marker(nid,marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.dimension,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
+        } else {
+          yarp.markers[nid].type = marker.type;
+          yarp.markers[nid].position = positions[i];
+          yarp.markers[nid].range = range;
+          yarp.markers[nid].radius = radius;
+          yarp.markers[nid].color = color;
+          yarp.markers[nid].direction = direction;
+          yarp.markers[nid].rotation = rotation;
+          yarp.markers[nid].visible = visible;
+          yarp.markers[nid].dimension = dimension;
+          yarp.markers[nid].enter = enter.toString();
+          yarp.markers[nid].leave = leave.toString();
+          yarp.markers[nid].permissions = permissions;
+          yarp.markers[nid].items = items;
+          if (!yarp.markers[nid].visible) yarp.markers[nid].color[4] = 0;
+        }
       }
     }
   }

@@ -14,16 +14,24 @@
  */
 
 class Item extends yarp.GMObject{
-  constructor(id,name,category,weight,spoil,model,options){
+  constructor(
+    id,
+    name,
+    category = 'None',
+    weight = 0,
+    spoil = false,
+    model = 'prop_paper_bag_01',
+    options = {}
+  ){
     super();
     if ((id && name) != null) {
       this._id = id;
       this._name = name;
-      this._category = category || 'None';
-      this._weight = weight || 0.5;
-      this._spoil = spoil || false;
-      this._weight = weight || 0.5;
-      this._model = model || '';
+      this._category = category;
+      this._weight = weight;
+      this._spoil = spoil;
+      this._weight = weight;
+      this._model = model;
       this._options = {};
       this.options = options;
       yarp.mng.register(this);
@@ -97,7 +105,17 @@ class Item extends yarp.GMObject{
     for (let category in items){
       for (let id in items[category]){
         let item = items[category][id];
-        new Item(id,item.name,category,item.weight,item.spoil,item.model,item.options);
+        if (!yarp.items[id]) {
+          new Item(id,item.name,category,item.weight,item.spoil,item.model,item.options);
+        } else {
+          yarp.items[id].name = item.name;
+          yarp.items[id].category = category;
+          yarp.items[id].weight = item.weight;
+          yarp.items[id].spoil = item.spoil;
+          yarp.items[id].weight = item.weight;
+          yarp.items[id].model = item.model;
+          yarp.items[id].options = item.options;
+        }
       }
     }
   }

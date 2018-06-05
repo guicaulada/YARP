@@ -17,19 +17,30 @@
  */
 
 class Weapon extends yarp.GMObject{
-  constructor(id,name,category,weight,ammo,model,bone,position,rotation,visible){
+  constructor(
+    id,
+    name,
+    category = 'None',
+    weight = 0,
+    ammo = 0,
+    model = '',
+    bone = 0,
+    position = new mp.Vector3(0, 0, 0),
+    rotation = new mp.Vector3(0, 0, 0),
+    visible = true
+  ){
     super();
     if ((id && name) != null) {
       this._id = id;
       this._name = name;
-      this._category = category || 'None';
-      this._weight = weight || 5.0;
-      this._ammo = ammo || 100;
-      this._model = model || '';
-      this._bone = bone || 0;
-      this._position = position || new mp.Vector3(0,0,0);
-      this._rotation = rotation || new mp.Vector3(0,0,0);
-      this._visible = visible || true;
+      this._category = category;
+      this._weight = weight;
+      this._ammo = ammo;
+      this._model = model;
+      this._bone = bone;
+      this._position = position;
+      this._rotation = rotation;
+      this._visible = visible;
       if (!this._visible) this._alpha = 0;
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -68,7 +79,20 @@ class Weapon extends yarp.GMObject{
     for (let category in weapons){
       for (let id in weapons[category]){
         let weapon = weapons[category][id];
-        new Weapon(id,weapon.name,category,weapon.weight,weapon.ammo,weapon.model,weapon.bone,weapon.position,weapon.rotation,weapon.visible);
+        if (!yarp.weapons[id]) {
+          new Weapon(id,weapon.name,category,weapon.weight,weapon.ammo,weapon.model,weapon.bone,weapon.position,weapon.rotation,weapon.visible);
+        } else {
+          yarp.weapons[id].name = weapon.name;
+          yarp.weapons[id].category = category;
+          yarp.weapons[id].weight = weapon.weight;
+          yarp.weapons[id].ammo = weapon.ammo;
+          yarp.weapons[id].model = weapon.model;
+          yarp.weapons[id].bone = weapon.bone;
+          yarp.weapons[id].position = weapon.position;
+          yarp.weapons[id].rotation = weapon.rotation;
+          yarp.weapons[id].visible = weapon.visible;
+          if (!yarp.weapons[id].visible) yarp.weapons[id].alpha = 0;
+        }
       }
     }
   }

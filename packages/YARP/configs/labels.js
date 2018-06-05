@@ -29,7 +29,7 @@ let config = {
   },
   '7/11': {
     enter: (player) => {
-      player.call('displayHelpText',['Press ~INPUT_PICKUP~ to shop.']);
+      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
       let location = yarp.locations[this.id];
       yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateSaleCategories', location.id,JSON.stringify(location.sale)]]]);
     },

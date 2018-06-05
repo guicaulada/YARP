@@ -40,7 +40,11 @@ class Variable extends yarp.GMObject{
   static config(file){
     let variables = require(file);
     for (let id in variables){
-      new Variable(id,variables[id]);
+      if (!yarp.variables[id]) {
+        new Variable(id,variables[id]);
+      } else {
+        yarp.variables[id].value = variables[id];
+      }
     }
   }
 }

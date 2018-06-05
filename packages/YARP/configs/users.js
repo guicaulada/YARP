@@ -2,7 +2,7 @@
 
 let config = {
   'Sighmir': {
-    groups: ['Super Admin', 'Admin', 'User'],
+    groups: ['Super Admin'],
     enter: (player) => {player.notify('~b~You should drink more water.');}
   }
 }

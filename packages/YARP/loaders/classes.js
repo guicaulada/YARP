@@ -21,11 +21,9 @@ module.exports = async () => {
     yarp.Location = require('../classes/Location.js');
     yarp.Marker = require('../classes/Marker.js');
     yarp.Npc = require('../classes/Npc.js');
-    yarp.Pool = require('../classes/Pool.js');
     yarp.Prop = require('../classes/Prop.js');
     yarp.Transaction = require('../classes/Transaction.js');
     yarp.User = require('../classes/User.js');
-    yarp.Variable = require('../classes/Variable.js');
     yarp.Vehicle = require('../classes/Vehicle.js');
     yarp.Weapon = require('../classes/Weapon.js');
   } catch(err) {

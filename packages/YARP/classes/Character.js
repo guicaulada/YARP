@@ -30,35 +30,61 @@
  */
 
 class Character extends yarp.GMObject{
-  constructor(id,socialClub,age,model,face,lastLogin,wallet,bank,health,armour,hunger,thirst,xp,position,heading,groups,weapons,skills,weight,inventory,customization,decoration,clothes,enter,leave){
+  constructor(
+    id,
+    socialClub,
+    age = 18,
+    model = 'mp_m_freemode_01',
+    face = {},
+    lastLogin = '',
+    wallet = yarp.variables['Starting Wallet'].value,
+    bank = yarp.variables['Starting Bank'].value,
+    health = 100,
+    armour = 0,
+    hunger = 0,
+    thirst = 0,
+    xp = 0,
+    position = yarp.variables['First Spawn'].value,
+    heading = yarp.variables['First Heading'].value,
+    groups = [],
+    weapons = {},
+    skills = {},
+    weight = 0,
+    inventory = {},
+    customization = {},
+    decoration = {},
+    clothes = {},
+    enter = () => {},
+    leave = () => {}
+  ) {
     super();
     if ((id && socialClub) != null){
       this._id = id;
       this._socialClub = socialClub;
-      this._age = age || 18;
-      this._model = model || 'mp_m_freemode_01';
-      this._face = face || {};
-      this._lastLogin = lastLogin || '';
-      this._wallet = wallet || yarp.variables['Starting Wallet'].value;
-      this._bank = bank || yarp.variables['Starting Bank'].value;
-      this._health = health || 100;
-      this._armour = armour || 0;
-      this._position = position || yarp.variables['First Spawn'].value;
-      this._heading = heading || yarp.variables['First Heading'].value;
-      this._groups = groups || [];
-      this._weapons = weapons || {};
-      this._skills = skills || {};
-      this._weight = weight || 0;
-      this._hunger = hunger || 0;
-      this._thirst = thirst || 0;
-      this._xp = xp || 0;
-      this._inventory = inventory || {};
-      this._customization = customization || {};
-      this._decoration = decoration || {};
-      this._clothes = clothes || {};
-      this._enter = ((enter) ? enter.toString() : '() => {}');
-      this._leave = ((leave) ? leave.toString() : '() => {}');
-      this.players = [];
+      this._age = age;
+      this._model = model;
+      this._face = face;
+      this._lastLogin = lastLogin;
+      this._wallet = wallet;
+      this._bank = bank;
+      this._health = health;
+      this._armour = armour;
+      this._position = position;
+      this._heading = heading;
+      this._groups = groups;
+      this._weapons = weapons;
+      this._skills = skills;
+      this._weight = weight;
+      this._hunger = hunger;
+      this._thirst = thirst;
+      this._xp = xp;
+      this._inventory = inventory;
+      this._customization = customization;
+      this._decoration = decoration;
+      this._clothes = clothes;
+      this._enter = enter.toString();
+      this._leave = leave.toString();
+      this.players = {};
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -220,7 +246,7 @@ class Character extends yarp.GMObject{
    */
   tryBankPayment(value){
     if (this.bank-value >= 0){
-      let transaction = new Transaction('Payment',value,this.name);
+      let transaction = new yarp.Transaction('Payment', value, this.name);
       transaction.save();
       this.bank -= value;
       this.player.setVariable('PLAYER_BANK', this.bank);
@@ -260,7 +286,7 @@ class Character extends yarp.GMObject{
    */
   tryDeposit(value){
     if (this.wallet-value >= 0){
-      let transaction = new Transaction('Deposit',value,this.name);
+      let transaction = new yarp.Transaction('Deposit', value, this.name);
       this.wallet -= value;
       this.bank += value;
       transaction.save();
@@ -281,7 +307,7 @@ class Character extends yarp.GMObject{
    */
   tryWithdraw(value){
     if (this.bank-value >= 0){
-      let transaction = new Transaction('Withdraw',value,this.name);
+      let transaction = new yarp.Transaction('Withdraw',value,this.name);
       this.wallet += value;
       this.bank -= value;
       transaction.save();
@@ -303,7 +329,7 @@ class Character extends yarp.GMObject{
    */
   tryTransfer(target, value){
     if (this.bank-value >= 0){
-      let transaction = new Transaction('Transfer',value,this.name);
+      let transaction = new yarp.Transaction('Transfer', value, this.name);
       this.bank = this.bank-value;
       target.bank = target.bank+value;
       transaction.save();
@@ -422,7 +448,7 @@ class Character extends yarp.GMObject{
     if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
     if (this.hasWeapon(weapon.id)) {
       this.weapons.splice(this.weapons.indexOf(weapon.id),1);
-    } 
+    }
     let player = this.player;
     player.call('takeWeapon', [weapon.id]);
     player.call('unequipWeapon', [JSON.stringify(weapon)]);
@@ -729,6 +755,23 @@ class Character extends yarp.GMObject{
           }
           if (group.permissions.indexOf(`+${permission}`) > -1){
             readd = true;
+          }
+          if ((!result) || (!readd && removed)) {
+            for (let child of group.inherits) {
+              let child = yarp.groups[inh];
+              if (child.permissions.indexOf('*') > -1) {
+                result = true;
+              }
+              if (child.permissions.indexOf(permission) > -1) {
+                result = true;
+              }
+              if (child.permissions.indexOf(`-${permission}`) > -1) {
+                removed = true;
+              }
+              if (child.permissions.indexOf(`+${permission}`) > -1) {
+                readd = true;
+              }
+            }
           }
         }
       }

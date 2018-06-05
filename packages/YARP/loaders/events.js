@@ -5,9 +5,9 @@
 
 module.exports = async () => {
   // Loading events
+  console.log(chalk.yellowBright('[YARP] ')+'Loading Events');
   try {
     // Load RAGE.MP events
-    console.log(chalk.yellowBright('[YARP] ')+'Loading Events');
     require('../events/ragemp/checkpoint.js');
     require('../events/ragemp/colshape.js');
     require('../events/ragemp/entity.js');
