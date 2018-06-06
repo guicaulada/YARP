@@ -299,6 +299,17 @@ function tick() {
         console.log(chalk.redBright('[YARP] ') + 'TickError: ' + err.message + '\n' + err.stack);
       }
     });
+    yarp.vehicles.forEach((vehicle) => {
+      try {
+        if (yarp.tick % yarp.variables['Save Interval'].value == 0) {
+          vehicle.position = vehicle.mp.position;
+          vehicle.heading = vehicle.mp.heading;
+          vehicle.save();
+        }
+      } catch (err) {
+        console.log(chalk.redBright('[YARP] ') + 'TickError: ' + err.message + '\n' + err.stack);
+      }
+    });
   } catch (err) {
     console.log(chalk.redBright('[YARP] ') + 'TickError: ' + err.message + '\n' + err.stack);
   }

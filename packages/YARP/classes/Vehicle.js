@@ -30,7 +30,7 @@ class Vehicle extends yarp.GMObject{
     heading = 0,
     owner = false,
     plate = false,
-    color = [0,0.0],
+    color = [0,0,0],
     alpha = 255,
     locked = false,
     engine = false,
