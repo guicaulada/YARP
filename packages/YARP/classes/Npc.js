@@ -63,13 +63,6 @@ class Npc extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.npcs[nid]) {
           new Npc(nid, npc.model, npc.positions[i], npc.heading, npc.drawDistance, npc.dimension, npc.call);
-        } else {
-          yarp.npcs[nid].model = npc.model;
-          yarp.npcs[nid].position = npc.positions[i];
-          yarp.npcs[nid].heading = npc.heading;
-          yarp.npcs[nid].drawDistance = npc.drawDistance;
-          yarp.npcs[nid].dimension = npc.dimension;
-          yarp.npcs[nid].call = npc.call.toString();
         }
       }
     }

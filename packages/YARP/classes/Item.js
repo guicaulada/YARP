@@ -107,14 +107,6 @@ class Item extends yarp.GMObject{
         let item = items[category][id];
         if (!yarp.items[id]) {
           new Item(id,item.name,category,item.weight,item.spoil,item.model,item.options);
-        } else {
-          yarp.items[id].name = item.name;
-          yarp.items[id].category = category;
-          yarp.items[id].weight = item.weight;
-          yarp.items[id].spoil = item.spoil;
-          yarp.items[id].weight = item.weight;
-          yarp.items[id].model = item.model;
-          yarp.items[id].options = item.options;
         }
       }
     }

@@ -79,11 +79,6 @@ class Location extends yarp.GMObject{
       let location = locations[id]
       if (!yarp.locations[id]){
         new Location(id,location.inventory,location.owner,location.money,location.price);
-      } else {
-        yarp.locations[id].owner = location.owner;
-        yarp.locations[id].money = location.money;
-        yarp.locations[id].price = location.price;
-        yarp.locations[id].inventory = location.inventory;
       }
     }
   }

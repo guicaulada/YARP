@@ -86,17 +86,6 @@ class Colshape extends yarp.GMObject{
         let nid = id +' ' + (i + 1);
         if (!yarp.colshapes[nid]){
           new Colshape(nid,colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
-        } else {
-          yarp.colshapes[nid].type = colshape.type;
-          yarp.colshapes[nid].position = colshape.positions[i];
-          yarp.colshapes[nid].width = colshape.width;
-          yarp.colshapes[nid].depth = colshape.depth;
-          yarp.colshapes[nid].height = colshape.height;
-          yarp.colshapes[nid].visible = colshape.visible;
-          yarp.colshapes[nid].enter = colshape.enter.toString();
-          yarp.colshapes[nid].leave = colshape.leave.toString();
-          yarp.colshapes[nid].permissions = colshape.permissions;
-          yarp.colshapes[nid].items = colshape.items;
         }
       }
     }

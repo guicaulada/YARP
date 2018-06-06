@@ -65,14 +65,6 @@ class Command extends yarp.GMObject{
         let command = commands[category][id];
         if (!yarp.commands[id]) {
           new Command(id,command.call,category,command.hint,command.permissions,command.items, command.position, command.range);
-        } else {
-          yarp.commands[id].category = category;
-          yarp.commands[id].hint = command.hint;
-          yarp.commands[id].call = command.call.toString();
-          yarp.commands[id].position = command.position;
-          yarp.commands[id].range = command.range;
-          yarp.commands[id].permissions = command.permissions;
-          yarp.commands[id].items = command.items;
         }
       }
     }

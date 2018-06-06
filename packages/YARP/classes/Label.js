@@ -94,20 +94,6 @@ class Label extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.labels[nid]) {
           new Label(nid,label.positions[i],label.text,label.color,label.drawDistance,label.font,label.los,label.dimension,label.visible,label.range,label.enter,label.leave,label.permissions,label.items)
-        } else {
-          yarp.labels[nid].text = label.text;
-          yarp.labels[nid].position = label.positions[i];
-          yarp.labels[nid].range = label.range;
-          yarp.labels[nid].color = label.color;
-          yarp.labels[nid].drawDistance = label.drawDistance;
-          yarp.labels[nid].font = label.font;
-          yarp.labels[nid].los = label.los;
-          yarp.labels[nid].dimension = label.dimension;
-          yarp.labels[nid].visible = label.visible;
-          yarp.labels[nid].enter = label.enter.toString();
-          yarp.labels[nid].leave = label.leave.toString();
-          yarp.labels[nid].permissions = label.permissions;
-          yarp.labels[nid].items = label.items;
         }
       }
     }

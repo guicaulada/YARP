@@ -126,23 +126,6 @@ class Vehicle extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.vehicles[nid]) {
           new Vehicle(nid, vehicle.model, vehicle.positions[i], vehicle.owner, vehicle.heading, vehicle.plate + i, vehicle.color, vehicle.alpha, vehicle.locked, vehicle.engine, vehicle.dimension, vehicle.visible, vehicle.permissions, vehicle.items)
-        } else {
-          yarp.vehicles[nid].model = vehicle.model;
-          yarp.vehicles[nid].position = vehicle.positions[i];
-          yarp.vehicles[nid].heading = vehicle.heading;
-          yarp.vehicles[nid].owner = vehicle.owner;
-          yarp.vehicles[nid].plate = (vehicle.plate) ? vehicle.plate : yarp.utils.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-          yarp.vehicles[nid].color = vehicle.color;
-          yarp.vehicles[nid].alpha = vehicle.alpha;
-          yarp.vehicles[nid].locked = vehicle.locked;
-          yarp.vehicles[nid].engine = vehicle.engine;
-          yarp.vehicles[nid].dimension = vehicle.dimension;
-          yarp.vehicles[nid].visible = vehicle.visible;
-          yarp.vehicles[nid].permissions = vehicle.permissions;
-          yarp.vehicles[nid].items = vehicle.items;
-          if (!yarp.vehicles[nid].visible) yarp.vehicles[nid].alpha = 0;
-          yarp.vehicles[nid].enter = vehicle.enter.toString();
-          yarp.vehicles[nid].leave = vehicle.leave.toString();
         }
       }
     }

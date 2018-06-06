@@ -53,10 +53,6 @@ class Event extends yarp.GMObject{
       let event = events[id];
       if (!yarp.events[id]) {
         new Event(id,event.call,event.permissions,event.items);
-      } else {
-        yarp.events[id].call = event.call.toString();
-        yarp.events[id].permissions = event.permissions;
-        yarp.events[id].items = event.items;
       }
     }
   }

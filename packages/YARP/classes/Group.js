@@ -184,12 +184,6 @@ class Group extends yarp.GMObject{
       let group = groups[id];
       if (!yarp.groups[id]) {
         new Group(id, group.type, group.inherits, group.permissions, group.enter, group.leave);
-      } else {
-        yarp.groups[id].type = group.type;
-        yarp.groups[id].inherits = group.inherits;
-        yarp.groups[id].permissions = group.permissions;
-        yarp.groups[id].enter = group.enter.toString();
-        yarp.groups[id].leave = group.leave.toString();
       }
     }
   }

@@ -89,19 +89,6 @@ class Checkpoint extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.checkpoints[nid]) {
           new Checkpoint(nid,checkpoint.positions[i],checkpoint.type,checkpoint.radius,checkpoint.color,checkpoint.direction,checkpoint.dimension,checkpoint.visible,checkpoint.range,checkpoint.enter,checkpoint.leave,checkpoint.permissions,checkpoint.items)
-        } else {
-          yarp.checkpoints[nid].type = checkpoint.type;
-          yarp.checkpoints[nid].position = checkpoint.positions[i];
-          yarp.checkpoints[nid].range = checkpoint.range;
-          yarp.checkpoints[nid].radius = checkpoint.radius;
-          yarp.checkpoints[nid].color = checkpoint.color,
-          yarp.checkpoints[nid].direction = checkpoint.direction;
-          yarp.checkpoints[nid].dimension = checkpoint.dimension;
-          yarp.checkpoints[nid].visible = checkpoint.visible;
-          yarp.checkpoints[nid].enter = checkpoint.enter.toString();
-          yarp.checkpoints[nid].leave = checkpoint.leave.toString();
-          yarp.checkpoints[nid].permissions = checkpoint.permissions;
-          yarp.checkpoints[nid].items = checkpoint.items;
         }
       }
     }

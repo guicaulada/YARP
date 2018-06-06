@@ -89,20 +89,6 @@ class Prop extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.props[nid]) {
           new Prop(nid,prop.model,prop.positions[i],prop.owner,prop.alpha,prop.rotation,prop.dimension,prop.visible,prop.range,prop.enter,prop.leave,prop.permissions,prop.items)
-        } else {
-          yarp.props[nid].model = prop.model;
-          yarp.props[nid].position = prop.positions[i];
-          yarp.props[nid].owner = prop.owner;
-          yarp.props[nid].alpha = prop.alpha;
-          yarp.props[nid].rotation = prop.rotation;
-          yarp.props[nid].dimension = prop.dimension;
-          yarp.props[nid].visible = prop.visible;
-          yarp.props[nid].range = prop.range;
-          yarp.props[nid].permissions = prop.permissions;
-          yarp.props[nid].items = prop.items;
-          yarp.props[nid].enter = prop.enter.toString();
-          yarp.props[nid].leave = prop.leave.toString();
-          if (!yarp.props[nid].visible) yarp.props[nid].alpha = 0;
         }
       }
     }

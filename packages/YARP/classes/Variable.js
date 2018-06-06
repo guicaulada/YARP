@@ -42,8 +42,6 @@ class Variable extends yarp.GMObject{
     for (let id in variables){
       if (!yarp.variables[id]) {
         new Variable(id,variables[id]);
-      } else {
-        yarp.variables[id].value = variables[id];
       }
     }
   }

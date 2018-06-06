@@ -81,17 +81,6 @@ class Weapon extends yarp.GMObject{
         let weapon = weapons[category][id];
         if (!yarp.weapons[id]) {
           new Weapon(id,weapon.name,category,weapon.weight,weapon.ammo,weapon.model,weapon.bone,weapon.position,weapon.rotation,weapon.visible);
-        } else {
-          yarp.weapons[id].name = weapon.name;
-          yarp.weapons[id].category = category;
-          yarp.weapons[id].weight = weapon.weight;
-          yarp.weapons[id].ammo = weapon.ammo;
-          yarp.weapons[id].model = weapon.model;
-          yarp.weapons[id].bone = weapon.bone;
-          yarp.weapons[id].position = weapon.position;
-          yarp.weapons[id].rotation = weapon.rotation;
-          yarp.weapons[id].visible = weapon.visible;
-          if (!yarp.weapons[id].visible) yarp.weapons[id].alpha = 0;
         }
       }
     }

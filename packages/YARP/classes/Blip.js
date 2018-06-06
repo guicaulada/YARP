@@ -89,19 +89,6 @@ class Blip extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.blips[nid]){
           new Blip(nid,blip.positions[i],id,blip.sprite,blip.scale,blip.color,blip.alpha,blip.drawDistance,blip.fade,blip.rotation,blip.dimension)
-        } else {
-          yarp.blips[nid].name = blip.name;
-          yarp.blips[nid].sprite = blip.sprite;
-          yarp.blips[nid].position = blip.positions[i];
-          yarp.blips[nid].scale = blip.scale;
-          yarp.blips[nid].color = blip.color;
-          yarp.blips[nid].alpha = blip.alpha;
-          yarp.blips[nid].drawDistance = blip.drawDistance;
-          yarp.blips[nid].fade = blip.fade;
-          yarp.blips[nid].rotation = blip.rotation;
-          yarp.blips[nid].dimension = blip.dimension;
-          yarp.blips[nid].visible = blip.visible;
-          if (!yarp.blips[nid].visible) yarp.blips[nid].alpha = 0;
         }
       }
     }

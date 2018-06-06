@@ -90,14 +90,6 @@ class Door extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.doors[nid]) {
           new Door(nid,door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
-        } else {
-          yarp.doors[nid].model = door.model;
-          yarp.doors[nid].position = door.positions[i];
-          yarp.doors[nid].range = door.range;
-          yarp.doors[nid].permissions = door.permissions;
-          yarp.doors[nid].items = door.items;
-          yarp.doors[nid].enter = door.enter.toString();
-          yarp.doors[nid].leave = door.leave.toString();
         }
       }
     }

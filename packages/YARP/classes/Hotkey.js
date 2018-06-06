@@ -96,15 +96,6 @@ class Hotkey extends yarp.GMObject{
         let hotkey = hotkeys[category][id];
         if (!yarp.hotkeys[id]) {
           new Hotkey(id,hotkey.key,hotkey.call,hotkey.hint,category,hotkey.permissions,hotkey.items);
-        } else {
-          yarp.hotkeys[id].key = hotkey.key;
-          yarp.hotkeys[id].category = category;
-          yarp.hotkeys[id].hint = hotkey.hint;
-          yarp.hotkeys[id].call = hotkey.call.toString();
-          yarp.hotkeys[id].position = hotkey.position;
-          yarp.hotkeys[id].range = hotkey.range;
-          yarp.hotkeys[id].permissions = hotkey.permissions;
-          yarp.hotkeys[id].items = hotkey.items;
         }
       }
     }

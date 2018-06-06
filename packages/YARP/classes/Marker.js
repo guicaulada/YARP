@@ -94,21 +94,6 @@ class Marker extends yarp.GMObject{
         let nid = id + ' ' + (i + 1);
         if (!yarp.markers[nid]) {
           new Marker(nid,marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.dimension,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
-        } else {
-          yarp.markers[nid].type = marker.type;
-          yarp.markers[nid].position = positions[i];
-          yarp.markers[nid].range = range;
-          yarp.markers[nid].radius = radius;
-          yarp.markers[nid].color = color;
-          yarp.markers[nid].direction = direction;
-          yarp.markers[nid].rotation = rotation;
-          yarp.markers[nid].visible = visible;
-          yarp.markers[nid].dimension = dimension;
-          yarp.markers[nid].enter = enter.toString();
-          yarp.markers[nid].leave = leave.toString();
-          yarp.markers[nid].permissions = permissions;
-          yarp.markers[nid].items = items;
-          if (!yarp.markers[nid].visible) yarp.markers[nid].color[4] = 0;
         }
       }
     }
