@@ -12,7 +12,7 @@
  * @param {string} code - Code.
  */
 mp.events.add('runServerCode', (player, code) => {
-  if (yarp.users[player.socialClub].hasPermission('cmd.code')){
+  if (yarp.users[player.socialClub].hasPermission('cmd.code')) {
     eval(code);
   }
 });
@@ -29,22 +29,22 @@ mp.events.add('playerBoundKeyPressed', (player, id) => {
   let user = yarp.users[player.socialClub];
   let character = user.character;
   let hotkey = yarp.hotkeys[id];
-  if (hotkey.call){
+  if (hotkey.call) {
     if (hotkey.args[player.id]) {
-      if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)){
+      if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)) {
         if (character.hasItems(hotkey.items)) {
-          if(hotkey.position && hotkey.range) {
-            if (yarp.utils.Vector3Distance(player.position,hotkey.position) < hotkey.range){
-              hotkey.call(player,hotkey.args[player.id]);
+          if (hotkey.position && hotkey.range) {
+            if (yarp.utils.vectorDistance(player.position, hotkey.position) < hotkey.range) {
+              hotkey.call(player, hotkey.args[player.id]);
             }
           } else {
-            hotkey.call(player,hotkey.args[player.id]);
+            hotkey.call(player, hotkey.args[player.id]);
           }
         } else {
-          player.call('displayHelpText',['You don\'t have the required items.']);
+          player.call('displayHelpText', ['You don\'t have the required items.']);
         }
-	   } else {
-        player.call('displayHelpText',['You don\'t have permission.']);
+      } else {
+        player.call('displayHelpText', ['You don\'t have permission.']);
       }
     }
   }
@@ -66,15 +66,14 @@ function tick() {
         if (user) {
           let character = user.character;
           if (character) {
-
             yarp.checkpoints.forEach((checkpoint) => {
               try {
                 let i = checkpoint.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.Vector3Distance(player.position,checkpoint.position) < checkpoint.range){
-                    if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, checkpoint.position) < checkpoint.range) {
+                    if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)) {
                       if (character.hasItems(checkpoint.items)) {
-                        if (checkpoint.enter){
+                        if (checkpoint.enter) {
                           checkpoint.enter(player);
                         }
                       } else {
@@ -83,18 +82,18 @@ function tick() {
                     } else {
                       player.notify('~r~You don\'t have the required items.');
                     }
-                    checkpoint.players.push(id)
+                    checkpoint.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.Vector3Distance(player.position,checkpoint.position) > checkpoint.range){
-                    if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, checkpoint.position) > checkpoint.range) {
+                    if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)) {
                       if (character.hasItems(checkpoint.items)) {
-                        if (checkpoint.leave){
+                        if (checkpoint.leave) {
                           checkpoint.leave(player);
                         }
                       }
                     }
-                    checkpoint.players.splice(i,1)
+                    checkpoint.players.splice(i, 1);
                   }
                 }
               } catch (err) {
@@ -106,10 +105,10 @@ function tick() {
               try {
                 let i = door.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.Vector3Distance(player.position,door.position) < door.range){
-                    if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, door.position) < door.range) {
+                    if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)) {
                       if (character.hasItems(door.items)) {
-                        if (door.enter){
+                        if (door.enter) {
                           door.enter(player);
                         }
                       } else {
@@ -121,15 +120,15 @@ function tick() {
                     door.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.Vector3Distance(player.position,door.position) > door.range){
-                    if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, door.position) > door.range) {
+                    if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)) {
                       if (character.hasItems(door.items)) {
-                        if (door.leave){
+                        if (door.leave) {
                           door.leave(player);
                         }
                       }
                     }
-                    door.players.splice(i,1);
+                    door.players.splice(i, 1);
                   }
                 }
               } catch (err) {
@@ -141,10 +140,10 @@ function tick() {
               try {
                 let i = label.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.Vector3Distance(player.position,label.position) < label.range){
-                    if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, label.position) < label.range) {
+                    if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)) {
                       if (character.hasItems(label.items)) {
-                        if (label.enter){
+                        if (label.enter) {
                           label.enter(player);
                         }
                       } else {
@@ -156,15 +155,15 @@ function tick() {
                     label.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.Vector3Distance(player.position,label.position) > label.range){
-                    if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, label.position) > label.range) {
+                    if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)) {
                       if (character.hasItems(label.items)) {
-                        if (label.leave){
+                        if (label.leave) {
                           label.leave(player);
                         }
                       }
                     }
-                    label.players.splice(i,1);
+                    label.players.splice(i, 1);
                   }
                 }
               } catch (err) {
@@ -176,10 +175,10 @@ function tick() {
               try {
                 let i = marker.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.Vector3Distance(player.position,marker.position) < marker.range){
-                    if (user.hasPermissions(marker.permissions) || character.hasPermissions(marker.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, marker.position) < marker.range) {
+                    if (user.hasPermissions(marker.permissions) || character.hasPermissions(marker.permissions)) {
                       if (character.hasItems(marker.items)) {
-                        if (marker.enter){
+                        if (marker.enter) {
                           marker.enter(player);
                         }
                       } else {
@@ -188,18 +187,18 @@ function tick() {
                     } else {
                       player.notify('~r~You don\'t have the required items.');
                     }
-                    marker.players.push(id)
+                    marker.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.Vector3Distance(player.position,marker.position) > marker.range){
-                    if (user.hasPermissions(marker.permissions) || character.hasPermissions(marker.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, marker.position) > marker.range) {
+                    if (user.hasPermissions(marker.permissions) || character.hasPermissions(marker.permissions)) {
                       if (character.hasItems(marker.items)) {
-                        if (marker.leave){
+                        if (marker.leave) {
                           marker.leave(player);
                         }
                       }
                     }
-                    marker.players.splice(i,1)
+                    marker.players.splice(i, 1);
                   }
                 }
               } catch (err) {
@@ -211,10 +210,10 @@ function tick() {
               try {
                 let i = prop.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.Vector3Distance(player.position,prop.position) < prop.range){
-                    if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, prop.position) < prop.range) {
+                    if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)) {
                       if (character.hasItems(prop.items)) {
-                        if (prop.enter){
+                        if (prop.enter) {
                           prop.enter(player);
                         }
                       } else {
@@ -223,18 +222,18 @@ function tick() {
                     } else {
                       player.notify('~r~You don\'t have the required items.');
                     }
-                    prop.players.push(id)
+                    prop.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.Vector3Distance(player.position,prop.position) > prop.range){
-                    if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)){
+                  if (yarp.utils.vectorDistance(player.position, prop.position) > prop.range) {
+                    if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)) {
                       if (character.hasItems(prop.items)) {
-                          if (prop.leave){
+                          if (prop.leave) {
                           prop.leave(player);
                         }
                       }
                     }
-                    prop.players.splice(i,1)
+                    prop.players.splice(i, 1);
                   }
                 }
               } catch (err) {
@@ -250,18 +249,19 @@ function tick() {
                   let user2 = yarp.users[id2];
                   if (user2) {
                     let character2 = user2.character;
-                    if (character) {
+                    if (character2) {
                       if (i < 0) {
-                        if (yarp.utils.Vector3Distance(player.position,player2.position) < 3){
-                          player.call('displayHelpText',['Press ~INPUT_PICKUP~ to interact.']);
-                          yarp.hotkeys['Event'].bind(player,['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]]]);
+                        if (yarp.utils.vectorDistance(player.position, player2.position) < 3) {
+                          player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to interact.']);
+                          yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]]]);
                           character.players.push(id2);
+                          character2.player.push(id);
                         }
                       } else {
-                        if (yarp.utils.Vector3Distance(player.position,player2.position) > 3){
+                        if (yarp.utils.vectorDistance(player.position, player2.position) > 3) {
                           player.call('clearHelpText');
                           yarp.hotkeys['Event'].unbind(player);
-                          prop.players.splice(id2,1)
+                          prop.players.splice(id2, 1);
                         }
                       }
                     }
@@ -317,6 +317,6 @@ function tick() {
   yarp.tick++;
   if (yarp.tick == Number.MAX_SAFE_INTEGER) yarp.tick = 0;
 
-  setTimeout(tick,500);
+  setTimeout(tick, 500);
 }
 tick();

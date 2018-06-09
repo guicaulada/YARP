@@ -9,10 +9,12 @@ let config = {
       'cmd.new',
       'cmd.rem',
       'cmd.givegroup',
-      'cmd.takegroup'
+      'cmd.takegroup',
     ],
-    enter: (player) => {player.notify('You are superadmin.');},
-    //leave: (player) => {console.log('A superadmin left.');}
+    enter: (player) => {
+      player.notify('You are superadmin.');
+    },
+    // leave: (player) => {console.log('A superadmin left.');}
   },
   'Admin': {
     permissions: [
@@ -26,23 +28,25 @@ let config = {
       'cmd.camdir',
       'cmd.noclip',
       'cmd.tp',
-      'cmd.gmtp'
-    ]
+      'cmd.gmtp',
+    ],
   },
   'User': {
     permissions: [
       'cmd.inventory',
       'cmd.money',
-      'cmd.hint'
-    ]
+      'cmd.hint',
+    ],
   },
   'Cop': {
     type: 'job',
-    enter: (player) => {player.notify('You are a cop.')},
+    enter: (player) => {
+      player.notify('You are a cop.');
+    },
     permissions: [
-      'cmd.radio'
-    ]
-  }
-}
+      'cmd.radio',
+    ],
+  },
+};
 
 module.exports = config;

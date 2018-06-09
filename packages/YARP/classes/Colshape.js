@@ -1,22 +1,24 @@
 'use strict';
 /**
- * Creates a Colshape.
- * @namespace yarp.Colshape
- * @class
+ * Implements a Colshape.
+ * @class yarp.Colshape
  * @extends yarp.GMObject
- * @param {string} id - Colshape id.
- * @param {Vector3} position - Colshape position.
- * @param {number} [type=0] - Colshape type.
- * @param {number} [width=10] - Colshape width.
- * @param {number} [height=10] - Colshape height.
- * @param {number} [depth=10] - Colshape depth.
- * @param {function} [enter=() => {}] - Colshape enter function.
- * @param {function} [leave=() => {}] - Colshape leave function.
- * @param {Array<string>} [permissions=[]] - Colshape permissions.
- * @param {Array<string>} [items=[]] - Colshape items.
  */
-
-class Colshape extends yarp.GMObject{
+class Colshape extends yarp.GMObject {
+  /**
+   *Creates an instance of Colshape.
+   * @param {*} id
+   * @param {*} position
+   * @param {number} [type=1]
+   * @param {number} [width=10]
+   * @param {number} [height=10]
+   * @param {number} [depth=10]
+   * @param {*} [enter=() => {}]
+   * @param {*} [leave=() => {}]
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @memberof yarp.Colshape
+   */
   constructor(
     id,
     position,
@@ -28,9 +30,23 @@ class Colshape extends yarp.GMObject{
     leave = () => {},
     permissions = [],
     items = {}
-  ){
+  ) {
     super();
-    if ((id && position) != null) {
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        position: position,
+        type: type,
+        width: width,
+        height: height,
+        depth: depth,
+        enter: enter,
+        leave: leave,
+        permissions: permissions,
+        items: items,
+      } = id;
+      return new yarp.Colshape(nid, position, type, width, height, depth, enter, leave, permissions, items);
+    } else if ((id && position) != null) {
       this._id = id;
       this._type = type;
       this._position = position;
@@ -42,7 +58,7 @@ class Colshape extends yarp.GMObject{
       this._leave = leave.toString();
       this._permissions = permissions;
       this._items = items;
-      switch(this._type){
+      switch (this._type) {
         case 1:
           this.mp = mp.colshapes.newRectangle(this._position.x, this._position.y, this._width, this._height);
           break;
@@ -57,37 +73,6 @@ class Colshape extends yarp.GMObject{
       }
       yarp.mng.register(this);
       this.makeGetterSetter();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Colshape
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Colshape(obj._id,obj._position,obj._type,obj._width,obj._height,obj._depth,obj._enter,obj._leave,obj._permissions,obj._items);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Colshape
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let colshapes = require(file);
-    for (let id in colshapes){
-      let colshape = colshapes[id];
-      for (let i=0; i < colshape.positions.length; i++){
-        let nid = id +' ' + (i + 1);
-        if (!yarp.colshapes[nid]){
-          new Colshape(nid,colshape.positions[i],colshape.type,colshape.width,colshape.height,colshape.color,colshape.depth,colshape.enter,colshape.leave,colshape.permissions,colshape.items)
-        }
-      }
     }
   }
 }

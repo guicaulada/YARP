@@ -18,18 +18,6 @@ mp.events.add('purchaseSaleItem', (storeid, itemid, amount) => {
 });
 
 /**
- * Attach a weapon model to the character.
- * @event purchaseAmmuWeapon
- * @memberof client.menu
- * @param {string} id - The weapon id.
- * @param {string} amount - The bought amount.
- * @fires purchaseAmmuWeapon
- */
-mp.events.add('purchaseAmmuWeapon', (id, amount) => {
-  mp.events.callRemote('purchaseAmmuWeapon', id, amount);
-});
-
-/**
  * Verifies the user password.
  * @event verifyLogin
  * @memberof client.menu
@@ -59,7 +47,7 @@ mp.events.add('unbindToggleChat', () => {
  * @fires callInventoryOption
  */
 mp.events.add('callInventoryOption', (itemid, option) => {
-	mp.events.callRemote('callInventoryOption', itemid, option);
+  mp.events.callRemote('callInventoryOption', itemid, option);
 });
 
 /**
@@ -69,8 +57,8 @@ mp.events.add('callInventoryOption', (itemid, option) => {
  * @fires browserExecute
  */
 mp.events.add('updateBankAccountMoney', () => {
-	let money = mp.players.local.getVariable('PLAYER_BANK');
-	mp.events.call('browserExecute', 'bank', ['updateAccountMoney', money]);
+  let money = mp.players.local.getVariable('PLAYER_BANK');
+  mp.events.call('browserExecute', 'bank', ['updateAccountMoney', money]);
 });
 
 /**
@@ -83,7 +71,7 @@ mp.events.add('updateBankAccountMoney', () => {
  * @fires executeBankOperation
  */
 mp.events.add('executeBankOperation', (operation, amount, target) => {
-	mp.events.callRemote('executeBankOperation', operation, amount, target);
+  mp.events.callRemote('executeBankOperation', operation, amount, target);
 });
 
 /**
@@ -93,5 +81,5 @@ mp.events.add('executeBankOperation', (operation, amount, target) => {
  * @fires loadPlayerBankBalance
  */
 mp.events.add('loadPlayerBankBalance', () => {
-	mp.events.callRemote('loadPlayerBankBalance');
+  mp.events.callRemote('loadPlayerBankBalance');
 });

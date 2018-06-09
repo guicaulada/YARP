@@ -1,21 +1,23 @@
 'use strict';
 /**
- * Creates a Hotkey.
- * @namespace yarp.Hotkey
- * @class
+ * Implements a Hotkey.
+ * @class yarp.Hotkey
  * @extends yarp.GMObject
- * @param {string} id - Hotkey id.
- * @param {string} key - Hotkey key.
- * @param {function} call - Hotkey call function.
- * @param {string} [category='None'] - Hotkey category.
- * @param {string} [hint='There\'s no hint.'] - Hotkey hint.
- * @param {Vector3} [position=null] - Hotkey position.
- * @param {number} [range=null] - Hotkey range.
- * @param {Array<string>} [permissions=[]] - Hotkey permissions.
- * @param {Array<string>} [items=[]] - Hotkey items.
  */
-
-class Hotkey extends yarp.GMObject{
+class Hotkey extends yarp.GMObject {
+  /**
+   *Creates an instance of Hotkey.
+   * @param {*} id
+   * @param {string} [key='KEY_E']
+   * @param {*} [call=() => {}]
+   * @param {string} [hint='There\'s no hint.']
+   * @param {string} [category='None']
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @param {boolean} [position=false]
+   * @param {boolean} [range=false]
+   * @memberof yarp.Hotkey
+   */
   constructor(
     id,
     key = 'KEY_E',
@@ -26,9 +28,22 @@ class Hotkey extends yarp.GMObject{
     items = {},
     position = false,
     range = false
-  ){
+  ) {
     super();
-    if ((id) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        key: key,
+        call: call,
+        hint: hint,
+        category: category,
+        permissions: permissions,
+        items: items,
+        position: position,
+        range: range,
+      } = id;
+      return new yarp.Hotkey(nid, key, call, hint, category, permissions, items, position, range);
+    } else if ((id) != null) {
       this._id = id;
       this._key = key;
       this._category = category;
@@ -55,7 +70,7 @@ class Hotkey extends yarp.GMObject{
    */
   bind(player, args) {
     this.args[player.id] = args;
-    player.call('playerBindKey',[this.id,this.key]);
+    player.call('playerBindKey', [this.id, this.key]);
   }
 
   /**
@@ -68,37 +83,7 @@ class Hotkey extends yarp.GMObject{
    */
   unbind(player) {
     this.args[player.id] = null;
-    player.call('playerUnbindKey',[this.id]);
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Hotkey
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Hotkey(obj._id,obj._key,obj._call,obj._hint,obj._category,obj._permissions,obj._items,obj._position,obj._range);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Hotkey
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let hotkeys = require(file);
-    for (let category in hotkeys){
-      for (let id in hotkeys[category]){
-        let hotkey = hotkeys[category][id];
-        if (!yarp.hotkeys[id]) {
-          new Hotkey(id,hotkey.key,hotkey.call,hotkey.hint,category,hotkey.permissions,hotkey.items);
-        }
-      }
-    }
+    player.call('playerUnbindKey', [this.id]);
   }
 }
 

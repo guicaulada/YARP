@@ -19,7 +19,7 @@
  */
 mp.events.add('createCharacter', (player, id, age, model, faceJson) => {
   let character = yarp.characters[id];
-  if(character == null){
+  if (character == null) {
     character = new yarp.Character(id, player.socialClub, age, model, JSON.parse(faceJson));
     character.save();
     player.call('characterCreatedSuccessfully');
@@ -60,10 +60,10 @@ mp.events.add('setCharacterIntoCreator', (player) => {
  * @fires equipWeapon
  * @fires updatePlayerCustomSkin
  */
-mp.events.add('loadCharacter', (player,id) => {
+mp.events.add('loadCharacter', (player, id) => {
   let character = yarp.characters[id];
-  let lastLogin = character.lastLogin.split(" ");
-  if (lastLogin[2]){
+  let lastLogin = character.lastLogin.split(' ');
+  if (lastLogin[2]) {
     player.notify(`Last connection from ~g~${lastLogin[0]}~w~ at ~g~${lastLogin[1]} ${lastLogin[2]}`);
   }
   character.updateLastLogin(player.ip);
@@ -75,14 +75,16 @@ mp.events.add('loadCharacter', (player,id) => {
   player.heading = character.heading;
   player.health = character.health;
   player.armour = character.armour;
-  for (let id in character.weapons){
-    player.giveWeapon(mp.joaat(id), character.weapons[id]);
-    player.call('equipWeapon', [JSON.stringify(yarp.weapons[id])]);
+  for (let id in character.weapons) {
+    if (character.weapons.hasOwnProperty(id)) {
+      player.giveWeapon(mp.joaat(id), character.weapons[id]);
+      player.call('equipWeapon', [JSON.stringify(yarp.weapons[id])]);
+    }
   }
   character.user.enter();
   character.enter();
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
   player.setVariable('PLAYER_XP', character.xp);
-  player.call('updatePlayerCustomSkin',[player,JSON.stringify(character.face), JSON.stringify(character.decoration)]);
+  player.call('updatePlayerCustomSkin', [player, JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 });

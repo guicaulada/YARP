@@ -1,26 +1,37 @@
 'use strict';
 /**
- * Creates a Transaction.
- * @namespace yarp.Transaction
- * @class
+ * Implements a Transaction.
+ * @class yarp.Transaction
  * @extends yarp.GMObject
- * @param {string} type - PrTransactionop type.
- * @param {number} value - Transaction value.
- * @param {string} source - Transaction source.
- * @param {string} [target=source] - Transaction target.
- * @param {Date} [date=new Date();] - Transaction date.
  */
-
-class Transaction extends yarp.GMObject{
+class Transaction extends yarp.GMObject {
+  /**
+   *Creates an instance of Transaction.
+   * @param {*} type
+   * @param {*} value
+   * @param {*} source
+   * @param {*} [target=source]
+   * @param {*} [date=new Date()]
+   * @memberof yarp.Transaction
+   */
   constructor(
     type,
     value,
     source,
     target = source,
     date = new Date()
-  ){
+  ) {
     super();
-    if ((type && value && source) != null) {
+    if (typeof id === 'object') {
+      let {
+        type: type,
+        value: value,
+        source: source,
+        target: target,
+        date: date,
+      } = id;
+      return new yarp.Transaction(type, value, source, target, date);
+    } else if ((type && value && source) != null) {
       this._id = yarp.transactions.length;
       this._type = type;
       this._value = value;
@@ -30,17 +41,6 @@ class Transaction extends yarp.GMObject{
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Transaction
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Transaction(obj._type,obj._value,obj._source,obj._target,obj._date);
   }
 }
 

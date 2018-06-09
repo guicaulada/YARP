@@ -1,20 +1,22 @@
 'use strict';
 /**
- * Creates a Command.
- * @namespace yarp.Command
- * @class
+ * Implements a Command.
+ * @class yarp.Command
  * @extends yarp.GMObject
- * @param {string} id - Command id.
- * @param {function} call - Command call function.
- * @param {string} [category='None'] - Command category.
- * @param {string} [hint='There\'s no hint.'] - Command hint.
- * @param {Vector3} [position=null] - Command position.
- * @param {number} [range=null] - Command range.
- * @param {Array<string>} [permissions=[]] - Command permissions.
- * @param {Array<string>} [items=[]] - Command items.
  */
-
-class Command extends yarp.GMObject{
+class Command extends yarp.GMObject {
+  /**
+   *Creates an instance of Command.
+   * @param {*} id
+   * @param {*} [call=() => {}]
+   * @param {string} [category='None']
+   * @param {string} [hint='There\'s no hint.']
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @param {boolean} [position=false]
+   * @param {boolean} [range=false]
+   * @memberof yarp.Command
+   */
   constructor(
     id,
     call = () => {},
@@ -24,9 +26,21 @@ class Command extends yarp.GMObject{
     items = {},
     position = false,
     range = false
-  ){
+  ) {
     super();
-    if ((id) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        call: call,
+        category: category,
+        hint: hint,
+        permissions: permissions,
+        items: items,
+        position: position,
+        range: range,
+      } = id;
+      return new yarp.Command(nid, call, category, hint, permissions, items, position, range);
+    } else if ((id) != null) {
       this._id = id;
       this._category = category;
       this._hint = hint;
@@ -37,36 +51,6 @@ class Command extends yarp.GMObject{
       this._items = items;
       yarp.mng.register(this);
       this.makeGetterSetter();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Command
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Command(obj._id,obj._call,obj._category,obj._hint,obj._permissions,obj._items,obj._position,obj._range);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Command
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let commands = require(file);
-    for (let category in commands){
-      for (let id in commands[category]){
-        let command = commands[category][id];
-        if (!yarp.commands[id]) {
-          new Command(id,command.call,category,command.hint,command.permissions,command.items, command.position, command.range);
-        }
-      }
     }
   }
 }

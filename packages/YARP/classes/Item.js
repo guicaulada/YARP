@@ -1,19 +1,21 @@
 'use strict';
 /**
- * Creates a Item.
- * @namespace yarp.Item
- * @class
+ * Implements a Item.
+ * @class yarp.Item
  * @extends yarp.GMObject
- * @param {string} id - Item id.
- * @param {string} name - Item name.
- * @param {string} [category='None'] - Item category.
- * @param {number} [weight=0.5] - Item weight.
- * @param {number} [spoil=false] - Item spoil.
- * @param {number} [model=''] - Item model.
- * @param {object} [options={}] - Item options.
  */
-
-class Item extends yarp.GMObject{
+class Item extends yarp.GMObject {
+  /**
+   *Creates an instance of Item.
+   * @param {*} id
+   * @param {*} name
+   * @param {string} [category='None']
+   * @param {number} [weight=0]
+   * @param {boolean} [spoil=false]
+   * @param {string} [model='prop_paper_bag_01']
+   * @param {*} [options={}]
+   * @memberof yarp.Item
+   */
   constructor(
     id,
     name,
@@ -22,9 +24,20 @@ class Item extends yarp.GMObject{
     spoil = false,
     model = 'prop_paper_bag_01',
     options = {}
-  ){
+  ) {
     super();
-    if ((id && name) != null) {
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        name: name,
+        category: category,
+        weight: weight,
+        spoil: spoil,
+        model: model,
+        options: options,
+      } = id;
+      return new yarp.Item(nid, name, category, weight, spoil, model, options);
+    } else if ((id && name) != null) {
       this._id = id;
       this._name = name;
       this._category = category;
@@ -33,7 +46,11 @@ class Item extends yarp.GMObject{
       this._weight = weight;
       this._model = model;
       this._options = {};
-      this.options = options;
+      for (let id in options) {
+        if (options.hasOwnProperty(id)) {
+          this._options[id] = options[id].toString();
+        }
+      }
       yarp.mng.register(this);
       this.makeGetterSetter();
     }
@@ -44,72 +61,53 @@ class Item extends yarp.GMObject{
    * @instance
    * @function options
    * @memberof yarp.Item
-   * @returns {object} - Functions indexed by option.
+   * @return {object} - Functions indexed by option.
    */
   get options() {
     let value = {};
     for (let id in this._options) {
-      value[id] = eval(this._options[id]);
-    }
-    return value
-  }
-
-  set options(value) {
-    for (let id in value) {
-      this._options[id] = value[id].toString();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @instance
-   * @function isAmmo
-   * @memberof yarp.Item
-   * @returns {boolean} - If the item is weapon or not.
-   */
-  isWeapon() {
-    return this.id.includes('WEAPON_')
-  }
-
-  /**
-   * Load from object.
-   * @instance
-   * @function isAmmo
-   * @memberof yarp.Item
-   * @returns {boolean} - If the item is ammo or not.
-   */
-  isAmmo() {
-    return this.id.includes('AMMO_')
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Item
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Item(obj._id,obj._name,obj._category,obj._weight,obj._spoil,obj._model,obj._options);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Item
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let items = require(file);
-    for (let category in items){
-      for (let id in items[category]){
-        let item = items[category][id];
-        if (!yarp.items[id]) {
-          new Item(id,item.name,category,item.weight,item.spoil,item.model,item.options);
-        }
+      if (this._options.hasOwnProperty(id)) {
+        value[id] = eval(this._options[id]);
       }
     }
+    return value;
+  }
+
+  /**
+   * Sets item options functions as strings.
+   * @instance
+   * @function options
+   * @memberof yarp.Item
+   * @param {Array<function>} value - Array of option functions
+   */
+  set options(value) {
+    for (let id in value) {
+      if (this._options.hasOwnProperty(id)) {
+        this._options[id] = value[id].toString();
+      }
+    }
+  }
+
+  /**
+   * Load from object.
+   * @instance
+   * @function isAmmo
+   * @memberof yarp.Item
+   * @return {boolean} - If the item is weapon or not.
+   */
+  isWeapon() {
+    return this.id.includes('WEAPON_');
+  }
+
+  /**
+   * Load from object.
+   * @instance
+   * @function isAmmo
+   * @memberof yarp.Item
+   * @return {boolean} - If the item is ammo or not.
+   */
+  isAmmo() {
+    return this.id.includes('AMMO_');
   }
 }
 

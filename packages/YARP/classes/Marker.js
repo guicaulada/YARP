@@ -1,26 +1,28 @@
 'use strict';
 /**
- * Creates a Marker.
- * @namespace yarp.Marker
- * @class
+ * Implements a Marker.
+ * @class yarp.Marker
  * @extends yarp.GMObject
- * @param {string} id - Marker id.
- * @param {Vector3} position - Marker position.
- * @param {number} [type=1] - Marker type.
- * @param {number} [radius=1] - Marker radius.
- * @param {Array<number>} [color=[255,255,0,255]] - Marker color.
- * @param {Vector3} [direction=new mp.Vector3(0,0,0)] - Marker direction.
- * @param {Vector3} [rotation=new mp.Vector3(0,0,0)] - Marker rotation.
- * @param {number}  [dimension=0] - Marker dimension.
- * @param {boolean} [visible=true] - Marker visible.
- * @param {number} [range=3] - Marker range.
- * @param {function} [enter=() => {}] - Marker enter function.
- * @param {function} [leave=() => {}] - Marker leave function.
- * @param {Array<string>} [permissions=[]] - Marker permissions.
- * @param {Array<string>} [items=[]] - Marker items.
  */
-
-class Marker extends yarp.GMObject{
+class Marker extends yarp.GMObject {
+  /**
+   *Creates an instance of Marker.
+   * @param {*} id
+   * @param {*} position
+   * @param {number} [type=1]
+   * @param {number} [radius=1]
+   * @param {*} [color=[255, 255, 0, 255]]
+   * @param {*} [direction=new mp.Vector3(0, 0, 0)]
+   * @param {*} [rotation=new mp.Vector3(0, 0, 0)]
+   * @param {boolean} [visible=true]
+   * @param {number} [dimension=0]
+   * @param {number} [range=3]
+   * @param {*} [enter=() => {}]
+   * @param {*} [leave=() => {}]
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @memberof yarp.Marker
+   */
   constructor(
     id,
     position,
@@ -36,12 +38,30 @@ class Marker extends yarp.GMObject{
     leave = () => {},
     permissions = [],
     items = {}
-  ){
+  ) {
     super();
-    if ((id && position) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        position: position,
+        type: type,
+        radius: radius,
+        color: color,
+        direction: direction,
+        rotation: rotation,
+        visible: visible,
+        dimension: dimension,
+        range: range,
+        enter: enter,
+        leave: leave,
+        permissions: permissions,
+        items: items,
+      } = id;
+      return new yarp.Marker(nid, position, type, radius, color, direction, rotation, visible, dimension, range, enter, leave, permissions, items);
+    } else if ((id && position) != null) {
       this._id = id;
       this._type = type;
-      this._position = yarp.utils.Vector3Offset(position,new mp.Vector3(0,0,-1));
+      this._position = yarp.utils.vectorOffset(position, new mp.Vector3(0, 0, -1));
       this._range = range;
       this._radius = radius;
       this._color = color;
@@ -61,41 +81,10 @@ class Marker extends yarp.GMObject{
         rotation: this._rotation,
         color: this._color,
         visible: this._visible,
-        dimension: this._dimension
+        dimension: this._dimension,
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Marker
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Marker(obj._id,obj._position,obj._type,obj._radius,obj._color,obj._direction,obj._rotation,obj._visible,obj._dimension,obj._range,obj._enter,obj._leave,obj._permissions,obj._items);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Marker
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let markers = require(file);
-    for (let id in markers){
-      let marker = markers[id];
-      for (let i=0; i < marker.positions.length; i++){
-        let nid = id + ' ' + (i + 1);
-        if (!yarp.markers[nid]) {
-          new Marker(nid,marker.positions[i],marker.type,marker.radius,marker.color,marker.direction,marker.rotation,marker.visible,marker.dimension,marker.range,marker.enter,marker.leave,marker.permissions,marker.items)
-        }
-      }
     }
   }
 }

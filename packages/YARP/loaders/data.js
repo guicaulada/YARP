@@ -27,7 +27,7 @@ module.exports = async () => {
     await yarp.variables.load();
     await yarp.vehicles.load();
     await yarp.weapons.load();
-  } catch(err) {
+  } catch (err) {
     console.log(chalk.redBright('[YARP] ')+'DataError: '+err.message+'\n'+err.stack);
   }
 };

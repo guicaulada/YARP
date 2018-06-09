@@ -4,7 +4,7 @@ let config = {
   'Whitelisted': false,
   'Starting Wallet': 100,
   'Starting Bank': 1500,
-  'Save Interval': 20, //A tick is 0.5s so 20 = 10 seconds
+  'Save Interval': 20, // A tick is 0.5s so 20 = 10 seconds
   'Hunger Interval': 20,
   'Hunger Rate': 1,
   'Thirst Interval': 20,
@@ -23,8 +23,8 @@ let config = {
     new mp.Vector3(295.83, -1446.94, 29.97),
     new mp.Vector3(-676.98, 310.68, 83.08),
     new mp.Vector3(1151.21, -1529.62, 35.37),
-    new mp.Vector3(-874.64, -307.71, 39.58)
-  ]
-}
+    new mp.Vector3(-874.64, -307.71, 39.58),
+  ],
+};
 
 module.exports = config;

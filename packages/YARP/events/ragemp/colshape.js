@@ -11,7 +11,7 @@
  * @param {object} player - The player that called the event.
  * @param {object} shape - The colshape that was entered.
  */
-mp.events.add('playerEnterColshape', (player,shape) => {
+mp.events.add('playerEnterColshape', (player, shape) => {
 });
 
 /**
@@ -21,5 +21,5 @@ mp.events.add('playerEnterColshape', (player,shape) => {
  * @param {object} player - The player that called the event.
  * @param {object} shape - The colshape that was left.
  */
-mp.events.add('playerExitColshape', (player,shape) => {
+mp.events.add('playerExitColshape', (player, shape) => {
 });

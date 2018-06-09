@@ -11,24 +11,24 @@ let utils = {};
  * @function getTimestamp
  * @memberof server.yarp.utils
  * @param {Date} date - new Date().
- * @returns {string} - The formatted date.
+ * @return {string} - The formatted date.
  */
 utils.getTimestamp = (date) => {
   let dd = date.getDate();
-  let mm = date.getMonth()+1; //January is 0!
+  let mm = date.getMonth()+1; // January is 0!
   let yyyy = date.getFullYear();
   let h = date.getHours();
   let m = date.getMinutes();
   let s = date.getSeconds();
-  if(dd<10){
+  if (dd<10) {
     dd='0'+dd;
   }
-  if(mm<10){
+  if (mm<10) {
     mm='0'+mm;
   }
   date = `${dd}/${mm}/${yyyy} ${h}:${m}:${s}`;
   return date;
-}
+};
 
 /**
  * Round numbers by the amount of decimals.
@@ -36,38 +36,38 @@ utils.getTimestamp = (date) => {
  * @memberof server.yarp.utils
  * @param {number} value - Value to be rounded.
  * @param {number} decimals - How many decimals.
- * @returns {number} - The rounded number.
+ * @return {number} - The rounded number.
  */
 utils.round = (value, decimals) => {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-}
+};
 
 /**
  * Offset a Vector3.
- * @function Vector3Offset
+ * @function vectorOffset
  * @memberof server.yarp.utils
  * @param {Vector3} vector - Vector3 to be offset.
  * @param {Vector3} offset - Vector3 offset amount.
- * @returns {Vector3} - Offset Vector3.
+ * @return {Vector3} - Offset Vector3.
  */
-utils.Vector3Offset = (vector,offset) => {
-  return new mp.Vector3(vector.x+offset.x,vector.y+offset.y,vector.z+offset.z);
-}
+utils.vectorOffset = (vector, offset) => {
+  return new mp.Vector3(vector.x+offset.x, vector.y+offset.y, vector.z+offset.z);
+};
 
 /**
  * Get the distance between two Vector3.
- * @function Vector3Distance
+ * @function vectorDistance
  * @memberof server.yarp.utils
  * @param {Vector3} vector1 - First Vector3.
  * @param {Vector3} vector2 - Second Vector3.
- * @returns {number} - Distance between them.
+ * @return {number} - Distance between them.
  */
-utils.Vector3Distance = (vector1,vector2) => {
+utils.vectorDistance = (vector1, vector2) => {
   let dx = vector1.x - vector2.x;
   let dy = vector1.y - vector2.y;
   let dz = vector1.z - vector2.z;
   return Math.sqrt( dx * dx + dy * dy + dz * dz );
-}
+};
 
 /**
  * Generate a random string.
@@ -75,98 +75,118 @@ utils.Vector3Distance = (vector1,vector2) => {
  * @memberof server.yarp.utils
  * @param {number} digits - Amaount of symbols on the string.
  * @param {string} possible - String with possible symbols.
- * @returns {string} - Randomly generated string.
+ * @return {string} - Randomly generated string.
  */
-utils.randomString = (digits,possible) => {
+utils.randomString = (digits, possible) => {
   let text = '';
-  for (let i = 0; i < digits; i++)
+  for (let i = 0; i < digits; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
   return text;
-}
+};
 
 /**
  * Get substrings from string.
  * @function getSubstrings
  * @memberof server.yarp.utils
  * @param {string} string - String to analyze.
- * @returns {Array} - Array of substrings.
+ * @param {string} symbol - Symbol the substrings will be inside.
+ * @return {Array} - Array of substrings.
  */
-utils.getSubstrings = (string,symbol) => {
+utils.getSubstrings = (string, symbol) => {
   let current;
   let pattern = new RegExp('\\'+symbol+'(.*?)'+'\\'+symbol, 'g');
   let result = [];
-  while(current = pattern.exec(string)) {
+  while (current = pattern.exec(string)) {
     if (current) {
       result.push(current[0].replace(new RegExp('\'', 'g'), ''));
     }
   }
   return result;
-}
+};
 
 /**
- * Offsets a Vector3.
+ * Get object patameters names
  * @function getParamNames
  * @memberof server.yarp.utils
  * @param {function} func - The function to be analyzed.
- * @returns {Array} - Array of parameter names.
+ * @return {Array} - Array of parameter names.
  */
 utils.getParamNames = (func) => {
   let STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+  let STRIP_DEFAULTS = / = [\s\S]*?\n/g;
   let ARGUMENT_NAMES = /([^\s,]+)/g;
-  let fnStr = func.toString().replace(STRIP_COMMENTS, '');
+  let fnStr = func.toString().replace('=', ' ').replace(STRIP_COMMENTS, '').replace(STRIP_DEFAULTS, ',');
   let result = fnStr.slice(fnStr.indexOf('(')+1, fnStr.indexOf(')')).match(ARGUMENT_NAMES);
-  if(result === null)
+  if (result === null) {
     result = [];
+  }
   return result;
-}
+};
 
 /**
- * Offsets a Vector3.
+ * Get only persisten data without prefix
+ * @instance
+ * @function data
+ * @memberof yarp.GMObject
+ * @param {object} object - The object to be analyzed.
+ * @return {object} - Persistent data object.
+ */
+utils.cleanData = (object) => {
+  let data = {};
+  for (let key of Object.keys(object)) {
+    if (key[0] == '_') {
+      data[key.slice(1, key.length)] = object[key];
+    }
+  }
+  return data;
+};
+
+/**
+ * Represents an object with a string
  * @function paramsToString
  * @memberof server.yarp.utils
  * @param {object} obj - The object to be analyzed.
- * @returns {string} - Object representation in string.
+ * @return {string} - Object representation in string.
  */
 utils.paramsToString = (obj) => {
-  let obj_p = '';
+  let objP = '';
   if (typeof obj === 'string') {
     return '\''+obj+'\'';
-  }
-  else if (typeof obj === 'boolean' || typeof obj === 'number') {
+  } else if (typeof obj === 'boolean' || typeof obj === 'number') {
     return obj.toString();
-  }
-  else if (obj instanceof Array) {
-      obj_p = '['
-    for (let o of obj){
-      obj_p = obj_p+' '+this.parseParams(o)+','
+  } else if (obj instanceof Array) {
+    objP = '[';
+    for (let o of obj) {
+      objP = objP+' '+utils.parseParams(o)+',';
     }
-    if (obj.length > 0){
-      obj_p = obj_p.slice(0, -1);
+    if (obj.length > 0) {
+      objP = objP.slice(0, -1);
     }
-    return obj_p+' ]';
-  }
-  else if (obj instanceof Object) {
-    obj_p = '{'
+    return objP+' ]';
+  } else if (obj instanceof Object) {
+    objP = '{';
     for (let k in obj) {
-      obj_p = obj_p+' \''+k+'\': '+this.parseParams(obj[k])+',';
+      if (obj.hasOwnProperty(k)) {
+        objP = objP+' \''+k+'\': '+utils.parseParams(obj[k])+',';
+      }
     }
-    if (Object.keys(obj).length > 0){
-      obj_p = obj_p.slice(0, -1);
+    if (Object.keys(obj).length > 0) {
+      objP = objP.slice(0, -1);
     }
-    return obj_p+' }';
-  }
-  else if (obj instanceof Function) {
+    return objP+' }';
+  } else if (obj instanceof Function) {
     return obj.toString();
   }
-  return obj_p;
-}
+  return objP;
+};
 
 /**
  * Returns the time in a set timezone.
  * @function getTimezoneDate
  * @memberof server.yarp.utils
  * @param {number} timezone - The timezone difference to GMT.
- * @returns {Date} - Timezone date.
+ * @return {Date} - Timezone date.
  */
 utils.getTimezoneDate = (timezone) => {
   let date = new Date();
@@ -229,10 +249,10 @@ utils.getTimezoneDate = (timezone) => {
     }
     if (mm > 12) {
       mm = 1;
-      yy++
+      yy++;
     }
   }
-  return new Date(yy,mm,dd,h,m,s);
-}
+  return new Date(yy, mm, dd, h, m, s);
+};
 
 module.exports = utils;

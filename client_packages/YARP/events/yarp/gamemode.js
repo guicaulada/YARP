@@ -26,7 +26,7 @@ mp.events.add('setWorldTime', (jtime) => {
  * @fires runServerCode
  */
 mp.events.add('runServerCode', (code) => {
-  mp.events.callRemote('runServerCode', code)
+  mp.events.callRemote('runServerCode', code);
 });
 
 /**
@@ -48,7 +48,7 @@ mp.events.add('runClientCode', (code) => {
  * @param {string} key - The virtual key code.
  * @fires playerBoundKeyPressed
  */
-mp.events.add('playerBindKey', (id,key) => {
+mp.events.add('playerBindKey', (id, key) => {
   if (keybinds[id]) {
     mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
     keybinds[id] = null;
@@ -57,9 +57,9 @@ mp.events.add('playerBindKey', (id,key) => {
   keybinds[id] = {
     key: key,
     call: () => {
-      mp.events.callRemote('playerBoundKeyPressed', id)
-    }
-  }
+      mp.events.callRemote('playerBoundKeyPressed', id);
+    },
+  };
   mp.keys.bind(keybinds[id].key, false, keybinds[id].call);
 });
 

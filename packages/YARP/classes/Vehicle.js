@@ -1,28 +1,30 @@
 'use strict';
 /**
- * Creates a Vehicle.
- * @namespace yarp.Vehicle
- * @class
+ * Implements a Vehicles.
+ * @class yarp.Vehicle
  * @extends yarp.GMObject
- * @param {string} id - Vehicle id.
- * @param {string} model - Vehicle model.
- * @param {Vector3} position - Vehicle position.
- * @param {number} [heading=0] - Vehicle heading.
- * @param {string} [owner=null] - Vehicle owner.
- * @param {string} [plate=yarp.utils.randomString(8,'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')] - Vehicle plate.
- * @param {Array<number>} [color=[0,0,0]] - Vehicle color.
- * @param {number} [alpha=255] - Vehicle alpha.
- * @param {boolean} [locked=false] - Vehicle locked.
- * @param {boolean} [engine=false] - Vehicle engine.
- * @param {number}  [dimension=0] - Vehicle dimension.
- * @param {boolean} [visible=true] - Vehicle visible.
- * @param {Array<string>} [permissions=[]] - Vehicle permissions.
- * @param {Array<string>} [items=[]] - Vehicle items.
- * @param {function} [enter=() => {}] - Vehicle enter function.
- * @param {function} [leave=() => {}] - Vehicle leave function.
  */
-
-class Vehicle extends yarp.GMObject{
+class Vehicle extends yarp.GMObject {
+  /**
+   *Creates an instance of Vehicle.
+   * @param {*} id
+   * @param {*} model
+   * @param {*} position
+   * @param {number} [heading=0]
+   * @param {boolean} [owner=false]
+   * @param {boolean} [plate=false]
+   * @param {*} [color=[0,0,0]]
+   * @param {number} [alpha=255]
+   * @param {boolean} [locked=false]
+   * @param {boolean} [engine=false]
+   * @param {number} [dimension=0]
+   * @param {boolean} [visible=true]
+   * @param {*} [enter=() => {}]
+   * @param {*} [leave=() => {}]
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @memberof yarp.Vehicle
+   */
   constructor(
     id,
     model,
@@ -30,7 +32,7 @@ class Vehicle extends yarp.GMObject{
     heading = 0,
     owner = false,
     plate = false,
-    color = [0,0,0],
+    color = [0, 0, 0],
     alpha = 255,
     locked = false,
     engine = false,
@@ -40,9 +42,29 @@ class Vehicle extends yarp.GMObject{
     leave = () => {},
     permissions = [],
     items = {}
-  ){
+  ) {
     super();
-    if ((id && model && position) != null) {
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        model: model,
+        position: position,
+        heading: heading,
+        owner: owner,
+        plate: plate,
+        color: color,
+        alpha: alpha,
+        locked: locked,
+        engine: engine,
+        dimension: dimension,
+        visible: visible,
+        enter: enter,
+        leave: leave,
+        permissions: permissions,
+        items: items,
+      } = id;
+      return new yarp.Vehicle(nid, model, position, heading, owner, plate, color, alpha, locked, engine, dimension, visible, enter, leave, permissions, items);
+    } else if ((id && model && position) != null) {
       this._id = id;
       this._model = model;
       this._position = position;
@@ -53,7 +75,7 @@ class Vehicle extends yarp.GMObject{
       this._alpha = alpha;
       this._locked = locked;
       this._engine = engine;
-      this._dimension = dimension ;
+      this._dimension = dimension;
       this._visible = visible;
       this._permissions = permissions;
       this._items = items;
@@ -69,7 +91,7 @@ class Vehicle extends yarp.GMObject{
         color: this._color,
         locked: this._locked,
         engine: this._engine,
-        dimension: this._dimension
+        dimension: this._dimension,
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -83,7 +105,7 @@ class Vehicle extends yarp.GMObject{
    * @memberof yarp.Vehicle
    * @param {Vector3} value - Position value.
    */
-  set position(value){
+  set position(value) {
     this.mp.position = value;
     this._position = value;
   }
@@ -95,40 +117,9 @@ class Vehicle extends yarp.GMObject{
    * @memberof yarp.Vehicle
    * @param {number} value - Heading value.
    */
-  set heading(value){
-    this.mp.rotation = new mp.Vector3(0,0,value);
+  set heading(value) {
+    this.mp.rotation = new mp.Vector3(0, 0, value);
     this._heading = value;
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Vehicle
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Vehicle(obj._id,obj._model,obj._position,obj._heading,obj._owner,obj._plate,obj._color,obj._alpha,obj._locked,obj._engine,obj._dimension,obj._visible,obj._permissions,obj._items);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Vehicle
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let vehicles = require(file);
-    for (let id in vehicles){
-      let vehicle = vehicles[id];
-      for (let i=0; i < vehicle.positions.length; i++){
-        let nid = id + ' ' + (i + 1);
-        if (!yarp.vehicles[nid]) {
-          new Vehicle(nid, vehicle.model, vehicle.positions[i], vehicle.owner, vehicle.heading, vehicle.plate + i, vehicle.color, vehicle.alpha, vehicle.locked, vehicle.engine, vehicle.dimension, vehicle.visible, vehicle.permissions, vehicle.items)
-        }
-      }
-    }
   }
 }
 

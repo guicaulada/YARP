@@ -26,7 +26,7 @@ module.exports = async () => {
     yarp.User = require('../classes/User.js');
     yarp.Vehicle = require('../classes/Vehicle.js');
     yarp.Weapon = require('../classes/Weapon.js');
-  } catch(err) {
+  } catch (err) {
     console.log(chalk.redBright('[YARP] ')+'ClassError: '+err.message+'\n'+err.stack);
   }
 };

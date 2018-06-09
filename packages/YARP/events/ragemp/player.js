@@ -13,7 +13,7 @@
  */
 mp.events.add('playerChat', (player, message) => {
   console.log(`${player.name}: ${message}`);
-	mp.players.broadcast(`${player.name}: ${message}`);
+  mp.players.broadcast(`${player.name}: ${message}`);
 });
 
 /**
@@ -24,29 +24,29 @@ mp.events.add('playerChat', (player, message) => {
  * @param {string} command - Message sent.
  */
 mp.events.add('playerCommand', (player, command) => {
-	const args = command.split(/[ ]+/);
-	const commandName = args.splice(0, 1)[0];
+  const args = command.split(/[ ]+/);
+  const commandName = args.splice(0, 1)[0];
   console.log(`${player.name}: /${command}`);
   command = yarp.commands[commandName];
 
-	if (command) {
+  if (command) {
     let user = yarp.users[player.socialClub];
     let character = user.character;
-    if (user.hasPermissions(command.permissions) || character.hasPermissions(command.permissions)){
+    if (user.hasPermissions(command.permissions) || character.hasPermissions(command.permissions)) {
       if (character.hasItems(command.items)) {
-        if(command.position && command.range) {
-          if (yarp.utils.Vector3Distance(player.position,command.position) < command.range){
-            command.call(player,args);
+        if (command.position && command.range) {
+          if (yarp.utils.vectorDistance(player.position, command.position) < command.range) {
+            command.call(player, args);
           } else {
             player.outputChatBox('!{yellow}HINT!{white}: You are at the wrong position.');
           }
         } else {
-          command.call(player,args);
+          command.call(player, args);
         }
       } else {
         player.outputChatBox('!{yellow}HINT!{white}: You don\'t have the required items.');
       }
-	  } else {
+    } else {
       player.outputChatBox('!{yellow}HINT!{white}: You don\'t have permission.');
     }
   }
@@ -84,27 +84,26 @@ mp.events.add('playerDeath', (player) => {
 mp.events.add('playerJoin', (player) => {
   player.name = player.socialClub;
   console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
-  player.call('setWorldTime', [JSON.stringify({h:mp.world.time.hour, m:mp.world.time.minute, s:mp.world.time.second})]);
-  let user = yarp.users[player.socialClub]
-  if(user != null){
+  player.call('setWorldTime', [JSON.stringify({h: mp.world.time.hour, m: mp.world.time.minute, s: mp.world.time.second})]);
+  let user = yarp.users[player.socialClub];
+  if (user != null) {
     if (user.banned) {
       player.outputChatBox('!{red}You have been banned.');
       console.log(`${player.socialClub} is banned.`);
-      setTimeout(function(){
+      setTimeout(function() {
         player.kick('You have been banned.');
-      },1000);
+      }, 1000);
     } else if (yarp.variables['Whitelisted'].value && !user.whitelisted) {
       player.outputChatBox('!{yellow}You are not whitelisted.');
       console.log(`${player.socialClub} is not whitelisted.`);
-      setTimeout(function(){
+      setTimeout(function() {
         player.kick('You are not whitelisted.');
-      },1000);
-    }
-    else {
+      }, 1000);
+    } else {
       player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountLogin.html']]);
     }
   } else {
-    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountRegister.html','setAccountName', player.socialClub]]);
+    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountRegister.html', 'setAccountName', player.socialClub]]);
   }
 });
 
@@ -132,7 +131,7 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
  * @memberof server.player
  * @param {object} player - The player that called the event.
  */
-mp.events.add('playerReady', player => {
+mp.events.add('playerReady', (player) => {
 });
 
 /**
@@ -141,7 +140,7 @@ mp.events.add('playerReady', player => {
  * @memberof server.player
  * @param {object} player - The player that called the event.
  */
-mp.events.add('playerSpawn', player => {
+mp.events.add('playerSpawn', (player) => {
 });
 
 /**
@@ -158,11 +157,11 @@ let currentWeapons = {};
 mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
   let character = yarp.characters[player.name];
   if (character) {
-    for (let id in character.weapons){
-      if (mp.joaat(id) == newWeapon){
+    for (let id in character.weapons) {
+      if (mp.joaat(id) == newWeapon) {
         currentWeapons[player.id] = id;
         player.call('unequipWeapon', [id]);
-      } else if ((mp.joaat(id) == oldWeapon) && (newWeapon != 1970349056)){
+      } else if ((mp.joaat(id) == oldWeapon) && (newWeapon != 1970349056)) {
         player.call('equipWeapon', [JSON.stringify(yarp.weapons[id])]);
       }
     }
@@ -181,6 +180,8 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
 mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson, weaponHash) => {
   let character = yarp.characters[player.name];
   if (character) {
-    character.takeAmmo(currentWeapons[player.id],1);
+    if (currentWeapons[player.id]) {
+      character.takeAmmo(currentWeapons[player.id], 1);
+    }
   }
 });

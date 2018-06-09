@@ -3,21 +3,24 @@
 const bcrypt = require('bcryptjs');
 
 /**
- * Creates a User.
- * @namespace yarp.User
- * @class
+ * Implements a User.
+ * @class yarp.User
  * @extends yarp.GMObject
- * @param {string} id - User social club.
- * @param {string} password - User password.
- * @param {string} [lastLogin=''] - User last login.
- * @param {Float} [whitelisted=false] - User whitelisted.
- * @param {Float} [banned=false] - User banned.
- * @param {Array<string>} [groups=[]] - User groups.
- * @param {function} [enter=() => {}] - User enter function.
- * @param {function} [leave=() => {}] - User leave function.
  */
-class User extends yarp.GMObject{
-  constructor(
+class User extends yarp.GMObject {
+/**
+ *Creates an instance of User.
+ * @param {*} id
+ * @param {*} password
+ * @param {string} [lastLogin='']
+ * @param {boolean} [whitelisted=false]
+ * @param {boolean} [banned=false]
+ * @param {*} [groups=[]]
+ * @param {*} [enter=() => {}]
+ * @param {*} [leave=() => {}]
+ * @memberof yarp.User
+ */
+constructor(
     id,
     password,
     lastLogin = '',
@@ -26,9 +29,21 @@ class User extends yarp.GMObject{
     groups = [],
     enter = () => {},
     leave = () => {}
-  ){
+  ) {
     super();
-    if ((id && password) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        password: password,
+        lastLogin: lastLogin,
+        whitelisted: whitelisted,
+        banned: banned,
+        groups: groups,
+        enter: enter,
+        leave: leave,
+      } = id;
+      return new yarp.User(nid, password, lastLogin, whitelisted, banned, groups, enter, leave);
+    } else if ((id && password) != null) {
       this._id = id;
       this._password = (password.length == 60) ? password : bcrypt.hashSync(password, 10);
       this._lastLogin = lastLogin;
@@ -47,11 +62,11 @@ class User extends yarp.GMObject{
    * @instance
    * @function player
    * @memberof yarp.User
-   * @returns {object} - Player.
+   * @return {object} - Player.
    */
-  get player(){
+  get player() {
     for (let player of mp.players.toArray()) {
-      if (player.socialClub == this.id){
+      if (player.socialClub == this.id) {
         return player;
       }
     }
@@ -63,14 +78,16 @@ class User extends yarp.GMObject{
    * @instance
    * @function characters
    * @memberof yarp.User
-   * @returns {object} - Characters indexed by name.
+   * @return {object} - Characters indexed by name.
    */
-  get characters(){
+  get characters() {
     let characters = {};
-    for (let id in yarp.characters){
-      let character = yarp.characters[id];
-      if (character.socialClub == this.id){
-        characters[id] = character;
+    for (let id in yarp.characters) {
+      if (yarp.characters.hasOwnProperty(id)) {
+        let character = yarp.characters[id];
+        if (character.socialClub == this.id) {
+          characters[id] = character;
+        }
       }
     }
     return characters;
@@ -81,11 +98,11 @@ class User extends yarp.GMObject{
    * @instance
    * @function character
    * @memberof yarp.User
-   * @returns {object} - Active character.
+   * @return {object} - Active character.
    */
-  get character(){
+  get character() {
     for (let player of mp.players.toArray()) {
-      if (player.socialClub == this.id){
+      if (player.socialClub == this.id) {
         return yarp.characters[player.name];
       }
     }
@@ -97,20 +114,20 @@ class User extends yarp.GMObject{
    * @instance
    * @function enter
    * @memberof yarp.User
-   * @returns {function} - Enter functions.
+   * @return {function} - Enter functions.
    * @fires userJoinedGroup
    */
   get enter() {
     return () => {
       let player = this.player;
       if (this._enter) {
-        (eval(this._enter))(player)
+        (eval(this._enter))(player);
       }
-      for (let group of this.groups){
+      for (let group of this.groups) {
         yarp.groups[group].enter(player);
-        mp.events.call('userJoinedGroup',player,this,group);
+        mp.events.call('userJoinedGroup', player, this, group);
       }
-    }
+    };
   }
 
   /**
@@ -118,26 +135,40 @@ class User extends yarp.GMObject{
    * @instance
    * @function leave
    * @memberof yarp.User
-   * @returns {function} - Leave functions.
+   * @return {function} - Leave functions.
    * @fires userLeftGroup
    */
   get leave() {
     return () => {
       let player = this.player;
       if (this._leave) {
-        (eval(this._leave))(player)
+        (eval(this._leave))(player);
       }
-      for (let group of this.groups){
+      for (let group of this.groups) {
         yarp.groups[group].leave(player);
-        mp.events.call('userLeftGroup',player,this,group);
+        mp.events.call('userLeftGroup', player, this, group);
       }
-    }
+    };
   }
 
+  /**
+   * Set's the enter function as a string
+   * @instance
+   * @function enter
+   * @memberof yarp.User
+   * @param {function} value - Enter function.
+   */
   set enter(value) {
-    this._enter = value;
+    this._enter = value.toString();
   }
 
+  /**
+   * Set's the leave function as a string
+   * @instance
+   * @function leave
+   * @memberof yarp.User
+   * @param {function} value - Leave function.
+   */
   set leave(value) {
     this._leave = value;
   }
@@ -149,7 +180,7 @@ class User extends yarp.GMObject{
    * @memberof yarp.User
    * @param {string} ip - Character ip.
    */
-  updateLastLogin(ip){
+  updateLastLogin(ip) {
     this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
   }
 
@@ -159,8 +190,9 @@ class User extends yarp.GMObject{
    * @function verifyPassword
    * @memberof yarp.User
    * @param {string} password - Password to comapare with hash.
+   * @return {boolean} - True if the password matches the hash.
    */
-  verifyPassword(password){
+  verifyPassword(password) {
     return bcrypt.compareSync(password, this.password);
   }
 
@@ -170,23 +202,23 @@ class User extends yarp.GMObject{
    * @function giveGroup
    * @memberof yarp.User
    * @param {string} group - Group id.
-   * @returns {boolean} - Operation success/fail.
+   * @return {boolean} - Operation success/fail.
    * @fires userJoinedGroup
    */
-  giveGroup(group){
+  giveGroup(group) {
     if (this.groups.indexOf(group) == -1) {
       if (yarp.groups[group]) {
         let type = yarp.groups[group].type;
-        if (type){
-          let same_type = this.getGroupByType(type);
-          if (same_type){
-            this.takeGroup(same_type);
+        if (type) {
+          let sameType = this.getGroupByType(type);
+          if (sameType) {
+            this.takeGroup(sameType);
           }
         }
         let player = this.player;
         if (player) {
           yarp.groups[group].enter(player);
-          mp.events.call('userJoinedGroup',player,this,group);
+          mp.events.call('userJoinedGroup', player, this, group);
         }
       }
       this.groups.push(group);
@@ -201,16 +233,16 @@ class User extends yarp.GMObject{
    * @function takeGroup
    * @memberof yarp.User
    * @param {string} group - Group id.
-   * @returns {boolean} - Operation success/fail.
+   * @return {boolean} - Operation success/fail.
    * @fires userLeftGroup
    */
-  takeGroup(group){
+  takeGroup(group) {
     if (this.groups.indexOf(group) > -1) {
       if (yarp.groups[group]) {
         let player = this.player;
         if (player) {
           yarp.groups[group].leave(player);
-          mp.events.call('userLeftGroup',player,this,group);
+          mp.events.call('userLeftGroup', player, this, group);
         }
       }
       this.groups.splice(this.groups.indexOf(group), 1);
@@ -225,13 +257,13 @@ class User extends yarp.GMObject{
    * @function getGroupByType
    * @memberof yarp.User
    * @param {string} type - Group type.
-   * @returns {string} - Group id.
+   * @return {string} - Group id.
    */
-  getGroupByType(type){
+  getGroupByType(type) {
     for (let id of this.groups) {
       let group = yarp.groups[id];
       if (group != null) {
-        if (group.type == type){
+        if (group.type == type) {
           return id;
         }
       }
@@ -243,15 +275,15 @@ class User extends yarp.GMObject{
    * @instance
    * @function getGroupByTypes
    * @memberof yarp.User
-   * @param {Array<string>} type - Group types.
-   * @returns {Array<string>} - Group ids.
+   * @param {Array<string>} types - Group types.
+   * @return {Array<string>} - Group ids.
    */
-  getGroupsByTypes(types){
+  getGroupsByTypes(types) {
     let groups = [];
     for (let id of this.groups) {
       let group = yarp.groups[id];
       if (group != null) {
-        if (types.indexOf(group.type) >= 0){
+        if (types.indexOf(group.type) >= 0) {
           groups.push(group);
         }
       }
@@ -265,9 +297,9 @@ class User extends yarp.GMObject{
    * @function hasGroup
    * @memberof yarp.User
    * @param {string} id - Group id.
-   * @returns {boolean} - If has or not the group.
+   * @return {boolean} - If has or not the group.
    */
-  hasGroup(id){
+  hasGroup(id) {
    return (this.groups.indexOf(id) > -1);
   }
 
@@ -276,11 +308,11 @@ class User extends yarp.GMObject{
    * @instance
    * @function hasGroup
    * @memberof yarp.User
-   * @param {Array<string>} id - Group ids.
-   * @returns {boolean} - If has or not all the groups.
+   * @param {Array<string>} groups - Group ids.
+   * @return {boolean} - If has or not all the groups.
    */
-  hasGroups(groups){
-    for (let i = 0; i < groups.length; i++){
+  hasGroups(groups) {
+    for (let i = 0; i < groups.length; i++) {
       if (!this.hasGroup(groups[i])) {
         return false;
       }
@@ -294,9 +326,9 @@ class User extends yarp.GMObject{
    * @function hasPermission
    * @memberof yarp.User
    * @param {string} permission - Permission.
-   * @returns {boolean} - If has or not the permission.
+   * @return {boolean} - If has or not the permission.
    */
-  hasPermission(permission){
+  hasPermission(permission) {
     let result = false;
     let removed = false;
     let readd = false;
@@ -304,8 +336,8 @@ class User extends yarp.GMObject{
       let parts = permission.split('.');
       let item = this.inventory[parts[0]];
       let operation = parts[1][0];
-      let value = Number(parts[1].splice(1,parts[1].length))
-      switch(operation) {
+      let value = Number(parts[1].splice(1, parts[1].length));
+      switch (operation) {
         case '>':
         result = (item > value);
         break;
@@ -320,8 +352,8 @@ class User extends yarp.GMObject{
       let parts = permission.split('.');
       let skill = this.skills[parts[0]];
       let operation = parts[1][0];
-      let value = Number(parts[1].splice(1,parts[1].length))
-      switch(operation) {
+      let value = Number(parts[1].splice(1, parts[1].length));
+      switch (operation) {
         case '>':
         result = (skill > value);
         break;
@@ -336,16 +368,16 @@ class User extends yarp.GMObject{
       for (let id of this.groups) {
         let group = yarp.groups[id];
         if (group != null) {
-          if (group.permissions.indexOf('*') > -1){
+          if (group.permissions.indexOf('*') > -1) {
             result = true;
           }
-          if (group.permissions.indexOf(permission) > -1){
+          if (group.permissions.indexOf(permission) > -1) {
             result = true;
           }
-          if (group.permissions.indexOf(`-${permission}`) > -1){
+          if (group.permissions.indexOf(`-${permission}`) > -1) {
             removed = true;
           }
-          if (group.permissions.indexOf(`+${permission}`) > -1){
+          if (group.permissions.indexOf(`+${permission}`) > -1) {
             readd = true;
           }
           if ((!result) || (!readd && removed)) {
@@ -368,7 +400,7 @@ class User extends yarp.GMObject{
         }
       }
     }
-    if (removed && !readd){
+    if (removed && !readd) {
       result = false;
     }
     return result;
@@ -380,51 +412,15 @@ class User extends yarp.GMObject{
    * @function hasPermission
    * @memberof yarp.User
    * @param {Array<string>} permissions - Permissions.
-   * @returns {boolean} - If has or not all permissions.
+   * @return {boolean} - If has or not all permissions.
    */
-  hasPermissions(permissions){
-    for (let i = 0; i < permissions.length; i++){
+  hasPermissions(permissions) {
+    for (let i = 0; i < permissions.length; i++) {
       if (!this.hasPermission(permissions[i])) {
         return false;
       }
     }
     return true;
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.User
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new User(obj._id,obj._password,obj._lastLogin,obj._whitelisted,obj._banned,obj._groups,obj._enter,obj._leave);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.User
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let users = require(file);
-    for (let id in users){
-      let user = users[id];
-      if (yarp.users[id]) {
-        for (let group of user.groups){
-          yarp.users[id].giveGroup(group);
-        }
-        if (user.enter) {
-          yarp.users[id].enter = user.enter.toString();
-        }
-        if (user.leave) {
-          yarp.users[id].leave = user.leave.toString();
-        }
-      }
-    }
   }
 }
 

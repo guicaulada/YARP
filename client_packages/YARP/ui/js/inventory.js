@@ -9,6 +9,8 @@ function populateInventory(inventoryJson, title) {
 	selected = null;
 
 	// Obtenemos el array de objetos
+	inventoryJson = inventoryJson.replace(/\n/g, '');
+	console.log(inventoryJson);
 	if (inventoryJson) {
 		inventory = JSON.parse(inventoryJson);
 	}

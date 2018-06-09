@@ -14,7 +14,7 @@ let charpos = false;
  * @memberof client.command
  */
 mp.events.add('toggleCamdir', () => {
-    camdir = !camdir
+    camdir = !camdir;
 });
 
 /**
@@ -23,7 +23,7 @@ mp.events.add('toggleCamdir', () => {
  * @memberof client.command
  */
 mp.events.add('toggleCharpos', () => {
-    charpos = !charpos
+    charpos = !charpos;
 });
 
 /**
@@ -32,13 +32,13 @@ mp.events.add('toggleCharpos', () => {
  * @memberof client.command
  */
 mp.events.add('toggleNoclip', () => {
-    noclip = !noclip
+    noclip = !noclip;
     mp.players.local.setInvincible(noclip);
     mp.players.local.freezePosition(false);
-    mp.players.local.setVisible(!noclip, !noclip)
-    mp.players.local.setCollision(!noclip,!noclip);
+    mp.players.local.setVisible(!noclip, !noclip);
+    mp.players.local.setCollision(!noclip, !noclip);
     mp.players.local.setHasGravity(!noclip);
-    if (noclip){
+    if (noclip) {
       mp.players.local.setMaxSpeed(0.0001);
     } else {
       mp.players.local.setMaxSpeed(10);
@@ -51,36 +51,36 @@ mp.events.add('toggleNoclip', () => {
  * @memberof client.command
  */
 mp.events.add('render', () => {
-  if (noclip){
+  if (noclip) {
     if (mp.keys.isDown(87) === true) {
       const pos = mp.players.local.position;
       const dir = yarp.utils.getCameraDirection();
-      mp.players.local.setCoordsNoOffset(pos.x+dir.x,pos.y+dir.y,pos.z+dir.z, false, false, false);
+      mp.players.local.setCoordsNoOffset(pos.x + dir.x, pos.y + dir.y, pos.z + dir.z, false, false, false);
     }
     if (mp.keys.isDown(83) === true) {
       const pos = mp.players.local.position;
       const dir = yarp.utils.getCameraDirection();
-      mp.players.local.setCoordsNoOffset(pos.x-dir.x,pos.y-dir.y,pos.z-dir.z, false, false, false);
+      mp.players.local.setCoordsNoOffset(pos.x - dir.x, pos.y - dir.y, pos.z - dir.z, false, false, false);
     }
   }
-  if (charpos){
+  if (charpos) {
     const pos = mp.players.local.position;
     mp.game.graphics.drawText(`X:${pos.x}    Y:${pos.y}    Z:${pos.z}`, [0.5, 0.005],
     {
       font: 4,
       color: [255, 255, 255, 255],
       scale: [1.0, 1.0],
-      outline: true
+      outline: true,
     });
   }
-  if (camdir){
+  if (camdir) {
     const dir = yarp.utils.getCameraDirection();
     mp.game.graphics.drawText(`X:${dir.x}    Y:${dir.y}    Z:${dir.z}`, [0.5, 0.05],
     {
       font: 4,
       color: [255, 255, 255, 255],
       scale: [1.0, 1.0],
-      outline: true
+      outline: true,
     });
   }
 });

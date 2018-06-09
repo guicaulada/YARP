@@ -13,7 +13,7 @@ let config = {
       new mp.Vector3( 810.15, -2156.88, 29.61),
       new mp.Vector3(-3172.6037, 1085.7481, 20.838),
       new mp.Vector3(-1119.4880, 2697.086, 18.5541),
-      new mp.Vector3(-1305.45056, -394.0068, 36.695)
+      new mp.Vector3(-1305.45056, -394.0068, 36.695),
     ],
   },
   '7/11': {
@@ -34,21 +34,21 @@ let config = {
       new mp.Vector3(1160.06237792969, -314.061828613281, 69.2050628662109),
       new mp.Vector3(-1829.00427246094, 798.903076171875, 138.186706542969),
       new mp.Vector3(2549.400390625, 385.048309326172, 108.622955322266),
-      new mp.Vector3(-621.989135742188, -230.804443359375, 38.0570297241211)
+      new mp.Vector3(-621.989135742188, -230.804443359375, 38.0570297241211),
     ],
   },
   'Airport': {
     visible: false,
     positions: [
       new mp.Vector3(-1032.690, -2728.141, 13.757),
-      new mp.Vector3(1743.6820, 3286.2510, 40.087)
+      new mp.Vector3(1743.6820, 3286.2510, 40.087),
     ],
   },
   'Cable Car': {
     visible: false,
     positions: [
       new mp.Vector3(-737.746, 5595.192, 41.655),
-      new mp.Vector3(457.097, 5571.724, 781.184)
+      new mp.Vector3(457.097, 5571.724, 781.184),
     ],
   },
   'Tattoo Shop': {
@@ -59,7 +59,7 @@ let config = {
       new mp.Vector3(322.139, 180.467, 103.587),
       new mp.Vector3(-3170.071, 1075.059, 20.829),
       new mp.Vector3(1864.633, 3747.738, 33.032),
-      new mp.Vector3(-293.713, 6200.04, 31.487)
+      new mp.Vector3(-293.713, 6200.04, 31.487),
     ],
   },
   'Barbershop': {
@@ -71,7 +71,7 @@ let config = {
       new mp.Vector3(1936.451, 3720.533, 32.638),
       new mp.Vector3(1200.214, -468.822, 66.268),
       new mp.Vector3(-30.109, -141.693, 57.041),
-      new mp.Vector3(-285.238, 6236.365, 31.455)
+      new mp.Vector3(-285.238, 6236.365, 31.455),
     ],
   },
   'Bank': {
@@ -84,7 +84,7 @@ let config = {
       new mp.Vector3(-354.452575683594, -53.8204879760742, 48.0463104248047),
       new mp.Vector3(309.967376708984, -283.033660888672, 53.1745223999023),
       new mp.Vector3(1176.86865234375, 2711.91357421875, 38.097785949707),
-      new mp.Vector3(255.001098632813, 225.855895996094, 101.005694274902)
+      new mp.Vector3(255.001098632813, 225.855895996094, 101.005694274902),
     ],
   },
   'Carwash': {
@@ -93,7 +93,7 @@ let config = {
       new mp.Vector3(26.5906, -1392.0261, 29.3634),
       new mp.Vector3(167.1034, -1719.4704, 29.2916),
       new mp.Vector3(-74.5693, 6427.8715, 31.4400),
-      new mp.Vector3(-699.6325, -932.7043, 19.0139)
+      new mp.Vector3(-699.6325, -932.7043, 19.0139),
     ],
   },
   'Clothing': {
@@ -112,7 +112,7 @@ let config = {
       new mp.Vector3(618.701, 2740.564, 41.905),
       new mp.Vector3(1199.169, 2694.895, 37.866),
       new mp.Vector3(-3164.172, 1063.927, 20.674),
-      new mp.Vector3(-1091.373, 2702.356, 19.422)
+      new mp.Vector3(-1091.373, 2702.356, 19.422),
     ],
   },
   'Gang Zone': {
@@ -125,7 +125,7 @@ let config = {
       new mp.Vector3(960.24, -140.31, 74.50),
       new mp.Vector3(-1042.29, 4910.17, 94.92),
       new mp.Vector3(29.4838, 3735.593, 38.688),
-      new mp.Vector3(-455.752, -1711.884, 18.642)
+      new mp.Vector3(-455.752, -1711.884, 18.642),
     ],
   },
   'Gas Station': {
@@ -159,7 +159,7 @@ let config = {
       new mp.Vector3(-319.690, -1471.610, 30.030),
       new mp.Vector3(174.880, -1562.450, 28.740),
       new mp.Vector3(1246.480, -1485.450, 34.900),
-      new mp.Vector3(-66.330, -2532.570, 6.140)
+      new mp.Vector3(-66.330, -2532.570, 6.140),
     ],
   },
   'Hospital': {
@@ -172,7 +172,7 @@ let config = {
       new mp.Vector3(295.83, -1446.94, 29.97),
       new mp.Vector3(-676.98, 310.68, 83.08),
       new mp.Vector3(1151.21, -1529.62, 35.37),
-      new mp.Vector3(-874.64, -307.71, 39.58)
+      new mp.Vector3(-874.64, -307.71, 39.58),
     ],
   },
   'House': {
@@ -188,7 +188,7 @@ let config = {
       new mp.Vector3(-35.31277, -580.4199, 88.71221),
       new mp.Vector3(120.5, 549.952, 184.097),
       new mp.Vector3(-1288.055, 440.748, 97.69459),
-      new mp.Vector3(-1468.14, -541.815, 73.4442)
+      new mp.Vector3(-1468.14, -541.815, 73.4442),
     ],
   },
   'LS Customs': {
@@ -198,7 +198,7 @@ let config = {
       new mp.Vector3(-1155.536, -2007.183, 13.244),
       new mp.Vector3(731.8163, -1088.822, 22.233),
       new mp.Vector3(1175.04, 2640.216, 37.82177),
-      new mp.Vector3(110.8406, 6626.568, 32.287)
+      new mp.Vector3(110.8406, 6626.568, 32.287),
     ],
   },
   'Race': {
@@ -206,7 +206,7 @@ let config = {
     positions: [
       new mp.Vector3(-1277.629, -2030.913, 1.2823),
       new mp.Vector3(2384.969, 4277.583, 30.379),
-      new mp.Vector3(1577.881, 3836.107, 30.7717)
+      new mp.Vector3(1577.881, 3836.107, 30.7717),
     ],
   },
   'Police Station': {
@@ -215,180 +215,180 @@ let config = {
       new mp.Vector3(425.130, -979.558, 30.711),
       new mp.Vector3(1859.234, 3678.742, 33.690),
       new mp.Vector3(-438.862, 6020.768, 31.490),
-      new mp.Vector3(818.221, -1289.883, 26.300)
+      new mp.Vector3(818.221, -1289.883, 26.300),
     ],
   },
   'Smoke on the Water': {
     visible: false,
     positions: [
-      new mp.Vector3(-1171.42, -1572.72, 3.6636)
+      new mp.Vector3(-1171.42, -1572.72, 3.6636),
     ],
   },
   'MazeBank Arena': {
     visible: false,
     positions: [
-      new mp.Vector3(-250.604, -2030.000, 30.000)
+      new mp.Vector3(-250.604, -2030.000, 30.000),
     ],
   },
   'Bahama Mamas': {
     visible: false,
     positions: [
-      new mp.Vector3(925.329, 46.152, 80.908)
+      new mp.Vector3(925.329, 46.152, 80.908),
     ],
   },
   'Downtown CO.': {
     visible: false,
     positions: [
-      new mp.Vector3(900.461, -181.466, 73.89)
+      new mp.Vector3(900.461, -181.466, 73.89),
     ],
   },
   'Tequil-La La': {
     visible: false,
     positions: [
-      new mp.Vector3(-565.171, 276.625, 83.286)
+      new mp.Vector3(-565.171, 276.625, 83.286),
     ],
   },
   'Theater': {
     visible: false,
     positions: [
-      new mp.Vector3(-455.752, 180.466, 104.301)
+      new mp.Vector3(-455.752, 180.466, 104.301),
     ],
   },
   'Weed Farm': {
     visible: false,
     positions: [
-      new mp.Vector3(2208.777, 5578.235, 53.735)
+      new mp.Vector3(2208.777, 5578.235, 53.735),
     ],
   },
   'FIB': {
     visible: false,
     positions: [
-      new mp.Vector3(105.455, -745.483, 44.754)
+      new mp.Vector3(105.455, -745.483, 44.754),
     ],
   },
   'Lifeinvader': {
     visible: false,
     positions: [
-      new mp.Vector3(-1047.900, -233.000, 39.000)
+      new mp.Vector3(-1047.900, -233.000, 39.000),
     ],
   },
   'Cluckin Bell': {
     visible: false,
     positions: [
-      new mp.Vector3(-72.68752, 6253.72656, 31.08991)
+      new mp.Vector3(-72.68752, 6253.72656, 31.08991),
     ],
   },
   'Comedy Club': {
     visible: false,
     positions: [
-      new mp.Vector3(-447.4833, 280.3197, 77.5215)
+      new mp.Vector3(-447.4833, 280.3197, 77.5215),
     ],
   },
   'Yacht': {
     visible: false,
     positions: [
-      new mp.Vector3(-2045.800, -1031.200, 11.900)
+      new mp.Vector3(-2045.800, -1031.200, 11.900),
     ],
   },
   'Ranch': {
     visible: false,
     positions: [
-      new mp.Vector3(2441.200, 4968.500, 51.700)
+      new mp.Vector3(2441.200, 4968.500, 51.700),
     ],
   },
   'PlayBoy': {
     visible: false,
     positions: [
-      new mp.Vector3(-1475.234, 167.088, 55.841)
+      new mp.Vector3(-1475.234, 167.088, 55.841),
     ],
   },
   'Chop Shop': {
     visible: false,
     positions: [
-      new mp.Vector3(479.056, -1316.825, 28.203)
+      new mp.Vector3(479.056, -1316.825, 28.203),
     ],
   },
   'Rebel Radio': {
     visible: false,
     positions: [
-      new mp.Vector3(736.153, 2583.143, 79.634)
+      new mp.Vector3(736.153, 2583.143, 79.634),
     ],
   },
   'Morgue': {
     visible: false,
     positions: [
-      new mp.Vector3(243.351, -1376.014, 39.534)
+      new mp.Vector3(243.351, -1376.014, 39.534),
     ],
   },
   'Golf': {
     visible: false,
     positions: [
-      new mp.Vector3(-1336.715, 59.051, 55.246)
+      new mp.Vector3(-1336.715, 59.051, 55.246),
     ],
   },
   'Hippie Camp': {
     visible: false,
     positions: [
-      new mp.Vector3(2476.712, 3789.645, 41.226)
+      new mp.Vector3(2476.712, 3789.645, 41.226),
     ],
   },
   'Torture': {
     visible: false,
     positions: [
-      new mp.Vector3(132.583, -2202.327, 7.187)
+      new mp.Vector3(132.583, -2202.327, 7.187),
     ],
   },
   'Body Training': {
     visible: false,
     positions: [
-      new mp.Vector3(-1202.962, -1566.140, 4.610)
+      new mp.Vector3(-1202.962, -1566.140, 4.610),
     ],
   },
   'Lester': {
     visible: false,
     positions: [
       new mp.Vector3(1274.292, -1712.663, 54.771),
-      new mp.Vector3(705.859, -964.651, 30.396)
+      new mp.Vector3(705.859, -964.651, 30.396),
     ],
   },
   'Epsilon': {
     visible: false,
     positions: [
-      new mp.Vector3(245.1564, 370.211, 104.7382)
+      new mp.Vector3(245.1564, 370.211, 104.7382),
     ],
   },
   'Franklin': {
     visible: false,
     positions: [
       new mp.Vector3(7.900, 548.100, 175.500),
-      new mp.Vector3(-14.128, -1445.483, 30.648)
+      new mp.Vector3(-14.128, -1445.483, 30.648),
     ],
   },
   'Michael': {
     visible: false,
     positions: [
-      new mp.Vector3(-852.400, 160.000, 65.600)
+      new mp.Vector3(-852.400, 160.000, 65.600),
     ],
   },
   'Trevor': {
     visible: false,
     positions: [
       new mp.Vector3(1985.700, 3812.200, 32.200),
-      new mp.Vector3(-1159.034, -1521.180, 10.633)
+      new mp.Vector3(-1159.034, -1521.180, 10.633),
     ],
   },
   'Legal Jobs': {
     visible: false,
     positions: [
-      new mp.Vector3(-268.363, -957.255, 31.223)
+      new mp.Vector3(-268.363, -957.255, 31.223),
     ],
   },
   'Ilegal Jobs': {
     visible: false,
     positions: [
-      new mp.Vector3(707.324, -966.986, 30.412)
+      new mp.Vector3(707.324, -966.986, 30.412),
     ],
-  }
+  },
 };
 
 module.exports = config;

@@ -54,10 +54,10 @@ mp.events.add('playerQuit', (exitType, reason) => {
  * @memberof client.player
  */
 mp.events.add('playerReady', () => {
-	for (let i = 0; i<225; i++){
-		let door = yarp.utils.doorInfo(i);
-		mp.game.object.doorControl(door.model, door.position.x, door.position.y, door.position.z, 0, 0.0, door.heading, 0.0);
-	}
+  for (let i = 0; i<225; i++) {
+    let door = yarp.utils.doorInfo(i);
+    mp.game.object.doorControl(door.model, door.position.x, door.position.y, door.position.z, 0, 0.0, door.heading, 0.0);
+  }
 });
 
 /**
@@ -94,5 +94,5 @@ mp.events.add('playerSpawn', () => {
  * @param {Vector3} targetEntity - Target entity.
  */
 mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
-	mp.events.callRemote('playerWeaponShot', JSON.stringify(targetPosition), JSON.stringify(targetEntity));
+  mp.events.callRemote('playerWeaponShot', JSON.stringify(targetPosition), JSON.stringify(targetEntity));
 });

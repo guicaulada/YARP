@@ -4,12 +4,12 @@
 * @namespace client.ui
 */
 
-let old_wallet = 0;
-let wallet_add = 0;
-let old_bank = 0;
-let bank_add = 0;
-let old_xp = 0;
-let xp_add = 0;
+let oldWallet = 0;
+let walletAdd = 0;
+let oldBank = 0;
+let bankAdd = 0;
+let oldXp = 0;
+let xpAdd = 0;
 let xpChange = false;
 let xpChangeDisplay = false;
 let walletChange = false;
@@ -45,19 +45,19 @@ mp.events.add('clearHelpText', () => {
  * @param {boolean} mph - Miles or kilometers (true or false).
  */
 function displaySpeedometer(mph) {
-	if(mp.players.local.isInAnyVehicle(false)) {
-		let velocity = mp.players.local.vehicle.getVelocity();
-		let speed = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
+  if (mp.players.local.isInAnyVehicle(false)) {
+    let velocity = mp.players.local.vehicle.getVelocity();
+    let speed = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
 
-		speed = (mph) ? speed * 2.236936 : speed * 3.6;
+    speed = (mph) ? speed * 2.236936 : speed * 3.6;
 
-  	mp.game.graphics.drawText(`Speed: ${speed.toFixed(0)}`, [0.5, 0.850], {
+    mp.game.graphics.drawText(`Speed: ${speed.toFixed(0)}`, [0.5, 0.850], {
       font: 7,
       color: [255, 255, 255, 185],
       scale: [0.5, 0.5],
-      outline: false
+      outline: false,
     });
-	}
+  }
 }
 
 /**
@@ -66,32 +66,48 @@ function displaySpeedometer(mph) {
  * @memberof client.ui
  */
 function displayWallet() {
-  let new_wallet = mp.players.local.getVariable('PLAYER_WALLET');
-  if (new_wallet != null) {
-    wallet_add += new_wallet - old_wallet;
-    old_wallet = new_wallet;
-    if (new_wallet < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(new_wallet)}`, [0.95, 0.1], { scale: [0.65, 0.65], color: [224, 50, 50, 255], font: 7 });
+  let newWallet = mp.players.local.getVariable('PLAYER_WALLET');
+  if (newWallet != null) {
+    walletAdd += newWallet - oldWallet;
+    oldWallet = newWallet;
+    if (newWallet < 0) {
+      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(newWallet)}`, [0.95, 0.1], {
+        scale: [0.65, 0.65],
+        color: [224, 50, 50, 255],
+        font: 7,
+      });
     } else {
-      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(new_wallet)}`, [0.95, 0.1], { scale: [0.65, 0.65], color: [114, 204, 114, 255], font: 7 });
+      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(newWallet)}`, [0.95, 0.1], {
+        scale: [0.65, 0.65],
+        color: [114, 204, 114, 255],
+        font: 7,
+      });
     }
   }
-  if (wallet_add != 0) {
+  if (walletAdd != 0) {
     walletChange = true;
   }
   if (walletChange) {
     if (!walletChangeDisplay) {
       walletChangeDisplay = true;
       setTimeout(() => {
-        wallet_add = 0;
+        walletAdd = 0;
         walletChange = false;
         walletChangeDisplay = false;
       }, 5000);
     }
-    if (wallet_add < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(wallet_add))}`, [0.95, 0.145], { scale: [0.65, 0.65], color: [224, 50, 50, 255], font: 7 });
-    } else if (wallet_add > 0) {
-      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(wallet_add)}`, [0.95, 0.145], { scale: [0.65, 0.65], color: [114, 204, 114, 255], font: 7 });
+    if (walletAdd < 0) {
+      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(walletAdd))}`, [0.95, 0.145], {
+        scale: [0.65, 0.65],
+        color: [224, 50, 50, 255],
+        font: 7,
+      });
+    } else if (walletAdd > 0) {
+      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(walletAdd)}`, [0.95, 0.145], {
+        scale: [0.65, 0.65],
+        color: [114, 204, 114, 255],
+        font: 7,
+      });
     }
   }
 }
@@ -102,32 +118,48 @@ function displayWallet() {
  * @memberof client.ui
  */
 function displayBank() {
-  let new_bank = mp.players.local.getVariable('PLAYER_BANK');
-  if (new_bank != null) {
-    bank_add += new_bank - old_bank;
-    old_bank = new_bank;
-    if (new_bank < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(new_bank)}`, [0.95, 0.190], { scale: [0.65, 0.65], color: [224, 50, 50, 255], font: 7 });
+  let newBank = mp.players.local.getVariable('PLAYER_BANK');
+  if (newBank != null) {
+    bankAdd += newBank - oldBank;
+    oldBank = newBank;
+    if (newBank < 0) {
+      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(newBank)}`, [0.95, 0.190], {
+        scale: [0.65, 0.65],
+        color: [224, 50, 50, 255],
+        font: 7,
+      });
     } else {
-      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(new_bank)}`, [0.95, 0.190], { scale: [0.65, 0.65], color: [114, 114, 204, 255], font: 7 });
+      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(newBank)}`, [0.95, 0.190], {
+        scale: [0.65, 0.65],
+        color: [114, 114, 204, 255],
+        font: 7,
+      });
     }
   }
-  if (bank_add != 0) {
+  if (bankAdd != 0) {
     bankChange = true;
   }
   if (bankChange) {
     if (!bankChangeDisplay) {
       bankChangeDisplay = true;
       setTimeout(() => {
-        bank_add = 0;
+        bankAdd = 0;
         bankChange = false;
         bankChangeDisplay = false;
       }, 5000);
     }
-    if (bank_add < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(bank_add))}`, [0.95, 0.235], { scale: [0.65, 0.65], color: [224, 50, 50, 255], font: 7 });
-    } else if (bank_add > 0) {
-      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(bank_add)}`, [0.95, 0.235], { scale: [0.65, 0.65], color: [114, 114, 204, 255], font: 7 });
+    if (bankAdd < 0) {
+      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(bankAdd))}`, [0.95, 0.235], {
+        scale: [0.65, 0.65],
+        color: [224, 50, 50, 255],
+        font: 7,
+      });
+    } else if (bankAdd > 0) {
+      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(bankAdd)}`, [0.95, 0.235], {
+        scale: [0.65, 0.65],
+        color: [114, 114, 204, 255],
+        font: 7,
+      });
     }
   }
 }
@@ -138,32 +170,48 @@ function displayBank() {
  * @memberof client.ui
  */
 function displayXp() {
-  let new_xp = mp.players.local.getVariable('PLAYER_XP');
-  if (new_xp != null) {
-    xp_add += new_xp - old_xp;
-    old_xp = new_xp;
-    if (new_xp < 0) {
-      mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(new_xp)} XP`, [0.95, 0.280], { scale: [0.65, 0.65], color: [224, 50, 50, 255], font: 7 });
+  let newXp = mp.players.local.getVariable('PLAYER_XP');
+  if (newXp != null) {
+    xpAdd += newXp - oldXp;
+    oldXp = newXp;
+    if (newXp < 0) {
+      mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(newXp)} XP`, [0.95, 0.280], {
+        scale: [0.65, 0.65],
+        color: [224, 50, 50, 255],
+        font: 7,
+      });
     } else {
-      mp.game.graphics.drawText(`${yarp.utils.numberWithCommas(new_xp)} XP`, [0.95, 0.280], { scale: [0.65, 0.65], color: [80, 80, 224, 255], font: 7 });
+      mp.game.graphics.drawText(`${yarp.utils.numberWithCommas(newXp)} XP`, [0.95, 0.280], {
+        scale: [0.65, 0.65],
+        color: [80, 80, 224, 255],
+        font: 7,
+      });
     }
   }
-  if (xp_add != 0) {
+  if (xpAdd != 0) {
     xpChange = true;
   }
   if (xpChange) {
     if (!xpChangeDisplay) {
       xpChangeDisplay = true;
       setTimeout(() => {
-        xp_add = 0;
+        xpAdd = 0;
         xpChange = false;
         xpChangeDisplay = false;
       }, 5000);
     }
-    if (xp_add < 0) {
-      mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(Math.abs(xp_add))} XP`, [0.95, 0.325], { scale: [0.65, 0.65], color: [224, 50, 50, 255], font: 7 });
-    } else if (xp_add > 0) {
-      mp.game.graphics.drawText(`+${yarp.utils.numberWithCommas(xp_add)} XP`, [0.95, 0.325], { scale: [0.65, 0.65], color: [80, 80, 224, 255], font: 7 });
+    if (xpAdd < 0) {
+      mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(Math.abs(xpAdd))} XP`, [0.95, 0.325], {
+        scale: [0.65, 0.65],
+        color: [224, 50, 50, 255],
+        font: 7,
+      });
+    } else if (xpAdd > 0) {
+      mp.game.graphics.drawText(`+${yarp.utils.numberWithCommas(xpAdd)} XP`, [0.95, 0.325], {
+        scale: [0.65, 0.65],
+        color: [80, 80, 224, 255],
+        font: 7,
+      });
     }
   }
 }

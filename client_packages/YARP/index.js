@@ -6,10 +6,10 @@
  * @namespace client
  */
 
-global.yarp = {}
+global.yarp = {};
 yarp.utils = require('./YARP/modules/utils.js');
 
-//Load RAGE.MP Events
+// Load RAGE.MP Events
 require('./YARP/events/ragemp/browser.js');
 require('./YARP/events/ragemp/checkpoint.js');
 require('./YARP/events/ragemp/colshape.js');
@@ -19,7 +19,7 @@ require('./YARP/events/ragemp/ui.js');
 require('./YARP/events/ragemp/vehicle.js');
 require('./YARP/events/ragemp/waypoint.js');
 
-//Load YARP Events
+// Load YARP Events
 require('./YARP/events/yarp/character.js');
 require('./YARP/events/yarp/command.js');
 require('./YARP/events/yarp/gamemode.js');

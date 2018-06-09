@@ -1,30 +1,41 @@
 'use strict';
 /**
- * Creates a Location.
- * @namespace yarp.Location
- * @class
+ * Implements a Location.
+ * @class yarp.Location
  * @extends yarp.GMObject
- * @param {string} id - Location id.
- * @param {object} [inventory={}] - Location inventory.
- * @param {string} [owner=null] - Location owner.
- * @param {number} [money=0] - Location radius.
- * @param {number} [price=0] - Location font.
  */
-
-class Location extends yarp.GMObject{
+class Location extends yarp.GMObject {
+  /**
+   *Creates an instance of Location.
+   * @param {*} id
+   * @param {*} [inventory={}]
+   * @param {boolean} [owner=false]
+   * @param {number} [money=0]
+   * @param {number} [price=0]
+   * @memberof yarp.Location
+   */
   constructor(
     id,
     inventory = {},
     owner = false,
     money = 0,
     price = 0
-  ){
+  ) {
     super();
-    if ((id) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        inventory: inventory,
+        owner: owner,
+        money: money,
+        price: price,
+      } = id;
+      return new yarp.Location(nid, inventory, owner, money, price);
+    } else if ((id) != null) {
       this._id = id;
       this._owner = owner;
       this._money = money;
-      this._price = price ;
+      this._price = price;
       this._inventory = inventory;
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -38,49 +49,23 @@ class Location extends yarp.GMObject{
    * @param {object} categories - Items indexed by categories and id.
    * @instance
    */
-  get sale(){
+  get sale() {
     let categories = {};
-    for (let id in this.inventory){
-      let item = yarp.items[id];
-      let inventory_item = this.inventory[id];
-      if (inventory_item.price) {
-        if (!categories[item.category]){
-          categories[item.category] = {}
+    for (let id in this.inventory) {
+      if (this.inventory.hasOwnProperty(id)) {
+        let item = yarp.items[id];
+        let inventoryItem = this.inventory[id];
+        if (inventoryItem.price) {
+          if (!categories[item.category]) {
+            categories[item.category] = {};
+          }
+          categories[item.category][item.id] = item.data;
+          categories[item.category][item.id].price = inventoryItem.price;
+          categories[item.category][item.id].amount = inventoryItem.amount;
         }
-        categories[item.category][item.id] = item.data;
-        categories[item.category][item.id].price = inventory_item.price;
-        categories[item.category][item.id].amount = inventory_item.amount;
       }
     }
     return categories;
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Location
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Location(obj._id,obj._inventory,obj._owner,obj._money,obj._price);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Location
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let locations = require(file);
-    for (let id in locations){
-      let location = locations[id]
-      if (!yarp.locations[id]){
-        new Location(id,location.inventory,location.owner,location.money,location.price);
-      }
-    }
   }
 }
 

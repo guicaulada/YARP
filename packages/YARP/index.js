@@ -11,6 +11,7 @@
  */
 global.yarp = {};
 global.chalk = require('chalk');
+yarp.cli = require('./modules/cli.js');
 
 /**
  * Loads the gamemode asynchronously.
@@ -41,7 +42,7 @@ global.chalk = require('chalk');
 
   // Rejoin players
   mp.players.forEach((player, i) => {
-    mp.events.call('playerJoin', player)
+    mp.events.call('playerJoin', player);
   });
 })();
 
@@ -50,14 +51,15 @@ const exit = async () => {
   await mp.players.broadcast(`!{red}The server is closing. Rejoin with F1.`);
   for (let player of mp.players.toArray()) {
     player.kick('The server is closing.');
-    console.log(`${player.name}(${player.socialClub}/${player.ip}) quit. Reason: The server is closing. (kicked)`)
+    console.log(`${player.name}(${player.socialClub}/${player.ip}) quit.`+'Reason: The server is closing. (kicked)');
   }
   process.exit();
-}
+};
 
 process.on('SIGHUP', exit);
-if (process.platform === 'win32')
-  process.on('SIGKILL', exit);
 process.on('SIGQUIT', exit);
 process.on('SIGTERM', exit);
 process.on('SIGINT', exit);
+if (process.platform === 'win32') {
+  process.on('SIGKILL', exit);
+}

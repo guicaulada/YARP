@@ -1,20 +1,22 @@
 'use strict';
 /**
- * Creates a Door.
- * @namespace yarp.Door
- * @class
+ * Implements a Door.
+ * @class yarp.Door
  * @extends yarp.GMObject
- * @param {string} id - Door id.
- * @param {string} model - Door model.
- * @param {Vector3} position - Door position.
- * @param {number} [range=0] - Door range.
- * @param {function} [enter=() => {}] - Door enter function.
- * @param {function} [leave=() => {}] - Door leave function.
- * @param {Array<string>} [permissions=[]] - Door permissions.
- * @param {Array<string>} [items=[]] - Door items.
  */
-
-class Door extends yarp.GMObject{
+class Door extends yarp.GMObject {
+  /**
+   *Creates an instance of Door.
+   * @param {*} id
+   * @param {*} model
+   * @param {*} position
+   * @param {number} [range=3]
+   * @param {*} [enter=() => {}]
+   * @param {*} [leave=() => {}]
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @memberof yarp.Door
+   */
   constructor(
     id,
     model,
@@ -24,9 +26,21 @@ class Door extends yarp.GMObject{
     leave = () => {},
     permissions = [],
     items = {}
-  ){
+  ) {
     super();
-    if ((id && model && position) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        model: model,
+        position: position,
+        range: range,
+        enter: enter,
+        leave: leave,
+        permissions: permissions,
+        items: items,
+      } = id;
+      return new yarp.Door(nid, model, position, range, enter, leave, permissions, items);
+    } else if ((id && model && position) != null) {
       this._id = id;
       this._model = model;
       this._position = position;
@@ -48,9 +62,9 @@ class Door extends yarp.GMObject{
    * @function open
    * @memberof yarp.Door
    */
-  open(){
+  open() {
     this.state = true;
-    mp.players.call('playerOpenDoor',[JSON.stringify(this)]);
+    mp.players.call('playerOpenDoor', [JSON.stringify(this)]);
   }
 
   /**
@@ -59,40 +73,9 @@ class Door extends yarp.GMObject{
    * @function close
    * @memberof yarp.Door
    */
-  close(){
+  close() {
     this.state = false;
-    mp.players.call('playerCloseDoor',[JSON.stringify(this)]);
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Door
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Door(obj._id,obj._model,obj._position,obj._range,obj._enter,obj._leave,obj._permissions,obj._items);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Door
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let doors = require(file);
-    for (let id in doors){
-      let door = doors[id];
-      for (let i=0; i < door.positions.length; i++){
-        let nid = id + ' ' + (i + 1);
-        if (!yarp.doors[nid]) {
-          new Door(nid,door.model,door.positions[i],door.range,door.enter,door.leave,door.permissions,door.items);
-        }
-      }
-    }
+    mp.players.call('playerCloseDoor', [JSON.stringify(this)]);
   }
 }
 

@@ -1,13 +1,14 @@
 'use strict';
 /**
  * Implements common functionalities across all YARP objects.
- * @namespace yarp.GMObject
  * @abstract
- * @class
- * @throws {TypeError} - Abstract class GMObject cannot be instantiated directly.
+ * @class yarp.GMObject
  */
-
-class GMObject{
+class GMObject {
+  /**
+   * @memberof yarp.GMObject
+   * @throws {TypeError} - Abstract class GMObject cannot be instantiated directly.
+   */
   constructor() {
     if (this.constructor === GMObject) {
       throw new TypeError('Abstract class GMObject cannot be instantiated directly.');
@@ -20,7 +21,7 @@ class GMObject{
    * @function save
    * @memberof yarp.GMObject
    */
-  save(){
+  save() {
     yarp.mng.save(this);
   }
 
@@ -30,7 +31,7 @@ class GMObject{
    * @function remove
    * @memberof yarp.GMObject
    */
-  remove(){
+  remove() {
     if (this.mp) this.mp.destroy();
     yarp.mng.remove(this);
   }
@@ -40,7 +41,7 @@ class GMObject{
    * @instance
    * @function data
    * @memberof yarp.GMObject
-   * @returns {object} - Persistent data object.
+   * @return {object} - Persistent data object.
    */
   get data() {
     let data = {};
@@ -53,17 +54,41 @@ class GMObject{
   }
 
   /**
+   * Get only persisten data without prefix
+   * @instance
+   * @function data
+   * @memberof yarp.GMObject
+   * @return {object} - Persistent data object.
+   */
+  get cleanData() {
+    let data = {};
+    for (let key of Object.keys(this)) {
+      if (key[0] == '_') {
+        data[key.slice(1, key.length)] = this[key];
+      }
+    }
+    return data;
+  }
+
+  /**
    * Evals the call parameter.
    * @instance
    * @function call
    * @memberof yarp.GMObject
    */
-  get call(){
+  get call() {
     return (eval(this._call));
   }
 
+  /**
+   * Set call function as string.
+   * @instance
+   * @function call
+   * @memberof yarp.GMObject
+   * @param {function} value - Call function.
+   */
   set call(value) {
-    this._call = value;
+    this._call = value.toString();
   }
 
   /**
@@ -73,11 +98,18 @@ class GMObject{
    * @memberof yarp.GMObject
    */
   get enter() {
-    return (eval(this._enter))
+    return (eval(this._enter));
   }
 
+  /**
+   * Set enter function as string.
+   * @instance
+   * @function enter
+   * @memberof yarp.GMObject
+   * @param {function} value - Enter function.
+   */
   set enter(value) {
-    this._enter = value;
+    this._enter = value.toString();
   }
 
   /**
@@ -87,11 +119,18 @@ class GMObject{
    * @memberof yarp.GMObject
    */
   get leave() {
-    return (eval(this._leave))
+    return (eval(this._leave));
   }
 
+  /**
+   * Set leave function as string.
+   * @instance
+   * @function leave
+   * @memberof yarp.GMObject
+   * @param {function} value - Leave function.
+   */
   set leave(value) {
-    this._leave = value;
+    this._leave = value.toString();
   }
 
   /**
@@ -100,18 +139,18 @@ class GMObject{
    * @function makeGetterSetter
    * @memberof yarp.GMObject
    */
-  makeGetterSetter(){
-    for (let key in this){
-      if (key[0] == '_'){
-        let gsp = key.slice(1, key.length)
-        if (!(gsp in this)){
+  makeGetterSetter() {
+    for (let key in this) {
+      if (key[0] == '_') {
+        let gsp = key.slice(1, key.length);
+        if (!(gsp in this)) {
           Object.defineProperty(this, gsp, {
-            get: function () {
+            get: () => {
               return this[key];
             },
-            set: function (value) {
+            set: (value) => {
               this[key] = value;
-            }
+            },
           });
         }
       }

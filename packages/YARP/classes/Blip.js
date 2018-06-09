@@ -1,23 +1,26 @@
 'use strict';
 /**
- * Creates a Blip.
- * @namespace yarp.Blip
- * @class
+ * Implements a Blip.
+ * @class yarp.Blip
  * @extends yarp.GMObject
- * @param {string} id - Blip id.
- * @param {Vector3} position - Blip position.
- * @param {string} [name='Blip'] - Blip name.
- * @param {number} [sprite=1] - Blip sprite.
- * @param {Float} [scale=1] - Blip scale.
- * @param {number} [color=4] - Blip color.
- * @param {number}  [alpha=255] - Blip alpha.
- * @param {Float} [drawDistance=100] - Blip draw distance.
- * @param {boolean} [fade=true] - Blip fade.
- * @param {Vector3} [rotation=new mp.Vector3(0,0,0)] - Blip rotation.
- * @param {number} [dimension=0] - Blip dimension.
  */
-
-class Blip extends yarp.GMObject{
+class Blip extends yarp.GMObject {
+  /**
+   *Creates an instance of Blip.
+   * @param {*} id
+   * @param {*} position
+   * @param {string} [name='Blip']
+   * @param {number} [sprite=1]
+   * @param {number} [scale=1]
+   * @param {number} [color=4]
+   * @param {number} [alpha=255]
+   * @param {number} [drawDistance=100]
+   * @param {boolean} [fade=true]
+   * @param {*} [rotation=new mp.Vector3(0, 0, 0)]
+   * @param {number} [dimension=0]
+   * @param {boolean} [visible=true]
+   * @memberof yarp.Blip
+   */
   constructor(
     id,
     position,
@@ -31,9 +34,25 @@ class Blip extends yarp.GMObject{
     rotation = new mp.Vector3(0, 0, 0),
     dimension = 0,
     visible = true
-  ){
+  ) {
     super();
-    if ((id && position) != null) {
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        position: position,
+        name: name,
+        sprite: sprite,
+        scale: scale,
+        color: color,
+        alpha: alpha,
+        drawDistance: drawDistance,
+        fade: fade,
+        rotation: rotation,
+        dimension: dimension,
+        visible: visible,
+      } = id;
+      return new yarp.Blip(nid, position, name, sprite, scale, color, alpha, drawDistance, fade, rotation, dimension, visible);
+    } else if ((id && position) != null) {
       this._id = id;
       this._name = name;
       this._sprite = sprite;
@@ -56,41 +75,10 @@ class Blip extends yarp.GMObject{
         drawDistance: this._drawDistance,
         shortRange: this._fade,
         rotation: this._rotation,
-        dimension: this._dimension
+        dimension: this._dimension,
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Blip
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Blip(obj._id,obj._position,obj._name,obj._sprite,obj._scale,obj._color,obj._alpha,obj._drawDistance,obj._fade,obj._rotation,obj._dimension,obj._visible);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Blip
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let blips = require(file);
-    for (let id in blips){
-      let blip = blips[id];
-      for (let i=0; i < blip.positions.length; i++){
-        let nid = id + ' ' + (i + 1);
-        if (!yarp.blips[nid]){
-          new Blip(nid,blip.positions[i],id,blip.sprite,blip.scale,blip.color,blip.alpha,blip.drawDistance,blip.fade,blip.rotation,blip.dimension)
-        }
-      }
     }
   }
 }

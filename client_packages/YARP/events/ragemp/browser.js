@@ -6,8 +6,8 @@
 
 // Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
 
-var browsers = {};
-var parameters = {};
+let browsers = {};
+let parameters = {};
 
 /**
 * Creates a browser window.
@@ -17,12 +17,12 @@ var parameters = {};
 * @param {object} params - Function and arguments to execute.
 * @fires destroyBrowser
 */
-mp.events.add('createBrowser', (id,params) => {
-	if(browsers[id] != null) {
-		mp.events.call('destroyBrowser', id);
-	}
-	parameters[id] = params.slice(1, params.length);
-	browsers[id] = mp.browsers.new(params[0]);
+mp.events.add('createBrowser', (id, params) => {
+  if (browsers[id] != null) {
+    mp.events.call('destroyBrowser', id);
+  }
+  parameters[id] = params.slice(1, params.length);
+  browsers[id] = mp.browsers.new(params[0]);
 });
 
 /**
@@ -33,16 +33,16 @@ mp.events.add('createBrowser', (id,params) => {
 * @fires browserExecute
 */
 mp.events.add('browserDomReady', (browser) => {
-	for (id in browsers){
-		if(browsers[id] === browser) {
-			mp.gui.chat.activate(false);
-			mp.gui.chat.show(false);
-			mp.gui.cursor.visible = true;
-			if(parameters[id].length > 0) {
-				mp.events.call('browserExecute', id, parameters[id]);
-			}
-		}
-	}
+  for (id in browsers) {
+    if (browsers[id] === browser) {
+      mp.gui.chat.activate(false);
+      mp.gui.chat.show(false);
+      mp.gui.cursor.visible = true;
+      if (parameters[id].length > 0) {
+        mp.events.call('browserExecute', id, parameters[id]);
+      }
+    }
+  }
 });
 
 /**
@@ -71,15 +71,15 @@ mp.events.add('browserLoadingFailed', (browser) => {
 * @param {object} params - Function and arguments to execute.
 */
 mp.events.add('browserExecute', (id, params) => {
-	var input = '';
-	for(var i = 1; i < params.length; i++) {
-		if(input.length > 0) {
-			input += ', `' + params[i] + '`';
-		} else {
-			input = '`' + params[i] + '`';
-		}
-	}
-	browsers[id].execute(`${params[0]}(${input});`);
+  let input = '';
+  for (let i = 1; i < params.length; i++) {
+    if (input.length > 0) {
+      input += ', `' + params[i] + '`';
+    } else {
+      input = '`' + params[i] + '`';
+    }
+  }
+  browsers[id].execute(`${params[0]}(${input});`);
 });
 
 /**
@@ -89,13 +89,13 @@ mp.events.add('browserExecute', (id, params) => {
 * @param {object} id - The browser id.
 */
 mp.events.add('destroyBrowser', (id) => {
-	if(browsers[id] != null){
-		mp.gui.cursor.visible = false;
-		mp.gui.chat.activate(true);
-		mp.gui.chat.show(true);
-		browsers[id].destroy();
-		browsers[id] = null;
-	}
+  if (browsers[id] != null) {
+    mp.gui.cursor.visible = false;
+    mp.gui.chat.activate(true);
+    mp.gui.chat.show(true);
+    browsers[id].destroy();
+    browsers[id] = null;
+  }
 });
 
 /**
@@ -104,7 +104,7 @@ mp.events.add('destroyBrowser', (id) => {
 * @memberof client.browser
 */
 mp.events.add('toggleChat', () => {
-	mp.gui.cursor.visible = !mp.gui.cursor.visible;
-	mp.gui.chat.activate(!mp.gui.cursor.visible);
-	mp.gui.chat.show(!mp.gui.cursor.visible);
+  mp.gui.cursor.visible = !mp.gui.cursor.visible;
+  mp.gui.chat.activate(!mp.gui.cursor.visible);
+  mp.gui.chat.show(!mp.gui.cursor.visible);
 });

@@ -26,7 +26,7 @@ module.exports = async () => {
     yarp.users = new yarp.Pool(yarp.User);
     yarp.vehicles = new yarp.Pool(yarp.Vehicle);
     yarp.weapons = new yarp.Pool(yarp.Weapon);
-  } catch(err) {
+  } catch (err) {
     console.log(chalk.redBright('[YARP] ')+'PoolError: '+err.message+'\n'+err.stack);
   }
 };

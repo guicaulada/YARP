@@ -1,48 +1,29 @@
 'use strict';
 /**
- * Creates a Variable.
- * @namespace yarp.Variable
- * @class
+ * Implements a Variable.
+ * @class yarp.Variable
  * @extends yarp.GMObject
- * @param {string} id - Variable id.
- * @param value - Variable value.
  */
-
-class Variable extends yarp.GMObject{
-  constructor(id,value){
+class Variable extends yarp.GMObject {
+  /**
+   *Creates an instance of Variable.
+   * @param {*} id
+   * @param {*} value
+   * @memberof yarp.Variable
+   */
+  constructor(id, value) {
     super();
-    if ((id && value) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        value: value,
+      } = id;
+      return new yarp.Variable(nid, value);
+    } else if ((id && value) != null) {
       this._id = id;
       this._value = value;
       yarp.mng.register(this);
       this.makeGetterSetter();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Variable
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Variable(obj._id,obj._value);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Variable
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let variables = require(file);
-    for (let id in variables){
-      if (!yarp.variables[id]) {
-        new Variable(id,variables[id]);
-      }
     }
   }
 }

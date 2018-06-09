@@ -1,26 +1,28 @@
 'use strict';
 /**
- * Creates a Label.
- * @namespace yarp.Label
- * @class
+ * Implements a Label.
+ * @class yarp.Label
  * @extends yarp.GMObject
- * @param {string} id - Label id.
- * @param {Vector3} position - Label position.
- * @param {string} [text=''] - Label text.
- * @param {number} [range=3] - Label range.
- * @param {Array<number>} [color=[251, 204, 51, 255]] - Label color.
- * @param {number} [drawDistance=10] - Label radius.
- * @param {number} [font=10] - Label font.
- * @param {boolean} [los=true] - Label line of sight.
- * @param {number}  [dimension=0] - Label dimension.
- * @param {boolean} [visible=true] - Label visible.
- * @param {function} [enter=() => {}] - Label enter function.
- * @param {function} [leave=() => {}] - Label leave function.
- * @param {Array<string>} [permissions=[]] - Label permissions.
- * @param {Array<string>} [items=[]] - Label items.
  */
-
-class Label extends yarp.GMObject{
+class Label extends yarp.GMObject {
+  /**
+   *Creates an instance of Label.
+   * @param {*} id
+   * @param {*} position
+   * @param {string} [text='']
+   * @param {*} [color=[51, 204, 51, 255]]
+   * @param {number} [drawDistance=10]
+   * @param {number} [font=2]
+   * @param {boolean} [los=true]
+   * @param {number} [dimension=0]
+   * @param {boolean} [visible=true]
+   * @param {number} [range=3]
+   * @param {*} [enter=() => {}]
+   * @param {*} [leave=() => {}]
+   * @param {*} [permissions=[]]
+   * @param {*} [items={}]
+   * @memberof yarp.Label
+   */
   constructor(
     id,
     position,
@@ -36,9 +38,27 @@ class Label extends yarp.GMObject{
     leave = () => {},
     permissions = [],
     items = {}
-  ){
+  ) {
     super();
-    if ((id && position) != null){
+    if (typeof id === 'object') {
+      let {
+        id: nid,
+        position: position,
+        text: text,
+        color: color,
+        drawDistance: drawDistance,
+        font: font,
+        los: los,
+        dimension: dimension,
+        visible: visible,
+        range: range,
+        enter: enter,
+        leave: leave,
+        permissions: permissions,
+        items: items,
+      } = id;
+      return new yarp.Label(nid, position, text, color, drawDistance, font, los, dimension, visible, range, enter, leave, permissions, items);
+    } else if ((id && position) != null) {
       this._id = id;
       this._text = text;
       this._position = position;
@@ -47,7 +67,7 @@ class Label extends yarp.GMObject{
       this._drawDistance = drawDistance;
       this._font = font;
       this._los = los;
-      this._dimension = dimension ;
+      this._dimension = dimension;
       this._visible = visible;
       this._enter = enter.toString();
       this._leave = leave.toString();
@@ -61,41 +81,10 @@ class Label extends yarp.GMObject{
         font: this._font,
         drawDistance: this._drawDistance,
         color: this._color,
-        dimension: this._dimension
+        dimension: this._dimension,
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
-    }
-  }
-
-  /**
-   * Load from object.
-   * @static
-   * @function load
-   * @memberof yarp.Label
-   * @param {object} object - Class object.
-   */
-  static load(obj){
-    return new Label(obj._id,obj._position,obj._text,obj._color,obj._drawDistance,obj._font,obj._los,obj._dimension,obj._visible,obj._range,obj._enter,obj._leave,obj._permissions,obj._items);
-  }
-
-  /**
-   * Load from config.
-   * @static
-   * @function config
-   * @memberof yarp.Label
-   * @param {string} file - Config file path.
-   */
-  static config(file){
-    let labels = require(file);
-    for (let id in labels){
-      let label = labels[id];
-      for (let i=0; i < label.positions.length; i++){
-        let nid = id + ' ' + (i + 1);
-        if (!yarp.labels[nid]) {
-          new Label(nid,label.positions[i],label.text,label.color,label.drawDistance,label.font,label.los,label.dimension,label.visible,label.range,label.enter,label.leave,label.permissions,label.items)
-        }
-      }
     }
   }
 }

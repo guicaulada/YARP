@@ -1,16 +1,16 @@
 # How to contribute
-We welcome contributions from the community and are pleased to have them.  
+We welcome contributions from the community and are pleased to have them.
 Please follow this guide when logging issues or making code changes.
 
 ## Logging Issues
-All issues should be created using the [new issue form](https://github.com/Sighmir/YARP/issues/new).  
+All issues should be created using the [new issue form](https://github.com/Sighmir/YARP/issues/new).
 Clearly describe the issue following the template provided.
 
 ## Coding Rules
 Code changes are welcome and should follow the guidelines below.
 
 * Fork the repository on GitHub.
-* Fix the issue ensuring that your code follows the [style guide](https://github.com/Sighmir/YARP/blob/master/STYLE.md).
+* Fix the issue ensuring that your code follows the [Google JavaScrpt Style Guide](https://google.github.io/styleguide/jsguide.html).
 * Test your new code ensuring that it doesn't cause any problems.
 * Document all public API methods with [jsdoc](http://usejsdoc.org/). To see how we document our APIs, please check out the existing source code.
 * Make your [pull request](https://github.com/Sighmir/YARP/pulls/new) to the [master branch](https://github.com/Sighmir/YARP/tree/master).
@@ -21,7 +21,7 @@ Code changes are welcome and should follow the guidelines below.
 We have very precise rules over how our git commit messages can be formatted.  This leads to **more readable messages** that are easy to follow when looking through the **project history**.  But also, we plan to use the git commit messages to **generate a change log**.
 
 ### Commit Message Format
-Each commit message consists of a **header**, a **body** and a **footer**.  
+Each commit message consists of a **header**, a **body** and a **footer**.
 The header has a special format that includes a **type**, a **scope** and a **subject**:
 
 ```
