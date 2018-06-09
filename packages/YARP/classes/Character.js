@@ -160,8 +160,8 @@ class Character extends yarp.GMObject {
    */
   get balance() {
     let balance = [];
-    for (transaction of yarp.transactions.toArray()) {
-      if ((transaction.source || transaction.target) == this.id) {
+    for (let transaction of yarp.transactions.toArray()) {
+      if (transaction.source == this.id || transaction.target == this.id) {
         balance.push(transaction);
       }
     }
@@ -294,7 +294,7 @@ class Character extends yarp.GMObject {
    */
   tryBankPayment(value) {
     if (this.bank-value >= 0) {
-      let transaction = new yarp.Transaction('Payment', value, this.name);
+      let transaction = new yarp.Transaction('Payment', value, this.id);
       transaction.save();
       this.bank -= value;
       this.player.setVariable('PLAYER_BANK', this.bank);
@@ -334,7 +334,7 @@ class Character extends yarp.GMObject {
    */
   tryDeposit(value) {
     if (this.wallet-value >= 0) {
-      let transaction = new yarp.Transaction('Deposit', value, this.name);
+      let transaction = new yarp.Transaction('Deposit', value, this.id);
       this.wallet -= value;
       this.bank += value;
       transaction.save();
@@ -355,7 +355,7 @@ class Character extends yarp.GMObject {
    */
   tryWithdraw(value) {
     if (this.bank-value >= 0) {
-      let transaction = new yarp.Transaction('Withdraw', value, this.name);
+      let transaction = new yarp.Transaction('Withdraw', value, this.id);
       this.wallet += value;
       this.bank -= value;
       transaction.save();
@@ -377,12 +377,17 @@ class Character extends yarp.GMObject {
    */
   tryTransfer(target, value) {
     if (this.bank-value >= 0) {
-      let transaction = new yarp.Transaction('Transfer', value, this.name);
+      let transaction = new yarp.Transaction('Transfer', value, this.id, target.id);
       this.bank = this.bank-value;
       target.bank = target.bank+value;
+      this.save();
+      target.save();
       transaction.save();
       this.player.setVariable('PLAYER_BANK', this.bank);
-      target.player.setVariable('PLAYER_BANK', target.bank);
+      let targetPlayer = target.player;
+      if (targetPlayer) {
+        targetPlayer.setVariable('PLAYER_BANK', target.bank);
+      }
       return true;
     }
     return false;

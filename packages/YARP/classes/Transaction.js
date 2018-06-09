@@ -12,27 +12,30 @@ class Transaction extends yarp.GMObject {
    * @param {*} source
    * @param {*} [target=source]
    * @param {*} [date=new Date()]
-   * @memberof yarp.Transaction
+   * @param {*} id
+   * @memberof Transaction
    */
   constructor(
     type,
     value,
     source,
     target = source,
-    date = new Date()
+    date = new Date(),
+    id = yarp.transactions.length,
   ) {
     super();
-    if (typeof id === 'object') {
+    if (typeof type === 'object') {
       let {
-        type: type,
+        type: ntype,
         value: value,
         source: source,
         target: target,
         date: date,
-      } = id;
-      return new yarp.Transaction(type, value, source, target, date);
+        id: id,
+      } = type;
+      return new yarp.Transaction(ntype, value, source, target, new Date(date), id);
     } else if ((type && value && source) != null) {
-      this._id = yarp.transactions.length;
+      this._id = id;
       this._type = type;
       this._value = value;
       this._source = source;

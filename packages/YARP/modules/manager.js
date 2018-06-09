@@ -15,7 +15,7 @@ let mng = {};
  */
 mng.register = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
-  if (object._id) {
+  if (object._id != null) {
     if (!yarp[collection]) yarp[collection] = {};
     yarp[collection][object._id] = object;
   } else {
@@ -32,7 +32,7 @@ mng.register = async (object) => {
  */
 mng.save = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
-  if (object._id) {
+  if (object._id != null) {
     yarp.db.save(collection, object.data);
   } else {
     console.log(chalk.redBright('[YARP] ') + 'ManagerError: object could not be saved in ' + collection + ', missing id.\n' + JSON.stringify(object));
@@ -48,7 +48,7 @@ mng.save = async (object) => {
  */
 mng.remove = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
-  if (object._id) {
+  if (object._id != null) {
     yarp.db.remove(collection, {_id: object._id});
     delete yarp[collection][object._id];
   } else {

@@ -10,11 +10,11 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js'></script>
     </head>
     <body class='background col-lg-12'>
-        <div class='col-lg-6 center-block panel vertical-center'>
-            <div class='panel-heading col-lg-12'><img src='../img/bank/bank-logo.png' /></div>
+        <div class='col-lg-6 center-block card vertical-center'>
+            <div class='card-heading col-lg-12'><img src='../img/bank/bank-logo.png' /></div>
 
             <!-- Menú principal del ATM -->
-            <div id='bank-menu' class='panel-body'>
+            <div id='bank-menu' class='card-body'>
 
                 <!-- Opciones de depósito y retiro -->
                 <div class='row'>
@@ -46,39 +46,39 @@
             </div>
 
             <!-- Opción de retirar dinero -->
-            <div id='bank-withdraw' class='panel-body hidden'>
+            <div id='bank-withdraw' class='card-body d-none'>
                 <div class='col-lg-5 col-lg-offset-2'><h1>Withdraw money</h1></div>
                 <div class='col-lg-5 col-lg-offset-2'><label>Available balance: </label><span id='bank-withdraw-balance'></span></div>
                 <div class='col-lg-5 col-lg-offset-2'><input id='bank-withdraw-amount' type='number' value='0' min='0'/></div>
-                <div class='col-lg-5 col-lg-offset-2'><span id='bank-withdraw-error' class='hidden alert alert-danger'></span></div>
+                <div class='col-lg-5 col-lg-offset-2'><span id='bank-withdraw-error' class='d-none alert alert-danger'></span></div>
             </div>
 
             <!-- Opción de depositar dinero -->
-            <div id='bank-deposit' class='panel-body hidden'>
+            <div id='bank-deposit' class='card-body d-none'>
                 <div class='col-lg-5 col-lg-offset-2'><h1>Deposit money</h1></div>
                 <div class='col-lg-5 col-lg-offset-2'><label>Available balance: </label><span id='bank-deposit-balance'></span></div>
                 <div class='col-lg-5 col-lg-offset-2'><input id='bank-deposit-amount' type='number' value='0' min='0'/></div>
-                <div class='col-lg-5 col-lg-offset-2'><span id='bank-deposit-error' class='hidden alert alert-danger'></span></div>
+                <div class='col-lg-5 col-lg-offset-2'><span id='bank-deposit-error' class='d-none alert alert-danger'></span></div>
             </div>
 
             <!-- Opción de transferir dinero -->
-            <div id='bank-transfer' class='panel-body hidden'>
+            <div id='bank-transfer' class='card-body d-none'>
                 <div class='col-lg-5 col-lg-offset-2'><h1>Transfer money</h1></div>
                 <div class='col-lg-5 col-lg-offset-2'><label>Available balance: </label><span id='bank-transfer-balance'></span></div>
                 <div class='col-lg-5 col-lg-offset-2'><input id='bank-transfer-person' type='text' placeholder='Receptor'/></div>
                 <div class='col-lg-5 col-lg-offset-2'><input id='bank-transfer-amount' type='number' value='0' min='0'/></div>
-                <div class='col-lg-5 col-lg-offset-2'><span id='bank-transfer-error' class='hidden alert alert-danger'></span></div>
+                <div class='col-lg-5 col-lg-offset-2'><span id='bank-transfer-error' class='d-none alert alert-danger'></span></div>
             </div>
 
             <!-- Opción de obtener el balance de la cuenta -->
-            <div id='bank-balance' class='panel-body hidden'>
+            <div id='bank-balance' class='card-body d-none'>
                 <div class='col-lg-8 col-lg-offset-2'>Account Balance</div>
                 <table class='col-lg-8 col-lg-offset-2'>
                     <thead class='thead-default'>
                         <tr>
-                            <th>Day</th>
+                            <th>Date</th>
                             <th>Operation</th>
-                            <th>Account of origin or destination</th>
+                            <th>Origin/Destination</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
@@ -86,8 +86,8 @@
                 </table>
             </div>
 
-            <div class='btn-group panel-footer col-lg-12' role='group'>
-                <button id='bank-accept' type='button' class='btn btn-secondary hidden' onclick='bankAccept();'>Accept</button>
+            <div class='btn-group card-footer col-lg-12' role='group'>
+                <button id='bank-accept' type='button' class='btn btn-secondary d-none' onclick='bankAccept();'>Accept</button>
                 <button id='bank-exit' type='button' class='btn btn-secondary' onclick='bankBack();'>Exit</button>
             </div>
 

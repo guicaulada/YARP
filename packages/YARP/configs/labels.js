@@ -127,10 +127,11 @@ let config = {
   'Bank': {
     enter: (player) => {
       player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to use the bank.']);
-      yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/statics/html/bankMenu.html']]]);
+      yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/bankMenu.html']]]);
     },
     leave: (player) => {
       player.call('clearHelpText');
+      player.call('destroyBrowser', ['menu']);
       yarp.hotkeys['Event'].unbind(player);
     },
     visible: false,

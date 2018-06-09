@@ -89,7 +89,7 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemId, amount) => {
  */
 mp.events.add('executeBankOperation', (player, operation, amount, target) => {
   let character = yarp.characters[player.name];
-  if (chartacter) {
+  if (character) {
     switch (operation) {
       case 1:
       if (character.tryWithdraw(Number(amount))) {
@@ -110,12 +110,17 @@ mp.events.add('executeBankOperation', (player, operation, amount, target) => {
       }
       break;
       case 3:
-      if (character.tryTransfer(target, Number(amount))) {
-        player.call('browserExecute', ['menu', ['bankBack']]);
-        player.notify(`Transferred ~r~$${amount}`);
+      if (yarp.characters[target]) {
+        if (character.tryTransfer(yarp.characters[target], Number(amount))) {
+          player.call('browserExecute', ['menu', ['bankBack']]);
+          player.notify(`Transferred ~r~$${amount}`);
+        } else {
+          player.notify('~r~Not enough money in your bank account.');
+          player.call('browserExecute', ['menu', ['showOperationError', 'Not enough money.']]);
+        }
       } else {
-        player.notify('~r~Not enough money in your bank account.');
-        player.call('browserExecute', ['menu', ['showOperationError', 'Not enough money.']]);
+        player.notify('~r~No bank account linked to that name.');
+        player.call('browserExecute', ['menu', ['showOperationError', 'Account not found.']]);
       }
       break;
     }

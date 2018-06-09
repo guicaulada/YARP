@@ -58,7 +58,7 @@ mp.events.add('callInventoryOption', (itemid, option) => {
  */
 mp.events.add('updateBankAccountMoney', () => {
   let money = mp.players.local.getVariable('PLAYER_BANK');
-  mp.events.call('browserExecute', 'bank', ['updateAccountMoney', money]);
+  mp.events.call('browserExecute', 'menu', ['updateAccountMoney', money]);
 });
 
 /**
@@ -76,10 +76,10 @@ mp.events.add('executeBankOperation', (operation, amount, target) => {
 
 /**
  * Loads the bank balance from the transactions pool.
- * @event loadPlayerBankBalance
+ * @event loadBankBalance
  * @memberof client.menu
- * @fires loadPlayerBankBalance
+ * @fires loadBankBalance
  */
-mp.events.add('loadPlayerBankBalance', () => {
-  mp.events.callRemote('loadPlayerBankBalance');
+mp.events.add('loadBankBalance', () => {
+  mp.events.callRemote('loadBankBalance');
 });

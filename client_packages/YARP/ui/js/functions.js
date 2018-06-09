@@ -52,27 +52,27 @@ function capitalizeFirstLetter(string) {
 
 function withdrawMoney() {
     bankSelectedOption = 1;
-    $('#bank-menu').addClass('hidden');
-    $('#bank-withdraw').removeClass('hidden');
-    $('#bank-accept').removeClass('hidden');
+    $('#bank-menu').addClass('d-none');
+    $('#bank-withdraw').removeClass('d-none');
+    $('#bank-accept').removeClass('d-none');
     $('#bank-exit').html('Cancel');
 	mp.trigger('updateBankAccountMoney');
 }
 
 function depositMoney() {
     bankSelectedOption = 2;
-    $('#bank-menu').addClass('hidden');
-    $('#bank-deposit').removeClass('hidden');
-    $('#bank-accept').removeClass('hidden');
+    $('#bank-menu').addClass('d-none');
+    $('#bank-deposit').removeClass('d-none');
+    $('#bank-accept').removeClass('d-none');
     $('#bank-exit').html('Cancel');
 	mp.trigger('updateBankAccountMoney');
 }
 
 function transferMoney() {
     bankSelectedOption = 3;
-    $('#bank-menu').addClass('hidden');
-    $('#bank-transfer').removeClass('hidden');
-    $('#bank-accept').removeClass('hidden');
+    $('#bank-menu').addClass('d-none');
+    $('#bank-transfer').removeClass('d-none');
+    $('#bank-accept').removeClass('d-none');
     $('#bank-exit').html('Cancel');
 	mp.trigger('updateBankAccountMoney');
 }
@@ -94,10 +94,10 @@ function updateAccountMoney(money) {
 
 function showBalance() {
     bankSelectedOption = 4;
-    $('#bank-menu').addClass('hidden');
-    $('#bank-balance').removeClass('hidden');
+    $('#bank-menu').addClass('d-none');
+    $('#bank-balance').removeClass('d-none');
     $('#bank-exit').html('Cancel');
-	mp.trigger('loadPlayerBankBalance');
+	mp.trigger('loadBankBalance');
 }
 
 function showBankOperations(bankOperationsJson, playerName) {
@@ -115,26 +115,26 @@ function showBankOperations(bankOperationsJson, playerName) {
 		var amountColumn = document.createElement('TD');
 
 		// Añadimos los datos del array
-		dateColumn.innerHTML = bankOperationsArray[i].date;
-		operationColumn.innerHTML = bankOperationsArray[i].type;
-		switch(bankOperationsArray[i].type) {
+		dateColumn.innerHTML = bankOperationsArray[i]._date;
+		operationColumn.innerHTML = bankOperationsArray[i]._type;
+		switch(bankOperationsArray[i]._type) {
 			case 'Transfer':
-				if(bankOperationsArray[i].source === playerName) {
-					amountColumn.innerHTML = '-' + bankOperationsArray[i].amount + '$';
-					involvedColumn.innerHTML = bankOperationsArray[i].target;
+				if(bankOperationsArray[i]._source === playerName) {
+					amountColumn.innerHTML = '-' + bankOperationsArray[i]._value + '$';
+					involvedColumn.innerHTML = bankOperationsArray[i]._target;
 				} else {
-					amountColumn.innerHTML = bankOperationsArray[i].amount + '$';
-					involvedColumn.innerHTML = bankOperationsArray[i].source;
+					amountColumn.innerHTML = bankOperationsArray[i]._value + '$';
+					involvedColumn.innerHTML = bankOperationsArray[i]._source;
 				}
 				break;
 			case 'Withdraw':
-				amountColumn.innerHTML = '-' + bankOperationsArray[i].amount + '$';
+				amountColumn.innerHTML = '-' + bankOperationsArray[i]._value + '$';
 				break;
 			case 'Payment':
-				amountColumn.innerHTML = '-' + bankOperationsArray[i].amount + '$';
+				amountColumn.innerHTML = '-' + bankOperationsArray[i]._value + '$';
 				break;
 			default:
-				amountColumn.innerHTML = bankOperationsArray[i].amount + '$';
+				amountColumn.innerHTML = bankOperationsArray[i]._value + '$';
 				break;
 		}
 
@@ -153,15 +153,15 @@ function showOperationError(message) {
     switch (bankSelectedOption) {
         case 1:
             $('#bank-withdraw-error').html(message);
-            $('#bank-withdraw-error').removeClass('hidden');
+            $('#bank-withdraw-error').removeClass('d-none');
             break;
         case 2:
             $('#bank-deposit-error').html(message);
-            $('#bank-deposit-error').removeClass('hidden');
+            $('#bank-deposit-error').removeClass('d-none');
             break;
         case 3:
             $('#bank-transfer-error').html(message);
-            $('#bank-transfer-error').removeClass('hidden');
+            $('#bank-transfer-error').removeClass('d-none');
             break;
     }
 }
@@ -170,32 +170,32 @@ function bankBack() {
     switch (bankSelectedOption) {
         case 1:
             $('#bank-withdraw-amount').val('0');
-            $('#bank-withdraw').addClass('hidden');
-            $('#bank-withdraw-error').addClass('hidden');
-            $('#bank-menu').removeClass('hidden');
+            $('#bank-withdraw').addClass('d-none');
+            $('#bank-withdraw-error').addClass('d-none');
+            $('#bank-menu').removeClass('d-none');
             break;
         case 2:
             $('#bank-deposit-amount').val('0');
-            $('#bank-deposit').addClass('hidden');
-            $('#bank-deposit-error').addClass('hidden');
-            $('#bank-menu').removeClass('hidden');
+            $('#bank-deposit').addClass('d-none');
+            $('#bank-deposit-error').addClass('d-none');
+            $('#bank-menu').removeClass('d-none');
             break;
         case 3:
             $('#bank-transfer-person').val('');
             $('#bank-transfer-amount').val('0');
-            $('#bank-transfer').addClass('hidden');
-            $('#bank-transfer-error').addClass('hidden');
-            $('#bank-menu').removeClass('hidden');
+            $('#bank-transfer').addClass('d-none');
+            $('#bank-transfer-error').addClass('d-none');
+            $('#bank-menu').removeClass('d-none');
             break;
         case 4:
-            $('#bank-balance').addClass('hidden');
-            $('#bank-menu').removeClass('hidden');
+            $('#bank-balance').addClass('d-none');
+            $('#bank-menu').removeClass('d-none');
             break;
         default:
-            mp.trigger('destroyBrowser', 'bank');
+            mp.trigger('destroyBrowser', 'menu');
             break;
     }
-    $('#bank-accept').addClass('hidden');
+    $('#bank-accept').addClass('d-none');
     $('#bank-exit').html('Exit');
     bankSelectedOption = 0;
 }
@@ -203,7 +203,7 @@ function bankBack() {
 function catalogBack() {
     switch (catalogSelectedOption) {
         case 1:
-            $('#vehicle-container').removeClass('hidden');
+            $('#vehicle-container').removeClass('d-none');
             break;
     }
     mp.trigger('closeCatalog');
@@ -238,10 +238,10 @@ function populateVehicleList(dealership, vehicleJSON) {
     // Mostramos el menú de filtros en función del concesionario
     switch (dealership) {
         case 0:
-            $('#vehicle-list-cars').removeClass('hidden');
+            $('#vehicle-list-cars').removeClass('d-none');
             break;
         case 1:
-            $('#vehicle-list-motorbikes').removeClass('hidden');
+            $('#vehicle-list-motorbikes').removeClass('d-none');
             break;
     }
 
@@ -282,9 +282,9 @@ $('input[type=\'checkbox\']').change(function () {
 
     for (var i = 0; i < vehicleArray.length; i++) {
         if (vehicleTypes.length == 0 || vehicleTypes.indexOf(vehicleArray[i].type) > -1) {
-            $('#vehicle-container').children().eq(i).removeClass('hidden');
+            $('#vehicle-container').children().eq(i).removeClass('d-none');
         } else {
-            $('#vehicle-container').children().eq(i).addClass('hidden');
+            $('#vehicle-container').children().eq(i).addClass('d-none');
         }
     }
 });
@@ -303,7 +303,7 @@ function checkVehiclePayable() {
 
 function showVehiclePurchaseButton() {
 	// Activamos el botón de compra
-	$('#catalog-purchase').removeClass('hidden');
+	$('#catalog-purchase').removeClass('d-none');
 }
 
 function rotatePreviewVehicle() {
