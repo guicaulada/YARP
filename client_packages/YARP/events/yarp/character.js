@@ -28,7 +28,7 @@ mp.events.add('showPlayerCharacters', (charactersJson) => {
   characters = charactersJson;
   mp.game.ui.displayRadar(false);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson]);
+  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson], true, true);
 });
 
 /**
@@ -155,7 +155,7 @@ mp.events.add('cancelCharacterCreation', () => {
   mp.gui.chat.activate(true);
   mp.gui.chat.show(true);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters]);
+  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters], true, true);
 });
 
 /**

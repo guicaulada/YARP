@@ -152,6 +152,6 @@ mp.events.add('verifyLogin', (player, password) => {
       player.call('showPlayerCharacters', [JSON.stringify(user.characters)]);
     }
   } else {
-    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountLogin.html']]);
+    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountLogin.html'], true, true]);
   }
 });

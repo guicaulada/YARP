@@ -1,7 +1,7 @@
 'use strict';
 /**
 * @file Ui events
-* @namespace client.ui
+* @namespace client.render
 */
 
 let oldWallet = 0;
@@ -20,7 +20,7 @@ let bankChangeDisplay = false;
 /**
  * Displays help text on top left.
  * @event displayHelpText
- * @memberof client.ui
+ * @memberof client.render
  * @param {string} text - Text to be displayed.
  */
 mp.events.add('displayHelpText', (text) => {
@@ -32,16 +32,68 @@ mp.events.add('displayHelpText', (text) => {
 /**
  * Clears help text on top left.
  * @event clearHelpText
- * @memberof client.ui
+ * @memberof client.render
  */
 mp.events.add('clearHelpText', () => {
   mp.game.ui.clearHelp(true);
 });
 
 /**
+ * Force arrow display.
+ * @function forceArrow
+ * @memberof client.render
+ */
+function forceArrow() {
+  for (let id in yarp.browsers) {
+    if (yarp.browsers.hasOwnProperty(id)) {
+      let browser = yarp.browsers[id];
+      if (browser != null) {
+        if (browser.forceArrow) {
+          mp.gui.chat.activate(false);
+          mp.gui.chat.show(false);
+          mp.gui.cursor.visible = true;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Diplays hunger.
+ * @function displayHunger
+ * @memberof client.render
+ */
+function displayHunger() {
+  let hunger = mp.players.local.getVariable('PLAYER_HUNGER');
+  if (hunger != null) {
+    mp.game.graphics.drawText(`${hunger}`, [0.18, 0.805], {
+      scale: [0.65, 0.65],
+      color: [153, 102, 51, 255],
+      font: 7,
+    });
+  }
+}
+
+/**
+ * Diplays thirst.
+ * @function displayThirst
+ * @memberof client.render
+ */
+function displayThirst() {
+  let thirst = mp.players.local.getVariable('PLAYER_THIRST');
+  if (thirst != null) {
+    mp.game.graphics.drawText(`${thirst}`, [0.18, 0.850], {
+      scale: [0.65, 0.65],
+      color: [51, 51, 204, 255],
+      font: 7,
+    });
+  }
+}
+
+/**
  * Diplays speedometer when inside a vehicle.
  * @function displaySpeedometer
- * @memberof client.ui
+ * @memberof client.render
  * @param {boolean} mph - Miles or kilometers (true or false).
  */
 function displaySpeedometer(mph) {
@@ -63,7 +115,7 @@ function displaySpeedometer(mph) {
 /**
  * Diplays wallet and money changes.
  * @function displayWallet
- * @memberof client.ui
+ * @memberof client.render
  */
 function displayWallet() {
   let newWallet = mp.players.local.getVariable('PLAYER_WALLET');
@@ -115,7 +167,7 @@ function displayWallet() {
 /**
  * Diplays bank and money changes.
  * @function displayBank
- * @memberof client.ui
+ * @memberof client.render
  */
 function displayBank() {
   let newBank = mp.players.local.getVariable('PLAYER_BANK');
@@ -167,7 +219,7 @@ function displayBank() {
 /**
  * Diplays xp and xp changes.
  * @function displayXp
- * @memberof client.ui
+ * @memberof client.render
  */
 function displayXp() {
   let newXp = mp.players.local.getVariable('PLAYER_XP');
@@ -219,10 +271,13 @@ function displayXp() {
 /**
  * Renders the UI.
  * @event render
- * @memberof client.ui
+ * @memberof client.render
  */
 mp.events.add('render', () => {
+  forceArrow();
   displaySpeedometer();
+  displayHunger();
+  displayThirst();
   displayWallet();
   displayBank();
   displayXp();

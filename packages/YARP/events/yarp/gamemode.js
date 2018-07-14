@@ -30,22 +30,20 @@ mp.events.add('playerBoundKeyPressed', (player, id) => {
   let character = user.character;
   let hotkey = yarp.hotkeys[id];
   if (hotkey.call) {
-    if (hotkey.args[player.id]) {
-      if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)) {
-        if (character.hasItems(hotkey.items)) {
-          if (hotkey.position && hotkey.range) {
-            if (yarp.utils.vectorDistance(player.position, hotkey.position) < hotkey.range) {
-              hotkey.call(player, hotkey.args[player.id]);
-            }
-          } else {
+    if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)) {
+      if (character.hasItems(hotkey.items)) {
+        if (hotkey.position && hotkey.range) {
+          if (yarp.utils.vectorDistance(player.position, hotkey.position) < hotkey.range) {
             hotkey.call(player, hotkey.args[player.id]);
           }
         } else {
-          player.call('displayHelpText', ['You don\'t have the required items.']);
+          hotkey.call(player, hotkey.args[player.id]);
         }
       } else {
-        player.call('displayHelpText', ['You don\'t have permission.']);
+        player.call('displayHelpText', ['You don\'t have the required items.']);
       }
+    } else {
+      player.call('displayHelpText', ['You don\'t have permission.']);
     }
   }
 });
@@ -253,7 +251,7 @@ function tick() {
                       if (i < 0) {
                         if (yarp.utils.vectorDistance(player.position, player2.position) < 3) {
                           player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to interact.']);
-                          yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]]]);
+                          yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]], true, true]);
                           character.players.push(id2);
                           character2.player.push(id);
                         }
@@ -302,8 +300,8 @@ function tick() {
     yarp.vehicles.forEach((vehicle) => {
       try {
         if (yarp.tick % yarp.variables['Save Interval'].value == 0) {
-          vehicle.position = vehicle.mp.position;
-          vehicle.heading = vehicle.mp.heading;
+          vehicle._position = vehicle.mp.position;
+          vehicle._heading = vehicle.mp.heading;
           vehicle.save();
         }
       } catch (err) {
@@ -317,6 +315,6 @@ function tick() {
   yarp.tick++;
   if (yarp.tick == Number.MAX_SAFE_INTEGER) yarp.tick = 0;
 
-  setTimeout(tick, 500);
+  setTimeout(tick, 1000/yarp.variables['Ticks/Second'].value);
 }
 tick();

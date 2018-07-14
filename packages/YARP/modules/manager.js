@@ -126,6 +126,7 @@ mng.config = (Class, config) => {
             let nid = id + ' ' + (i + 1);
             object.position = positions[i];
             object.id = nid;
+            if (!object.name) object.name = id;
             if (!yarp[collection][nid]) {
               yarp[collection][nid] = new Class(object);
             }

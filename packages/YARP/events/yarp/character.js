@@ -83,6 +83,9 @@ mp.events.add('loadCharacter', (player, id) => {
   }
   character.user.enter();
   character.enter();
+  yarp.hotkeys['Inventory'].bind(player);
+  player.setVariable('PLAYER_HUNGER', character.hunger);
+  player.setVariable('PLAYER_THIRST', character.thirst);
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
   player.setVariable('PLAYER_XP', character.xp);

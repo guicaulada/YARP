@@ -100,10 +100,10 @@ mp.events.add('playerJoin', (player) => {
         player.kick('You are not whitelisted.');
       }, 1000);
     } else {
-      player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountLogin.html']]);
+      player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountLogin.html'], true, true]);
     }
   } else {
-    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountRegister.html', 'setAccountName', player.socialClub]]);
+    player.call('createBrowser', ['menu', ['package://YARP/ui/html/accountRegister.html', 'setAccountName', player.socialClub], true, true]);
   }
 });
 

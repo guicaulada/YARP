@@ -7,6 +7,18 @@
 let keybinds = {};
 
 /**
+ * Sets the chat input state.
+ * Credits to kemperrr#9752.
+ * @event setWorldTime
+ * @memberof client.gamemode
+ * @param {boolean} active - If the chat is enalbed or not.
+ */
+mp.gui.execute('const _enableChatInput = enableChatInput;enableChatInput = (enable) => { mp.trigger(\'chatEnabled\', enable); _enableChatInput(enable) };');
+mp.events.add('chatEnabled', (toggle) => {
+  mp.gui.chat.enabled = toggle;
+});
+
+/**
  * Sets the world time in game.
  * @event setWorldTime
  * @memberof client.gamemode
@@ -57,7 +69,18 @@ mp.events.add('playerBindKey', (id, key) => {
   keybinds[id] = {
     key: key,
     call: () => {
-      mp.events.callRemote('playerBoundKeyPressed', id);
+      let disabled = false;
+      for (let id in yarp.browsers) {
+        if (yarp.browsers.hasOwnProperty(id)) {
+          let browser = yarp.browsers[id];
+          if (browser.disableHotkeys) {
+            disabled = true;
+          }
+        }
+      }
+      if (!disabled && !mp.gui.chat.enabled) {
+        mp.events.callRemote('playerBoundKeyPressed', id);
+      }
     },
   };
   mp.keys.bind(keybinds[id].key, false, keybinds[id].call);

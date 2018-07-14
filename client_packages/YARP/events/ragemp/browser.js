@@ -6,7 +6,6 @@
 
 // Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
 
-let browsers = {};
 let parameters = {};
 
 /**
@@ -17,12 +16,14 @@ let parameters = {};
 * @param {object} params - Function and arguments to execute.
 * @fires destroyBrowser
 */
-mp.events.add('createBrowser', (id, params) => {
-  if (browsers[id] != null) {
+mp.events.add('createBrowser', (id, params, disableHotkeys, forceArrow) => {
+  if (yarp.browsers[id] != null) {
     mp.events.call('destroyBrowser', id);
   }
   parameters[id] = params.slice(1, params.length);
-  browsers[id] = mp.browsers.new(params[0]);
+  yarp.browsers[id] = mp.browsers.new(params[0]);
+  yarp.browsers[id].disableHotkeys = disableHotkeys;
+  yarp.browsers[id].forceArrow = forceArrow;
 });
 
 /**
@@ -33,8 +34,8 @@ mp.events.add('createBrowser', (id, params) => {
 * @fires browserExecute
 */
 mp.events.add('browserDomReady', (browser) => {
-  for (id in browsers) {
-    if (browsers[id] === browser) {
+  for (let id in yarp.browsers) {
+    if (yarp.browsers[id] === browser) {
       mp.gui.chat.activate(false);
       mp.gui.chat.show(false);
       mp.gui.cursor.visible = true;
@@ -79,7 +80,7 @@ mp.events.add('browserExecute', (id, params) => {
       input = '`' + params[i] + '`';
     }
   }
-  browsers[id].execute(`${params[0]}(${input});`);
+  yarp.browsers[id].execute(`${params[0]}(${input});`);
 });
 
 /**
@@ -89,12 +90,12 @@ mp.events.add('browserExecute', (id, params) => {
 * @param {object} id - The browser id.
 */
 mp.events.add('destroyBrowser', (id) => {
-  if (browsers[id] != null) {
+  if (yarp.browsers[id] != null) {
     mp.gui.cursor.visible = false;
     mp.gui.chat.activate(true);
     mp.gui.chat.show(true);
-    browsers[id].destroy();
-    browsers[id] = null;
+    yarp.browsers[id].destroy();
+    delete yarp.browsers[id];
   }
 });
 

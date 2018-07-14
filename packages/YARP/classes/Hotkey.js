@@ -8,7 +8,7 @@ class Hotkey extends yarp.GMObject {
   /**
    *Creates an instance of Hotkey.
    * @param {*} id
-   * @param {string} [key='KEY_E']
+   * @param {string} [key='E']
    * @param {*} [call=() => {}]
    * @param {string} [hint='There\'s no hint.']
    * @param {string} [category='None']
@@ -20,7 +20,7 @@ class Hotkey extends yarp.GMObject {
    */
   constructor(
     id,
-    key = 'KEY_E',
+    key = 'E',
     call = () => {},
     hint = 'There\'s no hint.',
     category = 'None',

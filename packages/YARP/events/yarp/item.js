@@ -13,8 +13,8 @@
  */
 mp.events.add('restoreHunger', (player, value) => {
   let character = yarp.characters[player.name];
-  let hunger = character.hunger-value[0];
-  if (hunger > 0) {
+  let hunger = character.hunger - value;
+  if (hunger >= 0) {
     character.hunger = hunger;
   } else {
     character.hunger = 0;
@@ -31,8 +31,8 @@ mp.events.add('restoreHunger', (player, value) => {
  */
 mp.events.add('restoreThirst', (player, value) => {
   let character = yarp.characters[player.name];
-  let thirst = character.thirst-value[0];
-  if (thirst > 0) {
+  let thirst = character.thirst - value;
+  if (thirst >= 0) {
     character.thirst = thirst;
   } else {
     character.thirst = 0;

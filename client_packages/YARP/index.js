@@ -8,6 +8,7 @@
 
 global.yarp = {};
 yarp.utils = require('./YARP/modules/utils.js');
+yarp.browsers = {};
 
 // Load RAGE.MP Events
 require('./YARP/events/ragemp/browser.js');
@@ -15,7 +16,7 @@ require('./YARP/events/ragemp/checkpoint.js');
 require('./YARP/events/ragemp/colshape.js');
 require('./YARP/events/ragemp/player.js');
 require('./YARP/events/ragemp/stream.js');
-require('./YARP/events/ragemp/ui.js');
+require('./YARP/events/ragemp/render.js');
 require('./YARP/events/ragemp/vehicle.js');
 require('./YARP/events/ragemp/waypoint.js');
 

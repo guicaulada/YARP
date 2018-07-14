@@ -6,7 +6,7 @@ let config = {
          hint: 'Write code to be executed from inside the game. A very powerful command.',
          permissions: ['cmd.code'],
          call: (player, args) => {
-            player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor']]);
+            player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor'], true, false]);
             yarp.hotkeys['ToggleChat'].bind(player);
          },
       },
@@ -28,7 +28,7 @@ let config = {
                   }
                   eval(`new yarp[Class](${args.join(', ')})`);
                } else {
-                  player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', `new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(', ')})`]]);
+                  player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', `new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(', ')})`], true, false]);
                   yarp.hotkeys['ToggleChat'].bind(player);
                }
             }
@@ -65,10 +65,10 @@ let config = {
                      for (let i = 2; i < args.length; i++) {
                         text = text+`yarp.${collection}['${id}'].${args[i]} = ${obj[args[i]]};\\n`;
                      }
-                     player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', text]]);
+                     player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', text], true, false]);
                      yarp.hotkeys['ToggleChat'].bind(player);
                   } else {
-                     player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', `yarp.${collection}['${id}'];`]]);
+                     player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', `yarp.${collection}['${id}'];`], true, false]);
                      yarp.hotkeys['ToggleChat'].bind(player);
                   }
                }
@@ -234,7 +234,7 @@ let config = {
                 });
               }
             }
-            player.call('createBrowser', ['inventory', ['package://YARP/ui/html/inventory.html', 'populateInventory', JSON.stringify(list), 'Inventory']]);
+            player.call('createBrowser', ['inventory', ['package://YARP/ui/html/inventory.html', 'populateInventory', JSON.stringify(list), 'Inventory'], false, true]);
          },
       },
       'money': {
