@@ -1,16 +1,16 @@
 # Yet Another Roleplay - RAGE-MP
 
-YARP aim`s to be an object oriented framework that allows you to create persistent objects dynamically.  
-### /!\ This project is still under development, many changes can happen to the code. /!\
-### /!\ This project is NOT ready for production, use only for development. /!\
+YARP aim's to be an object oriented framework that allows you to create persistent objects dynamically.
+### :warning: This project is still under development, many changes can happen to the code. :warning:
+### :warning: This project is NOT ready for production, use only for development. :warning:
 
 ## Requirements
 * [RAGE-MP](http://rage.mp) - RAGE Multiplayer is an multiplayer modification for Grand Theft Auto V that is alternative to GTA Online.
-* [nodejs](https://nodejs.org) - A JavaScript runtime built on Chrome`s V8 JavaScript engine.
+* [nodejs](https://nodejs.org) - A JavaScript runtime built on Chrome's V8 JavaScript engine.
 * [mongodb](https://www.npmjs.com/package/mongodb) - A document database with the scalability and flexibility that you want with the querying and indexing that you need.
 * [bcryptjs](https://www.npmjs.com/package/bcryptjs) - Optimized bcrypt in JavaScript with zero dependencies.
-* [chalk](https://www.npmjs.com/package/chalk) - Terminal string styling done right.  
-* [python](https://www.python.org/download/releases/2.7.8/) - Python is a programming language that lets you work more quickly and integrate your systems more effectively.  
+* [chalk](https://www.npmjs.com/package/chalk) - Terminal string styling done right.
+* [python](https://www.python.org/download/releases/2.7.8/) - Python is a programming language that lets you work more quickly and integrate your systems more effectively.
 
 ## Installation
 
@@ -18,8 +18,8 @@ YARP aim`s to be an object oriented framework that allows you to create persiste
 2. Extract the files to your RAGE-MP server-files folder.
 3. Using a command prompt window install these modules on your server-files folder.
    * Run the command prompt as administrator.
-   * ```cd C:/server-files``` *(use your server path)*
-   * ```npm install```
+   * `cd C:/server-files` *(use your server path)*
+   * `npm install`
 
 ## Features
 * **Whitelist**
