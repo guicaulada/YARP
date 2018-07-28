@@ -289,12 +289,14 @@ $('input[type=\'checkbox\']').change(function () {
     }
 });
 
+/*
 $(document).ready(function () {
     $('#colorpicker').farbtastic(function (color) {
         var colorMain = document.getElementById('color-main').checked;
         mp.trigger('previewVehicleChangeColor', color, colorMain);
     });
 });
+*/
 
 function checkVehiclePayable() {
 	// Comprobamos si el jugador tiene el dinero para el vehículo

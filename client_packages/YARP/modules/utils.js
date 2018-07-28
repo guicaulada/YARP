@@ -15,7 +15,7 @@ let utils = {};
  */
 utils.getWeaponTypeInSlot = (weaponSlot) => {
   // Credits to kemperrr#9752.
-  return mp.game.invoke('0xB50B73D3F4DD1613', mp.players.local.handle, weaponSlot);
+  return mp.game.invoke('0xEFFED78E9011134D', mp.players.local.handle, weaponSlot);
 };
 
 /**
@@ -27,7 +27,7 @@ utils.getWeaponTypeInSlot = (weaponSlot) => {
  */
 utils.getWeaponAmmo = (weaponHash) => {
   // Credits to kemperrr#9752.
-  return mp.game.invoke('0x5088CF774DF6D935', mp.players.local.handle, weaponHash);
+  return mp.game.invoke('0x015A522136D7F951', mp.players.local.handle, weaponHash);
 };
 
 /**
@@ -38,7 +38,7 @@ utils.getWeaponAmmo = (weaponHash) => {
  */
 utils.removeWeapon = (weaponHash) => {
   // Credits to kemperrr#9752.
-  mp.game.invoke('0xABBEF2EAC74A02EB', mp.players.local.handle, weaponHash);
+  mp.game.invoke('0x4899CB088EDF59B8', mp.players.local.handle, weaponHash);
 };
 
 /**
@@ -50,7 +50,7 @@ utils.removeWeapon = (weaponHash) => {
  */
 utils.setWeaponAmmo = (weaponHash, ammo) => {
   // Credits to kemperrr#9752.
-  mp.game.invoke('0xF28A81E331A3F337', mp.players.local.handle, weaponHash, ammo);
+  mp.game.invoke('0x14E56BC5B5DB6A19', mp.players.local.handle, weaponHash, ammo);
 };
 
 /**
@@ -61,7 +61,7 @@ utils.setWeaponAmmo = (weaponHash, ammo) => {
  */
 utils.getCurrentWeapon = () => {
   // Credits to kemperrr#9752.
-  return mp.game.invoke('0x4D008FF908B623E2', mp.players.local.handle);
+  return mp.game.invoke('0x0A6DB4965674D243', mp.players.local.handle);
 };
 
 /**
@@ -73,7 +73,7 @@ utils.getCurrentWeapon = () => {
  */
 utils.giveWeaponComponent = (weaponHash, component) => {
   // Credits to kemperrr#9752.
-  mp.game.invoke('0x3A41B9B06FB233AE', mp.players.local.handle, weaponHash, component);
+  mp.game.invoke('0xD966D51AA5B28BB9', mp.players.local.handle, weaponHash, component);
 };
 
 /**
@@ -85,7 +85,7 @@ utils.giveWeaponComponent = (weaponHash, component) => {
  */
 utils.getWeaponClipSize = (weaponHash) => {
   // Credits to kemperrr#9752.
-  return mp.game.invoke('0x29E49EE03BC36422', weaponHash);
+  return mp.game.invoke('0x583BE370B1EC6EB4', weaponHash);
 };
 
 /**
@@ -97,7 +97,7 @@ utils.getWeaponClipSize = (weaponHash) => {
  */
 utils.gotWeapon = (weaponHash) => {
   // Credits to kemperrr#9752.
-  return mp.game.invoke('0xA8388473C755363D', mp.players.local.handle, weaponHash, false);
+  return mp.game.invoke('0x8DECB02F88F428BC', mp.players.local.handle, weaponHash, false);
 };
 
 /**
