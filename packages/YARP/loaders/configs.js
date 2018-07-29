@@ -26,6 +26,7 @@ module.exports = async () => {
     yarp.users.config('../configs/users.js');
     yarp.vehicles.config('../configs/vehicles.js');
     yarp.weapons.config('../configs/weapons.js');
+    yarp.cli.config('../configs/cli.js');
   } catch (err) {
     console.log(chalk.redBright('[YARP] ')+'ConfigError: '+err.message+'\n'+err.stack);
   }
