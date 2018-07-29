@@ -28,7 +28,9 @@ let config = {
                   }
                   eval(`new yarp[Class](${args.join(', ')})`);
                } else {
-                  player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor', `new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(', ')})`], true, false]);
+                  player.call('createBrowser', ['editor', [
+                    'package://YARP/ui/html/editor.html', 'setupCodeEditor', `new yarp.${Class}(${yarp.utils.getParamNames(yarp[Class]).join(', ')})`,
+                  ], true, false]);
                   yarp.hotkeys['ToggleChat'].bind(player);
                }
             }
@@ -133,7 +135,7 @@ let config = {
         hint: 'Give yourself money.',
         permissions: ['cmd.givemoney'],
         call: (player, args) => {
-           yarp.characters[player.name].giveMoney(Number(args[0]));
+           yarp.characters[player.name].money += Number(args[0]);
            player.notify('Received ~g~$' + args[0]);
         },
       },
