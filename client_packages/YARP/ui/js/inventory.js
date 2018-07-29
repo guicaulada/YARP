@@ -111,6 +111,9 @@ function updateInventory(amount) {
 	if (amount > 0)
 		selectedAmount.textContent = Number(amount);
 	else {
+		while (inventoryOptions.firstChild) {
+			inventoryOptions.removeChild(inventoryOptions.firstChild);
+		}
 		inventoryContainer.removeChild(currentSelected);
 		inventory.splice(selected, 1);
 		selected = null;
@@ -118,8 +121,5 @@ function updateInventory(amount) {
 		selectedAmount = null;
 		currentSelected = null;
 		populateInventory();
-		while (inventoryOptions.firstChild) {
-				inventoryOptions.removeChild(inventoryOptions.firstChild);
-		}
 	}
 }
