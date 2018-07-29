@@ -272,24 +272,24 @@ function tick() {
 
             if (yarp.tick % yarp.variables['Save Interval'].value == 0) {
               if ((player.position.x && player.position.y && player.position.z && player.health) != 0) {
-                character.position = player.position;
-                character.heading = player.heading;
-                character.health = player.health;
-                character.armour = player.armour;
+                character._position = player.position;
+                character._heading = player.heading;
+                character._health = player.health;
+                character._armour = player.armour;
                 character.save();
               }
             }
 
             if (yarp.tick % yarp.variables['Hunger Interval'].value == 0) {
-              character.increaseHunger(yarp.variables['Hunger Rate'].value);
+              character.hunger += yarp.variables['Hunger Rate'].value;
             }
 
             if (yarp.tick % yarp.variables['Thirst Interval'].value == 0) {
-              character.increaseThirst(yarp.variables['Thirst Rate'].value);
+              character.thirst += yarp.variables['Thirst Rate'].value;
             }
 
             if (yarp.tick % yarp.variables['XP Interval'].value == 0) {
-              character.increaseXp(yarp.variables['XP Rate'].value);
+              character.xp += yarp.variables['XP Rate'].value;
             }
           }
         }
