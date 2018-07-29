@@ -10,3 +10,4 @@
 !Makefile
 !.eslintrc.json
 !.eslintignore
+**/.listcache
