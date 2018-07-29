@@ -6,7 +6,7 @@ let config = {
   'Starting Bank': 1500,
   'Ticks/Second': 2,
   'Save Interval': 20, // Intervals are always in ticks.
-  'Hunger Interval': 20,
+  'Hunger Interval': 25,
   'Hunger Rate': 1,
   'Thirst Interval': 20,
   'Thirst Rate': 1,
