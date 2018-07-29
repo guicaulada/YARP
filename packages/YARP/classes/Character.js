@@ -190,6 +190,17 @@ class Character extends yarp.GMObject {
   }
 
   /**
+   * Set the enter function as a string
+   * @instance
+   * @function enter
+   * @memberof yarp.Character
+   * @param {function} value - Enter function.
+   */
+  set enter(value) {
+    this._enter = value.toString();
+  }
+
+  /**
    * Call leave fuction for character and it's groups.
    * @instance
    * @function leave
@@ -211,25 +222,235 @@ class Character extends yarp.GMObject {
   }
 
   /**
-   * Set's the enter function as a string
-   * @instance
-   * @function enter
-   * @memberof yarp.User
-   * @param {function} value - Enter function.
-   */
-  set enter(value) {
-    this._enter = value.toString();
-  }
-
-  /**
-   * Set's the leave function as a string
+   * Set the leave function as a string
    * @instance
    * @function leave
-   * @memberof yarp.User
+   * @memberof yarp.Character
    * @param {function} value - Leave function.
    */
   set leave(value) {
-    this._leave = value;
+    this._leave = value.toString();
+  }
+
+  /**
+   * Get the health value
+   * @instance
+   * @function health
+   * @memberof yarp.Character
+   */
+  get health() {
+    return this._health;
+  }
+
+  /**
+   * Set the health value for the player
+   * @instance
+   * @function health
+   * @memberof yarp.Character
+   * @param {Number} value Health value
+   */
+  set health(value) {
+    this._health = value;
+    let player = this.player;
+    if (player) {
+      player.health = value;
+    }
+  }
+
+  /**
+   * Get the wallet value
+   * @instance
+   * @function wallet
+   * @memberof yarp.Character
+   */
+  get wallet() {
+    return this._wallet;
+  }
+
+  /**
+   * Set the wallet value for the player
+   * @instance
+   * @function wallet
+   * @memberof yarp.Character
+   * @param {Number} value Wallet value
+   */
+  set wallet(value) {
+    this._wallet = value;
+    let player = this.player;
+    if (player) {
+      player.setVariable('PLAYER_WALLET', this.wallet);
+    }
+    this.save();
+  }
+
+  /**
+   * Get the bank value
+   * @instance
+   * @function bank
+   * @memberof yarp.Character
+   */
+  get bank() {
+    return this._bank;
+  }
+
+  /**
+   * Set the bank value for the player
+   * @instance
+   * @function bank
+   * @memberof yarp.Character
+   * @param {Number} value Bank value
+   */
+  set bank(value) {
+    this._bank = value;
+    let player = this.player;
+    if (player) {
+      player.setVariable('PLAYER_BANK', this.bank);
+    }
+    this.save();
+  }
+
+  /**
+   * Get the hunger value
+   * @instance
+   * @function hunger
+   * @memberof yarp.Character
+   */
+  get hunger() {
+    return this._hunger;
+  }
+
+  /**
+   * Set the hunger value for the player
+   * @instance
+   * @function hunger
+   * @memberof yarp.Character
+   * @param {Number} value Hunger value
+   */
+  set hunger(value) {
+    if (value > 100) {
+      this.health -= (value - 100);
+      value = 100;
+    } else if (value < 0) {
+      this.health += value;
+      value = 0;
+    }
+    this._hunger = value;
+    let player = this.player;
+    if (player) {
+      player.setVariable('PLAYER_HUNGER', this.hunger);
+    }
+  }
+
+  /**
+   * Get the thirst value
+   * @instance
+   * @function thirst
+   * @memberof yarp.Character
+   */
+  get thirst() {
+    return this._thirst;
+  }
+
+  /**
+   * Set the thirst value for the player
+   * @instance
+   * @function thirst
+   * @memberof yarp.Character
+   * @param {Number} value Thirst value
+   */
+  set thirst(value) {
+    if (value > 100) {
+      this.health -= (value - 100);
+      value = 100;
+    } else if (value < 0) {
+      this.health += value;
+      value = 0;
+    }
+    this._thirst = value;
+    let player = this.player;
+    if (player) {
+      player.setVariable('PLAYER_THIRST', this.thirst);
+    }
+  }
+
+  /**
+   * Get the xp value
+   * @instance
+   * @function xp
+   * @memberof yarp.Character
+   */
+  get xp() {
+    return this._xp;
+  }
+
+  /**
+   * Set the xp value for the player
+   * @instance
+   * @function xp
+   * @memberof yarp.Character
+   * @param {Number} value XP value
+   */
+  set xp(value) {
+    if (value > 1000000000) {
+      value = 1000000000;
+    } else if (value < 0) {
+      value = 0;
+    }
+    this._xp = value;
+    let player = this.player;
+    if (player) {
+      player.setVariable('PLAYER_XP', this.xp);
+    }
+  }
+
+  /**
+   * Get the heading value
+   * @instance
+   * @function heading
+   * @memberof yarp.Character
+   */
+  get heading() {
+    return this._heading;
+  }
+
+  /**
+   * Set the heading value for the player
+   * @instance
+   * @function heading
+   * @memberof yarp.Character
+   * @param {Number} value Heading value
+   */
+  set heading(value) {
+    this._heading = value;
+    let player = this.player;
+    if (player) {
+      player.heading = this.heading;
+    }
+  }
+
+  /**
+   * Get the position value
+   * @instance
+   * @function position
+   * @memberof yarp.Character
+   */
+  get position() {
+    return this._position;
+  }
+
+  /**
+   * Set the position value for the player
+   * @instance
+   * @function position
+   * @memberof yarp.Character
+   * @param {Number} value Position value
+   */
+  set position(value) {
+    this._position = value;
+    let player = this.player;
+    if (player) {
+      player.position = this.position;
+    }
   }
 
   /**
@@ -244,58 +465,6 @@ class Character extends yarp.GMObject {
   }
 
   /**
-   * Give money.
-   * @instance
-   * @function giveMoney
-   * @memberof yarp.Character
-   * @param {number} value - Amount to give.
-   */
-  giveMoney(value) {
-    this.wallet += value;
-    this.player.setVariable('PLAYER_WALLET', this.wallet);
-    this.save();
-  }
-
-  /**
-   * Give bank money.
-   * @instance
-   * @function giveBankMoney
-   * @memberof yarp.Character
-   * @param {number} value - Amount to give.
-   */
-  giveBankMoney(value) {
-    this.bank += value;
-    this.player.setVariable('PLAYER_BANK', this.bank);
-    this.save();
-  }
-
-  /**
-   * Take money.
-   * @instance
-   * @function takeMoney
-   * @memberof yarp.Character
-   * @param {number} value - Amount to give.
-   */
-  takeMoney(value) {
-    this.wallet -= value;
-    this.player.setVariable('PLAYER_WALLET', this.wallet);
-    this.save();
-  }
-
-  /**
-   * Give bank money.
-   * @instance
-   * @function takeBankMoney
-   * @memberof yarp.Character
-   * @param {number} value - Amount to give.
-   */
-  takeBankMoney(value) {
-    this.bank -= value;
-    this.player.setVariable('PLAYER_BANK', this.bank);
-    this.save();
-  }
-
-  /**
    * Try wallet payment.
    * @instance
    * @function tryWalletPayment
@@ -305,7 +474,7 @@ class Character extends yarp.GMObject {
    */
   tryWalletPayment(value) {
     if (this.wallet-value >= 0) {
-      this.takeMoney(value);
+      this.wallet -= value;
       return true;
     }
     return false;
@@ -321,9 +490,8 @@ class Character extends yarp.GMObject {
    */
   tryBankPayment(value) {
     if (this.bank-value >= 0) {
-      let transaction = new yarp.Transaction('Payment', value, this.id);
-      transaction.save();
-      this.takeBankMoney(value);
+      this.bank -= value;
+      new yarp.Transaction('Payment', value, this.id).save();
       return true;
     }
     return false;
@@ -356,10 +524,9 @@ class Character extends yarp.GMObject {
    */
   tryDeposit(value) {
     if (this.wallet-value >= 0) {
-      let transaction = new yarp.Transaction('Deposit', value, this.id);
-      transaction.save();
-      this.takeMoney(value);
-      this.giveBankMoney(value);
+      this.wallet -= value;
+      this.bank += value;
+      new yarp.Transaction('Deposit', value, this.id).save();
       return true;
     }
     return false;
@@ -375,10 +542,9 @@ class Character extends yarp.GMObject {
    */
   tryWithdraw(value) {
     if (this.bank-value >= 0) {
-      let transaction = new yarp.Transaction('Withdraw', value, this.id);
-      transaction.save();
-      this.takeBankMoney(value);
-      this.giveMoney(value);
+      this.bank -= value;
+      this.money += value;
+      new yarp.Transaction('Withdraw', value, this.id).save();
       return true;
     }
     return false;
@@ -395,10 +561,9 @@ class Character extends yarp.GMObject {
    */
   tryTransfer(target, value) {
     if (this.bank-value >= 0) {
-      let transaction = new yarp.Transaction('Transfer', value, this.id, target.id);
-      transaction.save();
-      this.giveBankMoney(value);
-      target.giveBankMoney(value);
+      this.bank -= value;
+      target.bank += value;
+      new yarp.Transaction('Transfer', value, this.id, target.id).save();
       return true;
     }
     return false;
@@ -860,112 +1025,6 @@ class Character extends yarp.GMObject {
       }
     }
     return true;
-  }
-
-  /**
-   * Increase hunger.
-   * @instance
-   * @function increaseHunger
-   * @memberof yarp.Character
-   * @param {number} value - Value to increase.
-   */
-  increaseHunger(value) {
-    let overflow = this.hunger+value-100;
-    if (overflow > 0) {
-      this.health -= overflow;
-    }
-    this.hunger += value;
-    if (this.hunger > 100) {
-      this.hunger = 100;
-    }
-    this.player.setVariable('PLAYER_HUNGER', this.hunger);
-  }
-
-  /**
-   * Increase thirst.
-   * @instance
-   * @function increaseThirst
-   * @memberof yarp.Character
-   * @param {number} value - Value to increase.
-   */
-  increaseThirst(value) {
-    let overflow = this.thirst+value-100;
-    if (overflow > 0) {
-      this.health -= overflow;
-    }
-    this.thirst += value;
-    if (this.thirst > 100) {
-      this.thirst = 100;
-    }
-    this.player.setVariable('PLAYER_THIRST', this.thirst);
-  }
-
-  /**
-   * Increase XP.
-   * @instance
-   * @function increaseXp
-   * @memberof yarp.Character
-   * @param {number} value - Value to increase.
-   */
-  increaseXp(value) {
-    this.xp += value;
-    if (this.xp > 1000000000) {
-      this.xp = 1000000000;
-    }
-    this.player.setVariable('PLAYER_XP', this.xp);
-  }
-
-  /**
-   * Decrease hunger.
-   * @instance
-   * @function decreaseHunger
-   * @memberof yarp.Character
-   * @param {number} value - Value to decrease.
-   */
-  decreaseHunger(value) {
-    let overflow = this.thirst-value;
-    if (overflow < 0) {
-      this.health += overflow;
-    }
-    this.hunger -= value;
-    if (this.hunger < 0) {
-      this.hunger = 0;
-    }
-    this.player.setVariable('PLAYER_HUNGER', this.hunger);
-  }
-
-  /**
-   * Decrease thirst.
-   * @instance
-   * @function decreaseThirst
-   * @memberof yarp.Character
-   * @param {number} value - Value to decrease.
-   */
-  decreaseThirst(value) {
-    let overflow = this.thirst - value;
-    if (overflow < 0) {
-      this.health += overflow;
-    }
-    this.thirst -= value;
-    if (this.thirst < 0) {
-      this.thirst = 0;
-    }
-    this.player.setVariable('PLAYER_THIRST', this.thirst);
-  }
-
-  /**
-   * Decrease XP.
-   * @instance
-   * @function decreaseXp
-   * @memberof yarp.Character
-   * @param {number} value - Value to decrease.
-   */
-  decreaseXp(value) {
-    this.xp -= value;
-    if (this.xp < 0) {
-      this.xp = 0;
-    }
-    this.player.setVariable('PLAYER_XP', this.xp);
   }
 }
 
