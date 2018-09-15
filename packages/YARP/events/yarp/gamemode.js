@@ -8,8 +8,8 @@
  * Evaluates code on server-side.
  * @event runServerCode
  * @memberof server.gamemode
- * @param {object} player - The player that called the event.
- * @param {string} code - Code.
+ * @param {object} player The player that called the event.
+ * @param {string} code Code.
  */
 mp.events.add('runServerCode', (player, code) => {
   if (yarp.users[player.socialClub].hasPermission('cmd.code')) {
@@ -21,8 +21,8 @@ mp.events.add('runServerCode', (player, code) => {
  * Evaluates code on server-side.
  * @event playerBoundKeyPressed
  * @memberof server.gamemode
- * @param {object} player - The player that called the event.
- * @param {string} id - Hotkey id.
+ * @param {object} player The player that called the event.
+ * @param {string} id Hotkey id.
  * @fires displayHelpText
  */
 mp.events.add('playerBoundKeyPressed', (player, id) => {
