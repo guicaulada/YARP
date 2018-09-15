@@ -11,7 +11,7 @@ let mng = {};
  * @async
  * @function register
  * @memberof yarp.mng
- * @param {object} object - Object to be registered.
+ * @param {object} object Object to be registered.
  */
 mng.register = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
@@ -28,7 +28,7 @@ mng.register = async (object) => {
  * @async
  * @function save
  * @memberof yarp.mng
- * @param {object} object - Object to be saved.
+ * @param {object} object Object to be saved.
  */
 mng.save = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
@@ -44,7 +44,7 @@ mng.save = async (object) => {
  * @async
  * @function remove
  * @memberof yarp.mng
- * @param {object} object - Object to be removed.
+ * @param {object} object Object to be removed.
  */
 mng.remove = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
@@ -61,7 +61,7 @@ mng.remove = async (object) => {
  * @async
  * @function load
  * @memberof yarp.mng
- * @param {object} Class - Class to be loaded.
+ * @param {object} Class Class to be loaded.
  */
 mng.load = async (Class) => {
   let collection = Class.name.toLowerCase()+'s';
@@ -76,8 +76,8 @@ mng.load = async (Class) => {
  * @async
  * @function config
  * @memberof yarp.mng
- * @param {object} Class - The object class.
- * @param {object} config - Config object or path.
+ * @param {object} Class The object class.
+ * @param {object} config Config object or path.
  */
 mng.config = (Class, config) => {
   if (typeof config === 'string') config = require(config);
