@@ -6,7 +6,7 @@
  */
 class Checkpoint extends yarp.GMObject {
   /**
-   *Creates an instance of Checkpoint.
+   * Creates an instance of Checkpoint.
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -19,7 +19,7 @@ class Checkpoint extends yarp.GMObject {
    * @param {Number} [params.range=3]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @memberof yarp.Checkpoint
    */

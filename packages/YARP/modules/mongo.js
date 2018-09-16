@@ -41,7 +41,7 @@ mongo.connect = (url) => {
  * @function insert
  * @memberof yarp.db
  * @param {String} collection The collection of the documents.
- * @param {Array} docs Array of objects.
+ * @param {Array<Object>} docs Array of objects.
  * @param {Object} [options] MongoDB options.
  * @return {Promise<Object>} A promise that returns the result from MongoDB if resolved.
  */
@@ -201,7 +201,7 @@ mongo.indexes = (collection) => {
  * @function aggregate
  * @memberof yarp.db
  * @param {String} collection The collection of the document.
- * @param {Array} query Contain all the aggregation framework commands for the execution.
+ * @param {Array<String>} query Contain all the aggregation framework commands for the execution.
  * @param {Object} [options] MongoDB options.
  * @return {Promise<Object>} A promise that returns the result from MongoDB if resolved.
  */

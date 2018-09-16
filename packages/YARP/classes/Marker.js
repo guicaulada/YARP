@@ -6,21 +6,21 @@
  */
 class Marker extends yarp.GMObject {
   /**
-   *Creates an instance of Marker.
+   * Creates an instance of Marker.
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
    * @param {Number} [params.type=1]
    * @param {Number} [params.radius=1]
-   * @param {*} [params.color=[255, 255, 0, 255]]
-   * @param {*} [params.direction=new mp.Vector3(0, 0, 0)]
-   * @param {*} [params.rotation=new mp.Vector3(0, 0, 0)]
+   * @param {Array<Number>} [params.color=[255, 255, 0, 255]]
+   * @param {Vector3} [params.direction=new mp.Vector3(0, 0, 0)]
+   * @param {Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
    * @param {Boolean} [params.visible=true]
    * @param {Number} [params.dimension=0]
    * @param {Number} [params.range=3]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @memberof yarp.Marker
    */

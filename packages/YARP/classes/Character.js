@@ -6,7 +6,7 @@
  */
 class Character extends yarp.GMObject {
   /**
-   *Creates an instance of Character.
+   * Creates an instance of Character.
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.socialClub
@@ -23,7 +23,7 @@ class Character extends yarp.GMObject {
    * @param {Number} [params.xp=0]
    * @param {String} [params.position=yarp.variables['First Spawn'].value]
    * @param {String} [params.heading=yarp.variables['First Heading'].value]
-   * @param {Array} [params.groups=[]]
+   * @param {Array<String>} [params.groups=[]]
    * @param {Object} [params.weapons={}]
    * @param {Object} [params.skills={}]
    * @param {Number} [params.weight=0]

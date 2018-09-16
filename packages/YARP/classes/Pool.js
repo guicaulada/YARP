@@ -5,8 +5,8 @@
  */
 class Pool {
   /**
-   *Creates an instance of Pool.
-   * @param {*} Class
+   * Creates an instance of Pool.
+   * @param {Class} Class
    * @memberof yarp.Pool
    */
   constructor(Class) {

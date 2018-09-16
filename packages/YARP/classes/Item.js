@@ -6,15 +6,15 @@
  */
 class Item extends yarp.GMObject {
   /**
-   *Creates an instance of Item.
+   * Creates an instance of Item.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} params.name
+   * @param {String} params.name
    * @param {String} [params.category='None']
    * @param {Number} [params.weight=0]
    * @param {Boolean} [params.spoil=false]
    * @param {String} [params.model='prop_paper_bag_01']
-   * @param {*} [params.options={}]
+   * @param {Object} [params.options={}]
    * @memberof yarp.Item
    */
   constructor(params) {

@@ -6,13 +6,13 @@
  */
 class Command extends yarp.GMObject {
   /**
-   *Creates an instance of Command.
+   * Creates an instance of Command.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} [params.call=() => {}]
+   * @param {Function} [params.call=() => {}]
    * @param {String} [params.category='None']
    * @param {String} [params.hint='There\'s no hint.']
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @param {Boolean} [params.position=false]
    * @param {Boolean} [params.range=false]

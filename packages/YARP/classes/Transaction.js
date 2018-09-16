@@ -6,13 +6,13 @@
  */
 class Transaction extends yarp.GMObject {
   /**
-   *Creates an instance of Transaction.
+   * Creates an instance of Transaction.
    * @param {Object} params
-   * @param {*} params.type
-   * @param {*} params.value
-   * @param {*} params.source
-   * @param {*} [params.target=source]
-   * @param {*} [params.date=new Date()]
+   * @param {String} params.type
+   * @param {Nuimber} params.value
+   * @param {String} params.source
+   * @param {String} [params.target=source]
+   * @param {String} [params.date=yarp.utils.getTimestamp(new Date())]
    * @memberof Transaction
    */
   constructor(params) {

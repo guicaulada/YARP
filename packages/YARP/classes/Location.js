@@ -6,10 +6,10 @@
  */
 class Location extends yarp.GMObject {
   /**
-   *Creates an instance of Location.
+   * Creates an instance of Location.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} [params.inventory={}]
+   * @param {Object} [params.inventory={}]
    * @param {Boolean} [params.owner=false]
    * @param {Number} [params.money=0]
    * @param {Number} [params.price=0]

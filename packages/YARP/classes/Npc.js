@@ -6,15 +6,15 @@
  */
 class Npc extends yarp.GMObject {
   /**
-   *Creates an instance of Npc.
+   * Creates an instance of Npc.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} params.model
+   * @param {String} params.model
    * @param {Vector3} params.position
    * @param {Number} [params.heading=0]
    * @param {Number} [params.drawDistance=100]
    * @param {Number} [params.dimension=0]
-   * @param {*} [params.call=() => {}]
+   * @param {Function} [params.call=() => {}]
    * @memberof yarp.Npc
    */
   constructor(params) {

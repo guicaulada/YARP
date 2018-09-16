@@ -6,15 +6,15 @@
  */
 class Vehicle extends yarp.GMObject {
   /**
-   *Creates an instance of Vehicle.
+   * Creates an instance of Vehicle.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} params.model
+   * @param {String} params.model
    * @param {Vector3} params.position
    * @param {Number} [params.heading=0]
    * @param {Boolean} [params.owner=false]
    * @param {Boolean} [params.plate=false]
-   * @param {*} [params.color=[0,0,0]]
+   * @param {Array<Number>} [params.color=[0,0,0]]
    * @param {Number} [params.alpha=255]
    * @param {Boolean} [params.locked=false]
    * @param {Boolean} [params.engine=false]
@@ -22,7 +22,7 @@ class Vehicle extends yarp.GMObject {
    * @param {Boolean} [params.visible=true]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @memberof yarp.Vehicle
    */

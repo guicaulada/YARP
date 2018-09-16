@@ -6,12 +6,12 @@
  */
 class Label extends yarp.GMObject {
   /**
-   *Creates an instance of Label.
+   * Creates an instance of Label.
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
    * @param {String} [params.text='']
-   * @param {*} [params.color=[51, 204, 51, 255]]
+   * @param {Array<Number>} [params.color=[51, 204, 51, 255]]
    * @param {Number} [params.drawDistance=10]
    * @param {Number} [params.font=2]
    * @param {Boolean} [params.los=true]
@@ -20,7 +20,7 @@ class Label extends yarp.GMObject {
    * @param {Number} [params.range=3]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @memberof yarp.Label
    */

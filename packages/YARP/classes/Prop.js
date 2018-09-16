@@ -6,20 +6,20 @@
  */
 class Prop extends yarp.GMObject {
   /**
-   *Creates an instance of Prop.
+   * Creates an instance of Prop.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} params.model
+   * @param {String} params.model
    * @param {Vector3} params.position
    * @param {Boolean} [params.owner=false]
    * @param {Number} [params.alpha=255]
-   * @param {*} [params.rotation=[]]
+   * @param {Array<Number>} [params.rotation=[]]
    * @param {Number} [params.dimension=0]
    * @param {Boolean} [params.visible=true]
    * @param {Number} [params.range=3]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @memberof yarp.Prop
    */

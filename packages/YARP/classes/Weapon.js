@@ -6,17 +6,17 @@
  */
 class Weapon extends yarp.GMObject {
   /**
-   *Creates an instance of Weapon.
+   * Creates an instance of Weapon.
    * @param {Object} params
    * @param {String} params.id
-   * @param {*} params.name
+   * @param {String} params.name
    * @param {String} [params.category='None']
    * @param {Number} [params.weight=0]
    * @param {Number} [params.ammo=0]
    * @param {String} [params.model='']
    * @param {Number} [params.bone=0]
-   * @param {*} [params.position=new mp.Vector3(0, 0, 0)]
-   * @param {*} [params.rotation=new mp.Vector3(0, 0, 0)]
+   * @param {Vector3} [params.position=new mp.Vector3(0, 0, 0)]
+   * @param {Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
    * @param {Boolean} [params.visible=true]
    * @memberof yarp.Weapon
    */

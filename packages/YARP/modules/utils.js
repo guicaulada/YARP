@@ -91,7 +91,7 @@ utils.randomString = (digits, possible) => {
  * @memberof server.yarp.utils
  * @param {String} string String to analyze.
  * @param {String} symbol Symbol the substrings will be inside.
- * @return {Array} Array of substrings.
+ * @return {Array<String>} Array of substrings.
  */
 utils.getSubstrings = (string, symbol) => {
   let current;
@@ -110,7 +110,7 @@ utils.getSubstrings = (string, symbol) => {
  * @function getParamNames
  * @memberof server.yarp.utils
  * @param {Function} func The function to be analyzed.
- * @return {Array} Array of parameter names.
+ * @return {Array<String>} Array of parameter names.
  */
 utils.getParamNames = (func) => {
   let STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;

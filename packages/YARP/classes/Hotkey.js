@@ -6,14 +6,14 @@
  */
 class Hotkey extends yarp.GMObject {
   /**
-   *Creates an instance of Hotkey.
+   * Creates an instance of Hotkey.
    * @param {Object} params
    * @param {String} params.id
    * @param {String} [params.key='E']
-   * @param {*} [params.call=() => {}]
+   * @param {Function} [params.call=() => {}]
    * @param {String} [params.hint='There\'s no hint.']
    * @param {String} [params.category='None']
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @param {Boolean} [params.position=false]
    * @param {Boolean} [params.range=false]
@@ -45,7 +45,7 @@ class Hotkey extends yarp.GMObject {
    * @function bind
    * @memberof yarp.Hotkey
    * @param {Object} player Player to bind to.
-   * @param {Array} args Arguments to the bind.
+   * @param {Array<*>} args Arguments to the bind.
    * @fires playerBindKey
    */
   bind(player, args) {

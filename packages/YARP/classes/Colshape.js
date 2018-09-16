@@ -6,7 +6,7 @@
  */
 class Colshape extends yarp.GMObject {
   /**
-   *Creates an instance of Colshape.
+   * Creates an instance of Colshape.
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -16,7 +16,7 @@ class Colshape extends yarp.GMObject {
    * @param {Number} [params.depth=10]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @param {Array} [params.permissions=[]]
+   * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
    * @memberof yarp.Colshape
    */
