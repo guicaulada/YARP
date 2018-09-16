@@ -47,7 +47,7 @@ class Location extends yarp.GMObject {
           if (!categories[item.category]) {
             categories[item.category] = {};
           }
-          categories[item.category][item.id] = item.data;
+          categories[item.category][item.id] = item.cleanData;
           categories[item.category][item.id].price = inventoryItem.price;
           categories[item.category][item.id].amount = inventoryItem.amount;
         }

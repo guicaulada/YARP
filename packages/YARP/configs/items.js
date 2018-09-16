@@ -14,6 +14,7 @@ let config = {
   'burger': {
     name: 'Burger',
     model: 'prop_cs_burger_01',
+    category: 'Food',
     options: {
       'Eat': (player) => {
         mp.events.call('restoreHunger', player, 10);
@@ -23,6 +24,7 @@ let config = {
   'hotdog': {
     name: 'Hot Dog',
     model: 'prop_cs_hotdog_01',
+    category: 'Food',
     options: {
       'Eat': (player) => {
         mp.events.call('restoreHunger', player, 15);
@@ -32,6 +34,7 @@ let config = {
   'beer': {
     name: 'Beer Bottle',
     model: 'prop_cs_beer_bot_01',
+    category: 'Food',
     options: {
       'Drink': (player) => {
         mp.events.call('restoreThirst', player, 5);
@@ -41,6 +44,7 @@ let config = {
   'juice': {
     name: 'Juice Box',
     model: 'prop_food_bs_juice01',
+    category: 'Food',
     options: {
       'Drink': (player) => {
         mp.events.call('restoreThirst', player, 10);
@@ -50,6 +54,7 @@ let config = {
   'soda': {
     name: 'Soda Can',
     model: 'ng_proc_sodacan_01a',
+    category: 'Food',
     options: {
       'Drink': (player) => {
         mp.events.call('restoreThirst', player, 15);

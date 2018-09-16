@@ -91,7 +91,10 @@ mp.events.add('loadCharacter', (player, id) => {
   player.call('updatePlayerCustomSkin', [player, JSON.stringify(character.face), JSON.stringify(character.decoration)]);
 
   yarp.hotkeys['Inventory'].bind(player);
-  yarp.hotkeys['Test Menu'].bind(player);
+
+  if (character.user.hasPermission('menu.testmenu')) {
+    yarp.hotkeys['Toggle Menu'].bind(player, [yarp.menus['Test Menu']]);
+  }
 
   yarp.menus.forEach((menu) => {
     menu.create(player);

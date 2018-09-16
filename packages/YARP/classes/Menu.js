@@ -10,7 +10,6 @@ class Menu extends yarp.GMObject {
    * @param {Object} params
    * @param {String} [params.title='']
    * @param {String} [params.subtitle='']
-   * @param {Number} [params.type=0]
    * @param {Array<Object>} [params.items=[]]
    * @param {Array<Number>} [params.offset=[0, 0]]
    * @param {Number} [params.spriteLibrary='commonmenu']
@@ -23,17 +22,12 @@ class Menu extends yarp.GMObject {
       this._id = params.id;
       this._title = this.default(params.title, params.id);
       this._subtitle = this.default(params.subtitle, '');
-      this._type = this.default(params._type, 0);
       this._items = this.default(params.items, []);
       this._offset = this.default(params.offset, [0, 0]);
       this._spriteLibrary = this.default(params.spriteLibrary, 'commonmenu');
       this._spriteName = this.default(params.spriteName, 'interaction_bgd');
-      this._leftBadge = this.default(params.leftBadge, false);
-      this._rightBadge = this.default(params.rightBadge, false);
-      this._rightLabel = this.default(params.rightLabel, false);
       yarp.mng.register(this);
       this.makeGetterSetter();
-      this.recreate();
     } else {
       throw new TypeError('Menu class requires id to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
@@ -98,7 +92,7 @@ class Menu extends yarp.GMObject {
    * @memberof yarp.Menu
    * @param {Array<Object>} items
    */
-  addItem(items) {
+  addItems(items) {
     this.items.concat(items);
     mp.players.call('menuAddItems', [JSON.stringify(items)]);
   }

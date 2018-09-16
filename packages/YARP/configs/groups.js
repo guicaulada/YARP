@@ -29,6 +29,7 @@ let config = {
       'cmd.noclip',
       'cmd.tp',
       'cmd.gmtp',
+      'menu.testmenu',
     ],
   },
   'User': {

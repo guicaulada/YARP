@@ -157,14 +157,14 @@ let multiplePositions = {
   '7/11': {
     visible: false,
     enter: (player) => {
-      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
       let location = yarp.locations[this.id];
-      yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateSaleCategories', location.id, JSON.stringify(location.sale)]], true, true]);
+      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
+      mp.events.call('openStoreMenu', player, location);
     },
     leave: (player) => {
+      let location = yarp.locations[this.id];
       player.call('clearHelpText');
-      player.call('destroyBrowser', ['menu']);
-      yarp.hotkeys['Event'].unbind(player);
+      mp.events.call('closeStoreMenu', player, location);
     },
     position: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),

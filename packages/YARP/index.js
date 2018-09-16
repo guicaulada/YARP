@@ -38,6 +38,9 @@ yarp.cli = require('./modules/cli.js');
   // Loading events
   await require('./loaders/events.js')();
 
+  // Loading features
+  await require('./loaders/features.js')();
+
   // Loading complete
   console.log(chalk.greenBright('[YARP] ')+'Loading Complete');
 

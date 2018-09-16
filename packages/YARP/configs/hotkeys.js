@@ -37,19 +37,26 @@ let config = {
       }
     },
   },
-  'Test Menu': {
+  'Toggle Menu': {
     key: 'M',
     category: 'testing',
     call: (player, args) => {
       if (!this.players) this.players = [];
       let i = this.players.indexOf(player.socialClub);
       if (i >= 0) {
-        yarp.menus['Test Menu'].open(player);
+        args[0].open(player);
         this.players.splice(i, 1);
       } else {
-        yarp.menus['Test Menu'].close(player);
+        args[0].close(player);
         this.players.push(player.socialClub);
       }
+    },
+  },
+  'Open Menu': {
+    key: 'E',
+    category: 'utility',
+    call: (player, args) => {
+      args[0].open(player);
     },
   },
 };
