@@ -20,6 +20,7 @@ module.exports = async () => {
     yarp.labels = new yarp.Pool(yarp.Label);
     yarp.locations = new yarp.Pool(yarp.Location);
     yarp.markers = new yarp.Pool(yarp.Marker);
+    yarp.menus = new yarp.Pool(yarp.Menu);
     yarp.npcs = new yarp.Pool(yarp.Npc);
     yarp.props = new yarp.Pool(yarp.Prop);
     yarp.transactions = new yarp.Pool(yarp.Transaction);

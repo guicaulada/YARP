@@ -20,6 +20,7 @@ module.exports = async () => {
     await yarp.labels.load();
     await yarp.locations.load();
     await yarp.markers.load();
+    await yarp.menus.load();
     await yarp.npcs.load();
     await yarp.props.load();
     await yarp.transactions.load();

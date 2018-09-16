@@ -134,7 +134,7 @@ class GMObject {
   }
 
   /**
-   * Set leave function as string.
+   * Returns first vaule or second value as default.
    * @instance
    * @function default
    * @memberof yarp.GMObject

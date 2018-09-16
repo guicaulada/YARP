@@ -13,6 +13,7 @@
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuIndexChage', (player, menuId, jsonData) => {
+    console.log(menuId, jsonData);
 });
 
 /**
@@ -24,6 +25,7 @@ mp.events.add('menuIndexChage', (player, menuId, jsonData) => {
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuListChange', (player, menuId, jsonData) => {
+    console.log(menuId, jsonData);
 });
 
 /**
@@ -35,6 +37,7 @@ mp.events.add('menuListChange', (player, menuId, jsonData) => {
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuCheckboxChange', (player, menuId, jsonData) => {
+    console.log(menuId, jsonData);
 });
 
 /**
@@ -46,6 +49,7 @@ mp.events.add('menuCheckboxChange', (player, menuId, jsonData) => {
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
+    console.log(menuId, jsonData);
 });
 
 /**
@@ -57,6 +61,7 @@ mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuSliderChange', (player, menuId, jsonData) => {
+    console.log(menuId, jsonData);
 });
 
 /**
@@ -68,6 +73,7 @@ mp.events.add('menuSliderChange', (player, menuId, jsonData) => {
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuClose', (player, menuId) => {
+    console.log(menuId);
 });
 
 /**
@@ -79,4 +85,5 @@ mp.events.add('menuClose', (player, menuId) => {
  * @param {String} jsonData Json data representing the event.
  */
 mp.events.add('menuChange', (player, menuId, jsonData) => {
+    console.log(menuId, jsonData);
 });

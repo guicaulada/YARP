@@ -6,6 +6,45 @@
 
 let utils = {};
 
+
+/**
+ * Returns first vaule or second value as default.
+ * @instance
+ * @function default
+ * @memberof client.yarp.utils
+ * @param {*} v Verified value.
+ * @param {*} d Default value if v is null.
+ * @return {*} v if it's not null, or d
+ */
+utils.default = (v, d) => {
+  return (v != null) ? v : d;
+};
+
+/**
+ * Handles substitution for JSON stringify on circular references.
+ * @function circularJSON
+ * @memberof client.yarp.utils
+ * @param {Object} object Circular object.
+ * @return {String} JSON string.
+ */
+utils.circularJSON = (object) => {
+  // http://stackoverflow.com/questions/11616630/json-stringify-avoid-typeerror-converting-circular-structure-to-json/11616993#11616993
+  let cache = [];
+  let json = JSON.stringify(object, (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      if (cache.indexOf(value) !== -1) {
+        // Circular reference found, discard key
+        return;
+      }
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  });
+  cache = null; // Enable garbage collection
+  return json;
+};
+
 /**
  * Gets weapon type from weapon slot.
  * @function getWeaponTypeInSlot

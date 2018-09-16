@@ -20,6 +20,7 @@ module.exports = async () => {
     yarp.labels.config('../configs/labels.js');
     yarp.locations.config('../configs/locations.js');
     yarp.markers.config('../configs/markers.js');
+    yarp.menus.config('../configs/menus.js');
     yarp.npcs.config('../configs/npcs.js');
     yarp.props.config('../configs/props.js');
     yarp.transactions.config('../configs/transactions.js');

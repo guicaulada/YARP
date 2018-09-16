@@ -20,6 +20,7 @@ module.exports = async () => {
     yarp.Label = require('../classes/Label.js');
     yarp.Location = require('../classes/Location.js');
     yarp.Marker = require('../classes/Marker.js');
+    yarp.Menu = require('../classes/Menu.js');
     yarp.Npc = require('../classes/Npc.js');
     yarp.Prop = require('../classes/Prop.js');
     yarp.Transaction = require('../classes/Transaction.js');

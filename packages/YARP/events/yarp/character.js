@@ -83,11 +83,17 @@ mp.events.add('loadCharacter', (player, id) => {
   }
   character.user.enter();
   character.enter();
-  yarp.hotkeys['Inventory'].bind(player);
   player.setVariable('PLAYER_HUNGER', character.hunger);
   player.setVariable('PLAYER_THIRST', character.thirst);
   player.setVariable('PLAYER_WALLET', character.wallet);
   player.setVariable('PLAYER_BANK', character.bank);
   player.setVariable('PLAYER_XP', character.xp);
   player.call('updatePlayerCustomSkin', [player, JSON.stringify(character.face), JSON.stringify(character.decoration)]);
+
+  yarp.hotkeys['Inventory'].bind(player);
+  yarp.hotkeys['Test Menu'].bind(player);
+
+  yarp.menus.forEach((menu) => {
+    menu.create(player);
+  });
 });
