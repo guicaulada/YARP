@@ -15,7 +15,7 @@
     "eslint-config-google": "^0.9.1"
   },
   "scripts": {
-    "test": "server.exe"
+    "start": "./server.exe"
   },
   "repository": {
     "type": "git",
