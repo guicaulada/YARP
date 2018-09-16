@@ -9,14 +9,14 @@ class User extends yarp.GMObject {
 /**
  *Creates an instance of User.
  * @param {Object} params
- * @param {*} params.id
+ * @param {String} params.id
  * @param {*} params.password
  * @param {String} [params.lastLogin='']
  * @param {Boolean} [params.whitelisted=false]
  * @param {Boolean} [params.banned=false]
  * @param {*} [params.groups=[]]
- * @param {*} [params.enter=() => {}]
- * @param {*} [params.leave=() => {}]
+ * @param {Function} [params.enter=() => {}]
+ * @param {Function} [params.leave=() => {}]
  * @memberof yarp.User
  */
 constructor(params) {

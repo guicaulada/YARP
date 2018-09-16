@@ -8,19 +8,19 @@ class Checkpoint extends yarp.GMObject {
   /**
    *Creates an instance of Checkpoint.
    * @param {Object} params
-   * @param {*} params.id
-   * @param {*} params.position
+   * @param {String} params.id
+   * @param {Vector3} params.position
    * @param {Number} [params.type=0]
    * @param {Number} [params.radius=1]
-   * @param {*} [params.color=[255, 255, 0, 255]]
-   * @param {*} [params.direction=new mp.Vector3(0, 0, 0)]
+   * @param {Array<Number>} [params.color=[255, 255, 0, 255]]
+   * @param {Vector3} [params.direction=new mp.Vector3(0, 0, 0)]
    * @param {Number} [params.dimension=0]
    * @param {Boolean} [params.visible=true]
    * @param {Number} [params.range=3]
-   * @param {*} [params.enter=() => {}]
-   * @param {*} [params.leave=() => {}]
-   * @param {*} [params.permissions=[]]
-   * @param {*} [params.items={}]
+   * @param {Function} [params.enter=() => {}]
+   * @param {Function} [params.leave=() => {}]
+   * @param {Array} [params.permissions=[]]
+   * @param {Object} [params.items={}]
    * @memberof yarp.Checkpoint
    */
   constructor(params) {

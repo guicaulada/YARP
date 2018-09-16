@@ -8,10 +8,10 @@ class Event extends yarp.GMObject {
   /**
    *Creates an instance of Event.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {*} [params.call=() => {}]
-   * @param {*} [params.permissions=[]]
-   * @param {*} [params.items={}]
+   * @param {Array} [params.permissions=[]]
+   * @param {Object} [params.items={}]
    * @memberof yarp.Event
    */
   constructor(params) {

@@ -8,7 +8,7 @@ class Weapon extends yarp.GMObject {
   /**
    *Creates an instance of Weapon.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {*} params.name
    * @param {String} [params.category='None']
    * @param {Number} [params.weight=0]

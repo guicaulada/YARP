@@ -438,7 +438,11 @@ class Character extends yarp.GMObject {
   tryBankPayment(value) {
     if (this.bank-value >= 0) {
       this.bank -= value;
-      new yarp.Transaction('Payment', value, this.id).save();
+      new yarp.Transaction({
+        type: 'Payment',
+        value: value,
+        source: this.id,
+      }).save();
       return true;
     }
     return false;
@@ -473,7 +477,11 @@ class Character extends yarp.GMObject {
     if (this.wallet-value >= 0) {
       this.wallet -= value;
       this.bank += value;
-      new yarp.Transaction('Deposit', value, this.id).save();
+      new yarp.Transaction({
+        type: 'Deposit',
+        value: value,
+        source: this.id,
+      }).save();
       return true;
     }
     return false;
@@ -491,7 +499,11 @@ class Character extends yarp.GMObject {
     if (this.bank-value >= 0) {
       this.bank -= value;
       this.wallet += value;
-      new yarp.Transaction('Withdraw', value, this.id).save();
+      new yarp.Transaction({
+        type: 'Withdraw',
+        value: value,
+        source: this.id,
+      }).save();
       return true;
     }
     return false;
@@ -510,7 +522,12 @@ class Character extends yarp.GMObject {
     if (this.bank-value >= 0) {
       this.bank -= value;
       target.bank += value;
-      new yarp.Transaction('Transfer', value, this.id, target.id).save();
+      new yarp.Transaction({
+        type: 'Transfer',
+        value: value,
+        source: this.id,
+        target: target.id,
+      }).save();
       return true;
     }
     return false;

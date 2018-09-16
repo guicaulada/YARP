@@ -8,12 +8,12 @@ class Group extends yarp.GMObject {
   /**
    *Creates an instance of Group.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {Boolean} [params.type=false]
    * @param {*} [params.inherits=[]]
-   * @param {*} [params.permissions=[]]
-   * @param {*} [params.enter=() => {}]
-   * @param {*} [params.leave=() => {}]
+   * @param {Array} [params.permissions=[]]
+   * @param {Function} [params.enter=() => {}]
+   * @param {Function} [params.leave=() => {}]
    * @memberof yarp.Group
    */
   constructor(params) {

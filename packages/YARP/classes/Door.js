@@ -8,14 +8,14 @@ class Door extends yarp.GMObject {
   /**
    *Creates an instance of Door.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {*} params.model
-   * @param {*} params.position
+   * @param {Vector3} params.position
    * @param {Number} [params.range=3]
-   * @param {*} [params.enter=() => {}]
-   * @param {*} [params.leave=() => {}]
-   * @param {*} [params.permissions=[]]
-   * @param {*} [params.items={}]
+   * @param {Function} [params.enter=() => {}]
+   * @param {Function} [params.leave=() => {}]
+   * @param {Array} [params.permissions=[]]
+   * @param {Object} [params.items={}]
    * @memberof yarp.Door
    */
   constructor(params) {

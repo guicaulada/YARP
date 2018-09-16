@@ -8,13 +8,13 @@ class Hotkey extends yarp.GMObject {
   /**
    *Creates an instance of Hotkey.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {String} [params.key='E']
    * @param {*} [params.call=() => {}]
    * @param {String} [params.hint='There\'s no hint.']
    * @param {String} [params.category='None']
-   * @param {*} [params.permissions=[]]
-   * @param {*} [params.items={}]
+   * @param {Array} [params.permissions=[]]
+   * @param {Object} [params.items={}]
    * @param {Boolean} [params.position=false]
    * @param {Boolean} [params.range=false]
    * @memberof yarp.Hotkey

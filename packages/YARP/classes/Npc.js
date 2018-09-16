@@ -8,9 +8,9 @@ class Npc extends yarp.GMObject {
   /**
    *Creates an instance of Npc.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {*} params.model
-   * @param {*} params.position
+   * @param {Vector3} params.position
    * @param {Number} [params.heading=0]
    * @param {Number} [params.drawDistance=100]
    * @param {Number} [params.dimension=0]

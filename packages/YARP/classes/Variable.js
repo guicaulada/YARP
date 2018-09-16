@@ -8,7 +8,7 @@ class Variable extends yarp.GMObject {
   /**
    *Creates an instance of Variable.
    * @param {Object} params
-   * @param {*} params.id
+   * @param {String} params.id
    * @param {*} params.value
    * @memberof yarp.Variable
    */

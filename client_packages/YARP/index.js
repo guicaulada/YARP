@@ -7,7 +7,6 @@
  */
 
 global.yarp = {};
-global.NativeUI = require('./YARP/lib/nativeui.js');
 yarp.utils = require('./YARP/modules/utils.js');
 yarp.browsers = {};
 

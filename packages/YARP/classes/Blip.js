@@ -9,7 +9,7 @@ class Blip extends yarp.GMObject {
    * Creates an instance of Blip.
    * @param {Object} params
    * @param {String} params.id
-   * @param {mp.Vector3} params.position
+   * @param {Vector3} params.position
    * @param {String} [params.name='Blip']
    * @param {Number} [params.sprite=1]
    * @param {Number} [params.scale=1]
@@ -17,7 +17,7 @@ class Blip extends yarp.GMObject {
    * @param {Number} [params.alpha=255]
    * @param {Number} [params.drawDistance=100]
    * @param {Boolean} [params.fade=true]
-   * @param {mp.Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
+   * @param {Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
    * @param {Number} [params.dimension=0]
    * @memberof yarp.Blip
    */

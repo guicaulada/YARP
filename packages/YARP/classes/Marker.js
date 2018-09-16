@@ -8,8 +8,8 @@ class Marker extends yarp.GMObject {
   /**
    *Creates an instance of Marker.
    * @param {Object} params
-   * @param {*} params.id
-   * @param {*} params.position
+   * @param {String} params.id
+   * @param {Vector3} params.position
    * @param {Number} [params.type=1]
    * @param {Number} [params.radius=1]
    * @param {*} [params.color=[255, 255, 0, 255]]
@@ -18,10 +18,10 @@ class Marker extends yarp.GMObject {
    * @param {Boolean} [params.visible=true]
    * @param {Number} [params.dimension=0]
    * @param {Number} [params.range=3]
-   * @param {*} [params.enter=() => {}]
-   * @param {*} [params.leave=() => {}]
-   * @param {*} [params.permissions=[]]
-   * @param {*} [params.items={}]
+   * @param {Function} [params.enter=() => {}]
+   * @param {Function} [params.leave=() => {}]
+   * @param {Array} [params.permissions=[]]
+   * @param {Object} [params.items={}]
    * @memberof yarp.Marker
    */
   constructor(params) {
