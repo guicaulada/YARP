@@ -23,7 +23,7 @@ class Transaction extends yarp.GMObject {
       this._source = params.source;
       this._value = params.value;
       this._target = this.default(params.target, this._source);
-      this._date = yarp.utils.getTimestamp(this.default(params.date, new Date()));
+      this._date = this.default(params.date, yarp.utils.getTimestamp(new Date()));
       yarp.mng.register(this);
       this.makeGetterSetter();
     } else {
