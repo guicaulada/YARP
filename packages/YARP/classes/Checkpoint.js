@@ -7,68 +7,38 @@
 class Checkpoint extends yarp.GMObject {
   /**
    *Creates an instance of Checkpoint.
-   * @param {*} id
-   * @param {*} position
-   * @param {number} [type=0]
-   * @param {number} [radius=1]
-   * @param {*} [color=[255, 255, 0, 255]]
-   * @param {*} [direction=new mp.Vector3(0, 0, 0)]
-   * @param {number} [dimension=0]
-   * @param {boolean} [visible=true]
-   * @param {number} [range=3]
-   * @param {*} [enter=() => {}]
-   * @param {*} [leave=() => {}]
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.position
+   * @param {Number} [params.type=0]
+   * @param {Number} [params.radius=1]
+   * @param {*} [params.color=[255, 255, 0, 255]]
+   * @param {*} [params.direction=new mp.Vector3(0, 0, 0)]
+   * @param {Number} [params.dimension=0]
+   * @param {Boolean} [params.visible=true]
+   * @param {Number} [params.range=3]
+   * @param {*} [params.enter=() => {}]
+   * @param {*} [params.leave=() => {}]
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
    * @memberof yarp.Checkpoint
    */
-  constructor(
-    id,
-    position,
-    type = 0,
-    radius = 1,
-    color = [255, 255, 0, 255],
-    direction = new mp.Vector3(0, 0, 0),
-    dimension = 0,
-    visible = true,
-    range = 3,
-    enter = () => {},
-    leave = () => {},
-    permissions = [],
-    items = {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        position: position,
-        type: type,
-        radius: radius,
-        color: color,
-        direction: direction,
-        dimension: dimension,
-        visible: visible,
-        range: range,
-        enter: enter,
-        leave: leave,
-        permissions: permissions,
-        items: items,
-      } = id;
-      return new yarp.Checkpoint(nid, position, type, radius, color, direction, dimension, visible, range, enter, leave, permissions, items);
-    } else if ((id && position) != null) {
-      this._id = id;
-      this._type = type;
-      this._position = yarp.utils.vectorOffset(position, new mp.Vector3(0, 0, -1));
-      this._range = range;
-      this._permissions = permissions;
-      this._items = items;
-      this._radius = radius;
-      this._color = color,
-      this._direction = direction;
-      this._dimension = dimension;
-      this._visible = visible;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
+    if ((params.id && params.position) != null) {
+      this._id = params.id;
+      this._position = yarp.utils.vectorOffset(params.position, new mp.Vector3(0, 0, -1));
+      this._type = this.default(params.type, 0);
+      this._range = this.default(params.range, 3);
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
+      this._radius = this.default(params.radius, 1);
+      this._color = this.default(params.color, [255, 255, 0, 255]),
+      this._direction = this.default(params.direction, new mp.Vector3(0, 0, 0));
+      this._dimension = this.default(params.dimension, 0);
+      this._visible = this.default(params.visible, true);
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
       this.players = [];
       this.mp = mp.checkpoints.new(this._type, this._position, this._radius,
       {
@@ -79,6 +49,8 @@ class Checkpoint extends yarp.GMObject {
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Checkpoint class requires id and position to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

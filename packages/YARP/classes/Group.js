@@ -7,42 +7,28 @@
 class Group extends yarp.GMObject {
   /**
    *Creates an instance of Group.
-   * @param {*} id
-   * @param {boolean} [type=false]
-   * @param {*} [inherits=[]]
-   * @param {*} [permissions=[]]
-   * @param {*} [enter=() => {}]
-   * @param {*} [leave=() => {}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {Boolean} [params.type=false]
+   * @param {*} [params.inherits=[]]
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.enter=() => {}]
+   * @param {*} [params.leave=() => {}]
    * @memberof yarp.Group
    */
-  constructor(
-    id,
-    type = false,
-    inherits = [],
-    permissions = [],
-    enter = () => {},
-    leave = () => {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        type: type,
-        inherits: inherits,
-        permissions: permissions,
-        enter: enter,
-        leave: leave,
-      } = id;
-      return new yarp.Group(nid, type, inherits, permissions, enter, leave);
-    } else if ((id) != null) {
-      this._id = id;
-      this._type = type;
-      this._inherits = inherits;
-      this._permissions = permissions;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
+    if ((params.id) != null) {
+      this._id = params.id;
+      this._type = this.default(params.type, false);
+      this._inherits = this.default(params.inherits, []);
+      this._permissions = this.default(params.permissions, {});
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Group class requires id to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -51,7 +37,7 @@ class Group extends yarp.GMObject {
    * @instance
    * @function users
    * @memberof yarp.Group
-   * @return {object} - Users.
+   * @return {Object} Users.
    */
   get users() {
     let users = {};
@@ -71,7 +57,7 @@ class Group extends yarp.GMObject {
    * @instance
    * @function characters
    * @memberof yarp.Group
-   * @return {object} - Characters.
+   * @return {Object} Characters.
    */
   get characters() {
     let characters = {};
@@ -91,7 +77,7 @@ class Group extends yarp.GMObject {
    * @instance
    * @function addPermission
    * @memberof yarp.Group
-   * @param {string} permission - Permission.
+   * @param {String} permission Permission.
    */
   addPermission(permission) {
     if (this.permissions.indexOf(permission) == -1) {
@@ -104,7 +90,7 @@ class Group extends yarp.GMObject {
    * @instance
    * @function removePermission
    * @memberof yarp.Group
-   * @param {string} permission - Permission.
+   * @param {String} permission Permission.
    */
   removePermission(permission) {
     if (this.permissions.indexOf(permission) > -1) {
@@ -117,8 +103,8 @@ class Group extends yarp.GMObject {
    * @instance
    * @function hasPermission
    * @memberof yarp.Group
-   * @param {string} permission - Permission.
-   * @return {boolean} - If has or not the permission.
+   * @param {String} permission Permission.
+   * @return {Boolean} If has or not the permission.
    */
   hasPermission(permission) {
     let result = false;
@@ -163,8 +149,8 @@ class Group extends yarp.GMObject {
    * @instance
    * @function hasPermission
    * @memberof yarp.Group
-   * @param {Array<string>} permissions - Permissions.
-   * @return {boolean} - If has or not all permissions.
+   * @param {Array<String>} permissions Permissions.
+   * @return {Boolean} If has or not all permissions.
    */
   hasPermissions(permissions) {
     for (let i = 0; i < permissions.length; i++) {

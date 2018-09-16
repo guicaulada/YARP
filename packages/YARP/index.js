@@ -11,6 +11,7 @@
  */
 global.yarp = {};
 global.chalk = require('chalk');
+global.bcrypt = require('bcryptjs');
 yarp.cli = require('./modules/cli.js');
 
 /**

@@ -7,81 +7,45 @@
 class Vehicle extends yarp.GMObject {
   /**
    *Creates an instance of Vehicle.
-   * @param {*} id
-   * @param {*} model
-   * @param {*} position
-   * @param {number} [heading=0]
-   * @param {boolean} [owner=false]
-   * @param {boolean} [plate=false]
-   * @param {*} [color=[0,0,0]]
-   * @param {number} [alpha=255]
-   * @param {boolean} [locked=false]
-   * @param {boolean} [engine=false]
-   * @param {number} [dimension=0]
-   * @param {boolean} [visible=true]
-   * @param {*} [enter=() => {}]
-   * @param {*} [leave=() => {}]
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.model
+   * @param {*} params.position
+   * @param {Number} [params.heading=0]
+   * @param {Boolean} [params.owner=false]
+   * @param {Boolean} [params.plate=false]
+   * @param {*} [params.color=[0,0,0]]
+   * @param {Number} [params.alpha=255]
+   * @param {Boolean} [params.locked=false]
+   * @param {Boolean} [params.engine=false]
+   * @param {Number} [params.dimension=0]
+   * @param {Boolean} [params.visible=true]
+   * @param {*} [params.enter=() => {}]
+   * @param {*} [params.leave=() => {}]
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
    * @memberof yarp.Vehicle
    */
-  constructor(
-    id,
-    model,
-    position,
-    heading = 0,
-    owner = false,
-    plate = false,
-    color = [0, 0, 0],
-    alpha = 255,
-    locked = false,
-    engine = false,
-    dimension = 0,
-    visible = true,
-    enter = () => {},
-    leave = () => {},
-    permissions = [],
-    items = {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        model: model,
-        position: position,
-        heading: heading,
-        owner: owner,
-        plate: plate,
-        color: color,
-        alpha: alpha,
-        locked: locked,
-        engine: engine,
-        dimension: dimension,
-        visible: visible,
-        enter: enter,
-        leave: leave,
-        permissions: permissions,
-        items: items,
-      } = id;
-      return new yarp.Vehicle(nid, model, position, heading, owner, plate, color, alpha, locked, engine, dimension, visible, enter, leave, permissions, items);
-    } else if ((id && model && position) != null) {
-      this._id = id;
-      this._model = model;
-      this._position = position;
-      this._heading = heading;
-      this._owner = owner;
-      this._plate = (plate) ? plate : yarp.utils.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-      this._color = color;
-      this._alpha = alpha;
-      this._locked = locked;
-      this._engine = engine;
-      this._dimension = dimension;
-      this._visible = visible;
-      this._permissions = permissions;
-      this._items = items;
+    if ((params.id && params.model && params.position) != null) {
+      this._id = params.id;
+      this._model = params.model;
+      this._position = params.position;
+      this._heading = this.default(params.heading, 0);
+      this._owner = this.default(params.owner, false);
+      this._plate = this.default(params.plate, yarp.utils.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'));
+      this._color = this.default(params.color, [0, 0, 0]);
+      this._alpha = this.default(params.alpha, 255);
+      this._locked = this.default(params.locked, false);
+      this._engine = this.default(params.engine, false);
+      this._dimension = this.default(params.dimension, 0);
+      this._visible = this.default(params.visible, true);
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
       if (!this._visible) this._alpha = 0;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
       this.players = [];
       this.mp = mp.vehicles.new(mp.joaat(this._model), this._position,
       {
@@ -95,6 +59,8 @@ class Vehicle extends yarp.GMObject {
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Vehicle class requires id, model and position to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -103,7 +69,7 @@ class Vehicle extends yarp.GMObject {
    * @instance
    * @function position
    * @memberof yarp.Vehicle
-   * @param {Vector3} value - Position value.
+   * @param {Vector3} value Position value.
    */
   set position(value) {
     this.mp.position = value;
@@ -115,7 +81,7 @@ class Vehicle extends yarp.GMObject {
    * @instance
    * @function heading
    * @memberof yarp.Vehicle
-   * @param {number} value - Heading value.
+   * @param {Number} value Heading value.
    */
   set heading(value) {
     this.mp.rotation = new mp.Vector3(0, 0, value);

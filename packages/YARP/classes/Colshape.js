@@ -7,57 +7,32 @@
 class Colshape extends yarp.GMObject {
   /**
    *Creates an instance of Colshape.
-   * @param {*} id
-   * @param {*} position
-   * @param {number} [type=1]
-   * @param {number} [width=10]
-   * @param {number} [height=10]
-   * @param {number} [depth=10]
-   * @param {*} [enter=() => {}]
-   * @param {*} [leave=() => {}]
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.position
+   * @param {Number} [params.type=1]
+   * @param {Number} [params.width=10]
+   * @param {Number} [params.height=10]
+   * @param {Number} [params.depth=10]
+   * @param {*} [params.enter=() => {}]
+   * @param {*} [params.leave=() => {}]
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
    * @memberof yarp.Colshape
    */
-  constructor(
-    id,
-    position,
-    type = 1,
-    width = 10,
-    height = 10,
-    depth = 10,
-    enter = () => {},
-    leave = () => {},
-    permissions = [],
-    items = {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        position: position,
-        type: type,
-        width: width,
-        height: height,
-        depth: depth,
-        enter: enter,
-        leave: leave,
-        permissions: permissions,
-        items: items,
-      } = id;
-      return new yarp.Colshape(nid, position, type, width, height, depth, enter, leave, permissions, items);
-    } else if ((id && position) != null) {
-      this._id = id;
-      this._type = type;
-      this._position = position;
-      this._width = width;
-      this._depth = depth;
-      this._height = height;
-      this._visible = visible;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
-      this._permissions = permissions;
-      this._items = items;
+    if ((params.id && params.position) != null) {
+      this._id = params.id;
+      this._position = params.position;
+      this._type = this.default(params.type, 1);
+      this._width = this.default(params.width, 10);
+      this._depth = this.default(params.depth, 10);
+      this._height = this.default(params.height, 10);
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
       switch (this._type) {
         case 1:
           this.mp = mp.colshapes.newRectangle(this._position.x, this._position.y, this._width, this._height);
@@ -73,6 +48,8 @@ class Colshape extends yarp.GMObject {
       }
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Colshape class requires id and position to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

@@ -8,8 +8,8 @@
  * Evaluates code on server-side.
  * @event runServerCode
  * @memberof server.gamemode
- * @param {object} player The player that called the event.
- * @param {string} code Code.
+ * @param {Object} player The player that called the event.
+ * @param {String} code Code.
  */
 mp.events.add('runServerCode', (player, code) => {
   if (yarp.users[player.socialClub].hasPermission('cmd.code')) {
@@ -21,8 +21,8 @@ mp.events.add('runServerCode', (player, code) => {
  * Evaluates code on server-side.
  * @event playerBoundKeyPressed
  * @memberof server.gamemode
- * @param {object} player The player that called the event.
- * @param {string} id Hotkey id.
+ * @param {Object} player The player that called the event.
+ * @param {String} id Hotkey id.
  * @fires displayHelpText
  */
 mp.events.add('playerBoundKeyPressed', (player, id) => {
@@ -239,6 +239,7 @@ function tick() {
               }
             });
 
+            /* Player on player interaction disabled until I get more friends to test it :(
             mp.players.forEach((player2) => {
               try {
                 let id2 = player2.socialClub;
@@ -269,6 +270,7 @@ function tick() {
                 console.log(chalk.redBright('[YARP] ') + 'TickError: ' + err.message + '\n' + err.stack);
               }
             });
+            */
 
             if (yarp.tick % yarp.variables['Save Interval'].value == 0) {
               if ((player.position.x && player.position.y && player.position.z && player.health) != 0) {
@@ -280,12 +282,14 @@ function tick() {
               }
             }
 
-            if (yarp.tick % yarp.variables['Hunger Interval'].value == 0) {
-              character.hunger += yarp.variables['Hunger Rate'].value;
-            }
+            if (character.health > 5) {
+              if (yarp.tick % yarp.variables['Hunger Interval'].value == 0) {
+                character.hunger += yarp.variables['Hunger Rate'].value;
+              }
 
-            if (yarp.tick % yarp.variables['Thirst Interval'].value == 0) {
-              character.thirst += yarp.variables['Thirst Rate'].value;
+              if (yarp.tick % yarp.variables['Thirst Interval'].value == 0) {
+                character.thirst += yarp.variables['Thirst Rate'].value;
+              }
             }
 
             if (yarp.tick % yarp.variables['XP Interval'].value == 0) {
@@ -297,6 +301,7 @@ function tick() {
         console.log(chalk.redBright('[YARP] ') + 'TickError: ' + err.message + '\n' + err.stack);
       }
     });
+
     yarp.vehicles.forEach((vehicle) => {
       try {
         if (yarp.tick % yarp.variables['Save Interval'].value == 0) {

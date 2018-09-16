@@ -8,8 +8,8 @@
  * Player enter coolshape.
  * @event playerEnterColshape
  * @memberof server.colshape
- * @param {object} player The player that called the event.
- * @param {object} shape The colshape that was entered.
+ * @param {Object} player The player that called the event.
+ * @param {Object} shape The colshape that was entered.
  */
 mp.events.add('playerEnterColshape', (player, shape) => {
 });
@@ -18,8 +18,8 @@ mp.events.add('playerEnterColshape', (player, shape) => {
  * Player exit coolshape.
  * @event playerExitColshape
  * @memberof server.colshape
- * @param {object} player The player that called the event.
- * @param {object} shape The colshape that was left.
+ * @param {Object} player The player that called the event.
+ * @param {Object} shape The colshape that was left.
  */
 mp.events.add('playerExitColshape', (player, shape) => {
 });

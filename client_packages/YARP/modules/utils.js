@@ -10,8 +10,8 @@ let utils = {};
  * Gets weapon type from weapon slot.
  * @function getWeaponTypeInSlot
  * @memberof client.yarp.utils
- * @param {number} weaponSlot - Weapon slot hash.
- * @return {number} - Weapon type hash.
+ * @param {Number} weaponSlot Weapon slot hash.
+ * @return {Number} Weapon type hash.
  */
 utils.getWeaponTypeInSlot = (weaponSlot) => {
   // Credits to kemperrr#9752.
@@ -22,8 +22,8 @@ utils.getWeaponTypeInSlot = (weaponSlot) => {
  * Gets weapon ammo.
  * @function getWeaponAmmo
  * @memberof client.yarp.utils
- * @param {number} weaponHash - Weapon hash.
- * @return {number} - Weapon ammo.
+ * @param {Number} weaponHash Weapon hash.
+ * @return {Number} Weapon ammo.
  */
 utils.getWeaponAmmo = (weaponHash) => {
   // Credits to kemperrr#9752.
@@ -34,7 +34,7 @@ utils.getWeaponAmmo = (weaponHash) => {
  * Removes a weapon.
  * @function removeWeapon
  * @memberof client.yarp.utils
- * @param {number} weaponHash - Weapon hash.
+ * @param {Number} weaponHash Weapon hash.
  */
 utils.removeWeapon = (weaponHash) => {
   // Credits to kemperrr#9752.
@@ -45,8 +45,8 @@ utils.removeWeapon = (weaponHash) => {
  * Sets weapon ammo.
  * @function setWeaponAmmo
  * @memberof client.yarp.utils
- * @param {number} weaponHash - Weapon hash.
- * @param {number} ammo - Ammo amount.
+ * @param {Number} weaponHash Weapon hash.
+ * @param {Number} ammo Ammo amount.
  */
 utils.setWeaponAmmo = (weaponHash, ammo) => {
   // Credits to kemperrr#9752.
@@ -57,7 +57,7 @@ utils.setWeaponAmmo = (weaponHash, ammo) => {
  * Gets the current weapon.
  * @function getCurrentWeapon
  * @memberof client.yarp.utils
- * @return {number} - Weapon hash.
+ * @return {Number} Weapon hash.
  */
 utils.getCurrentWeapon = () => {
   // Credits to kemperrr#9752.
@@ -68,8 +68,8 @@ utils.getCurrentWeapon = () => {
  * Gives a certain weapon component.
  * @function giveWeaponComponent
  * @memberof client.yarp.utils
- * @param {number} weaponHash - Weapon hash.
- * @param {number} component - Component hash.
+ * @param {Number} weaponHash Weapon hash.
+ * @param {Number} component Component hash.
  */
 utils.giveWeaponComponent = (weaponHash, component) => {
   // Credits to kemperrr#9752.
@@ -80,8 +80,8 @@ utils.giveWeaponComponent = (weaponHash, component) => {
  * Gets the clip size for a specific weapon.
  * @function getWeaponClipSize
  * @memberof client.yarp.utils
- * @param {number} weaponHash - Weapon hash.
- * @return {number} - The weapon clip size.
+ * @param {Number} weaponHash Weapon hash.
+ * @return {Number} The weapon clip size.
  */
 utils.getWeaponClipSize = (weaponHash) => {
   // Credits to kemperrr#9752.
@@ -92,8 +92,8 @@ utils.getWeaponClipSize = (weaponHash) => {
  * Verifies if the characer has a weapon.
  * @function gotWeapon
  * @memberof client.yarp.utils
- * @param {number} weaponHash - Weapon hash.
- * @return {boolean} - True/false if has or not weapon.
+ * @param {Number} weaponHash Weapon hash.
+ * @return {Boolean} True/false if has or not weapon.
  */
 utils.gotWeapon = (weaponHash) => {
   // Credits to kemperrr#9752.
@@ -104,7 +104,7 @@ utils.gotWeapon = (weaponHash) => {
  * Gets all character weapons and ammo.
  * @function getAllWeapons
  * @memberof client.yarp.utils
- * @return {object} - Dictionary weapon > ammo.
+ * @return {Object} Dictionary weapon > ammo.
  */
 utils.getAllWeapons = () => {
   // Credits to kemperrr#9752.
@@ -122,8 +122,8 @@ utils.getAllWeapons = () => {
  * Format numbers to contain commas.
  * @function numberWithCommas
  * @memberof client.yarp.utils
- * @param {number} x - Number to be formatted.
- * @return {string} - Formatted number.
+ * @param {Number} x Number to be formatted.
+ * @return {String} Formatted number.
  */
 utils.numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -133,10 +133,10 @@ utils.numberWithCommas = (x) => {
  * Gets character camera direction.
  * @function getCameraDirection
  * @memberof client.yarp.utils
- * @return {Vector3} - The position the camera is poiting.
+ * @return {Vector3} The position the camera is poiting.
  */
 utils.getCameraDirection = () => {
-  // Credits to https://github.com/ImagicTheCat/vRP/blob/vrpex/vrp/client/base.lua#L46 - Thank you for teaching me so much.
+  // Credits to https://github.com/ImagicTheCat/vRP/blob/vrpex/vrp/client/base.lua#L46 Thank you for teaching me so much.
   const heading = mp.game.cam.getGameplayCamRelativeHeading()+mp.players.local.getHeading();
   const pitch = mp.game.cam.getGameplayCamRot(0).x;
   let x = -Math.sin(heading*Math.PI/180.0);
@@ -155,7 +155,7 @@ utils.getCameraDirection = () => {
  * Gets a set containing all weapon slots.
  * @function getWeaponTypeInSlot
  * @memberof client.yarp.utils
- * @return {Set} - All weapon slots.
+ * @return {Set} All weapon slots.
  */
 utils.getWeaponSlots = () => {
   return new Set([
@@ -171,7 +171,7 @@ utils.getWeaponSlots = () => {
  * Gets a set containing all door types.
  * @function getDoorTypes
  * @memberof client.yarp.utils
- * @return {Set} - All door types.
+ * @return {Set} All door types.
  */
 utils.getDoorTypes = () => {
   return new Set([0x6b918ea1, 0x53a940ab, 0x86ef4558, 1796834809, 96153298, -281080954, 183249434,
@@ -208,7 +208,7 @@ utils.getDoorTypes = () => {
  * Gets weapon type from weapon slot.
  * @function getVirtualKeys
  * @memberof client.yarp.utils
- * @return {object} - Dictionary of virtual keys
+ * @return {Object} Dictionary of virtual keys
  */
 utils.getVirtualKeys = () => {
   return {
@@ -244,8 +244,8 @@ utils.getVirtualKeys = () => {
  * Returns the time in a set timezone.
  * @function getTimezoneDate
  * @memberof client.yarp.utils
- * @param {number} timezone - The timezone difference to GMT.
- * @return {Date} - Timezone date.
+ * @param {Number} timezone The timezone difference to GMT.
+ * @return {Date} Timezone date.
  */
 utils.getTimezone = (timezone) => {
   let date = new Date();

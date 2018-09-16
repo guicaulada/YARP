@@ -12,8 +12,8 @@ let parameters = {};
 * Creates a browser window.
 * @event createBrowser
 * @memberof client.browser
-* @param {object} id - The browser id.
-* @param {object} params - Function and arguments to execute.
+* @param {Object} id The browser id.
+* @param {Object} params Function and arguments to execute.
 * @fires destroyBrowser
 */
 mp.events.add('createBrowser', (id, params, disableHotkeys, forceArrow) => {
@@ -30,7 +30,7 @@ mp.events.add('createBrowser', (id, params, disableHotkeys, forceArrow) => {
 * Browser domain ready.
 * @event browserDomReady
 * @memberof client.browser
-* @param {object} browser - The browser object.
+* @param {Object} browser The browser object.
 * @fires browserExecute
 */
 mp.events.add('browserDomReady', (browser) => {
@@ -50,7 +50,7 @@ mp.events.add('browserDomReady', (browser) => {
 * Browser window created.
 * @event browserCreated
 * @memberof client.browser
-* @param {object} browser - The browser object.
+* @param {Object} browser The browser object.
 */
 mp.events.add('browserCreated', (browser) => {
 });
@@ -59,7 +59,7 @@ mp.events.add('browserCreated', (browser) => {
 * Browser window failed to load.
 * @event browserLoadingFailed
 * @memberof client.browser
-* @param {object} browser - The browser object.
+* @param {Object} browser The browser object.
 */
 mp.events.add('browserLoadingFailed', (browser) => {
 });
@@ -68,8 +68,8 @@ mp.events.add('browserLoadingFailed', (browser) => {
 * Execute on browser window.
 * @event browserLoadingFailed
 * @memberof client.browser
-* @param {object} id - The browser id.
-* @param {object} params - Function and arguments to execute.
+* @param {Object} id The browser id.
+* @param {Object} params Function and arguments to execute.
 */
 mp.events.add('browserExecute', (id, params) => {
   let input = '';
@@ -87,7 +87,7 @@ mp.events.add('browserExecute', (id, params) => {
 * Destroys a browser window.
 * @event createBrowser
 * @memberof client.browser
-* @param {object} id - The browser id.
+* @param {Object} id The browser id.
 */
 mp.events.add('destroyBrowser', (id) => {
   if (yarp.browsers[id] != null) {

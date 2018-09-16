@@ -7,38 +7,26 @@
 class Location extends yarp.GMObject {
   /**
    *Creates an instance of Location.
-   * @param {*} id
-   * @param {*} [inventory={}]
-   * @param {boolean} [owner=false]
-   * @param {number} [money=0]
-   * @param {number} [price=0]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} [params.inventory={}]
+   * @param {Boolean} [params.owner=false]
+   * @param {Number} [params.money=0]
+   * @param {Number} [params.price=0]
    * @memberof yarp.Location
    */
-  constructor(
-    id,
-    inventory = {},
-    owner = false,
-    money = 0,
-    price = 0
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        inventory: inventory,
-        owner: owner,
-        money: money,
-        price: price,
-      } = id;
-      return new yarp.Location(nid, inventory, owner, money, price);
-    } else if ((id) != null) {
-      this._id = id;
-      this._owner = owner;
-      this._money = money;
-      this._price = price;
-      this._inventory = inventory;
+    if ((params.id) != null) {
+      this._id = params.id;
+      this._owner = this.default(params.owner, false);
+      this._money = this.default(params.money, 0);
+      this._price = this.default(params.price, 0);
+      this._inventory = this.default(params.inventory, {});
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Location class requires id to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -46,7 +34,7 @@ class Location extends yarp.GMObject {
    * Get items with price in inventory.
    * @function sale
    * @memberof yarp.Location
-   * @param {object} categories - Items indexed by categories and id.
+   * @param {Object} categories Items indexed by categories and id.
    * @instance
    */
   get sale() {

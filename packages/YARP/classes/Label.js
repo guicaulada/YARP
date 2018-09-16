@@ -7,72 +7,40 @@
 class Label extends yarp.GMObject {
   /**
    *Creates an instance of Label.
-   * @param {*} id
-   * @param {*} position
-   * @param {string} [text='']
-   * @param {*} [color=[51, 204, 51, 255]]
-   * @param {number} [drawDistance=10]
-   * @param {number} [font=2]
-   * @param {boolean} [los=true]
-   * @param {number} [dimension=0]
-   * @param {boolean} [visible=true]
-   * @param {number} [range=3]
-   * @param {*} [enter=() => {}]
-   * @param {*} [leave=() => {}]
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.position
+   * @param {String} [params.text='']
+   * @param {*} [params.color=[51, 204, 51, 255]]
+   * @param {Number} [params.drawDistance=10]
+   * @param {Number} [params.font=2]
+   * @param {Boolean} [params.los=true]
+   * @param {Number} [params.dimension=0]
+   * @param {Boolean} [params.visible=true]
+   * @param {Number} [params.range=3]
+   * @param {*} [params.enter=() => {}]
+   * @param {*} [params.leave=() => {}]
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
    * @memberof yarp.Label
    */
-  constructor(
-    id,
-    position,
-    text = '',
-    color = [51, 204, 51, 255],
-    drawDistance = 10,
-    font = 2,
-    los = true,
-    dimension = 0,
-    visible = true,
-    range = 3,
-    enter = () => {},
-    leave = () => {},
-    permissions = [],
-    items = {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        position: position,
-        text: text,
-        color: color,
-        drawDistance: drawDistance,
-        font: font,
-        los: los,
-        dimension: dimension,
-        visible: visible,
-        range: range,
-        enter: enter,
-        leave: leave,
-        permissions: permissions,
-        items: items,
-      } = id;
-      return new yarp.Label(nid, position, text, color, drawDistance, font, los, dimension, visible, range, enter, leave, permissions, items);
-    } else if ((id && position) != null) {
-      this._id = id;
-      this._text = text;
-      this._position = position;
-      this._range = range;
-      this._color = color;
-      this._drawDistance = drawDistance;
-      this._font = font;
-      this._los = los;
-      this._dimension = dimension;
-      this._visible = visible;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
-      this._permissions = permissions;
-      this._items = items;
+    if ((params.id && params.position) != null) {
+      this._id = params.id;
+      this._position = params.position;
+      this._text = this.default(params.text, '');
+      this._range = this.default(params.range, 3);
+      this._color = this.default(params.color, [51, 204, 51, 255]);
+      this._drawDistance = this.default(params.drawDistance, 10);
+      this._font = this.default(params.font, 2);
+      this._los = this.default(params.los, true);
+      this._dimension = this.default(params.dimension, 0);
+      this._visible = this.default(params.visible, true);
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
       this.players = [];
       if (!this._visible) this._color[4] = 0;
       this.mp = mp.labels.new(this._text, this._position,
@@ -85,6 +53,8 @@ class Label extends yarp.GMObject {
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Label class requires id and position to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

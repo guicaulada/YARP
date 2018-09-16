@@ -7,120 +7,67 @@
 class Character extends yarp.GMObject {
   /**
    *Creates an instance of Character.
-   * @param {*} id
-   * @param {*} socialClub
-   * @param {number} [age=18]
-   * @param {string} [model='mp_m_freemode_01']
-   * @param {*} [face={}]
-   * @param {string} [lastLogin='']
-   * @param {string} [wallet=yarp.variables['Starting Wallet'].value]
-   * @param {string} [bank=yarp.variables['Starting Bank'].value]
-   * @param {number} [health=100]
-   * @param {number} [armour=0]
-   * @param {number} [hunger=0]
-   * @param {number} [thirst=0]
-   * @param {number} [xp=0]
-   * @param {string} [position=yarp.variables['First Spawn'].value]
-   * @param {string} [heading=yarp.variables['First Heading'].value]
-   * @param {*} [groups=[]]
-   * @param {*} [weapons={}]
-   * @param {*} [skills={}]
-   * @param {number} [weight=0]
-   * @param {*} [inventory={}]
-   * @param {*} [customization={}]
-   * @param {*} [decoration={}]
-   * @param {*} [clothes={}]
-   * @param {*} [enter=() => {}]
-   * @param {*} [leave=() => {}]
+   * @param {Object} params
+   * @param {String} params.id
+   * @param {String} params.socialClub
+   * @param {Number} [params.age=18]
+   * @param {String} [params.model='mp_m_freemode_01']
+   * @param {Object} [params.face={}]
+   * @param {String} [params.lastLogin='']
+   * @param {String} [params.wallet=yarp.variables['Starting Wallet'].value]
+   * @param {String} [params.bank=yarp.variables['Starting Bank'].value]
+   * @param {Number} [params.health=100]
+   * @param {Number} [params.armour=0]
+   * @param {Number} [params.hunger=0]
+   * @param {Number} [params.thirst=0]
+   * @param {Number} [params.xp=0]
+   * @param {String} [params.position=yarp.variables['First Spawn'].value]
+   * @param {String} [params.heading=yarp.variables['First Heading'].value]
+   * @param {Array} [params.groups=[]]
+   * @param {Object} [params.weapons={}]
+   * @param {Object} [params.skills={}]
+   * @param {Number} [params.weight=0]
+   * @param {Object} [params.inventory={}]
+   * @param {Object} [params.customization={}]
+   * @param {Object} [params.decoration={}]
+   * @param {Object} [params.clothes={}]
+   * @param {Function} [params.enter=() => {}]
+   * @param {Function} [params.leave=() => {}]
    * @memberof yarp.Character
    */
-  constructor(
-    id,
-    socialClub,
-    age = 18,
-    model = 'mp_m_freemode_01',
-    face = {},
-    lastLogin = '',
-    wallet = yarp.variables['Starting Wallet'].value,
-    bank = yarp.variables['Starting Bank'].value,
-    health = 100,
-    armour = 0,
-    hunger = 0,
-    thirst = 0,
-    xp = 0,
-    position = yarp.variables['First Spawn'].value,
-    heading = yarp.variables['First Heading'].value,
-    groups = [],
-    weapons = {},
-    skills = {},
-    weight = 0,
-    inventory = {},
-    customization = {},
-    decoration = {},
-    clothes = {},
-    enter = () => {},
-    leave = () => {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        socialClub: socialClub,
-        age: age,
-        model: model,
-        face: face,
-        lastLogin: lastLogin,
-        wallet: wallet,
-        bank: bank,
-        health: health,
-        armour: armour,
-        hunger: hunger,
-        thirst: thirst,
-        xp: xp,
-        position: position,
-        heading: heading,
-        groups: groups,
-        weapons: weapons,
-        skills: skills,
-        weight: weight,
-        inventory: inventory,
-        customization: customization,
-        decoration: decoration,
-        clothes: clothes,
-        enter: enter,
-        leave: leave,
-      } = id;
-      return new yarp.Character(nid, socialClub, age, model, face, lastLogin, wallet, bank, health, armour, hunger, thirst, xp,
-         position, heading, groups, weapons, skills, weight, inventory, customization, decoration, clothes, enter, leave);
-    } else if ((id && socialClub) != null) {
-      this._id = id;
-      this._socialClub = socialClub;
-      this._age = age;
-      this._model = model;
-      this._face = face;
-      this._lastLogin = lastLogin;
-      this._wallet = wallet;
-      this._bank = bank;
-      this._health = health;
-      this._armour = armour;
-      this._position = position;
-      this._heading = heading;
-      this._groups = groups;
-      this._weapons = weapons;
-      this._skills = skills;
-      this._weight = weight;
-      this._hunger = hunger;
-      this._thirst = thirst;
-      this._xp = xp;
-      this._inventory = inventory;
-      this._customization = customization;
-      this._decoration = decoration;
-      this._clothes = clothes;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
+    if ((params.id && params.socialClub) != null) {
+      this._id = params.id;
+      this._socialClub = params.socialClub;
+      this._age = this.default(params.age, 18);
+      this._model = this.default(params.model, 'mp_m_freemode_01');
+      this._face = this.default(params.age, {});
+      this._lastLogin = this.default(params.lastLogin, '');
+      this._wallet = this.default(params.wallet, yarp.variables['Starting Wallet'].value);
+      this._bank = this.default(params.bank, yarp.variables['Starting Bank'].value);
+      this._health = this.default(params.health, 100);
+      this._armour = this.default(params.armour, 0);
+      this._position = this.default(params.position, yarp.variables['First Spawn'].value);
+      this._heading = this.default(params.heading, yarp.variables['First Heading'].value);
+      this._groups = this.default(params.groups, []);
+      this._weapons = this.default(params.weapons, {});
+      this._skills = this.default(params.skills, {});
+      this._weight = this.default(params.weight, 0);
+      this._hunger = this.default(params.hunger, 0);
+      this._thirst = this.default(params.thirst, 0);
+      this._xp = this.default(params.xp, 0);
+      this._inventory = this.default(params.inventory, {});
+      this._customization = this.default(params.customization, {});
+      this._decoration = this.default(params.decostation, {});
+      this._clothes = this.default(params.clothers, {});
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
       this.players = [];
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Character class requires id and socialClub to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -129,7 +76,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function player
    * @memberof yarp.Character
-   * @return {object} - Player.
+   * @return {Object} Player.
    */
   get player() {
     for (let player of mp.players.toArray()) {
@@ -145,7 +92,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function user
    * @memberof yarp.Character
-   * @return {object} - User.
+   * @return {Object} User.
    */
   get user() {
     return yarp.users[this.socialClub];
@@ -156,7 +103,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function balance
    * @memberof yarp.Character
-   * @return {Array<object>} - Balance.
+   * @return {Array<Object>} Balance.
    */
   get balance() {
     let balance = [];
@@ -173,7 +120,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function enter
    * @memberof yarp.Character
-   * @return {function} - Enter functions.
+   * @return {Function} Enter functions.
    * @fires characterJoinedGroup
    */
   get enter() {
@@ -194,7 +141,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function enter
    * @memberof yarp.Character
-   * @param {function} value - Enter function.
+   * @param {Function} value Enter function.
    */
   set enter(value) {
     this._enter = value.toString();
@@ -205,7 +152,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function leave
    * @memberof yarp.Character
-   * @return {function} - Leave functions.
+   * @return {Function} Leave functions.
    * @fires characterLeftGroup
    */
   get leave() {
@@ -226,7 +173,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function leave
    * @memberof yarp.Character
-   * @param {function} value - Leave function.
+   * @param {Function} value Leave function.
    */
   set leave(value) {
     this._leave = value.toString();
@@ -328,7 +275,7 @@ class Character extends yarp.GMObject {
    */
   set hunger(value) {
     if (value > 100) {
-      this.health -= (value - 100);
+      this.health -= (value-100);
       value = 100;
     } else if (value < 0) {
       this.health += value;
@@ -360,7 +307,7 @@ class Character extends yarp.GMObject {
    */
   set thirst(value) {
     if (value > 100) {
-      this.health -= (value - 100);
+      this.health -= (value-100);
       value = 100;
     } else if (value < 0) {
       this.health += value;
@@ -458,7 +405,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function updateLastLogin
    * @memberof yarp.Character
-   * @param {string} ip - Character ip.
+   * @param {String} ip Character ip.
    */
   updateLastLogin(ip) {
     this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
@@ -469,8 +416,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function tryWalletPayment
    * @memberof yarp.Character
-   * @param {number} value - Amount to pay.
-   * @return {boolean} - Operation success/fail.
+   * @param {Number} value Amount to pay.
+   * @return {Boolean} Operation success/fail.
    */
   tryWalletPayment(value) {
     if (this.wallet-value >= 0) {
@@ -485,8 +432,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function tryBankPayment
    * @memberof yarp.Character
-   * @param {number} value - Amount to pay.
-   * @return {boolean} - Operation success/fail.
+   * @param {Number} value Amount to pay.
+   * @return {Boolean} Operation success/fail.
    */
   tryBankPayment(value) {
     if (this.bank-value >= 0) {
@@ -502,8 +449,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function tryFullPayment
    * @memberof yarp.Character
-   * @param {number} value - Amount to pay.
-   * @return {boolean} - Operation success/fail.
+   * @param {Number} value Amount to pay.
+   * @return {Boolean} Operation success/fail.
    */
   tryFullPayment(value) {
     if (this.tryWalletPayment(value)) {
@@ -519,8 +466,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function tryDeposit
    * @memberof yarp.Character
-   * @param {number} value - Amount to deposit.
-   * @return {boolean} - Operation success/fail.
+   * @param {Number} value Amount to deposit.
+   * @return {Boolean} Operation success/fail.
    */
   tryDeposit(value) {
     if (this.wallet-value >= 0) {
@@ -537,13 +484,13 @@ class Character extends yarp.GMObject {
    * @instance
    * @function tryWithdraw
    * @memberof yarp.Character
-   * @param {number} value - Amount to withdraw.
-   * @return {boolean} - Operation success/fail.
+   * @param {Number} value Amount to withdraw.
+   * @return {Boolean} Operation success/fail.
    */
   tryWithdraw(value) {
     if (this.bank-value >= 0) {
       this.bank -= value;
-      this.money += value;
+      this.wallet += value;
       new yarp.Transaction('Withdraw', value, this.id).save();
       return true;
     }
@@ -555,9 +502,9 @@ class Character extends yarp.GMObject {
    * @instance
    * @function tryTransfer
    * @memberof yarp.Character
-   * @param {string} target - Target character name.
-   * @param {number} value - Amount to transfer.
-   * @return {boolean} - Operation success/fail.
+   * @param {String} target Target character name.
+   * @param {Number} value Amount to transfer.
+   * @return {Boolean} Operation success/fail.
    */
   tryTransfer(target, value) {
     if (this.bank-value >= 0) {
@@ -574,9 +521,9 @@ class Character extends yarp.GMObject {
    * @instance
    * @function giveItem
    * @memberof yarp.Character
-   * @param {object} item - Item to give.
-   * @param {number} amount - Amount to give.
-   * @return {boolean} - Operation success/fail.
+   * @param {Object} item Item to give.
+   * @param {Number} amount Amount to give.
+   * @return {Boolean} Operation success/fail.
    */
   giveItem(item, amount) {
     if ((typeof item) === 'string') item = yarp.items[item];
@@ -597,16 +544,16 @@ class Character extends yarp.GMObject {
    * @instance
    * @function takeItem
    * @memberof yarp.Character
-   * @param {object} item - Item to take.
-   * @param {number} amount - Amount to take.
-   * @return {boolean} - Operation success/fail.
+   * @param {Object} item Item to take.
+   * @param {Number} amount Amount to take.
+   * @return {Boolean} Operation success/fail.
    */
   takeItem(item, amount) {
     if ((typeof item) === 'string') item = yarp.items[item];
     if (this.inventory[item.id] != null) {
-      if (this.inventory[item.id] - amount >= 0) {
-        this.inventory[item.id] = this.inventory[item.id] - amount;
-        this.weight = yarp.utils.round(this.weight - (amount * item.weight), 1);
+      if (this.inventory[item.id]-amount >= 0) {
+        this.inventory[item.id] = this.inventory[item.id]-amount;
+        this.weight = yarp.utils.round(this.weight-(amount * item.weight), 1);
         if (this.inventory[item.id] <= 0) {
           delete this.inventory[item.id];
         }
@@ -621,8 +568,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function takeItem
    * @memberof yarp.Character
-   * @param {string} id - Item id.
-   * @return {boolean} - If has or not the item.
+   * @param {String} id Item id.
+   * @return {Boolean} If has or not the item.
    */
   hasItem(id) {
     return (this.inventory[id] != null && this.inventory[id] > 0);
@@ -633,8 +580,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasItems
    * @memberof yarp.Character
-   * @param {Array<string>} items - Items id.
-   * @return {boolean} - If has or not all items.
+   * @param {Array<String>} items Items id.
+   * @return {Boolean} If has or not all items.
    */
   hasItems(items) {
     for (let i = 0; i < items.length; i++) {
@@ -650,8 +597,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function giveWeapon
    * @memberof yarp.Character
-   * @param {object} weapon - Weapon object or id.
-   * @param {number} amount - Amount of bullets.
+   * @param {Object} weapon Weapon object or id.
+   * @param {Number} amount Amount of bullets.
    * @fires equipWeapon
    */
   giveWeapon(weapon, amount) {
@@ -670,7 +617,7 @@ class Character extends yarp.GMObject {
    * @instance
    * @function takeWeapon
    * @memberof yarp.Character
-   * @param {object} weapon - Weapon object or id.
+   * @param {Object} weapon Weapon object or id.
    * @fires unequipWeapon
    */
   takeWeapon(weapon) {
@@ -688,8 +635,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function takeWeaponAmmo
    * @memberof yarp.Character
-   * @param {string} id - Weapon id.
-   * @param {number} amount - Amount of bullets.
+   * @param {String} id Weapon id.
+   * @param {Number} amount Amount of bullets.
    */
   takeWeaponAmmo(id, amount) {
     if (this.hasWeapon(id)) {
@@ -707,8 +654,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function giveWeaponAmmo
    * @memberof yarp.Character
-   * @param {string} id - Weapon id.
-   * @param {number} amount - Amount of bullets.
+   * @param {String} id Weapon id.
+   * @param {Number} amount Amount of bullets.
    */
   giveWeaponAmmo(id, amount) {
     if (this.hasWeapon(id)) {
@@ -723,8 +670,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function takeAmmo
    * @memberof yarp.Character
-   * @param {string} id - Ammo id.
-   * @param {number} amount - Amount of bullets.
+   * @param {String} id Ammo id.
+   * @param {Number} amount Amount of bullets.
    */
   takeAmmo(id, amount) {
     let weaponId = id.replace('AMMO_', 'WEAPON_');
@@ -743,8 +690,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function giveAmmo
    * @memberof yarp.Character
-   * @param {string} id - Ammo id.
-   * @param {number} amount - Amount of bullets.
+   * @param {String} id Ammo id.
+   * @param {Number} amount Amount of bullets.
    */
   giveAmmo(id, amount) {
     let weaponId = id.replace('AMMO_', 'WEAPON_');
@@ -760,8 +707,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasWeapon
    * @memberof yarp.Character
-   * @param {string} id - Weapon id.
-   * @return {boolean} - If has or not the weapon.
+   * @param {String} id Weapon id.
+   * @return {Boolean} If has or not the weapon.
    */
   hasWeapon(id) {
     return (this.weapons[id] != null);
@@ -772,8 +719,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasWeapons
    * @memberof yarp.Character
-   * @param {Array<string>} weapons - Weapons id.
-   * @return {boolean} - If has or not all the weapons.
+   * @param {Array<String>} weapons Weapons id.
+   * @return {Boolean} If has or not all the weapons.
    */
   hasWeapons(weapons) {
     for (let i = 0; i < weapons.length; i++) {
@@ -789,8 +736,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function giveGroup
    * @memberof yarp.Character
-   * @param {string} group - Group id.
-   * @return {boolean} - Operation success/fail.
+   * @param {String} group Group id.
+   * @return {Boolean} Operation success/fail.
    * @fires characterJoinedGroup
    */
   giveGroup(group) {
@@ -820,8 +767,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function takeGroup
    * @memberof yarp.Character
-   * @param {string} group - Group id.
-   * @return {boolean} - Operation success/fail.
+   * @param {String} group Group id.
+   * @return {Boolean} Operation success/fail.
    * @fires characterLeftGroup
    */
   takeGroup(group) {
@@ -844,8 +791,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function getGroupByType
    * @memberof yarp.Character
-   * @param {string} type - Group type.
-   * @return {string} - Group id.
+   * @param {String} type Group type.
+   * @return {String} Group id.
    */
   getGroupByType(type) {
     for (let id of this.groups) {
@@ -863,8 +810,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function getGroupByTypes
    * @memberof yarp.Character
-   * @param {Array<string>} types - Group types.
-   * @return {Array<string>} - Group ids.
+   * @param {Array<String>} types Group types.
+   * @return {Array<String>} Group ids.
    */
   getGroupsByTypes(types) {
     let groups = [];
@@ -884,8 +831,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasGroup
    * @memberof yarp.Character
-   * @param {string} id - Group id.
-   * @return {boolean} - If has or not the group.
+   * @param {String} id Group id.
+   * @return {Boolean} If has or not the group.
    */
   hasGroup(id) {
    return (this.groups.indexOf(id) > -1);
@@ -896,8 +843,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasGroup
    * @memberof yarp.Character
-   * @param {Array<string>} groups - Group ids.
-   * @return {boolean} - If has or not all the groups.
+   * @param {Array<String>} groups Group ids.
+   * @return {Boolean} If has or not all the groups.
    */
   hasGroups(groups) {
     for (let i = 0; i < groups.length; i++) {
@@ -913,8 +860,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasPermission
    * @memberof yarp.Character
-   * @param {string} permission - Permission.
-   * @return {boolean} - If has or not the permission.
+   * @param {String} permission Permission.
+   * @return {Boolean} If has or not the permission.
    */
   hasPermission(permission) {
     let result = false;
@@ -1015,8 +962,8 @@ class Character extends yarp.GMObject {
    * @instance
    * @function hasPermission
    * @memberof yarp.Character
-   * @param {Array<string>} permissions - Permissions.
-   * @return {boolean} - If has or not all permissions.
+   * @param {Array<String>} permissions Permissions.
+   * @return {Boolean} If has or not all permissions.
    */
   hasPermissions(permissions) {
     for (let i = 0; i < permissions.length; i++) {

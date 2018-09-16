@@ -10,7 +10,7 @@ let equiped = {};
  * Attach a weapon model to the character.
  * @event equipWeapon
  * @memberof client.weapon
- * @param {string} weaponJson - The weapon data in JSON.
+ * @param {String} weaponJson The weapon data in JSON.
  */
 mp.events.add('equipWeapon', (weaponJson) => {
   let weapon = JSON.parse(weaponJson);
@@ -35,7 +35,7 @@ mp.events.add('equipWeapon', (weaponJson) => {
  * Deletes specific equiped weapon.
  * @event unequipWeapon
  * @memberof client.weapon
- * @param {string} id - The weapon id.
+ * @param {String} id The weapon id.
  */
 mp.events.add('unequipWeapon', (id) => {
   if (equiped[id] != null) {

@@ -21,7 +21,7 @@ let characters = null;
  * Show user characters on side menu.
  * @event showPlayerCharacters
  * @memberof client.character
- * @param {string} charactersJson - User characters JSON.
+ * @param {String} charactersJson User characters JSON.
  * @fires createBrowser
  */
 mp.events.add('showPlayerCharacters', (charactersJson) => {
@@ -35,7 +35,7 @@ mp.events.add('showPlayerCharacters', (charactersJson) => {
  * Load the caracter data.
  * @event loadCharacter
  * @memberof client.character
- * @param {string} id - Character name.
+ * @param {String} id Character name.
  * @fires loadCharacter
  */
 mp.events.add('loadCharacter', (id) => {
@@ -69,7 +69,7 @@ mp.events.add('showCharacterCreationMenu', () => {
  * Changes the character model.
  * @event updatePlayerModel
  * @memberof client.character
- * @param {string} model - Ped model.
+ * @param {String} model Ped model.
  * @fires changeCharacterModel
  */
 mp.events.add('updatePlayerModel', (model) => {
@@ -81,9 +81,9 @@ mp.events.add('updatePlayerModel', (model) => {
  * Update character creation.
  * @event updatePlayerCreation
  * @memberof client.character
- * @param {string} partName - The part name.
- * @param {number} value - The part value.
- * @param {boolean} isPercentage - If the value is a parcentage or not.
+ * @param {String} partName The part name.
+ * @param {Number} value The part value.
+ * @param {Boolean} isPercentage If the value is a parcentage or not.
  */
 mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {
   if (isPercentage) {
@@ -97,7 +97,7 @@ mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {
  * Switches focus between body and face.
  * @event cameraPointTo
  * @memberof client.character
- * @param {number} bodyPart - Body or face (0/1).
+ * @param {Number} bodyPart Body or face (0/1).
  */
 mp.events.add('cameraPointTo', (bodyPart) => {
   if (bodyPart == 0) {
@@ -111,7 +111,7 @@ mp.events.add('cameraPointTo', (bodyPart) => {
  * Sets the character heading.
  * @event rotateCharacter
  * @memberof client.character
- * @param {number} rotation - Heading.
+ * @param {Number} rotation Heading.
  */
 mp.events.add('rotateCharacter', (rotation) => {
   mp.players.local.setHeading(rotation);
@@ -131,9 +131,9 @@ mp.events.add('characterNameDuplicated', () => {
  * Tries to create the character.
  * @event acceptCharacterCreation
  * @memberof client.character
- * @param {string} name - Character name.
- * @param {number} age - Character age.
- * @param {string} model - Character model (male/female).
+ * @param {String} name Character name.
+ * @param {Number} age Character age.
+ * @param {String} model Character model (male/female).
  * @fires createCharacter
  */
 mp.events.add('acceptCharacterCreation', (name, age, model) => {
@@ -178,9 +178,9 @@ mp.events.add('characterCreatedSuccessfully', () => {
  * Updates player features.
  * @event updatePlayerCustomSkin
  * @memberof client.character
- * @param {object} player - The player to be updated.
- * @param {string} faceJson - The face data in JSON.
- * @param {string} tattooJson - The tattoo data in JSON.
+ * @param {Object} player The player to be updated.
+ * @param {String} faceJson The face data in JSON.
+ * @param {String} tattooJson The tattoo data in JSON.
  */
 mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
   let face = JSON.parse(faceJson);
@@ -193,8 +193,8 @@ mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
  * Initializes player features.
  * @function initializeCharacterCreation
  * @memberof client.character
- * @param {object} player - The player to initialize.
- * @return {object} - The face model.
+ * @param {Object} player The player to initialize.
+ * @return {Object} The face model.
  */
 function initializeCharacterCreation(player) {
   faceModel.firstHeadShape = player === 'undefined' ? 0 : player.getVariable('FIRST_HEAD_SHAPE');
@@ -251,8 +251,8 @@ function initializeCharacterCreation(player) {
  * Updates player features.
  * @function updatePlayerFace
  * @memberof client.character
- * @param {object} player - The player to update.
- * @param {object} face - The face object.
+ * @param {Object} player The player to update.
+ * @param {Object} face The face object.
  */
 function updatePlayerFace(player, face) {
   player.setHeadBlendData(Number(face.firstHeadShape), Number(face.secondHeadShape), 0,
@@ -298,8 +298,8 @@ function updatePlayerFace(player, face) {
  * Updates player features.
  * @function updatePlayerTattoos
  * @memberof client.character
- * @param {object} player - The player to update.
- * @param {Array<object>} tattooArray - Object tattoo with hash and library.
+ * @param {Object} player The player to update.
+ * @param {Array<Object>} tattooArray Object tattoo with hash and library.
  */
 function updatePlayerTattoos(player, tattooArray) {
   for (let i = 0; i < tattooArray.length; i++) {

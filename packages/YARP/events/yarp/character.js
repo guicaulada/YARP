@@ -8,11 +8,11 @@
  * Create character event.
  * @event createCharacter
  * @memberof server.character
- * @param {object} player The player that called the event.
- * @param {string} id Character id.
- * @param {number} age Character age.
- * @param {string} model Character model.
- * @param {string} faceJson Character face JSON.
+ * @param {Object} player The player that called the event.
+ * @param {String} id Character id.
+ * @param {Number} age Character age.
+ * @param {String} model Character model.
+ * @param {String} faceJson Character face JSON.
  * @fires characterCreatedSuccessfully
  * @fires showPlayerCharacters
  * @fires characterNameDuplicated
@@ -20,7 +20,7 @@
 mp.events.add('createCharacter', (player, id, age, model, faceJson) => {
   let character = yarp.characters[id];
   if (character == null) {
-    character = new yarp.Character(id, player.socialClub, age, model, JSON.parse(faceJson));
+    character = new yarp.Character({id: id, socialClub: player.socialClub, age: age, model: model, face: JSON.parse(faceJson)});
     character.save();
     player.call('characterCreatedSuccessfully');
     player.call('showPlayerCharacters', [JSON.stringify(character.user.characters)]);
@@ -33,8 +33,8 @@ mp.events.add('createCharacter', (player, id, age, model, faceJson) => {
  * Change character model event.
  * @event changeCharacterModel
  * @memberof server.character
- * @param {object} player The player that called the event.
- * @param {string} model Character model.
+ * @param {Object} player The player that called the event.
+ * @param {String} model Character model.
  */
 mp.events.add('changeCharacterModel', (player, model) => {
   player.model = mp.joaat(model);
@@ -44,7 +44,7 @@ mp.events.add('changeCharacterModel', (player, model) => {
  * Set character into creator event.
  * @event setCharacterIntoCreator
  * @memberof server.character
- * @param {object} player The player that called the event.
+ * @param {Object} player The player that called the event.
  */
 mp.events.add('setCharacterIntoCreator', (player) => {
   player.position = new mp.Vector3(152.5, -1001.25, -99.5);
@@ -55,8 +55,8 @@ mp.events.add('setCharacterIntoCreator', (player) => {
  * Load character event.
  * @event loadCharacter
  * @memberof server.character
- * @param {object} player The player that called the event.
- * @param {string} id Character id.
+ * @param {Object} player The player that called the event.
+ * @param {String} id Character id.
  * @fires equipWeapon
  * @fires updatePlayerCustomSkin
  */

@@ -7,6 +7,7 @@
  */
 
 global.yarp = {};
+global.NativeUI = require('./YARP/lib/nativeui.js');
 yarp.utils = require('./YARP/modules/utils.js');
 yarp.browsers = {};
 
@@ -24,5 +25,5 @@ require('./YARP/events/ragemp/waypoint.js');
 require('./YARP/events/yarp/character.js');
 require('./YARP/events/yarp/command.js');
 require('./YARP/events/yarp/gamemode.js');
-require('./YARP/events/yarp/menu.js');
+require('./YARP/events/yarp/ui.js');
 require('./YARP/events/yarp/weapon.js');

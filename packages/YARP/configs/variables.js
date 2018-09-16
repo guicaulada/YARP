@@ -1,6 +1,8 @@
 'use strict';
 
-let config = {
+let config = {};
+
+let values = {
   'Whitelisted': false,
   'Starting Wallet': 100,
   'Starting Bank': 1500,
@@ -27,5 +29,13 @@ let config = {
     new mp.Vector3(-874.64, -307.71, 39.58),
   ],
 };
+
+for (let id in values) {
+  if (values.hasOwnProperty(id)) {
+    config[id] = {
+      value: values[id],
+    };
+  }
+}
 
 module.exports = config;

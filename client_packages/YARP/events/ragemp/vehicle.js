@@ -8,8 +8,8 @@
  * Entering vehicle.
  * @event playerStartEnterVehicle
  * @memberof client.vehicle
- * @param {object} vehicle - The vehicle of the event.
- * @param {number} seat - The seat he is sitting on.
+ * @param {Object} vehicle The vehicle of the event.
+ * @param {Number} seat The seat he is sitting on.
  */
 mp.events.add('playerStartEnterVehicle', (vehicle, seat) => {
 });
@@ -18,8 +18,8 @@ mp.events.add('playerStartEnterVehicle', (vehicle, seat) => {
  * Entered vehicle.
  * @event playerEnterVehicle
  * @memberof client.vehicle
- * @param {object} vehicle - The vehicle of the event.
- * @param {number} seat - The seat he is sitting on.
+ * @param {Object} vehicle The vehicle of the event.
+ * @param {Number} seat The seat he is sitting on.
  */
 mp.events.add('playerEnterVehicle', (vehicle, seat) => {
 });

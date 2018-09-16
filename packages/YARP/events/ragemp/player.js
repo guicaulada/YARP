@@ -8,8 +8,8 @@
  * Chat event.
  * @event playerChat
  * @memberof server.player
- * @param {object} player The player that called the event.
- * @param {string} message Message sent.
+ * @param {Object} player The player that called the event.
+ * @param {String} message Message sent.
  */
 mp.events.add('playerChat', (player, message) => {
   console.log(`${player.name}: ${message}`);
@@ -20,8 +20,8 @@ mp.events.add('playerChat', (player, message) => {
  * Command event.
  * @event playerCommand
  * @memberof server.player
- * @param {object} player The player that called the event.
- * @param {string} command Message sent.
+ * @param {Object} player The player that called the event.
+ * @param {String} command Message sent.
  */
 mp.events.add('playerCommand', (player, command) => {
   const args = command.split(/[ ]+/);
@@ -59,7 +59,7 @@ mp.events.add('playerDamage', (player, healthLoss, armorLoss) => {
  * Death event.
  * @event playerDeath
  * @memberof server.player
- * @param {object} player The player that called the event.
+ * @param {Object} player The player that called the event.
  * @fires unequipAllWeapons
  */
 mp.events.add('playerDeath', (player) => {
@@ -78,7 +78,7 @@ mp.events.add('playerDeath', (player) => {
  * Join event.
  * @event playerJoin
  * @memberof server.player
- * @param {object} player The player that called the event.
+ * @param {Object} player The player that called the event.
  * @fires createBrowser
  */
 mp.events.add('playerJoin', (player) => {
@@ -111,9 +111,9 @@ mp.events.add('playerJoin', (player) => {
  * Quit event.
  * @event playerQuit
  * @memberof server.player
- * @param {object} player The player that called the event.
- * @param {string} exitType Exit type.
- * @param {string} reason Exit reason.
+ * @param {Object} player The player that called the event.
+ * @param {String} exitType Exit type.
+ * @param {String} reason Exit reason.
  */
 mp.events.add('playerQuit', (player, exitType, reason) => {
   if (yarp.users[player.socialClub]) yarp.users[player.socialClub].leave();
@@ -129,7 +129,7 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
  * Player ready.
  * @event playerReady
  * @memberof server.player
- * @param {object} player The player that called the event.
+ * @param {Object} player The player that called the event.
  */
 mp.events.add('playerReady', (player) => {
 });
@@ -138,7 +138,7 @@ mp.events.add('playerReady', (player) => {
  * Player spawned.
  * @event playerSpawn
  * @memberof server.player
- * @param {object} player The player that called the event.
+ * @param {Object} player The player that called the event.
  */
 mp.events.add('playerSpawn', (player) => {
 });
@@ -147,9 +147,9 @@ mp.events.add('playerSpawn', (player) => {
  * Weapon change event.
  * @event playerWeaponChange
  * @memberof server.player
- * @param {object} player The player that called the event.
- * @param {number} oldWeapon Old weapon hash.
- * @param {number} newWeapon New weapon hash.
+ * @param {Object} player The player that called the event.
+ * @param {Number} oldWeapon Old weapon hash.
+ * @param {Number} newWeapon New weapon hash.
  * @fires unequipWeapon
  * @fires equipWeapon
  */
@@ -172,10 +172,10 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
  * Weapon shot event.
  * @event playerWeaponShot
  * @memberof server.player
- * @param {object} player The player that called the event.
- * @param {string} targetPositionJson Target position JSON.
- * @param {string} targetEntityJson Target entity JSON.
- * @param {number} weaponHash Weapon hash.
+ * @param {Object} player The player that called the event.
+ * @param {String} targetPositionJson Target position JSON.
+ * @param {String} targetEntityJson Target entity JSON.
+ * @param {Number} weaponHash Weapon hash.
  */
 mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson, weaponHash) => {
   let character = yarp.characters[player.name];

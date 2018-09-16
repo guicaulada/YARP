@@ -14,8 +14,7 @@ module.exports = async () => {
     yarp.Pool = require('../classes/Pool.js');
     await yarp.db.connect('mongodb://localhost:27017/yarp');
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'RequirementError: '+
-                err.message+'\n'+err.stack);
+    console.log(chalk.redBright('[YARP] ')+'RequirementError: '+err.message+'\n'+err.stack);
   }
 
   // This config defines default values for the gamemode

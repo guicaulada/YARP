@@ -8,9 +8,9 @@
  * Call inventory option.
  * @event callInventoryOption
  * @memberof server.menu
- * @param {object} player The player that called the event.
- * @param {string} itemId Item id.
- * @param {string} option Option id.
+ * @param {Object} player The player that called the event.
+ * @param {String} itemId Item id.
+ * @param {String} option Option id.
  * @fires browserExecute
  */
 mp.events.add('callInventoryOption', (player, itemId, option) => {
@@ -25,9 +25,9 @@ mp.events.add('callInventoryOption', (player, itemId, option) => {
  * Loads bank balance.
  * @event loadBankBalance
  * @memberof server.menu
- * @param {object} player The player that called the event.
- * @param {string} itemId Item id.
- * @param {string} option Option id.
+ * @param {Object} player The player that called the event.
+ * @param {String} itemId Item id.
+ * @param {String} option Option id.
  * @fires browserExecute
  */
 mp.events.add('loadBankBalance', (player) => {
@@ -38,7 +38,7 @@ mp.events.add('loadBankBalance', (player) => {
  * Unbind toggle chat hotkey.
  * @event unbindToggleChat
  * @memberof server.menu
- * @param {object} player The player that called the event.
+ * @param {Object} player The player that called the event.
  */
 mp.events.add('unbindToggleChat', (player) => {
   yarp.hotkeys['ToggleChat'].unbind(player);
@@ -48,10 +48,10 @@ mp.events.add('unbindToggleChat', (player) => {
  * Purchase item for sale.
  * @event purchaseSaleItem
  * @memberof server.menu
- * @param {object} player The player that called the event.
- * @param {string} locationid Location id.
- * @param {string} itemId Item id.
- * @param {string} amount Amount to purchase.
+ * @param {Object} player The player that called the event.
+ * @param {String} locationid Location id.
+ * @param {String} itemId Item id.
+ * @param {String} amount Amount to purchase.
  * @fires browserExecute
  */
 mp.events.add('purchaseSaleItem', (player, locationid, itemId, amount) => {
@@ -81,10 +81,10 @@ mp.events.add('purchaseSaleItem', (player, locationid, itemId, amount) => {
  * Execute bank operation.
  * @event executeBankOperation
  * @memberof server.menu
- * @param {object} player The player that called the event.
- * @param {number} operation Operation id.
- * @param {string} amount Amount of money.
- * @param {string} [target] Target of transfer.
+ * @param {Object} player The player that called the event.
+ * @param {Number} operation Operation id.
+ * @param {String} amount Amount of money.
+ * @param {String} [target] Target of transfer.
  * @fires browserExecute
  */
 mp.events.add('executeBankOperation', (player, operation, amount, target) => {
@@ -131,8 +131,8 @@ mp.events.add('executeBankOperation', (player, operation, amount, target) => {
  *Verify user login.
  * @event verifyLogin
  * @memberof server.menu
- * @param {object} player The player that called the event.
- * @param {string} password User password.
+ * @param {Object} player The player that called the event.
+ * @param {String} password User password.
  * @fires showCharacterCreationMenu
  * @fires showPlayerCharacters
  * @fires createBrowser
@@ -140,7 +140,7 @@ mp.events.add('executeBankOperation', (player, operation, amount, target) => {
 mp.events.add('verifyLogin', (player, password) => {
   let user = yarp.users[player.socialClub];
   if (user == null) {
-    user = new yarp.User(player.socialClub, password);
+    user = new yarp.User({id: player.socialClub, password: bcrypt.hashSync(password, 10)});
     user.giveGroup(yarp.variables['Default Group'].value);
   }
   if (user.verifyPassword(password)) {

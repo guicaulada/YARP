@@ -1,23 +1,126 @@
 'use strict';
 
 let config = {
+  'Smoke on the Water': {
+    sprite: 140,
+    position: new mp.Vector3(-1171.42, -1572.72, 3.6636),
+  },
+  'MazeBank Arena': {
+    sprite: 135,
+    position: new mp.Vector3(-250.604, -2030.000, 30.000),
+  },
+  'Bahama Mamas': {
+    sprite: 207,
+    position: new mp.Vector3(925.329, 46.152, 80.908),
+  },
+  'Downtown CO.': {
+    sprite: 375,
+    position: new mp.Vector3(900.461, -181.466, 73.89),
+  },
+  'Tequil-La La': {
+    sprite: 93,
+    position: new mp.Vector3(-565.171, 276.625, 83.286),
+  },
+  'Theater': {
+    sprite: 135,
+    position: new mp.Vector3(-455.752, 180.466, 104.301),
+  },
+  'Weed Farm': {
+    sprite: 140,
+    position: new mp.Vector3(2208.777, 5578.235, 53.735),
+  },
+  'FIB': {
+    sprite: 106,
+    position: new mp.Vector3(105.455, -745.483, 44.754),
+  },
+  'Lifeinvader': {
+    sprite: 77,
+    position: new mp.Vector3(-1047.900, -233.000, 39.000),
+  },
+  'Cluckin Bell': {
+    sprite: 357,
+    position: new mp.Vector3(-72.68752, 6253.72656, 31.08991),
+  },
+  'Comedy Club': {
+    sprite: 102,
+    position: new mp.Vector3(-447.4833, 280.3197, 77.5215),
+  },
+  'Yacht': {
+    sprite: 410,
+    position: new mp.Vector3(-2045.800, -1031.200, 11.900),
+  },
+  'Ranch': {
+    sprite: 438,
+    position: new mp.Vector3(2441.200, 4968.500, 51.700),
+  },
+  'PlayBoy': {
+    sprite: 439,
+    position: new mp.Vector3(-1475.234, 167.088, 55.841),
+  },
+  'Chop Shop': {
+    sprite: 446,
+    position: new mp.Vector3(479.056, -1316.825, 28.203),
+  },
+  'Rebel Radio': {
+    sprite: 136,
+    position: new mp.Vector3(736.153, 2583.143, 79.634),
+  },
+  'Morgue': {
+    sprite: 310,
+    position: new mp.Vector3(243.351, -1376.014, 39.534),
+  },
+  'Golf': {
+    sprite: 109,
+    position: new mp.Vector3(-1336.715, 59.051, 55.246),
+  },
+  'Hippie Camp': {
+    sprite: 140,
+    position: new mp.Vector3(2476.712, 3789.645, 41.226),
+  },
+  'Torture': {
+    sprite: 79,
+    position: new mp.Vector3(132.583, -2202.327, 7.187),
+  },
+  'Body Training': {
+    sprite: 311,
+    position: new mp.Vector3(-1202.962, -1566.140, 4.610),
+  },
+  'Epsilon': {
+    sprite: 206,
+    position: new mp.Vector3(245.1564, 370.211, 104.7382),
+  },
+  'Michael': {
+    sprite: 124,
+    position: new mp.Vector3(-852.400, 160.000, 65.600),
+  },
+  'Legal Jobs': {
+    sprite: 351,
+    position: new mp.Vector3(-268.363, -957.255, 31.223),
+  },
+  'Ilegal Jobs': {
+    sprite: 351,
+    position: new mp.Vector3(707.324, -966.986, 30.412),
+  },
+};
+
+let multiplePositions = {
   'Airport': {
     sprite: 90,
-    positions: [
+    position: [
       new mp.Vector3(-1032.690, -2728.141, 13.757),
       new mp.Vector3(1743.6820, 3286.2510, 40.087),
     ],
   },
   'Cable Car': {
     sprite: 36,
-    positions: [
+    position: [
       new mp.Vector3(-737.746, 5595.192, 41.655),
       new mp.Vector3(457.097, 5571.724, 781.184),
     ],
   },
   'Tattoo Shop': {
     sprite: 75,
-    positions: [
+    position: [
       new mp.Vector3(1322.645, -1651.976, 52.275),
       new mp.Vector3(-1153.676, -1425.68, 4.954),
       new mp.Vector3(322.139, 180.467, 103.587),
@@ -28,7 +131,7 @@ let config = {
   },
   'Store': {
     sprite: 52,
-    positions: [
+    position: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
       new mp.Vector3(1960.7580566406, 3749.26367187, 31.3437423706055),
       new mp.Vector3(1986.1240234375, 3053.874755859, 47.215171813),
@@ -50,7 +153,7 @@ let config = {
   },
   'Barbershop': {
     sprite: 71,
-    positions: [
+    position: [
       new mp.Vector3(-827.333, -190.916, 37.599),
       new mp.Vector3(130.512, -1715.535, 29.226),
       new mp.Vector3(-1291.472, -1117.230, 6.641),
@@ -62,7 +165,7 @@ let config = {
   },
   'Bank': {
     sprite: 207,
-    positions: [
+    position: [
       new mp.Vector3(147.04908752441, -1044.9448242188, 29.36802482605),
       new mp.Vector3(-2957.6674804688, 481.45776367188, 15.697026252747),
       new mp.Vector3(-107.06505584717, 6474.8012695313, 31.62670135498),
@@ -75,7 +178,7 @@ let config = {
   },
   'Ammu-Nation': {
     sprite: 110,
-    positions: [
+    position: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
       new mp.Vector3(252.696, -48.2487, 69.941),
       new mp.Vector3(844.299, -1033.26, 28.1949),
@@ -83,7 +186,7 @@ let config = {
       new mp.Vector3(-664.147, -935.119, 21.8292),
       new mp.Vector3(2569.62, -294.453, 108.735),
       new mp.Vector3(21.70, -1107.41, 29.79),
-      new mp.Vector3( 810.15, -2156.88, 29.61),
+      new mp.Vector3(810.15, -2156.88, 29.61),
       new mp.Vector3(-3172.6037, 1085.7481, 20.838),
       new mp.Vector3(-1119.4880, 2697.086, 18.5541),
       new mp.Vector3(-1305.45056, -394.0068, 36.695),
@@ -91,7 +194,7 @@ let config = {
   },
   'Carwash': {
     sprite: 100,
-    positions: [
+    position: [
       new mp.Vector3(26.5906, -1392.0261, 29.3634),
       new mp.Vector3(167.1034, -1719.4704, 29.2916),
       new mp.Vector3(-74.5693, 6427.8715, 31.4400),
@@ -100,7 +203,7 @@ let config = {
   },
   'Clothing': {
     sprite: 73,
-    positions: [
+    position: [
       new mp.Vector3(88.291, -1391.929, 29.200),
       new mp.Vector3(-718.985, -158.059, 36.996),
       new mp.Vector3(-151.204, -306.837, 38.724),
@@ -119,7 +222,7 @@ let config = {
   },
   'Gang Zone': {
     sprite: 437,
-    positions: [
+    position: [
       new mp.Vector3(298.68, -2010.10, 20.07),
       new mp.Vector3(86.64, -1924.60, 20.79),
       new mp.Vector3(-183.52, -1632.62, 33.34),
@@ -132,7 +235,7 @@ let config = {
   },
   'Gas Station': {
     sprite: 361,
-    positions: [
+    position: [
       new mp.Vector3(49.41872, 2778.793, 58.04395),
       new mp.Vector3(263.8949, 2606.463, 44.98339),
       new mp.Vector3(1039.958, 2671.134, 39.55091),
@@ -166,7 +269,7 @@ let config = {
   },
   'Hospital': {
     sprite: 61,
-    positions: [
+    position: [
       new mp.Vector3(1839.6, 3672.93, 34.28),
       new mp.Vector3(-247.76, 6331.23, 32.43),
       new mp.Vector3(-449.67, -340.83, 34.50),
@@ -179,7 +282,7 @@ let config = {
   },
   'House': {
     sprite: 357,
-    positions: [
+    position: [
       new mp.Vector3(-952.359436, -1077.50219, 2.6772258),
       new mp.Vector3(-59.124889373, -616.554, 37.35677),
       new mp.Vector3(-255.05390, -943.3288, 31.21998),
@@ -195,7 +298,7 @@ let config = {
   },
   'LS Customs': {
     sprite: 72,
-    positions: [
+    position: [
       new mp.Vector3(-337.3863, -136.9247, 39.0737),
       new mp.Vector3(-1155.536, -2007.183, 13.244),
       new mp.Vector3(731.8163, -1088.822, 22.233),
@@ -205,7 +308,7 @@ let config = {
   },
   'Race': {
     sprite: 316,
-    positions: [
+    position: [
       new mp.Vector3(-1277.629, -2030.913, 1.2823),
       new mp.Vector3(2384.969, 4277.583, 30.379),
       new mp.Vector3(1577.881, 3836.107, 30.7717),
@@ -213,184 +316,46 @@ let config = {
   },
   'Police Station': {
     sprite: 60,
-    positions: [
+    position: [
       new mp.Vector3(425.130, -979.558, 30.711),
       new mp.Vector3(1859.234, 3678.742, 33.690),
       new mp.Vector3(-438.862, 6020.768, 31.490),
       new mp.Vector3(818.221, -1289.883, 26.300),
     ],
   },
-  'Smoke on the Water': {
-    sprite: 140,
-    positions: [
-      new mp.Vector3(-1171.42, -1572.72, 3.6636),
-    ],
-  },
-  'MazeBank Arena': {
-    sprite: 135,
-    positions: [
-      new mp.Vector3(-250.604, -2030.000, 30.000),
-    ],
-  },
-  'Bahama Mamas': {
-    sprite: 207,
-    positions: [
-      new mp.Vector3(925.329, 46.152, 80.908),
-    ],
-  },
-  'Downtown CO.': {
-    sprite: 375,
-    positions: [
-      new mp.Vector3(900.461, -181.466, 73.89),
-    ],
-  },
-  'Tequil-La La': {
-    sprite: 93,
-    positions: [
-      new mp.Vector3(-565.171, 276.625, 83.286),
-    ],
-  },
-  'Theater': {
-    sprite: 135,
-    positions: [
-      new mp.Vector3(-455.752, 180.466, 104.301),
-    ],
-  },
-  'Weed Farm': {
-    sprite: 140,
-    positions: [
-      new mp.Vector3(2208.777, 5578.235, 53.735),
-    ],
-  },
-  'FIB': {
-    sprite: 106,
-    positions: [
-      new mp.Vector3(105.455, -745.483, 44.754),
-    ],
-  },
-  'Lifeinvader': {
-    sprite: 77,
-    positions: [
-      new mp.Vector3(-1047.900, -233.000, 39.000),
-    ],
-  },
-  'Cluckin Bell': {
-    sprite: 357,
-    positions: [
-      new mp.Vector3(-72.68752, 6253.72656, 31.08991),
-    ],
-  },
-  'Comedy Club': {
-    sprite: 102,
-    positions: [
-      new mp.Vector3(-447.4833, 280.3197, 77.5215),
-    ],
-  },
-  'Yacht': {
-    sprite: 410,
-    positions: [
-      new mp.Vector3(-2045.800, -1031.200, 11.900),
-    ],
-  },
-  'Ranch': {
-    sprite: 438,
-    positions: [
-      new mp.Vector3(2441.200, 4968.500, 51.700),
-    ],
-  },
-  'PlayBoy': {
-    sprite: 439,
-    positions: [
-      new mp.Vector3(-1475.234, 167.088, 55.841),
-    ],
-  },
-  'Chop Shop': {
-    sprite: 446,
-    positions: [
-      new mp.Vector3(479.056, -1316.825, 28.203),
-    ],
-  },
-  'Rebel Radio': {
-    sprite: 136,
-    positions: [
-      new mp.Vector3(736.153, 2583.143, 79.634),
-    ],
-  },
-  'Morgue': {
-    sprite: 310,
-    positions: [
-      new mp.Vector3(243.351, -1376.014, 39.534),
-    ],
-  },
-  'Golf': {
-    sprite: 109,
-    positions: [
-      new mp.Vector3(-1336.715, 59.051, 55.246),
-    ],
-  },
-  'Hippie Camp': {
-    sprite: 140,
-    positions: [
-      new mp.Vector3(2476.712, 3789.645, 41.226),
-    ],
-  },
-  'Torture': {
-    sprite: 79,
-    positions: [
-      new mp.Vector3(132.583, -2202.327, 7.187),
-    ],
-  },
-  'Body Training': {
-    sprite: 311,
-    positions: [
-      new mp.Vector3(-1202.962, -1566.140, 4.610),
-    ],
-  },
-  'Lester': {
-    sprite: 77,
-    positions: [
-      new mp.Vector3(1274.292, -1712.663, 54.771),
-      new mp.Vector3(705.859, -964.651, 30.396),
-    ],
-  },
-  'Epsilon': {
-    sprite: 206,
-    positions: [
-      new mp.Vector3(245.1564, 370.211, 104.7382),
-    ],
-  },
-  'Franklin': {
-    sprite: 210,
-    positions: [
-      new mp.Vector3(7.900, 548.100, 175.500),
-      new mp.Vector3(-14.128, -1445.483, 30.648),
-    ],
-  },
-  'Michael': {
-    sprite: 124,
-    positions: [
-      new mp.Vector3(-852.400, 160.000, 65.600),
-    ],
-  },
   'Trevor': {
     sprite: 208,
-    positions: [
+    position: [
       new mp.Vector3(1985.700, 3812.200, 32.200),
       new mp.Vector3(-1159.034, -1521.180, 10.633),
     ],
   },
-  'Legal Jobs': {
-    sprite: 351,
-    positions: [
-      new mp.Vector3(-268.363, -957.255, 31.223),
+  'Lester': {
+    sprite: 77,
+    position: [
+      new mp.Vector3(1274.292, -1712.663, 54.771),
+      new mp.Vector3(705.859, -964.651, 30.396),
     ],
   },
-  'Ilegal Jobs': {
-    sprite: 351,
-    positions: [
-      new mp.Vector3(707.324, -966.986, 30.412),
+  'Franklin': {
+    sprite: 210,
+    position: [
+      new mp.Vector3(7.900, 548.100, 175.500),
+      new mp.Vector3(-14.128, -1445.483, 30.648),
     ],
   },
 };
+
+for (let id in multiplePositions) {
+  if (multiplePositions.hasOwnProperty(id)) {
+    let blip = multiplePositions[id];
+    blip.position.forEach((position, i) => {
+      config[id + ' ' + i] = {
+        sprite: blip.sprite,
+        position: position,
+      };
+    });
+  }
+}
 
 module.exports = config;

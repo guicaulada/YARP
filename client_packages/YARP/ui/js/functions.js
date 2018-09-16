@@ -21,7 +21,7 @@ function getPlayerList() {
 }
 
 function populatePlayerList(playerJSON) {
-    var playerArray = JSON.parse(playerJSON);
+    var playerArray = JSON.parse(playerJSON.replace(/\r?\n|\r/g, ''));
     var tableBody = document.getElementById('playersTableBody');
     while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.firstChild);
@@ -101,7 +101,7 @@ function showBalance() {
 }
 
 function showBankOperations(bankOperationsJson, playerName) {
-	var bankOperationsArray = JSON.parse(bankOperationsJson);
+	var bankOperationsArray = JSON.parse(bankOperationsJson.replace(/\r?\n|\r/g, ''));
     var tableBody = document.getElementById('bankBalanceTableBody');
     while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.firstChild);
@@ -245,7 +245,7 @@ function populateVehicleList(dealership, vehicleJSON) {
             break;
     }
 
-    vehicleArray = JSON.parse(vehicleJSON);
+    vehicleArray = JSON.parse(vehicleJSON.replace(/\r?\n|\r/g, ''));
     var mainContainer = document.getElementById('vehicle-container');
     for (var i = 0; i < vehicleArray.length; i++) {
         var container = document.createElement('div');
@@ -368,7 +368,7 @@ function getFirstTestQuestion() {
 
 function populateQuestionAnswers(question, answersJSON) {
 	// Obtenemos el array del objeto JSON
-	let answers = JSON.parse(answersJSON);
+	let answers = JSON.parse(answersJSON.replace(/\r?\n|\r/g, ''));
 
 	// Ponemos el texto de la pregunta en la cabecera
 	$('#license-question').text(question);

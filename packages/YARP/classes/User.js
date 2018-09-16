@@ -1,7 +1,5 @@
 'use strict';
 
-const bcrypt = require('bcryptjs');
-
 /**
  * Implements a User.
  * @class yarp.User
@@ -10,50 +8,32 @@ const bcrypt = require('bcryptjs');
 class User extends yarp.GMObject {
 /**
  *Creates an instance of User.
- * @param {*} id
- * @param {*} password
- * @param {string} [lastLogin='']
- * @param {boolean} [whitelisted=false]
- * @param {boolean} [banned=false]
- * @param {*} [groups=[]]
- * @param {*} [enter=() => {}]
- * @param {*} [leave=() => {}]
+ * @param {Object} params
+ * @param {*} params.id
+ * @param {*} params.password
+ * @param {String} [params.lastLogin='']
+ * @param {Boolean} [params.whitelisted=false]
+ * @param {Boolean} [params.banned=false]
+ * @param {*} [params.groups=[]]
+ * @param {*} [params.enter=() => {}]
+ * @param {*} [params.leave=() => {}]
  * @memberof yarp.User
  */
-constructor(
-    id,
-    password,
-    lastLogin = '',
-    whitelisted = false,
-    banned = false,
-    groups = [],
-    enter = () => {},
-    leave = () => {}
-  ) {
+constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        password: password,
-        lastLogin: lastLogin,
-        whitelisted: whitelisted,
-        banned: banned,
-        groups: groups,
-        enter: enter,
-        leave: leave,
-      } = id;
-      return new yarp.User(nid, password, lastLogin, whitelisted, banned, groups, enter, leave);
-    } else if ((id && password) != null) {
-      this._id = id;
-      this._password = (password.length == 60) ? password : bcrypt.hashSync(password, 10);
-      this._lastLogin = lastLogin;
-      this._whitelisted = whitelisted;
-      this._banned = banned;
-      this._enter = enter.toString();
-      this._leave = leave.toString();
-      this._groups = groups;
+    if ((params.id && params.password) != null) {
+      this._id = params.id;
+      this._password = params.password;
+      this._lastLogin = this.default(params.lastLogin, '');
+      this._whitelisted = this.default(params.whitelisted, false);
+      this._banned = this.default(params.banned, false);
+      this._enter = this.default(params.enter, () => {}).toString();
+      this._leave = this.default(params.leave, () => {}).toString();
+      this._groups = this.default(params.groups, []);
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('User class requires id and password to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -62,7 +42,7 @@ constructor(
    * @instance
    * @function player
    * @memberof yarp.User
-   * @return {object} - Player.
+   * @return {Object} Player.
    */
   get player() {
     for (let player of mp.players.toArray()) {
@@ -78,7 +58,7 @@ constructor(
    * @instance
    * @function characters
    * @memberof yarp.User
-   * @return {object} - Characters indexed by name.
+   * @return {Object} Characters indexed by name.
    */
   get characters() {
     let characters = {};
@@ -98,7 +78,7 @@ constructor(
    * @instance
    * @function character
    * @memberof yarp.User
-   * @return {object} - Active character.
+   * @return {Object} Active character.
    */
   get character() {
     for (let player of mp.players.toArray()) {
@@ -114,7 +94,7 @@ constructor(
    * @instance
    * @function enter
    * @memberof yarp.User
-   * @return {function} - Enter functions.
+   * @return {Function} Enter functions.
    * @fires userJoinedGroup
    */
   get enter() {
@@ -135,7 +115,7 @@ constructor(
    * @instance
    * @function leave
    * @memberof yarp.User
-   * @return {function} - Leave functions.
+   * @return {Function} Leave functions.
    * @fires userLeftGroup
    */
   get leave() {
@@ -156,7 +136,7 @@ constructor(
    * @instance
    * @function enter
    * @memberof yarp.User
-   * @param {function} value - Enter function.
+   * @param {Function} value Enter function.
    */
   set enter(value) {
     this._enter = value.toString();
@@ -167,7 +147,7 @@ constructor(
    * @instance
    * @function leave
    * @memberof yarp.User
-   * @param {function} value - Leave function.
+   * @param {Function} value Leave function.
    */
   set leave(value) {
     this._leave = value;
@@ -178,7 +158,7 @@ constructor(
    * @instance
    * @function updateLastLogin
    * @memberof yarp.User
-   * @param {string} ip - Character ip.
+   * @param {String} ip Character ip.
    */
   updateLastLogin(ip) {
     this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
@@ -189,8 +169,8 @@ constructor(
    * @instance
    * @function verifyPassword
    * @memberof yarp.User
-   * @param {string} password - Password to comapare with hash.
-   * @return {boolean} - True if the password matches the hash.
+   * @param {String} password Password to comapare with hash.
+   * @return {Boolean} True if the password matches the hash.
    */
   verifyPassword(password) {
     return bcrypt.compareSync(password, this.password);
@@ -201,8 +181,8 @@ constructor(
    * @instance
    * @function giveGroup
    * @memberof yarp.User
-   * @param {string} group - Group id.
-   * @return {boolean} - Operation success/fail.
+   * @param {String} group Group id.
+   * @return {Boolean} Operation success/fail.
    * @fires userJoinedGroup
    */
   giveGroup(group) {
@@ -232,8 +212,8 @@ constructor(
    * @instance
    * @function takeGroup
    * @memberof yarp.User
-   * @param {string} group - Group id.
-   * @return {boolean} - Operation success/fail.
+   * @param {String} group Group id.
+   * @return {Boolean} Operation success/fail.
    * @fires userLeftGroup
    */
   takeGroup(group) {
@@ -256,8 +236,8 @@ constructor(
    * @instance
    * @function getGroupByType
    * @memberof yarp.User
-   * @param {string} type - Group type.
-   * @return {string} - Group id.
+   * @param {String} type Group type.
+   * @return {String} Group id.
    */
   getGroupByType(type) {
     for (let id of this.groups) {
@@ -275,8 +255,8 @@ constructor(
    * @instance
    * @function getGroupByTypes
    * @memberof yarp.User
-   * @param {Array<string>} types - Group types.
-   * @return {Array<string>} - Group ids.
+   * @param {Array<String>} types Group types.
+   * @return {Array<String>} Group ids.
    */
   getGroupsByTypes(types) {
     let groups = [];
@@ -296,8 +276,8 @@ constructor(
    * @instance
    * @function hasGroup
    * @memberof yarp.User
-   * @param {string} id - Group id.
-   * @return {boolean} - If has or not the group.
+   * @param {String} id Group id.
+   * @return {Boolean} If has or not the group.
    */
   hasGroup(id) {
    return (this.groups.indexOf(id) > -1);
@@ -308,8 +288,8 @@ constructor(
    * @instance
    * @function hasGroup
    * @memberof yarp.User
-   * @param {Array<string>} groups - Group ids.
-   * @return {boolean} - If has or not all the groups.
+   * @param {Array<String>} groups Group ids.
+   * @return {Boolean} If has or not all the groups.
    */
   hasGroups(groups) {
     for (let i = 0; i < groups.length; i++) {
@@ -325,8 +305,8 @@ constructor(
    * @instance
    * @function hasPermission
    * @memberof yarp.User
-   * @param {string} permission - Permission.
-   * @return {boolean} - If has or not the permission.
+   * @param {String} permission Permission.
+   * @return {Boolean} If has or not the permission.
    */
   hasPermission(permission) {
     let result = false;
@@ -411,8 +391,8 @@ constructor(
    * @instance
    * @function hasPermission
    * @memberof yarp.User
-   * @param {Array<string>} permissions - Permissions.
-   * @return {boolean} - If has or not all permissions.
+   * @param {Array<String>} permissions Permissions.
+   * @return {Boolean} If has or not all permissions.
    */
   hasPermissions(permissions) {
     for (let i = 0; i < permissions.length; i++) {

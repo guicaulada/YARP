@@ -7,7 +7,7 @@
 class GMObject {
   /**
    * @memberof yarp.GMObject
-   * @throws {TypeError} - Abstract class GMObject cannot be instantiated directly.
+   * @throws {TypeError} Abstract class GMObject cannot be instantiated directly.
    */
   constructor() {
     if (this.constructor === GMObject) {
@@ -41,7 +41,7 @@ class GMObject {
    * @instance
    * @function data
    * @memberof yarp.GMObject
-   * @return {object} - Persistent data object.
+   * @return {Object} Persistent data object.
    */
   get data() {
     let data = {};
@@ -58,7 +58,7 @@ class GMObject {
    * @instance
    * @function data
    * @memberof yarp.GMObject
-   * @return {object} - Persistent data object.
+   * @return {Object} Persistent data object.
    */
   get cleanData() {
     let data = {};
@@ -85,7 +85,7 @@ class GMObject {
    * @instance
    * @function call
    * @memberof yarp.GMObject
-   * @param {function} value - Call function.
+   * @param {Function} value Call function.
    */
   set call(value) {
     this._call = value.toString();
@@ -106,7 +106,7 @@ class GMObject {
    * @instance
    * @function enter
    * @memberof yarp.GMObject
-   * @param {function} value - Enter function.
+   * @param {Function} value Enter function.
    */
   set enter(value) {
     this._enter = value.toString();
@@ -127,10 +127,23 @@ class GMObject {
    * @instance
    * @function leave
    * @memberof yarp.GMObject
-   * @param {function} value - Leave function.
+   * @param {Function} value Leave function.
    */
   set leave(value) {
     this._leave = value.toString();
+  }
+
+  /**
+   * Set leave function as string.
+   * @instance
+   * @function default
+   * @memberof yarp.GMObject
+   * @param {*} v Verified value.
+   * @param {*} d Default value if v is null.
+   * @return {*} v if it's not null, or d
+   */
+  default(v, d) {
+    return (v != null) ? v : d;
   }
 
   /**

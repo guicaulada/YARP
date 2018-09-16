@@ -8,7 +8,7 @@
  * Notifies when an entity started being streamed.
  * @event entityStreamIn
  * @memberof client.stream
- * @param {object} entity - Streamed entity.
+ * @param {Object} entity Streamed entity.
  * @fires getPlayerCustomSkin
  */
 mp.events.add('entityStreamIn', (entity) => {
@@ -28,7 +28,7 @@ mp.events.add('entityStreamIn', (entity) => {
  * Notifies when an entity stopped being streamed.
  * @event entityStreamIn
  * @memberof client.stream
- * @param {object} entity - Entity that stopped streaming.
+ * @param {Object} entity Entity that stopped streaming.
  */
 mp.events.add('entityStreamOut', (entity) => {
 });

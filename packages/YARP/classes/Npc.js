@@ -7,46 +7,30 @@
 class Npc extends yarp.GMObject {
   /**
    *Creates an instance of Npc.
-   * @param {*} id
-   * @param {*} model
-   * @param {*} position
-   * @param {number} [heading=0]
-   * @param {number} [drawDistance=100]
-   * @param {number} [dimension=0]
-   * @param {*} [call=() => {}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.model
+   * @param {*} params.position
+   * @param {Number} [params.heading=0]
+   * @param {Number} [params.drawDistance=100]
+   * @param {Number} [params.dimension=0]
+   * @param {*} [params.call=() => {}]
    * @memberof yarp.Npc
    */
-  constructor(
-    id,
-    model,
-    position,
-    heading = 0,
-    drawDistance = 100,
-    dimension = 0,
-    call = () => {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        model: model,
-        position: position,
-        heading: heading,
-        drawDistance: drawDistance,
-        dimension: dimension,
-        call: call,
-      } = id;
-      return new yarp.Npc(nid, model, position, heading, drawDistance, dimension, call);
-    } else if ((id && model && position) != null) {
-      this._id = id;
-      this._model = model;
-      this._position = position;
-      this._heading = heading;
-      this._drawDistance = drawDistance;
-      this._dimension = dimension;
-      this._call = call.toString();
+    if ((params.id && params.model && params.position) != null) {
+      this._id = params.id;
+      this._model = params.model;
+      this._position = params.position;
+      this._heading = this.default(params.heading, 0);
+      this._drawDistance = this.default(params.drawDistance, 100);
+      this._dimension = this.default(params.dimension, 0);
+      this._call = this.default(params.call, () => {}).toString();
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Npc class requires id, model and position to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

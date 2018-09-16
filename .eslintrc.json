@@ -7,6 +7,7 @@
         "max-len": ["error", {
             "code": 200
         }],
+        "new-cap": "off",
         "no-invalid-this": 0
     }
 }

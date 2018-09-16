@@ -21,7 +21,7 @@ let bankChangeDisplay = false;
  * Displays help text on top left.
  * @event displayHelpText
  * @memberof client.render
- * @param {string} text - Text to be displayed.
+ * @param {String} text Text to be displayed.
  */
 mp.events.add('displayHelpText', (text) => {
   mp.game.ui.setTextComponentFormat('STRING');
@@ -94,7 +94,7 @@ function displayThirst() {
  * Diplays speedometer when inside a vehicle.
  * @function displaySpeedometer
  * @memberof client.render
- * @param {boolean} mph - Miles or kilometers (true or false).
+ * @param {Boolean} mph Miles or kilometers (true or false).
  */
 function displaySpeedometer(mph) {
   if (mp.players.local.isInAnyVehicle(false)) {
@@ -120,7 +120,7 @@ function displaySpeedometer(mph) {
 function displayWallet() {
   let newWallet = mp.players.local.getVariable('PLAYER_WALLET');
   if (newWallet != null) {
-    walletAdd += newWallet - oldWallet;
+    walletAdd += newWallet-oldWallet;
     oldWallet = newWallet;
     if (newWallet < 0) {
       mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(newWallet)}`, [0.95, 0.1], {
@@ -172,7 +172,7 @@ function displayWallet() {
 function displayBank() {
   let newBank = mp.players.local.getVariable('PLAYER_BANK');
   if (newBank != null) {
-    bankAdd += newBank - oldBank;
+    bankAdd += newBank-oldBank;
     oldBank = newBank;
     if (newBank < 0) {
       mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(newBank)}`, [0.95, 0.190], {
@@ -224,7 +224,7 @@ function displayBank() {
 function displayXp() {
   let newXp = mp.players.local.getVariable('PLAYER_XP');
   if (newXp != null) {
-    xpAdd += newXp - oldXp;
+    xpAdd += newXp-oldXp;
     oldXp = newXp;
     if (newXp < 0) {
       mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(newXp)} XP`, [0.95, 0.280], {

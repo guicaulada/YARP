@@ -11,7 +11,7 @@ let mng = {};
  * @async
  * @function register
  * @memberof yarp.mng
- * @param {object} object Object to be registered.
+ * @param {Object} object Object to be registered.
  */
 mng.register = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
@@ -28,7 +28,7 @@ mng.register = async (object) => {
  * @async
  * @function save
  * @memberof yarp.mng
- * @param {object} object Object to be saved.
+ * @param {Object} object Object to be saved.
  */
 mng.save = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
@@ -44,7 +44,7 @@ mng.save = async (object) => {
  * @async
  * @function remove
  * @memberof yarp.mng
- * @param {object} object Object to be removed.
+ * @param {Object} object Object to be removed.
  */
 mng.remove = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
@@ -61,7 +61,7 @@ mng.remove = async (object) => {
  * @async
  * @function load
  * @memberof yarp.mng
- * @param {object} Class Class to be loaded.
+ * @param {Object} Class Class to be loaded.
  */
 mng.load = async (Class) => {
   let collection = Class.name.toLowerCase()+'s';
@@ -76,17 +76,17 @@ mng.load = async (Class) => {
  * @async
  * @function config
  * @memberof yarp.mng
- * @param {object} Class The object class.
- * @param {object} config Config object or path.
+ * @param {Object} Class The object class.
+ * @param {Object} config Config object or path.
  */
 mng.config = (Class, config) => {
   if (typeof config === 'string') config = require(config);
   let collection = Class.name.toLowerCase() + 's';
-  let params = yarp.utils.getParamNames(Class);
-  if (collection == ('users' || 'characters')) {
-    for (let id in config) {
-      if (config.hasOwnProperty(id)) {
-        let object = config[id];
+
+  for (let id in config) {
+    if (config.hasOwnProperty(id)) {
+      let object = config[id];
+      if (collection == 'users' || collection == 'characters') {
         if (yarp[collection][id]) {
           for (let group of object.groups) {
             yarp[collection][id].giveGroup(group);
@@ -98,54 +98,9 @@ mng.config = (Class, config) => {
             yarp[collection][id].leave = object.leave.toString();
           }
         }
-      }
-    }
-  } else if (params.indexOf('category') >= 0) {
-    for (let category in config) {
-      if (config.hasOwnProperty(category)) {
-        for (let id in config[category]) {
-          if (config[category].hasOwnProperty(id)) {
-            if (!yarp[collection][id]) {
-              let object = config[category][id];
-              object.category = category;
-              object.id = id;
-              yarp[collection][id] = new Class(object);
-            }
-          }
-        }
-      }
-    }
-  } else if (params.indexOf('position') >= 0) {
-    for (let id in config) {
-      if (config.hasOwnProperty(id)) {
-        let object = config[id];
-        let positions = object.positions;
-        delete object.positions;
-        if (positions) {
-          for (let i = 0; i < positions.length; i++) {
-            let nid = id + ' ' + (i + 1);
-            object.position = positions[i];
-            object.id = nid;
-            if (!object.name) object.name = id;
-            if (!yarp[collection][nid]) {
-              yarp[collection][nid] = new Class(object);
-            }
-          }
-        }
-      }
-    }
-  } else {
-    for (let id in config) {
-      if (config.hasOwnProperty(id)) {
+      } else {
         if (!yarp[collection][id]) {
-          let object = {};
-          if (collection == 'variables') {
-            object.id = id;
-            object.value = config[id];
-          } else {
-            object = config[id];
-            object.id = id;
-          }
+          object.id = id;
           yarp[collection][id] = new Class(object);
         }
       }

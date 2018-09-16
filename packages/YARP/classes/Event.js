@@ -7,35 +7,25 @@
 class Event extends yarp.GMObject {
   /**
    *Creates an instance of Event.
-   * @param {*} id
-   * @param {*} [call=() => {}]
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} [params.call=() => {}]
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
    * @memberof yarp.Event
    */
-  constructor(
-    id,
-    call = () => {},
-    permissions = [],
-    items = {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        call: call,
-        permissions: permissions,
-        items: items,
-      } = id;
-      return new yarp.Event(nid, call, permissions, items);
-    } else if ((id) != null) {
-      this._id = id;
-      this._call = call.toString();
-      this._permissions = permissions;
-      this._items = items;
+    if ((params.id) != null) {
+      this._id = params.id;
+      this._call = this.default(params.call, () => {}).toString();
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
       this.mp = new mp.Event(this._id, eval(this._call));
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Event class requires id to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

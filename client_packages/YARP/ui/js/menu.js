@@ -13,7 +13,7 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let s_options = JSON.parse(optionsJson);
+	let s_options = JSON.parse(optionsJson.replace(/\r?\n|\r/g, ''));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
@@ -112,7 +112,7 @@ function populateSaleItems(id, category, itemsJson) {
 	selected = null;
 
 	// Obtenemos la lista de objetos a mostrar
-	let items = JSON.parse(itemsJson.replace(/\s+/g, ' '));
+	let items = JSON.parse(itemsJson.replace(/\r?\n|\r/g, ''));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
@@ -305,7 +305,7 @@ function populateSaleCategories(id,saleJson) {
 	// Añadimos el título al menú
 	let header = document.getElementById('header');
 	if (saleJson) {
-		sale = JSON.parse(saleJson.replace(/\s+/g, ' '));
+		sale = JSON.parse(saleJson.replace(/\r?\n|\r/g, ''));
 	}
 	header.textContent = id;
 
@@ -383,7 +383,7 @@ function populateTunningMenu(tunningComponentsJSON) {
 	header.textContent = 'Menú de modificaciones';
 
 	// Obtenemos la lista de componentes
-	tunningComponents = JSON.parse(tunningComponentsJSON);
+	tunningComponents = JSON.parse(tunningComponentsJSON.replace(/\r?\n|\r/g, ''));
 
 	// Mostramos el menú principal
 	populateTunningHome();
@@ -566,8 +566,8 @@ function populateTunningComponents() {
 
 function populateFastfoodOrders(ordersJson, distancesJson) {
 	// Obtenemos la lista de pedidos
-	let fastfoodOrders = JSON.parse(ordersJson);
-	let distances = JSON.parse(distancesJson);
+	let fastfoodOrders = JSON.parse(ordersJson.replace(/\r?\n|\r/g, ''));
+	let distances = JSON.parse(distancesJson.replace(/\r?\n|\r/g, ''));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
@@ -680,13 +680,13 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 	let options = document.getElementById('options');
 
 	// Añadimos el texto de cabecera y obtenemos la lista de delitos
-	let crimesArray = JSON.parse(crimesJson);
+	let crimesArray = JSON.parse(crimesJson.replace(/\r?\n|\r/g, ''));
 	header.textContent = 'Lista de delitos';
 	selectedOptions = [];
 
 	if(selectedCrimes.length > 0) {
 		// Obtenemos los delitos
-		let crimes = JSON.parse(selectedCrimes);
+		let crimes = JSON.parse(selectedCrimes.replace(/\r?\n|\r/g, ''));
 
 		for(let i = 0; i < crimes.length; i++) {
 			// Añadimos el delito
@@ -807,7 +807,8 @@ function populateCharacterList(charactersJson) {
 	let options = document.getElementById('options');
 
 	// Obtenemos la lista de jugadores
-	let characters = JSON.parse(charactersJson);
+	charactersJson = charactersJson.replace(/\r?\n|\r/g, '');
+	let characters = JSON.parse(charactersJson.replace(/\r?\n|\r/g, ''));
 
 	// Añadimos el texto de cabecera
 	header.textContent = 'Character list';
@@ -873,7 +874,7 @@ function populateTattooMenu(tattooZoneArray, businessName, priceMultiplier) {
 	header.textContent = businessName;
 
 	// Obtenemos las listas de tatuajes
-	tattooZones = JSON.parse(tattooZoneArray);
+	tattooZones = JSON.parse(tattooZoneArray.replace(/\r?\n|\r/g, ''));
 	multiplier = priceMultiplier;
 
 	// Mostramos el menú principal
@@ -958,7 +959,7 @@ function populateZoneTattoos(zoneTattooJson) {
 	let options = document.getElementById('options');
 
 	// Parseamos el JSON
-	let zoneTattooArray = JSON.parse(zoneTattooJson);
+	let zoneTattooArray = JSON.parse(zoneTattooJson.replace(/\r?\n|\r/g, ''));
 
 	// Limpiamos el contenido
 	while(content.firstChild) {
@@ -1063,14 +1064,14 @@ function populateZoneTattoos(zoneTattooJson) {
 
 function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName) {
 	// Obtenemos la lista de opciones
-	let faceOptions = JSON.parse(faceOptionsJson);
+	let faceOptions = JSON.parse(faceOptionsJson.replace(/\r?\n|\r/g, ''));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 
 	// Añadimos la cabecera del menú
 	header.textContent = businessName;
-	selectedOptions = JSON.parse(selectedFaceJson);
+	selectedOptions = JSON.parse(selectedFaceJson.replace(/\r?\n|\r/g, ''));
 
 	for(let i = 0; i < faceOptions.length; i++) {
 		// Obtenemos el objeto en curso
@@ -1208,7 +1209,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 
 function populateTownHallMenu(townHallOptionsJson) {
 	// Obtenemos la lista de opciones
-	let townHallOptions = JSON.parse(townHallOptionsJson);
+	let townHallOptions = JSON.parse(townHallOptionsJson.replace(/\r?\n|\r/g, ''));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
@@ -1322,7 +1323,7 @@ function populateTownHallMenu(townHallOptionsJson) {
 
 function populateFinesMenu(finesJson) {
 	// Obtenemos la lista de opciones
-	let finesList = JSON.parse(finesJson);
+	let finesList = JSON.parse(finesJson.replace(/\r?\n|\r/g, ''));
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');
 	selectedOptions = [];
@@ -1435,7 +1436,7 @@ function populateFinesMenu(finesJson) {
 
 function populatePoliceControlsMenu(policeControlJson) {
 	// Obtenemos la lista de opciones
-	let policeControls = JSON.parse(policeControlJson);
+	let policeControls = JSON.parse(policeControlJson.replace(/\r?\n|\r/g, ''));
 	let header = document.getElementById('header');
 	let content = document.getElementById('content');
 	let options = document.getElementById('options');

@@ -7,23 +7,20 @@
 class Variable extends yarp.GMObject {
   /**
    *Creates an instance of Variable.
-   * @param {*} id
-   * @param {*} value
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.value
    * @memberof yarp.Variable
    */
-  constructor(id, value) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        value: value,
-      } = id;
-      return new yarp.Variable(nid, value);
-    } else if ((id && value) != null) {
-      this._id = id;
-      this._value = value;
+    if ((params.id && params.value) != null) {
+      this._id = params.id;
+      this._value = params.value;
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Variable class requires id and value to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

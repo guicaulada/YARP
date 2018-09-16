@@ -8,7 +8,7 @@
  * Player sent chat message.
  * @event playerChat
  * @memberof client.player
- * @param {string} message - Message sent.
+ * @param {String} message Message sent.
  */
 mp.events.add('playerChat', (message) => {
 });
@@ -17,7 +17,7 @@ mp.events.add('playerChat', (message) => {
  * Player sent chat command.
  * @event playerCommand
  * @memberof client.player
- * @param {string} command - Command sent.
+ * @param {String} command Command sent.
  */
 mp.events.add('playerCommand', (command) => {
 });
@@ -42,8 +42,8 @@ mp.events.add('playerJoin', () => {
  * Player quit.
  * @event playerQuit
  * @memberof client.player
- * @param {string} exitType - disconnect, timeout, kicked.
- * @param {string} reason - Kick reason.
+ * @param {String} exitType disconnect, timeout, kicked.
+ * @param {String} reason Kick reason.
  */
 mp.events.add('playerQuit', (exitType, reason) => {
 });
@@ -68,8 +68,8 @@ mp.events.add('playerResurrect', () => {
  * Player rule was triggered.
  * @event playerRuleTriggered
  * @memberof client.player
- * @param {string} rule - Rule name.
- * @param {number} counter - Amount of failed attempts.
+ * @param {String} rule Rule name.
+ * @param {Number} counter Amount of failed attempts.
  */
 mp.events.add('playerRuleTriggered', (rule, counter) => {
 });
@@ -86,8 +86,8 @@ mp.events.add('playerSpawn', () => {
  * Player shot weapon.
  * @event playerSpawn
  * @memberof client.player
- * @param {Vector3} targetPosition - Target position.
- * @param {Vector3} targetEntity - Target entity.
+ * @param {Vector3} targetPosition Target position.
+ * @param {Vector3} targetEntity Target entity.
  */
 mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
   mp.events.callRemote('playerWeaponShot', JSON.stringify(targetPosition), JSON.stringify(targetEntity));

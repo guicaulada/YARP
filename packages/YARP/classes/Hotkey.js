@@ -7,55 +7,35 @@
 class Hotkey extends yarp.GMObject {
   /**
    *Creates an instance of Hotkey.
-   * @param {*} id
-   * @param {string} [key='E']
-   * @param {*} [call=() => {}]
-   * @param {string} [hint='There\'s no hint.']
-   * @param {string} [category='None']
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
-   * @param {boolean} [position=false]
-   * @param {boolean} [range=false]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {String} [params.key='E']
+   * @param {*} [params.call=() => {}]
+   * @param {String} [params.hint='There\'s no hint.']
+   * @param {String} [params.category='None']
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
+   * @param {Boolean} [params.position=false]
+   * @param {Boolean} [params.range=false]
    * @memberof yarp.Hotkey
    */
-  constructor(
-    id,
-    key = 'E',
-    call = () => {},
-    hint = 'There\'s no hint.',
-    category = 'None',
-    permissions = [],
-    items = {},
-    position = false,
-    range = false
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        key: key,
-        call: call,
-        hint: hint,
-        category: category,
-        permissions: permissions,
-        items: items,
-        position: position,
-        range: range,
-      } = id;
-      return new yarp.Hotkey(nid, key, call, hint, category, permissions, items, position, range);
-    } else if ((id) != null) {
-      this._id = id;
-      this._key = key;
-      this._category = category;
-      this._hint = hint;
-      this._call = call.toString();
-      this._position = position;
-      this._range = range;
-      this._permissions = permissions;
-      this._items = items;
+    if ((params.id) != null) {
+      this._id = params.id;
+      this._key = this.default(params.key, 'E');
+      this._category = this.default(params.categor, 'None');
+      this._hint = this.default(params.hint, 'There\'s no hint.');
+      this._call = this.default(params.call, () => {}).toString();
+      this._position = this.default(params.position, false);
+      this._range = this.default(params.range, false);
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
       this.args = {};
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Hotkey class requires id to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -64,8 +44,8 @@ class Hotkey extends yarp.GMObject {
    * @instance
    * @function bind
    * @memberof yarp.Hotkey
-   * @param {object} player - Player to bind to.
-   * @param {Array} args - Arguments to the bind.
+   * @param {Object} player Player to bind to.
+   * @param {Array} args Arguments to the bind.
    * @fires playerBindKey
    */
   bind(player, args) {
@@ -78,7 +58,7 @@ class Hotkey extends yarp.GMObject {
    * @instance
    * @function unbind
    * @memberof yarp.Hotkey
-   * @param {object} player - Player to unbind from.
+   * @param {Object} player Player to unbind from.
    * @fires playerUnbindKey
    */
   unbind(player) {

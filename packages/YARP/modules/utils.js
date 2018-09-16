@@ -11,7 +11,7 @@ let utils = {};
  * @function getTimestamp
  * @memberof server.yarp.utils
  * @param {Date} date new Date().
- * @return {string} The formatted date.
+ * @return {String} The formatted date.
  */
 utils.getTimestamp = (date) => {
   let dd = date.getDate();
@@ -34,9 +34,9 @@ utils.getTimestamp = (date) => {
  * Round numbers by the amount of decimals.
  * @function round
  * @memberof server.yarp.utils
- * @param {number} value Value to be rounded.
- * @param {number} decimals How many decimals.
- * @return {number} The rounded number.
+ * @param {Number} value Value to be rounded.
+ * @param {Number} decimals How many decimals.
+ * @return {Number} The rounded number.
  */
 utils.round = (value, decimals) => {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -60,7 +60,7 @@ utils.vectorOffset = (vector, offset) => {
  * @memberof server.yarp.utils
  * @param {Vector3} vector1 First Vector3.
  * @param {Vector3} vector2 Second Vector3.
- * @return {number} Distance between them.
+ * @return {Number} Distance between them.
  */
 utils.vectorDistance = (vector1, vector2) => {
   let dx = vector1.x - vector2.x;
@@ -73,9 +73,9 @@ utils.vectorDistance = (vector1, vector2) => {
  * Generate a random string.
  * @function randomString
  * @memberof server.yarp.utils
- * @param {number} digits Amaount of symbols on the string.
- * @param {string} possible String with possible symbols.
- * @return {string} Randomly generated string.
+ * @param {Number} digits Amaount of symbols on the string.
+ * @param {String} possible String with possible symbols.
+ * @return {String} Randomly generated string.
  */
 utils.randomString = (digits, possible) => {
   let text = '';
@@ -89,8 +89,8 @@ utils.randomString = (digits, possible) => {
  * Get substrings from string.
  * @function getSubstrings
  * @memberof server.yarp.utils
- * @param {string} string String to analyze.
- * @param {string} symbol Symbol the substrings will be inside.
+ * @param {String} string String to analyze.
+ * @param {String} symbol Symbol the substrings will be inside.
  * @return {Array} Array of substrings.
  */
 utils.getSubstrings = (string, symbol) => {
@@ -109,7 +109,7 @@ utils.getSubstrings = (string, symbol) => {
  * Get object patameters names
  * @function getParamNames
  * @memberof server.yarp.utils
- * @param {function} func The function to be analyzed.
+ * @param {Function} func The function to be analyzed.
  * @return {Array} Array of parameter names.
  */
 utils.getParamNames = (func) => {
@@ -129,8 +129,8 @@ utils.getParamNames = (func) => {
  * @instance
  * @function data
  * @memberof yarp.GMObject
- * @param {object} object The object to be analyzed.
- * @return {object} Persistent data object.
+ * @param {Object} object The object to be analyzed.
+ * @return {Object} Persistent data object.
  */
 utils.cleanData = (object) => {
   let data = {};
@@ -146,8 +146,8 @@ utils.cleanData = (object) => {
  * Represents an object with a string
  * @function paramsToString
  * @memberof server.yarp.utils
- * @param {object} obj The object to be analyzed.
- * @return {string} Object representation in string.
+ * @param {Object} obj The object to be analyzed.
+ * @return {String} Object representation in string.
  */
 utils.paramsToString = (obj) => {
   let objP = '';
@@ -185,7 +185,7 @@ utils.paramsToString = (obj) => {
  * Returns the time in a set timezone.
  * @function getTimezoneDate
  * @memberof server.yarp.utils
- * @param {number} timezone The timezone difference to GMT.
+ * @param {Number} timezone The timezone difference to GMT.
  * @return {Date} Timezone date.
  */
 utils.getTimezoneDate = (timezone) => {

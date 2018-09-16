@@ -6,65 +6,36 @@
  */
 class Blip extends yarp.GMObject {
   /**
-   *Creates an instance of Blip.
-   * @param {*} id
-   * @param {*} position
-   * @param {string} [name='Blip']
-   * @param {number} [sprite=1]
-   * @param {number} [scale=1]
-   * @param {number} [color=4]
-   * @param {number} [alpha=255]
-   * @param {number} [drawDistance=100]
-   * @param {boolean} [fade=true]
-   * @param {*} [rotation=new mp.Vector3(0, 0, 0)]
-   * @param {number} [dimension=0]
-   * @param {boolean} [visible=true]
+   * Creates an instance of Blip.
+   * @param {Object} params
+   * @param {String} params.id
+   * @param {mp.Vector3} params.position
+   * @param {String} [params.name='Blip']
+   * @param {Number} [params.sprite=1]
+   * @param {Number} [params.scale=1]
+   * @param {Number} [params.color=4]
+   * @param {Number} [params.alpha=255]
+   * @param {Number} [params.drawDistance=100]
+   * @param {Boolean} [params.fade=true]
+   * @param {mp.Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
+   * @param {Number} [params.dimension=0]
    * @memberof yarp.Blip
    */
-  constructor(
-    id,
-    position,
-    name = 'Blip',
-    sprite = 1,
-    scale = 1,
-    color = 4,
-    alpha = 255,
-    drawDistance = 100,
-    fade = true,
-    rotation = new mp.Vector3(0, 0, 0),
-    dimension = 0,
-    visible = true
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        position: position,
-        name: name,
-        sprite: sprite,
-        scale: scale,
-        color: color,
-        alpha: alpha,
-        drawDistance: drawDistance,
-        fade: fade,
-        rotation: rotation,
-        dimension: dimension,
-        visible: visible,
-      } = id;
-      return new yarp.Blip(nid, position, name, sprite, scale, color, alpha, drawDistance, fade, rotation, dimension, visible);
-    } else if ((id && position) != null) {
-      this._id = id;
-      this._name = name;
-      this._sprite = sprite;
-      this._position = position;
-      this._scale = scale;
-      this._color = color;
-      this._alpha = alpha;
-      this._drawDistance = drawDistance;
-      this._fade = fade;
-      this._rotation = rotation;
-      this._dimension = dimension;
-      this._visible = visible;
+    if ((params.id && params.position) != null) {
+      this._id = params.id;
+      this._position = params.position;
+      this._name = this.default(params.name, params.id);
+      this._sprite = this.default(params.sprite, 1);
+      this._scale = this.default(params.scale, 1);
+      this._color = this.default(params.color, 4);
+      this._alpha = this.default(params.alpha, 255);
+      this._drawDistance = this.default(params.drawDistance, 100);
+      this._fade = this.default(params.fade, true);
+      this._rotation = this.default(params.rotation, new mp.Vector3(0, 0, 0));
+      this._dimension = this.default(params.dimension, 0);
+      this._visible = this.default(params.visible, true);
       if (!this._visible) this._alpha = 0;
       this.mp = mp.blips.new(this._sprite, this._position,
       {
@@ -79,6 +50,8 @@ class Blip extends yarp.GMObject {
       });
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Blip class requires id and position to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

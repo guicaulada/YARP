@@ -21,7 +21,7 @@ module.exports = async () => {
     require('../events/yarp/character.js');
     require('../events/yarp/gamemode.js');
     require('../events/yarp/item.js');
-    require('../events/yarp/menu.js');
+    require('../events/yarp/ui.js');
   } catch (err) {
     console.log(chalk.redBright('[YARP] ')+'EventError: '+err.message+'\n'+err.stack);
   }

@@ -8,9 +8,9 @@
  * Attach a weapon model to the character.
  * @event purchaseSaleItem
  * @memberof client.menu
- * @param {string} storeid - The store id.
- * @param {string} itemid - The item id.
- * @param {string} amount - The bought amount.
+ * @param {String} storeid The store id.
+ * @param {String} itemid The item id.
+ * @param {String} amount The bought amount.
  * @fires purchaseSaleItem
  */
 mp.events.add('purchaseSaleItem', (storeid, itemid, amount) => {
@@ -21,7 +21,7 @@ mp.events.add('purchaseSaleItem', (storeid, itemid, amount) => {
  * Verifies the user password.
  * @event verifyLogin
  * @memberof client.menu
- * @param {string} password - The typed password.
+ * @param {String} password The typed password.
  * @fires verifyLogin
  */
 mp.events.add('verifyLogin', (password) => {
@@ -42,8 +42,8 @@ mp.events.add('unbindToggleChat', () => {
  * Call an inventory item option.
  * @event callInventoryOption
  * @memberof client.menu
- * @param {string} itemid - The item id.
- * @param {string} option - The option id.
+ * @param {String} itemid The item id.
+ * @param {String} option The option id.
  * @fires callInventoryOption
  */
 mp.events.add('callInventoryOption', (itemid, option) => {
@@ -65,9 +65,9 @@ mp.events.add('updateBankAccountMoney', () => {
  * Updates bank account money on UI.
  * @event executeBankOperation
  * @memberof client.menu
- * @param {number} operation - 1 = Withdraw, 2 = Deposit, 3 = Transfer.
- * @param {number} amount - Amount of money.
- * @param {string} target - Character name.
+ * @param {Number} operation 1 = Withdraw, 2 = Deposit, 3 = Transfer.
+ * @param {Number} amount Amount of money.
+ * @param {String} target Character name.
  * @fires executeBankOperation
  */
 mp.events.add('executeBankOperation', (operation, amount, target) => {

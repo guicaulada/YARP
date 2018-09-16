@@ -8,7 +8,7 @@
  * Player created a waypoint.
  * @event playerCreateWaypoint
  * @memberof client.waypoint
- * @param {Vector3} position - The position of the waypoint.
+ * @param {Vector3} position The position of the waypoint.
  */
 mp.events.add('playerCreateWaypoint', (position) => {
 });

@@ -7,52 +7,39 @@
 class Item extends yarp.GMObject {
   /**
    *Creates an instance of Item.
-   * @param {*} id
-   * @param {*} name
-   * @param {string} [category='None']
-   * @param {number} [weight=0]
-   * @param {boolean} [spoil=false]
-   * @param {string} [model='prop_paper_bag_01']
-   * @param {*} [options={}]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} params.name
+   * @param {String} [params.category='None']
+   * @param {Number} [params.weight=0]
+   * @param {Boolean} [params.spoil=false]
+   * @param {String} [params.model='prop_paper_bag_01']
+   * @param {*} [params.options={}]
    * @memberof yarp.Item
    */
-  constructor(
-    id,
-    name,
-    category = 'None',
-    weight = 0,
-    spoil = false,
-    model = 'prop_paper_bag_01',
-    options = {}
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        name: name,
-        category: category,
-        weight: weight,
-        spoil: spoil,
-        model: model,
-        options: options,
-      } = id;
-      return new yarp.Item(nid, name, category, weight, spoil, model, options);
-    } else if ((id && name) != null) {
-      this._id = id;
-      this._name = name;
-      this._category = category;
-      this._weight = weight;
-      this._spoil = spoil;
-      this._weight = weight;
-      this._model = model;
-      this._options = {};
-      for (let id in options) {
-        if (options.hasOwnProperty(id)) {
-          this._options[id] = options[id].toString();
+    if ((params.id && params.name) != null) {
+      this._id = params.id;
+      this._name = params.name;
+      this._category = this.default(params.category, 'None');
+      this._weight = this.default(params.weight, 0);
+      this._spoil = this.default(params.spoil, false);
+      this._weight = this.default(params.weight, 0);
+      this._model = this.default(params.model, 'prop_paper_bag_01');
+      this._options = this.default(params.options, {});
+
+      // Turning functions into strings
+      for (let id in this._options) {
+        if (this._options.hasOwnProperty(id)) {
+          this._options[id] = this.default(this._options[id], () => {}).toString();
         }
       }
+
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Item class requires id and name to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 
@@ -61,7 +48,7 @@ class Item extends yarp.GMObject {
    * @instance
    * @function options
    * @memberof yarp.Item
-   * @return {object} - Functions indexed by option.
+   * @return {Object} Functions indexed by option.
    */
   get options() {
     let value = {};
@@ -78,7 +65,7 @@ class Item extends yarp.GMObject {
    * @instance
    * @function options
    * @memberof yarp.Item
-   * @param {Array<function>} value - Array of option functions
+   * @param {Array<function>} value Array of option functions
    */
   set options(value) {
     for (let id in value) {
@@ -93,7 +80,7 @@ class Item extends yarp.GMObject {
    * @instance
    * @function isAmmo
    * @memberof yarp.Item
-   * @return {boolean} - If the item is weapon or not.
+   * @return {Boolean} If the item is weapon or not.
    */
   isWeapon() {
     return this.id.includes('WEAPON_');
@@ -104,7 +91,7 @@ class Item extends yarp.GMObject {
    * @instance
    * @function isAmmo
    * @memberof yarp.Item
-   * @return {boolean} - If the item is ammo or not.
+   * @return {Boolean} If the item is ammo or not.
    */
   isAmmo() {
     return this.id.includes('AMMO_');

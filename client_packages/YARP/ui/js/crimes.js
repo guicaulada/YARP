@@ -1,6 +1,6 @@
 ﻿function populateCrimesConfirmMenu(crimesJson) {
 	// Obtenemos la lista de delitos a aplicar
-	let crimesArray = JSON.parse(crimesJson);
+	let crimesArray = JSON.parse(crimesJson.replace(/\r?\n|\r/g, ''));
 	let content = document.getElementById('content');
 
 	// Declaramos las variables de condena

@@ -7,50 +7,32 @@
 class Command extends yarp.GMObject {
   /**
    *Creates an instance of Command.
-   * @param {*} id
-   * @param {*} [call=() => {}]
-   * @param {string} [category='None']
-   * @param {string} [hint='There\'s no hint.']
-   * @param {*} [permissions=[]]
-   * @param {*} [items={}]
-   * @param {boolean} [position=false]
-   * @param {boolean} [range=false]
+   * @param {Object} params
+   * @param {*} params.id
+   * @param {*} [params.call=() => {}]
+   * @param {String} [params.category='None']
+   * @param {String} [params.hint='There\'s no hint.']
+   * @param {*} [params.permissions=[]]
+   * @param {*} [params.items={}]
+   * @param {Boolean} [params.position=false]
+   * @param {Boolean} [params.range=false]
    * @memberof yarp.Command
    */
-  constructor(
-    id,
-    call = () => {},
-    category = 'None',
-    hint = 'There\'s no hint.',
-    permissions = [],
-    items = {},
-    position = false,
-    range = false
-  ) {
+  constructor(params) {
     super();
-    if (typeof id === 'object') {
-      let {
-        id: nid,
-        call: call,
-        category: category,
-        hint: hint,
-        permissions: permissions,
-        items: items,
-        position: position,
-        range: range,
-      } = id;
-      return new yarp.Command(nid, call, category, hint, permissions, items, position, range);
-    } else if ((id) != null) {
-      this._id = id;
-      this._category = category;
-      this._hint = hint;
-      this._call = call.toString();
-      this._position = position;
-      this._range = range;
-      this._permissions = permissions;
-      this._items = items;
+    if ((params.id) != null) {
+      this._id = params.id;
+      this._category = this.default(params.category, 'None');
+      this._hint = this.default(params.hint, 'There\'s no hint.');
+      this._call = this.default(params.call, () => {}).toString();
+      this._position = this.default(params.position, false);
+      this._range = this.default(params.range, false);
+      this._permissions = this.default(params.permissions, []);
+      this._items = this.default(params.items, {});
       yarp.mng.register(this);
       this.makeGetterSetter();
+    } else {
+      throw new TypeError('Command class requires id to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
   }
 }

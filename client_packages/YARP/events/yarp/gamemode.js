@@ -11,7 +11,7 @@ let keybinds = {};
  * Credits to kemperrr#9752.
  * @event setWorldTime
  * @memberof client.gamemode
- * @param {boolean} active - If the chat is enalbed or not.
+ * @param {Boolean} active If the chat is enalbed or not.
  */
 mp.gui.execute('const _enableChatInput = enableChatInput;enableChatInput = (enable) => { mp.trigger(\'chatEnabled\', enable); _enableChatInput(enable) };');
 mp.events.add('chatEnabled', (toggle) => {
@@ -22,7 +22,7 @@ mp.events.add('chatEnabled', (toggle) => {
  * Sets the world time in game.
  * @event setWorldTime
  * @memberof client.gamemode
- * @param {string} jtime - JSON string with h, m, s.
+ * @param {String} jtime JSON string with h, m, s.
  */
 mp.events.add('setWorldTime', (jtime) => {
   let time = JSON.parse(jtime);
@@ -34,7 +34,7 @@ mp.events.add('setWorldTime', (jtime) => {
  * Executes code on the server.
  * @event runServerCode
  * @memberof client.gamemode
- * @param {string} code - The code to be executed.
+ * @param {String} code The code to be executed.
  * @fires runServerCode
  */
 mp.events.add('runServerCode', (code) => {
@@ -45,7 +45,7 @@ mp.events.add('runServerCode', (code) => {
  * Executes code on the client.
  * @event runClientCode
  * @memberof client.gamemode
- * @param {string} code - The code to be executed.
+ * @param {String} code The code to be executed.
  * @fires runClientCode
  */
 mp.events.add('runClientCode', (code) => {
@@ -56,8 +56,8 @@ mp.events.add('runClientCode', (code) => {
  * Binds a key.
  * @event playerBindKey
  * @memberof client.gamemode
- * @param {string} id - The id of the keybind.
- * @param {string} key - The virtual key code.
+ * @param {String} id The id of the keybind.
+ * @param {String} key The virtual key code.
  * @fires playerBoundKeyPressed
  */
 mp.events.add('playerBindKey', (id, key) => {
@@ -90,7 +90,7 @@ mp.events.add('playerBindKey', (id, key) => {
  * Unbind a key.
  * @event playerUnbindKey
  * @memberof client.gamemode
- * @param {string} id - The id of the keybind.
+ * @param {String} id The id of the keybind.
  */
 mp.events.add('playerUnbindKey', (id) => {
   if (keybinds[id]) {
@@ -103,7 +103,7 @@ mp.events.add('playerUnbindKey', (id) => {
  * Open a door.
  * @event playerOpenDoor
  * @memberof client.gamemode
- * @param {string} doorJson - Door data in JSON.
+ * @param {String} doorJson Door data in JSON.
  */
 mp.events.add('playerOpenDoor', (doorJson) => {
   let door = JSON.parse(doorJson);
@@ -114,7 +114,7 @@ mp.events.add('playerOpenDoor', (doorJson) => {
  * Close a door.
  * @event playerCloseDoor
  * @memberof client.gamemode
- * @param {string} doorJson - Door data in JSON.
+ * @param {String} doorJson Door data in JSON.
  */
 mp.events.add('playerCloseDoor', (doorJson) => {
   let door = JSON.parse(doorJson);
