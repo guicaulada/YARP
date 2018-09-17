@@ -7,6 +7,19 @@
 let utils = {};
 
 /**
+ * Returns first vaule or second value as default.
+ * @instance
+ * @function default
+ * @memberof client.yarp.utils
+ * @param {*} v Verified value.
+ * @param {*} d Default value if v is null.
+ * @return {*} v if it's not null, or d
+ */
+utils.default = (v, d) => {
+  return (v != null) ? v : d;
+};
+
+/**
  * Format dates to dd/mm/yy h:m:s.
  * @function getTimestamp
  * @memberof server.yarp.utils

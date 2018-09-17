@@ -1,12 +1,15 @@
 'use strict';
 
-mp.events.add('openStoreMenu', (player, location) => {
+let openStores = {};
+
+mp.events.add('openStoreMenu', (player, location, options) => {
+  if (!options) options = {};
   let sale = location.sale;
   let menu = new yarp.Menu({
     id: location.id,
-    title: '7/11',
-    subtitle: 'Welcome to 7/11, how can I help?',
-    offset: [1450, 450],
+    title: yarp.utils.default(options.title, 'Store'),
+    subtitle: yarp.utils.default(options.subtitle, 'Welcome, buy your shit and get out!'),
+    offset: yarp.utils.default(options.offset, [1450, 450]),
   });
 
   for (let category in sale) {
@@ -14,11 +17,13 @@ mp.events.add('openStoreMenu', (player, location) => {
       menu.items.push({
         text: category,
         description: `Buy ${category.toLowerCase()} items.`,
+        _meta: {storeId: location.id, storeType: 'common'},
       });
     }
   }
 
   menu.create(player);
+  openStores[player.name] = {total: 0, received: {}};
   yarp.hotkeys['Open Menu'].bind(player, [menu]);
 });
 
@@ -27,8 +32,16 @@ mp.events.add('closeStoreMenu', (player, location) => {
     yarp.menus[location.id].close(player);
     for (let category in location.sale) {
       if (location.sale.hasOwnProperty(category)) {
-        if (yarp.menus[location.id + ' ' + category]) {
-          yarp.menus[location.id + ' ' + category].close(player);
+        if (yarp.menus[category]) {
+          yarp.menus[category].close(player);
+          player.notify('Paid ~r~$' + openStores[player.name].total);
+          for (let item in openStores[player.name].received) {
+            if (openStores[player.name].received.hasOwnProperty(item)) {
+              let amount = openStores[player.name].received[item];
+              player.notify('Received ~g~' + amount + ' ' + item);
+            }
+          }
+          delete openStores[player.name];
         }
       }
     }
@@ -47,14 +60,15 @@ mp.events.add('closeStoreMenu', (player, location) => {
 mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
   let data = JSON.parse(jsonData);
   let item = data.item;
-  if (menuId.indexOf('7/11') >= 0) {
-    let location = yarp.locations[menuId];
+  if (item._meta.storeType == 'common' && item._meta.storeId) {
+    let storeId = item._meta.storeId;
+    let location = yarp.locations[storeId];
     if (location) {
       let sale = location.sale;
       if (sale[item.text]) {
         let categoryMenu = new yarp.Menu({
-          id: location.id + ' ' + item.text,
-          subtitle: 'Please choose your ' + item.text.toLowerCase(),
+          id: item.text,
+          subtitle: 'Pick your ' + item.text.toLowerCase(),
           offset: [1450, 450],
         });
 
@@ -66,7 +80,7 @@ mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
                 text: saleItem.name,
                 description: `Buy ${saleItem.name} for $${saleItem.price}.`,
                 rightLabel: '$'+saleItem.price,
-                _metadata: {itemId: saleItem.id, storeId: location.id, categoryId: item.text},
+                _meta: {itemId: saleItem.id, storeId: location.id, categoryId: item.text, storeType: 'common'},
               });
             }
           }
@@ -91,22 +105,27 @@ mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
 mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
   let data = JSON.parse(jsonData);
   let item = data.item;
-  if (item._metadata.itemId && item._metadata.storeId && item._metadata.categoryId) {
-    let storeId = item._metadata.storeId;
+  if (item._meta.storeType == 'common' && item._meta.itemId && item._meta.storeId && item._meta.categoryId) {
+    let storeId = item._meta.storeId;
     let location = yarp.locations[storeId];
     if (location) {
-      let categoryId = item._metadata.categoryId;
+      let categoryId = item._meta.categoryId;
       let sale = location.sale;
       if (sale[categoryId]) {
-        let itemId = item._metadata.itemId;
+        let itemId = item._meta.itemId;
         let saleItem = sale[categoryId][itemId];
         let character = yarp.characters[player.name];
         if (character.tryFullPayment(saleItem.price)) {
           location.inventory[itemId].amount -= 1;
           character.giveItem(yarp.items[itemId], 1);
           character.save();
-          player.notify('Paid ~r~$' + saleItem.price);
-          player.notify('Received ~g~' + 1 + ' ' + item.text);
+
+          openStores[player.name].total += saleItem.price;
+          if (!openStores[player.name].received[item.text]) {
+            openStores[player.name].received[item.text] = 1;
+          } else {
+            openStores[player.name].received[item.text] += 1;
+          }
         }
       }
     }

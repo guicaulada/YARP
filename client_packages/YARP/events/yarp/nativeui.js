@@ -49,7 +49,7 @@ function menuAddItem(menuId, item) {
             if (item.rightLabel) menuItem.SetRightLabel(item.rightLabel);
             break;
     }
-    menuItem._metadata = yarp.utils.default(item._metadata, {});
+    menuItem._meta = yarp.utils.default(item._meta, {});
     yarp.nui[menuId].AddItem(menuItem);
 }
 
@@ -68,7 +68,7 @@ function menuAddItem(menuId, item) {
 mp.events.add('createMenu', (menuId, optionsJson) => {
     let options = JSON.parse(optionsJson);
     yarp.nui[menuId] = new NativeUI.Menu(options.title, options.subtitle, new NativeUI.Point(...options.offset), options.spriteLibrary, options.spriteName);
-    yarp.nui[menuId]._metadata = {};
+    yarp.nui[menuId]._meta = {};
     for (let item of options.items) {
         menuAddItem(menuId, item);
     }
@@ -87,7 +87,7 @@ mp.events.add('createMenu', (menuId, optionsJson) => {
                 text: item._text.caption,
                 description: item.Description,
                 item: item._itemText ? item._itemText.caption : null,
-                _metadata: item._metadata,
+                _meta: item._meta,
             },
         }));
     });
@@ -102,7 +102,7 @@ mp.events.add('createMenu', (menuId, optionsJson) => {
                 text: item._text.caption,
                 description: item.Description,
                 item: item._itemText ? item._itemText.caption : null,
-                _metadata: item._metadata,
+                _meta: item._meta,
             },
         }));
     });
@@ -117,7 +117,7 @@ mp.events.add('createMenu', (menuId, optionsJson) => {
                 text: item._text.caption,
                 description: item.Description,
                 item: item._itemText ? item._itemText.caption : null,
-                _metadata: item._metadata,
+                _meta: item._meta,
             },
         }));
     });
@@ -133,7 +133,7 @@ mp.events.add('createMenu', (menuId, optionsJson) => {
                 text: item._text.caption,
                 description: item.Description,
                 item: item._itemText ? item._itemText.caption : null,
-                _metadata: item._metadata,
+                _meta: item._meta,
             },
         }));
     });
