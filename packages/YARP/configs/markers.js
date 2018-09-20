@@ -106,6 +106,16 @@ let config = {
 let multiplePositions = {
   'Ammu-Nation': {
     visible: true,
+    enter: (player) => {
+      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
+      let location = yarp.locations[this.id];
+      yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateSaleCategories', location.id, JSON.stringify(location.sale)]], true, true]);
+    },
+    leave: (player) => {
+      player.call('clearHelpText');
+      player.call('destroyBrowser', ['menu']);
+      yarp.hotkeys['Event'].unbind(player);
+    },
     position: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
       new mp.Vector3(252.696, -48.2487, 69.941),
@@ -122,6 +132,16 @@ let multiplePositions = {
   },
   '7/11': {
     visible: true,
+    enter: (player) => {
+      let location = yarp.locations[this.id];
+      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
+      mp.events.call('openStoreMenu', player, location);
+    },
+    leave: (player) => {
+      let location = yarp.locations[this.id];
+      player.call('clearHelpText');
+      mp.events.call('closeStoreMenu', player, location);
+    },
     position: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
       new mp.Vector3(1960.7580566406, 3749.26367187, 31.3437423706055),
@@ -350,7 +370,7 @@ for (let id in multiplePositions) {
   if (multiplePositions.hasOwnProperty(id)) {
     let marker = multiplePositions[id];
     marker.position.forEach((position, i) => {
-      config[id+' '+i] = {
+      config[id+' '+(i+1)] = {
         visible: marker.visible,
         position: position,
       };
