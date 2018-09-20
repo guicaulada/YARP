@@ -350,7 +350,8 @@ for (let id in multiplePositions) {
   if (multiplePositions.hasOwnProperty(id)) {
     let blip = multiplePositions[id];
     blip.position.forEach((position, i) => {
-      config[id + ' ' + i] = {
+      config[id + ' ' + (i+1)] = {
+        name: id,
         sprite: blip.sprite,
         position: position,
       };
