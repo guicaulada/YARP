@@ -113,7 +113,7 @@ let multiplePositions = {
     },
     leave: (player) => {
       let location = yarp.locations[this.id];
-      yarp.server.closeStoreMenu(player, location);
+      // yarp.server.closeStoreMenu(player, location);
     },
     position: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
@@ -138,7 +138,7 @@ let multiplePositions = {
     },
     leave: (player) => {
       let location = yarp.locations[this.id];
-      yarp.server.closeStoreMenu(player, location);
+      // yarp.server.closeStoreMenu(player, location);
     },
     position: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
