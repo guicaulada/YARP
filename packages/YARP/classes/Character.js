@@ -2,9 +2,9 @@
 /**
  * Implements a Character.
  * @class yarp.Character
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Character extends yarp.GMObject {
+class Character extends yarp.Object {
   /**
    * Creates an instance of Character.
    * @param {Object} params
@@ -29,8 +29,6 @@ class Character extends yarp.GMObject {
    * @param {Number} [params.weight=0]
    * @param {Object} [params.inventory={}]
    * @param {Object} [params.customization={}]
-   * @param {Object} [params.decoration={}]
-   * @param {Object} [params.clothes={}]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
    * @memberof yarp.Character
@@ -42,7 +40,6 @@ class Character extends yarp.GMObject {
       this._socialClub = params.socialClub;
       this._age = this.default(params.age, 18);
       this._model = this.default(params.model, 'mp_m_freemode_01');
-      this._face = this.default(params.age, {});
       this._lastLogin = this.default(params.lastLogin, '');
       this._wallet = this.default(params.wallet, yarp.variables['Starting Wallet'].value);
       this._bank = this.default(params.bank, yarp.variables['Starting Bank'].value);
@@ -59,13 +56,12 @@ class Character extends yarp.GMObject {
       this._xp = this.default(params.xp, 0);
       this._inventory = this.default(params.inventory, {});
       this._customization = this.default(params.customization, {});
-      this._decoration = this.default(params.decostation, {});
-      this._clothes = this.default(params.clothers, {});
       this._enter = this.default(params.enter, () => {}).toString();
       this._leave = this.default(params.leave, () => {}).toString();
       this.players = [];
       yarp.mng.register(this);
       this.makeGetterSetter();
+      this.defaultCustomization();
     } else {
       throw new TypeError('Character class requires id and socialClub to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
@@ -131,7 +127,7 @@ class Character extends yarp.GMObject {
       }
       for (let group of this.groups) {
         yarp.groups[group].enter(player);
-        mp.events.call('characterJoinedGroup', player, this, group);
+        yarp.server.characterJoinedGroup(player, this, group);
       }
     };
   }
@@ -163,7 +159,7 @@ class Character extends yarp.GMObject {
       }
       for (let group of this.groups) {
         yarp.groups[group].leave(player);
-        mp.events.call('characterLeftGroup', player, this, group);
+        yarp.server.characterLeftGroup = (player, this, group);
       }
     };
   }
@@ -408,7 +404,7 @@ class Character extends yarp.GMObject {
    * @param {String} ip Character ip.
    */
   updateLastLogin(ip) {
-    this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
+    this.lastLogin = `${ip} ${yarp.utils.server.getTimestamp(new Date())}`;
   }
 
   /**
@@ -550,7 +546,7 @@ class Character extends yarp.GMObject {
       } else {
         this.inventory[item.id] = amount;
       }
-      this.weight = yarp.utils.round(this.weight + (amount * item.weight), 1);
+      this.weight = yarp.utils.server.round(this.weight + (amount * item.weight), 1);
       return true;
     }
     return false;
@@ -570,7 +566,7 @@ class Character extends yarp.GMObject {
     if (this.inventory[item.id] != null) {
       if (this.inventory[item.id]-amount >= 0) {
         this.inventory[item.id] = this.inventory[item.id]-amount;
-        this.weight = yarp.utils.round(this.weight-(amount * item.weight), 1);
+        this.weight = yarp.utils.server.round(this.weight-(amount * item.weight), 1);
         if (this.inventory[item.id] <= 0) {
           delete this.inventory[item.id];
         }
@@ -626,7 +622,7 @@ class Character extends yarp.GMObject {
     if (!amount) amount = 0;
     this.weapons[weapon.id] += amount;
     this.player.giveWeapon(mp.joaat(weapon.id), amount);
-    this.player.call('equipWeapon', [JSON.stringify(weapon)]);
+    yarp.client.equipWeapon(this.player, weapon);
   }
 
   /**
@@ -643,8 +639,8 @@ class Character extends yarp.GMObject {
       this.weapons.splice(this.weapons.indexOf(weapon.id), 1);
     }
     let player = this.player;
-    player.call('takeWeapon', [weapon.id]);
-    player.call('unequipWeapon', [JSON.stringify(weapon)]);
+    yarp.client.takeWeapon(player, weapon.id);
+    yarp.client.unequipWeapon(player, weapon);
   }
 
   /**
@@ -661,8 +657,7 @@ class Character extends yarp.GMObject {
       if (this.weapons[id] <= 0) {
         this.weapons[id] = 0;
       }
-      let player = this.player;
-      player.call('setWeaponAmmo', [id, this.weapons[id]]);
+      yarp.client.setWeaponAmmo(this.player, id, this.weapons[id]);
     }
   }
 
@@ -677,8 +672,7 @@ class Character extends yarp.GMObject {
   giveWeaponAmmo(id, amount) {
     if (this.hasWeapon(id)) {
       this.weapons[id] += amount;
-      let player = this.player;
-      player.call('setWeaponAmmo', [id, this.weapons[id]]);
+      yarp.client.setWeaponAmmo(this.player, id, this.weapons[id]);
     }
   }
 
@@ -697,8 +691,7 @@ class Character extends yarp.GMObject {
       if (this.weapons[weaponId] <= 0) {
         this.weapons[weaponId] = 0;
       }
-      let player = this.player;
-      player.call('setWeaponAmmo', [weaponId, this.weapons[weaponId]]);
+      yarp.client.setWeaponAmmo(this.player, weaponId, this.weapons[weaponId]);
     }
   }
 
@@ -714,8 +707,7 @@ class Character extends yarp.GMObject {
     let weaponId = id.replace('AMMO_', 'WEAPON_');
     if (this.hasWeapon(weaponId)) {
       this.weapons[weaponId] += amount;
-      let player = this.player;
-      player.call('setWeaponAmmo', [weaponId, this.weapons[weaponId]]);
+      yarp.client.setWeaponAmmo(this.player, weaponId, this.weapons[weaponId]);
     }
   }
 
@@ -770,7 +762,7 @@ class Character extends yarp.GMObject {
         let player = this.player;
         if (player) {
           yarp.groups[group].enter(player);
-          mp.events.call('characterJoinedGroup', player, this, group);
+          yarp.server.characterJoinedGroup(player, this, group);
         }
       }
       this.groups.push(group);
@@ -794,7 +786,7 @@ class Character extends yarp.GMObject {
         let player = this.player;
         if (player) {
           yarp.groups[group].leave(player);
-          mp.events.call('characterLeftGroup', player, this, group);
+          yarp.server.characterLeftGroup(player, this, group);
         }
       }
       this.groups.splice(this.groups.indexOf(group), 1);
@@ -990,6 +982,112 @@ class Character extends yarp.GMObject {
     }
     return true;
   }
+
+  /**
+   * Apply saved character customization to ped.
+   * @instance
+   * @function loadCustomization
+   * @memberof yarp.Character
+   */
+  applyCustomization() {
+    let player = this.player;
+    if (player) {
+      player.setCustomization(
+        this.customization.gender == 0,
+        this.customization.parents.mother,
+        this.customization.parents.father,
+        0,
+        this.customization.parents.mother,
+        this.customization.parents.father,
+        0,
+        this.customization.parents.similarity,
+        this.customization.parents.skinSimilarity,
+        0.0,
+        this.customization.eyeColor,
+        this.customization.hair.color,
+        this.customization.hair.highlightColor,
+        this.customization.features
+      );
+      player.setClothes(2, this.customization.hair.hair, 0, 2);
+      for (let i = 0; i < 10; i++) player.setHeadOverlay(i, [this.customization.appearance[i].value, this.customization.appearance[i].opacity, this.colorForOverlayIdx(i), 0]);
+    }
+  }
+
+  /**
+   * Sets character to default customization.
+   * @instance
+   * @function defaultCustomization
+   * @memberof yarp.Character
+   */
+  defaultCustomization() {
+    this.customization = {
+      gender: 0,
+
+      parents: {
+        father: 0,
+        mother: 0,
+        similarity: 1.0,
+        skinSimilarity: 1.0,
+      },
+
+      features: [],
+      appearance: [],
+
+      hair: {
+        hair: 0,
+        color: 0,
+        highlightColor: 0,
+      },
+
+      eyebrowColor: 0,
+      beardColor: 0,
+      eyeColor: 0,
+      blushColor: 0,
+      lipstickColor: 0,
+      chestHairColor: 0,
+    };
+    for (let i = 0; i < 20; i++) this.customization.features.push(0.0);
+    for (let i = 0; i < 10; i++) this.customization.appearance.push({value: 255, opacity: 1.0});
+  }
+
+  /**
+   * Sets character to default customization.
+   * @instance
+   * @function defaultCustomization
+   * @memberof yarp.Character
+   * @param {Number} index Overlay index
+   * @return {Number} Color
+   */
+  colorForOverlayIdx(index) {
+    let color;
+
+    switch (index) {
+      case 1:
+        color = this.customization.beardColor;
+        break;
+
+      case 2:
+        color = this.customization.eyebrowColor;
+        break;
+
+      case 5:
+        color = this.customization.blushColor;
+        break;
+
+      case 8:
+        color = this.customization.lipstickColor;
+        break;
+
+      case 10:
+        color = this.customization.chestHairColor;
+        break;
+
+      default:
+        color = 0;
+    }
+
+    return color;
+  };
 }
 
 module.exports = Character;

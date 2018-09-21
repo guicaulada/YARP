@@ -19,7 +19,7 @@ let config = {
     key: 'ALT',
     category: 'utility',
     call: (player, args) => {
-      player.call('toggleChat');
+      yarp.client.toggleChat(player);
     },
   },
   'Inventory': {
@@ -29,7 +29,7 @@ let config = {
       if (!this.players) this.players = [];
       let i = this.players.indexOf(player.socialClub);
       if (i >= 0) {
-        player.call('destroyBrowser', ['inventory']);
+        yarp.client.destroyBrowser(player, 'inventory');
         this.players.splice(i, 1);
       } else {
         yarp.commands['inventory'].call(player);
@@ -39,7 +39,7 @@ let config = {
   },
   'Toggle Menu': {
     key: 'M',
-    category: 'testing',
+    category: 'utility',
     call: (player, args) => {
       if (!this.players) this.players = [];
       let i = this.players.indexOf(player.socialClub);
@@ -57,6 +57,13 @@ let config = {
     category: 'utility',
     call: (player, args) => {
       args[0].open(player);
+    },
+  },
+  'Test Proxy': {
+    key: 'B',
+    category: 'testing',
+    call: async (player, args) => {
+      console.log('Final Message:'+await yarp.client.testProxy(player, 'server'));
     },
   },
 };

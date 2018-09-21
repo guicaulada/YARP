@@ -4,11 +4,11 @@ let config = {
   'FIB Elevator Up': {
     visible: false,
     enter: (player) => {
-      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to take the elevator.']);
+      yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to take the elevator.');
       yarp.hotkeys['Teleport'].bind(player, [yarp.labels['FIB Elevator Down 1'].position]);
     },
     leave: (player) => {
-      player.call('clearHelpText');
+      yarp.client.clearHelpText(player);
       yarp.hotkeys['Teleport'].unbind(player);
     },
     position: new mp.Vector3(139.219, -762.7094, 45.752),
@@ -16,11 +16,11 @@ let config = {
   'FIB Elevator Down': {
     visible: false,
     enter: (player) => {
-      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to take the elevator.']);
+      yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to take the elevator.');
       yarp.hotkeys['Teleport'].bind(player, [yarp.labels['FIB Elevator Up 1'].position]);
     },
     leave: (player) => {
-      player.call('clearHelpText');
+      yarp.client.clearHelpText(player);
       yarp.hotkeys['Teleport'].unbind(player);
     },
     position: new mp.Vector3(136.0667, -761.8372, 234.1520),
@@ -206,12 +206,12 @@ let multiplePositions = {
   'Bank': {
     visible: false,
     enter: (player) => {
-      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to use the bank.']);
-      yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/bankMenu.html']], true, true]);
+      yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to use the bank.');
+      yarp.hotkeys['Event'].bind(player, ['yarp:createBrowser', ['menu', ['package://YARP/ui/html/bankMenu.html'], true, true]]);
     },
     leave: (player) => {
-      player.call('clearHelpText');
-      player.call('destroyBrowser', ['menu']);
+      yarp.client.clearHelpText(player);
+      yarp.client.destroyBrowser(player, 'menu');
       yarp.hotkeys['Event'].unbind(player);
     },
     position: [
@@ -383,7 +383,7 @@ for (let id in multiplePositions) {
   if (multiplePositions.hasOwnProperty(id)) {
     let label = multiplePositions[id];
     label.position.forEach((position, i) => {
-      config[id + ' ' + i] = {
+      config[id + ' ' + (i+1)] = {
         visible: label.visible,
         position: position,
         enter: label.enter,

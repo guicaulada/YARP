@@ -2,9 +2,9 @@
 /**
  * Implements a Label.
  * @class yarp.Label
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Label extends yarp.GMObject {
+class Label extends yarp.Object {
   /**
    * Creates an instance of Label.
    * @param {Object} params

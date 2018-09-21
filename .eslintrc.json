@@ -4,9 +4,7 @@
         "ecmaVersion": 8
     },
     "rules": {
-        "max-len": ["error", {
-            "code": 200
-        }],
+        "max-len": "off",
         "new-cap": "off",
         "no-invalid-this": 0
     }

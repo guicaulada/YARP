@@ -2,9 +2,9 @@
 /**
  * Implements a Npc.
  * @class yarp.Npc
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Npc extends yarp.GMObject {
+class Npc extends yarp.Object {
   /**
    * Creates an instance of Npc.
    * @param {Object} params

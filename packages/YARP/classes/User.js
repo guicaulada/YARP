@@ -3,9 +3,9 @@
 /**
  * Implements a User.
  * @class yarp.User
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class User extends yarp.GMObject {
+class User extends yarp.Object {
 /**
  * Creates an instance of User.
  * @param {Object} params
@@ -105,7 +105,7 @@ constructor(params) {
       }
       for (let group of this.groups) {
         yarp.groups[group].enter(player);
-        mp.events.call('userJoinedGroup', player, this, group);
+        yarp.server.userJoinedGroup(player, this, group);
       }
     };
   }
@@ -126,7 +126,7 @@ constructor(params) {
       }
       for (let group of this.groups) {
         yarp.groups[group].leave(player);
-        mp.events.call('userLeftGroup', player, this, group);
+        yarp.server.userLeftGroup = (player, this, group);
       }
     };
   }
@@ -161,7 +161,7 @@ constructor(params) {
    * @param {String} ip Character ip.
    */
   updateLastLogin(ip) {
-    this.lastLogin = `${ip} ${yarp.utils.getTimestamp(new Date())}`;
+    this.lastLogin = `${ip} ${yarp.utils.server.getTimestamp(new Date())}`;
   }
 
   /**
@@ -198,7 +198,7 @@ constructor(params) {
         let player = this.player;
         if (player) {
           yarp.groups[group].enter(player);
-          mp.events.call('userJoinedGroup', player, this, group);
+          yarp.server.userJoinedGroup(player, this, group);
         }
       }
       this.groups.push(group);
@@ -222,7 +222,7 @@ constructor(params) {
         let player = this.player;
         if (player) {
           yarp.groups[group].leave(player);
-          mp.events.call('userLeftGroup', player, this, group);
+          yarp.server.userLeftGroup(player, this, group);
         }
       }
       this.groups.splice(this.groups.indexOf(group), 1);

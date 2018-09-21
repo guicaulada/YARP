@@ -156,7 +156,7 @@ class Pool {
    */
   async forEachInRange(position, range, call) {
     for (let id in this) {
-      if (id[0] != '_' && yarp.utils.vectorDistance(this[id].position, position) <= range) {
+      if (id[0] != '_' && yarp.utils.server.vectorDistance(this[id].position, position) <= range) {
         call(this[id]);
       }
     }

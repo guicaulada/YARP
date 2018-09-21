@@ -2,9 +2,9 @@
 /**
  * Implements a Location.
  * @class yarp.Location
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Location extends yarp.GMObject {
+class Location extends yarp.Object {
   /**
    * Creates an instance of Location.
    * @param {Object} params

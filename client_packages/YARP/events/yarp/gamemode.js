@@ -1,71 +1,110 @@
 'use strict';
 /**
-* @file Gamemode events
-* @namespace client.gamemode
+* Gamemode events
 */
 
 let keybinds = {};
 
 /**
+ * Displays help text on top left.
+ * @function displayHelpText
+ * @memberof yarp.client
+ * @param {String} text Text to be displayed.
+ */
+yarp.client.displayHelpText = (text) => {
+  mp.game.ui.setTextComponentFormat('STRING');
+  mp.game.ui.addTextComponentSubstringPlayerName(text);
+  mp.game.ui.displayHelpTextFromStringLabel(0, false, true, -1);
+};
+
+/**
+ * Clears help text on top left.
+ * @function clearHelpText
+ * @memberof yarp.client
+ */
+yarp.client.clearHelpText = () => {
+  mp.game.ui.clearHelp(true);
+};
+
+/**
  * Sets the chat input state.
  * Credits to kemperrr#9752.
- * @event setWorldTime
- * @memberof client.gamemode
+ * @function setWorldTime
+ * @memberof yarp.client
  * @param {Boolean} active If the chat is enalbed or not.
  */
-mp.gui.execute('const _enableChatInput = enableChatInput;enableChatInput = (enable) => { mp.trigger(\'chatEnabled\', enable); _enableChatInput(enable) };');
-mp.events.add('chatEnabled', (toggle) => {
+mp.gui.execute('const _enableChatInput = enableChatInput;enableChatInput = (enable) => { mp.trigger(\'yarp:cefTrigger\', \'yarp:chatEnabled\(enable); _enableChatInput(enable) };');
+yarp.client.chatEnabled = (toggle) => {
   mp.gui.chat.enabled = toggle;
-});
+};
 
 /**
  * Sets the world time in game.
- * @event setWorldTime
- * @memberof client.gamemode
- * @param {String} jtime JSON string with h, m, s.
+ * @function setWorldTime
+ * @memberof yarp.client
+ * @param {String} time Time data {h, m, s}.
  */
-mp.events.add('setWorldTime', (jtime) => {
-  let time = JSON.parse(jtime);
+yarp.client.setWorldTime = (time) => {
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
   mp.game.time.setClockTime(time.h, time.m, time.s);
-});
-
-/**
- * Executes code on the server.
- * @event runServerCode
- * @memberof client.gamemode
- * @param {String} code The code to be executed.
- * @fires runServerCode
- */
-mp.events.add('runServerCode', (code) => {
-  mp.events.callRemote('runServerCode', code);
-});
+};
 
 /**
  * Executes code on the client.
- * @event runClientCode
- * @memberof client.gamemode
+ * @function runClientCode
+ * @memberof yarp.client
  * @param {String} code The code to be executed.
- * @fires runClientCode
  */
-mp.events.add('runClientCode', (code) => {
+yarp.client.runClientCode = (code) => {
   eval(code);
-});
+};
+
+
+/**
+ * Run client function.
+ * @function runClientFunction
+ * @memberof yarp.client
+ * @param {String} func Function name.
+ * @param {Array} args Function arguments.
+ */
+yarp.client.runClientFunction = (func, args) => {
+  eval(func)(...args);
+};
+
+/**
+ * Executes code on the server.
+ * @function runServerCode
+ * @memberof yarp.client
+ * @param {String} code The code to be executed.
+ */
+yarp.client.runServerCode = (code) => {
+  yarp.server.runServerCode(code);
+};
+
+/**
+ * Executes code on the server.
+ * @function runServerFunction
+ * @memberof yarp.client
+ * @param {String} func Function name.
+ * @param {Array} args Function arguments.
+ */
+yarp.client.runServerFunction = (func, args) => {
+  yarp.server.runServerFunction(func, args);
+};
 
 /**
  * Binds a key.
- * @event playerBindKey
- * @memberof client.gamemode
+ * @function playerBindKey
+ * @memberof yarp.client
  * @param {String} id The id of the keybind.
  * @param {String} key The virtual key code.
- * @fires playerBoundKeyPressed
  */
-mp.events.add('playerBindKey', (id, key) => {
+yarp.client.playerBindKey = (id, key) => {
   if (keybinds[id]) {
     mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
     keybinds[id] = null;
   }
-  if ((typeof key) === 'string') key = yarp.utils.getVirtualKeys()[key.toUpperCase()];
+  if ((typeof key) === 'string') key = yarp.utils.client.getVirtualKeys()[key.toUpperCase()];
   keybinds[id] = {
     key: key,
     call: () => {
@@ -79,44 +118,42 @@ mp.events.add('playerBindKey', (id, key) => {
         }
       }
       if (!disabled && !mp.gui.chat.enabled) {
-        mp.events.callRemote('playerBoundKeyPressed', id);
+        yarp.server.playerBoundKeyPressed(id);
       }
     },
   };
   mp.keys.bind(keybinds[id].key, false, keybinds[id].call);
-});
+};
 
 /**
  * Unbind a key.
- * @event playerUnbindKey
- * @memberof client.gamemode
+ * @function playerUnbindKey
+ * @memberof yarp.client
  * @param {String} id The id of the keybind.
  */
-mp.events.add('playerUnbindKey', (id) => {
+yarp.client.playerUnbindKey = (id) => {
   if (keybinds[id]) {
     mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
     keybinds[id] = null;
   }
-});
+};
 
 /**
  * Open a door.
- * @event playerOpenDoor
- * @memberof client.gamemode
- * @param {String} doorJson Door data in JSON.
+ * @function playerOpenDoor
+ * @memberof yarp.client
+ * @param {Object} door Door data.
  */
-mp.events.add('playerOpenDoor', (doorJson) => {
-  let door = JSON.parse(doorJson);
+yarp.client.playerOpenDoor = (door) => {
   mp.game.object.doorControl(door._model, door._position.x, door._position.y, door._position.z, false, 0.0, 50.0, 0.0);
-});
+};
 
 /**
  * Close a door.
- * @event playerCloseDoor
- * @memberof client.gamemode
- * @param {String} doorJson Door data in JSON.
+ * @function playerCloseDoor
+ * @memberof yarp.client
+ * @param {Object} door Door data.
  */
-mp.events.add('playerCloseDoor', (doorJson) => {
-  let door = JSON.parse(doorJson);
+yarp.client.playerCloseDoor = (door) => {
   mp.game.object.doorControl(door._model, door._position.x, door._position.y, door._position.z, true, 0.0, 50.0, 0.0);
-});
+};

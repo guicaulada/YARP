@@ -25,7 +25,7 @@ function populateInventory(inventoryJson, title) {
 		titleContainer.textContent = title;
 		closeImage.src = '../img/close.png';
 		closeImage.onclick = (function(){
-			mp.trigger('destroyBrowser', 'inventory');
+			mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'inventory');
 		});
 		titleContainer.appendChild(closeImage);
 	}
@@ -97,7 +97,7 @@ function showInventoryOptions(optionsArray) {
 		itemOption.classList.add('inventory-option');
 		itemOption.textContent = options[i];
 		itemOption.onclick = (function(){
-			mp.trigger('callInventoryOption', selected_id, options[i]);
+			mp.trigger('yarp:cefTrigger', 'callInventoryOption', selected_id, options[i]);
 		});
 		inventoryOptions.appendChild(itemOption);
 	}

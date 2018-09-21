@@ -2,9 +2,9 @@
 /**
  * Implements a Checkpoint.
  * @class yarp.Checkpoint
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Checkpoint extends yarp.GMObject {
+class Checkpoint extends yarp.Object {
   /**
    * Creates an instance of Checkpoint.
    * @param {Object} params
@@ -27,7 +27,7 @@ class Checkpoint extends yarp.GMObject {
     super();
     if ((params.id && params.position) != null) {
       this._id = params.id;
-      this._position = yarp.utils.vectorOffset(params.position, new mp.Vector3(0, 0, -1));
+      this._position = yarp.utils.server.vectorOffset(params.position, new mp.Vector3(0, 0, -1));
       this._type = this.default(params.type, 0);
       this._range = this.default(params.range, 3);
       this._permissions = this.default(params.permissions, []);

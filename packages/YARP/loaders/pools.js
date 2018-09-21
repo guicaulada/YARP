@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Loads the pools on server-side asynchronously.
+ * Loads the pools on server-side.
  */
 
 module.exports = async () => {

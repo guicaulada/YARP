@@ -107,14 +107,13 @@ let multiplePositions = {
   'Ammu-Nation': {
     visible: true,
     enter: (player) => {
-      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
       let location = yarp.locations[this.id];
-      yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateSaleCategories', location.id, JSON.stringify(location.sale)]], true, true]);
+      yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to shop.');
+      // yarp.server.openStoreMenu(player, location);
     },
     leave: (player) => {
-      player.call('clearHelpText');
-      player.call('destroyBrowser', ['menu']);
-      yarp.hotkeys['Event'].unbind(player);
+      let location = yarp.locations[this.id];
+      yarp.server.closeStoreMenu(player, location);
     },
     position: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
@@ -134,13 +133,12 @@ let multiplePositions = {
     visible: true,
     enter: (player) => {
       let location = yarp.locations[this.id];
-      player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to shop.']);
-      mp.events.call('openStoreMenu', player, location);
+      yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to shop.');
+      // yarp.server.openStoreMenu(player, location);
     },
     leave: (player) => {
       let location = yarp.locations[this.id];
-      player.call('clearHelpText');
-      mp.events.call('closeStoreMenu', player, location);
+      yarp.server.closeStoreMenu(player, location);
     },
     position: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
@@ -373,6 +371,8 @@ for (let id in multiplePositions) {
       config[id+' '+(i+1)] = {
         visible: marker.visible,
         position: position,
+        enter: marker.enter,
+        leave: marker.leave,
       };
     });
   }

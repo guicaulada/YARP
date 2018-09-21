@@ -3,6 +3,7 @@
 let config = {};
 
 let values = {
+  'Database': 'mongodb://localhost:27017/yarp',
   'Whitelisted': false,
   'Starting Wallet': 100,
   'Starting Bank': 1500,
@@ -17,6 +18,8 @@ let values = {
   'Max Weight': 30,
   'First Spawn': new mp.Vector3(-888.8746, -2313.2836, 3.5077),
   'First Heading': 90,
+  'Character Creator': new mp.Vector3(402.8664, -996.4108, -99.00027),
+  'Creator Heading': -185.0,
   'Default Group': 'User',
   'Spawns': [
     new mp.Vector3(1839.6, 3672.93, 34.28),
@@ -28,6 +31,7 @@ let values = {
     new mp.Vector3(1151.21, -1529.62, 35.37),
     new mp.Vector3(-874.64, -307.71, 39.58),
   ],
+  'Debug': true,
 };
 
 for (let id in values) {

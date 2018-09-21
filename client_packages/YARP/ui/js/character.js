@@ -62,7 +62,7 @@ $('div#sex').on('click', 'img', function() {
 			$('#sex-female').removeClass('enabled');
 			$('#sex-male').addClass('enabled');
 		}
-		mp.trigger('updatePlayerModel', currentModel);
+		mp.trigger('yarp:cefTrigger', 'updatePlayerModel', currentModel);
 	}
 });
 
@@ -96,13 +96,13 @@ function createCharacter() {
 		let characterAge = $('#age').val();
 		let characterName = $('#character-name').val()[0].toUpperCase() + $('#character-name').val().substr(1);
 		let characterSurname = $('#character-surname').val()[0].toUpperCase() + $('#character-surname').val().substr(1);
-		mp.trigger('acceptCharacterCreation', characterName.trim() + ' ' + characterSurname.trim(), characterAge, currentModel);
+		mp.trigger('yarp:cefTrigger', 'acceptCharacterCreation', characterName.trim() + ' ' + characterSurname.trim(), characterAge, currentModel);
 	}
 }
 
 function cancelCreation() {
 	// Cancelamos la creación del personaje
-	mp.trigger('cancelCharacterCreation');
+	mp.trigger('yarp:cefTrigger', 'cancelCharacterCreation');
 }
 
 function showPlayerDuplicatedWarn() {
@@ -112,12 +112,12 @@ function showPlayerDuplicatedWarn() {
 
 function cameraPointTo(part) {
 	// Cambiamos la zona a la que apunta la cámara
-	mp.trigger('cameraPointTo', part);
+	mp.trigger('yarp:cefTrigger', 'cameraPointTo', part);
 }
 
 function rotateCharacter() {
     var rotation = parseFloat(document.getElementById('character-slider').value);
-	mp.trigger('rotateCharacter', rotation);
+	mp.trigger('yarp:cefTrigger', 'rotateCharacter', rotation);
 }
 
 function showPrevFatherFace() {
@@ -127,7 +127,7 @@ function showPrevFatherFace() {
 		currentFatherFace--;
 	}
 	$('#face-father-shape').text('Type ' + (currentFatherFace + 1));
-	mp.trigger('updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
 }
 
 function showNextFatherFace() {
@@ -137,7 +137,7 @@ function showNextFatherFace() {
 		currentFatherFace++;
 	}
 	$('#face-father-shape').text('Type ' + (currentFatherFace + 1));
-	mp.trigger('updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'firstHeadShape', currentFatherFace, false);
 }
 
 function showPrevMotherFace() {
@@ -147,7 +147,7 @@ function showPrevMotherFace() {
 		currentMotherFace--;
 	}
 	$('#face-mother-shape').text('Type ' + (currentMotherFace - 1));
-	mp.trigger('updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
 }
 
 function showNextMotherFace() {
@@ -157,7 +157,7 @@ function showNextMotherFace() {
 		currentMotherFace++;
 	}
 	$('#face-mother-shape').text('Type ' + (currentMotherFace - 1));
-	mp.trigger('updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'secondHeadShape', currentMotherFace, false);
 }
 
 function showPrevFatherSkin() {
@@ -167,7 +167,7 @@ function showPrevFatherSkin() {
 		currentFatherSkin--;
 	}
 	$('#father-skin').text('Type ' + (currentFatherSkin + 1));
-	mp.trigger('updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
 }
 
 function showNextFatherSkin() {
@@ -177,7 +177,7 @@ function showNextFatherSkin() {
 		currentFatherSkin++;
 	}
 	$('#father-skin').text('Type ' + (currentFatherSkin + 1));
-	mp.trigger('updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'firstSkinTone', currentFatherSkin, false);
 }
 
 function showPrevMotherSkin() {
@@ -187,7 +187,7 @@ function showPrevMotherSkin() {
 		currentMotherSkin--;
 	}
 	$('#mother-skin').text('Type ' + (currentMotherSkin + 1));
-	mp.trigger('updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
 }
 
 function showNextMotherSkin() {
@@ -197,17 +197,17 @@ function showNextMotherSkin() {
 		currentMotherSkin++;
 	}
 	$('#mother-skin').text('Type ' + (currentMotherSkin + 1));
-	mp.trigger('updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'secondSkinTone', currentMotherSkin, false);
 }
 
 function updateFaceMix() {
 	let faceMixValue = document.getElementById('headMix').value;
-	mp.trigger('updatePlayerCreation', 'headMix', faceMixValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'headMix', faceMixValue, true);
 }
 
 function updateSkinMix() {
 	let skinMixValue = document.getElementById('skinMix').value;
-	mp.trigger('updatePlayerCreation', 'skinMix', skinMixValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'skinMix', skinMixValue, true);
 }
 
 function showPrevHairModel() {
@@ -219,7 +219,7 @@ function showPrevHairModel() {
 	    currentHairModel--;
     }
 	$('#hair-model').text('Type ' + (currentHairModel + 1));
-	mp.trigger('updatePlayerCreation', 'hairModel', currentHairModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'hairModel', currentHairModel, false);
 }
 
 function showNextHairModel() {
@@ -232,7 +232,7 @@ function showNextHairModel() {
 	}
 	$('#hair-model').text('Type ' + (currentHairModel + 1));
 
-	mp.trigger('updatePlayerCreation', 'hairModel', currentHairModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'hairModel', currentHairModel, false);
 }
 
 function showPrevHairFirstColor() {
@@ -242,7 +242,7 @@ function showPrevHairFirstColor() {
 		currentHairFirstColor--;
 	}
 	$('#hair-first-color').text('Type ' + (currentHairFirstColor + 1));
-	mp.trigger('updatePlayerCreation', 'firstHairColor', currentHairFirstColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'firstHairColor', currentHairFirstColor, false);
 }
 
 function showNextHairFirstColor() {
@@ -252,7 +252,7 @@ function showNextHairFirstColor() {
 		currentHairFirstColor++;
 	}
 	$('#hair-first-color').text('Type ' + (currentHairFirstColor + 1));
-	mp.trigger('updatePlayerCreation', 'firstHairColor', currentHairFirstColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'firstHairColor', currentHairFirstColor, false);
 }
 
 function showPrevHairSecondColor() {
@@ -262,7 +262,7 @@ function showPrevHairSecondColor() {
 		currentHairSecondColor--;
 	}
 	$('#hair-second-color').text('Type ' + (currentHairSecondColor + 1));
-	mp.trigger('updatePlayerCreation', 'secondHairColor', currentHairSecondColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'secondHairColor', currentHairSecondColor, false);
 }
 
 function showNextHairSecondColor() {
@@ -272,7 +272,7 @@ function showNextHairSecondColor() {
 		currentHairSecondColor++;
 	}
 	$('#hair-second-color').text('Type ' + (currentHairSecondColor + 1));
-	mp.trigger('updatePlayerCreation', 'secondHairColor', currentHairSecondColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'secondHairColor', currentHairSecondColor, false);
 }
 
 function showPrevBeardModel() {
@@ -286,7 +286,7 @@ function showPrevBeardModel() {
 	} else {
 		$('#beard-model').text('Type ' + (currentBeardModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'beardModel', currentBeardModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'beardModel', currentBeardModel, false);
 }
 
 function showNextBeardModel() {
@@ -300,7 +300,7 @@ function showNextBeardModel() {
 	} else {
 		$('#beard-model').text('Type ' + (currentBeardModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'beardModel', currentBeardModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'beardModel', currentBeardModel, false);
 }
 
 function showPrevBeardColor() {
@@ -310,7 +310,7 @@ function showPrevBeardColor() {
 		currentBeardColor--;
 	}
 	$('#beard-color').text('Type ' + (currentBeardColor + 1));
-	mp.trigger('updatePlayerCreation', 'beardColor', currentBeardColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'beardColor', currentBeardColor, false);
 }
 
 function showNextBeardColor() {
@@ -320,7 +320,7 @@ function showNextBeardColor() {
 		currentBeardColor++;
 	}
 	$('#beard-color').text('Type ' + (currentBeardColor + 1));
-	mp.trigger('updatePlayerCreation', 'beardColor', currentBeardColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'beardColor', currentBeardColor, false);
 }
 
 function showPrevChestModel() {
@@ -334,7 +334,7 @@ function showPrevChestModel() {
 	} else {
 		$('#chest-model').text('Type ' + (currentChestModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'chestModel', currentChestModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chestModel', currentChestModel, false);
 }
 
 function showNextChestModel() {
@@ -348,7 +348,7 @@ function showNextChestModel() {
 	} else {
 		$('#chest-model').text('Type ' + (currentChestModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'chestModel', currentChestModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chestModel', currentChestModel, false);
 }
 
 function showPrevChestColor() {
@@ -358,7 +358,7 @@ function showPrevChestColor() {
 		currentChestColor--;
 	}
 	$('#chest-color').text('Type ' + (currentChestColor + 1));
-	mp.trigger('updatePlayerCreation', 'chestColor', currentChestColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chestColor', currentChestColor, false);
 }
 
 function showNextChestColor() {
@@ -368,7 +368,7 @@ function showNextChestColor() {
 		currentChestColor++;
 	}
 	$('#chest-color').text('Type ' + (currentChestColor + 1));
-	mp.trigger('updatePlayerCreation', 'chestColor', currentChestColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chestColor', currentChestColor, false);
 }
 
 function showPrevBlemishesModel() {
@@ -382,7 +382,7 @@ function showPrevBlemishesModel() {
 	} else {
 		$('#blemishes-model').text('Type ' + (currentBlemishesModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'blemishesModel', currentBlemishesModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'blemishesModel', currentBlemishesModel, false);
 }
 
 function showNextBlemishesModel() {
@@ -396,7 +396,7 @@ function showNextBlemishesModel() {
 	} else {
 		$('#blemishes-model').text('Type ' + (currentBlemishesModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'blemishesModel', currentBlemishesModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'blemishesModel', currentBlemishesModel, false);
 }
 
 function showPrevAgeingModel() {
@@ -410,7 +410,7 @@ function showPrevAgeingModel() {
 	} else {
 		$('#ageing-model').text('Type ' + (currentAgeingModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'ageingModel', currentAgeingModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'ageingModel', currentAgeingModel, false);
 }
 
 function showNextAgeingModel() {
@@ -424,7 +424,7 @@ function showNextAgeingModel() {
 	} else {
 		$('#ageing-model').text('Type ' + (currentAgeingModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'ageingModel', currentAgeingModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'ageingModel', currentAgeingModel, false);
 }
 
 function showPrevComplexionModel() {
@@ -438,7 +438,7 @@ function showPrevComplexionModel() {
 	} else {
 		$('#complexion-model').text('Type ' + (currentComplexionModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'complexionModel', currentComplexionModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'complexionModel', currentComplexionModel, false);
 }
 
 function showNextComplexionModel() {
@@ -452,7 +452,7 @@ function showNextComplexionModel() {
 	} else {
 		$('#complexion-model').text('Type ' + (currentComplexionModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'complexionModel', currentComplexionModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'complexionModel', currentComplexionModel, false);
 }
 
 function showPrevSundamageModel() {
@@ -466,7 +466,7 @@ function showPrevSundamageModel() {
 	} else {
 		$('#sundamage-model').text('Type ' + (currentSundamageModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'sundamageModel', currentSundamageModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'sundamageModel', currentSundamageModel, false);
 }
 
 function showNextSundamageModel() {
@@ -480,7 +480,7 @@ function showNextSundamageModel() {
 	} else {
 		$('#sundamage-model').text('Type ' + (currentSundamageModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'sundamageModel', currentSundamageModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'sundamageModel', currentSundamageModel, false);
 }
 
 function showPrevFrecklesModel() {
@@ -494,7 +494,7 @@ function showPrevFrecklesModel() {
 	} else {
 		$('#freckles-model').text('Type ' + (currentFrecklesModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'frecklesModel', currentFrecklesModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'frecklesModel', currentFrecklesModel, false);
 }
 
 function showNextFrecklesModel() {
@@ -508,7 +508,7 @@ function showNextFrecklesModel() {
 	} else {
 		$('#freckles-model').text('Type ' + (currentFrecklesModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'frecklesModel', currentFrecklesModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'frecklesModel', currentFrecklesModel, false);
 }
 
 function showPrevEyesColor() {
@@ -518,7 +518,7 @@ function showPrevEyesColor() {
 		currentEyesColor--;
 	}
 	$('#eyes-color').text('Type ' + (currentEyesColor + 1));
-	mp.trigger('updatePlayerCreation', 'eyesColor', currentEyesColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyesColor', currentEyesColor, false);
 }
 
 function showNextEyesColor() {
@@ -528,7 +528,7 @@ function showNextEyesColor() {
 		currentEyesColor++;
 	}
 	$('#eyes-color').text('Type ' + (currentEyesColor + 1));
-	mp.trigger('updatePlayerCreation', 'eyesColor', currentEyesColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyesColor', currentEyesColor, false);
 }
 
 function showPrevEyebrowsModel() {
@@ -538,7 +538,7 @@ function showPrevEyebrowsModel() {
 		currentEyebrowsModel--;
 	}
 	$('#eyebrows-model').text('Type ' + (currentEyebrowsModel + 1));
-	mp.trigger('updatePlayerCreation', 'eyebrowsModel', currentEyebrowsModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyebrowsModel', currentEyebrowsModel, false);
 }
 
 function showNextEyebrowsModel() {
@@ -548,7 +548,7 @@ function showNextEyebrowsModel() {
 		currentEyebrowsModel++;
 	}
 	$('#eyebrows-model').text('Type ' + (currentEyebrowsModel + 1));
-	mp.trigger('updatePlayerCreation', 'eyebrowsModel', currentEyebrowsModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyebrowsModel', currentEyebrowsModel, false);
 }
 
 function showPrevEyebrowsColor() {
@@ -558,7 +558,7 @@ function showPrevEyebrowsColor() {
 		currentEyebrowsColor--;
 	}
 	$('#eyebrows-color').text('Type ' + (currentEyebrowsColor + 1));
-	mp.trigger('updatePlayerCreation', 'eyebrowsColor', currentEyebrowsColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyebrowsColor', currentEyebrowsColor, false);
 }
 
 function showNextEyebrowsColor() {
@@ -568,107 +568,107 @@ function showNextEyebrowsColor() {
 		currentEyebrowsColor++;
 	}
 	$('#eyebrows-color').text('Type ' + (currentEyebrowsColor + 1));
-	mp.trigger('updatePlayerCreation', 'eyebrowsColor', currentEyebrowsColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyebrowsColor', currentEyebrowsColor, false);
 }
 
 function updateA() {
 	let aValue = document.getElementById('a').value;
-	mp.trigger('updatePlayerCreation', 'noseWidth', aValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'noseWidth', aValue, true);
 }
 
 function updateB() {
 	let bValue = document.getElementById('b').value;
-	mp.trigger('updatePlayerCreation', 'noseHeight', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'noseHeight', bValue, true);
 }
 
 function updateC() {
 	let bValue = document.getElementById('c').value;
-	mp.trigger('updatePlayerCreation', 'noseLength', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'noseLength', bValue, true);
 }
 
 function updateD() {
 	let bValue = document.getElementById('d').value;
-	mp.trigger('updatePlayerCreation', 'noseBridge', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'noseBridge', bValue, true);
 }
 
 function updateE() {
 	let bValue = document.getElementById('e').value;
-	mp.trigger('updatePlayerCreation', 'noseTip', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'noseTip', bValue, true);
 }
 
 function updateF() {
 	let bValue = document.getElementById('f').value;
-	mp.trigger('updatePlayerCreation', 'noseShift', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'noseShift', bValue, true);
 }
 
 function updateG() {
 	let bValue = document.getElementById('g').value;
-	mp.trigger('updatePlayerCreation', 'browHeight', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'browHeight', bValue, true);
 }
 
 function updateH() {
 	let bValue = document.getElementById('h').value;
-	mp.trigger('updatePlayerCreation', 'browWidth', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'browWidth', bValue, true);
 }
 
 function updateI() {
 	let bValue = document.getElementById('i').value;
-	mp.trigger('updatePlayerCreation', 'cheekboneHeight', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'cheekboneHeight', bValue, true);
 }
 
 function updateJ() {
 	let bValue = document.getElementById('j').value;
-	mp.trigger('updatePlayerCreation', 'cheekboneWidth', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'cheekboneWidth', bValue, true);
 }
 
 function updateK() {
 	let bValue = document.getElementById('k').value;
-	mp.trigger('updatePlayerCreation', 'cheeksWidth', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'cheeksWidth', bValue, true);
 }
 
 function updateL() {
 	let bValue = document.getElementById('l').value;
-	mp.trigger('updatePlayerCreation', 'eyes', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'eyes', bValue, true);
 }
 
 function updateM() {
 	let bValue = document.getElementById('m').value;
-	mp.trigger('updatePlayerCreation', 'lips', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'lips', bValue, true);
 }
 
 function updateN() {
 	let bValue = document.getElementById('n').value;
-	mp.trigger('updatePlayerCreation', 'jawWidth', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'jawWidth', bValue, true);
 }
 
 function updateO() {
 	let bValue = document.getElementById('o').value;
-	mp.trigger('updatePlayerCreation', 'jawHeight', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'jawHeight', bValue, true);
 }
 
 function updateP() {
 	let bValue = document.getElementById('p').value;
-	mp.trigger('updatePlayerCreation', 'chinLength', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chinLength', bValue, true);
 }
 
 function updateQ() {
 	let bValue = document.getElementById('q').value;
-	mp.trigger('updatePlayerCreation', 'chinPosition', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chinPosition', bValue, true);
 }
 
 function updateR() {
 	let bValue = document.getElementById('r').value;
-	mp.trigger('updatePlayerCreation', 'chinWidth', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chinWidth', bValue, true);
 }
 
 function updateS() {
 	let bValue = document.getElementById('s').value;
-	mp.trigger('updatePlayerCreation', 'chinShape', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'chinShape', bValue, true);
 }
 
 function updateT() {
 	let bValue = document.getElementById('t').value;
-	mp.trigger('updatePlayerCreation', 'neckWidth', bValue, true);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'neckWidth', bValue, true);
 }
 
 function showPrevMakeupModel() {
@@ -682,7 +682,7 @@ function showPrevMakeupModel() {
 	} else {
 		$('#makeup-model').text('Type ' + (currentMakeupModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'makeupModel', currentMakeupModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'makeupModel', currentMakeupModel, false);
 }
 
 function showNextMakeupModel() {
@@ -696,7 +696,7 @@ function showNextMakeupModel() {
 	} else {
 		$('#makeup-model').text('Type ' + (currentMakeupModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'makeupModel', currentMakeupModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'makeupModel', currentMakeupModel, false);
 }
 
 function showPrevBlushModel() {
@@ -710,7 +710,7 @@ function showPrevBlushModel() {
 	} else {
 		$('#blush-model').text('Type ' + (currentBlushModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'blushModel', currentBlushModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'blushModel', currentBlushModel, false);
 }
 
 function showNextBlushModel() {
@@ -724,7 +724,7 @@ function showNextBlushModel() {
 	} else {
 		$('#blush-model').text('Type ' + (currentBlushModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'blushModel', currentBlushModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'blushModel', currentBlushModel, false);
 }
 
 function showPrevBlushColor() {
@@ -734,7 +734,7 @@ function showPrevBlushColor() {
 		currentBlushColor--;
 	}
 	$('#blush-color').text('Type ' + (currentBlushColor + 1));
-	mp.trigger('updatePlayerCreation', 'blushColor', currentBlushColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'blushColor', currentBlushColor, false);
 }
 
 function showNextBlushColor() {
@@ -744,7 +744,7 @@ function showNextBlushColor() {
 		currentBlushColor++;
 	}
 	$('#blush-color').text('Type ' + (currentBlushColor + 1));
-	mp.trigger('updatePlayerCreation', 'blushColor', currentBlushColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'blushColor', currentBlushColor, false);
 }
 
 function showPrevLipstickModel() {
@@ -758,7 +758,7 @@ function showPrevLipstickModel() {
 	} else {
 		$('#lipstick-model').text('Type ' + (currentLipstickModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'lipstickModel', currentLipstickModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'lipstickModel', currentLipstickModel, false);
 }
 
 function showNextLipstickModel() {
@@ -772,7 +772,7 @@ function showNextLipstickModel() {
 	} else {
 		$('#lipstick-model').text('Type ' + (currentLipstickModel + 1));
 	}
-	mp.trigger('updatePlayerCreation', 'lipstickModel', currentLipstickModel, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'lipstickModel', currentLipstickModel, false);
 }
 
 function showPrevLipstickColor() {
@@ -782,7 +782,7 @@ function showPrevLipstickColor() {
 		currentLipstickColor--;
 	}
 	$('#lipstick-color').text('Type ' + (currentLipstickColor + 1));
-	mp.trigger('updatePlayerCreation', 'lipstickColor', currentLipstickColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'lipstickColor', currentLipstickColor, false);
 }
 
 function showNextLipstickColor() {
@@ -792,7 +792,7 @@ function showNextLipstickColor() {
 		currentLipstickColor++;
 	}
 	$('#lipstick-color').text('Type ' + (currentLipstickColor + 1));
-	mp.trigger('updatePlayerCreation', 'lipstickColor', currentLipstickColor, false);
+	mp.trigger('yarp:cefTrigger', 'updatePlayerCreation', 'lipstickColor', currentLipstickColor, false);
 }
 
 $('.btn-number').click(function(e){

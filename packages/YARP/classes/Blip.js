@@ -2,9 +2,9 @@
 /**
  * Implements a Blip.
  * @class yarp.Blip
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Blip extends yarp.GMObject {
+class Blip extends yarp.Object {
   /**
    * Creates an instance of Blip.
    * @param {Object} params

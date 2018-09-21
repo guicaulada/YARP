@@ -2,9 +2,9 @@
 /**
  * Implements a Hotkey.
  * @class yarp.Hotkey
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Hotkey extends yarp.GMObject {
+class Hotkey extends yarp.Object {
   /**
    * Creates an instance of Hotkey.
    * @param {Object} params
@@ -50,7 +50,7 @@ class Hotkey extends yarp.GMObject {
    */
   bind(player, args) {
     this.args[player.id] = args;
-    player.call('playerBindKey', [this.id, this.key]);
+    yarp.client.playerBindKey(player, this.id, this.key);
   }
 
   /**
@@ -63,7 +63,7 @@ class Hotkey extends yarp.GMObject {
    */
   unbind(player) {
     this.args[player.id] = null;
-    player.call('playerUnbindKey', [this.id]);
+    yarp.client.playerUnbindKey(player, this.id);
   }
 }
 

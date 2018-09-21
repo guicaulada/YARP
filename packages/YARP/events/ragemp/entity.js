@@ -1,13 +1,12 @@
 'use strict';
 /**
- * @file Entity events
- * @namespace server.entity
+ * Entity events
  */
 
 /**
  * Entity created.
  * @event entityCreated
- * @memberof server.entity
+ * @memberof ragemp.server
  * @param {Object} entity The entity that called the event.
  */
 mp.events.add('entityCreated', (entity) => {
@@ -16,7 +15,7 @@ mp.events.add('entityCreated', (entity) => {
 /**
  * Entity destroyed.
  * @event entityDestroyed
- * @memberof server.entity
+ * @memberof ragemp.server
  * @param {Object} entity The entity that called the event.
  */
 mp.events.add('entityDestroyed', (entity) => {
@@ -25,7 +24,7 @@ mp.events.add('entityDestroyed', (entity) => {
 /**
  * Entity model change.
  * @event entityModelChange
- * @memberof server.entity
+ * @memberof ragemp.server
  * @param {Object} entity The entity that called the event.
  * @param {Number} oldModel Hash of the old model.
  */

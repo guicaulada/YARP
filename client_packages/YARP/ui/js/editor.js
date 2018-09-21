@@ -31,17 +31,17 @@ function setupCodeEditor(text){
       }
     });
     $('#cancel').click(function(){
-      mp.trigger('destroyBrowser', 'editor');
-      mp.trigger('unbindToggleChat');
+      mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'editor');
+      mp.trigger('yarp:cefTrigger', 'unbindToggleChat');
     });
 
     $('#server').click(function(){
-      mp.trigger('runServerCode', editor.getValue());
+      mp.trigger('yarp:cefTrigger', 'runServerCode', editor.getValue());
       editor.getDoc().setValue('');
     });
 
     $('#client').click(function(){
-      mp.trigger('runClientCode', editor.getValue());
+      mp.trigger('yarp:cefTrigger', 'runClientCode', editor.getValue());
       editor.getDoc().setValue('');
     });
     editor.setSize($('.wrapper').width(), $('.wrapper').height());

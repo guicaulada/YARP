@@ -5,19 +5,19 @@ let objectArgs = [];
 
 function loginAccount() {
     var password = document.getElementById('pass').value;
-    mp.trigger('destroyBrowser', 'menu');
-    mp.trigger('verifyLogin', password);
+    mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
+    mp.trigger('yarp:cefTrigger', 'verifyLogin', password);
 }
 
 function selectName() {
     var name = capitalizeFirstLetter(document.getElementById('name').value);
     var surname = capitalizeFirstLetter(document.getElementById('surname').value);
     var realName = name + ' ' + surname;
-    mp.trigger('createCharacter', realName);
+    mp.trigger('yarp:cefTrigger', 'createCharacter', realName);
 }
 
 function getPlayerList() {
-    mp.trigger('getConnectedPlayers');
+    mp.trigger('yarp:cefTrigger', 'getConnectedPlayers');
 }
 
 function populatePlayerList(playerJSON) {
@@ -56,7 +56,7 @@ function withdrawMoney() {
     $('#bank-withdraw').removeClass('d-none');
     $('#bank-accept').removeClass('d-none');
     $('#bank-exit').html('Cancel');
-	mp.trigger('updateBankAccountMoney');
+	mp.trigger('yarp:cefTrigger', 'updateBankAccountMoney');
 }
 
 function depositMoney() {
@@ -65,7 +65,7 @@ function depositMoney() {
     $('#bank-deposit').removeClass('d-none');
     $('#bank-accept').removeClass('d-none');
     $('#bank-exit').html('Cancel');
-	mp.trigger('updateBankAccountMoney');
+	mp.trigger('yarp:cefTrigger', 'updateBankAccountMoney');
 }
 
 function transferMoney() {
@@ -74,7 +74,7 @@ function transferMoney() {
     $('#bank-transfer').removeClass('d-none');
     $('#bank-accept').removeClass('d-none');
     $('#bank-exit').html('Cancel');
-	mp.trigger('updateBankAccountMoney');
+	mp.trigger('yarp:cefTrigger', 'updateBankAccountMoney');
 }
 
 function updateAccountMoney(money) {
@@ -97,7 +97,7 @@ function showBalance() {
     $('#bank-menu').addClass('d-none');
     $('#bank-balance').removeClass('d-none');
     $('#bank-exit').html('Cancel');
-	mp.trigger('loadBankBalance');
+	mp.trigger('yarp:cefTrigger', 'loadBankBalance');
 }
 
 function showBankOperations(bankOperationsJson, playerName) {
@@ -192,7 +192,7 @@ function bankBack() {
             $('#bank-menu').removeClass('d-none');
             break;
         default:
-            mp.trigger('destroyBrowser', 'menu');
+            mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
             break;
     }
     $('#bank-accept').addClass('d-none');
@@ -206,7 +206,7 @@ function catalogBack() {
             $('#vehicle-container').removeClass('d-none');
             break;
     }
-    mp.trigger('closeCatalog');
+    mp.trigger('yarp:cefTrigger', 'closeCatalog');
     $('#catalog-exit').html('Exit');
     catalogSelectedOption = 0;
 }
@@ -227,11 +227,11 @@ function bankAccept() {
             amount = $('#bank-transfer-amount').val();
             break;
     }
-    mp.trigger('executeBankOperation', bankSelectedOption, amount, target);
+    mp.trigger('yarp:cefTrigger', 'executeBankOperation', bankSelectedOption, amount, target);
 }
 
 function getVehicleList() {
-    mp.trigger('getCarShopVehicleList');
+    mp.trigger('yarp:cefTrigger', 'getCarShopVehicleList');
 }
 
 function populateVehicleList(dealership, vehicleJSON) {
@@ -262,7 +262,7 @@ function populateVehicleList(dealership, vehicleJSON) {
         price.textContent = 'Precio: ' + vehicleArray[i].price +'$';
         container.className = 'col-lg-2';
         container.onclick = function () {
-            mp.trigger('previewCarShopVehicle', this.firstChild.id);
+            mp.trigger('yarp:cefTrigger', 'previewCarShopVehicle', this.firstChild.id);
         };
         container.appendChild(image);
         container.appendChild(model);
@@ -293,14 +293,14 @@ $('input[type=\'checkbox\']').change(function () {
 $(document).ready(function () {
     $('#colorpicker').farbtastic(function (color) {
         var colorMain = document.getElementById('color-main').checked;
-        mp.trigger('previewVehicleChangeColor', color, colorMain);
+        mp.trigger('yarp:cefTrigger', 'previewVehicleChangeColor', color, colorMain);
     });
 });
 */
 
 function checkVehiclePayable() {
 	// Comprobamos si el jugador tiene el dinero para el vehículo
-	mp.trigger('checkVehiclePayable');
+	mp.trigger('yarp:cefTrigger', 'checkVehiclePayable');
 }
 
 function showVehiclePurchaseButton() {
@@ -310,30 +310,30 @@ function showVehiclePurchaseButton() {
 
 function rotatePreviewVehicle() {
     var rotation = parseFloat(document.getElementById('vehicle-slider').value);
-    mp.trigger('rotatePreviewVehicle', rotation);
+    mp.trigger('yarp:cefTrigger', 'rotatePreviewVehicle', rotation);
 }
 
 function goBackToCatalog() {
-    mp.trigger('showCatalog');
+    mp.trigger('yarp:cefTrigger', 'showCatalog');
 }
 
 function purchaseVehicle() {
-    mp.trigger('purchaseVehicle');
+    mp.trigger('yarp:cefTrigger', 'purchaseVehicle');
 }
 
 function testVehicle() {
-	mp.trigger('testVehicle');
+	mp.trigger('yarp:cefTrigger', 'testVehicle');
 }
 
 function namePoliceControl() {
     var name = document.getElementById('name').value;
-    mp.trigger('policeControlSelectedName', name);
-    mp.trigger('destroyBrowser', 'police');
+    mp.trigger('yarp:cefTrigger', 'policeControlSelectedName', name);
+    mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'police');
 }
 
 function preloadContact() {
 	// Cargamos los datos del contacto seleccionado
-    mp.trigger('preloadContactData');
+    mp.trigger('yarp:cefTrigger', 'preloadContactData');
 }
 
 function populateContactData(number, name) {
@@ -347,23 +347,23 @@ function setContactData() {
     let name = document.getElementById('name').value;
 
 	// Llamamos al cliente para que dé de alta
-    mp.trigger('setContactData', number, name);
+    mp.trigger('yarp:cefTrigger', 'setContactData', number, name);
 }
 
 function sendPhoneMessage() {
 	// Recogemos y enviamos el mensaje
 	let message = document.getElementById('message').value;
-    mp.trigger('sendPhoneMessage', message);
+    mp.trigger('yarp:cefTrigger', 'sendPhoneMessage', message);
 }
 
 function cancelMessage() {
 	// Cancelamos el envío del SMS
-    mp.trigger('cancelPhoneMessage');
+    mp.trigger('yarp:cefTrigger', 'cancelPhoneMessage');
 }
 
 function getFirstTestQuestion() {
 	// Cogemos la primera pregunta y sus respuestas
-	mp.trigger('getNextTestQuestion');
+	mp.trigger('yarp:cefTrigger', 'getNextTestQuestion');
 }
 
 function populateQuestionAnswers(question, answersJSON) {
@@ -407,5 +407,5 @@ function setAccountName(sclub){
 function submitAnswer() {
 	// Recogemos la respuesta y la enviamos
 	let answer = $('input[name=\'answer\']:checked', '#testForm').val();
-	mp.trigger('submitAnswer', answer);
+	mp.trigger('yarp:cefTrigger', 'submitAnswer', answer);
 }

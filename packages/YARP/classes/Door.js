@@ -2,9 +2,9 @@
 /**
  * Implements a Door.
  * @class yarp.Door
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Door extends yarp.GMObject {
+class Door extends yarp.Object {
   /**
    * Creates an instance of Door.
    * @param {Object} params

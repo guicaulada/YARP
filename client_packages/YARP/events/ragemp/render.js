@@ -1,7 +1,6 @@
 'use strict';
 /**
-* @file Ui events
-* @namespace client.render
+* Ui events
 */
 
 let oldWallet = 0;
@@ -18,30 +17,9 @@ let bankChange = false;
 let bankChangeDisplay = false;
 
 /**
- * Displays help text on top left.
- * @event displayHelpText
- * @memberof client.render
- * @param {String} text Text to be displayed.
- */
-mp.events.add('displayHelpText', (text) => {
-  mp.game.ui.setTextComponentFormat('STRING');
-  mp.game.ui.addTextComponentSubstringPlayerName(text);
-  mp.game.ui.displayHelpTextFromStringLabel(0, false, true, -1);
-});
-
-/**
- * Clears help text on top left.
- * @event clearHelpText
- * @memberof client.render
- */
-mp.events.add('clearHelpText', () => {
-  mp.game.ui.clearHelp(true);
-});
-
-/**
  * Force arrow display.
  * @function forceArrow
- * @memberof client.render
+ * @memberof ragemp.client
  */
 function forceArrow() {
   for (let id in yarp.browsers) {
@@ -61,7 +39,7 @@ function forceArrow() {
 /**
  * Diplays hunger.
  * @function displayHunger
- * @memberof client.render
+ * @memberof ragemp.client
  */
 function displayHunger() {
   let hunger = mp.players.local.getVariable('PLAYER_HUNGER');
@@ -77,7 +55,7 @@ function displayHunger() {
 /**
  * Diplays thirst.
  * @function displayThirst
- * @memberof client.render
+ * @memberof ragemp.client
  */
 function displayThirst() {
   let thirst = mp.players.local.getVariable('PLAYER_THIRST');
@@ -93,7 +71,7 @@ function displayThirst() {
 /**
  * Diplays speedometer when inside a vehicle.
  * @function displaySpeedometer
- * @memberof client.render
+ * @memberof ragemp.client
  * @param {Boolean} mph Miles or kilometers (true or false).
  */
 function displaySpeedometer(mph) {
@@ -115,7 +93,7 @@ function displaySpeedometer(mph) {
 /**
  * Diplays wallet and money changes.
  * @function displayWallet
- * @memberof client.render
+ * @memberof ragemp.client
  */
 function displayWallet() {
   let newWallet = mp.players.local.getVariable('PLAYER_WALLET');
@@ -123,13 +101,13 @@ function displayWallet() {
     walletAdd += newWallet-oldWallet;
     oldWallet = newWallet;
     if (newWallet < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(newWallet)}`, [0.95, 0.1], {
+      mp.game.graphics.drawText(`-$${yarp.utils.client.numberWithCommas(newWallet)}`, [0.95, 0.1], {
         scale: [0.65, 0.65],
         color: [224, 50, 50, 255],
         font: 7,
       });
     } else {
-      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(newWallet)}`, [0.95, 0.1], {
+      mp.game.graphics.drawText(`$${yarp.utils.client.numberWithCommas(newWallet)}`, [0.95, 0.1], {
         scale: [0.65, 0.65],
         color: [114, 204, 114, 255],
         font: 7,
@@ -149,13 +127,13 @@ function displayWallet() {
       }, 5000);
     }
     if (walletAdd < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(walletAdd))}`, [0.95, 0.145], {
+      mp.game.graphics.drawText(`-$${yarp.utils.client.numberWithCommas(Math.abs(walletAdd))}`, [0.95, 0.145], {
         scale: [0.65, 0.65],
         color: [224, 50, 50, 255],
         font: 7,
       });
     } else if (walletAdd > 0) {
-      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(walletAdd)}`, [0.95, 0.145], {
+      mp.game.graphics.drawText(`+$${yarp.utils.client.numberWithCommas(walletAdd)}`, [0.95, 0.145], {
         scale: [0.65, 0.65],
         color: [114, 204, 114, 255],
         font: 7,
@@ -167,7 +145,7 @@ function displayWallet() {
 /**
  * Diplays bank and money changes.
  * @function displayBank
- * @memberof client.render
+ * @memberof ragemp.client
  */
 function displayBank() {
   let newBank = mp.players.local.getVariable('PLAYER_BANK');
@@ -175,13 +153,13 @@ function displayBank() {
     bankAdd += newBank-oldBank;
     oldBank = newBank;
     if (newBank < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(newBank)}`, [0.95, 0.190], {
+      mp.game.graphics.drawText(`-$${yarp.utils.client.numberWithCommas(newBank)}`, [0.95, 0.190], {
         scale: [0.65, 0.65],
         color: [224, 50, 50, 255],
         font: 7,
       });
     } else {
-      mp.game.graphics.drawText(`$${yarp.utils.numberWithCommas(newBank)}`, [0.95, 0.190], {
+      mp.game.graphics.drawText(`$${yarp.utils.client.numberWithCommas(newBank)}`, [0.95, 0.190], {
         scale: [0.65, 0.65],
         color: [114, 114, 204, 255],
         font: 7,
@@ -201,13 +179,13 @@ function displayBank() {
       }, 5000);
     }
     if (bankAdd < 0) {
-      mp.game.graphics.drawText(`-$${yarp.utils.numberWithCommas(Math.abs(bankAdd))}`, [0.95, 0.235], {
+      mp.game.graphics.drawText(`-$${yarp.utils.client.numberWithCommas(Math.abs(bankAdd))}`, [0.95, 0.235], {
         scale: [0.65, 0.65],
         color: [224, 50, 50, 255],
         font: 7,
       });
     } else if (bankAdd > 0) {
-      mp.game.graphics.drawText(`+$${yarp.utils.numberWithCommas(bankAdd)}`, [0.95, 0.235], {
+      mp.game.graphics.drawText(`+$${yarp.utils.client.numberWithCommas(bankAdd)}`, [0.95, 0.235], {
         scale: [0.65, 0.65],
         color: [114, 114, 204, 255],
         font: 7,
@@ -219,7 +197,7 @@ function displayBank() {
 /**
  * Diplays xp and xp changes.
  * @function displayXp
- * @memberof client.render
+ * @memberof ragemp.client
  */
 function displayXp() {
   let newXp = mp.players.local.getVariable('PLAYER_XP');
@@ -227,13 +205,13 @@ function displayXp() {
     xpAdd += newXp-oldXp;
     oldXp = newXp;
     if (newXp < 0) {
-      mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(newXp)} XP`, [0.95, 0.280], {
+      mp.game.graphics.drawText(`-${yarp.utils.client.numberWithCommas(newXp)} XP`, [0.95, 0.280], {
         scale: [0.65, 0.65],
         color: [224, 50, 50, 255],
         font: 7,
       });
     } else {
-      mp.game.graphics.drawText(`${yarp.utils.numberWithCommas(newXp)} XP`, [0.95, 0.280], {
+      mp.game.graphics.drawText(`${yarp.utils.client.numberWithCommas(newXp)} XP`, [0.95, 0.280], {
         scale: [0.65, 0.65],
         color: [80, 80, 224, 255],
         font: 7,
@@ -253,13 +231,13 @@ function displayXp() {
       }, 5000);
     }
     if (xpAdd < 0) {
-      mp.game.graphics.drawText(`-${yarp.utils.numberWithCommas(Math.abs(xpAdd))} XP`, [0.95, 0.325], {
+      mp.game.graphics.drawText(`-${yarp.utils.client.numberWithCommas(Math.abs(xpAdd))} XP`, [0.95, 0.325], {
         scale: [0.65, 0.65],
         color: [224, 50, 50, 255],
         font: 7,
       });
     } else if (xpAdd > 0) {
-      mp.game.graphics.drawText(`+${yarp.utils.numberWithCommas(xpAdd)} XP`, [0.95, 0.325], {
+      mp.game.graphics.drawText(`+${yarp.utils.client.numberWithCommas(xpAdd)} XP`, [0.95, 0.325], {
         scale: [0.65, 0.65],
         color: [80, 80, 224, 255],
         font: 7,
@@ -271,7 +249,7 @@ function displayXp() {
 /**
  * Renders the UI.
  * @event render
- * @memberof client.render
+ * @memberof ragemp.client
  */
 mp.events.add('render', () => {
   forceArrow();

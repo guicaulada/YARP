@@ -2,9 +2,9 @@
 /**
  * Implements a Menu.
  * @class yarp.Menu
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Menu extends yarp.GMObject {
+class Menu extends yarp.Object {
   /**
    * Creates an instance of Menu.
    * @param {Object} params
@@ -39,7 +39,7 @@ class Menu extends yarp.GMObject {
    * @param {Object} player
    */
   create(player) {
-    player.call('createMenu', [this.id, JSON.stringify(yarp.utils.cleanData(this))]);
+    yarp.client.createMenu(player, this.id, yarp.utils.server.cleanData(this));
   }
 
   /**
@@ -47,7 +47,9 @@ class Menu extends yarp.GMObject {
    * @memberof yarp.Menu
    */
   recreate() {
-    mp.players.call('createMenu', [this.id, JSON.stringify(yarp.utils.cleanData(this))]);
+    mp.players.forEach((player, id) => {
+      yarp.client.createMenu(player, this.id, yarp.utils.server.cleanData(this));
+    });
   }
 
   /**
@@ -56,7 +58,7 @@ class Menu extends yarp.GMObject {
    * @param {Object} player
    */
   open(player) {
-    player.call('openMenu', [this.id]);
+    yarp.client.openMenu(player, this.id);
   }
 
   /**
@@ -65,7 +67,7 @@ class Menu extends yarp.GMObject {
    * @param {Object} player
    */
   close(player) {
-    player.call('closeMenu', [this.id]);
+    yarp.client.closeMenu(player, this.id);
   }
 
   /**
@@ -74,7 +76,7 @@ class Menu extends yarp.GMObject {
    * @param {Object} player
    */
   toggle(player) {
-    player.call('toggleMenu', [this.id]);
+    yarp.client.toggleMenu(player, this.id);
   }
 
   /**
@@ -84,7 +86,9 @@ class Menu extends yarp.GMObject {
    */
   addItem(item) {
     this.items.push(item);
-    mp.players.call('menuAddItem', [JSON.stringify(item)]);
+    mp.players.forEach((player, id) => {
+      yarp.client.menuAddItem(player, item);
+    });
   }
 
   /**
@@ -94,7 +98,9 @@ class Menu extends yarp.GMObject {
    */
   addItems(items) {
     this.items.concat(items);
-    mp.players.call('menuAddItems', [JSON.stringify(items)]);
+    mp.players.forEach((player, id) => {
+      yarp.client.menuAddItems(player, items);
+    });
   }
 }
 

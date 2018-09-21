@@ -2,9 +2,9 @@
 /**
  * Implements a Event.
  * @class yarp.Event
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Event extends yarp.GMObject {
+class Event extends yarp.Object {
   /**
    * Creates an instance of Event.
    * @param {Object} params

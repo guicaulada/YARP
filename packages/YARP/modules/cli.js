@@ -1,4 +1,8 @@
-const rl = require('readline');
+'use strict';
+/**
+ * Provides safe asynchronous interaction between MongoDB and YARP.
+ * @namespace yarp.cli
+ */
 
 let cli = {};
 

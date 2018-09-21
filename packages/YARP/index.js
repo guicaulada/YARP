@@ -3,25 +3,14 @@
  * @file Loads the gamemode on server-side.
  * @author Guilherme Caulada (Sighmir)
  * @copyright Copyright (C) 2018  Sighmir
- * @namespace server
  */
 
 /**
- * @namespace yarp
- */
-global.yarp = {};
-global.chalk = require('chalk');
-global.bcrypt = require('bcryptjs');
-yarp.cli = require('./modules/cli.js');
-
-/**
- * Loads the gamemode asynchronously.
- * @async
- * @function
+ * Loads the gamemode.
  */
 (async () => {
   // Loading requirements
-  await require('./loaders/requirements.js')();
+  await require('./loaders/core.js')();
 
   // Loading classes
   await require('./loaders/classes.js')();
@@ -50,6 +39,9 @@ yarp.cli = require('./modules/cli.js');
   });
 })();
 
+/**
+ * Tries to kick all players for save exit.
+ */
 const exit = async () => {
   console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');
   await mp.players.broadcast(`!{red}The server is closing. Rejoin with F1.`);
@@ -60,6 +52,9 @@ const exit = async () => {
   process.exit();
 };
 
+/**
+ * Redirects process exiting to custom exit function.
+ */
 process.on('SIGHUP', exit);
 process.on('SIGQUIT', exit);
 process.on('SIGTERM', exit);

@@ -32,7 +32,7 @@ mng.register = async (object) => {
  */
 mng.save = async (object) => {
   let collection = object.constructor.name.toLowerCase()+'s';
-  if (object._id != null) {
+  if (object._id != null && !object.lock__save__) {
     yarp.db.save(collection, object.data);
   } else {
     console.log(chalk.redBright('[YARP] ') + 'ManagerError: object could not be saved in ' + collection + ', missing id.\n' + JSON.stringify(object));
@@ -67,7 +67,7 @@ mng.load = async (Class) => {
   let collection = Class.name.toLowerCase()+'s';
   let res = await yarp.db.find(collection);
   for (let i = 0; i < res.length; i++) {
-    yarp[collection][res[i]._id] = new Class(yarp.utils.cleanData(res[i]));
+    yarp[collection][res[i]._id] = new Class(yarp.utils.server.cleanData(res[i]));
   }
 };
 

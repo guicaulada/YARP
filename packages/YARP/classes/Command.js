@@ -2,9 +2,9 @@
 /**
  * Implements a Command.
  * @class yarp.Command
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Command extends yarp.GMObject {
+class Command extends yarp.Object {
   /**
    * Creates an instance of Command.
    * @param {Object} params

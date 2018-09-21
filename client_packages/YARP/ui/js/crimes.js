@@ -27,10 +27,10 @@
 
 function applyCrimesToPlayer() {
 	// Aplicamos los delitos al jugador
-	mp.trigger('executePlayerCrimes');
+	mp.trigger('yarp:cefTrigger', 'executePlayerCrimes');
 }
 
 function showCrimesMenu() {
 	// Mostramos el menú de delitos
-	mp.trigger('backCrimesMenu');
+	mp.trigger('yarp:cefTrigger', 'backCrimesMenu');
 }

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Loads the configs on server-side asynchronously.
+ * Loads the configs on server-side.
  */
 
 module.exports = async () => {

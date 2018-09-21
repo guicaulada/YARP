@@ -2,9 +2,9 @@
 /**
  * Implements a Vehicles.
  * @class yarp.Vehicle
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Vehicle extends yarp.GMObject {
+class Vehicle extends yarp.Object {
   /**
    * Creates an instance of Vehicle.
    * @param {Object} params
@@ -34,7 +34,7 @@ class Vehicle extends yarp.GMObject {
       this._position = params.position;
       this._heading = this.default(params.heading, 0);
       this._owner = this.default(params.owner, false);
-      this._plate = this.default(params.plate, yarp.utils.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'));
+      this._plate = this.default(params.plate, yarp.utils.server.randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'));
       this._color = this.default(params.color, [0, 0, 0]);
       this._alpha = this.default(params.alpha, 255);
       this._locked = this.default(params.locked, false);

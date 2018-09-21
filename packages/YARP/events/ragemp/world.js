@@ -1,7 +1,6 @@
 'use strict';
 /**
- * @file World events and IPLs
- * @namespace server.world
+ * World events and IPLs
  */
 
 mp.world.removeIpl('facelobbyfake');

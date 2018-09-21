@@ -2,9 +2,9 @@
 /**
  * Implements a Colshape.
  * @class yarp.Colshape
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Colshape extends yarp.GMObject {
+class Colshape extends yarp.Object {
   /**
    * Creates an instance of Colshape.
    * @param {Object} params

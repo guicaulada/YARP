@@ -2,9 +2,9 @@
 /**
  * Implements a Weapon.
  * @class yarp.Weapon
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Weapon extends yarp.GMObject {
+class Weapon extends yarp.Object {
   /**
    * Creates an instance of Weapon.
    * @param {Object} params

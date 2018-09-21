@@ -1,111 +1,41 @@
 'use strict';
 /**
-* @file Browser events
-* @namespace client.browser
-*/
-
-// Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
-
-let parameters = {};
+ * Browser events
+ */
 
 /**
-* Creates a browser window.
-* @event createBrowser
-* @memberof client.browser
-* @param {Object} id The browser id.
-* @param {Object} params Function and arguments to execute.
-* @fires destroyBrowser
-*/
-mp.events.add('createBrowser', (id, params, disableHotkeys, forceArrow) => {
-  if (yarp.browsers[id] != null) {
-    mp.events.call('destroyBrowser', id);
-  }
-  parameters[id] = params.slice(1, params.length);
-  yarp.browsers[id] = mp.browsers.new(params[0]);
-  yarp.browsers[id].disableHotkeys = disableHotkeys;
-  yarp.browsers[id].forceArrow = forceArrow;
-});
-
-/**
-* Browser domain ready.
-* @event browserDomReady
-* @memberof client.browser
-* @param {Object} browser The browser object.
-* @fires browserExecute
-*/
+ * Browser domain ready.
+ * @event browserDomReady
+ * @memberof ragemp.client
+ * @param {Object} browser The browser object.
+ */
 mp.events.add('browserDomReady', (browser) => {
   for (let id in yarp.browsers) {
     if (yarp.browsers[id] === browser) {
       mp.gui.chat.activate(false);
       mp.gui.chat.show(false);
       mp.gui.cursor.visible = true;
-      if (parameters[id].length > 0) {
-        mp.events.call('browserExecute', id, parameters[id]);
+      if (yarp.browsers[id].parameters.length > 0) {
+        yarp.client.browserExecute(id, yarp.browsers[id].parameters);
       }
     }
   }
 });
 
 /**
-* Browser window created.
-* @event browserCreated
-* @memberof client.browser
-* @param {Object} browser The browser object.
-*/
+ * Browser window created.
+ * @event browserCreated
+ * @memberof ragemp.client
+ * @param {Object} browser The browser object.
+ */
 mp.events.add('browserCreated', (browser) => {
 });
 
 /**
-* Browser window failed to load.
-* @event browserLoadingFailed
-* @memberof client.browser
-* @param {Object} browser The browser object.
-*/
+ * Browser window failed to load.
+ * @event browserLoadingFailed
+ * @memberof ragemp.client
+ * @param {Object} browser The browser object.
+ */
 mp.events.add('browserLoadingFailed', (browser) => {
-});
-
-/**
-* Execute on browser window.
-* @event browserLoadingFailed
-* @memberof client.browser
-* @param {Object} id The browser id.
-* @param {Object} params Function and arguments to execute.
-*/
-mp.events.add('browserExecute', (id, params) => {
-  let input = '';
-  for (let i = 1; i < params.length; i++) {
-    if (input.length > 0) {
-      input += ', `' + params[i] + '`';
-    } else {
-      input = '`' + params[i] + '`';
-    }
-  }
-  yarp.browsers[id].execute(`${params[0]}(${input});`);
-});
-
-/**
-* Destroys a browser window.
-* @event createBrowser
-* @memberof client.browser
-* @param {Object} id The browser id.
-*/
-mp.events.add('destroyBrowser', (id) => {
-  if (yarp.browsers[id] != null) {
-    mp.gui.cursor.visible = false;
-    mp.gui.chat.activate(true);
-    mp.gui.chat.show(true);
-    yarp.browsers[id].destroy();
-    delete yarp.browsers[id];
-  }
-});
-
-/**
-* Toggle chat.
-* @event toggleChat
-* @memberof client.browser
-*/
-mp.events.add('toggleChat', () => {
-  mp.gui.cursor.visible = !mp.gui.cursor.visible;
-  mp.gui.chat.activate(!mp.gui.cursor.visible);
-  mp.gui.chat.show(!mp.gui.cursor.visible);
 });

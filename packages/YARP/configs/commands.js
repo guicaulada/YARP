@@ -6,7 +6,7 @@ let config = {
     hint: 'Write code to be executed from inside the game. A very powerful command.',
     permissions: ['cmd.code'],
     call: (player, args) => {
-      player.call('createBrowser', ['editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor'], true, false]);
+      yarp.client.createBrowser(player, 'editor', ['package://YARP/ui/html/editor.html', 'setupCodeEditor'], true, false);
       yarp.hotkeys['ToggleChat'].bind(player);
     },
   },
@@ -15,7 +15,7 @@ let config = {
     hint: 'Give a group to an user or character.',
     permissions: ['cmd.givegroup'],
     call: (player, args) => {
-      args = yarp.utils.getSubstrings(args.join(' '), '\'');
+      args = yarp.utils.server.getSubstrings(args.join(' '), '\'');
       let user = yarp.users[args[0]];
       let character = yarp.characters[args[0]];
       let group = yarp.groups[args[1]];
@@ -35,7 +35,7 @@ let config = {
     hint: 'Take a group from an user or character.',
     permissions: ['cmd.takegroup'],
     call: (player, args) => {
-      args = yarp.utils.getSubstrings(args.join(' '), '\'');
+      args = yarp.utils.server.getSubstrings(args.join(' '), '\'');
       let user = yarp.users[args[0]];
       let character = yarp.characters[args[0]];
       let group = yarp.groups[args[1]];
@@ -46,6 +46,25 @@ let config = {
         } else if (character) {
           character.takeGroup(group.id);
           character.save();
+        }
+      }
+    },
+  },
+  'creator': {
+    category: 'admin',
+    hint: 'Opens the character creator.',
+    permissions: ['cmd.creator'],
+    call: (player, args) => {
+      const freemodeCharacters = [mp.joaat('mp_m_freemode_01'), mp.joaat('mp_f_freemode_01')];
+      if (freemodeCharacters.indexOf(player.model) == -1) {
+        player.outputChatBox('/creator command is restricted to freemode characters.');
+      } else if (player.vehicle) {
+        player.outputChatBox('You can\'t use this command inside a vehicle.');
+      } else {
+        if (player.usingCreator) {
+          player.sendToWorld();
+        } else {
+          player.sendToCreator();
         }
       }
     },
@@ -116,7 +135,7 @@ let config = {
     hint: 'Toggle No-clip.',
     permissions: ['cmd.noclip'],
     call: (player, args) => {
-      player.call('toggleNoclip');
+      yarp.client.toggleNoclip(player);
     },
   },
   'charpos': {
@@ -124,7 +143,7 @@ let config = {
     hint: 'Toggle character position display.',
     permissions: ['cmd.charpos'],
     call: (player, args) => {
-      player.call('toggleCharpos');
+      yarp.client.toggleCharpos(player);
     },
   },
   'camdir': {
@@ -132,7 +151,7 @@ let config = {
     hint: 'Toggle camera direction display.',
     permissions: ['cmd.camdir'],
     call: (player, args) => {
-      player.call('toggleCamdir');
+      yarp.client.toggleCamdir(player);
     },
   },
   'gmtp': {
@@ -140,7 +159,7 @@ let config = {
     hint: 'Teleport to specified gamemode object.',
     permissions: ['cmd.gmtp'],
     call: (player, args) => {
-      args = yarp.utils.getSubstrings(args.join(' '), '\'');
+      args = yarp.utils.server.getSubstrings(args.join(' '), '\'');
       let Class = args[0];
       let id = args[1];
       if (yarp[Class]) {
@@ -180,7 +199,7 @@ let config = {
           });
         }
       }
-      player.call('createBrowser', ['inventory', ['package://YARP/ui/html/inventory.html', 'populateInventory', JSON.stringify(list), 'Inventory'], false, true]);
+      yarp.client.createBrowser(player, 'inventory', ['package://YARP/ui/html/inventory.html', 'populateInventory', list, 'Inventory'], false, true);
     },
   },
   'money': {

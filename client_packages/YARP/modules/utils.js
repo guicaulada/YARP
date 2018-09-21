@@ -1,33 +1,44 @@
 'use strict';
 /**
  * Holds utility functions for the client.
- * @namespace client.yarp.utils
  */
 
-let utils = {};
+let utils = new yarp.Proxy('yarp:utils');
 
+/**
+ * Returns a random integer between min and max
+ * @instance
+ * @function default
+ * @memberof yarp.utils.client
+ * @param {Number} min Minimum value.
+ * @param {Number} max Random value.
+ * @return {Number} Random integer.
+ */
+utils.client.getRandomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 /**
  * Returns first vaule or second value as default.
  * @instance
  * @function default
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {*} v Verified value.
  * @param {*} d Default value if v is null.
  * @return {*} v if it's not null, or d
  */
-utils.default = (v, d) => {
+utils.client.default = (v, d) => {
   return (v != null) ? v : d;
 };
 
 /**
  * Handles substitution for JSON stringify on circular references.
  * @function circularJSON
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Object} object Circular object.
  * @return {String} JSON string.
  */
-utils.circularJSON = (object) => {
+utils.client.circularJSON = (object) => {
   // http://stackoverflow.com/questions/11616630/json-stringify-avoid-typeerror-converting-circular-structure-to-json/11616993#11616993
   let cache = [];
   let json = JSON.stringify(object, (key, value) => {
@@ -48,11 +59,11 @@ utils.circularJSON = (object) => {
 /**
  * Gets weapon type from weapon slot.
  * @function getWeaponTypeInSlot
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponSlot Weapon slot hash.
  * @return {Number} Weapon type hash.
  */
-utils.getWeaponTypeInSlot = (weaponSlot) => {
+utils.client.getWeaponTypeInSlot = (weaponSlot) => {
   // Credits to kemperrr#9752.
   return mp.game.invoke('0xEFFED78E9011134D', mp.players.local.handle, weaponSlot);
 };
@@ -60,11 +71,11 @@ utils.getWeaponTypeInSlot = (weaponSlot) => {
 /**
  * Gets weapon ammo.
  * @function getWeaponAmmo
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponHash Weapon hash.
  * @return {Number} Weapon ammo.
  */
-utils.getWeaponAmmo = (weaponHash) => {
+utils.client.getWeaponAmmo = (weaponHash) => {
   // Credits to kemperrr#9752.
   return mp.game.invoke('0x015A522136D7F951', mp.players.local.handle, weaponHash);
 };
@@ -72,10 +83,10 @@ utils.getWeaponAmmo = (weaponHash) => {
 /**
  * Removes a weapon.
  * @function removeWeapon
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponHash Weapon hash.
  */
-utils.removeWeapon = (weaponHash) => {
+utils.client.removeWeapon = (weaponHash) => {
   // Credits to kemperrr#9752.
   mp.game.invoke('0x4899CB088EDF59B8', mp.players.local.handle, weaponHash);
 };
@@ -83,11 +94,11 @@ utils.removeWeapon = (weaponHash) => {
 /**
  * Sets weapon ammo.
  * @function setWeaponAmmo
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponHash Weapon hash.
  * @param {Number} ammo Ammo amount.
  */
-utils.setWeaponAmmo = (weaponHash, ammo) => {
+utils.client.setWeaponAmmo = (weaponHash, ammo) => {
   // Credits to kemperrr#9752.
   mp.game.invoke('0x14E56BC5B5DB6A19', mp.players.local.handle, weaponHash, ammo);
 };
@@ -95,10 +106,10 @@ utils.setWeaponAmmo = (weaponHash, ammo) => {
 /**
  * Gets the current weapon.
  * @function getCurrentWeapon
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @return {Number} Weapon hash.
  */
-utils.getCurrentWeapon = () => {
+utils.client.getCurrentWeapon = () => {
   // Credits to kemperrr#9752.
   return mp.game.invoke('0x0A6DB4965674D243', mp.players.local.handle);
 };
@@ -106,11 +117,11 @@ utils.getCurrentWeapon = () => {
 /**
  * Gives a certain weapon component.
  * @function giveWeaponComponent
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponHash Weapon hash.
  * @param {Number} component Component hash.
  */
-utils.giveWeaponComponent = (weaponHash, component) => {
+utils.client.giveWeaponComponent = (weaponHash, component) => {
   // Credits to kemperrr#9752.
   mp.game.invoke('0xD966D51AA5B28BB9', mp.players.local.handle, weaponHash, component);
 };
@@ -118,11 +129,11 @@ utils.giveWeaponComponent = (weaponHash, component) => {
 /**
  * Gets the clip size for a specific weapon.
  * @function getWeaponClipSize
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponHash Weapon hash.
  * @return {Number} The weapon clip size.
  */
-utils.getWeaponClipSize = (weaponHash) => {
+utils.client.getWeaponClipSize = (weaponHash) => {
   // Credits to kemperrr#9752.
   return mp.game.invoke('0x583BE370B1EC6EB4', weaponHash);
 };
@@ -130,11 +141,11 @@ utils.getWeaponClipSize = (weaponHash) => {
 /**
  * Verifies if the characer has a weapon.
  * @function gotWeapon
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} weaponHash Weapon hash.
  * @return {Boolean} True/false if has or not weapon.
  */
-utils.gotWeapon = (weaponHash) => {
+utils.client.gotWeapon = (weaponHash) => {
   // Credits to kemperrr#9752.
   return mp.game.invoke('0x8DECB02F88F428BC', mp.players.local.handle, weaponHash, false);
 };
@@ -142,10 +153,10 @@ utils.gotWeapon = (weaponHash) => {
 /**
  * Gets all character weapons and ammo.
  * @function getAllWeapons
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @return {Object} Dictionary weapon > ammo.
  */
-utils.getAllWeapons = () => {
+utils.client.getAllWeapons = () => {
   // Credits to kemperrr#9752.
   const weapons = {};
   this.weaponSlots.forEach((weaponSlot) => {
@@ -160,21 +171,21 @@ utils.getAllWeapons = () => {
 /**
  * Format numbers to contain commas.
  * @function numberWithCommas
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} x Number to be formatted.
  * @return {String} Formatted number.
  */
-utils.numberWithCommas = (x) => {
+utils.client.numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 /**
  * Gets character camera direction.
  * @function getCameraDirection
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @return {Vector3} The position the camera is poiting.
  */
-utils.getCameraDirection = () => {
+utils.client.getCameraDirection = () => {
   // Credits to https://github.com/ImagicTheCat/vRP/blob/vrpex/vrp/client/base.lua#L46 Thank you for teaching me so much.
   const heading = mp.game.cam.getGameplayCamRelativeHeading()+mp.players.local.getHeading();
   const pitch = mp.game.cam.getGameplayCamRot(0).x;
@@ -193,10 +204,10 @@ utils.getCameraDirection = () => {
 /**
  * Gets a set containing all weapon slots.
  * @function getWeaponTypeInSlot
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @return {Set} All weapon slots.
  */
-utils.getWeaponSlots = () => {
+utils.client.getWeaponSlots = () => {
   return new Set([
     1993361168, 1277010230, 932043479, 690654591, 1459198205, 195782970, -438797331, 896793492,
     495159329, -1155528315, -515636489, -871913299, -1352759032, -542958961, 1682645887, -859470162,
@@ -209,10 +220,10 @@ utils.getWeaponSlots = () => {
 /**
  * Gets a set containing all door types.
  * @function getDoorTypes
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @return {Set} All door types.
  */
-utils.getDoorTypes = () => {
+utils.client.getDoorTypes = () => {
   return new Set([0x6b918ea1, 0x53a940ab, 0x86ef4558, 1796834809, 96153298, -281080954, 183249434,
     758345384, -1069262641, 1968521986, -2143706301, -1403421822, -1950137670, 1226259807, 1090833557,
     897332612, 1095946640, 801975945, -167996547, -1935818563, 1891185217, 1236591681, 1980808685,
@@ -246,10 +257,10 @@ utils.getDoorTypes = () => {
 /**
  * Gets weapon type from weapon slot.
  * @function getVirtualKeys
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @return {Object} Dictionary of virtual keys
  */
-utils.getVirtualKeys = () => {
+utils.client.getVirtualKeys = () => {
   return {
     ABNT_C1: 0xC1, ABNT_C2: 0xC2, ADD: 0x6B, ATTN: 0xF6, BACK: 0x08, CANCEL: 0x03, CLEAR: 0x0C, ALT: 0x12,
     CRSEL: 0xF7, DECIMAL: 0x6E, DIVIDE: 0x6F, EREOF: 0xF9, ESCAPE: 0x1B, EXECUTE: 0x2B, EXSEL: 0xF8,
@@ -282,11 +293,11 @@ utils.getVirtualKeys = () => {
 /**
  * Returns the time in a set timezone.
  * @function getTimezoneDate
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.client
  * @param {Number} timezone The timezone difference to GMT.
  * @return {Date} Timezone date.
  */
-utils.getTimezone = (timezone) => {
+utils.client.getTimezone = (timezone) => {
   let date = new Date();
   let h = date.getUTCHours() + timezone;
   let m = date.getUTCMinutes();

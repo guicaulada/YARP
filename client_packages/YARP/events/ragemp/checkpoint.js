@@ -1,23 +1,22 @@
 'use strict';
 /**
-* @file Checkpoint events
-* @namespace client.checkpoint
-*/
+ * Checkpoint events
+ */
 
 /**
-* Player exit checkpoint.
-* @event playerEnterCheckpoint
-* @memberof client.checkpoint
-* @param {Object} checkpoint The checkpoint that was left.
-*/
+ * Player exit checkpoint.
+ * @event playerEnterCheckpoint
+ * @memberof ragemp.client
+ * @param {Object} checkpoint The checkpoint that was left.
+ */
 mp.events.add('playerEnterCheckpoint', (checkpoint) => {
 });
 
 /**
-* Player exit checkpoint.
-* @event playerExitCheckpoint
-* @memberof client.checkpoint
-* @param {Object} checkpoint The checkpoint that was left.
-*/
+ * Player exit checkpoint.
+ * @event playerExitCheckpoint
+ * @memberof ragemp.client
+ * @param {Object} checkpoint The checkpoint that was left.
+ */
 mp.events.add('playerExitCheckpoint', (checkpoint) => {
 });

@@ -2,9 +2,9 @@
 /**
  * Implements a Variable.
  * @class yarp.Variable
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Variable extends yarp.GMObject {
+class Variable extends yarp.Object {
   /**
    * Creates an instance of Variable.
    * @param {Object} params

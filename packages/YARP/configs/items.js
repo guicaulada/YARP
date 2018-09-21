@@ -7,7 +7,7 @@ let config = {
     category: 'Food',
     options: {
       'Eat': (player) => {
-        mp.events.call('restoreHunger', player, 5);
+        yarp.server.restoreHunger(player, 5);
       },
     },
   },
@@ -17,7 +17,7 @@ let config = {
     category: 'Food',
     options: {
       'Eat': (player) => {
-        mp.events.call('restoreHunger', player, 10);
+        yarp.server.restoreHunger(player, 10);
       },
     },
   },
@@ -27,7 +27,7 @@ let config = {
     category: 'Food',
     options: {
       'Eat': (player) => {
-        mp.events.call('restoreHunger', player, 15);
+        yarp.server.restoreHunger(player, 15);
       },
     },
   },
@@ -37,7 +37,7 @@ let config = {
     category: 'Food',
     options: {
       'Drink': (player) => {
-        mp.events.call('restoreThirst', player, 5);
+        yarp.server.restoreThirst(player, 5);
       },
     },
   },
@@ -47,7 +47,7 @@ let config = {
     category: 'Food',
     options: {
       'Drink': (player) => {
-        mp.events.call('restoreThirst', player, 10);
+        yarp.server.restoreThirst(player, 10);
       },
     },
   },
@@ -57,7 +57,7 @@ let config = {
     category: 'Food',
     options: {
       'Drink': (player) => {
-        mp.events.call('restoreThirst', player, 15);
+        yarp.server.restoreThirst(player, 15);
       },
     },
   },

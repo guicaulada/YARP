@@ -1,13 +1,12 @@
 'use strict';
 /**
-* @file Waypoint events
-* @namespace client.waypoint
+* Waypoint events
 */
 
 /**
  * Player created a waypoint.
  * @event playerCreateWaypoint
- * @memberof client.waypoint
+ * @memberof ragemp.client
  * @param {Vector3} position The position of the waypoint.
  */
 mp.events.add('playerCreateWaypoint', (position) => {
@@ -16,7 +15,7 @@ mp.events.add('playerCreateWaypoint', (position) => {
 /**
  * Player have reached a waypoint.
  * @event playerReachWaypoint
- * @memberof client.waypoint
+ * @memberof ragemp.client
  */
 mp.events.add('playerReachWaypoint', () => {
 });

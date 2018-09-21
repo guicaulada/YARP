@@ -2,9 +2,9 @@
 /**
  * Implements a Item.
  * @class yarp.Item
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Item extends yarp.GMObject {
+class Item extends yarp.Object {
   /**
    * Creates an instance of Item.
    * @param {Object} params

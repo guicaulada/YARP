@@ -1,7 +1,6 @@
 'use strict';
 /**
-* @file Character events
-* @namespace client.character
+* Character events
 */
 
 // Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/character.js
@@ -19,135 +18,127 @@ let characters = null;
 
 /**
  * Show user characters on side menu.
- * @event showPlayerCharacters
- * @memberof client.character
- * @param {String} charactersJson User characters JSON.
- * @fires createBrowser
+ * @function showPlayerCharacters
+ * @memberof yarp.client
+ * @param {Object} userCharacters User characters.
  */
-mp.events.add('showPlayerCharacters', (charactersJson) => {
-  characters = charactersJson;
+yarp.client.showPlayerCharacters = (userCharacters) => {
+  characters = JSON.stringify(userCharacters);
   mp.game.ui.displayRadar(false);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', charactersJson], true, true);
-});
+  yarp.client.createBrowser('character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters], true, true);
+};
 
 /**
  * Load the caracter data.
- * @event loadCharacter
- * @memberof client.character
+ * @function loadCharacter
+ * @memberof yarp.client
  * @param {String} id Character name.
- * @fires loadCharacter
  */
-mp.events.add('loadCharacter', (id) => {
-  mp.events.call('destroyBrowser', 'character');
+yarp.client.loadCharacter = (id) => {
+  yarp.client.destroyBrowser('character');
   mp.game.ui.displayRadar(true);
-  mp.events.callRemote('loadCharacter', id);
+  yarp.server.loadCharacter(id);
   mp.game.invoke('0x95C0A5BBDC189AA1');
-});
+};
 
 /**
  * Displays the character creation menu.
- * @event showCharacterCreationMenu
- * @memberof client.character
- * @fires createBrowser
+ * @function showCharacterCreationMenu
+ * @memberof yarp.client
  */
-mp.events.add('showCharacterCreationMenu', () => {
+yarp.client.showCharacterCreationMenu = () => {
   mp.game.ui.displayRadar(false);
-  mp.events.callRemote('setCharacterIntoCreator');
+  yarp.server.setCharacterIntoCreator();
   mp.game.invoke('0x95C0A5BBDC189AA1');
-  initializeCharacterCreation(mp.players.local);
+  yarp.client.initializeCharacterCreation(mp.players.local);
   camera = mp.cameras.new('default', new mp.Vector3(152.6008, -1003.25, -98), new mp.Vector3(-20.0, 0.0, 0.0), 90);
   camera.setActive(true);
   mp.game.cam.renderScriptCams(true, false, 0, true, false);
   mp.game.ui.displayHud(false);
   mp.gui.chat.activate(false);
   mp.gui.chat.show(false);
-  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/characterCreator.html']);
-});
+  yarp.client.createBrowser('character', ['package://YARP/ui/html/characterCreator.html']);
+};
 
 /**
  * Changes the character model.
- * @event updatePlayerModel
- * @memberof client.character
+ * @function updatePlayerModel
+ * @memberof yarp.client
  * @param {String} model Ped model.
- * @fires changeCharacterModel
  */
-mp.events.add('updatePlayerModel', (model) => {
-  initializeCharacterCreation(mp.players.local);
-  mp.events.callRemote('changeCharacterModel', model);
-});
+yarp.client.updatePlayerModel = (model) => {
+  yarp.client.initializeCharacterCreation(mp.players.local);
+  yarp.server.changeCharacterModel(model);
+};
 
 /**
  * Update character creation.
- * @event updatePlayerCreation
- * @memberof client.character
+ * @function updatePlayerCreation
+ * @memberof yarp.client
  * @param {String} partName The part name.
  * @param {Number} value The part value.
  * @param {Boolean} isPercentage If the value is a parcentage or not.
  */
-mp.events.add('updatePlayerCreation', (partName, value, isPercentage) => {
+yarp.client.updatePlayerCreation = (partName, value, isPercentage) => {
   if (isPercentage) {
     value = parseFloat(value / 100);
   }
   faceModel[`${partName}`] = value;
-  updatePlayerFace(mp.players.local, faceModel);
-});
+  yarp.client.updatePlayerFace(mp.players.local, faceModel);
+};
 
 /**
  * Switches focus between body and face.
- * @event cameraPointTo
- * @memberof client.character
+ * @function cameraPointTo
+ * @memberof yarp.client
  * @param {Number} bodyPart Body or face (0/1).
  */
-mp.events.add('cameraPointTo', (bodyPart) => {
+yarp.client.cameraPointTo = (bodyPart) => {
   if (bodyPart == 0) {
     camera.setCoord(152.6008, -1003.25, -98);
   } else {
     camera.setCoord(152.3708, -1001.75, -98.3);
   }
-});
+};
 
 /**
  * Sets the character heading.
- * @event rotateCharacter
- * @memberof client.character
+ * @function rotateCharacter
+ * @memberof yarp.client
  * @param {Number} rotation Heading.
  */
-mp.events.add('rotateCharacter', (rotation) => {
+yarp.client.rotateCharacter = (rotation) => {
   mp.players.local.setHeading(rotation);
-});
+};
 
 /**
  * Warns that the character name is a duplicate.
- * @event characterNameDuplicated
- * @memberof client.character
- * @fires browserExecute
+ * @function characterNameDuplicated
+ * @memberof yarp.client
  */
-mp.events.add('characterNameDuplicated', () => {
-  mp.events.call('browserExecute', 'character', ['showPlayerDuplicatedWarn']);
-});
+yarp.client.characterNameDuplicated = () => {
+  yarp.client.browserExecute('character', ['showPlayerDuplicatedWarn']);
+};
 
 /**
  * Tries to create the character.
- * @event acceptCharacterCreation
- * @memberof client.character
+ * @function acceptCharacterCreation
+ * @memberof yarp.client
  * @param {String} name Character name.
  * @param {Number} age Character age.
  * @param {String} model Character model (male/female).
- * @fires createCharacter
  */
-mp.events.add('acceptCharacterCreation', (name, age, model) => {
-  let faceJson = JSON.stringify(faceModel);
-  mp.events.callRemote('createCharacter', name, age, model, faceJson);
-});
+yarp.client.acceptCharacterCreation = (name, age, model) => {
+  yarp.server.createCharacter(name, age, model, faceModel);
+};
 
 /**
  * Cancels and exits character creation.
- * @event cancelCharacterCreation
- * @memberof client.character
- * @fires createBrowser
+ * @function cancelCharacterCreation
+ * @memberof yarp.client
  */
-mp.events.add('cancelCharacterCreation', () => {
+yarp.client.cancelCharacterCreation = () => {
   mp.game.cam.renderScriptCams(false, false, 0, true, false);
   camera.destroy();
   camera = null;
@@ -155,48 +146,45 @@ mp.events.add('cancelCharacterCreation', () => {
   mp.gui.chat.activate(true);
   mp.gui.chat.show(true);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-  mp.events.call('createBrowser', 'character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters], true, true);
-});
+  yarp.client.createBrowser('character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters], true, true);
+};
 
 /**
  * Cancels and exits character creation.
- * @event characterCreatedSuccessfully
- * @memberof client.character
- * @fires destroyBrowser
+ * @function characterCreatedSuccessfully
+ * @memberof yarp.client
  */
-mp.events.add('characterCreatedSuccessfully', () => {
+yarp.client.characterCreatedSuccessfully = () => {
   mp.game.cam.renderScriptCams(false, false, 0, true, false);
   camera.destroy();
   camera = null;
   mp.game.ui.displayHud(true);
   mp.gui.chat.activate(true);
   mp.gui.chat.show(true);
-  mp.events.call('destroyBrowser', 'character');
-});
+  yarp.client.destroyBrowser('character');
+};
 
 /**
  * Updates player features.
- * @event updatePlayerCustomSkin
- * @memberof client.character
+ * @function updatePlayerCustomSkin
+ * @memberof yarp.client
  * @param {Object} player The player to be updated.
- * @param {String} faceJson The face data in JSON.
- * @param {String} tattooJson The tattoo data in JSON.
+ * @param {Object} face The face data.
+ * @param {Object} tattoo The tattoo data.
  */
-mp.events.add('updatePlayerCustomSkin', (player, faceJson, tattooJson) => {
-  let face = JSON.parse(faceJson);
-  let tattoo = JSON.parse(tattooJson);
-  updatePlayerFace(player, face);
-  updatePlayerTattoos(player, tattoo);
-});
+yarp.client.updatePlayerCustomSkin = (player, face, tattoo) => {
+  yarp.client.updatePlayerFace(player, face);
+  yarp.client.updatePlayerTattoos(player, tattoo);
+};
 
 /**
  * Initializes player features.
  * @function initializeCharacterCreation
- * @memberof client.character
+ * @memberof yarp.client
  * @param {Object} player The player to initialize.
  * @return {Object} The face model.
  */
-function initializeCharacterCreation(player) {
+yarp.client.initializeCharacterCreation = (player) => {
   faceModel.firstHeadShape = player === 'undefined' ? 0 : player.getVariable('FIRST_HEAD_SHAPE');
   faceModel.secondHeadShape = player === 'undefined' ? 0 : player.getVariable('SECOND_HEAD_SHAPE');
   faceModel.firstSkinTone = player === 'undefined' ? 0 : player.getVariable('FIRST_SKIN_TONE');
@@ -245,16 +233,16 @@ function initializeCharacterCreation(player) {
   faceModel.neckWidth = player === 'undefined' ? 0.0 : player.getVariable('NECK_WIDTH');
 
   return faceModel;
-}
+};
 
 /**
  * Updates player features.
  * @function updatePlayerFace
- * @memberof client.character
+ * @memberof yarp.client
  * @param {Object} player The player to update.
  * @param {Object} face The face object.
  */
-function updatePlayerFace(player, face) {
+yarp.client.updatePlayerFace = (player, face) => {
   player.setHeadBlendData(Number(face.firstHeadShape), Number(face.secondHeadShape), 0,
     Number(face.firstSkinTone), Number(face.secondSkinTone), 0, Number(face.headMix),
     Number(face.skinMix), 0, false);
@@ -292,19 +280,19 @@ function updatePlayerFace(player, face) {
   player.setFaceFeature(17, Number(face.chinWidth));
   player.setFaceFeature(18, Number(face.chinShape));
   player.setFaceFeature(19, Number(face.neckWidth));
-}
+};
 
 /**
  * Updates player features.
  * @function updatePlayerTattoos
- * @memberof client.character
+ * @memberof yarp.client
  * @param {Object} player The player to update.
  * @param {Array<Object>} tattooArray Object tattoo with hash and library.
  */
-function updatePlayerTattoos(player, tattooArray) {
+yarp.client.updatePlayerTattoos = (player, tattooArray) => {
   for (let i = 0; i < tattooArray.length; i++) {
     let library = mp.game.joaat(tattooArray[i].library);
     let hash = mp.game.joaat(tattooArray[i].hash);
     player.setDecoration(library, hash);
   }
-}
+};

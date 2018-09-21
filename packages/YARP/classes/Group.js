@@ -2,9 +2,9 @@
 /**
  * Implements a Group.
  * @class yarp.Group
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Group extends yarp.GMObject {
+class Group extends yarp.Object {
   /**
    * Creates an instance of Group.
    * @param {Object} params

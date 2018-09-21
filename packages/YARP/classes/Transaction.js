@@ -2,9 +2,9 @@
 /**
  * Implements a Transaction.
  * @class yarp.Transaction
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Transaction extends yarp.GMObject {
+class Transaction extends yarp.Object {
   /**
    * Creates an instance of Transaction.
    * @param {Object} params
@@ -12,7 +12,7 @@ class Transaction extends yarp.GMObject {
    * @param {Nuimber} params.value
    * @param {String} params.source
    * @param {String} [params.target=source]
-   * @param {String} [params.date=yarp.utils.getTimestamp(new Date())]
+   * @param {String} [params.date=yarp.utils.server.getTimestamp(new Date())]
    * @memberof Transaction
    */
   constructor(params) {
@@ -23,7 +23,7 @@ class Transaction extends yarp.GMObject {
       this._source = params.source;
       this._value = params.value;
       this._target = this.default(params.target, this._source);
-      this._date = this.default(params.date, yarp.utils.getTimestamp(new Date()));
+      this._date = this.default(params.date, yarp.utils.server.getTimestamp(new Date()));
       yarp.mng.register(this);
       this.makeGetterSetter();
     } else {

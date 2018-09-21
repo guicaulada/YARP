@@ -92,13 +92,13 @@ function populateSelectorOptions(file, id, selector, optionsJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('selectSelectorOption', file, id, s_options[selected].id);
+			mp.trigger('yarp:cefTrigger', 'selectSelectorOption', file, id, s_options[selected].id);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -284,7 +284,7 @@ function populateSaleItems(id, category, itemsJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseSaleItem', id, list[selected]._id, purchasedAmount);
+			mp.trigger('yarp:cefTrigger', 'purchaseSaleItem', id, list[selected]._id, purchasedAmount);
 		}
 	});
 
@@ -370,7 +370,7 @@ function populateSaleCategories(id,saleJson) {
 
 	exitButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -454,7 +454,7 @@ function populateTunningHome() {
 
 	exitButton.onclick = (function() {
 		// Cerramos la ventana de compra
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -520,7 +520,7 @@ function populateTunningComponents() {
 				drawable = i;
 
 				// Actualizamos el tunning del vehículo
-				mp.trigger('addVehicleComponent', tunningComponents[selected].slot, drawable);
+				mp.trigger('yarp:cefTrigger', 'addVehicleComponent', tunningComponents[selected].slot, drawable);
 			}
 		});
 
@@ -550,7 +550,7 @@ function populateTunningComponents() {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			//mp.trigger('purchaseItem', selected, purchasedAmount);
+			//mp.trigger('yarp:cefTrigger', 'purchaseItem', selected, purchasedAmount);
 		}
 	});
 
@@ -659,13 +659,13 @@ function populateFastfoodOrders(ordersJson, distancesJson) {
 	deliverButton.onclick = (function() {
 		// Entregamos el pedido seleccionado
 		if(selected != null) {
-			mp.trigger('deliverFastfoodOrder', fastfoodOrders[selected].id);
+			mp.trigger('yarp:cefTrigger', 'deliverFastfoodOrder', fastfoodOrders[selected].id);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -786,13 +786,13 @@ function populateCrimesMenu(crimesJson, selectedCrimes) {
 	applyButton.onclick = (function() {
 		// Entregamos el pedido seleccionado
 		if(selectedOptions.length > 0) {
-			mp.trigger('applyCrimes', JSON.stringify(selectedOptions));
+			mp.trigger('yarp:cefTrigger', 'applyCrimes', JSON.stringify(selectedOptions));
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de pedidos
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -837,7 +837,7 @@ function populateCharacterList(charactersJson) {
 		// Ponemos la función para cada elemento
 		itemContainer.onclick = (function() {
 			// Cargamos el personaje
-			mp.trigger('loadCharacter', character._id);
+			mp.trigger('yarp:cefTrigger', 'loadCharacter', character._id);
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -860,7 +860,7 @@ function populateCharacterList(charactersJson) {
 		// Ponemos la función para cada elemento
 		createButton.onclick = (function() {
 			// Mostramos el menú de creación de personaje
-			mp.trigger('showCharacterCreationMenu');
+			mp.trigger('yarp:cefTrigger', 'showCharacterCreationMenu');
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -925,7 +925,7 @@ function populateTattooHome() {
 			selected = i;
 
 			// Cargamos la lista de tatuajes de la zona
-			mp.trigger('getZoneTattoos', i);
+			mp.trigger('yarp:cefTrigger', 'getZoneTattoos', i);
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -946,7 +946,7 @@ function populateTattooHome() {
 
 	exitButton.onclick = (function() {
 		// Salimos del menú
-		mp.trigger('exitTattooShop');
+		mp.trigger('yarp:cefTrigger', 'exitTattooShop');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1015,7 +1015,7 @@ function populateZoneTattoos(zoneTattooJson) {
 				drawable = i;
 
 				// Actualizamos los tatuajes
-				mp.trigger('addPlayerTattoo', drawable);
+				mp.trigger('yarp:cefTrigger', 'addPlayerTattoo', drawable);
 			}
 		});
 
@@ -1045,7 +1045,7 @@ function populateZoneTattoos(zoneTattooJson) {
 	purchaseButton.onclick = (function() {
 		// Mandamos la acción de compra si ha seleccionado algo
 		if(selected != null) {
-			mp.trigger('purchaseTattoo', selected, drawable);
+			mp.trigger('yarp:cefTrigger', 'purchaseTattoo', selected, drawable);
 		}
 	});
 
@@ -1054,7 +1054,7 @@ function populateZoneTattoos(zoneTattooJson) {
 		populateTattooHome();
 
 		// Limpiamos los tatuajes no comprados
-		mp.trigger('clearTattoos');
+		mp.trigger('yarp:cefTrigger', 'clearTattoos');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1137,7 +1137,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 
 			// Actualizamos la apariencia
-			mp.trigger('updateFacialHair', i, selectedOptions[i]);
+			mp.trigger('yarp:cefTrigger', 'updateFacialHair', i, selectedOptions[i]);
 		});
 
 		itemSubstract.onclick = (function() {
@@ -1161,7 +1161,7 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 			amountSpan.innerHTML = '<b>Tipo: </b>' + selectedOptions[i];
 
 			// Actualizamos la apariencia
-			mp.trigger('updateFacialHair', i, selectedOptions[i]);
+			mp.trigger('yarp:cefTrigger', 'updateFacialHair', i, selectedOptions[i]);
 		});
 
 		// Ordenamos la jerarquía de elementos
@@ -1193,13 +1193,13 @@ function populateHairdresserMenu(faceOptionsJson, selectedFaceJson, businessName
 	// Ponemos la función para cada elemento
 	acceptButton.onclick = (function() {
 		// Guardamos los cambios
-		mp.trigger('applyHairdresserChanges');
+		mp.trigger('yarp:cefTrigger', 'applyHairdresserChanges');
 	});
 
 	cancelButton.onclick = (function() {
 		// Cancelamos el peinado y cerramos la ventana de pedidos
-		mp.trigger('cancelHairdresserChanges');
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'cancelHairdresserChanges');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1307,13 +1307,13 @@ function populateTownHallMenu(townHallOptionsJson) {
 	acceptButton.onclick = (function() {
 		if(selected != null) {
 			// Ejecutamos la acción seleccionada
-			mp.trigger('executeTownHallOperation', selected);
+			mp.trigger('yarp:cefTrigger', 'executeTownHallOperation', selected);
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana del ayuntamiento
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1420,13 +1420,13 @@ function populateFinesMenu(finesJson) {
 	acceptButton.onclick = (function() {
 		if(selectedOptions.length > 0) {
 			// Pagamos las multas del jugador
-			mp.trigger('payPlayerFines', JSON.stringify(selectedOptions));
+			mp.trigger('yarp:cefTrigger', 'payPlayerFines', JSON.stringify(selectedOptions));
 		}
 	});
 
 	cancelButton.onclick = (function() {
 		// Volvemos al índice del ayuntamiento
-		mp.trigger('backTownHallIndex');
+		mp.trigger('yarp:cefTrigger', 'backTownHallIndex');
 	});
 
 	// Ordenamos la jerarquía de elementos
@@ -1504,13 +1504,13 @@ function populatePoliceControlsMenu(policeControlJson) {
 	// Ponemos la función para cada elemento
 	acceptButton.onclick = (function() {
 		// Procesamos la opción y borramos el navegador
-		mp.trigger('proccessPoliceControlAction');
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'proccessPoliceControlAction');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	cancelButton.onclick = (function() {
 		// Cerramos la ventana de controles
-		mp.trigger('destroyBrowser', 'menu');
+		mp.trigger('yarp:cefTrigger', 'destroyBrowser', 'menu');
 	});
 
 	// Ordenamos la jerarquía de elementos

@@ -1,85 +1,77 @@
 'use strict';
 /**
-* @file Menu events
-* @namespace client.menu
+* Menu events
 */
 
 /**
  * Attach a weapon model to the character.
- * @event purchaseSaleItem
+ * @function purchaseSaleItem
  * @memberof client.menu
  * @param {String} storeid The store id.
  * @param {String} itemid The item id.
  * @param {String} amount The bought amount.
- * @fires purchaseSaleItem
  */
-mp.events.add('purchaseSaleItem', (storeid, itemid, amount) => {
-  mp.events.callRemote('purchaseSaleItem', storeid, itemid, amount);
-});
+yarp.client.purchaseSaleItem = (storeid, itemid, amount) => {
+  yarp.server.purchaseSaleItem(storeid, itemid, amount);
+};
 
 /**
  * Verifies the user password.
- * @event verifyLogin
+ * @function verifyLogin
  * @memberof client.menu
  * @param {String} password The typed password.
- * @fires verifyLogin
  */
-mp.events.add('verifyLogin', (password) => {
-  mp.events.callRemote('verifyLogin', password);
-});
+yarp.client.verifyLogin = (password) => {
+  yarp.server.verifyLogin(password);
+};
 
 /**
  * Unbinds the toggle chat hotkey.
- * @event unbindToggleChat
+ * @function unbindToggleChat
  * @memberof client.menu
- * @fires unbindToggleChat
  */
-mp.events.add('unbindToggleChat', () => {
-  mp.events.callRemote('unbindToggleChat');
-});
+yarp.client.unbindToggleChat = () => {
+  yarp.server.unbindToggleChat();
+};
 
 /**
  * Call an inventory item option.
- * @event callInventoryOption
+ * @function callInventoryOption
  * @memberof client.menu
  * @param {String} itemid The item id.
  * @param {String} option The option id.
- * @fires callInventoryOption
  */
-mp.events.add('callInventoryOption', (itemid, option) => {
-  mp.events.callRemote('callInventoryOption', itemid, option);
-});
+yarp.client.callInventoryOption = (itemid, option) => {
+  yarp.server.callInventoryOption(itemid, option);
+};
 
 /**
  * Updates bank account money on UI.
- * @event updateBankAccountMoney
+ * @function updateBankAccountMoney
  * @memberof client.menu
- * @fires browserExecute
  */
-mp.events.add('updateBankAccountMoney', () => {
+yarp.client.updateBankAccountMoney = () => {
   let money = mp.players.local.getVariable('PLAYER_BANK');
-  mp.events.call('browserExecute', 'menu', ['updateAccountMoney', money]);
-});
+  yarp.client.browserExecute('menu', ['updateAccountMoney', money]);
+};
 
 /**
  * Updates bank account money on UI.
- * @event executeBankOperation
+ * @function executeBankOperation
  * @memberof client.menu
  * @param {Number} operation 1 = Withdraw, 2 = Deposit, 3 = Transfer.
  * @param {Number} amount Amount of money.
  * @param {String} target Character name.
- * @fires executeBankOperation
  */
-mp.events.add('executeBankOperation', (operation, amount, target) => {
-  mp.events.callRemote('executeBankOperation', operation, amount, target);
-});
+yarp.client.executeBankOperation = (operation, amount, target) => {
+  yarp.server.executeBankOperation(operation, amount, target);
+};
 
 /**
  * Loads the bank balance from the transactions pool.
- * @event loadBankBalance
+ * @function loadBankBalance
  * @memberof client.menu
- * @fires loadBankBalance
  */
-mp.events.add('loadBankBalance', () => {
-  mp.events.callRemote('loadBankBalance');
-});
+yarp.client.loadBankBalance = () => {
+  yarp.server.loadBankBalance();
+};

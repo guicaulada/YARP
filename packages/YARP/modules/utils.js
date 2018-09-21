@@ -1,32 +1,44 @@
 'use strict';
 /**
  * Holds utility functions for the server.
- * @namespace server.yarp.utils
  */
 
-let utils = {};
+let utils = new yarp.Proxy('yarp:utils');
+
+/**
+ * Returns a random integer between min and max
+ * @instance
+ * @function default
+ * @memberof yarp.utils.server
+ * @param {Number} min Minimum value.
+ * @param {Number} max Random value.
+ * @return {Number} Random integer.
+ */
+utils.server.getRandomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 /**
  * Returns first vaule or second value as default.
  * @instance
  * @function default
- * @memberof client.yarp.utils
+ * @memberof yarp.utils.server
  * @param {*} v Verified value.
  * @param {*} d Default value if v is null.
  * @return {*} v if it's not null, or d
  */
-utils.default = (v, d) => {
+utils.server.default = (v, d) => {
   return (v != null) ? v : d;
 };
 
 /**
  * Format dates to dd/mm/yy h:m:s.
  * @function getTimestamp
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Date} date new Date().
  * @return {String} The formatted date.
  */
-utils.getTimestamp = (date) => {
+utils.server.getTimestamp = (date) => {
   let dd = date.getDate();
   let mm = date.getMonth()+1; // January is 0!
   let yyyy = date.getFullYear();
@@ -46,36 +58,36 @@ utils.getTimestamp = (date) => {
 /**
  * Round numbers by the amount of decimals.
  * @function round
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Number} value Value to be rounded.
  * @param {Number} decimals How many decimals.
  * @return {Number} The rounded number.
  */
-utils.round = (value, decimals) => {
+utils.server.round = (value, decimals) => {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 };
 
 /**
  * Offset a Vector3.
  * @function vectorOffset
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Vector3} vector Vector3 to be offset.
  * @param {Vector3} offset Vector3 offset amount.
  * @return {Vector3} Offset Vector3.
  */
-utils.vectorOffset = (vector, offset) => {
+utils.server.vectorOffset = (vector, offset) => {
   return new mp.Vector3(vector.x+offset.x, vector.y+offset.y, vector.z+offset.z);
 };
 
 /**
  * Get the distance between two Vector3.
  * @function vectorDistance
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Vector3} vector1 First Vector3.
  * @param {Vector3} vector2 Second Vector3.
  * @return {Number} Distance between them.
  */
-utils.vectorDistance = (vector1, vector2) => {
+utils.server.vectorDistance = (vector1, vector2) => {
   let dx = vector1.x - vector2.x;
   let dy = vector1.y - vector2.y;
   let dz = vector1.z - vector2.z;
@@ -85,12 +97,12 @@ utils.vectorDistance = (vector1, vector2) => {
 /**
  * Generate a random string.
  * @function randomString
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Number} digits Amaount of symbols on the string.
  * @param {String} possible String with possible symbols.
  * @return {String} Randomly generated string.
  */
-utils.randomString = (digits, possible) => {
+utils.server.randomString = (digits, possible) => {
   let text = '';
   for (let i = 0; i < digits; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -101,12 +113,12 @@ utils.randomString = (digits, possible) => {
 /**
  * Get substrings from string.
  * @function getSubstrings
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {String} string String to analyze.
  * @param {String} symbol Symbol the substrings will be inside.
  * @return {Array<String>} Array of substrings.
  */
-utils.getSubstrings = (string, symbol) => {
+utils.server.getSubstrings = (string, symbol) => {
   let current;
   let pattern = new RegExp('\\'+symbol+'(.*?)'+'\\'+symbol, 'g');
   let result = [];
@@ -121,11 +133,11 @@ utils.getSubstrings = (string, symbol) => {
 /**
  * Get object patameters names
  * @function getParamNames
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Function} func The function to be analyzed.
  * @return {Array<String>} Array of parameter names.
  */
-utils.getParamNames = (func) => {
+utils.server.getParamNames = (func) => {
   let STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
   let STRIP_DEFAULTS = / = [\s\S]*?\n/g;
   let ARGUMENT_NAMES = /([^\s,]+)/g;
@@ -145,7 +157,7 @@ utils.getParamNames = (func) => {
  * @param {Object} object The object to be analyzed.
  * @return {Object} Persistent data object.
  */
-utils.cleanData = (object) => {
+utils.server.cleanData = (object) => {
   let data = {};
   for (let key of Object.keys(object)) {
     if (key[0] == '_') {
@@ -158,11 +170,11 @@ utils.cleanData = (object) => {
 /**
  * Represents an object with a string
  * @function paramsToString
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Object} obj The object to be analyzed.
  * @return {String} Object representation in string.
  */
-utils.paramsToString = (obj) => {
+utils.server.paramsToString = (obj) => {
   let objP = '';
   if (typeof obj === 'string') {
     return '\''+obj+'\'';
@@ -171,7 +183,7 @@ utils.paramsToString = (obj) => {
   } else if (obj instanceof Array) {
     objP = '[';
     for (let o of obj) {
-      objP = objP+' '+utils.parseParams(o)+',';
+      objP = objP+' '+utils.server.parseParams(o)+',';
     }
     if (obj.length > 0) {
       objP = objP.slice(0, -1);
@@ -181,7 +193,7 @@ utils.paramsToString = (obj) => {
     objP = '{';
     for (let k in obj) {
       if (obj.hasOwnProperty(k)) {
-        objP = objP+' \''+k+'\': '+utils.parseParams(obj[k])+',';
+        objP = objP+' \''+k+'\': '+utils.server.parseParams(obj[k])+',';
       }
     }
     if (Object.keys(obj).length > 0) {
@@ -197,11 +209,11 @@ utils.paramsToString = (obj) => {
 /**
  * Returns the time in a set timezone.
  * @function getTimezoneDate
- * @memberof server.yarp.utils
+ * @memberof yarp.utils.server
  * @param {Number} timezone The timezone difference to GMT.
  * @return {Date} Timezone date.
  */
-utils.getTimezoneDate = (timezone) => {
+utils.server.getTimezoneDate = (timezone) => {
   let date = new Date();
   let h = date.getUTCHours() + timezone;
   let m = date.getUTCMinutes();

@@ -1,31 +1,43 @@
 'use strict';
 /**
- * @file Gamemode events
- * @namespace server.gamemode
+ * Gamemode events
  */
 
 /**
  * Evaluates code on server-side.
- * @event runServerCode
- * @memberof server.gamemode
+ * @function runServerCode
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} code Code.
  */
-mp.events.add('runServerCode', (player, code) => {
+yarp.server.runServerCode = (player, code) => {
   if (yarp.users[player.socialClub].hasPermission('cmd.code')) {
     eval(code);
   }
-});
+};
+
+/**
+ * Run server function.
+ * @function runServerFunction
+ * @memberof yarp.server
+ * @param {Object} player The player that called the event.
+ * @param {String} func Function name.
+ * @param {Array} args Function arguments.
+ */
+yarp.server.runServerFunction = (player, func, args) => {
+  if (yarp.users[player.socialClub].hasPermission('cmd.func')) {
+    eval(func)(...args);
+  }
+};
 
 /**
  * Evaluates code on server-side.
- * @event playerBoundKeyPressed
- * @memberof server.gamemode
+ * @function playerBoundKeyPressed
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} id Hotkey id.
- * @fires displayHelpText
  */
-mp.events.add('playerBoundKeyPressed', (player, id) => {
+yarp.server.playerBoundKeyPressed = (player, id) => {
   let user = yarp.users[player.socialClub];
   let character = user.character;
   let hotkey = yarp.hotkeys[id];
@@ -33,27 +45,27 @@ mp.events.add('playerBoundKeyPressed', (player, id) => {
     if (user.hasPermissions(hotkey.permissions) || character.hasPermissions(hotkey.permissions)) {
       if (character.hasItems(hotkey.items)) {
         if (hotkey.position && hotkey.range) {
-          if (yarp.utils.vectorDistance(player.position, hotkey.position) < hotkey.range) {
+          if (yarp.utils.server.vectorDistance(player.position, hotkey.position) < hotkey.range) {
             hotkey.call(player, hotkey.args[player.id]);
           }
         } else {
           hotkey.call(player, hotkey.args[player.id]);
         }
       } else {
-        player.call('displayHelpText', ['You don\'t have the required items.']);
+        yarp.client.displayHelpText(player, 'You don\'t have the required items.');
       }
     } else {
-      player.call('displayHelpText', ['You don\'t have permission.']);
+      yarp.client.displayHelpText(player, 'You don\'t have permission.');
     }
   }
-});
+};
 
 yarp.tick = 0;
 
 /**
  * Scans players and objects to act on proximity.
  * @function tick
- * @memberof server.gamemode
+ * @memberof yarp.server
  */
 function tick() {
   try {
@@ -68,7 +80,7 @@ function tick() {
               try {
                 let i = checkpoint.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.vectorDistance(player.position, checkpoint.position) < checkpoint.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, checkpoint.position) < checkpoint.range) {
                     if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)) {
                       if (character.hasItems(checkpoint.items)) {
                         if (checkpoint.enter) {
@@ -83,7 +95,7 @@ function tick() {
                     checkpoint.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.vectorDistance(player.position, checkpoint.position) > checkpoint.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, checkpoint.position) > checkpoint.range) {
                     if (user.hasPermissions(checkpoint.permissions) || character.hasPermissions(checkpoint.permissions)) {
                       if (character.hasItems(checkpoint.items)) {
                         if (checkpoint.leave) {
@@ -103,7 +115,7 @@ function tick() {
               try {
                 let i = door.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.vectorDistance(player.position, door.position) < door.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, door.position) < door.range) {
                     if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)) {
                       if (character.hasItems(door.items)) {
                         if (door.enter) {
@@ -118,7 +130,7 @@ function tick() {
                     door.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.vectorDistance(player.position, door.position) > door.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, door.position) > door.range) {
                     if (user.hasPermissions(door.permissions) || character.hasPermissions(door.permissions)) {
                       if (character.hasItems(door.items)) {
                         if (door.leave) {
@@ -138,7 +150,7 @@ function tick() {
               try {
                 let i = label.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.vectorDistance(player.position, label.position) < label.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, label.position) < label.range) {
                     if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)) {
                       if (character.hasItems(label.items)) {
                         if (label.enter) {
@@ -153,7 +165,7 @@ function tick() {
                     label.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.vectorDistance(player.position, label.position) > label.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, label.position) > label.range) {
                     if (user.hasPermissions(label.permissions) || character.hasPermissions(label.permissions)) {
                       if (character.hasItems(label.items)) {
                         if (label.leave) {
@@ -173,7 +185,7 @@ function tick() {
               try {
                 let i = marker.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.vectorDistance(player.position, marker.position) < marker.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, marker.position) < marker.range) {
                     if (user.hasPermissions(marker.permissions) || character.hasPermissions(marker.permissions)) {
                       if (character.hasItems(marker.items)) {
                         if (marker.enter) {
@@ -188,7 +200,7 @@ function tick() {
                     marker.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.vectorDistance(player.position, marker.position) > marker.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, marker.position) > marker.range) {
                     if (user.hasPermissions(marker.permissions) || character.hasPermissions(marker.permissions)) {
                       if (character.hasItems(marker.items)) {
                         if (marker.leave) {
@@ -208,7 +220,7 @@ function tick() {
               try {
                 let i = prop.players.indexOf(id);
                 if (i < 0) {
-                  if (yarp.utils.vectorDistance(player.position, prop.position) < prop.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, prop.position) < prop.range) {
                     if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)) {
                       if (character.hasItems(prop.items)) {
                         if (prop.enter) {
@@ -223,7 +235,7 @@ function tick() {
                     prop.players.push(id);
                   }
                 } else {
-                  if (yarp.utils.vectorDistance(player.position, prop.position) > prop.range) {
+                  if (yarp.utils.server.vectorDistance(player.position, prop.position) > prop.range) {
                     if (user.hasPermissions(prop.permissions) || character.hasPermissions(prop.permissions)) {
                       if (character.hasItems(prop.items)) {
                           if (prop.leave) {
@@ -250,15 +262,15 @@ function tick() {
                     let character2 = user2.character;
                     if (character2) {
                       if (i < 0) {
-                        if (yarp.utils.vectorDistance(player.position, player2.position) < 3) {
-                          player.call('displayHelpText', ['Press ~INPUT_PICKUP~ to interact.']);
+                        if (yarp.utils.server.vectorDistance(player.position, player2.position) < 3) {
+                          yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to interact.');
                           yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]], true, true]);
                           character.players.push(id2);
                           character2.player.push(id);
                         }
                       } else {
-                        if (yarp.utils.vectorDistance(player.position, player2.position) > 3) {
-                          player.call('clearHelpText');
+                        if (yarp.utils.server.vectorDistance(player.position, player2.position) > 3) {
+                          yarp.client.clearHelpText(player);
                           yarp.hotkeys['Event'].unbind(player);
                           prop.players.splice(id2, 1);
                         }
@@ -272,7 +284,7 @@ function tick() {
             });
             */
 
-            if (yarp.tick % yarp.variables['Save Interval'].value == 0) {
+            if (yarp.tick % yarp.variables['Save Interval'].value == 0 && !character.isLocked()) {
               if ((player.position.x && player.position.y && player.position.z && player.health) != 0) {
                 character._position = player.position;
                 character._heading = player.heading;

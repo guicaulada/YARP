@@ -2,14 +2,22 @@
 
 let openStores = {};
 
-mp.events.add('openStoreMenu', (player, location, options) => {
+/**
+ * Open store menu.
+ * @event openStoreMenu
+ * @memberof yarp.server
+ * @param {Object} player The player that called the event.
+ * @param {Object} location Store location.
+ * @param {Object} options Store options.
+ */
+yarp.server.openStoreMenu = (player, location, options) => {
   if (!options) options = {};
   let sale = location.sale;
   let menu = new yarp.Menu({
     id: location.id,
-    title: yarp.utils.default(options.title, 'Store'),
-    subtitle: yarp.utils.default(options.subtitle, 'Welcome, buy your shit and get out!'),
-    offset: yarp.utils.default(options.offset, [1450, 450]),
+    title: yarp.utils.server.default(options.title, 'Store'),
+    subtitle: yarp.utils.server.default(options.subtitle, 'Welcome, buy your shit and get out!'),
+    offset: yarp.utils.server.default(options.offset, [1450, 450]),
   });
 
   for (let category in sale) {
@@ -25,9 +33,16 @@ mp.events.add('openStoreMenu', (player, location, options) => {
   menu.create(player);
   openStores[player.name] = {total: 0, received: {}};
   yarp.hotkeys['Open Menu'].bind(player, [menu]);
-});
+};
 
-mp.events.add('closeStoreMenu', (player, location) => {
+/**
+ * Closes store menu.
+ * @event closeStoreMenu
+ * @memberof yarp.server
+ * @param {Object} player The player that called the event.
+ * @param {Object} location Store location.
+ */
+yarp.server.closeStoreMenu = (player, location) => {
   if (yarp.menus[location.id]) {
     yarp.menus[location.id].close(player);
     for (let category in location.sale) {
@@ -47,18 +62,17 @@ mp.events.add('closeStoreMenu', (player, location) => {
     }
   }
   yarp.hotkeys['Open Menu'].unbind(player);
-});
+};
 
 /**
  * Called when item is selected on native menu.
  * @event menuItemSelect
- * @memberof features.common
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
-  let data = JSON.parse(jsonData);
+yarp.server.menuItemSelect = (player, menuId, data) => {
   let item = data.item;
   if (item._meta.storeType == 'common' && item._meta.storeId) {
     let storeId = item._meta.storeId;
@@ -92,18 +106,17 @@ mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
       }
     }
   }
-});
+};
 
 /**
  * Called when item is selected on native menu.
  * @event menuItemSelect
- * @memberof features.common
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
-  let data = JSON.parse(jsonData);
+yarp.server.menuItemSelect = (player, menuId, data) => {
   let item = data.item;
   if (item._meta.storeType == 'common' && item._meta.itemId && item._meta.storeId && item._meta.categoryId) {
     let storeId = item._meta.storeId;
@@ -130,4 +143,4 @@ mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
       }
     }
   }
-});
+};

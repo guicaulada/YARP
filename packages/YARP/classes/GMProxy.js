@@ -1,28 +1,55 @@
 'use strict';
 /**
  * Implements a gamemode Proxy.
- * @class yarp.Tunnel
  */
 class GMProxy {
   /**
    * Creates an instance of Proxy.
+   * @memberof yarp.Proxy
    * @param {String} id Tunnel id.
-   * @memberof Tunnel
    */
   constructor(id) {
     if (id) {
       let self = this;
       self.id = id;
       self.local = {};
+      self.tryJSON = {
+        parse: (string) => {
+          let result;
+          if (string) {
+            try {
+              result = JSON.parse(string);
+            } catch (err) {
+              result = string;
+              console.log(chalk.redBright('[YARP] ') + 'ProxyError: ' + err.message + '\n' + err.stack);
+            }
+          }
+          return result;
+        },
+        stringify: (obj) => {
+          let result;
+          if (obj) {
+            try {
+              result = JSON.stringify(obj);
+            } catch (err) {
+              result = obj;
+              console.log(chalk.redBright('[YARP] ') + 'ProxyError: ' + err.message + '\n' + err.stack);
+            }
+          }
+          return result;
+        },
+      };
       self.server = new Proxy({}, {
         get: (proxy, name) => {
           return self.local[name];
         },
         set: (proxy, name, value) => {
           self.local[name] = value;
-          mp.events.add(`${self.id}:${name}`, async (player, time, args) => {
+          mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
+            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}`);
             if (!args) args = [];
-            player.call(`${self.id}:${name}:${time}`, [JSON.stringify(await value(...JSON.parse(args)))]);
+            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `${self.id}:${name}:${id} ==>`);
+            player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(await value(player, ...this.tryJSON.parse(args)))]);
           });
           return value;
         },
@@ -32,11 +59,13 @@ class GMProxy {
           return (...args) => {
             return new Promise((resolve, reject) => {
               try {
-                let time = Math.round((new Date()).getTime());
-                args[0].call(`${self.id}:${name}`, [`${time}`, JSON.stringify(args.slice(1, args.length))]);
-                mp.events.add(`${self.id}:${name}:${time}`, (player, result) => {
-                  mp.events.remove(`${self.id}:${name}:${time}`);
-                  resolve(JSON.parse(result));
+                let id = Math.round((new Date()).getTime());
+                if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `${self.id}:${name}  ==>`);
+                args[0].call(`${self.id}:${name}`, [`${id}`, this.tryJSON.stringify(args.slice(1, args.length))]);
+                mp.events.add(`${self.id}:${name}:${id}`, (player, result) => {
+                  if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}:${id}`);
+                  mp.events.remove(`${self.id}:${name}:${id}`);
+                  resolve(this.tryJSON.parse(result));
                 });
               } catch (err) {
                 console.log(chalk.redBright('[YARP] ') + 'ProxyError: ' + err.message + '\n' + err.stack);

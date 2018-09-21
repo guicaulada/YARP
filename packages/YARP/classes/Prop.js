@@ -2,9 +2,9 @@
 /**
  * Implements a Prop.
  * @class yarp.Prop
- * @extends yarp.GMObject
+ * @extends yarp.Object
  */
-class Prop extends yarp.GMObject {
+class Prop extends yarp.Object {
   /**
    * Creates an instance of Prop.
    * @param {Object} params

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Loads the classes on server-side asynchronously.
+ * Loads the classes on server-side.
  */
 
 module.exports = async () => {

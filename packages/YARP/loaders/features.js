@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Loads features on server-side asynchronously.
+ * Loads features on server-side.
  */
 
 module.exports = async () => {

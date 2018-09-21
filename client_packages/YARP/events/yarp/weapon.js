@@ -1,19 +1,17 @@
 'use strict';
 /**
-* @file Weapon events
-* @namespace client.weapon
+* Weapon events
 */
 
 let equiped = {};
 
 /**
  * Attach a weapon model to the character.
- * @event equipWeapon
- * @memberof client.weapon
- * @param {String} weaponJson The weapon data in JSON.
+ * @function equipWeapon
+ * @memberof yarp.client
+ * @param {Object} weapon The weapon data.
  */
-mp.events.add('equipWeapon', (weaponJson) => {
-  let weapon = JSON.parse(weaponJson);
+yarp.client.equipWeapon = (weapon) => {
   let model = mp.game.joaat(weapon._model);
   if (mp.game.streaming.isModelValid(model)) {
     let obj = mp.objects.new(model, mp.players.local.position, {
@@ -29,27 +27,27 @@ mp.events.add('equipWeapon', (weaponJson) => {
     );
     equiped[weapon._id] = obj;
   }
-});
+};
 
 /**
  * Deletes specific equiped weapon.
- * @event unequipWeapon
- * @memberof client.weapon
+ * @function unequipWeapon
+ * @memberof yarp.client
  * @param {String} id The weapon id.
  */
-mp.events.add('unequipWeapon', (id) => {
+yarp.client.unequipWeapon = (id) => {
   if (equiped[id] != null) {
     equiped[id].destroy();
     equiped[id] = null;
   }
-});
+};
 
 /**
  * Deletes every equiped weapon.
- * @event unequipAllWeapons
- * @memberof client.weapon
+ * @function unequipAllWeapons
+ * @memberof yarp.client
  */
-mp.events.add('unequipAllWeapons', () => {
+yarp.client.unequipAllWeapons = () => {
   for (id in equiped) {
     if (equiped[id] != null) {
       equiped[id].destroy();
@@ -57,14 +55,27 @@ mp.events.add('unequipAllWeapons', () => {
     }
   }
   equiped = {};
-});
+};
 
-mp.events.add('takeWeapon', (weaponHash) => {
+/**
+ * Remove weapon from player.
+ * @function equipWeapon
+ * @memberof yarp.client
+ * @param {*} weaponHash The weapon data.
+ */
+yarp.client.takeWeapon = (weaponHash) => {
   if ((typeof weaponHash) === 'string') weaponHash = mp.game.joaat(weaponHash);
-  yarp.utils.removeWeapon(weaponHash);
-});
+  yarp.utils.client.removeWeapon(weaponHash);
+};
 
-mp.events.add('setWeaponAmmo', (weaponHash, ammo) => {
+/**
+ * Takes ammo from player.
+ * @function equipWeapon
+ * @memberof yarp.client
+ * @param {*} weaponHash The weapon data.
+ * @param {Number} ammo The weapon data.
+ */
+yarp.client.setWeaponAmmo = (weaponHash, ammo) => {
   if ((typeof weaponHash) === 'string') weaponHash = mp.game.joaat(weaponHash);
-  yarp.utils.setWeaponAmmo(weaponHash, ammo);
-});
+  yarp.utils.client.setWeaponAmmo(weaponHash, ammo);
+};

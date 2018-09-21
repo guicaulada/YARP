@@ -1,89 +1,87 @@
 'use strict';
 /**
- * @file Menu events
- * @namespace server.nativui
+ * NativeUI events
  */
 
 /**
  * Called when index is changed on native menu.
- * @event menuIndexChage
- * @memberof server.nativui
+ * @function menuIndexChage
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuIndexChage', (player, menuId, jsonData) => {
-    if (menuId == 'Test Menu') console.log(menuId, jsonData);
-});
+yarp.server.menuIndexChage = (player, menuId, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, data);
+};
 
 /**
  * Called when list is changed on native menu.
- * @event menuListChange
- * @memberof server.nativui
+ * @function menuListChange
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuListChange', (player, menuId, jsonData) => {
-    if (menuId == 'Test Menu') console.log(menuId, jsonData);
-});
+yarp.server.menuListChange = (player, menuId, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, data);
+};
 
 /**
  * Called when checkbox is changed on native menu.
- * @event menuCheckboxChange
- * @memberof server.nativui
+ * @function menuCheckboxChange
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuCheckboxChange', (player, menuId, jsonData) => {
-    if (menuId == 'Test Menu') console.log(menuId, jsonData);
-});
+yarp.server.menuCheckboxChange = (player, menuId, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, data);
+};
 
 /**
  * Called when item is selected on native menu.
- * @event menuItemSelect
- * @memberof server.nativui
+ * @function menuItemSelect
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuItemSelect', (player, menuId, jsonData) => {
-    if (menuId == 'Test Menu') console.log(menuId, jsonData);
-});
+yarp.server.menuItemSelect = (player, menuId, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, data);
+};
 
 /**
  * Called when slider is changed on native menu.
- * @event menuSliderChange
- * @memberof server.nativui
+ * @function menuSliderChange
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuSliderChange', (player, menuId, jsonData) => {
-    if (menuId == 'Test Menu') console.log(menuId, jsonData);
-});
+yarp.server.menuSliderChange = (player, menuId, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, data);
+};
 
 /**
  * Called when a native menu is closed.
- * @event menuClose
- * @memberof server.nativui
+ * @function menuClose
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
  */
-mp.events.add('menuClose', (player, menuId) => {
+yarp.server.menuClose = (player, menuId) => {
     if (menuId == 'Test Menu') console.log(menuId);
-});
+};
 
 /**
  * Called when a native menu is changed.
- * @event menuClose
- * @memberof server.nativui
+ * @function menuClose
+ * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
- * @param {String} jsonData Json data representing the event.
+ * @param {Object} data Data representing the event.
  */
-mp.events.add('menuChange', (player, menuId, jsonData) => {
-    if (menuId == 'Test Menu') console.log(menuId, jsonData);
-});
+yarp.server.menuChange = (player, menuId, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, data);
+};

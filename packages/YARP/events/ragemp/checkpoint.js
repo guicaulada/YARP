@@ -1,13 +1,12 @@
 'use strict';
 /**
- * @file Checkpoint events
- * @namespace server.checkpoint
+ * Checkpoint events
  */
 
 /**
  * Player exit checkpoint.
  * @event playerEnterCheckpoint
- * @memberof server.checkpoint
+ * @memberof ragemp.server
  * @param {Object} player The player that called the event.
  * @param {Object} checkpoint The checkpoint that was left.
  */
@@ -17,7 +16,7 @@ mp.events.add('playerEnterCheckpoint', (player, checkpoint) => {
 /**
  * Player exit checkpoint.
  * @event playerExitCheckpoint
- * @memberof server.checkpoint
+ * @memberof ragemp.server
  * @param {Object} player The player that called the event.
  * @param {Object} checkpoint The checkpoint that was left.
  */
