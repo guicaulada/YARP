@@ -30,7 +30,7 @@ mp.events.add('playerCommand', (player, command) => {
   command = yarp.commands[commandName];
 
   if (command) {
-    let user = yarp.users[player.socialClub];
+    let user = player.user;
     let character = user.character;
     if (user.hasPermissions(command.permissions) || character.hasPermissions(command.permissions)) {
       if (character.hasItems(command.items)) {
@@ -62,7 +62,7 @@ mp.events.add('playerDamage', (player, healthLoss, armorLoss) => {
  * @param {Object} player The player that called the event.
  */
 mp.events.add('playerDeath', (player) => {
-    let character = yarp.characters[player.name];
+    let character = player.character;
     character.weapons = {};
     character.health = 100;
     character.armour = 0;
@@ -101,7 +101,7 @@ mp.events.add('playerJoin', (player) => {
       yarp.client.createBrowser(player, 'menu', ['package://YARP/ui/html/accountLogin.html'], true, true);
     }
   } else {
-    yarp.client.createBrowser(palyer, 'menu', ['package://YARP/ui/html/accountRegister.html', 'setAccountName', player.socialClub], true, true);
+    yarp.client.createBrowser(player, 'menu', ['package://YARP/ui/html/accountRegister.html', 'setAccountName', player.socialClub], true, true);
   }
 });
 
@@ -114,8 +114,8 @@ mp.events.add('playerJoin', (player) => {
  * @param {String} reason Exit reason.
  */
 mp.events.add('playerQuit', (player, exitType, reason) => {
-  if (yarp.users[player.socialClub]) yarp.users[player.socialClub].leave();
-  if (yarp.characters[player.name]) yarp.characters[player.name].leave();
+  if (player.user) player.user.leave();
+  if (player.character) player.character.leave();
   let msg = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
   if (exitType == 'kicked') {
     msg = `${player.name}(${player.socialClub}/${player.ip}) quit. Reason: ${reason} (${exitType})`;
@@ -151,7 +151,7 @@ mp.events.add('playerSpawn', (player) => {
  */
 let currentWeapons = {};
 mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
-  let character = yarp.characters[player.name];
+  let character = player.character;
   if (character) {
     for (let id in character.weapons) {
       if (mp.joaat(id) == newWeapon) {
@@ -174,7 +174,7 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
  * @param {Number} weaponHash Weapon hash.
  */
 mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson, weaponHash) => {
-  let character = yarp.characters[player.name];
+  let character = player.character;
   if (character) {
     if (currentWeapons[player.id]) {
       character.takeAmmo(currentWeapons[player.id], 1);

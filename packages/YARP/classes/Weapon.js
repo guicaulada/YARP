@@ -44,7 +44,7 @@ class Weapon extends yarp.Object {
         model: this.model,
         options: {
           Equip: (player) => {
-            let character = yarp.characters[player.name];
+            let character = player.character;
             character.giveWeapon(this, 0);
           },
         },
@@ -59,7 +59,7 @@ class Weapon extends yarp.Object {
         model: 'v_ret_gc_ammostack',
         options: {
           Equip: (player) => {
-            let character = yarp.characters[player.name];
+            let character = player.character;
             character.giveAmmo(ammoid, character.inventory[ammoid]);
           },
         },

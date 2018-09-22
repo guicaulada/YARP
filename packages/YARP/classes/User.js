@@ -37,22 +37,6 @@ class User extends yarp.Object {
   }
 
   /**
-   * Get user player.
-   * @instance
-   * @function player
-   * @memberof User
-   * @return {Object} Player.
-   */
-  get player() {
-    for (let player of mp.players.toArray()) {
-      if (player.socialClub == this.id) {
-        return player;
-      }
-    }
-    return null;
-  }
-
-  /**
    * Get user characters.
    * @instance
    * @function characters
@@ -70,22 +54,6 @@ class User extends yarp.Object {
       }
     }
     return characters;
-  }
-
-  /**
-   * Get user active character.
-   * @instance
-   * @function character
-   * @memberof User
-   * @return {Object} Active character.
-   */
-  get character() {
-    for (let player of mp.players.toArray()) {
-      if (player.socialClub == this.id) {
-        return yarp.characters[player.name];
-      }
-    }
-    return null;
   }
 
   /**

@@ -57,6 +57,10 @@ yarp.server.setCharacterIntoCreator = (player) => {
  */
 yarp.server.loadCharacter = (player, id) => {
   let character = yarp.characters[id];
+  player.character = character;
+  character.player = player;
+  character.user = player.user;
+  player.user.character = character;
   let lastLogin = character.lastLogin.split(' ');
   if (lastLogin[2]) {
     player.notify(`Last connection from ~g~${lastLogin[0]}~w~ at ~g~${lastLogin[1]} ${lastLogin[2]}`);

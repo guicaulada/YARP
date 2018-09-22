@@ -15,7 +15,7 @@
 yarp.server.callInventoryOption = (player, itemId, option) => {
   let item = yarp.items[itemId];
   item.options[option](player);
-  let character = yarp.characters[player.name];
+  let character = player.character;
   character.takeItem(item, 1);
   yarp.client.browserExecute(player, 'inventory', ['updateInventory', character.inventory[itemId]]);
 };
@@ -29,7 +29,7 @@ yarp.server.callInventoryOption = (player, itemId, option) => {
  * @param {String} option Option id.
  */
 yarp.server.loadBankBalance = (player) => {
-  yarp.client.browserExecute(player, 'menu', ['showBankOperations', JSON.stringify(yarp.characters[player.name].balance), player.name]);
+  yarp.client.browserExecute(player, 'menu', ['showBankOperations', JSON.stringify(player.character.balance), player.name]);
 };
 
 /**
@@ -52,7 +52,7 @@ yarp.server.unbindToggleChat = (player) => {
  * @param {String} amount Amount to purchase.
  */
 yarp.server.purchaseSaleItem = (player, locationid, itemId, amount) => {
-  let character = yarp.characters[player.name];
+  let character = player.character;
   let location = yarp.locations[locationid];
   if (location) {
     let item = yarp.items[itemId];
@@ -84,7 +84,7 @@ yarp.server.purchaseSaleItem = (player, locationid, itemId, amount) => {
  * @param {String} [target] Target of transfer.
  */
 yarp.server.executeBankOperation = (player, operation, amount, target) => {
-  let character = yarp.characters[player.name];
+  let character = player.character;
   if (character) {
     switch (operation) {
       case 1:
@@ -137,6 +137,8 @@ yarp.server.verifyLogin = (player, password) => {
     user.giveGroup(yarp.variables['Default Group'].value);
   }
   if (user.verifyPassword(password)) {
+    player.user = user;
+    user.player = player;
     user.updateLastLogin(player.ip);
     user.save();
     if (Object.keys(user.characters).length == 0) {

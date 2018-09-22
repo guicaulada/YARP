@@ -95,6 +95,49 @@ class Menu extends yarp.Object {
   isVisible(player) {
     return this._visible[player.name];
   }
+
+  /**
+   * Update menu item.
+   * @memberof Menu
+   * @param {Object} player
+   * @param {Number} index
+   * @param {Object} item
+   */
+  updateItem(player, index, item) {
+    yarp.client.menuUpdateItem(player, this.id, index, item);
+  }
+
+  /**
+   * Update menu items.
+   * @memberof Menu
+   * @param {Object} player
+   * @param {Object} indexItems
+   */
+  updateItems(player, indexItems) {
+    yarp.client.menuUpdateItems(player, this.id, indexItems);
+  }
+
+  /**
+   * Remove menu item.
+   * @memberof Menu
+   * @param {Object} player
+   * @param {Number} index
+   * @param {Object} item
+   */
+  removeItem(player, index) {
+    yarp.client.menuRemoveItem(player, this.id, index);
+  }
+
+  /**
+   * Remove menu items.
+   * @memberof Menu
+   * @param {Object} player
+   * @param {Number} index
+   * @param {Number} amount
+   */
+  removeItems(player, index, amount) {
+    yarp.client.menuRemoveItems(player, this.id, index, amount);
+  }
 }
 
 module.exports = Menu;

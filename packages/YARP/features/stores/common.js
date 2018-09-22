@@ -101,7 +101,7 @@ yarp.server.add.menuItemClicked = (player, menuId, type, data) => {
       if (sale[categoryId]) {
         let itemId = data.itemId;
         let saleItem = sale[categoryId][itemId];
-        let character = yarp.characters[player.name];
+        let character = player.character;
         if (character.tryFullPayment(saleItem.price)) {
           location.inventory[itemId].amount -= 1;
           let item = yarp.items[itemId];

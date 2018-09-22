@@ -12,7 +12,7 @@
  * @param {Number} value Amount to restore.
  */
 yarp.server.restoreHunger = (player, value) => {
-  let character = yarp.characters[player.name];
+  let character = player.character;
   character.hunger -= value;
 };
 
@@ -24,6 +24,6 @@ yarp.server.restoreHunger = (player, value) => {
  * @param {Number} value Amount to restore.
  */
 yarp.server.restoreThirst = (player, value) => {
-  let character = yarp.characters[player.name];
+  let character = player.character;
   character.thirst -= value;
 };

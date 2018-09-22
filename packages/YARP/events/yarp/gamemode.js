@@ -12,7 +12,7 @@
  * @param {String} code Code.
  */
 yarp.server.runServerCode = (player, code) => {
-  if (yarp.users[player.socialClub].hasPermission('cmd.code')) {
+  if (player.user.hasPermission('cmd.code')) {
     eval(code);
   }
 };
@@ -26,7 +26,7 @@ yarp.server.runServerCode = (player, code) => {
  * @param {Array} args Function arguments.
  */
 yarp.server.runServerFunction = (player, func, args) => {
-  if (yarp.users[player.socialClub].hasPermission('cmd.func')) {
+  if (player.user.hasPermission('cmd.func')) {
     eval(func)(...args);
   }
 };
@@ -39,7 +39,7 @@ yarp.server.runServerFunction = (player, func, args) => {
  * @param {String} id Hotkey id.
  */
 yarp.server.playerBoundKeyPressed = (player, id) => {
-  let user = yarp.users[player.socialClub];
+  let user = player.user;
   let character = user.character;
   let hotkey = yarp.hotkeys[id];
   if (hotkey.call) {

@@ -114,9 +114,32 @@ yarp.client.closeMenu = (menuId) => {
 };
 
 yarp.client.menuAddItems = (menuId, items) => {
-    for (item of items) {
+    for (let item of items) {
         yarp.client.menuAddItem(menuId, item);
     }
+};
+
+yarp.client.menuUpdateItem = (menuId, index, item) => {
+    let menuItem = yarp.menus[menuId].menuItems[index];
+    Object.assign(menuItem, item);
+};
+
+yarp.client.menuUpdateItems = (menuId, indexItems) => {
+    for (let index in indexItems) {
+        if (indexItems.hasOwnProperty(index)) {
+            yarp.client.menuUpdateItem(menuId, Number(index), indexItems[index]);
+        }
+    }
+};
+
+yarp.client.menuRemoveItem = (menuId, index) => {
+    yarp.menus[menuId].menuItems.splice(index, 1);
+    yarp.menus[menuId].currentIndexMenuItems = 0;
+};
+
+yarp.client.menuRemoveItems = (menuId, index, amount) => {
+    yarp.menus[menuId].menuItems.splice(index, amount);
+    yarp.menus[menuId].currentIndexMenuItems = 0;
 };
 
 mp.events.add('render', () => {

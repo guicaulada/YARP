@@ -90,7 +90,7 @@ let config = {
     hint: 'Give yourself money.',
     permissions: ['cmd.givemoney'],
     call: (player, args) => {
-      yarp.characters[player.name].wallet += Number(args[0]);
+      player.character.wallet += Number(args[0]);
       player.notify('Received ~g~$' + args[0]);
     },
   },
@@ -117,8 +117,8 @@ let config = {
     call: (player, args) => {
       let ammo = Number(args[1]) || 10000;
       let id = 'weapon_'+args[0];
-      yarp.characters[player.name].giveWeapon(yarp.weapons[id.toUpperCase()], ammo);
-      yarp.characters[player.name].save();
+      player.character.giveWeapon(yarp.weapons[id.toUpperCase()], ammo);
+      player.character.save();
     },
   },
   'veh': {
@@ -187,7 +187,7 @@ let config = {
     permissions: ['cmd.inventory'],
     call: (player, args) => {
       let list = [];
-      let inventory = yarp.characters[player.name].inventory;
+      let inventory = player.character.inventory;
       for (let id in inventory) {
         if (inventory.hasOwnProperty(id)) {
           let item = yarp.items[id];
@@ -207,8 +207,8 @@ let config = {
     hint: 'Show your wallet and bank.',
     permissions: ['cmd.money'],
     call: (player, args) => {
-      player.outputChatBox(`Wallet: !{51, 204, 51}${yarp.characters[player.name].wallet}`);
-      player.outputChatBox(`Bank: !{0, 153, 255}${yarp.characters[player.name].bank}`);
+      player.outputChatBox(`Wallet: !{51, 204, 51}${player.character.wallet}`);
+      player.outputChatBox(`Bank: !{0, 153, 255}${player.character.bank}`);
     },
   },
   '?': {

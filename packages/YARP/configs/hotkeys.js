@@ -26,15 +26,7 @@ let config = {
     key: 'I',
     category: 'utility',
     call: (player, args) => {
-      if (!this.players) this.players = [];
-      let i = this.players.indexOf(player.socialClub);
-      if (i >= 0) {
-        yarp.client.destroyBrowser(player, 'inventory');
-        this.players.splice(i, 1);
-      } else {
-        yarp.commands['inventory'].call(player);
-        this.players.push(player.socialClub);
-      }
+      player.character.toggleInventory();
     },
   },
   'Toggle Menu': {
