@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Player events
+ * @memberof ragemp.server
  */
 
 /**

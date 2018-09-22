@@ -7,7 +7,10 @@ module.exports = async () => {
   // Loading events
   console.log(chalk.yellowBright('[YARP] ')+'Loading Events');
   try {
-    // Load RAGE.MP events
+    /**
+     * Loads RAGE:MP events.
+     * @namespace ragemp.server
+     */
     require('../events/ragemp/checkpoint.js');
     require('../events/ragemp/colshape.js');
     require('../events/ragemp/entity.js');
@@ -17,7 +20,10 @@ module.exports = async () => {
     require('../events/ragemp/waypoint.js');
     require('../events/ragemp/world.js');
 
-    // Load YARP events
+    /**
+     * Loads YARP events.
+     * @namespace yarp.server
+     */
     require('../events/yarp/character.js');
     require('../events/yarp/gamemode.js');
     require('../events/yarp/item.js');

@@ -6,7 +6,7 @@ class GMProxy {
   /**
    * Creates an instance of GMProxy.
    * @param {String} id Tunnel id.
-   * @memberof yarp.Proxy
+   * @memberof GMProxy
    */
   constructor(id) {
     if (id) {

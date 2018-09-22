@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Camera events
+ * @memberof yarp.client
  */
 
 /**

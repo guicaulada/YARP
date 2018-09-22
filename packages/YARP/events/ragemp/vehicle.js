@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Vehicle events
+ * @memberof ragemp.server
  */
 
 /**

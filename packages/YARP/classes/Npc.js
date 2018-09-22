@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Npc.
- * @class yarp.Npc
- * @extends yarp.Object
  */
 class Npc extends yarp.Object {
   /**
    * Creates an instance of Npc.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.model
@@ -15,7 +14,7 @@ class Npc extends yarp.Object {
    * @param {Number} [params.drawDistance=100]
    * @param {Number} [params.dimension=0]
    * @param {Function} [params.call=() => {}]
-   * @memberof yarp.Npc
+   * @memberof Npc
    */
   constructor(params) {
     super();

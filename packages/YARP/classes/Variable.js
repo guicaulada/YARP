@@ -1,16 +1,15 @@
 'use strict';
 /**
  * Implements a Variable.
- * @class yarp.Variable
- * @extends yarp.Object
  */
 class Variable extends yarp.Object {
   /**
    * Creates an instance of Variable.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {*} params.value
-   * @memberof yarp.Variable
+   * @memberof Variable
    */
   constructor(params) {
     super();

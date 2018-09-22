@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Vehicles.
- * @class yarp.Vehicle
- * @extends yarp.Object
  */
 class Vehicle extends yarp.Object {
   /**
    * Creates an instance of Vehicle.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.model
@@ -24,7 +23,7 @@ class Vehicle extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Vehicle
+   * @memberof Vehicle
    */
   constructor(params) {
     super();
@@ -68,7 +67,7 @@ class Vehicle extends yarp.Object {
    * Set vehicle position.
    * @instance
    * @function position
-   * @memberof yarp.Vehicle
+   * @memberof Vehicle
    * @param {Vector3} value Position value.
    */
   set position(value) {
@@ -80,7 +79,7 @@ class Vehicle extends yarp.Object {
    * Set vehicle heading.
    * @instance
    * @function heading
-   * @memberof yarp.Vehicle
+   * @memberof Vehicle
    * @param {Number} value Heading value.
    */
   set heading(value) {

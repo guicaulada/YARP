@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Item.
- * @class yarp.Item
- * @extends yarp.Object
  */
 class Item extends yarp.Object {
   /**
    * Creates an instance of Item.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.name
@@ -15,7 +14,7 @@ class Item extends yarp.Object {
    * @param {Boolean} [params.spoil=false]
    * @param {String} [params.model='prop_paper_bag_01']
    * @param {Object} [params.options={}]
-   * @memberof yarp.Item
+   * @memberof Item
    */
   constructor(params) {
     super();
@@ -47,7 +46,7 @@ class Item extends yarp.Object {
    * Gets item options functions.
    * @instance
    * @function options
-   * @memberof yarp.Item
+   * @memberof Item
    * @return {Object} Functions indexed by option.
    */
   get options() {
@@ -64,7 +63,7 @@ class Item extends yarp.Object {
    * Sets item options functions as strings.
    * @instance
    * @function options
-   * @memberof yarp.Item
+   * @memberof Item
    * @param {Array<function>} value Array of option functions
    */
   set options(value) {
@@ -79,7 +78,7 @@ class Item extends yarp.Object {
    * Load from object.
    * @instance
    * @function isAmmo
-   * @memberof yarp.Item
+   * @memberof Item
    * @return {Boolean} If the item is weapon or not.
    */
   isWeapon() {
@@ -90,7 +89,7 @@ class Item extends yarp.Object {
    * Load from object.
    * @instance
    * @function isAmmo
-   * @memberof yarp.Item
+   * @memberof Item
    * @return {Boolean} If the item is ammo or not.
    */
   isAmmo() {

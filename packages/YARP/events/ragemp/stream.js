@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Stream events
+ * @memberof ragemp.server
  */
 
 /**

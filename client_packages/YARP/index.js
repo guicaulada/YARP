@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @file Loads the gamemode on client-side.
+ * Loads the gamemode on client-side.
  * @author Guilherme Caulada (Sighmir)
  * @copyright Copyright (C) 2018  Sighmir
  */

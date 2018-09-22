@@ -1,6 +1,7 @@
 'use strict';
 /**
  * World events and IPLs
+ * @memberof ragemp.server
  */
 
 mp.world.removeIpl('facelobbyfake');

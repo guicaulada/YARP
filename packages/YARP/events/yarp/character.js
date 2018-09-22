@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @file Character events
- * @namespace server.character
+ * Character events
+ * @memberof yarp.server
  */
 
 /**

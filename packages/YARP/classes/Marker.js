@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Marker.
- * @class yarp.Marker
- * @extends yarp.Object
  */
 class Marker extends yarp.Object {
   /**
    * Creates an instance of Marker.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -22,7 +21,7 @@ class Marker extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Marker
+   * @memberof Marker
    */
   constructor(params) {
     super();

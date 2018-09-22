@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @file Loads the gamemode on server-side.
+ * Loads the gamemode on server-side.
  * @author Guilherme Caulada (Sighmir)
  * @copyright Copyright (C) 2018  Sighmir
  */
@@ -40,7 +40,8 @@
 })();
 
 /**
- * Tries to kick all players for save exit.
+ * Tries to kick all players for safe exit.
+ * @ignore
  */
 const exit = async () => {
   console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');

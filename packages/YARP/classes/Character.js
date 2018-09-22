@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Character.
- * @class yarp.Character
- * @extends yarp.Object
  */
 class Character extends yarp.Object {
   /**
    * Creates an instance of Character.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.socialClub
@@ -31,7 +30,7 @@ class Character extends yarp.Object {
    * @param {Object} [params.customization={}]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @memberof yarp.Character
+   * @memberof Character
    */
   constructor(params) {
     super();
@@ -71,7 +70,7 @@ class Character extends yarp.Object {
    * Get character player.
    * @instance
    * @function player
-   * @memberof yarp.Character
+   * @memberof Character
    * @return {Object} Player.
    */
   get player() {
@@ -87,7 +86,7 @@ class Character extends yarp.Object {
    * Get character user.
    * @instance
    * @function user
-   * @memberof yarp.Character
+   * @memberof Character
    * @return {Object} User.
    */
   get user() {
@@ -98,7 +97,7 @@ class Character extends yarp.Object {
    * Get character balance.
    * @instance
    * @function balance
-   * @memberof yarp.Character
+   * @memberof Character
    * @return {Array<Object>} Balance.
    */
   get balance() {
@@ -115,9 +114,8 @@ class Character extends yarp.Object {
    * Call enter fuction for character and it's groups.
    * @instance
    * @function enter
-   * @memberof yarp.Character
+   * @memberof Character
    * @return {Function} Enter functions.
-   * @fires characterJoinedGroup
    */
   get enter() {
     return () => {
@@ -136,7 +134,7 @@ class Character extends yarp.Object {
    * Set the enter function as a string
    * @instance
    * @function enter
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Function} value Enter function.
    */
   set enter(value) {
@@ -147,9 +145,8 @@ class Character extends yarp.Object {
    * Call leave fuction for character and it's groups.
    * @instance
    * @function leave
-   * @memberof yarp.Character
+   * @memberof Character
    * @return {Function} Leave functions.
-   * @fires characterLeftGroup
    */
   get leave() {
     return () => {
@@ -168,7 +165,7 @@ class Character extends yarp.Object {
    * Set the leave function as a string
    * @instance
    * @function leave
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Function} value Leave function.
    */
   set leave(value) {
@@ -179,7 +176,7 @@ class Character extends yarp.Object {
    * Get the health value
    * @instance
    * @function health
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get health() {
     return this._health;
@@ -189,7 +186,7 @@ class Character extends yarp.Object {
    * Set the health value for the player
    * @instance
    * @function health
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Health value
    */
   set health(value) {
@@ -204,7 +201,7 @@ class Character extends yarp.Object {
    * Get the wallet value
    * @instance
    * @function wallet
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get wallet() {
     return this._wallet;
@@ -214,7 +211,7 @@ class Character extends yarp.Object {
    * Set the wallet value for the player
    * @instance
    * @function wallet
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Wallet value
    */
   set wallet(value) {
@@ -230,7 +227,7 @@ class Character extends yarp.Object {
    * Get the bank value
    * @instance
    * @function bank
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get bank() {
     return this._bank;
@@ -240,7 +237,7 @@ class Character extends yarp.Object {
    * Set the bank value for the player
    * @instance
    * @function bank
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Bank value
    */
   set bank(value) {
@@ -256,7 +253,7 @@ class Character extends yarp.Object {
    * Get the hunger value
    * @instance
    * @function hunger
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get hunger() {
     return this._hunger;
@@ -266,7 +263,7 @@ class Character extends yarp.Object {
    * Set the hunger value for the player
    * @instance
    * @function hunger
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Hunger value
    */
   set hunger(value) {
@@ -288,7 +285,7 @@ class Character extends yarp.Object {
    * Get the thirst value
    * @instance
    * @function thirst
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get thirst() {
     return this._thirst;
@@ -298,7 +295,7 @@ class Character extends yarp.Object {
    * Set the thirst value for the player
    * @instance
    * @function thirst
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Thirst value
    */
   set thirst(value) {
@@ -320,7 +317,7 @@ class Character extends yarp.Object {
    * Get the xp value
    * @instance
    * @function xp
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get xp() {
     return this._xp;
@@ -330,7 +327,7 @@ class Character extends yarp.Object {
    * Set the xp value for the player
    * @instance
    * @function xp
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value XP value
    */
   set xp(value) {
@@ -350,7 +347,7 @@ class Character extends yarp.Object {
    * Get the heading value
    * @instance
    * @function heading
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get heading() {
     return this._heading;
@@ -360,7 +357,7 @@ class Character extends yarp.Object {
    * Set the heading value for the player
    * @instance
    * @function heading
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Heading value
    */
   set heading(value) {
@@ -375,7 +372,7 @@ class Character extends yarp.Object {
    * Get the position value
    * @instance
    * @function position
-   * @memberof yarp.Character
+   * @memberof Character
    */
   get position() {
     return this._position;
@@ -385,7 +382,7 @@ class Character extends yarp.Object {
    * Set the position value for the player
    * @instance
    * @function position
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Position value
    */
   set position(value) {
@@ -400,7 +397,7 @@ class Character extends yarp.Object {
    * Update character last login.
    * @instance
    * @function updateLastLogin
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} ip Character ip.
    */
   updateLastLogin(ip) {
@@ -411,7 +408,7 @@ class Character extends yarp.Object {
    * Try wallet payment.
    * @instance
    * @function tryWalletPayment
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Amount to pay.
    * @return {Boolean} Operation success/fail.
    */
@@ -427,7 +424,7 @@ class Character extends yarp.Object {
    * Try bank payment.
    * @instance
    * @function tryBankPayment
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Amount to pay.
    * @return {Boolean} Operation success/fail.
    */
@@ -448,7 +445,7 @@ class Character extends yarp.Object {
    * Try full payment.
    * @instance
    * @function tryFullPayment
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Amount to pay.
    * @return {Boolean} Operation success/fail.
    */
@@ -465,7 +462,7 @@ class Character extends yarp.Object {
    * Try deposit.
    * @instance
    * @function tryDeposit
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Amount to deposit.
    * @return {Boolean} Operation success/fail.
    */
@@ -487,7 +484,7 @@ class Character extends yarp.Object {
    * Try withdraw.
    * @instance
    * @function tryWithdraw
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} value Amount to withdraw.
    * @return {Boolean} Operation success/fail.
    */
@@ -509,7 +506,7 @@ class Character extends yarp.Object {
    * Try transfer.
    * @instance
    * @function tryTransfer
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} target Target character name.
    * @param {Number} value Amount to transfer.
    * @return {Boolean} Operation success/fail.
@@ -533,7 +530,7 @@ class Character extends yarp.Object {
    * Give an item.
    * @instance
    * @function giveItem
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Object} item Item to give.
    * @param {Number} amount Amount to give.
    * @return {Boolean} Operation success/fail.
@@ -556,7 +553,7 @@ class Character extends yarp.Object {
    * Take an item.
    * @instance
    * @function takeItem
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Object} item Item to take.
    * @param {Number} amount Amount to take.
    * @return {Boolean} Operation success/fail.
@@ -580,7 +577,7 @@ class Character extends yarp.Object {
    * Check if has an item.
    * @instance
    * @function takeItem
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Item id.
    * @return {Boolean} If has or not the item.
    */
@@ -592,7 +589,7 @@ class Character extends yarp.Object {
    * Check if has all items.
    * @instance
    * @function hasItems
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Array<String>} items Items id.
    * @return {Boolean} If has or not all items.
    */
@@ -609,10 +606,9 @@ class Character extends yarp.Object {
    * Give a weapon.
    * @instance
    * @function giveWeapon
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Object} weapon Weapon object or id.
    * @param {Number} amount Amount of bullets.
-   * @fires equipWeapon
    */
   giveWeapon(weapon, amount) {
     if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
@@ -629,9 +625,8 @@ class Character extends yarp.Object {
    * Take a weapon.
    * @instance
    * @function takeWeapon
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Object} weapon Weapon object or id.
-   * @fires unequipWeapon
    */
   takeWeapon(weapon) {
     if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
@@ -647,7 +642,7 @@ class Character extends yarp.Object {
    * Take weapon ammo.
    * @instance
    * @function takeWeaponAmmo
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Weapon id.
    * @param {Number} amount Amount of bullets.
    */
@@ -665,7 +660,7 @@ class Character extends yarp.Object {
    * Give weapon ammo.
    * @instance
    * @function giveWeaponAmmo
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Weapon id.
    * @param {Number} amount Amount of bullets.
    */
@@ -680,7 +675,7 @@ class Character extends yarp.Object {
    * Take ammo.
    * @instance
    * @function takeAmmo
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Ammo id.
    * @param {Number} amount Amount of bullets.
    */
@@ -699,7 +694,7 @@ class Character extends yarp.Object {
    * Give ammo.
    * @instance
    * @function giveAmmo
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Ammo id.
    * @param {Number} amount Amount of bullets.
    */
@@ -715,7 +710,7 @@ class Character extends yarp.Object {
    * Check if has a weapon.
    * @instance
    * @function hasWeapon
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Weapon id.
    * @return {Boolean} If has or not the weapon.
    */
@@ -727,7 +722,7 @@ class Character extends yarp.Object {
    * Check if has all weapons.
    * @instance
    * @function hasWeapons
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Array<String>} weapons Weapons id.
    * @return {Boolean} If has or not all the weapons.
    */
@@ -744,10 +739,9 @@ class Character extends yarp.Object {
    * Give a group.
    * @instance
    * @function giveGroup
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} group Group id.
    * @return {Boolean} Operation success/fail.
-   * @fires characterJoinedGroup
    */
   giveGroup(group) {
     if (this.groups.indexOf(group) == -1) {
@@ -775,10 +769,9 @@ class Character extends yarp.Object {
    * Take a group.
    * @instance
    * @function takeGroup
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} group Group id.
    * @return {Boolean} Operation success/fail.
-   * @fires characterLeftGroup
    */
   takeGroup(group) {
     if (this.groups.indexOf(group) > -1) {
@@ -799,7 +792,7 @@ class Character extends yarp.Object {
    * Get group by type.
    * @instance
    * @function getGroupByType
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} type Group type.
    * @return {String} Group id.
    */
@@ -818,7 +811,7 @@ class Character extends yarp.Object {
    * Get groups by types.
    * @instance
    * @function getGroupByTypes
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Array<String>} types Group types.
    * @return {Array<String>} Group ids.
    */
@@ -839,7 +832,7 @@ class Character extends yarp.Object {
    * Check if has group.
    * @instance
    * @function hasGroup
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} id Group id.
    * @return {Boolean} If has or not the group.
    */
@@ -851,7 +844,7 @@ class Character extends yarp.Object {
    * Check if has all groups.
    * @instance
    * @function hasGroup
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Array<String>} groups Group ids.
    * @return {Boolean} If has or not all the groups.
    */
@@ -868,7 +861,7 @@ class Character extends yarp.Object {
    * Check if has permission.
    * @instance
    * @function hasPermission
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {String} permission Permission.
    * @return {Boolean} If has or not the permission.
    */
@@ -970,7 +963,7 @@ class Character extends yarp.Object {
    * Check if has all permissions.
    * @instance
    * @function hasPermission
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Array<String>} permissions Permissions.
    * @return {Boolean} If has or not all permissions.
    */
@@ -987,7 +980,7 @@ class Character extends yarp.Object {
    * Apply saved character customization to ped.
    * @instance
    * @function loadCustomization
-   * @memberof yarp.Character
+   * @memberof Character
    */
   applyCustomization() {
     let player = this.player;
@@ -1017,7 +1010,7 @@ class Character extends yarp.Object {
    * Sets character to default customization.
    * @instance
    * @function defaultCustomization
-   * @memberof yarp.Character
+   * @memberof Character
    */
   defaultCustomization() {
     this.customization = {
@@ -1054,7 +1047,7 @@ class Character extends yarp.Object {
    * Sets character to default customization.
    * @instance
    * @function defaultCustomization
-   * @memberof yarp.Character
+   * @memberof Character
    * @param {Number} index Overlay index
    * @return {Number} Color
    */

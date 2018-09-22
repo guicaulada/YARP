@@ -4,7 +4,7 @@
  */
 class GMObject {
   /**
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @abstract
    * @throws {TypeError} Abstract class GMObject cannot be instantiated directly.
    */
@@ -18,7 +18,7 @@ class GMObject {
    * Returns true if saving is blocked.
    * @instance
    * @function isLocked
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @return {Boolean} Saving blocked?
    */
   isLocked() {
@@ -29,7 +29,7 @@ class GMObject {
    * Blocks saving the object.
    * @instance
    * @function lock
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   lock() {
     this.lock__save__ = true;
@@ -39,7 +39,7 @@ class GMObject {
    * Unblocks saving the object.
    * @instance
    * @function unlock
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   unlock() {
     this.lock__save__ = false;
@@ -49,7 +49,7 @@ class GMObject {
    * Save the object.
    * @instance
    * @function save
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   save() {
     yarp.mng.save(this);
@@ -59,7 +59,7 @@ class GMObject {
    * Remove the object.
    * @instance
    * @function remove
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   remove() {
     if (this.mp) this.mp.destroy();
@@ -70,7 +70,7 @@ class GMObject {
    * Get only persisten data
    * @instance
    * @function data
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @return {Object} Persistent data object.
    */
   get data() {
@@ -87,7 +87,7 @@ class GMObject {
    * Get only persisten data without prefix
    * @instance
    * @function data
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @return {Object} Persistent data object.
    */
   get cleanData() {
@@ -104,7 +104,7 @@ class GMObject {
    * Evals the call parameter.
    * @instance
    * @function call
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   get call() {
     return (eval(this._call));
@@ -114,7 +114,7 @@ class GMObject {
    * Set call function as string.
    * @instance
    * @function call
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @param {Function} value Call function.
    */
   set call(value) {
@@ -125,7 +125,7 @@ class GMObject {
    * Evals the enter parameter.
    * @instance
    * @function enter
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   get enter() {
     return (eval(this._enter));
@@ -135,7 +135,7 @@ class GMObject {
    * Set enter function as string.
    * @instance
    * @function enter
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @param {Function} value Enter function.
    */
   set enter(value) {
@@ -146,7 +146,7 @@ class GMObject {
    * Evals the leave parameter.
    * @instance
    * @function leave
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   get leave() {
     return (eval(this._leave));
@@ -156,7 +156,7 @@ class GMObject {
    * Set leave function as string.
    * @instance
    * @function leave
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @param {Function} value Leave function.
    */
   set leave(value) {
@@ -167,7 +167,7 @@ class GMObject {
    * Returns first vaule or second value as default.
    * @instance
    * @function default
-   * @memberof yarp.Object
+   * @memberof GMObject
    * @param {*} v Verified value.
    * @param {*} d Default value if v is null.
    * @return {*} v if it's not null, or d
@@ -180,7 +180,7 @@ class GMObject {
    * Make getter and setter for persistent variables.
    * @instance
    * @function makeGetterSetter
-   * @memberof yarp.Object
+   * @memberof GMObject
    */
   makeGetterSetter() {
     for (let key in this) {

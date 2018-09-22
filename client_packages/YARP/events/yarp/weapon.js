@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Weapon events
-*/
+ * Weapon events
+ * @memberof yarp.client
+ */
 
 let equiped = {};
 

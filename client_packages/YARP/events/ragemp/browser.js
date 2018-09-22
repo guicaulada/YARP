@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Browser events
+ * @memberof ragemp.client
  */
 
 /**

@@ -1,20 +1,17 @@
 'use strict';
 /**
  * Implements a Menu.
- * @class yarp.Menu
- * @extends yarp.Object
  */
 class Menu extends yarp.Object {
   /**
    * Creates an instance of Menu.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} [params.title='']
-   * @param {String} [params.subtitle='']
    * @param {Array<Object>} [params.data=[]]
    * @param {Array<Number>} [params.offset=[0, 0]]
-   * @param {Number} [params.spriteLibrary='commonmenu']
-   * @param {Number} [params.spriteName='interaction_bgd']
-   * @memberof yarp.Menu
+   * @param {Number} [params.texture=['commonmenu', 'interaction_bgd']]
+   * @memberof Menu
    */
   constructor(params) {
     super();
@@ -34,7 +31,7 @@ class Menu extends yarp.Object {
 
   /**
    * Creates the menu.
-   * @memberof yarp.Menu
+   * @memberof Menu
    * @param {Object} player
    */
   create(player) {
@@ -43,7 +40,7 @@ class Menu extends yarp.Object {
 
   /**
    * Recreates the menu for all online players.
-   * @memberof yarp.Menu
+   * @memberof Menu
    */
   recreate() {
     mp.players.forEach((player, id) => {
@@ -53,7 +50,7 @@ class Menu extends yarp.Object {
 
   /**
    * Open the menu.
-   * @memberof yarp.Menu
+   * @memberof Menu
    * @param {Object} player
    */
   open(player) {
@@ -63,7 +60,7 @@ class Menu extends yarp.Object {
 
   /**
    * Close the menu.
-   * @memberof yarp.Menu
+   * @memberof Menu
    * @param {Object} player
    */
   close(player) {
@@ -73,7 +70,7 @@ class Menu extends yarp.Object {
 
   /**
    * Toggle the menu.
-   * @memberof yarp.Menu
+   * @memberof Menu
    * @param {Object} player
    */
   toggle(player) {
@@ -82,7 +79,7 @@ class Menu extends yarp.Object {
 
   /**
    * Add one item the menu.
-   * @memberof yarp.Menu
+   * @memberof Menu
    * @param {Object} item
    */
   add(item) {
@@ -91,7 +88,7 @@ class Menu extends yarp.Object {
 
   /**
    * Returns if menu is visible.
-   * @memberof yarp.Menu
+   * @memberof Menu
    * @param {Object} player
    * @return {Boolean} True if menu is visible for player.
    */

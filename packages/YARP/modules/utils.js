@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Holds utility functions for the server.
+ * @namespace yarp.utils.server
  */
 
 let utils = new yarp.Proxy('yarp:utils');

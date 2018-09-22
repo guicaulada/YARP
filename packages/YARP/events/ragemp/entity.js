@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Entity events
+ * @memberof ragemp.server
  */
 
 /**

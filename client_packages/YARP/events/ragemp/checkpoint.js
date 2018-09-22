@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Checkpoint events
+ * @memberof ragemp.client
  */
 
 /**

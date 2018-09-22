@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Weapon.
- * @class yarp.Weapon
- * @extends yarp.Object
  */
 class Weapon extends yarp.Object {
   /**
    * Creates an instance of Weapon.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.name
@@ -18,7 +17,7 @@ class Weapon extends yarp.Object {
    * @param {Vector3} [params.position=new mp.Vector3(0, 0, 0)]
    * @param {Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
    * @param {Boolean} [params.visible=true]
-   * @memberof yarp.Weapon
+   * @memberof Weapon
    */
   constructor(params) {
     super();

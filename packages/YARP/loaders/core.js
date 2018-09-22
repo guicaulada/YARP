@@ -4,16 +4,23 @@
  */
 
 module.exports = async () => {
-  // Loading core
+  // Loading core.
+
+  /** @global */
   global.rl = require('readline');
+  /** @global */
   global.chalk = require('chalk');
+  /** @global */
   global.bcrypt = require('bcryptjs');
   console.log(chalk.yellowBright('[YARP] ')+'Loading Core');
   try {
+    /** @namespace ragemp */
+    /** @namespace yarp */
     let GMProxy = require('../classes/GMProxy.js');
     global.yarp = new GMProxy('yarp');
-
     yarp.Proxy = GMProxy;
+
+    /** @namespace yarp.utils */
     yarp.utils = require('../modules/utils.js');
     yarp.cli = require('../modules/cli.js');
     yarp.db = require('../modules/mongo.js');

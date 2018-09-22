@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Waypoint events
-*/
+ * Waypoint events
+ * @memberof ragemp.client
+ */
 
 /**
  * Player created a waypoint.

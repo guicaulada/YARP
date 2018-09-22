@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Command events
-*/
+ * Command events
+ * @memberof yarp.client
+ */
 
 let camdir = false;
 let noclip = false;

@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Menu events
-*/
+ * Menu events
+ * @memberof yarp.client
+ */
 
 /**
  * Attach a weapon model to the character.

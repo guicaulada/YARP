@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Blip.
- * @class yarp.Blip
- * @extends yarp.Object
  */
 class Blip extends yarp.Object {
   /**
    * Creates an instance of Blip.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -19,7 +18,7 @@ class Blip extends yarp.Object {
    * @param {Boolean} [params.fade=true]
    * @param {Vector3} [params.rotation=new mp.Vector3(0, 0, 0)]
    * @param {Number} [params.dimension=0]
-   * @memberof yarp.Blip
+   * @memberof Blip
    */
   constructor(params) {
     super();

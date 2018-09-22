@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Prop.
- * @class yarp.Prop
- * @extends yarp.Object
  */
 class Prop extends yarp.Object {
   /**
    * Creates an instance of Prop.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.model
@@ -21,7 +20,7 @@ class Prop extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Prop
+   * @memberof Prop
    */
   constructor(params) {
     super();

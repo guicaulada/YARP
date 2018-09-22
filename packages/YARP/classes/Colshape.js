@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Colshape.
- * @class yarp.Colshape
- * @extends yarp.Object
  */
 class Colshape extends yarp.Object {
   /**
    * Creates an instance of Colshape.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -18,7 +17,7 @@ class Colshape extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Colshape
+   * @memberof Colshape
    */
   constructor(params) {
     super();

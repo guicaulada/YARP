@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Ui events
-*/
+ * Ui events
+ * @memberof ragemp.client
+ */
 
 let oldWallet = 0;
 let walletAdd = 0;

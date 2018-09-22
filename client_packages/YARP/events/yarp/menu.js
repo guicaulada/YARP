@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Menu events
-*/
+ * Menu events
+ * @memberof yarp.client
+ */
 
 yarp.client.menuAddItem = (menuId, item) => {
     let menuItem = [item.displayText, item.data,

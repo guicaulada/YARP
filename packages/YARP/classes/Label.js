@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Label.
- * @class yarp.Label
- * @extends yarp.Object
  */
 class Label extends yarp.Object {
   /**
    * Creates an instance of Label.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -22,7 +21,7 @@ class Label extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Label
+   * @memberof Label
    */
   constructor(params) {
     super();

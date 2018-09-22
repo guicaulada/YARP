@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Stream events
-*/
+ * Stream events
+ * @memberof ragemp.client
+ */
 
 /**
  * Notifies when an entity started being streamed.

@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Character events
-*/
+ * Character events
+ * @memberof yarp.client
+ */
 
 // Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/character/character.js
 

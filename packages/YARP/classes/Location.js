@@ -1,19 +1,18 @@
 'use strict';
 /**
  * Implements a Location.
- * @class yarp.Location
- * @extends yarp.Object
  */
 class Location extends yarp.Object {
   /**
    * Creates an instance of Location.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Object} [params.inventory={}]
    * @param {Boolean} [params.owner=false]
    * @param {Number} [params.money=0]
    * @param {Number} [params.price=0]
-   * @memberof yarp.Location
+   * @memberof Location
    */
   constructor(params) {
     super();
@@ -33,7 +32,7 @@ class Location extends yarp.Object {
   /**
    * Get items with price in inventory.
    * @function sale
-   * @memberof yarp.Location
+   * @memberof Location
    * @param {Object} categories Items indexed by categories and id.
    * @instance
    */

@@ -1,13 +1,12 @@
 'use strict';
 /**
  * Implements a Pool.
- * @class yarp.Pool
  */
 class Pool {
   /**
    * Creates an instance of Pool.
    * @param {Class} Class
-   * @memberof yarp.Pool
+   * @memberof Pool
    */
   constructor(Class) {
     this._Class = Class;
@@ -17,7 +16,7 @@ class Pool {
    * Load all objects from the pool collection.
    * @instance
    * @function load
-   * @memberof yarp.Pool
+   * @memberof Pool
    */
   async load() {
     await yarp.mng.load(this._Class);
@@ -27,7 +26,7 @@ class Pool {
    * Load from config.
    * @instance
    * @function config
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @param {*} file Config object or path.
    */
   async config(file) {
@@ -38,7 +37,7 @@ class Pool {
    * Categories in the pool.
    * @instance
    * @function categories
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @return {Array<String>} Categories in the pool.
    */
   get categories() {
@@ -63,7 +62,7 @@ class Pool {
    * Elments in the pool.
    * @instance
    * @function length
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @return {Number} Number of elements.
    */
   get length() {
@@ -80,7 +79,7 @@ class Pool {
    * Elments in the pool.
    * @instance
    * @function size
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @return {Number} Number of elements.
    */
   get size() {
@@ -91,7 +90,7 @@ class Pool {
    * Checks if id exists in the pool.
    * @instance
    * @function exists
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @param {String} id Object id.
    * @return {Boolean} If objects exists or not in the pool.
    */
@@ -103,7 +102,7 @@ class Pool {
    * Get object at id.
    * @instance
    * @function at
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @param {String} id Object id.
    * @return {Object} Object at id.
    */
@@ -115,7 +114,7 @@ class Pool {
    * Get the pool as array.
    * @instance
    * @function toArray
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @return {Array<Object>} All objects in the pool.
    */
   toArray() {
@@ -133,7 +132,7 @@ class Pool {
    * @async
    * @instance
    * @function forEach
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @param {Function} call Function to run for each element.
    */
   async forEach(call) {
@@ -149,7 +148,7 @@ class Pool {
    * @async
    * @instance
    * @function forEachInRange
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @param {Vector3} position Position.
    * @param {Number} range Max range.
    * @param {Function} call Function to run for each element.
@@ -167,7 +166,7 @@ class Pool {
    * @async
    * @instance
    * @function forEachInDimension
-   * @memberof yarp.Pool
+   * @memberof Pool
    * @param {Number} dimension Dimension.
    * @param {Function} call Function to run for each element.
    */

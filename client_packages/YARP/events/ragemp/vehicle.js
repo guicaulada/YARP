@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Vehicle events
-*/
+ * Vehicle events
+ * @memberof ragemp.client
+ */
 
 /**
  * Entering vehicle.

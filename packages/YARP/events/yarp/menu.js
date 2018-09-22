@@ -1,6 +1,7 @@
 'use strict';
 /**
  * NativeMenu events
+ * @memberof yarp.server
  */
 
 /**

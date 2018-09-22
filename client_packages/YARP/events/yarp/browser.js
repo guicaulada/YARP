@@ -2,6 +2,7 @@
 /**
  * Credits to https://github.com/xabier1989/WiredPlayers-RP/blob/master/client_packages/WiredPlayers/globals/browser.js
  * Browser events
+ * @memberof yarp.client
  */
 
 /**

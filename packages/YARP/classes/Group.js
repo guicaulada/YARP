@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Group.
- * @class yarp.Group
- * @extends yarp.Object
  */
 class Group extends yarp.Object {
   /**
    * Creates an instance of Group.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Boolean} [params.type=false]
@@ -14,7 +13,7 @@ class Group extends yarp.Object {
    * @param {Array<String>} [params.permissions=[]]
    * @param {Function} [params.enter=() => {}]
    * @param {Function} [params.leave=() => {}]
-   * @memberof yarp.Group
+   * @memberof Group
    */
   constructor(params) {
     super();
@@ -36,7 +35,7 @@ class Group extends yarp.Object {
    * Get users on group.
    * @instance
    * @function users
-   * @memberof yarp.Group
+   * @memberof Group
    * @return {Object} Users.
    */
   get users() {
@@ -56,7 +55,7 @@ class Group extends yarp.Object {
    * Get characters on group.
    * @instance
    * @function characters
-   * @memberof yarp.Group
+   * @memberof Group
    * @return {Object} Characters.
    */
   get characters() {
@@ -76,7 +75,7 @@ class Group extends yarp.Object {
    * Add permission to group.
    * @instance
    * @function addPermission
-   * @memberof yarp.Group
+   * @memberof Group
    * @param {String} permission Permission.
    */
   addPermission(permission) {
@@ -89,7 +88,7 @@ class Group extends yarp.Object {
    * Remove permission from group.
    * @instance
    * @function removePermission
-   * @memberof yarp.Group
+   * @memberof Group
    * @param {String} permission Permission.
    */
   removePermission(permission) {
@@ -102,7 +101,7 @@ class Group extends yarp.Object {
    * Check if has permission.
    * @instance
    * @function hasPermission
-   * @memberof yarp.Group
+   * @memberof Group
    * @param {String} permission Permission.
    * @return {Boolean} If has or not the permission.
    */
@@ -148,7 +147,7 @@ class Group extends yarp.Object {
    * Check if has all permissions.
    * @instance
    * @function hasPermission
-   * @memberof yarp.Group
+   * @memberof Group
    * @param {Array<String>} permissions Permissions.
    * @return {Boolean} If has or not all permissions.
    */

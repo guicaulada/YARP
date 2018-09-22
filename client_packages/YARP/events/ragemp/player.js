@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @file Player events
- * @namespace client.player
+ * Player events
+ * @memberof ragemp.client
  */
 
 /**

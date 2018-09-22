@@ -2,24 +2,23 @@
 
 /**
  * Implements a User.
- * @class yarp.User
- * @extends yarp.Object
  */
 class User extends yarp.Object {
-/**
- * Creates an instance of User.
- * @param {Object} params
- * @param {String} params.id
- * @param {String} params.password
- * @param {String} [params.lastLogin='']
- * @param {Boolean} [params.whitelisted=false]
- * @param {Boolean} [params.banned=false]
- * @param {Array<String>} [params.groups=[]]
- * @param {Function} [params.enter=() => {}]
- * @param {Function} [params.leave=() => {}]
- * @memberof yarp.User
- */
-constructor(params) {
+  /**
+   * Creates an instance of User.
+   * @extends yarp.Object
+   * @param {Object} params
+   * @param {String} params.id
+   * @param {String} params.password
+   * @param {String} [params.lastLogin='']
+   * @param {Boolean} [params.whitelisted=false]
+   * @param {Boolean} [params.banned=false]
+   * @param {Array<String>} [params.groups=[]]
+   * @param {Function} [params.enter=() => {}]
+   * @param {Function} [params.leave=() => {}]
+   * @memberof User
+   */
+  constructor(params) {
     super();
     if ((params.id && params.password) != null) {
       this._id = params.id;
@@ -41,7 +40,7 @@ constructor(params) {
    * Get user player.
    * @instance
    * @function player
-   * @memberof yarp.User
+   * @memberof User
    * @return {Object} Player.
    */
   get player() {
@@ -57,7 +56,7 @@ constructor(params) {
    * Get user characters.
    * @instance
    * @function characters
-   * @memberof yarp.User
+   * @memberof User
    * @return {Object} Characters indexed by name.
    */
   get characters() {
@@ -77,7 +76,7 @@ constructor(params) {
    * Get user active character.
    * @instance
    * @function character
-   * @memberof yarp.User
+   * @memberof User
    * @return {Object} Active character.
    */
   get character() {
@@ -93,9 +92,8 @@ constructor(params) {
    * Call enter fuction for character and it's groups.
    * @instance
    * @function enter
-   * @memberof yarp.User
+   * @memberof User
    * @return {Function} Enter functions.
-   * @fires userJoinedGroup
    */
   get enter() {
     return () => {
@@ -114,9 +112,8 @@ constructor(params) {
    * Call leave fuction for character and it's groups.
    * @instance
    * @function leave
-   * @memberof yarp.User
+   * @memberof User
    * @return {Function} Leave functions.
-   * @fires userLeftGroup
    */
   get leave() {
     return () => {
@@ -135,7 +132,7 @@ constructor(params) {
    * Set's the enter function as a string
    * @instance
    * @function enter
-   * @memberof yarp.User
+   * @memberof User
    * @param {Function} value Enter function.
    */
   set enter(value) {
@@ -146,7 +143,7 @@ constructor(params) {
    * Set's the leave function as a string
    * @instance
    * @function leave
-   * @memberof yarp.User
+   * @memberof User
    * @param {Function} value Leave function.
    */
   set leave(value) {
@@ -157,7 +154,7 @@ constructor(params) {
    * Update character last login.
    * @instance
    * @function updateLastLogin
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} ip Character ip.
    */
   updateLastLogin(ip) {
@@ -168,7 +165,7 @@ constructor(params) {
    * Verify password.
    * @instance
    * @function verifyPassword
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} password Password to comapare with hash.
    * @return {Boolean} True if the password matches the hash.
    */
@@ -180,10 +177,9 @@ constructor(params) {
    * Give a group.
    * @instance
    * @function giveGroup
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} group Group id.
    * @return {Boolean} Operation success/fail.
-   * @fires userJoinedGroup
    */
   giveGroup(group) {
     if (this.groups.indexOf(group) == -1) {
@@ -211,10 +207,9 @@ constructor(params) {
    * Take a group.
    * @instance
    * @function takeGroup
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} group Group id.
    * @return {Boolean} Operation success/fail.
-   * @fires userLeftGroup
    */
   takeGroup(group) {
     if (this.groups.indexOf(group) > -1) {
@@ -235,7 +230,7 @@ constructor(params) {
    * Get group by type.
    * @instance
    * @function getGroupByType
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} type Group type.
    * @return {String} Group id.
    */
@@ -254,7 +249,7 @@ constructor(params) {
    * Get groups by types.
    * @instance
    * @function getGroupByTypes
-   * @memberof yarp.User
+   * @memberof User
    * @param {Array<String>} types Group types.
    * @return {Array<String>} Group ids.
    */
@@ -275,7 +270,7 @@ constructor(params) {
    * Check if has group.
    * @instance
    * @function hasGroup
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} id Group id.
    * @return {Boolean} If has or not the group.
    */
@@ -287,7 +282,7 @@ constructor(params) {
    * Check if has all groups.
    * @instance
    * @function hasGroup
-   * @memberof yarp.User
+   * @memberof User
    * @param {Array<String>} groups Group ids.
    * @return {Boolean} If has or not all the groups.
    */
@@ -304,7 +299,7 @@ constructor(params) {
    * Check if has permission.
    * @instance
    * @function hasPermission
-   * @memberof yarp.User
+   * @memberof User
    * @param {String} permission Permission.
    * @return {Boolean} If has or not the permission.
    */
@@ -390,7 +385,7 @@ constructor(params) {
    * Check if has all permissions.
    * @instance
    * @function hasPermission
-   * @memberof yarp.User
+   * @memberof User
    * @param {Array<String>} permissions Permissions.
    * @return {Boolean} If has or not all permissions.
    */

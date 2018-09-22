@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Door.
- * @class yarp.Door
- * @extends yarp.Object
  */
 class Door extends yarp.Object {
   /**
    * Creates an instance of Door.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.model
@@ -16,7 +15,7 @@ class Door extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Door
+   * @memberof Door
    */
   constructor(params) {
     super();
@@ -42,7 +41,7 @@ class Door extends yarp.Object {
    * Broadcast open door event.
    * @instance
    * @function open
-   * @memberof yarp.Door
+   * @memberof Door
    */
   open() {
     this.state = true;
@@ -53,7 +52,7 @@ class Door extends yarp.Object {
    * Broadcast close door event.
    * @instance
    * @function close
-   * @memberof yarp.Door
+   * @memberof Door
    */
   close() {
     this.state = false;

@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Item events
+ * @memberof yarp.server
  */
 
 /**

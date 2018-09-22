@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Checkpoint.
- * @class yarp.Checkpoint
- * @extends yarp.Object
  */
 class Checkpoint extends yarp.Object {
   /**
    * Creates an instance of Checkpoint.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position
@@ -21,7 +20,7 @@ class Checkpoint extends yarp.Object {
    * @param {Function} [params.leave=() => {}]
    * @param {Array<String>} [params.permissions=[]]
    * @param {Object} [params.items={}]
-   * @memberof yarp.Checkpoint
+   * @memberof Checkpoint
    */
   constructor(params) {
     super();

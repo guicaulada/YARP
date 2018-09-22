@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a Transaction.
- * @class yarp.Transaction
- * @extends yarp.Object
  */
 class Transaction extends yarp.Object {
   /**
    * Creates an instance of Transaction.
+   * @extends yarp.Object
    * @param {Object} params
    * @param {String} params.type
    * @param {Nuimber} params.value

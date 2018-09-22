@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Waypoint events
+ * @memberof ragemp.server
  */
 
 /**

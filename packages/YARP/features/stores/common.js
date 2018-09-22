@@ -4,7 +4,7 @@ let openStores = {};
 
 /**
  * Open store menu.
- * @event openStoreMenu
+ * @function openStoreMenu
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {Object} location Store location.
@@ -58,7 +58,7 @@ yarp.server.openStoreMenu = (player, location, options) => {
 
 /**
  * Closes store menu.
- * @event closeStoreMenu
+ * @function closeStoreMenu
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {Object} location Store location.
@@ -84,7 +84,7 @@ yarp.server.closeStoreMenu = (player, location) => {
 
 /**
  * Called when item is clicked on native menu.
- * @event menuItemClicked
+ * @function menuItemClicked
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.

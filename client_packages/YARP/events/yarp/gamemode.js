@@ -1,7 +1,8 @@
 'use strict';
 /**
-* Gamemode events
-*/
+ * Gamemode events
+ * @memberof yarp.client
+ */
 
 let keybinds = {};
 

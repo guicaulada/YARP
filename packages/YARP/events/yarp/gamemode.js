@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Gamemode events
+ * @memberof yarp.server
  */
 
 /**

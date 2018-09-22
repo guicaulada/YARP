@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Colshape events
+ * @memberof ragemp.client
  */
 
 /**
