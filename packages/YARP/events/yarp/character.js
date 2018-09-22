@@ -20,7 +20,7 @@ yarp.server.createCharacter = (player, id, age, model, face) => {
     character = new yarp.Character({id: id, socialClub: player.socialClub, age: age, model: model, face: face});
     character.save();
     yarp.client.characterCreatedSuccessfully(player);
-    yarp.client.showPlayerCharacters(player, character.user.characters);
+    yarp.client.showPlayerCharacters(player, player.user.characters);
   } else {
     yarp.client.characterNameDuplicated(player);
   }
