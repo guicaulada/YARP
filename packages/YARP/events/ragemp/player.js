@@ -25,7 +25,7 @@ mp.events.add('playerChat', (player, message) => {
 mp.events.add('playerCommand', (player, command) => {
   const args = command.split(/[ ]+/);
   const commandName = args.splice(0, 1)[0];
-  console.log(`${player.name}: /${command}`);
+  console.log(chalk.cyanBright('[YARP] ') + `${player.name}: /${command}`);
   command = yarp.commands[commandName];
 
   if (command) {
@@ -157,7 +157,7 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
         currentWeapons[player.id] = id;
         yarp.client.unequipWeapon(player, id);
       } else if ((mp.joaat(id) == oldWeapon) && (newWeapon != 1970349056)) {
-        yarp.client.equipWeapon(palyer, yarp.weapons[id]);
+        yarp.client.equipWeapon(player, yarp.weapons[id]);
       }
     }
   }

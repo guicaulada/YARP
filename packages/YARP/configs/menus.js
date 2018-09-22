@@ -2,28 +2,45 @@
 
 let config = {
   'Test Menu': {
-    offset: [50, 50],
-    items: [
+    offset: [0.1, 0.1],
+    data: [
       {
-        text: 'Default',
-        description: 'Default test item.',
+        displayText: 'Default',
+        caption: 'Default test item.',
       },
       {
-        type: 1,
-        text: 'List',
-        items: ['One', 'Two', 'Three'],
-        description: 'List test item.',
+        type: 'list',
+        displayText: 'List',
+        data: [
+          {
+            displayText: 'One',
+          },
+          {
+            displayText: 'Two',
+          },
+          {
+            displayText: 'Three',
+          },
+        ],
+        caption: 'List test item.',
       },
       {
-        type: 2,
-        text: 'Slider',
-        items: ['One', 'Two', 'Three'],
-        description: 'Slider test item.',
+        type: 'slider',
+        displayText: 'Slider',
+        min: -10,
+        max: 10,
+        step: 1,
+        caption: 'Slider test item.',
       },
       {
-        type: 3,
-        text: 'Checkbox',
-        description: 'Checkbox test item.',
+        type: 'checkbox',
+        displayText: 'Checkbox',
+        data: true,
+        caption: 'Checkbox test item.',
+      },
+      {
+        type: 'close',
+        displayText: 'Close',
       },
     ],
   },

@@ -5,6 +5,10 @@
 
 let keybinds = {};
 
+yarp.client.chatShow = (toggle) => {
+  mp.gui.chat.show(toggle);
+};
+
 /**
  * Displays help text on top left.
  * @function displayHelpText
@@ -33,7 +37,7 @@ yarp.client.clearHelpText = () => {
  * @memberof yarp.client
  * @param {Boolean} active If the chat is enalbed or not.
  */
-mp.gui.execute('const _enableChatInput = enableChatInput;enableChatInput = (enable) => { mp.trigger(\'yarp:cefTrigger\', \'yarp:chatEnabled\(enable); _enableChatInput(enable) };');
+mp.gui.execute('const _enableChatInput = enableChatInput;enableChatInput = (enable) => { mp.trigger(\'yarp:cefTrigger\', \'chatEnabled\', \'enable\'); _enableChatInput(enable) };');
 yarp.client.chatEnabled = (toggle) => {
   mp.gui.chat.enabled = toggle;
 };

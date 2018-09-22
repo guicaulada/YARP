@@ -10,7 +10,7 @@ class Menu extends yarp.Object {
    * @param {Object} params
    * @param {String} [params.title='']
    * @param {String} [params.subtitle='']
-   * @param {Array<Object>} [params.items=[]]
+   * @param {Array<Object>} [params.data=[]]
    * @param {Array<Number>} [params.offset=[0, 0]]
    * @param {Number} [params.spriteLibrary='commonmenu']
    * @param {Number} [params.spriteName='interaction_bgd']
@@ -21,11 +21,10 @@ class Menu extends yarp.Object {
     if ((params.id) != null) {
       this._id = params.id;
       this._title = this.default(params.title, params.id);
-      this._subtitle = this.default(params.subtitle, '');
-      this._items = this.default(params.items, []);
+      this._data = this.default(params.data, []);
       this._offset = this.default(params.offset, [0, 0]);
-      this._spriteLibrary = this.default(params.spriteLibrary, 'commonmenu');
-      this._spriteName = this.default(params.spriteName, 'interaction_bgd');
+      this._texture = this.default(params.texture, ['commonmenu', 'interaction_bgd']);
+      this._visible = {};
       yarp.mng.register(this);
       this.makeGetterSetter();
     } else {
@@ -58,6 +57,7 @@ class Menu extends yarp.Object {
    * @param {Object} player
    */
   open(player) {
+    this._visible[player.name] = true;
     yarp.client.openMenu(player, this.id);
   }
 
@@ -67,6 +67,7 @@ class Menu extends yarp.Object {
    * @param {Object} player
    */
   close(player) {
+    this._visible[player.name] = false;
     yarp.client.closeMenu(player, this.id);
   }
 
@@ -84,23 +85,18 @@ class Menu extends yarp.Object {
    * @memberof yarp.Menu
    * @param {Object} item
    */
-  addItem(item) {
-    this.items.push(item);
-    mp.players.forEach((player, id) => {
-      yarp.client.menuAddItem(player, item);
-    });
+  add(item) {
+    this._data.push(item);
   }
 
   /**
-   * Add items the menu.
+   * Returns if menu is visible.
    * @memberof yarp.Menu
-   * @param {Array<Object>} items
+   * @param {Object} player
+   * @return {Boolean} True if menu is visible for player.
    */
-  addItems(items) {
-    this.items.concat(items);
-    mp.players.forEach((player, id) => {
-      yarp.client.menuAddItems(player, items);
-    });
+  isVisible(player) {
+    return this._visible[player.name];
   }
 }
 

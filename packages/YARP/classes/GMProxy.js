@@ -41,9 +41,11 @@ class GMProxy {
       };
       self.server = new Proxy({}, {
         get: (proxy, name) => {
+          if (name == 'add') return self.add;
           return self.local[name];
         },
         set: (proxy, name, value) => {
+          if (name == 'add') return self.add;
           self.local[name] = value;
           mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
             if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}`);
@@ -75,6 +77,20 @@ class GMProxy {
         },
         set: (proxy, name, value) => {
           console.log(chalk.redBright('[YARP] ') + 'ProxyError: You can\'t set client events on server-side.');
+        },
+      });
+      self.add = new Proxy({}, {
+        get: (proxy, name) => {
+          return self.local[name];
+        },
+        set: (proxy, name, value) => {
+          mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
+            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}`);
+            if (!args) args = [];
+            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `${self.id}:${name}:${id} ==>`);
+            player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(await value(player, ...this.tryJSON.parse(args)))]);
+          });
+          return value;
         },
       });
     } else {

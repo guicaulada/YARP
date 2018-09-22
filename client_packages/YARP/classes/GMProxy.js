@@ -71,6 +71,20 @@ class GMProxy {
           console.log('[YARP] ' + 'ProxyError: You can\'t set server events on client-side.');
         },
       });
+      self.add = new Proxy({}, {
+        get: (proxy, name) => {
+          if (name == 'add') return self.add;
+          return self.local[name];
+        },
+        set: (proxy, name, value) => {
+          if (name == 'add') return self.add;
+          mp.events.add(`${self.id}:${name}`, async (id, args) => {
+            if (!args) args = [];
+            mp.events.callRemote(`${self.id}:${name}:${id}`, this.tryJSON.stringify(await value(...this.tryJSON.parse(args))));
+          });
+          return value;
+        },
+      });
     } else {
       throw new TypeError('GMProxy class requires id to be instantiated.');
     }

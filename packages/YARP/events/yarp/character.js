@@ -88,12 +88,12 @@ yarp.server.loadCharacter = (player, id) => {
   yarp.hotkeys['Inventory'].bind(player);
 
   if (character.user.hasPermission('menu.testmenu')) {
-    // yarp.hotkeys['Toggle Menu'].bind(player, [yarp.menus['Test Menu']]);
-    // yarp.hotkeys['Test Proxy'].bind(player);
+    yarp.hotkeys['Toggle Menu'].bind(player, ['Test Menu']);
+    yarp.hotkeys['Test Proxy'].bind(player);
   }
 
   yarp.menus.forEach((menu) => {
-    // menu.create(player);
+    menu.create(player);
   });
 };
 

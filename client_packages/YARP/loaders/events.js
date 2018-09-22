@@ -19,6 +19,6 @@ require('./YARP/events/yarp/camera.js');
 require('./YARP/events/yarp/character.js');
 require('./YARP/events/yarp/command.js');
 require('./YARP/events/yarp/gamemode.js');
-require('./YARP/events/yarp/nativeui.js');
+require('./YARP/events/yarp/menu.js');
 require('./YARP/events/yarp/ui.js');
 require('./YARP/events/yarp/weapon.js');

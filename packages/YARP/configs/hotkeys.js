@@ -41,15 +41,7 @@ let config = {
     key: 'M',
     category: 'utility',
     call: (player, args) => {
-      if (!this.players) this.players = [];
-      let i = this.players.indexOf(player.socialClub);
-      if (i >= 0) {
-        args[0].open(player);
-        this.players.splice(i, 1);
-      } else {
-        args[0].close(player);
-        this.players.push(player.socialClub);
-      }
+      yarp.client.toggleMenu(player, args[0]);
     },
   },
   'Open Menu': {

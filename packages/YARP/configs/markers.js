@@ -109,11 +109,11 @@ let multiplePositions = {
     enter: (player) => {
       let location = yarp.locations[this.id];
       yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to shop.');
-      // yarp.server.openStoreMenu(player, location);
+      yarp.server.openStoreMenu(player, location, {title: 'Ammu-Nation', offset: [0.1, 0.15]});
     },
     leave: (player) => {
       let location = yarp.locations[this.id];
-      // yarp.server.closeStoreMenu(player, location);
+      yarp.server.closeStoreMenu(player, location);
     },
     position: [
       new mp.Vector3(1692.41, 3758.22, 34.7053),
@@ -134,11 +134,11 @@ let multiplePositions = {
     enter: (player) => {
       let location = yarp.locations[this.id];
       yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to shop.');
-      // yarp.server.openStoreMenu(player, location);
+      yarp.server.openStoreMenu(player, location, {title: '7/11', offset: [0.1, 0.15]});
     },
     leave: (player) => {
       let location = yarp.locations[this.id];
-      // yarp.server.closeStoreMenu(player, location);
+      yarp.server.closeStoreMenu(player, location);
     },
     position: [
       new mp.Vector3(1734.48046875, 6420.38134765625, 34.5372314453125),
