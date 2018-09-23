@@ -34,6 +34,12 @@ yarp.client.menuAddItem = (menuId, item) => {
             menuItem = new NativeMenu.SliderMenuItem(...menuItem);
             break;
         case 'close':
+            menuItem = [...menuItem.slice(0, 4),
+                new NativeMenu.Color(...yarp.utils.client.default(item.textColor, [255, 255, 255, 255])),
+                new NativeMenu.Color(...yarp.utils.client.default(item.backgroundColor, [242, 67, 67, 204])),
+                new NativeMenu.Color(...yarp.utils.client.default(item.hoverTextColor, [255, 255, 255, 255])),
+                new NativeMenu.Color(...yarp.utils.client.default(item.hoverBackgroundColor, [242, 67, 67, 255])),
+            ];
             menuItem = new NativeMenu.CloseMenuItem(...menuItem);
             break;
         case 'submenu':
@@ -93,24 +99,36 @@ yarp.client.createMenu = (menuId, options) => {
 
 yarp.client.toggleMenu = (menuId) => {
     if (yarp.menus[menuId].isVisible) {
-        mp.gui.chat.show(true);
-        yarp.menus[menuId].close();
+        yarp.client.closeMenu(menuId);
     } else {
-        mp.gui.chat.show(false);
-        mp.gui.cursor.visible = false;
-        yarp.menus[menuId].open();
+        yarp.client.openMenu(menuId);
     }
 };
 
 yarp.client.openMenu = (menuId) => {
+    yarp.client.closeAllMenus();
     yarp.menus[menuId].open();
     mp.gui.cursor.visible = false;
     mp.gui.chat.show(false);
 };
 
 yarp.client.closeMenu = (menuId) => {
-    yarp.menus[menuId].close();
+    let currentMenu = yarp.client.getCurrentMenu();
+    let targetMenu = yarp.menus[menuId];
+    while (currentMenu != targetMenu) {
+        yarp.client.removeSubMenu(currentMenu);
+        currentMenu = yarp.client.getCurrentMenu();
+    }
+    targetMenu.close();
     mp.gui.chat.show(true);
+};
+
+yarp.client.closeAllMenus = () => {
+    for (let menuId in yarp.menus) {
+        if (yarp.menus[menuId].isVisible) {
+            yarp.client.closeMenu(menuId);
+        }
+    }
 };
 
 yarp.client.menuAddItems = (menuId, items) => {
@@ -133,13 +151,31 @@ yarp.client.menuUpdateItems = (menuId, indexItems) => {
 };
 
 yarp.client.menuRemoveItem = (menuId, index) => {
+    let currentMenu = yarp.client.getCurrentMenu();
+    yarp.client.removeSubMenu(currentMenu);
     yarp.menus[menuId].menuItems.splice(index, 1);
-    yarp.menus[menuId].currentIndexMenuItems = 0;
+    yarp.menus[menuId].setToItem(index % yarp.menus[menuId].menuItems.length);
 };
 
 yarp.client.menuRemoveItems = (menuId, index, amount) => {
+    let currentMenu = yarp.client.getCurrentMenu();
+    yarp.client.removeSubMenu(currentMenu);
     yarp.menus[menuId].menuItems.splice(index, amount);
-    yarp.menus[menuId].currentIndexMenuItems = 0;
+    yarp.menus[menuId].setToItem(index % yarp.menus[menuId].menuItems.length);
+};
+
+yarp.client.getCurrentMenu = () => {
+    return NativeMenu.MenuPool.getCurrentMenu();
+};
+
+yarp.client.displaySubMenu = (menu) => {
+    if (typeof menu === 'string') menu = yarp.menus[menu];
+    return NativeMenu.MenuPool.displaySubMenu(menu);
+};
+
+yarp.client.removeSubMenu = (menu) => {
+    if (typeof menu === 'string') menu = yarp.menus[menu];
+    return NativeMenu.MenuPool.removeSubMenu(menu);
 };
 
 mp.events.add('render', () => {

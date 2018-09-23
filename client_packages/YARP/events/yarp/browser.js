@@ -71,8 +71,8 @@ yarp.client.toggleChat = () => {
 };
 
 /**
- * Toggle chat.
- * @function yarp:cefTrigger
+ * Executes CEF triggered function.
+ * @event yarp:cefTrigger
  * @memberof yarp.client
  * @param {String} func Function name.
  * @param {Array} args Function arguments.
