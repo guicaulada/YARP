@@ -67,16 +67,16 @@ yarp.server.closeStoreMenu = (player, location) => {
   if (openStores[player.name] != null) {
     if (yarp.menus[location.id] && yarp.menus[location.id].isVisible(player)) {
       yarp.menus[location.id].close(player);
-      if (openStores[player.name].total > 0) {
-        player.notify('Paid ~r~$' + openStores[player.name].total);
-        for (let item in openStores[player.name].received) {
-          if (openStores[player.name].received.hasOwnProperty(item)) {
-            let amount = openStores[player.name].received[item];
-            player.notify('Received ~g~' + amount + ' ' + item);
-          }
+    }
+    if (openStores[player.name].total > 0) {
+      player.notify('Paid ~r~$' + openStores[player.name].total);
+      for (let item in openStores[player.name].received) {
+        if (openStores[player.name].received.hasOwnProperty(item)) {
+          let amount = openStores[player.name].received[item];
+          player.notify('Received ~g~' + amount + ' ' + item);
         }
-        delete openStores[player.name];
       }
+      delete openStores[player.name];
     }
     yarp.hotkeys['Open Menu'].unbind(player);
   }
@@ -89,9 +89,10 @@ yarp.server.closeStoreMenu = (player, location) => {
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
  * @param {String} type Type of the item.
+ * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.add.menuItemClicked = (player, menuId, type, data) => {
+yarp.server.add.menuItemClicked = (player, menuId, type, index, data) => {
   if (data && data.storeType == 'common' && data.itemId && data.storeId && data.categoryId) {
     let storeId = data.storeId;
     let location = yarp.locations[storeId];
