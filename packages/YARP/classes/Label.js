@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Label.
- * @class Label
  */
 class Label extends yarp.Object {
   /**

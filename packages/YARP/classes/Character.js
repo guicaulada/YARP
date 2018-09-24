@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Character.
- * @class Character
  */
 class Character extends yarp.Object {
   /**

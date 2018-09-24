@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Blip.
- * @class Blip
  */
 class Blip extends yarp.Object {
   /**

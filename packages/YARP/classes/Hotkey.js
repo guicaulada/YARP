@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Hotkey.
- * @class Hotkey
  */
 class Hotkey extends yarp.Object {
   /**

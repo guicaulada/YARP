@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a menu pool.
- * @class MenuPool
  */
 class MenuPool {
   /**

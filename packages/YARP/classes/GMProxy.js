@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a gamemode Proxy.
- * @class GMProxy
  */
 class GMProxy {
   /**

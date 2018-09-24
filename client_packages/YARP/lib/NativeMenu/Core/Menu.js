@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a menu.
- * @class Menu
  */
 class Menu {
   /**

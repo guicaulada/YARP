@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Creates common menu texture dictionary.
+ * @memberof NativeMenu
  */
 let CommonMenuTexture = new NativeMenu.TextureDictionary('commonmenu', [
   'arrowleft',

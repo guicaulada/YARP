@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Door.
- * @class Door
  */
 class Door extends yarp.Object {
   /**

@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a main menu.
- * @class MainMenu
- * @extends {NativeMenu.Menu}
  */
 class MainMenu extends NativeMenu.Menu {
   /**
    *Creates an instance of MainMenu.
+   * @extends {NativeMenu.Menu}
    * @param {String} [title='']
    * @param {Boolean} [isVisible=true]
    * @memberof MainMenu

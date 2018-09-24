@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Location.
- * @class Location
  */
 class Location extends yarp.Object {
   /**

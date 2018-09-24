@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a checkbox menu item.
- * @class CheckboxMenuItem
- * @extends {NativeMenu.MenuItem}
  */
 class CheckboxMenuItem extends NativeMenu.MenuItem {
   /**
    *Creates an instance of CheckboxMenuItem.
+   * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
    * @param {Boolean} [data=false]
    * @param {String} [caption='']

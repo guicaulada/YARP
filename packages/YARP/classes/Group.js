@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Group.
- * @class Group
  */
 class Group extends yarp.Object {
   /**

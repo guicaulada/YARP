@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a submenu menu item.
- * @class SubMenuItem
- * @extends {NativeMenu.MenuItem}
  */
 class SubMenuItem extends NativeMenu.MenuItem {
   /**
    * Creates an instance of SubMenuItem.
+   * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
    * @param {*} data
    * @param {String} [caption='']

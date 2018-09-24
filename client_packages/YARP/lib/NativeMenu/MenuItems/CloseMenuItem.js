@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a close menu item.
- * @class CloseMenuItem
- * @extends {NativeMenu.MenuItem}
  */
 class CloseMenuItem extends NativeMenu.TextMenuItem {
   /**
    *Creates an instance of CloseMenuItem.
+   * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
    * @param {*} data
    * @param {String} [caption='']

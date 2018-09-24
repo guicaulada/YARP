@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements sound.
- * @class Sound
  */
 class Sound {
   /**

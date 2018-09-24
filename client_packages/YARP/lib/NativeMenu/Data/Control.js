@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Creates control dictionary.
+ * @memberof NativeMenu
  */
 let Control = {};
 

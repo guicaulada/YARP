@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Item.
- * @class Item
  */
 class Item extends yarp.Object {
   /**

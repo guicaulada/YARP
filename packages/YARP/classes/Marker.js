@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Marker.
- * @class Marker
  */
 class Marker extends yarp.Object {
   /**

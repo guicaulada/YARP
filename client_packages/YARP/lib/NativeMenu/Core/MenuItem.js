@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a menu item.
- * @class MenuItem
  */
 class MenuItem {
   /**

@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Transaction.
- * @class Transaction
  */
 class Transaction extends yarp.Object {
   /**

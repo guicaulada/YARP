@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a slider menu item.
- * @class SliderMenuItem
- * @extends {NativeMenu.MenuItem}
  */
 class SliderMenuItem extends NativeMenu.MenuItem {
   /**
    * Creates an instance of SliderMenuItem.
+   * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
    * @param {Number} min
    * @param {Number} max

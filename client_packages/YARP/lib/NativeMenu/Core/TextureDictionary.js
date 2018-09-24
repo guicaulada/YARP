@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a texture dictionary.
- * @class TextureDictionary
  */
 class TextureDictionary {
   /**

@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Command.
- * @class Command
  */
 class Command extends yarp.Object {
   /**

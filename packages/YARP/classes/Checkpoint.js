@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Checkpoint.
- * @class Checkpoint
  */
 class Checkpoint extends yarp.Object {
   /**

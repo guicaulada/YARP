@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Creates menu badge dictionary.
+ * @memberof NativeMenu
  */
 let MenuBadge = {};
 

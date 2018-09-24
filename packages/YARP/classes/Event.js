@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Event.
- * @class Event
  */
 class Event extends yarp.Object {
   /**

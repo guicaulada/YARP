@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a color.
- * @class Color
  */
 class Color {
   /**

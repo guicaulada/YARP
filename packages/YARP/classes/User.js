@@ -2,7 +2,6 @@
 
 /**
  * Implements a User.
- * @class User
  */
 class User extends yarp.Object {
   /**

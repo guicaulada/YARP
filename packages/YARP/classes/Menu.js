@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Menu.
- * @class Menu
  */
 class Menu extends yarp.Object {
   /**

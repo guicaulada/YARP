@@ -1,12 +1,11 @@
 'use strict';
 /**
  * Implements a list menu item.
- * @class ListMenuItem
- * @extends {NativeMenu.MenuItem}
  */
 class ListMenuItem extends NativeMenu.MenuItem {
   /**
    *Creates an instance of ListMenuItem.
+   * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
    * @param {Array<MenuItem>} data
    * @param {Number} [defaultIndex=0]

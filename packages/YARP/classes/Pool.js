@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Pool.
- * @class Pool
  */
 class Pool {
   /**

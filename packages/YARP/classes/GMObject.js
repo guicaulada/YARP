@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements common functionalities across all YARP objects.
- * @class GMObject
  */
 class GMObject {
   /**

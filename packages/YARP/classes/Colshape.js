@@ -1,7 +1,6 @@
 'use strict';
 /**
  * Implements a Colshape.
- * @class Colshape
  */
 class Colshape extends yarp.Object {
   /**
