@@ -7,9 +7,46 @@
 let utils = new yarp.Proxy('yarp:utils');
 
 /**
+ * Returns text width on screen
+ * @function getRandomInt
+ * @memberof yarp.utils.client
+ * @param {String} text
+ * @param {Array} [position=[]]
+ * @param {NativeMenu.Color} color
+ * @param {Number} [font=0]
+ * @param {Array<Number>} [scale=[0.35, 0.35]]
+ * @param {Boolean} isTextCenter
+ */
+utils.client.drawText = (text, position = [], color, font = 0, scale = [0.35, 0.35], isTextCenter = false) => {
+  mp.game.ui.setTextFont(font);
+  mp.game.ui.setTextScale(scale[0] * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH, scale[1] * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT);
+  mp.game.ui.setTextColour(color.red, color.green, color.blue, color.alpha);
+  mp.game.ui.setTextCentre(isTextCenter);
+  mp.game.ui.setTextEntry('STRING');
+  mp.game.ui.addTextComponentSubstringPlayerName(text);
+  mp.game.ui.drawText(position[0], position[1]);
+};
+
+/**
+ * Returns text width on screen
+ * @function getRandomInt
+ * @memberof yarp.utils.client
+ * @param {String} text
+ * @param {Number} [font=0]
+ * @param {Array<Number>} [scale=[0.35, 0.35]]
+ * @return {Number} Text width on screen.
+ */
+utils.client.getTextWidth = (text, font = 0, scale = [0.35, 0.35]) => {
+  mp.game.ui.setTextFont(font);
+  mp.game.ui.setTextScale(scale[0], scale[1]);
+  mp.game.ui.setTextEntryForWidth('STRING');
+  mp.game.ui.addTextComponentSubstringPlayerName(text);
+  return mp.game.ui.getTextScreenWidth(true);
+};
+
+/**
  * Returns a random integer between min and max
- * @instance
- * @function default
+ * @function getRandomInt
  * @memberof yarp.utils.client
  * @param {Number} min Minimum value.
  * @param {Number} max Random value.
@@ -21,7 +58,6 @@ utils.client.getRandomInt = (min, max) => {
 
 /**
  * Returns first vaule or second value as default.
- * @instance
  * @function default
  * @memberof yarp.utils.client
  * @param {*} v Verified value.

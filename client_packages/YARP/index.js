@@ -8,5 +8,8 @@
 // Loading core
 require('./YARP/loaders/core.js');
 
+// Loading libraries
+require('./YARP/loaders/libs.js');
+
 // Loading events
 require('./YARP/loaders/events.js');

@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Marker.
+ * @class Marker
  */
 class Marker extends yarp.Object {
   /**
    * Creates an instance of Marker.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position

@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Event.
+ * @class Event
  */
 class Event extends yarp.Object {
   /**
    * Creates an instance of Event.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Function} [params.call=() => {}]

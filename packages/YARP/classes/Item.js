@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Item.
+ * @class Item
  */
 class Item extends yarp.Object {
   /**
    * Creates an instance of Item.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.name
@@ -46,8 +47,8 @@ class Item extends yarp.Object {
    * Gets item options functions.
    * @instance
    * @function options
-   * @memberof Item
    * @return {Object} Functions indexed by option.
+   * @memberof Item
    */
   get options() {
     let value = {};
@@ -63,8 +64,8 @@ class Item extends yarp.Object {
    * Sets item options functions as strings.
    * @instance
    * @function options
-   * @memberof Item
    * @param {Array<function>} value Array of option functions
+   * @memberof Item
    */
   set options(value) {
     for (let id in value) {
@@ -78,8 +79,8 @@ class Item extends yarp.Object {
    * Load from object.
    * @instance
    * @function isAmmo
-   * @memberof Item
    * @return {Boolean} If the item is weapon or not.
+   * @memberof Item
    */
   isWeapon() {
     return this.id.includes('WEAPON_');
@@ -89,8 +90,8 @@ class Item extends yarp.Object {
    * Load from object.
    * @instance
    * @function isAmmo
-   * @memberof Item
    * @return {Boolean} If the item is ammo or not.
+   * @memberof Item
    */
   isAmmo() {
     return this.id.includes('AMMO_');

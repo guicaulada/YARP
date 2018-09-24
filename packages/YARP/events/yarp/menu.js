@@ -53,10 +53,11 @@ yarp.server.inventoryItemClicked = (player, menuId, type, data) => {
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
  * @param {String} type Type of the item.
+ * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuItemClicked = (player, menuId, type, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, data);
+yarp.server.menuItemClicked = (player, menuId, type, index, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, type, index, data);
     if (type == 'close') {
         yarp.client.chatShow(player, true);
         yarp.menus[menuId].visible = false;
@@ -73,10 +74,11 @@ yarp.server.menuItemClicked = (player, menuId, type, data) => {
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
  * @param {String} type Type of the item.
+ * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuItemSelected = (player, menuId, type, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, data);
+yarp.server.menuItemSelected = (player, menuId, type, index, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, type, index, data);
 };
 
 /**
@@ -86,10 +88,11 @@ yarp.server.menuItemSelected = (player, menuId, type, data) => {
  * @param {Object} player The player that called the event.
  * @param {String} menuId Id of the menu.
  * @param {String} type Type of the item.
+ * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuItemChanged = (player, menuId, type, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, data);
+yarp.server.menuItemChanged = (player, menuId, type, index, data) => {
+    if (menuId == 'Test Menu') console.log(menuId, type, index, data);
 };
 
 /**

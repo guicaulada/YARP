@@ -5,7 +5,7 @@
 class Vehicle extends yarp.Object {
   /**
    * Creates an instance of Vehicle.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.model
@@ -67,8 +67,8 @@ class Vehicle extends yarp.Object {
    * Set vehicle position.
    * @instance
    * @function position
-   * @memberof Vehicle
    * @param {Vector3} value Position value.
+   * @memberof Vehicle
    */
   set position(value) {
     this.mp.position = value;
@@ -79,8 +79,8 @@ class Vehicle extends yarp.Object {
    * Set vehicle heading.
    * @instance
    * @function heading
-   * @memberof Vehicle
    * @param {Number} value Heading value.
+   * @memberof Vehicle
    */
   set heading(value) {
     this.mp.rotation = new mp.Vector3(0, 0, value);

@@ -5,7 +5,7 @@
 class Weapon extends yarp.Object {
   /**
    * Creates an instance of Weapon.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.name

@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Command.
+ * @class Command
  */
 class Command extends yarp.Object {
   /**
    * Creates an instance of Command.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Function} [params.call=() => {}]

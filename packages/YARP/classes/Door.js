@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Door.
+ * @class Door
  */
 class Door extends yarp.Object {
   /**
    * Creates an instance of Door.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.model

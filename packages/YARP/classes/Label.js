@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Label.
+ * @class Label
  */
 class Label extends yarp.Object {
   /**
    * Creates an instance of Label.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position

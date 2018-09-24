@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Hotkey.
+ * @class Hotkey
  */
 class Hotkey extends yarp.Object {
   /**
    * Creates an instance of Hotkey.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {String} [params.key='E']
@@ -42,9 +43,9 @@ class Hotkey extends yarp.Object {
    * Bind hotkey to player.
    * @instance
    * @function bind
-   * @memberof Hotkey
    * @param {Object} player Player to bind to.
    * @param {Array<*>} args Arguments to the bind.
+   * @memberof Hotkey
    */
   bind(player, args) {
     this.args[player.id] = args;
@@ -55,8 +56,8 @@ class Hotkey extends yarp.Object {
    * Unbind hotkey to player.
    * @instance
    * @function unbind
-   * @memberof Hotkey
    * @param {Object} player Player to unbind from.
+   * @memberof Hotkey
    */
   unbind(player) {
     this.args[player.id] = null;

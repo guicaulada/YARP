@@ -6,7 +6,7 @@
 class User extends yarp.Object {
   /**
    * Creates an instance of User.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {String} params.password
@@ -40,8 +40,8 @@ class User extends yarp.Object {
    * Get user characters.
    * @instance
    * @function characters
-   * @memberof User
    * @return {Object} Characters indexed by name.
+   * @memberof User
    */
   get characters() {
     let characters = {};
@@ -60,8 +60,8 @@ class User extends yarp.Object {
    * Call enter fuction for character and it's groups.
    * @instance
    * @function enter
-   * @memberof User
    * @return {Function} Enter functions.
+   * @memberof User
    */
   get enter() {
     return () => {
@@ -80,8 +80,8 @@ class User extends yarp.Object {
    * Call leave fuction for character and it's groups.
    * @instance
    * @function leave
-   * @memberof User
    * @return {Function} Leave functions.
+   * @memberof User
    */
   get leave() {
     return () => {
@@ -100,8 +100,8 @@ class User extends yarp.Object {
    * Set's the enter function as a string
    * @instance
    * @function enter
-   * @memberof User
    * @param {Function} value Enter function.
+   * @memberof User
    */
   set enter(value) {
     this._enter = value.toString();
@@ -111,8 +111,8 @@ class User extends yarp.Object {
    * Set's the leave function as a string
    * @instance
    * @function leave
-   * @memberof User
    * @param {Function} value Leave function.
+   * @memberof User
    */
   set leave(value) {
     this._leave = value;
@@ -122,8 +122,8 @@ class User extends yarp.Object {
    * Update character last login.
    * @instance
    * @function updateLastLogin
-   * @memberof User
    * @param {String} ip Character ip.
+   * @memberof User
    */
   updateLastLogin(ip) {
     this.lastLogin = `${ip} ${yarp.utils.server.getTimestamp(new Date())}`;
@@ -133,9 +133,9 @@ class User extends yarp.Object {
    * Verify password.
    * @instance
    * @function verifyPassword
-   * @memberof User
    * @param {String} password Password to comapare with hash.
    * @return {Boolean} True if the password matches the hash.
+   * @memberof User
    */
   verifyPassword(password) {
     return bcrypt.compareSync(password, this.password);
@@ -145,9 +145,9 @@ class User extends yarp.Object {
    * Give a group.
    * @instance
    * @function giveGroup
-   * @memberof User
    * @param {String} group Group id.
    * @return {Boolean} Operation success/fail.
+   * @memberof User
    */
   giveGroup(group) {
     if (this.groups.indexOf(group) == -1) {
@@ -175,9 +175,9 @@ class User extends yarp.Object {
    * Take a group.
    * @instance
    * @function takeGroup
-   * @memberof User
    * @param {String} group Group id.
    * @return {Boolean} Operation success/fail.
+   * @memberof User
    */
   takeGroup(group) {
     if (this.groups.indexOf(group) > -1) {
@@ -198,9 +198,9 @@ class User extends yarp.Object {
    * Get group by type.
    * @instance
    * @function getGroupByType
-   * @memberof User
    * @param {String} type Group type.
    * @return {String} Group id.
+   * @memberof User
    */
   getGroupByType(type) {
     for (let id of this.groups) {
@@ -217,9 +217,9 @@ class User extends yarp.Object {
    * Get groups by types.
    * @instance
    * @function getGroupByTypes
-   * @memberof User
    * @param {Array<String>} types Group types.
    * @return {Array<String>} Group ids.
+   * @memberof User
    */
   getGroupsByTypes(types) {
     let groups = [];
@@ -238,9 +238,9 @@ class User extends yarp.Object {
    * Check if has group.
    * @instance
    * @function hasGroup
-   * @memberof User
    * @param {String} id Group id.
    * @return {Boolean} If has or not the group.
+   * @memberof User
    */
   hasGroup(id) {
    return (this.groups.indexOf(id) > -1);
@@ -250,9 +250,9 @@ class User extends yarp.Object {
    * Check if has all groups.
    * @instance
    * @function hasGroup
-   * @memberof User
    * @param {Array<String>} groups Group ids.
    * @return {Boolean} If has or not all the groups.
+   * @memberof User
    */
   hasGroups(groups) {
     for (let i = 0; i < groups.length; i++) {
@@ -267,9 +267,9 @@ class User extends yarp.Object {
    * Check if has permission.
    * @instance
    * @function hasPermission
-   * @memberof User
    * @param {String} permission Permission.
    * @return {Boolean} If has or not the permission.
+   * @memberof User
    */
   hasPermission(permission) {
     let result = false;
@@ -353,9 +353,9 @@ class User extends yarp.Object {
    * Check if has all permissions.
    * @instance
    * @function hasPermission
-   * @memberof User
    * @param {Array<String>} permissions Permissions.
    * @return {Boolean} If has or not all permissions.
+   * @memberof User
    */
   hasPermissions(permissions) {
     for (let i = 0; i < permissions.length; i++) {

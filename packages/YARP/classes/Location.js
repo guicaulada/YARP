@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Location.
+ * @class Location
  */
 class Location extends yarp.Object {
   /**
    * Creates an instance of Location.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Object} [params.inventory={}]
@@ -31,10 +32,10 @@ class Location extends yarp.Object {
 
   /**
    * Get items with price in inventory.
-   * @function sale
-   * @memberof Location
-   * @param {Object} categories Items indexed by categories and id.
    * @instance
+   * @function sale
+   * @param {Object} categories Items indexed by categories and id.
+   * @memberof Location
    */
   get sale() {
     let categories = {};

@@ -5,7 +5,7 @@
 class Variable extends yarp.Object {
   /**
    * Creates an instance of Variable.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {*} params.value

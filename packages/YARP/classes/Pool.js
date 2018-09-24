@@ -26,8 +26,8 @@ class Pool {
    * Load from config.
    * @instance
    * @function config
-   * @memberof Pool
    * @param {*} file Config object or path.
+   * @memberof Pool
    */
   async config(file) {
     await yarp.mng.config(this._Class, file);
@@ -37,8 +37,8 @@ class Pool {
    * Categories in the pool.
    * @instance
    * @function categories
-   * @memberof Pool
    * @return {Array<String>} Categories in the pool.
+   * @memberof Pool
    */
   get categories() {
     let categories = {};
@@ -62,8 +62,8 @@ class Pool {
    * Elments in the pool.
    * @instance
    * @function length
-   * @memberof Pool
    * @return {Number} Number of elements.
+   * @memberof Pool
    */
   get length() {
     let count = 0;
@@ -79,8 +79,8 @@ class Pool {
    * Elments in the pool.
    * @instance
    * @function size
-   * @memberof Pool
    * @return {Number} Number of elements.
+   * @memberof Pool
    */
   get size() {
     return length;
@@ -90,9 +90,9 @@ class Pool {
    * Checks if id exists in the pool.
    * @instance
    * @function exists
-   * @memberof Pool
    * @param {String} id Object id.
    * @return {Boolean} If objects exists or not in the pool.
+   * @memberof Pool
    */
   exists(id) {
     return (this[id] != null);
@@ -102,9 +102,9 @@ class Pool {
    * Get object at id.
    * @instance
    * @function at
-   * @memberof Pool
    * @param {String} id Object id.
    * @return {Object} Object at id.
+   * @memberof Pool
    */
   at(id) {
     return this[id];
@@ -114,8 +114,8 @@ class Pool {
    * Get the pool as array.
    * @instance
    * @function toArray
-   * @memberof Pool
    * @return {Array<Object>} All objects in the pool.
+   * @memberof Pool
    */
   toArray() {
     let array = [];
@@ -132,8 +132,8 @@ class Pool {
    * @async
    * @instance
    * @function forEach
-   * @memberof Pool
    * @param {Function} call Function to run for each element.
+   * @memberof Pool
    */
   async forEach(call) {
     for (let id in this) {
@@ -148,10 +148,10 @@ class Pool {
    * @async
    * @instance
    * @function forEachInRange
-   * @memberof Pool
    * @param {Vector3} position Position.
    * @param {Number} range Max range.
    * @param {Function} call Function to run for each element.
+   * @memberof Pool
    */
   async forEachInRange(position, range, call) {
     for (let id in this) {
@@ -166,9 +166,9 @@ class Pool {
    * @async
    * @instance
    * @function forEachInDimension
-   * @memberof Pool
    * @param {Number} dimension Dimension.
    * @param {Function} call Function to run for each element.
+   * @memberof Pool
    */
   async forEachInDimension(dimension, call) {
     for (let id in this) {

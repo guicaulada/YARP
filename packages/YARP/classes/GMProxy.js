@@ -1,12 +1,13 @@
 'use strict';
 /**
  * Implements a gamemode Proxy.
+ * @class GMProxy
  */
 class GMProxy {
   /**
    * Creates an instance of Proxy.
-   * @memberof GMProxy
    * @param {String} id Tunnel id.
+   * @memberof GMProxy
    */
   constructor(id) {
     if (id) {

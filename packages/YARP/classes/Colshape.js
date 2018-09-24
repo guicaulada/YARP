@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Colshape.
+ * @class Colshape
  */
 class Colshape extends yarp.Object {
   /**
    * Creates an instance of Colshape.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position

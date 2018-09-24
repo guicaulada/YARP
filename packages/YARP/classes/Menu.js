@@ -5,7 +5,7 @@
 class Menu extends yarp.Object {
   /**
    * Creates an instance of Menu.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} [params.title='']
    * @param {Array<Object>} [params.data=[]]
@@ -31,8 +31,10 @@ class Menu extends yarp.Object {
 
   /**
    * Creates the menu.
-   * @memberof Menu
+   * @instance
+   * @function create
    * @param {Object} player
+   * @memberof Menu
    */
   create(player) {
     yarp.client.createMenu(player, this.id, yarp.utils.server.cleanData(this));
@@ -40,6 +42,8 @@ class Menu extends yarp.Object {
 
   /**
    * Recreates the menu for all online players.
+   * @instance
+   * @function recreate
    * @memberof Menu
    */
   recreate() {
@@ -49,9 +53,11 @@ class Menu extends yarp.Object {
   }
 
   /**
-   * Open the menu.
-   * @memberof Menu
+   * Open the menu for player.
+   * @instance
+   * @function open
    * @param {Object} player
+   * @memberof Menu
    */
   open(player) {
     this._visible[player.name] = true;
@@ -59,9 +65,11 @@ class Menu extends yarp.Object {
   }
 
   /**
-   * Close the menu.
-   * @memberof Menu
+   * Close the menu for player.
+   * @instance
+   * @function close
    * @param {Object} player
+   * @memberof Menu
    */
   close(player) {
     this._visible[player.name] = false;
@@ -69,18 +77,22 @@ class Menu extends yarp.Object {
   }
 
   /**
-   * Toggle the menu.
-   * @memberof Menu
+   * Toggle the menu for player.
+   * @instance
+   * @function toggle
    * @param {Object} player
+   * @memberof Menu
    */
   toggle(player) {
     yarp.client.toggleMenu(player, this.id);
   }
 
   /**
-   * Add one item the menu.
-   * @memberof Menu
+   * Add one item to the menu.
+   * @instance
+   * @function add
    * @param {Object} item
+   * @memberof Menu
    */
   add(item) {
     this._data.push(item);
@@ -88,9 +100,11 @@ class Menu extends yarp.Object {
 
   /**
    * Returns if menu is visible.
-   * @memberof Menu
+   * @instance
+   * @function isVisible
    * @param {Object} player
    * @return {Boolean} True if menu is visible for player.
+   * @memberof Menu
    */
   isVisible(player) {
     return this._visible[player.name];
@@ -98,10 +112,12 @@ class Menu extends yarp.Object {
 
   /**
    * Update menu item.
-   * @memberof Menu
+   * @instance
+   * @function updateItem
    * @param {Object} player
    * @param {Number} index
    * @param {Object} item
+   * @memberof Menu
    */
   updateItem(player, index, item) {
     yarp.client.menuUpdateItem(player, this.id, index, item);
@@ -109,9 +125,11 @@ class Menu extends yarp.Object {
 
   /**
    * Update menu items.
-   * @memberof Menu
+   * @instance
+   * @function updateItems
    * @param {Object} player
    * @param {Object} indexItems
+   * @memberof Menu
    */
   updateItems(player, indexItems) {
     yarp.client.menuUpdateItems(player, this.id, indexItems);
@@ -119,10 +137,12 @@ class Menu extends yarp.Object {
 
   /**
    * Remove menu item.
-   * @memberof Menu
+   * @instance
+   * @function removeItem
    * @param {Object} player
    * @param {Number} index
    * @param {Object} item
+   * @memberof Menu
    */
   removeItem(player, index) {
     yarp.client.menuRemoveItem(player, this.id, index);
@@ -130,10 +150,12 @@ class Menu extends yarp.Object {
 
   /**
    * Remove menu items.
-   * @memberof Menu
+   * @instance
+   * @function removeItems
    * @param {Object} player
    * @param {Number} index
    * @param {Number} amount
+   * @memberof Menu
    */
   removeItems(player, index, amount) {
     yarp.client.menuRemoveItems(player, this.id, index, amount);

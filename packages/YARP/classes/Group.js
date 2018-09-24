@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Group.
+ * @class Group
  */
 class Group extends yarp.Object {
   /**
    * Creates an instance of Group.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Boolean} [params.type=false]
@@ -35,8 +36,8 @@ class Group extends yarp.Object {
    * Get users on group.
    * @instance
    * @function users
-   * @memberof Group
    * @return {Object} Users.
+   * @memberof Group
    */
   get users() {
     let users = {};
@@ -55,8 +56,8 @@ class Group extends yarp.Object {
    * Get characters on group.
    * @instance
    * @function characters
-   * @memberof Group
    * @return {Object} Characters.
+   * @memberof Group
    */
   get characters() {
     let characters = {};
@@ -75,8 +76,8 @@ class Group extends yarp.Object {
    * Add permission to group.
    * @instance
    * @function addPermission
-   * @memberof Group
    * @param {String} permission Permission.
+   * @memberof Group
    */
   addPermission(permission) {
     if (this.permissions.indexOf(permission) == -1) {
@@ -88,8 +89,8 @@ class Group extends yarp.Object {
    * Remove permission from group.
    * @instance
    * @function removePermission
-   * @memberof Group
    * @param {String} permission Permission.
+   * @memberof Group
    */
   removePermission(permission) {
     if (this.permissions.indexOf(permission) > -1) {
@@ -101,9 +102,9 @@ class Group extends yarp.Object {
    * Check if has permission.
    * @instance
    * @function hasPermission
-   * @memberof Group
    * @param {String} permission Permission.
    * @return {Boolean} If has or not the permission.
+   * @memberof Group
    */
   hasPermission(permission) {
     let result = false;
@@ -147,9 +148,9 @@ class Group extends yarp.Object {
    * Check if has all permissions.
    * @instance
    * @function hasPermission
-   * @memberof Group
    * @param {Array<String>} permissions Permissions.
    * @return {Boolean} If has or not all permissions.
+   * @memberof Group
    */
   hasPermissions(permissions) {
     for (let i = 0; i < permissions.length; i++) {

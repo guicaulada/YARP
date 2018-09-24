@@ -5,7 +5,7 @@
 class Transaction extends yarp.Object {
   /**
    * Creates an instance of Transaction.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.type
    * @param {Nuimber} params.value

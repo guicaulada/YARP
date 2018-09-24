@@ -1,11 +1,12 @@
 'use strict';
 /**
  * Implements a Blip.
+ * @class Blip
  */
 class Blip extends yarp.Object {
   /**
    * Creates an instance of Blip.
-   * @extends yarp.Object
+   * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} params.id
    * @param {Vector3} params.position

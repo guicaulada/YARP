@@ -1,12 +1,13 @@
 'use strict';
 /**
  * Implements common functionalities across all YARP objects.
+ * @class GMObject
  */
 class GMObject {
   /**
-   * @memberof GMObject
    * @abstract
    * @throws {TypeError} Abstract class GMObject cannot be instantiated directly.
+   * @memberof GMObject
    */
   constructor() {
     if (this.constructor === GMObject) {
@@ -18,8 +19,8 @@ class GMObject {
    * Returns true if saving is blocked.
    * @instance
    * @function isLocked
-   * @memberof GMObject
    * @return {Boolean} Saving blocked?
+   * @memberof GMObject
    */
   isLocked() {
     return this.lock__save__;
@@ -70,8 +71,8 @@ class GMObject {
    * Get only persisten data
    * @instance
    * @function data
-   * @memberof GMObject
    * @return {Object} Persistent data object.
+   * @memberof GMObject
    */
   get data() {
     let data = {};
@@ -87,8 +88,8 @@ class GMObject {
    * Get only persisten data without prefix
    * @instance
    * @function data
-   * @memberof GMObject
    * @return {Object} Persistent data object.
+   * @memberof GMObject
    */
   get cleanData() {
     let data = {};
@@ -114,8 +115,8 @@ class GMObject {
    * Set call function as string.
    * @instance
    * @function call
-   * @memberof GMObject
    * @param {Function} value Call function.
+   * @memberof GMObject
    */
   set call(value) {
     this._call = value.toString();
@@ -135,8 +136,8 @@ class GMObject {
    * Set enter function as string.
    * @instance
    * @function enter
-   * @memberof GMObject
    * @param {Function} value Enter function.
+   * @memberof GMObject
    */
   set enter(value) {
     this._enter = value.toString();
@@ -156,8 +157,8 @@ class GMObject {
    * Set leave function as string.
    * @instance
    * @function leave
-   * @memberof GMObject
    * @param {Function} value Leave function.
+   * @memberof GMObject
    */
   set leave(value) {
     this._leave = value.toString();
@@ -167,10 +168,10 @@ class GMObject {
    * Returns first vaule or second value as default.
    * @instance
    * @function default
-   * @memberof GMObject
    * @param {*} v Verified value.
    * @param {*} d Default value if v is null.
    * @return {*} v if it's not null, or d
+   * @memberof GMObject
    */
   default(v, d) {
     return (v != null) ? v : d;
