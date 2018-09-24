@@ -53,7 +53,7 @@ yarp.client.menuAddItem = (menuId, item) => {
             break;
         case 'submenu':
             menuItem = new NativeMenu.SubMenuItem(...menuItem);
-            yarp.menus[item.id] = menuItem;
+            yarp.menus[item.id] = menuItem.menu;
             for (let subitem of item.data) {
                 yarp.client.menuAddItem(item.id, subitem);
             }
