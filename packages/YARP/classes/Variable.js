@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Implements a Variable.
+ * @class Variable
  */
 class Variable extends yarp.Object {
   /**

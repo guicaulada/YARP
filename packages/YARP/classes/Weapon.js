@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Implements a Weapon.
+ * @class Weapon
  */
 class Weapon extends yarp.Object {
   /**

@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Implements a Vehicles.
+ * @class Vehicles
  */
 class Vehicle extends yarp.Object {
   /**

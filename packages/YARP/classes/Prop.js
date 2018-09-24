@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Implements a Prop.
+ * @class Prop
  */
 class Prop extends yarp.Object {
   /**

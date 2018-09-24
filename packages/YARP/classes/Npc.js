@@ -1,6 +1,7 @@
 'use strict';
 /**
  * Implements a Npc.
+ * @class Npc
  */
 class Npc extends yarp.Object {
   /**
