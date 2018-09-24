@@ -26,11 +26,10 @@ class CheckboxMenuItem extends NativeMenu.MenuItem {
   }
 
   /**
-   *
-   *
-   * @param {*} x
-   * @param {*} y
-   * @param {*} yCaption
+   * Draws item on screen.
+   * @param {Number} x
+   * @param {Number} y
+   * @param {Number} yCaption
    * @memberof CheckboxMenuItem
    */
   draw(x, y, yCaption) {
