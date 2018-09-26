@@ -1078,13 +1078,13 @@ class Character extends yarp.Object {
           id: 'inventory'+item.name,
           displayText: this.inventory[itemId]+' - '+item.name,
           caption: this.default(item.caption, ''),
-          data: [],
+          items: [],
         };
 
         let o = 0;
         for (let option in item.options) {
           if (item.options.hasOwnProperty(option)) {
-            submenu.data.push({
+            submenu.items.push({
               type: 'text',
               displayText: option,
               caption: option+` item`,
