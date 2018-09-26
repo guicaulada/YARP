@@ -8,7 +8,7 @@ class Menu extends yarp.Object {
    * @extends {yarp.Object}
    * @param {Object} params
    * @param {String} [params.title='']
-   * @param {Array<Object>} [params.data=[]]
+   * @param {Array<Object>} [params.items=[]]
    * @param {Array<Number>} [params.offset=[0, 0]]
    * @param {Number} [params.texture=['commonmenu', 'interaction_bgd']]
    * @memberof Menu
@@ -18,7 +18,7 @@ class Menu extends yarp.Object {
     if ((params.id) != null) {
       this._id = params.id;
       this._title = this.default(params.title, params.id);
-      this._data = this.default(params.data, []);
+      this._items = this.default(params.items, []);
       this._offset = this.default(params.offset, [0, 0]);
       this._texture = this.default(params.texture, ['commonmenu', 'interaction_bgd']);
       this._visible = {};
@@ -95,7 +95,7 @@ class Menu extends yarp.Object {
    * @memberof Menu
    */
   add(item) {
-    this._data.push(item);
+    this.items.push(item);
   }
 
   /**

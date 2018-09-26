@@ -5,7 +5,7 @@
 
 module.exports = async () => {
   // Loading events
-  console.log(chalk.yellowBright('[YARP] ')+'Loading Events');
+  yarp.log.warning('Loading Events');
   try {
     /**
      * Loads RAGE:MP events.
@@ -30,6 +30,6 @@ module.exports = async () => {
     require('../events/yarp/menu.js');
     require('../events/yarp/ui.js');
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'EventError: '+err.message+'\n'+err.stack);
+    yarp.log.danger('EventError: '+err.message+'\n'+err.stack);
   }
 };

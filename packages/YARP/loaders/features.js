@@ -5,11 +5,11 @@
 
 module.exports = async () => {
   // Loading features (a more complex set of events and functions working together)
-  console.log(chalk.yellowBright('[YARP] ')+'Loading Features');
+  yarp.log.warning('Loading Features');
   try {
     // Load stores
-    require('../features/stores/common.js');
+    require('../features/stores/index.js');
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'FeatureError: '+err.message+'\n'+err.stack);
+    yarp.log.danger('FeatureError: '+err.message+'\n'+err.stack);
   }
 };

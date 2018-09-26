@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Provides safe asynchronous interaction between MongoDB and YARP.
+ * Implements command-line interface.
  * @namespace yarp.cli
  */
 
@@ -28,7 +28,7 @@ cli.io.on('line', (s) => {
     } else {
       res = ' Unknown command!!!';
     }
-    console.log(res);
+    yarp.log.command(res);
   }
 });
 

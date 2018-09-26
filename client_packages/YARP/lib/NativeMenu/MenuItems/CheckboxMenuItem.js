@@ -7,7 +7,8 @@ class CheckboxMenuItem extends NativeMenu.MenuItem {
    *Creates an instance of CheckboxMenuItem.
    * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
-   * @param {Boolean} [data=false]
+   * @param {Boolean} [toggled=false]
+   * @param {Boolean} [data={}]
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
    * @param {NativeMenu.Color} [textColor=new NativeMenu.Color(255, 255, 255, 240)]
@@ -16,11 +17,12 @@ class CheckboxMenuItem extends NativeMenu.MenuItem {
    * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
    * @memberof CheckboxMenuItem
    */
-  constructor(displayText, data = false, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
+  constructor(displayText, toggled = false, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
     super(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor);
+    this.toggled = toggled;
     this.addOnClickEvent({
-      trigger: (data) => {
-        this.data = !this.data;
+      trigger: (toggled) => {
+        this.toggled = !this.toggled;
       },
     });
   }
@@ -34,7 +36,7 @@ class CheckboxMenuItem extends NativeMenu.MenuItem {
    */
   draw(x, y, yCaption) {
     super.draw(x, y, yCaption);
-    NativeMenu.CommonMenuTexture.draw(this.data ? 'shop_box_tick' : 'shop_box_blank', x + NativeMenu.MainMenu.MENU_DRAW_OFFSET_X - (0.015 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), y + NativeMenu.MainMenu.MENU_DRAW_OFFSET_Y, (0.025 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), (0.035 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT), new NativeMenu.Color(), 0);
+    NativeMenu.CommonMenuTexture.draw(this.toggled ? 'shop_box_tick' : 'shop_box_blank', x + NativeMenu.MainMenu.MENU_DRAW_OFFSET_X - (0.015 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), y + NativeMenu.MainMenu.MENU_DRAW_OFFSET_Y, (0.025 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), (0.035 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT), new NativeMenu.Color(), 0);
   }
 }
 

@@ -12,48 +12,18 @@ let openStores = {};
  */
 yarp.server.openStoreMenu = (player, location, options) => {
   if (!options) options = {};
-  let sale = location.sale;
-  let menu = new yarp.Menu({
-    id: location.id,
-    title: yarp.utils.server.default(options.title, 'Store'),
-    offset: yarp.utils.server.default(options.offset, [0, 0]),
-  });
-
-  for (let category in sale) {
-    if (sale.hasOwnProperty(category)) {
-      let submenu = {
-        type: 'submenu',
-        id: category,
-        displayText: category,
-        caption: `Buy ${category.toLowerCase()} items.`,
-        data: [],
-      };
-
-      for (let itemId in sale[category]) {
-        if (sale[category].hasOwnProperty(itemId)) {
-          let saleItem = sale[category][itemId];
-          if (saleItem.amount > 0) {
-            submenu.data.push({
-              type: 'text',
-              displayText: saleItem.price + '$ - ' + saleItem.name,
-              caption: `Buy ${saleItem.name} for $${saleItem.price}.`,
-              data: {itemId: saleItem.id, storeId: location.id, categoryId: category, storeType: 'common'},
-            });
-          }
-        }
-      }
-      menu.add(submenu);
-    }
+  openStores[player.name] = {total: 0, received: {}, type: options.type, location: location.id};
+  switch (options.type) {
+    case 'submenu':
+    yarp.server.openSubmenuStore(player, location, options);
+    break;
+    case 'list':
+    yarp.server.openListStore(player, location, options);
+    break;
+    default:
+    yarp.log.danger('Unknow store type given in options.\nOptions: ' + JSON.stringify(options));
+    break;
   }
-
-  menu.add({
-    type: 'close',
-    displayText: 'Close',
-  });
-
-  menu.create(player);
-  openStores[player.name] = {total: 0, received: {}};
-  yarp.hotkeys['Open Menu'].bind(player, [menu]);
 };
 
 /**
@@ -93,7 +63,7 @@ yarp.server.closeStoreMenu = (player, location) => {
  * @param {Object} data Data representing the event.
  */
 yarp.server.add.menuItemClicked = (player, menuId, type, index, data) => {
-  if (data && data.storeType == 'common' && data.itemId && data.storeId && data.categoryId) {
+  if (data && data.storeType && data.itemId && data.storeId && data.categoryId) {
     let storeId = data.storeId;
     let location = yarp.locations[storeId];
     if (location) {
@@ -103,27 +73,32 @@ yarp.server.add.menuItemClicked = (player, menuId, type, index, data) => {
         let itemId = data.itemId;
         let saleItem = sale[categoryId][itemId];
         let character = player.character;
-        if (character.tryFullPayment(saleItem.price)) {
-          location.inventory[itemId].amount -= 1;
+        let amount = 1;
+        if (data.item) amount = Number(data.item.displayText);
+        if (character.tryFullPayment(saleItem.price*amount)) {
+          location.inventory[itemId].amount -= amount;
           let item = yarp.items[itemId];
           if (item.isWeapon()) {
             character.giveWeapon(yarp.weapons[item.id]);
           } else if (item.isAmmo()) {
-            character.giveAmmo(item.id, 1);
+            character.giveAmmo(item.id, amount);
           } else {
-            character.giveItem(item, 1);
+            character.giveItem(item, amount);
           }
           location.save();
           character.save();
 
-          openStores[player.name].total += saleItem.price;
+          openStores[player.name].total += (saleItem.price * amount);
           if (!openStores[player.name].received[item.name]) {
-            openStores[player.name].received[item.name] = 1;
+            openStores[player.name].received[item.name] = amount;
           } else {
-            openStores[player.name].received[item.name] += 1;
+            openStores[player.name].received[item.name] += amount;
           }
         }
       }
     }
   }
 };
+
+require('./list.js');
+require('./submenu.js');

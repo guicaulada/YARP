@@ -5,7 +5,7 @@
 
 module.exports = async () => {
   // Loading data
-  console.log(chalk.yellowBright('[YARP] ')+'Loading Data');
+  yarp.log.warning('Loading Data');
   try {
     await yarp.blips.load();
     await yarp.characters.load();
@@ -29,6 +29,6 @@ module.exports = async () => {
     await yarp.vehicles.load();
     await yarp.weapons.load();
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'DataError: '+err.message+'\n'+err.stack);
+    yarp.log.danger('DataError: '+err.message+'\n'+err.stack);
   }
 };

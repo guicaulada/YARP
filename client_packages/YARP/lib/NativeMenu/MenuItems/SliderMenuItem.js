@@ -7,9 +7,10 @@ class SliderMenuItem extends NativeMenu.MenuItem {
    * Creates an instance of SliderMenuItem.
    * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
-   * @param {Number} min
-   * @param {Number} max
-   * @param {Number} step
+   * @param {Number} [min=1]
+   * @param {Number} [max=3]
+   * @param {Number} [step=1]
+   * @param {Number} [start=Math.floor((min + max) / 2)]
    * @param {*} data
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
@@ -19,14 +20,12 @@ class SliderMenuItem extends NativeMenu.MenuItem {
    * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
    * @memberof SliderMenuItem
    */
-  constructor(displayText, min, max, step, data = NaN, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
+  constructor(displayText, min=1, max=3, step=1, start = Math.floor((min + max) / 2), data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
     super(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor);
     this.min = min;
     this.max = max;
     this.step = step;
-    if (isNaN(data)) {
-      this.data = Math.floor((this.min + this.max) / 2);
-    }
+    this.start = start;
     this.firstRender = true;
     this.onChangeEvents = [];
   }
@@ -49,15 +48,15 @@ class SliderMenuItem extends NativeMenu.MenuItem {
    */
   render(x, y, yCaption) {
     if (this.firstRender) {
-      this.setToValue(this.data, false);
+      this.setToValue(this.start, false);
       this.firstRender = false;
     }
     if (this._isSelect && Date.now() - NativeMenu.MainMenu.CONTROL_TICK_TIME_MS > NativeMenu.MainMenu.LAST_TICK_TIME) {
       if (mp.game.controls.isControlPressed(0, NativeMenu.Control.INPUT_CELLPHONE_RIGHT)) {
-        this.setToValue(this.data + this.step);
+        this.setToValue(this.start + this.step);
       } else {
         if (mp.game.controls.isControlPressed(0, NativeMenu.Control.INPUT_CELLPHONE_LEFT)) {
-          this.setToValue(this.data - this.step);
+          this.setToValue(this.start - this.step);
         }
       }
     }
@@ -79,7 +78,7 @@ class SliderMenuItem extends NativeMenu.MenuItem {
     let sliderHeight = NativeMenu.MainMenu.MENU_HEIGHT / 4;
     let xPosition = xOffset - (sliderWidth / 2);
     mp.game.graphics.drawRect(xPosition, y + NativeMenu.MainMenu.MENU_DRAW_OFFSET_Y, sliderWidth, sliderHeight, 52, 73, 94, 255);
-    let xDataPosition = xOffset - sliderWidth + (sliderWidth / ((this.max - this.min) / this.step) * ((this.data + Math.abs(this.min)) / this.step));
+    let xDataPosition = xOffset - sliderWidth + (sliderWidth / ((this.max - this.min) / this.step) * ((this.start + Math.abs(this.min)) / this.step));
     mp.game.graphics.drawRect(xDataPosition, y + NativeMenu.MainMenu.MENU_DRAW_OFFSET_Y, 0.004, sliderHeight * 2, this.textColor.red, this.textColor.green, this.textColor.blue, this.textColor.alpha);
     let arrowWidth = (0.015 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH);
     let xLeftArrowPosition = xOffset - sliderWidth - (arrowWidth / 2);
@@ -95,12 +94,12 @@ class SliderMenuItem extends NativeMenu.MenuItem {
    */
   setToValue(newValue, withSound = true) {
     if (newValue < this.min) {
-      this.data = this.max;
+      this.start = this.max;
     } else {
       if (newValue > this.max) {
-        this.data = this.min;
+        this.start = this.min;
       } else {
-        this.data = newValue;
+        this.start = newValue;
       }
     }
     if (withSound) {
@@ -108,7 +107,7 @@ class SliderMenuItem extends NativeMenu.MenuItem {
     }
     NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
     this.onChangeEvents.forEach((value) => {
-      value.trigger(this.data);
+      value.trigger(this.start);
     });
   }
 }

@@ -31,7 +31,7 @@
   await require('./loaders/features.js')();
 
   // Loading complete
-  console.log(chalk.greenBright('[YARP] ')+'Loading Complete');
+  yarp.log.success('Loading Complete');
 
   // Rejoin players
   mp.players.forEach((player, i) => {
@@ -44,11 +44,11 @@
  * @ignore
  */
 const exit = async () => {
-  console.log(chalk.redBright('[YARP] ')+'Closing Connection. Bye-bye.');
+  yarp.log.danger('Closing Connection. Bye-bye.');
   await mp.players.broadcast(`!{red}The server is closing. Rejoin with F1.`);
   for (let player of mp.players.toArray()) {
     player.kick('The server is closing.');
-    console.log(`${player.name}(${player.socialClub}/${player.ip}) quit.`+'Reason: The server is closing. (kicked)');
+    yarp.log.info(`${player.name}(${player.socialClub}/${player.ip}) quit.`+'Reason: The server is closing. (kicked)');
   }
   process.exit();
 };

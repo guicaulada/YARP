@@ -12,7 +12,7 @@
  * @param {String} message Message sent.
  */
 mp.events.add('playerChat', (player, message) => {
-  console.log(chalk.cyanBright('[YARP] ') + `${player.name}: ${message}`);
+  yarp.log.info(`${player.name}: ${message}`);
   mp.players.broadcast(`${player.name}: ${message}`);
 });
 
@@ -26,7 +26,7 @@ mp.events.add('playerChat', (player, message) => {
 mp.events.add('playerCommand', (player, command) => {
   const args = command.split(/[ ]+/);
   const commandName = args.splice(0, 1)[0];
-  console.log(chalk.cyanBright('[YARP] ') + `${player.name}: /${command}`);
+  yarp.log.info(`${player.name}: /${command}`);
   command = yarp.commands[commandName];
 
   if (command) {
@@ -81,19 +81,19 @@ mp.events.add('playerDeath', (player) => {
  */
 mp.events.add('playerJoin', (player) => {
   player.name = player.socialClub;
-  console.log(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
+  yarp.log.info(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
   yarp.client.setWorldTime(player, {h: mp.world.time.hour, m: mp.world.time.minute, s: mp.world.time.second});
   let user = yarp.users[player.socialClub];
   if (user != null) {
     if (user.banned) {
       player.outputChatBox('!{red}You have been banned.');
-      console.log(`${player.socialClub} is banned.`);
+      yarp.log.info(`${player.socialClub} is banned.`);
       setTimeout(function() {
         player.kick('You have been banned.');
       }, 1000);
     } else if (yarp.variables['Whitelisted'].value && !user.whitelisted) {
       player.outputChatBox('!{yellow}You are not whitelisted.');
-      console.log(`${player.socialClub} is not whitelisted.`);
+      yarp.log.info(`${player.socialClub} is not whitelisted.`);
       setTimeout(function() {
         player.kick('You are not whitelisted.');
       }, 1000);
@@ -120,7 +120,7 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
   if (exitType == 'kicked') {
     msg = `${player.name}(${player.socialClub}/${player.ip}) quit. Reason: ${reason} (${exitType})`;
   }
-  console.log(msg);
+  yarp.log.info(msg);
 });
 
 /**

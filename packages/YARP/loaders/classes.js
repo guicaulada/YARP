@@ -5,7 +5,7 @@
 
 module.exports = async () => {
   // Loading classes
-  console.log(chalk.yellowBright('[YARP] ')+'Loading Objects');
+  yarp.log.warning('Loading Objects');
   try {
     yarp.Blip = require('../classes/Blip.js');
     yarp.Character = require('../classes/Character.js');
@@ -28,6 +28,6 @@ module.exports = async () => {
     yarp.Vehicle = require('../classes/Vehicle.js');
     yarp.Weapon = require('../classes/Weapon.js');
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'ClassError: '+err.message+'\n'+err.stack);
+    yarp.log.danger('ClassError: '+err.message+'\n'+err.stack);
   }
 };

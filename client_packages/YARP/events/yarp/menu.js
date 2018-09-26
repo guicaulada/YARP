@@ -14,47 +14,44 @@
 yarp.client.menuAddItem = (menuId, item) => {
     let index = yarp.menus[menuId].menuItems.length;
     let type = yarp.utils.client.default(item.type, 'text');
-    let menuItem = [item.displayText, item.data,
-        yarp.utils.client.default(item.caption, ''),
-        yarp.utils.client.default(item.badge, NaN),
-        new NativeMenu.Color(...yarp.utils.client.default(item.textColor, [255, 255, 255, 240])),
-        new NativeMenu.Color(...yarp.utils.client.default(item.backgroundColor, [0, 0, 0, 120])),
-        new NativeMenu.Color(...yarp.utils.client.default(item.hoverTextColor, [20, 0, 0, 240])),
-        new NativeMenu.Color(...yarp.utils.client.default(item.hoverBackgroundColor, [255, 255, 255, 170])),
+    let menuItem = [
+        item.displayText, item.data, item.caption, item.badge,
     ];
+    if (item.textColor) {
+        menuItem.push(new NativeMenu.Color(...item.textColor));
+    }
+    if (item.backgroundColor) {
+        menuItem.push(new NativeMenu.Color(...item.backgroundColor));
+    }
+    if (item.hoverTextColor) {
+        menuItem.push(new NativeMenu.Color(...item.hoverTextColor));
+    }
+    if (item.hoverBackgroundColor) {
+        menuItem.push(new NativeMenu.Color(...item.hoverBackgroundColor));
+    }
     switch (type) {
         case 'checkbox':
-            menuItem = new NativeMenu.CheckboxMenuItem(...menuItem);
+            menuItem = new NativeMenu.CheckboxMenuItem(menuItem[0], item.toggled, ...menuItem.slice(1, 8));
             break;
         case 'list':
-            menuItem = [...menuItem.slice(0, 2),
-                yarp.utils.client.default(item.defaultIndex, 0),
-                ...menuItem.slice(2, 8),
+            menuItem = [
+                menuItem[0], item.items, item.defaultIndex, ...menuItem.slice(1, 8),
             ];
             menuItem = new NativeMenu.ListMenuItem(...menuItem);
             break;
         case 'slider':
-            menuItem = [menuItem[0],
-                yarp.utils.client.default(item.min, 1),
-                yarp.utils.client.default(item.max, 1),
-                yarp.utils.client.default(item.step, 1),
-                ...menuItem.slice(1, 8),
+            menuItem = [
+                menuItem[0], item.min, item.max, item.step, item.start, ...menuItem.slice(1, 8),
             ];
             menuItem = new NativeMenu.SliderMenuItem(...menuItem);
             break;
         case 'close':
-            menuItem = [...menuItem.slice(0, 4),
-                new NativeMenu.Color(...yarp.utils.client.default(item.textColor, [255, 255, 255, 255])),
-                new NativeMenu.Color(...yarp.utils.client.default(item.backgroundColor, [242, 67, 67, 204])),
-                new NativeMenu.Color(...yarp.utils.client.default(item.hoverTextColor, [255, 255, 255, 255])),
-                new NativeMenu.Color(...yarp.utils.client.default(item.hoverBackgroundColor, [242, 67, 67, 255])),
-            ];
             menuItem = new NativeMenu.CloseMenuItem(...menuItem);
             break;
         case 'submenu':
             menuItem = new NativeMenu.SubMenuItem(...menuItem);
             yarp.menus[item.id] = menuItem.menu;
-            for (let subitem of item.data) {
+            for (let subitem of item.items) {
                 yarp.client.menuAddItem(item.id, subitem);
             }
             break;
@@ -99,7 +96,7 @@ yarp.client.createMenu = (menuId, options) => {
     if (options.texture) {
         yarp.menus[menuId].setTitleTexture(...options.texture);
     }
-    for (let item of options.data) {
+    for (let item of options.items) {
         yarp.client.menuAddItem(menuId, item);
     }
     yarp.menus[menuId].setEventMenu({
@@ -148,11 +145,11 @@ yarp.client.openMenu = (menuId) => {
 yarp.client.closeMenu = (menuId) => {
     let currentMenu = yarp.client.getCurrentMenu();
     let targetMenu = yarp.menus[menuId];
-    while (currentMenu != targetMenu) {
+    while (currentMenu != targetMenu && currentMenu != null) {
         yarp.client.removeSubMenu(currentMenu);
         currentMenu = yarp.client.getCurrentMenu();
     }
-    targetMenu.close();
+    if (currentMenu) currentMenu.close();
     mp.gui.chat.show(true);
 };
 

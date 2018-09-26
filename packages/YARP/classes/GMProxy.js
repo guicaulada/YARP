@@ -21,7 +21,7 @@ class GMProxy {
               result = JSON.parse(string);
             } catch (err) {
               result = string;
-              console.log(chalk.redBright('[YARP] ') + 'ProxyError: ' + err.message + '\n' + err.stack);
+              yarp.log.danger('ProxyError: ' + err.message + '\n' + err.stack);
             }
           }
           return result;
@@ -33,7 +33,7 @@ class GMProxy {
               result = JSON.stringify(obj);
             } catch (err) {
               result = obj;
-              console.log(chalk.redBright('[YARP] ') + 'ProxyError: ' + err.message + '\n' + err.stack);
+              yarp.log.danger('ProxyError: ' + err.message + '\n' + err.stack);
             }
           }
           return result;
@@ -48,9 +48,9 @@ class GMProxy {
           if (name == 'add') return self.add;
           self.local[name] = value;
           mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
-            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}`);
+            if (yarp.variables['Debug'].value) yarp.log.debug(`<== ${self.id}:${name}`);
             if (!args) args = [];
-            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `${self.id}:${name}:${id} ==>`);
+            if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}:${id} ==>`);
             player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(await value(player, ...this.tryJSON.parse(args)))]);
           });
           return value;
@@ -62,21 +62,21 @@ class GMProxy {
             return new Promise((resolve, reject) => {
               try {
                 let id = Math.round((new Date()).getTime());
-                if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `${self.id}:${name}  ==>`);
+                if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}  ==>`);
                 args[0].call(`${self.id}:${name}`, [`${id}`, this.tryJSON.stringify(args.slice(1, args.length))]);
                 mp.events.add(`${self.id}:${name}:${id}`, (player, result) => {
-                  if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}:${id}`);
+                  if (yarp.variables['Debug'].value) yarp.log.debug(`<== ${self.id}:${name}:${id}`);
                   mp.events.remove(`${self.id}:${name}:${id}`);
                   resolve(this.tryJSON.parse(result));
                 });
               } catch (err) {
-                console.log(chalk.redBright('[YARP] ') + 'ProxyError: ' + err.message + '\n' + err.stack);
+                yarp.log.danger('ProxyError: ' + err.message + '\n' + err.stack);
               }
             });
           };
         },
         set: (proxy, name, value) => {
-          console.log(chalk.redBright('[YARP] ') + 'ProxyError: You can\'t set client events on server-side.');
+          yarp.log.danger('ProxyError: You can\'t set client events on server-side.');
         },
       });
       self.add = new Proxy({}, {
@@ -85,9 +85,9 @@ class GMProxy {
         },
         set: (proxy, name, value) => {
           mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
-            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `<== ${self.id}:${name}`);
+            if (yarp.variables['Debug'].value) yarp.log.debug(`<== ${self.id}:${name}`);
             if (!args) args = [];
-            if (yarp.variables.Debug.value) console.log(chalk.magentaBright('[YARP] ') + `${self.id}:${name}:${id} ==>`);
+            if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}:${id} ==>`);
             player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(await value(player, ...this.tryJSON.parse(args)))]);
           });
           return value;

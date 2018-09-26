@@ -12,15 +12,23 @@ module.exports = async () => {
   global.chalk = require('chalk');
   /** @global */
   global.bcrypt = require('bcryptjs');
-  console.log(chalk.yellowBright('[YARP] ')+'Loading Core');
+
+  let log = require('../modules/log.js');
+
+  log.warning('Loading Core');
   try {
     /** @namespace ragemp */
     /** @namespace yarp */
+    // Loads Proxy
     let GMProxy = require('../classes/GMProxy.js');
     global.yarp = new GMProxy('yarp');
     yarp.Proxy = GMProxy;
 
     /** @namespace yarp.utils */
+    yarp.log = log;
+    yarp.log.time = true;
+    yarp.log.date = true;
+    yarp.log.type = true;
     yarp.utils = require('../modules/utils.js');
     yarp.cli = require('../modules/cli.js');
     yarp.db = require('../modules/mongo.js');
@@ -32,6 +40,6 @@ module.exports = async () => {
     yarp.variables.config('../configs/variables.js');
     await yarp.db.connect(yarp.variables['Database'].value);
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'CoreError: '+err.message+'\n'+err.stack);
+    log.error('CoreError: '+err.message+'\n'+err.stack);
   }
 };

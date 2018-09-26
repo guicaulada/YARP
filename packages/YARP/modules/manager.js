@@ -19,7 +19,7 @@ mng.register = async (object) => {
     if (!yarp[collection]) yarp[collection] = {};
     yarp[collection][object._id] = object;
   } else {
-    console.log(chalk.redBright('[YARP] ') + 'ManagerError: object could not be registered in ' + collection + ', missing id.\n' + JSON.stringify(object));
+    yarp.log.danger('ManagerError: object could not be registered in ' + collection + ', missing id.\n' + JSON.stringify(object));
   }
 };
 
@@ -35,7 +35,7 @@ mng.save = async (object) => {
   if (object._id != null && !object.lock__save__) {
     yarp.db.save(collection, object.data);
   } else {
-    console.log(chalk.redBright('[YARP] ') + 'ManagerError: object could not be saved in ' + collection + ', missing id.\n' + JSON.stringify(object));
+    yarp.log.danger('ManagerError: object could not be saved in ' + collection + ', missing id.\n' + JSON.stringify(object));
   }
 };
 
@@ -52,7 +52,7 @@ mng.remove = async (object) => {
     yarp.db.remove(collection, {_id: object._id});
     delete yarp[collection][object._id];
   } else {
-    console.log(chalk.redBright('[YARP] ') + 'ManagerError: object could not be removed in ' + collection + ', missing id.\n' + JSON.stringify(object));
+    yarp.log.danger('ManagerError: object could not be removed in ' + collection + ', missing id.\n' + JSON.stringify(object));
   }
 };
 

@@ -5,7 +5,7 @@
 
 module.exports = async () => {
   // Loading pools
-  console.log(chalk.yellowBright('[YARP] ')+'Loading Pools');
+  yarp.log.warning('Loading Pools');
   try {
     yarp.blips = new yarp.Pool(yarp.Blip);
     yarp.characters = new yarp.Pool(yarp.Character);
@@ -28,6 +28,6 @@ module.exports = async () => {
     yarp.vehicles = new yarp.Pool(yarp.Vehicle);
     yarp.weapons = new yarp.Pool(yarp.Weapon);
   } catch (err) {
-    console.log(chalk.redBright('[YARP] ')+'PoolError: '+err.message+'\n'+err.stack);
+    yarp.log.danger('PoolError: '+err.message+'\n'+err.stack);
   }
 };

@@ -3,7 +3,7 @@
 let config = {
   'Test Menu': {
     offset: [0.1, 0.1],
-    data: [
+    items: [
       {
         displayText: 'Default',
         caption: 'Default test item.',
@@ -11,7 +11,7 @@ let config = {
       {
         type: 'list',
         displayText: 'List',
-        data: [
+        items: [
           {
             displayText: 'One',
           },
@@ -35,7 +35,7 @@ let config = {
       {
         type: 'checkbox',
         displayText: 'Checkbox',
-        data: true,
+        toggled: true,
         caption: 'Checkbox test item.',
       },
       {

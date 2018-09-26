@@ -15,7 +15,7 @@ class MenuItem {
    * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
    * @memberof MenuItem
    */
-  constructor(displayText, data, caption = '', badge = NaN, textColor = new NativeMenu.Color(255, 255, 255, 240), backgroundColor = new NativeMenu.Color(0, 0, 0, 120), hoverTextColor = new NativeMenu.Color(0, 0, 0, 240), hoverBackgroundColor = new NativeMenu.Color(255, 255, 255, 170)) {
+  constructor(displayText, data = {}, caption = '', badge = NaN, textColor = new NativeMenu.Color(255, 255, 255, 240), backgroundColor = new NativeMenu.Color(0, 0, 0, 120), hoverTextColor = new NativeMenu.Color(0, 0, 0, 240), hoverBackgroundColor = new NativeMenu.Color(255, 255, 255, 170)) {
     this.displayText = displayText;
     this.data = data;
     this.caption = caption;
@@ -37,12 +37,15 @@ class MenuItem {
   set isSelect(value) {
     this._isSelect = value;
     if (this._isSelect && !(this instanceof NativeMenu.CloseMenuItem)) {
+      if (this instanceof NativeMenu.ListMenuItem) {
+        this.data.item = this.items[this.itemsCurrentIndex];
+      }
       this.onSelectEvents.forEach((event) => {
-        event.trigger(this instanceof NativeMenu.ListMenuItem ? this.data[this.dataCurrentIndex] : this.data);
+        event.trigger(this.data);
       });
       let currentMenuInstance = NativeMenu.MenuPool.getCurrentMenu();
       if (currentMenuInstance.onEventMenu != null && typeof currentMenuInstance.onEventMenu.select !== 'undefined') {
-        currentMenuInstance.onEventMenu.select(this, this instanceof NativeMenu.ListMenuItem ? this.data[this.dataCurrentIndex] : this.data);
+        currentMenuInstance.onEventMenu.select(this, this.data);
       }
     }
   }
@@ -77,13 +80,16 @@ class MenuItem {
     if (this._isSelect && Date.now() - NativeMenu.MainMenu.CONTROL_TICK_TIME_MS > NativeMenu.MainMenu.LAST_TICK_TIME) {
       if (mp.game.controls.isControlJustReleased(0, NativeMenu.Control.INPUT_FRONTEND_ACCEPT)) {
         NativeMenu.Sound.SOUND_SELECT.playSound();
+        if (this instanceof NativeMenu.ListMenuItem) {
+          this.data.item = this.items[this.itemsCurrentIndex];
+        }
         this.onClickEvents.forEach((event) => {
-          event.trigger(this instanceof NativeMenu.ListMenuItem ? this.data[this.dataCurrentIndex] : this.data);
+          event.trigger(this.data);
         });
         if (!(this instanceof NativeMenu.CloseMenuItem)) {
           let currentMenuInstance = NativeMenu.MenuPool.getCurrentMenu();
           if (currentMenuInstance.onEventMenu != null && typeof currentMenuInstance.onEventMenu.click !== 'undefined') {
-            currentMenuInstance.onEventMenu.click(this, this instanceof NativeMenu.ListMenuItem ? this.data[this.dataCurrentIndex] : this.data);
+            currentMenuInstance.onEventMenu.click(this, this.data);
           }
         }
         NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
