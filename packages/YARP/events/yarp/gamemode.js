@@ -265,14 +265,14 @@ function tick() {
                       if (i < 0) {
                         if (yarp.utils.server.vectorDistance(player.position, player2.position) < 3) {
                           yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to interact.');
-                          yarp.hotkeys['Event'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]], true, true]);
+                          yarp.hotkeys['Call'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/sideMenu.html', 'populateActionMenu', player2.name]], true, true]);
                           character.players.push(id2);
                           character2.player.push(id);
                         }
                       } else {
                         if (yarp.utils.server.vectorDistance(player.position, player2.position) > 3) {
                           yarp.client.clearHelpText(player);
-                          yarp.hotkeys['Event'].unbind(player);
+                          yarp.hotkeys['Call'].unbind(player);
                           prop.players.splice(id2, 1);
                         }
                       }

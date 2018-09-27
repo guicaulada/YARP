@@ -1,11 +1,11 @@
 'use strict';
 
 let config = {
-  'Event': {
+  'Call': {
     key: 'E',
     category: 'utility',
     call: (player, args) => {
-      player.call(args[0], args[1]);
+      yarp.client[args[0]](player, ...args[1]);
     },
   },
   'Teleport': {
