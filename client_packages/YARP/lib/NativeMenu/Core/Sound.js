@@ -34,9 +34,12 @@ class Sound {
 /**
  * Some common sounds.
  */
-Sound.SOUND_SELECT = new Sound('SELECT');
-Sound.SOUND_BACK = new Sound('BACK');
-Sound.SOUND_NAV_LEFT_RIGHT = new Sound('NAV_LEFT_RIGHT');
-Sound.SOUND_NAV_UP_DOWN = new Sound('NAV_UP_DOWN');
+Sound.SELECT = new Sound('SELECT');
+Sound.BACK = new Sound('BACK');
+Sound.NAV_LEFT_RIGHT = new Sound('NAV_LEFT_RIGHT');
+Sound.NAV_UP_DOWN = new Sound('NAV_UP_DOWN');
+Sound.HACKING = new Sound('Pin_Centred', 'DLC_HEIST_BIOLAB_PREP_HACKING_SOUNDS');
+Sound.CONTINUE = new Sound('CONTINUE');
+Sound.CANCEL = new Sound('CANCEL');
 
 exports = Sound;

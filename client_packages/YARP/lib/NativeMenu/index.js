@@ -1,5 +1,5 @@
 
-global.NativeMenu = {};
+global.NativeMenu = new yarp.Proxy('NativeMenu');
 
 // Core
 NativeMenu.Color = require('./YARP/lib/NativeMenu/Core/Color.js');
@@ -22,5 +22,14 @@ NativeMenu.SubMenuItem = require('./YARP/lib/NativeMenu/MenuItems/SubMenuItem.js
 NativeMenu.CommonMenuTexture = require('./YARP/lib/NativeMenu/Data/CommonMenuTexture.js');
 NativeMenu.Control = require('./YARP/lib/NativeMenu/Data/Control.js');
 NativeMenu.MenuBadge = require('./YARP/lib/NativeMenu/Data/MenuBadge.js');
+
+// MenuBuilder
+NativeMenu.Button = require('./YARP/lib/NativeMenu/Builder/Button.js');
+NativeMenu.DebugPanel = require('./YARP/lib/NativeMenu/Builder/DebugPanel.js');
+NativeMenu.InputPanel = require('./YARP/lib/NativeMenu/Builder/InputPanel.js');
+NativeMenu.Panel = require('./YARP/lib/NativeMenu/Builder/Panel.js');
+NativeMenu.Prompt = require('./YARP/lib/NativeMenu/Builder/Prompt.js');
+NativeMenu.Skin = require('./YARP/lib/NativeMenu/Builder/Skin.js');
+
 
 exports = NativeMenu;

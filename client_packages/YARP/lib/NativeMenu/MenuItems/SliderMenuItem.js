@@ -103,7 +103,7 @@ class SliderMenuItem extends NativeMenu.MenuItem {
       }
     }
     if (withSound) {
-      NativeMenu.Sound.SOUND_NAV_LEFT_RIGHT.playSound();
+      NativeMenu.Sound.NAV_LEFT_RIGHT.playSound();
     }
     NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
     this.onChangeEvents.forEach((value) => {

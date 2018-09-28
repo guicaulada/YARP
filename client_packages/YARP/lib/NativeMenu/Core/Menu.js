@@ -93,10 +93,10 @@ class Menu {
     this._isVisible = value;
     if (value) {
       this.setToItem(0);
-      NativeMenu.Sound.SOUND_NAV_LEFT_RIGHT.playSound();
+      NativeMenu.Sound.NAV_LEFT_RIGHT.playSound();
     } else {
       this.menuItems[this.currentIndexMenuItems].isSelect = false;
-      NativeMenu.Sound.SOUND_BACK.playSound();
+      NativeMenu.Sound.BACK.playSound();
     }
   }
 
@@ -115,7 +115,7 @@ class Menu {
         newIndex %= this.menuItems.length;
       }
       if (withSound) {
-        NativeMenu.Sound.SOUND_NAV_UP_DOWN.playSound();
+        NativeMenu.Sound.NAV_UP_DOWN.playSound();
       }
       this.currentIndexMenuItems = newIndex;
       this.menuItems[this.currentIndexMenuItems].isSelect = true;

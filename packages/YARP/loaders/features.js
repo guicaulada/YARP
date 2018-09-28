@@ -9,6 +9,7 @@ module.exports = async () => {
   try {
     // Load stores
     require('../features/stores/index.js');
+    require('../features/login/index.js');
   } catch (err) {
     yarp.log.danger('FeatureError: '+err.message+'\n'+err.stack);
   }

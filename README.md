@@ -58,3 +58,4 @@ YARP is still under development, information will be added here in the future. S
 * [ImagicTheCat](https://github.com/ImagicTheCat)
 * [xabier1989](https://github.com/xabier1989)
 * [BlueDadjun](https://github.com/BlueDadjun)
+* [Stuyk](https://github.com/Stuyk)

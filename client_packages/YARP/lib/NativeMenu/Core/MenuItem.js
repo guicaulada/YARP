@@ -79,7 +79,7 @@ class MenuItem {
     this.draw(x, y, yCaption);
     if (this._isSelect && Date.now() - NativeMenu.MainMenu.CONTROL_TICK_TIME_MS > NativeMenu.MainMenu.LAST_TICK_TIME) {
       if (mp.game.controls.isControlJustReleased(0, NativeMenu.Control.INPUT_FRONTEND_ACCEPT)) {
-        NativeMenu.Sound.SOUND_SELECT.playSound();
+        NativeMenu.Sound.SELECT.playSound();
         if (this instanceof NativeMenu.ListMenuItem) {
           this.data.item = this.items[this.itemsCurrentIndex];
         }

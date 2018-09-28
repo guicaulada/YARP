@@ -117,7 +117,7 @@ yarp.client.playerBindKey = (id, key) => {
       for (let id in yarp.browsers) {
         if (yarp.browsers.hasOwnProperty(id)) {
           let browser = yarp.browsers[id];
-          if (browser.disableHotkeys) {
+          if (browser.disableHotkeys || yarp.hotkeys.disabled === true) {
             disabled = true;
           }
         }

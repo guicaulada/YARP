@@ -26,5 +26,6 @@ require('./YARP/events/yarp/character.js');
 require('./YARP/events/yarp/command.js');
 require('./YARP/events/yarp/gamemode.js');
 require('./YARP/events/yarp/menu.js');
+require('./YARP/events/yarp/prompt.js');
 require('./YARP/events/yarp/ui.js');
 require('./YARP/events/yarp/weapon.js');

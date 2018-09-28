@@ -53,5 +53,7 @@ class MenuPool {
 }
 
 MenuPool.MenuInstances = [];
+MenuPool.currentInputBox = null;
+MenuPool.timeSinceLastKeyCheck = new Date().getTime();
 
 exports = MenuPool;

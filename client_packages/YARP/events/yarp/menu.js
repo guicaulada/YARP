@@ -133,7 +133,8 @@ yarp.client.openMenu = (menuId) => {
     yarp.client.closeAllMenus();
     yarp.menus[menuId].open();
     mp.gui.cursor.visible = false;
-    mp.gui.chat.show(false);
+    mp.gui.chat.show(true);
+    mp.gui.chat.push(JSON.stringify(yarp.menus[menuId]));
 };
 
 /**
@@ -247,6 +248,17 @@ yarp.client.getCurrentMenu = () => {
 };
 
 /**
+ * Returns menu.
+ * @function getMenuById
+ * @param {String} id Menu id.
+ * @memberof yarp.client
+ * @return {NativeMenu.Menu}
+ */
+yarp.client.getMenuById = (id) => {
+    return yarp.menus[id];
+};
+
+/**
  * Displays submenu.
  * @function displaySubMenu
  * @param {String|NativeMenu.Menu} menu Menu id or object.
@@ -267,6 +279,7 @@ yarp.client.removeSubMenu = (menu) => {
     if (typeof menu === 'string') menu = yarp.menus[menu];
     NativeMenu.MenuPool.removeSubMenu(menu);
 };
+
 
 /**
  * Renders the menus.
