@@ -12,36 +12,24 @@
  * @param {Object} item The item data.
  */
 yarp.client.menuAddItem = (menuId, item) => {
-    let index = yarp.menus[menuId].menuItems.length;
-    let type = yarp.utils.client.default(item.type, 'text');
+    item.type = yarp.utils.client.default(item.type, 'text');
     let menuItem = [
-        item.displayText, item.data, item.caption, item.badge,
+        item.displayText, item.caption, item.badge, item.data,
     ];
-    if (item.textColor) {
-        menuItem.push(new NativeMenu.Color(...item.textColor));
-    }
-    if (item.backgroundColor) {
-        menuItem.push(new NativeMenu.Color(...item.backgroundColor));
-    }
-    if (item.hoverTextColor) {
-        menuItem.push(new NativeMenu.Color(...item.hoverTextColor));
-    }
-    if (item.hoverBackgroundColor) {
-        menuItem.push(new NativeMenu.Color(...item.hoverBackgroundColor));
-    }
-    switch (type) {
+    switch (item.type) {
         case 'checkbox':
-            menuItem = new NativeMenu.CheckboxMenuItem(menuItem[0], item.toggled, ...menuItem.slice(1, 8));
+            menuItem = new NativeMenu.CheckboxMenuItem(...menuItem);
+            if (item.toggled === true) menuItem.toggled = true;
             break;
         case 'list':
             menuItem = [
-                menuItem[0], item.items, item.defaultIndex, ...menuItem.slice(1, 8),
+                menuItem[0], item.items, item.defaultIndex, ...menuItem.slice(1, menuItem.length),
             ];
             menuItem = new NativeMenu.ListMenuItem(...menuItem);
             break;
         case 'slider':
             menuItem = [
-                menuItem[0], item.min, item.max, item.step, item.start, ...menuItem.slice(1, 8),
+                menuItem[0], item.min, item.max, item.step, item.start, ...menuItem.slice(1, menuItem.length),
             ];
             menuItem = new NativeMenu.SliderMenuItem(...menuItem);
             break;
@@ -59,28 +47,82 @@ yarp.client.menuAddItem = (menuId, item) => {
             menuItem = new NativeMenu.TextMenuItem(...menuItem);
             break;
     }
+    menuItem.data._menuId = menuId;
+    menuItem.data._index = yarp.menus[menuId].menuItems.length;
+    yarp.client.setMenuItemColor(menuItem, item);
+    yarp.client.addMenuItemEvents(menuItem, item);
+    yarp.menus[menuId].add(menuItem);
+};
+
+/**
+ * Add menu builder item.
+ * @function menuBuilderAddItem
+ * @memberof yarp.client
+ * @param {String} menuId The menu id.
+ * @param {Object} item The item data.
+ */
+yarp.client.menuBuilderAddItem = (menuId, item) => {
+    item.type = yarp.utils.client.default(item.type, 'panel');
+    let menuItem = [
+        item.x, item.y, item.width, item.height, item.text, item.data,
+    ];
+    switch (item.type) {
+        case 'button':
+            menuItem = new NativeMenu.Button(...menuItem);
+            if (item.disabled === true) menuItem.disabled = true;
+            break;
+        case 'input':
+            menuItem = [
+                ...menuItem.slice(0, 5), item.maxLength, ...menuItem.slice(6, menuItem.length),
+            ];
+            menuItem = new NativeMenu.InputPanel(...menuItem);
+            if (item.masked === true) menuItem.inputMasked = true;
+            if (item.disabled === true) menuItem.disabled = true;
+            break;
+        case 'debug':
+            menuItem = new NativeMenu.DebugPanel(...menuItem);
+            break;
+        default:
+            menuItem = new NativeMenu.Panel(...menuItem);
+            break;
+    }
+    menuItem.data._menuId = menuId;
+    menuItem.data._index = yarp.menus[menuId].menuItems.length;
+    yarp.client.setMenuItemColor(menuItem, item);
+    yarp.client.addMenuItemEvents(menuItem, item);
+    yarp.menus[menuId].add(menuItem);
+};
+
+yarp.client.setMenuItemColor = (menuItem, item) => {
+    for (let color in menuItem.skin) {
+        if (item[color] && item[color].length && item[color].length == 4) {
+            menuItem.skin[color] = new NativeMenu.Color(...item[color]);
+        }
+    }
+};
+
+yarp.client.addMenuItemEvents = (menuItem, item) => {
     if (menuItem.addOnClickEvent) {
         menuItem.addOnClickEvent({
-            trigger: (data) => {
-                yarp.server.menuItemClicked(menuId, type, index, data);
-            },
+            trigger: menuItem.onClickEvents.length == 0 ? (data) => {
+                yarp.server.menuItemClicked(data);
+            } : item.click ? item.click : () => {},
         });
     }
     if (menuItem.addOnSelectEvent) {
         menuItem.addOnSelectEvent({
-            trigger: (data) => {
-                yarp.server.menuItemSelected(menuId, type, index, data);
-            },
+            trigger: menuItem.onSelectEvents.length == 0 ? (data) => {
+                // yarp.server.menuItemSelected(data); // Do we really need that many events? No. YES!
+            } : item.select ? item.select : () => {},
         });
     }
     if (menuItem.addOnChangeEvent) {
         menuItem.addOnChangeEvent({
-            trigger: (data) => {
-                yarp.server.menuItemChanged(menuId, type, index, data);
-            },
+            trigger: menuItem.onChangeEvents.length == 0 ? (data) => {
+                // yarp.server.menuItemChanged(data); // This might be a little too much, use with caution.
+            } : item.changed ? item.changed : () => {},
         });
     }
-    yarp.menus[menuId].add(menuItem);
 };
 
 /**
@@ -101,12 +143,31 @@ yarp.client.createMenu = (menuId, options) => {
     }
     yarp.menus[menuId].setEventMenu({
         click: (data) => {
-            yarp.server.menuClicked(menuId, data);
+            data._menuId = menuId;
+            // yarp.server.menuClicked(data); // Enabled if you need this, probably don't.
         },
         select: (data) => {
-            yarp.server.menuSelected(menuId, data);
+            data._menuId = menuId;
+            // yarp.server.menuSelected(data); // Im on an event diet.
         },
     });
+};
+
+/**
+ * Creates menu builder.
+ * @function buildMenu
+ * @memberof yarp.client
+ * @param {String} menuId The menu builder id.
+ * @param {Object} options The menu builder data.
+ */
+yarp.client.buildMenu = (menuId, options) => {
+    yarp.menus[menuId] = new NativeMenu.MenuBuilder(options.title, ...options.size);
+    if (options.debug === true) {
+        yarp.menus[menuId].debugMode = true;
+    }
+    for (let item of options.items) {
+        yarp.client.menuBuilderAddItem(menuId, item);
+    }
 };
 
 /**
@@ -128,13 +189,13 @@ yarp.client.toggleMenu = (menuId) => {
  * @function openMenu
  * @memberof yarp.client
  * @param {String} menuId The menu id.
+ * @param {Boolean} [chat=false] Chat on/off.
  */
-yarp.client.openMenu = (menuId) => {
+yarp.client.openMenu = (menuId, chat = false) => {
     yarp.client.closeAllMenus();
     yarp.menus[menuId].open();
     mp.gui.cursor.visible = false;
-    mp.gui.chat.show(true);
-    mp.gui.chat.push(JSON.stringify(yarp.menus[menuId]));
+    mp.gui.chat.show(chat);
 };
 
 /**
@@ -144,6 +205,7 @@ yarp.client.openMenu = (menuId) => {
  * @param {String} menuId The menu id.
  */
 yarp.client.closeMenu = (menuId) => {
+    NativeMenu.MenuPool.currentInputBox = null;
     let currentMenu = yarp.client.getCurrentMenu();
     let targetMenu = yarp.menus[menuId];
     while (currentMenu != targetMenu && currentMenu != null) {
@@ -256,6 +318,34 @@ yarp.client.getCurrentMenu = () => {
  */
 yarp.client.getMenuById = (id) => {
     return yarp.menus[id];
+};
+
+/**
+ * Returns item data.
+ * @function getMenuItemByIndex
+ * @param {String} id Menu id.
+ * @param {Number} index Item index.
+ * @memberof yarp.client
+ * @return {*} Item data.
+ */
+yarp.client.getMenuItemByIndex = (id, index) => {
+    return yarp.menus[id].menuItems[index].data;
+};
+
+/**
+ * Returns items data.
+ * @function getMenuItemsByIndex
+ * @param {String} id Menu id.
+ * @param {Array<Number>} indexList Item index list.
+ * @memberof yarp.client
+ * @return {Array<*>} Item data by index.
+ */
+yarp.client.getMenuItemsByIndex = (id, indexList) => {
+    let result = [];
+    for (let index of indexList) {
+        result[index] = yarp.menus[id].menuItems[index].data;
+    }
+    return result;
 };
 
 /**

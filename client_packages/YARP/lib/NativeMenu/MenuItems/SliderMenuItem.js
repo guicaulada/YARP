@@ -11,17 +11,13 @@ class SliderMenuItem extends NativeMenu.MenuItem {
    * @param {Number} [max=3]
    * @param {Number} [step=1]
    * @param {Number} [start=Math.floor((min + max) / 2)]
-   * @param {*} data
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
-   * @param {NativeMenu.Color} [textColor=new NativeMenu.Color(255, 255, 255, 240)]
-   * @param {NativeMenu.Color} [backgroundColor=new NativeMenu.Color(0, 0, 0, 120)]
-   * @param {NativeMenu.Color} [hoverTextColor=new NativeMenu.Color(0, 0, 0, 240)]
-   * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
+   * @param {*} data
    * @memberof SliderMenuItem
    */
-  constructor(displayText, min=1, max=3, step=1, start = Math.floor((min + max) / 2), data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
-    super(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor);
+  constructor(displayText, min = 1, max = 3, step = 1, start = Math.floor((min + max) / 2), caption, badge, data) {
+    super(displayText, caption, badge, data);
     this.min = min;
     this.max = max;
     this.step = step;

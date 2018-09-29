@@ -6,6 +6,32 @@
 
 let utils = new yarp.Proxy('yarp:utils');
 
+
+/**
+ * Handles substitution for JSON stringify on circular references.
+ * @function circularJSON
+ * @memberof yarp.utils.client
+ * @param {Object} object Circular object.
+ * @return {String} JSON string.
+ */
+utils.server.circularJSON = (object) => {
+  // http://stackoverflow.com/questions/11616630/json-stringify-avoid-typeerror-converting-circular-structure-to-json/11616993#11616993
+  let cache = [];
+  let json = JSON.stringify(object, (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      if (cache.indexOf(value) !== -1) {
+        // Circular reference found, discard key
+        return;
+      }
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  });
+  cache = null; // Enable garbage collection
+  return json;
+};
+
 /**
  * Returns a random integer between min and max
  * @instance

@@ -28,7 +28,7 @@ NativeMenu.Button = require('./YARP/lib/NativeMenu/Builder/Button.js');
 NativeMenu.DebugPanel = require('./YARP/lib/NativeMenu/Builder/DebugPanel.js');
 NativeMenu.InputPanel = require('./YARP/lib/NativeMenu/Builder/InputPanel.js');
 NativeMenu.Panel = require('./YARP/lib/NativeMenu/Builder/Panel.js');
-NativeMenu.Prompt = require('./YARP/lib/NativeMenu/Builder/Prompt.js');
+NativeMenu.MenuBuilder = require('./YARP/lib/NativeMenu/Builder/MenuBuilder.js');
 NativeMenu.Skin = require('./YARP/lib/NativeMenu/Builder/Skin.js');
 
 

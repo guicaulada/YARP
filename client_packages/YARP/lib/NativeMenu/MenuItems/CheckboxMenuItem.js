@@ -7,19 +7,14 @@ class CheckboxMenuItem extends NativeMenu.MenuItem {
    *Creates an instance of CheckboxMenuItem.
    * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
-   * @param {Boolean} [toggled=false]
-   * @param {Boolean} [data={}]
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
-   * @param {NativeMenu.Color} [textColor=new NativeMenu.Color(255, 255, 255, 240)]
-   * @param {NativeMenu.Color} [backgroundColor=new NativeMenu.Color(0, 0, 0, 120)]
-   * @param {NativeMenu.Color} [hoverTextColor=new NativeMenu.Color(0, 0, 0, 240)]
-   * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
+   * @param {Boolean} [data={}]
    * @memberof CheckboxMenuItem
    */
-  constructor(displayText, toggled = false, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
-    super(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor);
-    this.toggled = toggled;
+  constructor(displayText, caption, badge, data) {
+    super(displayText, caption, badge, data);
+    this.toggled = false;
     this.addOnClickEvent({
       trigger: (toggled) => {
         this.toggled = !this.toggled;

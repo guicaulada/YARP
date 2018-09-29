@@ -57,12 +57,9 @@ yarp.server.closeStoreMenu = (player, location) => {
  * @function menuItemClicked
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
- * @param {String} type Type of the item.
- * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.add.menuItemClicked = (player, menuId, type, index, data) => {
+yarp.server.add.menuItemClicked = (player, data) => {
   if (data && data.storeType && data.itemId && data.storeId && data.categoryId) {
     let storeId = data.storeId;
     let location = yarp.locations[storeId];

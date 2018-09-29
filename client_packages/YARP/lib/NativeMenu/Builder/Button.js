@@ -20,10 +20,6 @@ class Button {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.aX = NativeMenu.Prompt.res.x * this.x;
-    this.aY = NativeMenu.Prompt.res.y * this.y;
-    this.aWidth = NativeMenu.Prompt.res.x * this.width;
-    this.aHeight = NativeMenu.Prompt.res.y * this.height;
     // booleans
     this.mouseCollision = false;
     this.mouseClicked = false;

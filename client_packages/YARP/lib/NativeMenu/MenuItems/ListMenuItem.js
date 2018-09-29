@@ -9,17 +9,13 @@ class ListMenuItem extends NativeMenu.MenuItem {
    * @param {String} displayText
    * @param {Array<MenuItem>} [items=[]]
    * @param {Number} [defaultIndex=0]
-   * @param {*} [data={}]
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
-   * @param {NativeMenu.Color} [textColor=new NativeMenu.Color(255, 255, 255, 240)]
-   * @param {NativeMenu.Color} [backgroundColor=new NativeMenu.Color(0, 0, 0, 120)]
-   * @param {NativeMenu.Color} [hoverTextColor=new NativeMenu.Color(0, 0, 0, 240)]
-   * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
+   * @param {*} [data={}]
    * @memberof ListMenuItem
    */
-  constructor(displayText, items = [], defaultIndex = 0, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
-    super(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor);
+  constructor(displayText, items = [], defaultIndex = 0, caption, badge, data) {
+    super(displayText, caption, badge, data);
     this.items = items;
     this.onChangeEvents = [];
     this.firstRender = true;

@@ -4,66 +4,24 @@
  * @memberof yarp.server
  */
 
-
-/**
- * Called when inventory item is clicked on native menu.
- * @function menuItemClicked
- * @memberof yarp.server
- * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
- * @param {String} type Type of the item.
- * @param {Object} data Data representing the event.
- */
-yarp.server.inventoryItemClicked = (player, menuId, type, data) => {
-    let character = player.character;
-    let item = yarp.items[data.itemId];
-    character.takeItem(item, 1);
-    let amount = character.inventory[item.id];
-    if (amount > 0) {
-        let submenu = {
-            type: 'submenu',
-            id: 'inventory' + item.name,
-            displayText: amount + ' - ' + item.name,
-            caption: yarp.utils.server.default(item.caption, ''),
-            data: [],
-        };
-        let i = 0;
-        for (let option in item.options) {
-            if (item.options.hasOwnProperty(option)) {
-                submenu.data.push({
-                    type: 'text',
-                    displayText: option,
-                    caption: option + ` item`,
-                    data: {itemId: item.id, option: option, index: i, itemIndex: data.itemIndex},
-                });
-                i++;
-            }
-        }
-        yarp.menus['inventory'+character.id].updateItem(player, data.itemIndex, submenu);
-    } else {
-        yarp.menus['inventory' + character.id].removeItem(player, data.itemIndex);
-    }
-    item.options[data.option](player);
-};
-
 /**
  * Called when item is clicked on native menu.
  * @function menuItemClicked
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
- * @param {String} type Type of the item.
- * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuItemClicked = (player, menuId, type, index, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, type, index, data);
-    if (type == 'close') {
+yarp.server.menuItemClicked = (player, data) => {
+    if (data._menuId == 'Test Menu') console.log(data);
+    if (data._type == 'close') {
         yarp.client.chatShow(player, true);
-        yarp.menus[menuId].visible = false;
+        yarp.menus[data._menuId].visible = false;
     }
-    if (menuId.includes('inventory') && type != 'close') {
-        yarp.server.inventoryItemClicked(player, menuId, type, data);
+    if (data._menuId.includes('inventory') && data._type != 'close') {
+        yarp.server.inventoryItemClicked(player, data);
+    }
+    if (data._menuId == 'Login Panel') {
+        yarp.server.loginItemClicked(player, data);
     }
 };
 
@@ -72,13 +30,10 @@ yarp.server.menuItemClicked = (player, menuId, type, index, data) => {
  * @function menuItemSelected
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
- * @param {String} type Type of the item.
- * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuItemSelected = (player, menuId, type, index, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, type, index, data);
+yarp.server.menuItemSelected = (player, data) => {
+    if (data._menuId == 'Test Menu') console.log(data);
 };
 
 /**
@@ -86,13 +41,10 @@ yarp.server.menuItemSelected = (player, menuId, type, index, data) => {
  * @function menuItemChanged
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
- * @param {String} type Type of the item.
- * @param {Number} index Index of the item.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuItemChanged = (player, menuId, type, index, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, type, index, data);
+yarp.server.menuItemChanged = (player, data) => {
+    if (data._menuId == 'Test Menu') console.log(data);
 };
 
 /**
@@ -100,11 +52,11 @@ yarp.server.menuItemChanged = (player, menuId, type, index, data) => {
  * @function menuClicked
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
+ * @param {String} data._menuId Id of the menu.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuClicked = (player, menuId, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, data);
+yarp.server.menuClicked = (player, data) => {
+    if (data._menuId == 'Test Menu') console.log(data);
 };
 
 /**
@@ -112,9 +64,9 @@ yarp.server.menuClicked = (player, menuId, data) => {
  * @function menuSelected
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
- * @param {String} menuId Id of the menu.
+ * @param {String} data._menuId Id of the menu.
  * @param {Object} data Data representing the event.
  */
-yarp.server.menuSelected = (player, menuId, data) => {
-    if (menuId == 'Test Menu') console.log(menuId, data);
+yarp.server.menuSelected = (player, data) => {
+    if (data._menuId == 'Test Menu') console.log(data);
 };

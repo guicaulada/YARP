@@ -1,17 +1,18 @@
 'use strict';
 /**
- * Implements a prompt.
+ * Implements a menu builder.
  */
-class Prompt {
+class MenuBuilder {
   /**
-   * Creates an instance of Prompt.
+   * Creates an instance of MenuBuilder.
    * @param {Number} uniqueMenuName
    * @param {Number} xGridSize
    * @param {Number} yGridSize
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   constructor(uniqueMenuName, xGridSize, yGridSize) {
     this.menuName = uniqueMenuName;
+    this.menuItems = [];
     this.buttons = [];
     this.panels = [];
     this.inputPanels = [];
@@ -32,11 +33,12 @@ class Prompt {
     this.debugFrame = 0;
     this.offset = [];
     this._isVisible = false;
+    NativeMenu.MenuPool.MenuInstances.push(this);
   }
   /**
    * Setup the general width / height calculations for the grid.
    * @param {Object} item
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   prepare(item) {
     item.width = this.pctGridWidth * item.width;
@@ -47,32 +49,44 @@ class Prompt {
     if (item.height <= 0) {
       item.height = this.pctGridHeight;
     }
-    item.x = this.pctGridX * x + (item.width / 2);
-    item.y = this.pctGridY * y + (item.height / 2);
+    item.x = this.pctGridX * item.x + (item.width / 2);
+    item.y = this.pctGridY * item.y + (item.height / 2);
     if (item.x <= 0) {
       item.x = this.pctGridWidth / 2;
     }
     if (item.y <= 0) {
       item.y = this.pctGridHeight / 2;
     }
+    item.aX = NativeMenu.MenuBuilder.res.x * item.x;
+    item.aY = NativeMenu.MenuBuilder.res.y * item.y;
+    item.aWidth = NativeMenu.MenuBuilder.res.x * item.width;
+    item.aHeight = NativeMenu.MenuBuilder.res.y * item.height;
   }
 
   /**
    * Add item to the menu.
    * @param {Object} menuItem A menu item object.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   add(menuItem) {
     this.prepare(menuItem);
-    if (menuItem instanceof NativeMenu.Button) this.buttons.push(menuItem);
-    else if (menuItem instanceof NativeMenu.Panel) this.panels.push(menuItem);
-    else if (menuItem instanceof NativeMenu.InputPanel) this.inputPanels.push(menuItem);
-    else if (menuItem instanceof NativeMenu.DebugPanel) this.debugPanels.push(menuItem);
+    if (menuItem instanceof NativeMenu.Button) {
+      this.buttons.push(menuItem);
+      this.menuItems.push(menuItem);
+    } else if (menuItem instanceof NativeMenu.Panel) {
+      this.panels.push(menuItem);
+      this.menuItems.push(menuItem);
+    } else if (menuItem instanceof NativeMenu.InputPanel) {
+      this.inputPanels.push(menuItem);
+      this.menuItems.push(menuItem);
+    } else if (menuItem instanceof NativeMenu.DebugPanel) {
+      this.debugPanels.push(menuItem);
+    }
   }
 
   /**
-   * Renders the prompt if visible.
-   * @memberof Prompt
+   * Renders the menu builder if visible.
+   * @memberof MenuBuilder
    */
   render() {
     if (this.isVisible) {
@@ -82,8 +96,8 @@ class Prompt {
   }
 
   /**
-   * Draws the prompt.
-   * @memberof Prompt
+   * Draws the menu builder.
+   * @memberof MenuBuilder
    */
   draw() {
     this.drawButtons();
@@ -94,7 +108,7 @@ class Prompt {
 
   /**
    * Recalculate the grid.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   recalculate() {
     this.pctGridX = 1 / this.gridSizeWidth;
@@ -105,7 +119,7 @@ class Prompt {
 
   /**
    * Daws debug panels.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   drawDebugPanels() {
     if (!this.debugMode) return;
@@ -128,19 +142,19 @@ class Prompt {
 
   /**
    * Generates debug panels.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   generateDebugMode() {
     for (let x = 0; x < this.gridSizeWidth; x++) {
       for (let y = 0; y < this.gridSizeHeight; y++) {
-        new NativeMenu.DebugPanel(this, x, y, 1, 1, `(${x},${y})`);
+        this.add(new NativeMenu.DebugPanel(x, y, 1, 1, `(${x},${y})`));
       }
     }
   }
 
   /**
    * Draws buttons.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   drawButtons() {
     if (this.buttons.length <= 0) return;
@@ -151,7 +165,7 @@ class Prompt {
 
   /**
    * Draws panels.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   drawPanels() {
     if (this.panels.length <= 0) {
@@ -164,7 +178,7 @@ class Prompt {
 
   /**
    * Draws input panels.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   drawInputPanels() {
     if (this.inputPanels.length <= 0) {
@@ -176,16 +190,16 @@ class Prompt {
   }
 
   /**
-   * Closes prompt.
-   * @memberof Prompt
+   * Closes menu builder.
+   * @memberof MenuBuilder
    */
   close() {
     this.isVisible = false;
   }
 
   /**
-   * Opens prompt.
-   * @memberof Prompt
+   * Opens menu builder.
+   * @memberof MenuBuilder
    */
   open() {
     this.isVisible = true;
@@ -202,7 +216,7 @@ class Prompt {
   /**
    * Sets if the menu is visible or not.
    * @param {Boolean} value If the menu is visible or not.
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   set isVisible(value) {
     this._isVisible = value;
@@ -221,10 +235,10 @@ class Prompt {
   }
 
   /**
-   * Returns screen active resolution for prompt.
+   * Returns screen active resolution for menu builder.
    * @readonly
    * @static
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   static get res() {
     return mp.game.graphics.getScreenActiveResolution(0, 0);
@@ -234,7 +248,7 @@ class Prompt {
    * Processes keydown events.
    * @static
    * @param {Number} i
-   * @memberof Prompt
+   * @memberof MenuBuilder
    */
   static keydown(i) {
     let menu = NativeMenu.MenuPool.getCurrentMenu();
@@ -286,4 +300,4 @@ mp.events.add('click', (x, y, upOrDown, leftOrRight, relativeX, relativeY, world
   }
 });
 
-exports = Prompt;
+exports = MenuBuilder;

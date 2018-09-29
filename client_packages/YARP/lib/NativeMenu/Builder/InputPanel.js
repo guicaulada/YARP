@@ -9,20 +9,17 @@ class InputPanel {
    * @param {Number} y
    * @param {Number} width
    * @param {Number} height
+   * @param {String} text
    * @param {Number} maxTextLength
    * @param {*} [data={}]
    * @memberof InputPanel
    */
-  constructor(x, y, width, height, maxTextLength, data = {}) {
+  constructor(x, y, width, height, text = '', maxTextLength, data = {}) {
     this.data = data;
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.aX = NativeMenu.Prompt.res.x * this.x;
-    this.aY = NativeMenu.Prompt.res.y * this.y;
-    this.aWidth = NativeMenu.Prompt.res.x * this.width;
-    this.aHeight = NativeMenu.Prompt.res.y * this.height;
     this.mouseCollision = false;
     this.mouseClicked = false;
     this.fontScale = [0.5, 0.5];
@@ -36,7 +33,7 @@ class InputPanel {
     // Skin
     this.skin = new NativeMenu.Skin();
     // Input Text
-    this.data.inputText = '';
+    this.data.inputText = text;
     this.inputMaxLength = maxTextLength;
     this.inputMasked = false;
     // Disabled
@@ -162,7 +159,7 @@ class InputPanel {
     NativeMenu.MenuPool.currentInputBox = this;
     for (let i = 1; i <= 0xFE; i++) {
       mp.keys.bind(i, true, () => {
-        Prompt.keydown(i);
+        NativeMenu.MenuBuilder.keydown(i);
         this.onChangeEvents.forEach((event) => {
           event.trigger(this.data);
         });

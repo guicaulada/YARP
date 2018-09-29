@@ -75,7 +75,7 @@ function tick() {
         let id = player.socialClub;
         let user = yarp.users[id];
         if (user) {
-          let character = user.character;
+          let character = player.character;
           if (character) {
             yarp.checkpoints.forEach((checkpoint) => {
               try {

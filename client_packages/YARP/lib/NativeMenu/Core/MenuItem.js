@@ -6,24 +6,17 @@ class MenuItem {
   /**
    *Creates an instance of MenuItem.
    * @param {String} displayText
-   * @param {*} data
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
-   * @param {NativeMenu.Color} [textColor=new NativeMenu.Color(255, 255, 255, 240)]
-   * @param {NativeMenu.Color} [backgroundColor=new NativeMenu.Color(0, 0, 0, 120)]
-   * @param {NativeMenu.Color} [hoverTextColor=new NativeMenu.Color(0, 0, 0, 240)]
-   * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
+   * @param {*} data
    * @memberof MenuItem
    */
-  constructor(displayText, data = {}, caption = '', badge = NaN, textColor = new NativeMenu.Color(255, 255, 255, 240), backgroundColor = new NativeMenu.Color(0, 0, 0, 120), hoverTextColor = new NativeMenu.Color(0, 0, 0, 240), hoverBackgroundColor = new NativeMenu.Color(255, 255, 255, 170)) {
+  constructor(displayText, caption = '', badge = NaN, data = {}) {
     this.displayText = displayText;
     this.data = data;
     this.caption = caption;
     this.badge = badge;
-    this._textColor = textColor;
-    this._backgroundColor = backgroundColor;
-    this._hoverTextColor = hoverTextColor;
-    this._hoverBackgroundColor = hoverBackgroundColor;
+    this.skin = new NativeMenu.Skin();
     this._isSelect = false;
     this.onClickEvents = [];
     this.onSelectEvents = [];
@@ -116,9 +109,9 @@ class MenuItem {
       let numberOfLine = Math.ceil(yarp.utils.client.getTextWidth(this.caption) / NativeMenu.MainMenu.MENU_WIDTH);
       let textLengthPerLine = this.caption.length / numberOfLine;
       let textureHeight = NativeMenu.MainMenu.MENU_HEIGHT * numberOfLine;
-      NativeMenu.CommonMenuTexture.draw('gradient_nav', x, yCaption + textureHeight / 2, NativeMenu.MainMenu.MENU_WIDTH, textureHeight, new NativeMenu.Color(this._backgroundColor.red, this._backgroundColor.green, this._backgroundColor.blue, 220), 270);
+      NativeMenu.CommonMenuTexture.draw('gradient_nav', x, yCaption + textureHeight / 2, NativeMenu.MainMenu.MENU_WIDTH, textureHeight, new NativeMenu.Color(this.skin.backgroundColor.red, this.skin.backgroundColor.green, this.skin.backgroundColor.blue, 220), 270);
       for (let i = 0; i < numberOfLine; i++) {
-        yarp.utils.client.drawText(this.caption.substring(i * textLengthPerLine, (i + 1) * textLengthPerLine), [x - NativeMenu.MainMenu.MENU_DRAW_OFFSET_X + (0.004 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), yCaption + (0.005 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT) + i * NativeMenu.MainMenu.MENU_HEIGHT], this._textColor);
+        yarp.utils.client.drawText(this.caption.substring(i * textLengthPerLine, (i + 1) * textLengthPerLine), [x - NativeMenu.MainMenu.MENU_DRAW_OFFSET_X + (0.004 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), yCaption + (0.005 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT) + i * NativeMenu.MainMenu.MENU_HEIGHT], this.skin.textColor);
       }
     }
   }
@@ -128,7 +121,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   get hoverTextColor() {
-    return this._hoverTextColor;
+    return this.skin.textHoverColor;
   }
 
   /**
@@ -137,7 +130,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   set hoverTextColor(value) {
-    this._hoverTextColor = value;
+    this.skin.textHoverColor = value;
   }
 
   /**
@@ -145,7 +138,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   get hoverBackgroundColor() {
-    return this._hoverBackgroundColor;
+    return this.skin.backgroundHoverColor;
   }
 
   /**
@@ -154,7 +147,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   set hoverBackgroundColor(value) {
-    this._hoverBackgroundColor = value;
+    this.skin.backgroundHoverColor = value;
   }
 
   /**
@@ -162,7 +155,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   get textColor() {
-    return this._isSelect ? this._hoverTextColor : this._textColor;
+    return this._isSelect ? this.skin.textHoverColor : this.skin.textColor;
   }
 
   /**
@@ -171,7 +164,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   set textColor(value) {
-    this._textColor = value;
+    this.skin.textColor = value;
   }
 
   /**
@@ -179,7 +172,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   get backgroundColor() {
-    return this._isSelect ? this._hoverBackgroundColor : this._backgroundColor;
+    return this._isSelect ? this.skin.backgroundHoverColor : this.skin.backgroundColor;
   }
 
   /**
@@ -188,7 +181,7 @@ class MenuItem {
    * @memberof MenuItem
    */
   set backgroundColor(value) {
-    this._backgroundColor = value;
+    this.skin.backgroundColor = value;
   }
 }
 

@@ -65,7 +65,7 @@ class Menu {
     }
     let i = Math.max(0, this.currentIndexMenuItems + 1 - NativeMenu.MainMenu.MAX_MENU_DISPLAY);
     let to = Math.min(i + NativeMenu.MainMenu.MAX_MENU_DISPLAY, this.menuItems.length);
-    let captionYOffset = y + ((to - i) * NativeMenu.MainMenu.MENU_HEIGHT); // + (0.02 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT);
+    let captionYOffset = y + ((to - i) * NativeMenu.MainMenu.MENU_HEIGHT) + (0.02 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT);
     for (; i < to; i++) {
       this.menuItems[i].render(x, y, captionYOffset);
       y += NativeMenu.MainMenu.MENU_HEIGHT;

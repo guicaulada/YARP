@@ -122,31 +122,3 @@ yarp.server.executeBankOperation = (player, operation, amount, target) => {
     }
   }
 };
-
-/**
- *Verify user login.
- * @function verifyLogin
- * @memberof yarp.server
- * @param {Object} player The player that called the event.
- * @param {String} password User password.
- */
-yarp.server.verifyLogin = (player, password) => {
-  let user = yarp.users[player.socialClub];
-  if (user == null) {
-    user = new yarp.User({id: player.socialClub, password: bcrypt.hashSync(password, 10)});
-    user.giveGroup(yarp.variables['Default Group'].value);
-  }
-  if (user.verifyPassword(password)) {
-    player.user = user;
-    user.player = player;
-    user.updateLastLogin(player.ip);
-    user.save();
-    if (Object.keys(user.characters).length == 0) {
-      yarp.client.showCharacterCreationMenu(player);
-    } else {
-      yarp.client.showPlayerCharacters(player, user.characters);
-    }
-  } else {
-    yarp.client.createBrowser(player, 'menu', ['package://YARP/ui/html/accountLogin.html'], true, true);
-  }
-};

@@ -92,8 +92,15 @@ mp.events.add('playerJoin', (player) => {
  * @param {String} reason Exit reason.
  */
 mp.events.add('playerQuit', (player, exitType, reason) => {
-  if (player.user) player.user.leave();
-  if (player.character) player.character.leave();
+  if (player.user) {
+    player.user.leave();
+    player.user.player = null;
+    player.user.character = null;
+  }
+  if (player.character) {
+    player.character.leave();
+    player.character.player = null;
+  }
   let msg = `${player.name}(${player.socialClub}/${player.ip}) quit. (${exitType})`;
   if (exitType == 'kicked') {
     msg = `${player.name}(${player.socialClub}/${player.ip}) quit. Reason: ${reason} (${exitType})`;

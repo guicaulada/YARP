@@ -17,10 +17,10 @@ class Skin {
    * @memberof Skin
    */
   constructor(
-    backgroundColor = new NativeMenu.Color(255, 255, 255, 50),
-    backgroundHoverColor = new NativeMenu.Color(255, 255, 255, 75),
+    backgroundColor = new NativeMenu.Color(0, 0, 0, 50),
+    backgroundHoverColor = new NativeMenu.Color(0, 0, 0, 75),
     backgroundTextFieldColor = new NativeMenu.Color(230, 230, 230, 255),
-    backgroundColorDisabled = new NativeMenu.Color(150, 150, 150, 50),
+    backgroundColorDisabled = new NativeMenu.Color(0, 0, 0, 25),
     backgroundTextFieldColorDisabled = new NativeMenu.Color(150, 150, 150, 255),
     textColorDisabled = new NativeMenu.Color(150, 150, 150, 255),
     textColor = new NativeMenu.Color(255, 255, 255, 255),

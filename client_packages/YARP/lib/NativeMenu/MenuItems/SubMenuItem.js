@@ -7,17 +7,13 @@ class SubMenuItem extends NativeMenu.MenuItem {
    * Creates an instance of SubMenuItem.
    * @extends {NativeMenu.MenuItem}
    * @param {String} displayText
-   * @param {*} data
    * @param {String} [caption='']
    * @param {Number} [badge=NaN]
-   * @param {NativeMenu.Color} [textColor=new NativeMenu.Color(255, 255, 255, 240)]
-   * @param {NativeMenu.Color} [backgroundColor=new NativeMenu.Color(0, 0, 0, 120)]
-   * @param {NativeMenu.Color} [hoverTextColor=new NativeMenu.Color(0, 0, 0, 240)]
-   * @param {NativeMenu.Color} [hoverBackgroundColor=new NativeMenu.Color(255, 255, 255, 170)]
+   * @param {*} data
    * @memberof SubMenuItem
    */
-  constructor(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor) {
-    super(displayText, data, caption, badge, textColor, backgroundColor, hoverTextColor, hoverBackgroundColor);
+  constructor(displayText, caption, badge, data) {
+    super(displayText, caption, badge, data);
     this.menu = new NativeMenu.Menu(false);
   }
 
