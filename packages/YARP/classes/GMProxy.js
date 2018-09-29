@@ -50,8 +50,11 @@ class GMProxy {
           mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
             if (yarp.variables['Debug'].value) yarp.log.debug(`<== ${self.id}:${name}`);
             if (!args) args = [];
-            if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}:${id} ==>`);
-            player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(await value(player, ...this.tryJSON.parse(args)))]);
+            let result = await value(player, ...this.tryJSON.parse(args));
+            if (result != null) {
+              player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(result)]);
+              if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}:${id} ==>`);
+            }
           });
           return value;
         },
@@ -85,10 +88,13 @@ class GMProxy {
         },
         set: (proxy, name, value) => {
           mp.events.add(`${self.id}:${name}`, async (player, id, args) => {
-            if (yarp.variables['Debug'].value) yarp.log.debug(`<== ${self.id}:${name}`);
+            if (yarp.variables['Debug'].value) yarp.log.debug(`<=+ ${self.id}:${name}`);
             if (!args) args = [];
-            if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}:${id} ==>`);
-            player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(await value(player, ...this.tryJSON.parse(args)))]);
+            let result = await value(player, ...this.tryJSON.parse(args));
+            if (result != null) {
+              player.call(`${self.id}:${name}:${id}`, [this.tryJSON.stringify(result)]);
+              if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}:${id} +=>`);
+            }
           });
           return value;
         },

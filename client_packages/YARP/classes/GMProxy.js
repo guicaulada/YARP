@@ -45,7 +45,10 @@ class GMProxy {
           self.local[name] = value;
           mp.events.add(`${self.id}:${name}`, async (id, args) => {
             if (!args) args = [];
-            mp.events.callRemote(`${self.id}:${name}:${id}`, this.tryJSON.stringify(await value(...this.tryJSON.parse(args))));
+            let result = await value(...this.tryJSON.parse(args));
+            if (result != null) {
+              mp.events.callRemote(`${self.id}:${name}:${id}`, this.tryJSON.stringify(result));
+            }
           });
           return value;
         },
@@ -80,7 +83,10 @@ class GMProxy {
           if (name == 'add') return self.add;
           mp.events.add(`${self.id}:${name}`, async (id, args) => {
             if (!args) args = [];
-            mp.events.callRemote(`${self.id}:${name}:${id}`, this.tryJSON.stringify(await value(...this.tryJSON.parse(args))));
+            let result = await value(...this.tryJSON.parse(args));
+            if (result != null) {
+              mp.events.callRemote(`${self.id}:${name}:${id}`, this.tryJSON.stringify(result));
+            }
           });
           return value;
         },
