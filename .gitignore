@@ -11,3 +11,4 @@
 !.eslintrc.json
 !.eslintignore
 **/.listcache
+!.gitattributes
