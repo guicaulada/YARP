@@ -37,8 +37,8 @@ class MenuItem {
         event.trigger(this.data);
       });
       let currentMenuInstance = NativeMenu.MenuPool.getCurrentMenu();
-      if (currentMenuInstance.onEventMenu != null && typeof currentMenuInstance.onEventMenu.select !== 'undefined') {
-        currentMenuInstance.onEventMenu.select(this, this.data);
+      if (currentMenuInstance.onMenuEvent != null && typeof currentMenuInstance.onMenuEvent.select !== 'undefined') {
+        currentMenuInstance.onMenuEvent.select(this, this.data);
       }
     }
   }
@@ -81,8 +81,8 @@ class MenuItem {
         });
         if (!(this instanceof NativeMenu.CloseMenuItem)) {
           let currentMenuInstance = NativeMenu.MenuPool.getCurrentMenu();
-          if (currentMenuInstance.onEventMenu != null && typeof currentMenuInstance.onEventMenu.click !== 'undefined') {
-            currentMenuInstance.onEventMenu.click(this, this.data);
+          if (currentMenuInstance.onMenuEvent != null && typeof currentMenuInstance.onMenuEvent.click !== 'undefined') {
+            currentMenuInstance.onMenuEvent.click(this, this.data);
           }
         }
         NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();

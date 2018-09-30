@@ -5,29 +5,29 @@ yarp.server.loginPlayer = (player) => {
   yarp.log.info(`${player.name}(${player.socialClub}/${player.ip}) joined.`);
   yarp.client.setWorldTime(player, {h: mp.world.time.hour, m: mp.world.time.minute, s: mp.world.time.second});
   let user = yarp.users[player.socialClub];
-  if (user != null) {
-    if (user.banned) {
-      player.outputChatBox('!{red}You have been banned.');
-      yarp.log.info(`${player.socialClub} is banned.`);
-      setTimeout(() => {
-        player.kick('You have been banned.');
-      }, 1000);
-    } else if (yarp.variables['Whitelisted'].value && !user.whitelisted) {
-      player.outputChatBox('!{yellow}You are not whitelisted.');
-      yarp.log.info(`${player.socialClub} is not whitelisted.`);
-      setTimeout(() => {
-        player.kick('You are not whitelisted.');
-      }, 1000);
-    } else {
-      yarp.server.openLoginMenu(player);
-    }
+  if (!user) {
+    yarp.server.openLoginMenu(player);
+    return;
+  }
+  if (user.banned) {
+    player.outputChatBox('!{red}You have been banned.');
+    yarp.log.info(`${player.socialClub} is banned.`);
+    setTimeout(() => {
+      player.kick('You have been banned.');
+    }, 1000);
+  } else if (yarp.variables['Whitelisted'].value && !user.whitelisted) {
+    player.outputChatBox('!{yellow}You are not whitelisted.');
+    yarp.log.info(`${player.socialClub} is not whitelisted.`);
+    setTimeout(() => {
+      player.kick('You are not whitelisted.');
+    }, 1000);
   } else {
-    yarp.client.createBrowser(player, 'menu', ['package://YARP/ui/html/accountRegister.html', 'setAccountName', player.socialClub], true, true);
+    yarp.server.openLoginMenu(player);
   }
 };
 
 yarp.server.openLoginMenu = (player) => {
-  let menu = {title: 'Login Panel', size: [9, 9]};
+  let menu = new yarp.Menu({id: 'Login Panel', size: [9, 9]});
   menu.items = [
     {
       type: 'panel',
@@ -35,7 +35,7 @@ yarp.server.openLoginMenu = (player) => {
       y: 3,
       width: 3,
       height: 1,
-      text: 'Login Panel',
+      text: (yarp.users[player.socialClub] != null) ? 'Login Panel' : 'Registrarion Panel',
       backgroundColor: [0, 0, 0, 100],
     },
     {
@@ -70,20 +70,20 @@ yarp.server.openLoginMenu = (player) => {
       y: 6,
       width: 3,
       height: 1,
-      text: 'Login',
+      text: (yarp.users[player.socialClub] != null) ? 'Login' : 'Register',
       data: {login: true},
       backgroundColor: [0, 0, 0, 100],
       backgroundHoverColor: [255, 255, 51, 100],
     },
   ];
-  yarp.client.buildMenu(player, 'Login Panel', menu);
-  yarp.client.openMenu(player, 'Login Panel');
+  menu.build(player);
+  menu.open(player, true);
 };
 
 yarp.server.loginItemClicked = async (player, data) => {
   if (data._index === 3 && data.login === true) {
-    let inputs = await yarp.client.getMenuItemsByIndex(player, 'Login Panel', [1, 2]);
-    yarp.client.closeMenu(player, 'Login Panel');
+    let inputs = await yarp.menus['Login Panel'].getItemsByIndex(player, [1, 2]);
+    yarp.menus['Login Panel'].close(player);
     yarp.server.verifyLogin(player, inputs[2].inputText);
   }
 };
@@ -96,22 +96,34 @@ yarp.server.loginItemClicked = async (player, data) => {
  * @param {String} password User password.
  */
 yarp.server.verifyLogin = (player, password) => {
-  let user = yarp.users[player.socialClub];
-  if (user == null) {
-    user = new yarp.User({id: player.socialClub, password: bcrypt.hashSync(password, 10)});
-    user.giveGroup(yarp.variables['Default Group'].value);
-  }
-  if (user.verifyPassword(password)) {
-    player.user = user;
-    user.player = player;
-    user.updateLastLogin(player.ip);
-    user.save();
-    if (Object.keys(user.characters).length == 0) {
-      yarp.client.showCharacterCreationMenu(player);
-    } else {
-      yarp.client.showPlayerCharacters(player, JSON.parse(yarp.utils.server.circularJSON(user.characters)));
+  if (password.length > 5) {
+    let user = yarp.users[player.socialClub];
+    if (user == null) {
+      user = new yarp.User({id: player.socialClub, password: bcrypt.hashSync(password, 10)});
+      user.giveGroup(yarp.variables['Default Group'].value);
     }
-  } else {
-    yarp.client.openMenu(player, 'Login Panel');
+    if (user.verifyPassword(password)) {
+      player.user = user;
+      user.player = player;
+      user.updateLastLogin(player.ip);
+      user.save();
+      if (Object.keys(user.characters).length == 0) {
+        yarp.client.showCharacterCreationMenu(player);
+      } else {
+        yarp.client.showPlayerCharacters(player, yarp.utils.server.uncircular(user.characters));
+      }
+      return;
+    }
   }
+  yarp.menus['Login Panel'].addAt(4, {
+    type: 'panel',
+    x: 3,
+    y: 2,
+    width: 3,
+    height: 1,
+    text: (password.length <= 5) ? 'Your password must have at least 5 characters' : 'Invalid password',
+    backgroundColor: [237, 82, 73, 100],
+  });
+  yarp.menus['Login Panel'].build(player);
+  yarp.menus['Login Panel'].open(player);
 };

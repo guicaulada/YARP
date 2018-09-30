@@ -11,7 +11,7 @@ class Menu {
   constructor(isVisible = true) {
     this.menuItems = [];
     this.currentIndexMenuItems = 0;
-    this.onEventMenu = null;
+    this.onMenuEvent = null;
     this._isVisible = isVisible;
     NativeMenu.MenuPool.MenuInstances.push(this);
   }
@@ -37,8 +37,8 @@ class Menu {
    * @param {Function} eventMenu
    * @memberof Menu
    */
-  setEventMenu(eventMenu) {
-    this.onEventMenu = eventMenu;
+  setMenuEvent(eventMenu) {
+    this.onMenuEvent = eventMenu;
   }
 
   /**

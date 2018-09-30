@@ -2,21 +2,21 @@
 /**
  * Implements a menu builder.
  */
-class MenuBuilder {
+class MenuBuilder extends NativeMenu.Menu {
   /**
    * Creates an instance of MenuBuilder.
    * @param {Number} uniqueMenuName
    * @param {Number} xGridSize
    * @param {Number} yGridSize
+   * @extends {NativeMenu.Menu}
    * @memberof MenuBuilder
    */
   constructor(uniqueMenuName, xGridSize, yGridSize) {
-    this.menuName = uniqueMenuName;
-    this.menuItems = [];
-    this.buttons = [];
-    this.panels = [];
-    this.inputPanels = [];
+    super(false);
+    this.size = [xGridSize, yGridSize];
+    this.offset = [];
     this.debugPanels = [];
+    this.menuName = uniqueMenuName;
     this.hoveredButton = null;
     this.blurMenuOnOpen = true;
     this.hideChatOnOpen = true;
@@ -28,13 +28,23 @@ class MenuBuilder {
     this.pctGridHeight = this.pctGridY;
     this.playSoundsWhenTyping = true;
     this.debugMode = false;
-    this.skin = new NativeMenu.Skin();
     this.generateDebugMode();
     this.debugFrame = 0;
-    this.offset = [];
-    this._isVisible = false;
     NativeMenu.MenuPool.MenuInstances.push(this);
   }
+
+  /**
+   * Selects item by index.
+   * @param {Number} newIndex
+   * @param {Boolean} [withSound=true]
+   * @memberof Menu
+   */
+  setToItem(newIndex, withSound = true) {
+    if (withSound) NativeMenu.Sound.CONTINUE.playSound();
+    this.hoveredButton = this.menuItems[newIndex];
+    this.currentIndexMenuItems = newIndex;
+  }
+
   /**
    * Setup the general width / height calculations for the grid.
    * @param {Object} item
@@ -70,17 +80,10 @@ class MenuBuilder {
    */
   add(menuItem) {
     this.prepare(menuItem);
-    if (menuItem instanceof NativeMenu.Button) {
-      this.buttons.push(menuItem);
-      this.menuItems.push(menuItem);
-    } else if (menuItem instanceof NativeMenu.Panel) {
-      this.panels.push(menuItem);
-      this.menuItems.push(menuItem);
-    } else if (menuItem instanceof NativeMenu.InputPanel) {
-      this.inputPanels.push(menuItem);
-      this.menuItems.push(menuItem);
-    } else if (menuItem instanceof NativeMenu.DebugPanel) {
+    if (menuItem instanceof NativeMenu.DebugPanel) {
       this.debugPanels.push(menuItem);
+    } else {
+      this.menuItems.push(menuItem);
     }
   }
 
@@ -100,9 +103,10 @@ class MenuBuilder {
    * @memberof MenuBuilder
    */
   draw() {
-    this.drawButtons();
-    this.drawPanels();
-    this.drawInputPanels();
+    for (let menuItem of this.menuItems) {
+      menuItem.draw();
+    }
+
     this.drawDebugPanels();
   }
 
@@ -149,43 +153,6 @@ class MenuBuilder {
       for (let y = 0; y < this.gridSizeHeight; y++) {
         this.add(new NativeMenu.DebugPanel(x, y, 1, 1, `(${x},${y})`));
       }
-    }
-  }
-
-  /**
-   * Draws buttons.
-   * @memberof MenuBuilder
-   */
-  drawButtons() {
-    if (this.buttons.length <= 0) return;
-    for (let i = 0; i < this.buttons.length; i++) {
-      this.buttons[i].draw();
-    }
-  }
-
-  /**
-   * Draws panels.
-   * @memberof MenuBuilder
-   */
-  drawPanels() {
-    if (this.panels.length <= 0) {
-      return;
-    }
-    for (let i = 0; i < this.panels.length; i++) {
-      this.panels[i].draw();
-    }
-  }
-
-  /**
-   * Draws input panels.
-   * @memberof MenuBuilder
-   */
-  drawInputPanels() {
-    if (this.inputPanels.length <= 0) {
-      return;
-    }
-    for (let i = 0; i < this.inputPanels.length; i++) {
-      this.inputPanels[i].draw();
     }
   }
 
@@ -296,6 +263,7 @@ mp.events.add('click', (x, y, upOrDown, leftOrRight, relativeX, relativeY, world
   if (menu.hoveredButton.mouseCollision && upOrDown === 'up') {
     NativeMenu.MenuPool.timeSinceLastKeyCheck = new Date().getTime();
     menu.hoveredButton.action();
+    if (menu.onMenuEvent && menu.onMenuEvent.click) menu.onMenuEvent.click(this, this.data);
     return;
   }
 });

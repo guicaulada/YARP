@@ -122,8 +122,11 @@ class Button {
     let lastCollision = this.mouseCollision;
     if (mouse[0] > this.aX - (this.aWidth / 2) && mouse[0] < this.aX + (this.aWidth / 2) && mouse[1] > this.aY - (this.aHeight / 2) && mouse[1] < this.aY + (this.aHeight / 2)) {
       this.mouseCollision = true;
-      NativeMenu.MenuPool.getCurrentMenu().hoveredButton = this;
+      let menu = NativeMenu.MenuPool.getCurrentMenu();
+      menu.hoveredButton = this;
       if (lastCollision != this.mouseCollision) {
+        menu.currentIndexMenuItems = this.data._index;
+        if (menu.onMenuEvent && menu.onMenuEvent.select) menu.onMenuEvent.select(this, this.data);
         this.onSelectEvents.forEach((event) => {
           event.trigger(this.data);
         });

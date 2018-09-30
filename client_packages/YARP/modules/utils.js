@@ -70,12 +70,12 @@ utils.client.default = (v, d) => {
 
 /**
  * Handles substitution for JSON stringify on circular references.
- * @function circularJSON
+ * @function uncircular
  * @memberof yarp.utils.client
  * @param {Object} object Circular object.
  * @return {String} JSON string.
  */
-utils.client.circularJSON = (object) => {
+utils.client.uncircular = (object) => {
   // http://stackoverflow.com/questions/11616630/json-stringify-avoid-typeerror-converting-circular-structure-to-json/11616993#11616993
   let cache = [];
   let json = JSON.stringify(object, (key, value) => {
@@ -90,7 +90,7 @@ utils.client.circularJSON = (object) => {
     return value;
   });
   cache = null; // Enable garbage collection
-  return json;
+  return JSON.parse(json);
 };
 
 /**

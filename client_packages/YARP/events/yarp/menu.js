@@ -125,6 +125,19 @@ yarp.client.addMenuItemEvents = (menuItem, item) => {
     }
 };
 
+yarp.client.setMenuEvent = (menuId, click, select) => {
+    yarp.menus[menuId].setMenuEvent({
+        click: click == null ? (data) => {
+            data._menuId = menuId;
+            // yarp.server.menuClicked(data); // Enabled if you need this, probably don't.
+        } : click,
+        select: select == null ? (data) => {
+            data._menuId = menuId;
+            // yarp.server.menuSelected(data); // Im on an event diet.
+        } : select,
+    });
+};
+
 /**
  * Creates menu.
  * @function createMenu
@@ -138,19 +151,10 @@ yarp.client.createMenu = (menuId, options) => {
     if (options.texture) {
         yarp.menus[menuId].setTitleTexture(...options.texture);
     }
+    yarp.client.setMenuEvent(menuId);
     for (let item of options.items) {
         yarp.client.menuAddItem(menuId, item);
     }
-    yarp.menus[menuId].setEventMenu({
-        click: (data) => {
-            data._menuId = menuId;
-            // yarp.server.menuClicked(data); // Enabled if you need this, probably don't.
-        },
-        select: (data) => {
-            data._menuId = menuId;
-            // yarp.server.menuSelected(data); // Im on an event diet.
-        },
-    });
 };
 
 /**
@@ -165,6 +169,7 @@ yarp.client.buildMenu = (menuId, options) => {
     if (options.debug === true) {
         yarp.menus[menuId].debugMode = true;
     }
+    yarp.client.setMenuEvent(menuId);
     for (let item of options.items) {
         yarp.client.menuBuilderAddItem(menuId, item);
     }
@@ -380,7 +385,7 @@ mp.events.add('render', () => {
     for (let menuId in yarp.menus) {
         if (yarp.menus.hasOwnProperty(menuId)) {
             let menu = yarp.menus[menuId];
-            if (menu.offset) menu.render(...menu.offset);
+            if (menu.menuItems.length > 0) menu.render(...menu.offset);
         }
     }
 });

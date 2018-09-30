@@ -20,6 +20,7 @@ class Menu extends yarp.Object {
       this._title = this.default(params.title, params.id);
       this._items = this.default(params.items, []);
       this._offset = this.default(params.offset, [0, 0]);
+      this._size = this.default(params.size, [10, 10]);
       this._texture = this.default(params.texture, ['commonmenu', 'interaction_bgd']);
       this._visible = {};
       yarp.mng.register(this);
@@ -41,6 +42,17 @@ class Menu extends yarp.Object {
   }
 
   /**
+   * Creates the menu.
+   * @instance
+   * @function create
+   * @param {Object} player
+   * @memberof Menu
+   */
+  build(player) {
+    yarp.client.buildMenu(player, this.id, yarp.utils.server.cleanData(this));
+  }
+
+  /**
    * Recreates the menu for all online players.
    * @instance
    * @function recreate
@@ -57,11 +69,12 @@ class Menu extends yarp.Object {
    * @instance
    * @function open
    * @param {Object} player
+   * @param {Boolean} [chat=false] Chat on/off.
    * @memberof Menu
    */
-  open(player) {
+  open(player, chat = false) {
     this._visible[player.name] = true;
-    yarp.client.openMenu(player, this.id);
+    yarp.client.openMenu(player, this.id, chat);
   }
 
   /**
@@ -96,6 +109,18 @@ class Menu extends yarp.Object {
    */
   add(item) {
     this.items.push(item);
+  }
+
+  /**
+   * Add one item to the menu at a certain index.
+   * @instance
+   * @function addAt
+   * @param {Number} index
+   * @param {Object} item
+   * @memberof Menu
+   */
+  addAt(index, item) {
+    this.items[index] = item;
   }
 
   /**
@@ -160,6 +185,30 @@ class Menu extends yarp.Object {
   removeItems(player, index, amount) {
     yarp.client.menuRemoveItems(player, this.id, index, amount);
   }
+
+  /**
+   * Returns item data.
+   * @function getItemByIndex
+   * @param {Object} player
+   * @param {Number} index Item index.
+   * @memberof Menu
+   * @return {*} Item data.
+   */
+  async getItemByIndex(player, index) {
+    return await yarp.client.getMenuItemByIndex(player, this.id, index);
+  };
+
+  /**
+   * Returns items data.
+   * @function getItemsByIndex
+   * @param {Object} player
+   * @param {Array<Number>} indexList Item index list.
+   * @memberof Menu
+   * @return {Array<*>} Item data by index.
+   */
+  async getItemsByIndex(player, indexList) {
+    return await yarp.client.getMenuItemsByIndex(player, this.id, indexList);
+  };
 }
 
 module.exports = Menu;
