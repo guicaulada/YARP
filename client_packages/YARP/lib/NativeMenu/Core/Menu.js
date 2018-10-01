@@ -6,10 +6,12 @@ class Menu {
   /**
    * Creates an instance of Menu.
    * @param {Boolean} [isVisible=true]
+   * @param {*} [data={}}]
    * @memberof Menu
    */
-  constructor(isVisible = true) {
+  constructor(isVisible = true, data = {}) {
     this.menuItems = [];
+    this.data = data;
     this.currentIndexMenuItems = 0;
     this.onMenuEvent = null;
     this._isVisible = isVisible;
@@ -95,8 +97,11 @@ class Menu {
       this.setToItem(0);
       NativeMenu.Sound.NAV_LEFT_RIGHT.playSound();
     } else {
+      this.onMenuEvent.close(this, this.data);
       this.menuItems[this.currentIndexMenuItems].isSelect = false;
       NativeMenu.Sound.BACK.playSound();
+      mp.gui.cursor.show(false, false);
+      mp.gui.chat.show(true);
     }
   }
 

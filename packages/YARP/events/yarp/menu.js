@@ -70,3 +70,15 @@ yarp.server.menuClicked = (player, data) => {
 yarp.server.menuSelected = (player, data) => {
     if (data._menuId == 'Test Menu') console.log(data);
 };
+
+/**
+ * Called when menu is closed for native menu.
+ * @function menuClosed
+ * @memberof yarp.server
+ * @param {Object} player The player that called the event.
+ * @param {String} data._menuId Id of the menu.
+ * @param {Object} data Data representing the event.
+ */
+yarp.server.menuClosed = (player, data) => {
+    if (data._menuId == 'Test Menu') console.log(data);
+};

@@ -157,14 +157,6 @@ class InputPanel {
     if (this.disabled) return;
     NativeMenu.Sound.CONTINUE.playSound();
     NativeMenu.MenuPool.currentInputBox = this;
-    for (let i = 1; i <= 0xFE; i++) {
-      mp.keys.bind(i, true, () => {
-        NativeMenu.MenuBuilder.keydown(i);
-        this.onChangeEvents.forEach((event) => {
-          event.trigger(this.data);
-        });
-      });
-    }
     this.onClickEvents.forEach((event) => {
       event.trigger(this.data);
     });

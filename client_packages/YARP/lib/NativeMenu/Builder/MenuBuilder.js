@@ -195,6 +195,7 @@ class MenuBuilder extends NativeMenu.Menu {
         mp.gui.chat.show(false);
       }
     } else {
+      this.onMenuEvent.close(this, this.data);
       mp.gui.cursor.show(false, false);
       mp.game.graphics.transitionFromBlurred(5);
       mp.gui.chat.show(true);
@@ -225,6 +226,9 @@ class MenuBuilder extends NativeMenu.Menu {
       NativeMenu.MenuPool.timeSinceLastKeyCheck = new Date().getTime();
       NativeMenu.MenuPool.currentInputBox.data.inputText = NativeMenu.MenuPool.currentInputBox.data.inputText.slice(0, -1);
       NativeMenu.Sound.HACKING.playSound();
+      NativeMenu.MenuPool.currentInputBox.onChangeEvents.forEach((event) => {
+        event.trigger(NativeMenu.MenuPool.currentInputBox.data);
+      });
       return;
     }
     let x = String.fromCharCode(i);
@@ -242,6 +246,9 @@ class MenuBuilder extends NativeMenu.Menu {
       }
       NativeMenu.MenuPool.currentInputBox.data.inputText = NativeMenu.MenuPool.currentInputBox.data.inputText + String.fromCharCode(i).toLowerCase();
       NativeMenu.MenuPool.timeSinceLastKeyCheck = new Date().getTime();
+      NativeMenu.MenuPool.currentInputBox.onChangeEvents.forEach((event) => {
+        event.trigger(NativeMenu.MenuPool.currentInputBox.data);
+      });
       return;
     } else {
       if (menu.playSoundsWhenTyping) {
@@ -249,6 +256,9 @@ class MenuBuilder extends NativeMenu.Menu {
       }
       NativeMenu.MenuPool.currentInputBox.data.inputText = NativeMenu.MenuPool.currentInputBox.data.inputText + String.fromCharCode(i);
       NativeMenu.MenuPool.timeSinceLastKeyCheck = new Date().getTime();
+      NativeMenu.MenuPool.currentInputBox.onChangeEvents.forEach((event) => {
+        event.trigger(NativeMenu.MenuPool.currentInputBox.data);
+      });
       return;
     }
   }
@@ -263,9 +273,15 @@ mp.events.add('click', (x, y, upOrDown, leftOrRight, relativeX, relativeY, world
   if (menu.hoveredButton.mouseCollision && upOrDown === 'up') {
     NativeMenu.MenuPool.timeSinceLastKeyCheck = new Date().getTime();
     menu.hoveredButton.action();
-    if (menu.onMenuEvent && menu.onMenuEvent.click) menu.onMenuEvent.click(this, this.data);
+    if (menu.onMenuEvent && menu.onMenuEvent.click) menu.onMenuEvent.click(menu.hoveredButton, menu.hoveredButton.data);
     return;
   }
 });
+
+for (let i = 1; i <= 0xFE; i++) {
+  mp.keys.bind(i, true, () => {
+    MenuBuilder.keydown(i);
+  });
+}
 
 exports = MenuBuilder;

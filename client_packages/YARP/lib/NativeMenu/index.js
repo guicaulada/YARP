@@ -14,6 +14,7 @@ NativeMenu.TextureDictionary = require('./YARP/lib/NativeMenu/Core/TextureDictio
 NativeMenu.TextMenuItem = require('./YARP/lib/NativeMenu/MenuItems/TextMenuItem.js');
 NativeMenu.CheckboxMenuItem = require('./YARP/lib/NativeMenu/MenuItems/CheckboxMenuItem.js');
 NativeMenu.CloseMenuItem = require('./YARP/lib/NativeMenu/MenuItems/CloseMenuItem.js');
+NativeMenu.InputMenuItem = require('./YARP/lib/NativeMenu/MenuItems/InputMenuItem.js');
 NativeMenu.ListMenuItem = require('./YARP/lib/NativeMenu/MenuItems/ListMenuItem.js');
 NativeMenu.SliderMenuItem = require('./YARP/lib/NativeMenu/MenuItems/SliderMenuItem.js');
 NativeMenu.SubMenuItem = require('./YARP/lib/NativeMenu/MenuItems/SubMenuItem.js');

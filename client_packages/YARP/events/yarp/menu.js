@@ -43,6 +43,12 @@ yarp.client.menuAddItem = (menuId, item) => {
                 yarp.client.menuAddItem(item.id, subitem);
             }
             break;
+        case 'input':
+            menuItem = [
+                menuItem[0], item.masked, item.max, item.inputText, ...menuItem.slice(1, menuItem.length),
+            ];
+            menuItem = new NativeMenu.InputMenuItem(...menuItem);
+            break;
         default:
             menuItem = new NativeMenu.TextMenuItem(...menuItem);
             break;
@@ -112,29 +118,33 @@ yarp.client.addMenuItemEvents = (menuItem, item) => {
     if (menuItem.addOnSelectEvent) {
         menuItem.addOnSelectEvent({
             trigger: menuItem.onSelectEvents.length == 0 ? (data) => {
-                // yarp.server.menuItemSelected(data); // Do we really need that many events? No. YES!
+                yarp.server.menuItemSelected(data); // Do we really need that many events? No. YES!
             } : item.select ? item.select : () => {},
         });
     }
     if (menuItem.addOnChangeEvent) {
         menuItem.addOnChangeEvent({
             trigger: menuItem.onChangeEvents.length == 0 ? (data) => {
-                // yarp.server.menuItemChanged(data); // This might be a little too much, use with caution.
+                yarp.server.menuItemChanged(data); // This might be a little too much, use with caution.
             } : item.changed ? item.changed : () => {},
         });
     }
 };
 
-yarp.client.setMenuEvent = (menuId, click, select) => {
+yarp.client.setMenuEvent = (menuId, menu) => {
     yarp.menus[menuId].setMenuEvent({
-        click: click == null ? (data) => {
+        click: !menu || !menu.click ? (menu, data) => {
             data._menuId = menuId;
-            // yarp.server.menuClicked(data); // Enabled if you need this, probably don't.
-        } : click,
-        select: select == null ? (data) => {
+            yarp.server.menuClicked(data); // Enabled if you need this, probably don't.
+        } : menu.click,
+        select: !menu || !menu.select ? (menu, data) => {
             data._menuId = menuId;
-            // yarp.server.menuSelected(data); // Im on an event diet.
-        } : select,
+            yarp.server.menuSelected(data); // Im on an event diet.
+        } : menu.select,
+        close: !menu || !menu.close ? (menu, data) => {
+            data._menuId = menuId;
+            yarp.server.menuClosed(data); // MOAR EVENTS!
+        } : menu.close,
     });
 };
 

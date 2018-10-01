@@ -39,6 +39,17 @@ let config = {
         caption: 'Checkbox test item.',
       },
       {
+        type: 'input',
+        displayText: 'Input',
+        inputText: 'input text',
+      },
+      {
+        type: 'input',
+        displayText: 'Masked',
+        inputText: 'input text',
+        masked: true,
+      },
+      {
         type: 'close',
         displayText: 'Close',
       },
