@@ -15,7 +15,7 @@ class InputMenuItem extends NativeMenu.MenuItem {
    * @param {*} data
    * @memberof InputMenuItem
    */
-  constructor(displayText, masked = false, max = 10, text = '', caption, badge, data) {
+  constructor(displayText, masked = false, max = 20, text = '', caption, badge, data) {
     super(displayText, caption, badge, data);
     this.firstRender = true;
     this.onChangeEvents = [];
@@ -56,6 +56,11 @@ class InputMenuItem extends NativeMenu.MenuItem {
       if (NativeMenu.MenuPool.currentInputBox == this) {
         NativeMenu.MenuPool.currentInputBox = null;
         yarp.hotkeys.disabled = false;
+      }
+    } else if (this._isSelect) {
+      mp.game.controls.disableControlAction(0, 199, true); // Disable menu
+      for (let i = 0; i <= 171; i++) {
+        mp.game.controls.disableControlAction(0, i, true); // Disable all movement ?
       }
     }
     super.render(x, y, yCaption);
