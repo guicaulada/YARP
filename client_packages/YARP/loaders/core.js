@@ -7,6 +7,7 @@ global.yarp = new GMProxy('yarp');
 
 yarp.Proxy = GMProxy;
 yarp.utils = require('./YARP/modules/utils.js');
+yarp.hotkeys = {};
 yarp.browsers = {};
 yarp.cameras = {};
 yarp.menus = {};

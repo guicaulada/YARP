@@ -4,8 +4,6 @@
  * @memberof yarp.client
  */
 
-let keybinds = {};
-
 yarp.client.chatShow = (toggle) => {
   mp.gui.chat.show(toggle);
 };
@@ -105,20 +103,21 @@ yarp.client.runServerFunction = (func, args) => {
  * @param {String} key The virtual key code.
  */
 yarp.client.playerBindKey = (id, key) => {
-  if (keybinds[id]) {
-    mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
-    keybinds[id] = null;
+  if (yarp.hotkeys[id]) {
+    mp.keys.unbind(yarp.hotkeys[id].key, false, yarp.hotkeys[id].call);
+    yarp.hotkeys[id] = null;
   }
   if ((typeof key) === 'string') key = yarp.utils.client.getVirtualKeys()[key.toUpperCase()];
-  keybinds[id] = {
+  yarp.hotkeys[id] = {
     key: key,
     call: () => {
-      let disabled = false;
+      let disabled = yarp.hotkeys.disabled;
       for (let id in yarp.browsers) {
         if (yarp.browsers.hasOwnProperty(id)) {
           let browser = yarp.browsers[id];
-          if (browser.disableHotkeys || yarp.hotkeys.disabled === true) {
+          if (browser.disableHotkeys) {
             disabled = true;
+            break;
           }
         }
       }
@@ -127,7 +126,7 @@ yarp.client.playerBindKey = (id, key) => {
       }
     },
   };
-  mp.keys.bind(keybinds[id].key, false, keybinds[id].call);
+  mp.keys.bind(yarp.hotkeys[id].key, false, yarp.hotkeys[id].call);
 };
 
 /**
@@ -137,9 +136,9 @@ yarp.client.playerBindKey = (id, key) => {
  * @param {String} id The id of the keybind.
  */
 yarp.client.playerUnbindKey = (id) => {
-  if (keybinds[id]) {
-    mp.keys.unbind(keybinds[id].key, false, keybinds[id].call);
-    keybinds[id] = null;
+  if (yarp.hotkeys[id]) {
+    mp.keys.unbind(yarp.hotkeys[id].key, false, yarp.hotkeys[id].call);
+    yarp.hotkeys[id] = null;
   }
 };
 

@@ -30,6 +30,7 @@ class InputMenuItem extends NativeMenu.MenuItem {
       trigger: (data) => {
         if (this.disabled) return;
         NativeMenu.MenuPool.currentInputBox = this;
+        yarp.hotkeys.disabled = true;
       },
     });
   }
@@ -52,7 +53,10 @@ class InputMenuItem extends NativeMenu.MenuItem {
    */
   render(x, y, yCaption) {
     if (!this._isSelect && Date.now() - NativeMenu.MainMenu.CONTROL_TICK_TIME_MS > NativeMenu.MainMenu.LAST_TICK_TIME) {
-      if (NativeMenu.MenuPool.currentInputBox == this) NativeMenu.MenuPool.currentInputBox = null;
+      if (NativeMenu.MenuPool.currentInputBox == this) {
+        NativeMenu.MenuPool.currentInputBox = null;
+        yarp.hotkeys.disabled = false;
+      }
     }
     super.render(x, y, yCaption);
   }
