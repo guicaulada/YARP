@@ -21,7 +21,7 @@ class Group extends yarp.Object {
       this._id = params.id;
       this._type = this.default(params.type, false);
       this._inherits = this.default(params.inherits, []);
-      this._permissions = this.default(params.permissions, {});
+      this._permissions = this.default(params.permissions, []);
       this._enter = this.default(params.enter, () => {}).toString();
       this._leave = this.default(params.leave, () => {}).toString();
       yarp.mng.register(this);
