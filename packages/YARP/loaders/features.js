@@ -15,6 +15,9 @@ module.exports = async () => {
 
     // Load login panel
     require('../features/login/index.js');
+
+    // Load character stuff
+    require('../features/characters/index.js');
   } catch (err) {
     yarp.log.danger('FeatureError: '+err.message+'\n'+err.stack);
   }

@@ -19,6 +19,7 @@ class Menu extends yarp.Object {
       this._id = params.id;
       this._title = this.default(params.title, params.id);
       this._items = this.default(params.items, []);
+      this._debug = this.default(params.debug, false);
       this._offset = this.default(params.offset, [0, 0]);
       this._size = this.default(params.size, [10, 10]);
       this._texture = this.default(params.texture, ['commonmenu', 'interaction_bgd']);

@@ -23,8 +23,8 @@ class Skin {
     backgroundColorDisabled = new NativeMenu.Color(0, 0, 0, 25),
     backgroundTextFieldColorDisabled = new NativeMenu.Color(150, 150, 150, 255),
     textColorDisabled = new NativeMenu.Color(150, 150, 150, 255),
-    textColor = new NativeMenu.Color(255, 255, 255, 255),
-    textHoverColor = new NativeMenu.Color(150, 150, 150, 255),
+    textColor = new NativeMenu.Color(200, 200, 200, 255),
+    textHoverColor = new NativeMenu.Color(255, 255, 255, 255),
     textOutline = true
   ) {
     this.backgroundColor = backgroundColor;

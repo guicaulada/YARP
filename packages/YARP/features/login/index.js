@@ -77,7 +77,7 @@ yarp.server.openLoginMenu = (player) => {
     },
   ];
   menu.build(player);
-  menu.open(player, true);
+  menu.open(player);
 };
 
 yarp.server.loginItemClicked = async (player, data) => {
@@ -110,7 +110,7 @@ yarp.server.verifyLogin = (player, password) => {
       if (Object.keys(user.characters).length == 0) {
         yarp.client.showCharacterCreationMenu(player);
       } else {
-        yarp.client.showPlayerCharacters(player, yarp.utils.server.uncircular(user.characters));
+        yarp.server.showPlayerCharacters(player);
       }
       return;
     }

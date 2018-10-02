@@ -15,31 +15,26 @@ let faceModel = {
 };
 
 let camera = null;
-let characters = null;
 
 /**
  * Show user characters on side menu.
- * @function showPlayerCharacters
+ * @function toClouds
  * @memberof yarp.client
  * @param {Object} userCharacters User characters.
  */
-yarp.client.showPlayerCharacters = (userCharacters) => {
-  characters = JSON.stringify(userCharacters);
+yarp.client.toClouds = () => {
   mp.game.ui.displayRadar(false);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-  yarp.client.createBrowser('character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters], true, true);
 };
 
 /**
  * Load the caracter data.
- * @function loadCharacter
+ * @function fromClouds
  * @memberof yarp.client
  * @param {String} id Character name.
  */
-yarp.client.loadCharacter = (id) => {
-  yarp.client.destroyBrowser('character');
+yarp.client.fromClouds = (id) => {
   mp.game.ui.displayRadar(true);
-  yarp.server.loadCharacter(id);
   mp.game.invoke('0x95C0A5BBDC189AA1');
 };
 
@@ -147,7 +142,8 @@ yarp.client.cancelCharacterCreation = () => {
   mp.gui.chat.activate(true);
   mp.gui.chat.show(true);
   mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
-  yarp.client.createBrowser('character', ['package://YARP/ui/html/sideMenu.html', 'populateCharacterList', characters], true, true);
+  yarp.client.destroyBrowser('character');
+  yarp.server.showPlayerCharacters();
 };
 
 /**
