@@ -20,6 +20,8 @@ let values = {
   'First Heading': 90,
   'Character Creator': new mp.Vector3(402.8664, -996.4108, -99.00027),
   'Creator Heading': -185.0,
+  'Creator Camera Pos': new mp.Vector3(402.8664, -997.5515, -98.5),
+  'Creator Camera Look': new mp.Vector3(402.8664, -996.4108, -98.5),
   'Default Group': 'User',
   'Spawns': [
     new mp.Vector3(1839.6, 3672.93, 34.28),

@@ -24,7 +24,6 @@ module.exports = async () => {
      * Loads YARP events.
      * @namespace yarp.server
      */
-    require('../events/yarp/character.js');
     require('../events/yarp/gamemode.js');
     require('../events/yarp/item.js');
     require('../events/yarp/menu.js');

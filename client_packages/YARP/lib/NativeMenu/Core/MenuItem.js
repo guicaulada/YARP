@@ -106,12 +106,11 @@ class MenuItem {
     }
     yarp.utils.client.drawText(this.displayText, [xOffset, y + (0.005 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT)], this.textColor);
     if (this._isSelect && this.caption.length > 0) {
-      let numberOfLine = Math.ceil(yarp.utils.client.getTextWidth(this.caption) / NativeMenu.MainMenu.MENU_WIDTH);
-      let textLengthPerLine = this.caption.length / numberOfLine;
-      let textureHeight = NativeMenu.MainMenu.MENU_HEIGHT * numberOfLine;
+      let eachLineText = this.caption.split('\n');
+      let textureHeight = NativeMenu.MainMenu.MENU_HEIGHT * eachLineText.length;
       NativeMenu.CommonMenuTexture.draw('gradient_nav', x, yCaption + textureHeight / 2, NativeMenu.MainMenu.MENU_WIDTH, textureHeight, new NativeMenu.Color(this.skin.backgroundColor.red, this.skin.backgroundColor.green, this.skin.backgroundColor.blue, 220), 270);
-      for (let i = 0; i < numberOfLine; i++) {
-        yarp.utils.client.drawText(this.caption.substring(i * textLengthPerLine, (i + 1) * textLengthPerLine), [x - NativeMenu.MainMenu.MENU_DRAW_OFFSET_X + (0.004 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), yCaption + (0.005 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT) + i * NativeMenu.MainMenu.MENU_HEIGHT], this.skin.textColor);
+      for (let i = 0; i < eachLineText.length; i++) {
+        yarp.utils.client.drawText(eachLineText[i], [x - NativeMenu.MainMenu.MENU_DRAW_OFFSET_X + (0.004 * NativeMenu.MainMenu.SCREEN_RATIO_WIDTH), yCaption + (0.005 * NativeMenu.MainMenu.SCREEN_RATIO_HEIGHT) + i * NativeMenu.MainMenu.MENU_HEIGHT], this.skin.textColor);
       }
     }
   }

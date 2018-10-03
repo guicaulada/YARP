@@ -183,6 +183,10 @@ class InputPanel {
           event.trigger(this.data);
         });
       }
+      mp.game.controls.disableControlAction(0, 199, true); // Disable menu
+      for (let i = 0; i <= 171; i++) {
+        mp.game.controls.disableControlAction(0, i, true); // Disable all movement ?
+      }
       return;
     }
     this.mouseCollision = false;

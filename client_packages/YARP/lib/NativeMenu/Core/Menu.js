@@ -97,11 +97,11 @@ class Menu {
       this.setToItem(0);
       NativeMenu.Sound.NAV_LEFT_RIGHT.playSound();
     } else {
-      this.onMenuEvent.close(this, this.data);
+      if (this.onMenuEvent && this.onMenuEvent.close) this.onMenuEvent.close(this, this.data);
       this.menuItems[this.currentIndexMenuItems].isSelect = false;
       NativeMenu.Sound.BACK.playSound();
       mp.gui.cursor.show(false, false);
-      mp.gui.chat.show(true);
+      if (!this.data._submenu) mp.gui.chat.show(true);
     }
   }
 

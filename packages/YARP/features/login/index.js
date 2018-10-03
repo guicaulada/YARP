@@ -108,7 +108,7 @@ yarp.server.verifyLogin = (player, password) => {
       user.updateLastLogin(player.ip);
       user.save();
       if (Object.keys(user.characters).length == 0) {
-        yarp.client.showCharacterCreationMenu(player);
+        yarp.server.showCharacterCreationMenu(player);
       } else {
         yarp.server.showPlayerCharacters(player);
       }

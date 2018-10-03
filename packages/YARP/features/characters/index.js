@@ -58,7 +58,9 @@ yarp.server.add.menuItemClicked = (player, data) => {
       yarp.server.loadCharacter(player, data.charId);
       yarp.client.fromClouds(player);
     } else if (data.newChar) {
-      yarp.client.showCharacterCreationMenu(player);
+      yarp.server.showCharacterCreationMenu(player);
     }
   }
 };
+
+require('./creator.js');

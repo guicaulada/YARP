@@ -39,6 +39,9 @@ yarp.client.menuAddItem = (menuId, item) => {
         case 'submenu':
             menuItem = new NativeMenu.SubMenuItem(...menuItem);
             yarp.menus[item.id] = menuItem.menu;
+            yarp.client.setMenuEvent(item.id);
+            yarp.menus[item.id].data._submenu = true;
+            yarp.menus[item.id].data._parentId = menuId;
             for (let subitem of item.items) {
                 yarp.client.menuAddItem(item.id, subitem);
             }
@@ -395,7 +398,7 @@ mp.events.add('render', () => {
     for (let menuId in yarp.menus) {
         if (yarp.menus.hasOwnProperty(menuId)) {
             let menu = yarp.menus[menuId];
-            if (menu.menuItems.length > 0) menu.render(...menu.offset);
+            if (menu.offset != null) menu.render(...menu.offset);
         }
     }
 });
