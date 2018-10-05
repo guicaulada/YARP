@@ -568,6 +568,7 @@ yarp.server.loadCharacter = (player, id) => {
   player.heading = character.heading;
   player.health = character.health;
   player.armour = character.armour;
+  player.dimension = 0;
   for (let id in character.weapons) {
     if (character.weapons.hasOwnProperty(id)) {
       player.giveWeapon(mp.joaat(id), character.weapons[id]);
