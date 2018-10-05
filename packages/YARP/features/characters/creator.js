@@ -512,8 +512,9 @@ yarp.server.add.menuItemClicked = async (player, data) => {
               player.character.id = id;
               player.character.unlock();
               player.character.save();
-              yarp.server.showPlayerCharacters(player);
               yarp.menus['Character Creator'].close(player);
+              yarp.client.destroyCamera(player, 'Character Creator');
+              yarp.server.showPlayerCharacters(player);
             } else {
               let menu = yarp.server.buildCharacterMenu(player, false);
               for (let i = 0; i <= 1; i++) {
