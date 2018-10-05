@@ -1,6 +1,7 @@
 'use strict';
 
 yarp.server.showPlayerCharacters = (player) => {
+  player.character = null;
   let characters = player.user.characters;
   yarp.client.toClouds(player);
   let menu = new yarp.Menu({id: 'Character List', size: [16, 16], debug: false});

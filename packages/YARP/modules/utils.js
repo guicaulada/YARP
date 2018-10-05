@@ -46,6 +46,20 @@ utils.server.getRandomInt = (min, max) => {
 };
 
 /**
+ * Capitalizes a string
+ * @instance
+ * @function capitalize
+ * @memberof yarp.utils.server
+ * @param {String} str String to be capitalized.
+ * @return {String} Capitalized string.
+ */
+utils.server.capitalize = (str) => {
+  str = str.toLowerCase();
+  str = str.charAt(0).toUpperCase() + str.substr(1);
+  return str;
+};
+
+/**
  * Returns first vaule or second value as default.
  * @instance
  * @function default

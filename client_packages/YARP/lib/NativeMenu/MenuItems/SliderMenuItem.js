@@ -23,6 +23,7 @@ class SliderMenuItem extends NativeMenu.MenuItem {
     this.step = step;
     this.start = start;
     this.firstRender = true;
+    this.isSet = false;
     this.onChangeEvents = [];
   }
 
@@ -98,13 +99,17 @@ class SliderMenuItem extends NativeMenu.MenuItem {
         this.start = newValue;
       }
     }
+    this.data.value = this.start;
     if (withSound) {
       NativeMenu.Sound.NAV_LEFT_RIGHT.playSound();
     }
     NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
-    this.onChangeEvents.forEach((value) => {
-      value.trigger(this.start);
-    });
+    if (this.isSet) {
+      this.onChangeEvents.forEach((value) => {
+        value.trigger(this.data);
+      });
+    }
+    this.isSet = true;
   }
 }
 

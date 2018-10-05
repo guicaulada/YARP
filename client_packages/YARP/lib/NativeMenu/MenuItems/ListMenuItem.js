@@ -19,6 +19,7 @@ class ListMenuItem extends NativeMenu.MenuItem {
     this.items = items;
     this.onChangeEvents = [];
     this.firstRender = true;
+    this.isSet = false;
     this.defaultIndex = defaultIndex;
   }
 
@@ -92,10 +93,14 @@ class ListMenuItem extends NativeMenu.MenuItem {
     if (withSound) {
       NativeMenu.Sound.NAV_LEFT_RIGHT.playSound();
     }
+    this.data.item = this.items[this.itemsCurrentIndex];
     NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
-    this.onChangeEvents.forEach((value) => {
-      value.trigger(this.items[this.itemsCurrentIndex]);
-    });
+    if (this.isSet) {
+      this.onChangeEvents.forEach((value) => {
+        value.trigger(this.data);
+      });
+    }
+    this.isSet = true;
   }
 }
 

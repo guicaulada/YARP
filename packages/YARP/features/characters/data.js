@@ -2,7 +2,7 @@
 
 let data = {};
 
-data.freemode = [mp.joaat('mp_m_freemode_01'), mp.joaat('mp_f_freemode_01')];
+data.gender = [mp.joaat('mp_m_freemode_01'), mp.joaat('mp_f_freemode_01')];
 data.fathers = {'Benjamin': 0, 'Daniel': 1, 'Joshua': 2, 'Noah': 3, 'Andrew': 4, 'Juan': 5, 'Alex': 6, 'Isaac': 7, 'Evan': 8, 'Ethan': 9, 'Vincent': 10, 'Angel': 11, 'Diego': 12, 'Adrian': 13, 'Gabriel': 14, 'Michael': 15, 'Santiago': 16, 'Kevin': 17, 'Louis': 18, 'Samuel': 19, 'Anthony': 20, 'Claude': 42, 'Niko': 43, 'John': 44};
 data.mothers = {'Hannah': 21, 'Aubrey': 22, 'Jasmine': 23, 'Gisele': 24, 'Amelia': 25, 'Isabella': 26, 'Zoe': 27, 'Ava': 28, 'Camila': 29, 'Violet': 30, 'Sophia': 31, 'Evelyn': 32, 'Nicole': 33, 'Ashley': 34, 'Gracie': 35, 'Brianna': 36, 'Natalie': 37, 'Olivia': 38, 'Elizabeth': 39, 'Charlotte': 40, 'Emma': 41, 'Misty': 45};
 data.features = {
@@ -137,13 +137,13 @@ data.maxLipstickColor = 32;
 
 // color arrays
 data.hairColors = [];
-for (let i = 0; i < data.maxHairColor; i++) data.hairColors.push(i.toString());
+for (let i = 0; i < data.maxHairColor; i++) data.hairColors.push(i);
 
 data.blushColors = [];
-for (let i = 0; i < data.maxBlushColor; i++) data.blushColors.push(i.toString());
+for (let i = 0; i < data.maxBlushColor; i++) data.blushColors.push(i);
 
 data.lipstickColors = [];
-for (let i = 0; i < data.maxLipstickColor; i++) data.lipstickColors.push(i.toString());
+for (let i = 0; i < data.maxLipstickColor; i++) data.lipstickColors.push(i);
 
 
 module.exports = data;

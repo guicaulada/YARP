@@ -11,7 +11,6 @@ class Character extends yarp.Object {
    * @param {String} params.socialClub
    * @param {Number} [params.age=18]
    * @param {String} [params.model='mp_m_freemode_01']
-   * @param {Object} [params.face={}]
    * @param {String} [params.lastLogin='']
    * @param {String} [params.wallet=yarp.variables['Starting Wallet'].value]
    * @param {String} [params.bank=yarp.variables['Starting Bank'].value]
@@ -54,13 +53,12 @@ class Character extends yarp.Object {
       this._thirst = this.default(params.thirst, 0);
       this._xp = this.default(params.xp, 0);
       this._inventory = this.default(params.inventory, {});
-      this._customization = this.default(params.customization, {});
+      this._customization = this.default(params.customization, Character.defaultCustomization);
       this._enter = this.default(params.enter, () => {}).toString();
       this._leave = this.default(params.leave, () => {}).toString();
       this.players = [];
       yarp.mng.register(this);
       this.makeGetterSetter();
-      this.defaultCustomization();
     } else {
       throw new TypeError('Character class requires id and socialClub to be instantiated.\nParameters: ' + JSON.stringify(params));
     }
@@ -968,7 +966,7 @@ class Character extends yarp.Object {
         0,
         this.customization.parents.similarity,
         this.customization.parents.skinSimilarity,
-        0.0,
+        0,
         this.customization.eyeColor,
         this.customization.hair.color,
         this.customization.hair.highlightColor,
@@ -980,20 +978,20 @@ class Character extends yarp.Object {
   }
 
   /**
-   * Sets character to default customization.
-   * @instance
+   * Returns the default customization.
+   * @static
    * @function defaultCustomization
    * @memberof Character
    */
-  defaultCustomization() {
-    this.customization = {
+  static get defaultCustomization() {
+    let customization = {
       gender: 0,
 
       parents: {
         father: 0,
         mother: 0,
-        similarity: 1.0,
-        skinSimilarity: 1.0,
+        similarity: 0.5,
+        skinSimilarity: 0.5,
       },
 
       features: [],
@@ -1012,8 +1010,9 @@ class Character extends yarp.Object {
       lipstickColor: 0,
       chestHairColor: 0,
     };
-    for (let i = 0; i < 20; i++) this.customization.features.push(0.0);
-    for (let i = 0; i < 10; i++) this.customization.appearance.push({value: 255, opacity: 1.0});
+    for (let i = 0; i <= 19; i++) customization.features.push(0.0);
+    for (let i = 0; i <= 10; i++) customization.appearance.push({value: 255, opacity: 1.0});
+    return customization;
   }
 
   /**
