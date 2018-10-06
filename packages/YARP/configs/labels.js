@@ -205,15 +205,6 @@ let multiplePositions = {
   },
   'Bank': {
     visible: false,
-    enter: (player) => {
-      yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to use the bank.');
-      yarp.hotkeys['Call'].bind(player, ['createBrowser', ['menu', ['package://YARP/ui/html/bankMenu.html'], true, true]]);
-    },
-    leave: (player) => {
-      yarp.client.clearHelpText(player);
-      yarp.client.destroyBrowser(player, 'menu');
-      yarp.hotkeys['Call'].unbind(player);
-    },
     position: [
       new mp.Vector3(147.04908752441, -1044.9448242188, 29.36802482605),
       new mp.Vector3(-2957.6674804688, 481.45776367188, 15.697026252747),

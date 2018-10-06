@@ -51,6 +51,7 @@ yarp.client.menuAddItem = (menuId, item) => {
                 menuItem[0], item.masked, item.max, item.inputText, ...menuItem.slice(1, menuItem.length),
             ];
             menuItem = new NativeMenu.InputMenuItem(...menuItem);
+            if (item.disabled === true) menuItem.disabled = true;
             break;
         default:
             menuItem = new NativeMenu.TextMenuItem(...menuItem);

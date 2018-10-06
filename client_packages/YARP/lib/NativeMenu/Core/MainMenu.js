@@ -110,7 +110,7 @@ class MainMenu extends NativeMenu.Menu {
 }
 
 MainMenu.MAX_MENU_DISPLAY = 8;
-MainMenu.CONTROL_TICK_TIME_MS = 150;
+MainMenu.CONTROL_TICK_TIME_MS = 200;
 MainMenu.LAST_TICK_TIME = Date.now();
 
 exports = MainMenu;

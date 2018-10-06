@@ -1061,49 +1061,7 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   openInventory() {
-    let player = this.player;
-    let menu = new yarp.Menu({
-      id: 'inventory'+this.id,
-      title: ['Inventory'],
-      offset: [0.1, 0.15],
-    });
-
-    let i = 0;
-    for (let itemId in this.inventory) {
-      if (this.inventory.hasOwnProperty(itemId)) {
-        let item = yarp.items[itemId];
-        let submenu = {
-          type: 'submenu',
-          id: 'inventory'+item.name,
-          displayText: this.inventory[itemId]+' - '+item.name,
-          caption: this.default(item.caption, ''),
-          items: [],
-        };
-
-        let o = 0;
-        for (let option in item.options) {
-          if (item.options.hasOwnProperty(option)) {
-            submenu.items.push({
-              type: 'text',
-              displayText: option,
-              caption: option+` item`,
-              data: {itemId: item.id, option: option, index: o, itemIndex: i},
-            });
-            o++;
-          }
-        }
-        menu.add(submenu);
-        i++;
-      }
-    }
-
-    menu.add({
-      type: 'close',
-      displayText: 'Close',
-    });
-
-    menu.create(player);
-    menu.open(player);
+    yerp.server.openCharacterInventory(this.player, this);
   }
 
   /**
@@ -1113,7 +1071,7 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   closeInventory() {
-    yarp.menus['inventory'+this.id].close(this.player);
+    yarp.server.closeCharacterInventory(this.player, this);
   }
 
   /**
@@ -1123,11 +1081,7 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   toggleInventory() {
-    if (!yarp.menus['inventory' + this.id] || !yarp.menus['inventory' +this.id].isVisible(this.player)) {
-      this.openInventory();
-    } else {
-      this.closeInventory();
-    }
+    yarp.server.toggleCharacterInventory(this.player, this);
   }
 }
 

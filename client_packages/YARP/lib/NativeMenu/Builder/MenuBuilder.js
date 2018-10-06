@@ -232,7 +232,7 @@ class MenuBuilder extends NativeMenu.Menu {
       return;
     }
     let x = String.fromCharCode(i);
-    if (!x.match(/^[a-zA-Z1-9 ]+$/)) {
+    if (!x.match(/^[a-zA-Z0-9 ]+$/)) {
       NativeMenu.MenuPool.timeSinceLastKeyCheck = new Date().getTime();
       return;
     }
