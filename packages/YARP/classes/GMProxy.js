@@ -65,7 +65,7 @@ class GMProxy {
             return new Promise((resolve, reject) => {
               try {
                 let id = Math.round((new Date()).getTime());
-                if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name}  ==>`);
+                if (yarp.variables['Debug'].value) yarp.log.debug(`${self.id}:${name} ==>`);
                 args[0].call(`${self.id}:${name}`, [`${id}`, this.tryJSON.stringify(args.slice(1, args.length))]);
                 mp.events.add(`${self.id}:${name}:${id}`, (player, result) => {
                   if (yarp.variables['Debug'].value) yarp.log.debug(`<== ${self.id}:${name}:${id}`);

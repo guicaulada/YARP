@@ -2,7 +2,7 @@
 /**
  * Implements a Weapon.
  */
-class Weapon extends yarp.Object {
+class Weapon extends yarp.Item {
   /**
    * Creates an instance of Weapon.
    * @extends {yarp.Object}
@@ -20,50 +20,20 @@ class Weapon extends yarp.Object {
    * @memberof Weapon
    */
   constructor(params) {
-    super();
+    super(params);
     if ((params.id && params.name) != null) {
-      this._id = params.id;
-      this._name = params.name;
-      this._category = this.default(params.category, 'None');
-      this._weight = this.default(params.weight, 0);
-      this._ammo = this.default(params.ammo, 0);
-      this._model = this.default(params.model, '');
+      this._ammo = this.default(params.ammo, false);
       this._bone = this.default(params.bone, 0);
       this._position = this.default(params.position, new mp.Vector3(0, 0, 0));
       this._rotation = this.default(params.rotation, new mp.Vector3(0, 0, 0));
       this._visible = this.default(params.visible, true);
+      this._options.Equip = (player) => {
+        let character = player.character;
+        character.giveWeapon(this, 1);
+      };
       if (!this._visible) this._alpha = 0;
       yarp.mng.register(this);
       this.makeGetterSetter();
-      new yarp.Item({
-        id: this.id,
-        name: this.name,
-        category: this.category,
-        weight: this.weight,
-        spoil: false,
-        model: this.model,
-        options: {
-          Equip: (player) => {
-            let character = player.character;
-            character.giveWeapon(this, 0);
-          },
-        },
-      });
-      let ammoid = this.id.replace('WEAPON_', 'AMMO_');
-      new yarp.Item({
-        id: ammoid,
-        name: this.name + ' Ammo',
-        category: this.category + ' Ammo',
-        weight: 0.1,
-        spoil: false,
-        model: 'v_ret_gc_ammostack',
-        options: {
-          Equip: (player) => {
-            let character = player.character;
-            character.giveAmmo(ammoid, character.inventory[ammoid]);
-          },
-        },
-      });
     } else {
       throw new TypeError('Weapon class requires id and name to be instantiated.\nParameters: ' + JSON.stringify(params));
     }

@@ -25,7 +25,6 @@ module.exports = async () => {
      * @namespace yarp.server
      */
     require('../events/yarp/gamemode.js');
-    require('../events/yarp/item.js');
     require('../events/yarp/menu.js');
   } catch (err) {
     yarp.log.danger('EventError: '+err.message+'\n'+err.stack);

@@ -46,13 +46,13 @@ class Character extends yarp.Object {
       this._position = this.default(params.position, yarp.variables['First Spawn'].value);
       this._heading = this.default(params.heading, yarp.variables['First Heading'].value);
       this._groups = this.default(params.groups, []);
-      this._weapons = this.default(params.weapons, {});
       this._skills = this.default(params.skills, {});
       this._weight = this.default(params.weight, 0);
       this._hunger = this.default(params.hunger, 0);
       this._thirst = this.default(params.thirst, 0);
       this._xp = this.default(params.xp, 0);
       this._inventory = this.default(params.inventory, {});
+      this._equipment = this.default(params.equipment, {});
       this._customization = this.default(params.customization, Character.defaultCustomization);
       this._enter = this.default(params.enter, () => {}).toString();
       this._leave = this.default(params.leave, () => {}).toString();
@@ -503,16 +503,18 @@ class Character extends yarp.Object {
    * @function giveItem
    * @param {Object} item Item to give.
    * @param {Number} amount Amount to give.
+   * @param {Boolean} equiped If the item is equiped.
    * @return {Boolean} Operation success/fail.
    * @memberof Character
    */
-  giveItem(item, amount) {
+  giveItem(item, amount, equiped) {
     if ((typeof item) === 'string') item = yarp.items[item];
+    let inventory = (equiped) ? this.equipment : this.inventory;
     if (this.weight + item.weight < yarp.variables['Max Weight'].value) {
-      if (this.inventory[item.id] != null) {
-        this.inventory[item.id] = this.inventory[item.id] + amount;
+      if (inventory[item.id] != null) {
+        inventory[item.id] = inventory[item.id] + amount;
       } else {
-        this.inventory[item.id] = amount;
+        inventory[item.id] = amount;
       }
       this.weight = yarp.utils.server.round(this.weight + (amount * item.weight), 1);
       return true;
@@ -526,17 +528,19 @@ class Character extends yarp.Object {
    * @function takeItem
    * @param {Object} item Item to take.
    * @param {Number} amount Amount to take.
+   * @param {Boolean} equiped If the item is equiped.
    * @return {Boolean} Operation success/fail.
    * @memberof Character
    */
-  takeItem(item, amount) {
+  takeItem(item, amount, equiped) {
     if ((typeof item) === 'string') item = yarp.items[item];
-    if (this.inventory[item.id] != null) {
-      if (this.inventory[item.id]-amount >= 0) {
-        this.inventory[item.id] = this.inventory[item.id]-amount;
+    let inventory = (equiped) ? this.equipment : this.inventory;
+    if (inventory[item.id] != null) {
+      if (inventory[item.id]-amount >= 0) {
+        inventory[item.id] = inventory[item.id]-amount;
         this.weight = yarp.utils.server.round(this.weight-(amount * item.weight), 1);
-        if (this.inventory[item.id] <= 0) {
-          delete this.inventory[item.id];
+        if (inventory[item.id] <= 0) {
+          delete inventory[item.id];
         }
         return true;
       }
@@ -553,7 +557,7 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   hasItem(id) {
-    return (this.inventory[id] != null && this.inventory[id] > 0);
+    return (this.inventory[id] != null && this.inventory[id] > 0) || (this.equipment[id] != null && this.equipment[id] > 0);
   }
 
   /**
@@ -583,12 +587,8 @@ class Character extends yarp.Object {
    */
   giveWeapon(weapon, amount) {
     if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
-    if (!this.hasWeapon(weapon.id)) {
-      this.weapons[weapon.id] = 0;
-    }
-    if (!amount) amount = 0;
-    this.weapons[weapon.id] += amount;
-    this.player.giveWeapon(mp.joaat(weapon.id), amount);
+    this.giveItem(weapon, amount, !this.equipment[weapon.id]);
+    this.player.giveWeapon(mp.joaat(weapon.id), 0);
     yarp.client.equipWeapon(this.player, weapon);
   }
 
@@ -601,45 +601,9 @@ class Character extends yarp.Object {
    */
   takeWeapon(weapon) {
     if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
-    if (this.hasWeapon(weapon.id)) {
-      this.weapons.splice(this.weapons.indexOf(weapon.id), 1);
-    }
-    let player = this.player;
-    yarp.client.takeWeapon(player, weapon.id);
-    yarp.client.unequipWeapon(player, weapon);
-  }
-
-  /**
-   * Take weapon ammo.
-   * @instance
-   * @function takeWeaponAmmo
-   * @param {String} id Weapon id.
-   * @param {Number} amount Amount of bullets.
-   * @memberof Character
-   */
-  takeWeaponAmmo(id, amount) {
-    if (this.hasWeapon(id)) {
-      this.weapons[id] -= amount;
-      if (this.weapons[id] <= 0) {
-        this.weapons[id] = 0;
-      }
-      yarp.client.setWeaponAmmo(this.player, id, this.weapons[id]);
-    }
-  }
-
-  /**
-   * Give weapon ammo.
-   * @instance
-   * @function giveWeaponAmmo
-   * @param {String} id Weapon id.
-   * @param {Number} amount Amount of bullets.
-   * @memberof Character
-   */
-  giveWeaponAmmo(id, amount) {
-    if (this.hasWeapon(id)) {
-      this.weapons[id] += amount;
-      yarp.client.setWeaponAmmo(this.player, id, this.weapons[id]);
-    }
+    this.takeItem(weapon, 1, true);
+    yarp.client.takeWeapon(this.player, weapon.id);
+    yarp.client.unequipWeapon(this.player, weapon);
   }
 
   /**
@@ -651,13 +615,11 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   takeAmmo(id, amount) {
-    let weaponId = id.replace('AMMO_', 'WEAPON_');
-    if (this.hasWeapon(weaponId)) {
-      this.weapons[weaponId] -= amount;
-      if (this.weapons[weaponId] <= 0) {
-        this.weapons[weaponId] = 0;
-      }
-      yarp.client.setWeaponAmmo(this.player, weaponId, this.weapons[weaponId]);
+    if (this.equipment[id]) {
+      this.giveItem(id, amount, true);
+      yarp.utils.client.setAmmoByType(this.player, mp.joaat(weapon.id), amount);
+    } else {
+      this.giveItem(id, amount, false);
     }
   }
 
@@ -670,40 +632,12 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   giveAmmo(id, amount) {
-    let weaponId = id.replace('AMMO_', 'WEAPON_');
-    if (this.hasWeapon(weaponId)) {
-      this.weapons[weaponId] += amount;
-      yarp.client.setWeaponAmmo(this.player, weaponId, this.weapons[weaponId]);
+    if (this.equipment[id] < 100) {
+      this.giveItem(id, amount, true);
+      yarp.utils.client.setAmmoByType(this.player, mp.joaat(id), amount);
+    } else {
+      this.giveItem(id, amount, false);
     }
-  }
-
-  /**
-   * Check if has a weapon.
-   * @instance
-   * @function hasWeapon
-   * @param {String} id Weapon id.
-   * @return {Boolean} If has or not the weapon.
-   * @memberof Character
-   */
-  hasWeapon(id) {
-    return (this.weapons[id] != null);
-  }
-
-  /**
-   * Check if has all weapons.
-   * @instance
-   * @function hasWeapons
-   * @param {Array<String>} weapons Weapons id.
-   * @return {Boolean} If has or not all the weapons.
-   * @memberof Character
-   */
-  hasWeapons(weapons) {
-    for (let i = 0; i < weapons.length; i++) {
-      if (!this.hasWeapon(weapons[i])) {
-        return false;
-      }
-    }
-    return true;
   }
 
   /**

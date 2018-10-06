@@ -206,6 +206,18 @@ utils.client.getAllWeapons = () => {
 };
 
 /**
+ * Sets player ammo by ammo type.
+ * @function setAmmoByType
+ * @memberof yarp.utils.client
+ * @param {Number} ammoType Ammo type.
+ * @param {Number} ammo Ammo amount.
+ * @return {Boolean} True/false if has or not weapon.
+ */
+utils.client.setAmmoByType = (ammoType, ammo) => {
+  return mp.game.invoke('0x5FD1E1F011E76D7E', mp.players.local.handle, ammoType, ammo);
+};
+
+/**
  * Format numbers to contain commas.
  * @function numberWithCommas
  * @memberof yarp.utils.client
