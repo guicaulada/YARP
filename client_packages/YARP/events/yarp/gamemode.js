@@ -8,6 +8,16 @@ yarp.client.chatShow = (toggle) => {
   mp.gui.chat.show(toggle);
 };
 
+yarp.client.toClouds = () => {
+  mp.game.ui.displayRadar(false);
+  mp.game.streaming.startPlayerSwitch(mp.players.local.handle, mp.players.local.handle, 513, 1);
+};
+
+yarp.client.fromClouds = (id) => {
+  mp.game.ui.displayRadar(true);
+  mp.game.invoke('0x95C0A5BBDC189AA1');
+};
+
 /**
  * Displays help text on top left.
  * @function displayHelpText

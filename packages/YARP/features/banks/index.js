@@ -156,6 +156,9 @@ yarp.server.add.menuItemClicked = async (player, data) => {
           yarp.server.warnBankMenu(player, 2, '\nOnly numbers allowed!');
         }
         break;
+      case 5:
+        yarp.hotkeys['Open Menu'].unbind(player);
+        break;
     }
   } else if (data._menuId == 'Transfer') {
     if (data._index == 2) {
