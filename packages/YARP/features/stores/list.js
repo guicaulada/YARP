@@ -67,7 +67,7 @@ yarp.server.add.menuItemClicked = (player, data) => {
                 type: 'list',
                 displayText: saleItem.price + '$ - ' + saleItem.name,
                 caption: `Buy ${saleItem.name} for $${saleItem.price}.`,
-                items: Array.from({length: 100}, (v, k) => {
+                items: Array.from({length: 10}, (v, k) => {
                   return {
                     displayText: k + 1,
                   };

@@ -109,7 +109,7 @@ let multiplePositions = {
     enter: (player) => {
       let location = yarp.locations[this.id];
       yarp.client.displayHelpText(player, 'Press ~INPUT_PICKUP~ to shop.');
-      yarp.server.openStoreMenu(player, location, {title: 'Ammu-Nation', offset: [0.1, 0.15], type: 'submenu'});
+      yarp.server.openStoreMenu(player, location, {title: 'Ammu-Nation', offset: [0.1, 0.15], type: 'sublist'});
     },
     leave: (player) => {
       let location = yarp.locations[this.id];

@@ -15,14 +15,17 @@ yarp.server.openStoreMenu = (player, location, options) => {
   openStores[player.name] = {total: 0, received: {}, type: options.type, location: location.id};
   switch (options.type) {
     case 'submenu':
-    yarp.server.openSubmenuStore(player, location, options);
-    break;
+      yarp.server.openSubmenuStore(player, location, options);
+      break;
+    case 'sublist':
+      yarp.server.openSublistStore(player, location, options);
+      break;
     case 'list':
-    yarp.server.openListStore(player, location, options);
-    break;
+      yarp.server.openListStore(player, location, options);
+      break;
     default:
-    yarp.log.error('Unknow store type given in options.\nOptions: ' + JSON.stringify(options));
-    break;
+      yarp.log.error('Unknow store type given in options.\nOptions: ' + JSON.stringify(options));
+      break;
   }
 };
 
@@ -93,3 +96,4 @@ yarp.server.add.menuItemClicked = (player, data) => {
 
 require('./list.js');
 require('./submenu.js');
+require('./sublist.js');
