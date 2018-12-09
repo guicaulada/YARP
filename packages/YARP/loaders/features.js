@@ -19,6 +19,6 @@ module.exports = async () => {
     // Load banks
     require('../features/banks/index.js');
   } catch (err) {
-    yarp.log.danger('FeatureError: '+err.message+'\n'+err.stack);
+    yarp.log.error('FeatureError: '+err.message+'\n'+err.stack);
   }
 };

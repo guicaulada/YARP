@@ -44,7 +44,7 @@
  * @ignore
  */
 const exit = async () => {
-  yarp.log.danger('Closing Connection. Bye-bye.');
+  yarp.log.warning('Closing Connection. Bye-bye.');
   await mp.players.broadcast(`!{red}The server is closing. Rejoin with F1.`);
   for (let player of mp.players.toArray()) {
     player.kick('The server is closing.');

@@ -137,7 +137,7 @@ utils.client.removeWeapon = (weaponHash) => {
  */
 utils.client.setWeaponAmmo = (weaponHash, ammo) => {
   // Credits to kemperrr#9752.
-  mp.game.invoke('0x14E56BC5B5DB6A19', mp.players.local.handle, weaponHash, ammo);
+  mp.game.invoke('0x14E56BC5B5DB6A19', mp.players.local.handle, Number(weaponHash), Number(ammo));
 };
 
 /**
@@ -211,10 +211,9 @@ utils.client.getAllWeapons = () => {
  * @memberof yarp.utils.client
  * @param {Number} ammoType Ammo type.
  * @param {Number} ammo Ammo amount.
- * @return {Boolean} True/false if has or not weapon.
  */
 utils.client.setAmmoByType = (ammoType, ammo) => {
-  return mp.game.invoke('0x5FD1E1F011E76D7E', mp.players.local.handle, ammoType, ammo);
+  mp.game.invoke('0x5FD1E1F011E76D7E', mp.players.local.handle, ammoType, ammo);
 };
 
 /**

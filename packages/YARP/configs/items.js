@@ -7,6 +7,7 @@ let config = {
     category: 'Food',
     options: {
       'Eat': (player) => {
+        player.character.takeItem(this, 1);
         player.character.hunger -= 5;
       },
     },
@@ -17,6 +18,7 @@ let config = {
     category: 'Food',
     options: {
       'Eat': (player) => {
+        player.character.takeItem(this, 1);
         player.character.hunger -= 10;
       },
     },
@@ -27,6 +29,7 @@ let config = {
     category: 'Food',
     options: {
       'Eat': (player) => {
+        player.character.takeItem(this, 1);
         player.character.hunger -= 15;
       },
     },
@@ -37,6 +40,7 @@ let config = {
     category: 'Food',
     options: {
       'Drink': (player) => {
+        player.character.takeItem(this, 1);
         player.character.thirst -= 5;
       },
     },
@@ -47,6 +51,7 @@ let config = {
     category: 'Food',
     options: {
       'Drink': (player) => {
+        player.character.takeItem(this, 1);
         player.character.thirst -= 10;
       },
     },
@@ -57,6 +62,7 @@ let config = {
     category: 'Food',
     options: {
       'Drink': (player) => {
+        player.character.takeItem(this, 1);
         player.character.thirst -= 15;
       },
     },
@@ -71,20 +77,15 @@ let ammos = {
   'AMMO_SHOTGUN': 'Shotgun Ammo',
   'AMMO_STUNGUN': 'Stungun Ammo',
   'AMMO_SNIPER': 'Sniper Ammo',
-  'AMMO_SNIPER_REMOTE': 'Remote Sniper Ammo',
-  'AMMO_FIREEXTINGUISHER': 'Fire-extinguisher charge',
-  'AMMO_PETROLCAN': 'Petrol',
+  'AMMO_FIREWORK': 'Firework',
   'AMMO_MINIGUN': 'Minigun Ammo',
+  'AMMO_RAILGUN': 'Railgun Ammo',
   'AMMO_GRENADELAUNCHER': 'Grenade Launcher Ammo',
   'AMMO_GRENADELAUNCHER_SMOKE': 'Grenade Launcher Smoke Ammo',
   'AMMO_RPG': 'RPG Ammo',
+  'AMMO_ROCKETLAUNCHER': 'Rocket Launcher Ammo',
   'AMMO_STINGER': 'Stinger Ammo',
-  'AMMO_BALL': 'Ball',
-  'AMMO_STICKYBOMB': 'Sticky Bomb',
-  'AMMO_SMOKEGRENADE': 'Smoke Grenade',
-  'AMMO_BZGAS': 'Blackout Gas',
   'AMMO_FLARE': 'Flare',
-  'AMMO_MOLOTOV': 'Molotov',
 };
 
 for (let ammo in ammos) {
@@ -95,17 +96,19 @@ for (let ammo in ammos) {
       category: 'Ammo',
       options: {
         'Equip': (player) => {
+          let maxBullets = 250;
           let amount = 0;
-          if (player.character.inventory[this.id] > 100) {
-            amount = 100;
+          let equipped = this.default(player.character.equipment[this.id], 0);
+          if (player.character.inventory[this.id] > maxBullets) {
+            amount = maxBullets;
           } else {
             amount = player.character.inventory[this.id];
           }
-          if (player.character.equipment[this.id] + amount > 100) {
-            amount = 100 - player.character.equipment[this.id];
+          if (equipped + amount > maxBullets) {
+            amount = maxBullets - equipped;
           }
           if (player.character.takeItem(this.id, amount, false)) {
-            player.character.giveAmmo(this.id, amount);
+            player.character.equipment[this.id] = equipped + amount;
           }
         },
       },

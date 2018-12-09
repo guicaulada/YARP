@@ -21,7 +21,7 @@ yarp.server.openStoreMenu = (player, location, options) => {
     yarp.server.openListStore(player, location, options);
     break;
     default:
-    yarp.log.danger('Unknow store type given in options.\nOptions: ' + JSON.stringify(options));
+    yarp.log.error('Unknow store type given in options.\nOptions: ' + JSON.stringify(options));
     break;
   }
 };
@@ -75,13 +75,7 @@ yarp.server.add.menuItemClicked = (player, data) => {
         if (character.tryFullPayment(saleItem.price*amount)) {
           location.inventory[itemId].amount -= amount;
           let item = yarp.items[itemId];
-          if (item.isWeapon()) {
-            character.giveWeapon(yarp.weapons[item.id]);
-          } else if (item.isAmmo()) {
-            character.giveAmmo(item.id, amount);
-          } else {
-            character.giveItem(item, amount);
-          }
+          character.giveItem(item, amount);
           location.save();
           character.save();
 

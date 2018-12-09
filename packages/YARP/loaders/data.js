@@ -29,6 +29,6 @@ module.exports = async () => {
     await yarp.vehicles.load();
     await yarp.weapons.load();
   } catch (err) {
-    yarp.log.danger('DataError: '+err.message+'\n'+err.stack);
+    yarp.log.error('DataError: '+err.message+'\n'+err.stack);
   }
 };

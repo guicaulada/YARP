@@ -21,7 +21,7 @@ class GMProxy {
               result = JSON.parse(string);
             } catch (err) {
               result = string;
-              yarp.log.danger('ProxyError: ' + err.message + '\n' + err.stack);
+              yarp.log.error('ProxyError: ' + err.message + '\n' + err.stack);
             }
           }
           return result;
@@ -33,7 +33,7 @@ class GMProxy {
               result = JSON.stringify(obj);
             } catch (err) {
               result = obj;
-              yarp.log.danger('ProxyError: ' + err.message + '\n' + err.stack);
+              yarp.log.error('ProxyError: ' + err.message + '\n' + err.stack);
             }
           }
           return result;
@@ -73,13 +73,13 @@ class GMProxy {
                   resolve(this.tryJSON.parse(result));
                 });
               } catch (err) {
-                yarp.log.danger('ProxyError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('ProxyError: ' + err.message + '\n' + err.stack);
               }
             });
           };
         },
         set: (proxy, name, value) => {
-          yarp.log.danger('ProxyError: You can\'t set client events on server-side.');
+          yarp.log.error('ProxyError: You can\'t set client events on server-side.');
         },
       });
       self.add = new Proxy({}, {

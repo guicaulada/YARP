@@ -4,6 +4,7 @@ let config = {
   'WEAPON_ADVANCEDRIFLE': {
     name: 'Advanced Rifle',
     bone: 24818,
+    ammo: 'AMMO_RIFLE',
     category: 'Assault',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -12,6 +13,7 @@ let config = {
   'WEAPON_ASSAULTRIFLE': {
     name: 'Assault Rifle',
     bone: 24818,
+    ammo: 'AMMO_RIFLE',
     category: 'Assault',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -20,6 +22,7 @@ let config = {
   'WEAPON_BULLPUPRIFLE': {
     name: 'Bullpup Rifle',
     bone: 24818,
+    ammo: 'AMMO_RIFLE',
     category: 'Assault',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -28,6 +31,7 @@ let config = {
   'WEAPON_CARBINERIFLE': {
     name: 'Carbine Rifle',
     bone: 24818,
+    ammo: 'AMMO_RIFLE',
     category: 'Assault',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -36,6 +40,7 @@ let config = {
   'WEAPON_COMPACTRIFLE': {
     name: 'Compact Rifle',
     bone: 24818,
+    ammo: 'AMMO_RIFLE',
     category: 'Assault',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -44,6 +49,7 @@ let config = {
   'WEAPON_SPECIALCARBINE': {
     name: 'Special Carbine',
     bone: 24818,
+    ammo: 'AMMO_RIFLE',
     category: 'Assault',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -132,6 +138,7 @@ let config = {
   'WEAPON_APPISTOL': {
     name: 'AP Pistol',
     bone: 51826,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.10, 0.07),
     rotation: new mp.Vector3(-115.0, 0.0, 0.0),
@@ -140,6 +147,7 @@ let config = {
   'WEAPON_VINTAGEPISTOL': {
     name: 'Vintage Pistol',
     bone: 51826,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.10, 0.07),
     rotation: new mp.Vector3(-115.0, 0.0, 0.0),
@@ -148,6 +156,7 @@ let config = {
   'WEAPON_HEAVYPISTOL': {
     name: 'Heavy Pistol',
     bone: 51826,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.10, 0.07),
     rotation: new mp.Vector3(-115.0, 0.0, 0.0),
@@ -156,6 +165,7 @@ let config = {
   'WEAPON_SNSPISTOL': {
     name: 'SNS Pistol',
     bone: 58271,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.1, -0.07),
     rotation: new mp.Vector3(-55.0, 0.10, 0.0),
@@ -164,6 +174,7 @@ let config = {
   'WEAPON_STUNGUN': {
     name: 'Stungun',
     bone: 58271,
+    ammo: 'AMMO_STUNGUN',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.1, -0.07),
     rotation: new mp.Vector3(-55.0, 0.10, 0.0),
@@ -172,6 +183,7 @@ let config = {
   'WEAPON_REVOLVER': {
     name: 'Revolver',
     bone: 58271,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.1, -0.07),
     rotation: new mp.Vector3(-55.0, 0.10, 0.0),
@@ -180,6 +192,7 @@ let config = {
   'WEAPON_PISTOL50': {
     name: '.50 Pistol',
     bone: 51826,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.10, 0.07),
     rotation: new mp.Vector3(-115.0, 0.0, 0.0),
@@ -188,6 +201,7 @@ let config = {
   'WEAPON_PISTOL': {
     name: 'Pistol',
     bone: 51826,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.10, 0.07),
     rotation: new mp.Vector3(-115.0, 0.0, 0.0),
@@ -196,6 +210,7 @@ let config = {
   'WEAPON_MARKSMANPISTOL': {
     name: 'Marksman Pistol',
     bone: 58271,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.1, -0.07),
     rotation: new mp.Vector3(-55.0, 0.10, 0.0),
@@ -204,6 +219,7 @@ let config = {
   'WEAPON_FLAREGUN': {
     name: 'Flare Gun',
     bone: 58271,
+    ammo: 'AMMO_FLARE',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.1, -0.07),
     rotation: new mp.Vector3(-55.0, 0.10, 0.0),
@@ -212,6 +228,7 @@ let config = {
   'WEAPON_COMBATPISTOL': {
     name: 'Combat Pistol',
     bone: 51826,
+    ammo: 'AMMO_PISTOL',
     category: 'Handgun',
     position: new mp.Vector3(-0.01, 0.10, 0.07),
     rotation: new mp.Vector3(-115.0, 0.0, 0.0),
@@ -220,6 +237,7 @@ let config = {
   'WEAPON_ASSAULTSHOTGUN': {
     name: 'Assault Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -228,6 +246,7 @@ let config = {
   'WEAPON_MUSKET': {
     name: 'Musket',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -236,6 +255,7 @@ let config = {
   'WEAPON_DBSHOTGUN': {
     name: 'Double Barrel Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -244,6 +264,7 @@ let config = {
   'WEAPON_PUMPSHOTGUN': {
     name: 'Pump Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 135.0, 0.0),
@@ -252,6 +273,7 @@ let config = {
   'WEAPON_SAWNOFFSHOTGUN': {
     name: 'Sawn-off Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -260,6 +282,7 @@ let config = {
   'WEAPON_HEAVYSHOTGUN': {
     name: 'Heavy Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 225.0, 0.0),
@@ -268,6 +291,7 @@ let config = {
   'WEAPON_BULLPUPSHOTGUN': {
     name: 'Bullpup Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 135.0, 0.0),
@@ -276,6 +300,7 @@ let config = {
   'WEAPON_AUTOSHOTGUN': {
     name: 'Auto Shotgun',
     bone: 24818,
+    ammo: 'AMMO_SHOTGUN',
     category: 'Shotgun',
     position: new mp.Vector3(0.1, 0.15, 0.0),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -284,6 +309,7 @@ let config = {
   'WEAPON_ASSAULTSMG': {
     name: 'Assault SMG',
     bone: 24818,
+    ammo: 'AMMO_SMG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -292,6 +318,7 @@ let config = {
   'WEAPON_MINISMG': {
     name: 'Mini SMG',
     bone: 24818,
+    ammo: 'AMMO_SMG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -300,6 +327,7 @@ let config = {
   'WEAPON_GUSENBERG': {
     name: 'Gusenberg',
     bone: 24818,
+    ammo: 'AMMO_MG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -308,6 +336,7 @@ let config = {
   'WEAPON_SMG': {
     name: 'SMG',
     bone: 24818,
+    ammo: 'AMMO_SMG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -316,6 +345,7 @@ let config = {
   'WEAPON_MG': {
     name: 'MG',
     bone: 24818,
+    ammo: 'AMMO_MG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -324,6 +354,7 @@ let config = {
   'WEAPON_MICROSMG': {
     name: 'Micro SMG',
     bone: 24818,
+    ammo: 'AMMO_SMG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -332,6 +363,7 @@ let config = {
   'WEAPON_MACHINEPISTOL': {
     name: 'Machine Pistol',
     bone: 24818,
+    ammo: 'AMMO_PISTOL',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -340,6 +372,7 @@ let config = {
   'WEAPON_COMBATMG': {
     name: 'Combat MG',
     bone: 24818,
+    ammo: 'AMMO_MG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -348,6 +381,7 @@ let config = {
   'WEAPON_COMBATPDW': {
     name: 'Combat PDW',
     bone: 24818,
+    ammo: 'AMMO_MG',
     category: 'Machine',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -516,6 +550,7 @@ let config = {
   'WEAPON_REMOTESNIPER': {
     name: 'Remote Sniper',
     bone: 24818,
+    ammo: 'AMMO_SNIPER',
     category: 'Other',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -524,6 +559,7 @@ let config = {
   'WEAPON_STINGER': {
     name: 'Stinger',
     bone: 24818,
+    ammo: 'AMMO_STINGER',
     category: 'Other',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -532,6 +568,7 @@ let config = {
   'WEAPON_HEAVYSNIPER': {
     name: 'Heavy Sniper',
     bone: 24818,
+    ammo: 'AMMO_SNIPER',
     category: 'Sniper',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 135.0, 0.0),
@@ -540,6 +577,7 @@ let config = {
   'WEAPON_MARKSMANRIFLE': {
     name: 'Marksman Rifle',
     bone: 24818,
+    ammo: 'AMMO_SNIPER',
     category: 'Sniper',
     position: new mp.Vector3(0.1, -0.15, 0.0),
     rotation: new mp.Vector3(0.0, 135.0, 0.0),
@@ -548,6 +586,7 @@ let config = {
   'WEAPON_SNIPERRIFLE': {
     name: 'Sniper Rifle',
     bone: 24818,
+    ammo: 'AMMO_SNIPER',
     category: 'Sniper',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -556,6 +595,7 @@ let config = {
   'WEAPON_RPG': {
     name: 'RPG',
     bone: 24818,
+    ammo: 'AMMO_RPG',
     category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -564,7 +604,8 @@ let config = {
   'WEAPON_COMPACTLAUNCHER': {
     name: 'Compact Launcher',
     bone: 24818,
-      category: 'Heavy',
+    ammo: ['AMMO_GRENADELAUNCHER', 'AMMO_GRENADELAUNCHER_SMOKE'],
+    category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
     model: '',
@@ -572,7 +613,8 @@ let config = {
   'WEAPON_FIREWORK': {
     name: 'Firework',
     bone: 24818,
-      category: 'Heavy',
+    ammo: 'AMMO_FIREWORK',
+    category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
     model: 'w_lr_firework',
@@ -580,6 +622,7 @@ let config = {
   'WEAPON_GRENADELAUNCHER': {
     name: 'Grenade Launcher',
     bone: 24818,
+    ammo: ['AMMO_GRENADELAUNCHER', 'AMMO_GRENADELAUNCHER_SMOKE'],
     category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -588,6 +631,7 @@ let config = {
   'WEAPON_HOMINGLAUNCHER': {
     name: 'Homing Launcher',
     bone: 24818,
+    ammo: 'AMMO_ROCKETLAUNCHER',
     category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -596,6 +640,7 @@ let config = {
   'WEAPON_MINIGUN': {
     name: 'Minigun',
     bone: 24818,
+    ammo: 'AMMO_MINIGUN',
     category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),
@@ -604,6 +649,7 @@ let config = {
   'WEAPON_RAILGUN': {
     name: 'Rail Gun',
     bone: 24818,
+    ammo: 'AMMO_RAILGUN',
     category: 'Heavy',
     position: new mp.Vector3(0.0, 0.0, 0.0 ),
     rotation: new mp.Vector3(0.0, 0.0, 0.0),

@@ -28,6 +28,6 @@ module.exports = async () => {
     yarp.Vehicle = require('../classes/Vehicle.js');
     yarp.Weapon = require('../classes/Weapon.js');
   } catch (err) {
-    yarp.log.danger('ClassError: '+err.message+'\n'+err.stack);
+    yarp.log.error('ClassError: '+err.message+'\n'+err.stack);
   }
 };

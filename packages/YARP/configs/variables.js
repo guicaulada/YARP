@@ -9,9 +9,9 @@ let values = {
   'Starting Bank': 1500,
   'Ticks/Second': 2,
   'Save Interval': 20, // Intervals are always in ticks.
-  'Hunger Interval': 25,
+  'Hunger Interval': 25*5,
   'Hunger Rate': 1,
-  'Thirst Interval': 20,
+  'Thirst Interval': 20*5,
   'Thirst Rate': 1,
   'XP Interval': 600 * 2,
   'XP Rate': 10,

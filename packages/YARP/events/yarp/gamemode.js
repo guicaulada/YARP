@@ -108,7 +108,7 @@ function tick() {
                   }
                 }
               } catch (err) {
-                yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
               }
             });
 
@@ -143,7 +143,7 @@ function tick() {
                   }
                 }
               } catch (err) {
-                yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
               }
             });
 
@@ -178,7 +178,7 @@ function tick() {
                   }
                 }
               } catch (err) {
-                yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
               }
             });
 
@@ -213,7 +213,7 @@ function tick() {
                   }
                 }
               } catch (err) {
-                yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
               }
             });
 
@@ -248,7 +248,7 @@ function tick() {
                   }
                 }
               } catch (err) {
-                yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
               }
             });
 
@@ -280,7 +280,7 @@ function tick() {
                   }
                 }
               } catch (err) {
-                yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+                yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
               }
             });
             */
@@ -311,7 +311,7 @@ function tick() {
           }
         }
       } catch (err) {
-        yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+        yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
       }
     });
 
@@ -323,11 +323,11 @@ function tick() {
           vehicle.save();
         }
       } catch (err) {
-        yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+        yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
       }
     });
   } catch (err) {
-    yarp.log.danger('TickError: ' + err.message + '\n' + err.stack);
+    yarp.log.error('TickError: ' + err.message + '\n' + err.stack);
   }
 
   yarp.tick++;

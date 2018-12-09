@@ -186,20 +186,7 @@ let config = {
     hint: 'Open your inventory.',
     permissions: ['cmd.inventory'],
     call: (player, args) => {
-      let list = [];
-      let inventory = player.character.inventory;
-      for (let id in inventory) {
-        if (inventory.hasOwnProperty(id)) {
-          let item = yarp.items[id];
-          list.push({
-            id: item.id,
-            model: item.model,
-            amount: inventory[id],
-            options: item._options,
-          });
-        }
-      }
-      yarp.client.createBrowser(player, 'inventory', ['package://YARP/ui/html/inventory.html', 'populateInventory', list, 'Inventory'], false, true);
+      player.character.toggleInventory();
     },
   },
   'money': {

@@ -12,14 +12,19 @@ let mng = {};
  * @function register
  * @memberof yarp.mng
  * @param {Object} object Object to be registered.
+ * @param {String} [collection] Collection to have the object.
  */
-mng.register = async (object) => {
-  let collection = object.constructor.name.toLowerCase()+'s';
+mng.register = async (object, collection) => {
+  if (!collection) {
+    collection = object.constructor.name.toLowerCase()+'s';
+  } else {
+    collection = collection.name.toLowerCase()+'s';
+  }
   if (object._id != null) {
     if (!yarp[collection]) yarp[collection] = {};
     yarp[collection][object._id] = object;
   } else {
-    yarp.log.danger('ManagerError: object could not be registered in ' + collection + ', missing id.\n' + JSON.stringify(object));
+    yarp.log.error('ManagerError: object could not be registered in ' + collection + ', missing id.\n' + JSON.stringify(object));
   }
 };
 
@@ -35,7 +40,7 @@ mng.save = async (object) => {
   if (object._id != null && !object.lock__save__) {
     yarp.db.save(collection, object.data);
   } else {
-    yarp.log.danger('ManagerError: object could not be saved in ' + collection + ', missing id.\n' + JSON.stringify(object));
+    yarp.log.error('ManagerError: object could not be saved in ' + collection + ', missing id.\n' + JSON.stringify(object));
   }
 };
 
@@ -52,7 +57,7 @@ mng.remove = async (object) => {
     yarp.db.remove(collection, {_id: object._id});
     delete yarp[collection][object._id];
   } else {
-    yarp.log.danger('ManagerError: object could not be removed in ' + collection + ', missing id.\n' + JSON.stringify(object));
+    yarp.log.error('ManagerError: object could not be removed in ' + collection + ', missing id.\n' + JSON.stringify(object));
   }
 };
 

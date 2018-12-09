@@ -28,6 +28,6 @@ module.exports = async () => {
     yarp.vehicles = new yarp.Pool(yarp.Vehicle);
     yarp.weapons = new yarp.Pool(yarp.Weapon);
   } catch (err) {
-    yarp.log.danger('PoolError: '+err.message+'\n'+err.stack);
+    yarp.log.error('PoolError: '+err.message+'\n'+err.stack);
   }
 };

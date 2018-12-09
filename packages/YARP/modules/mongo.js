@@ -27,7 +27,7 @@ mongo.connect = (url) => {
       resolve(_db);
     } else {
       MongoClient.connect(_url, (err, client) => {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         _db = client.db('yarp');
         yarp.log.warning('Connected to '+_url);
         resolve(_db);
@@ -49,7 +49,7 @@ mongo.insert = (collection, docs, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).insert(docs, options, function(err, res) {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -69,7 +69,7 @@ mongo.remove = (collection, selector, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).remove(selector, options, function(err, res) {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -89,7 +89,7 @@ mongo.save = (collection, doc, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).save(doc, options, function(err, res) {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -110,7 +110,7 @@ mongo.update = (collection, selector, doc, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).save(selector, doc, options, function(err, res) {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -131,7 +131,7 @@ mongo.destinct = (collection, key, query, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).destinct(key, query, options, (err, res) => {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -151,7 +151,7 @@ mongo.count = (collection, query, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).count(query, options, (err, res) => {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -171,7 +171,7 @@ mongo.find = (collection, query, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).find(query, options).toArray((err, res) => {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -189,7 +189,7 @@ mongo.indexes = (collection) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).indexes(function(err, res) {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -209,7 +209,7 @@ mongo.aggregate = (collection, query, options) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).aggregate(query, options, (err, res) => {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });
@@ -227,7 +227,7 @@ mongo.stats = (collection) => {
   return new Promise((resolve, reject) => {
     mongo.connect().then((_db) => {
       _db.collection(collection).stats(function(err, res) {
-        if (err) yarp.log.danger(err);
+        if (err) yarp.log.error(err);
         resolve(res);
       });
     });

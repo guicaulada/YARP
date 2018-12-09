@@ -569,12 +569,6 @@ yarp.server.loadCharacter = (player, id) => {
   player.health = character.health;
   player.armour = character.armour;
   player.dimension = 0;
-  for (let id in character.weapons) {
-    if (character.weapons.hasOwnProperty(id)) {
-      player.giveWeapon(mp.joaat(id), character.weapons[id]);
-      yarp.client.equipWeapon(player, yarp.weapons[id]);
-    }
-  }
   character.user.enter();
   character.enter();
   player.setVariable('PLAYER_HUNGER', character.hunger);
@@ -589,6 +583,15 @@ yarp.server.loadCharacter = (player, id) => {
   if (character.user.hasPermission('menu.testmenu')) {
     yarp.hotkeys['Toggle Menu'].bind(player, ['Test Menu']);
     yarp.hotkeys['Test Proxy'].bind(player);
+  }
+
+  for (let id in character.equipment) {
+    if (character.equipment.hasOwnProperty(id)) {
+      if (yarp.items[id].isWeapon()) {
+        player.giveWeapon(mp.joaat(id), yarp.utils.server.default(character.equipment[yarp.weapons[id].ammo], 0));
+        yarp.client.equipWeapon(player, yarp.weapons[id]);
+      }
+    }
   }
 
   yarp.menus.forEach((menu) => {

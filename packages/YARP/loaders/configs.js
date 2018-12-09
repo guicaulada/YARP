@@ -29,6 +29,6 @@ module.exports = async () => {
     yarp.weapons.config('../configs/weapons.js');
     yarp.cli.config('../configs/cli.js');
   } catch (err) {
-    yarp.log.danger('ConfigError: '+err.message+'\n'+err.stack);
+    yarp.log.error('ConfigError: '+err.message+'\n'+err.stack);
   }
 };

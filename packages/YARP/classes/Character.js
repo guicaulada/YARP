@@ -578,69 +578,6 @@ class Character extends yarp.Object {
   }
 
   /**
-   * Give a weapon.
-   * @instance
-   * @function giveWeapon
-   * @param {Object} weapon Weapon object or id.
-   * @param {Number} amount Amount of bullets.
-   * @memberof Character
-   */
-  giveWeapon(weapon, amount) {
-    if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
-    this.giveItem(weapon, amount, !this.equipment[weapon.id]);
-    this.player.giveWeapon(mp.joaat(weapon.id), 0);
-    yarp.client.equipWeapon(this.player, weapon);
-  }
-
-  /**
-   * Take a weapon.
-   * @instance
-   * @function takeWeapon
-   * @param {Object} weapon Weapon object or id.
-   * @memberof Character
-   */
-  takeWeapon(weapon) {
-    if ((typeof weapon) === 'string') weapon = yarp.weapons[weapon];
-    this.takeItem(weapon, 1, true);
-    yarp.client.takeWeapon(this.player, weapon.id);
-    yarp.client.unequipWeapon(this.player, weapon);
-  }
-
-  /**
-   * Take ammo.
-   * @instance
-   * @function takeAmmo
-   * @param {String} id Ammo id.
-   * @param {Number} amount Amount of bullets.
-   * @memberof Character
-   */
-  takeAmmo(id, amount) {
-    if (this.equipment[id]) {
-      this.giveItem(id, amount, true);
-      yarp.utils.client.setAmmoByType(this.player, mp.joaat(weapon.id), amount);
-    } else {
-      this.giveItem(id, amount, false);
-    }
-  }
-
-  /**
-   * Give ammo.
-   * @instance
-   * @function giveAmmo
-   * @param {String} id Ammo id.
-   * @param {Number} amount Amount of bullets.
-   * @memberof Character
-   */
-  giveAmmo(id, amount) {
-    if (this.equipment[id] < 100) {
-      this.giveItem(id, amount, true);
-      yarp.utils.client.setAmmoByType(this.player, mp.joaat(id), amount);
-    } else {
-      this.giveItem(id, amount, false);
-    }
-  }
-
-  /**
    * Give a group.
    * @instance
    * @function giveGroup
@@ -995,7 +932,7 @@ class Character extends yarp.Object {
    * @memberof Character
    */
   openInventory() {
-    yerp.server.openCharacterInventory(this.player, this);
+    yarp.server.openCharacterInventory(this.player, this);
   }
 
   /**

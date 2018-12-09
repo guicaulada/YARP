@@ -20,7 +20,7 @@ log.colors = {
   info: 'cyanBright',
   debug: 'magentaBright',
   warning: 'yellowBright',
-  danger: 'redBright',
+  error: 'redBright',
   success: 'greenBright',
   command: 'cyan',
 };
@@ -59,7 +59,7 @@ for (let color in log.colors) {
 log.log = (message) => {
   fs.appendFile('./yarp.log', message.concat('\n'), (error) => {
     if (error) {
-      log.danger('Failed to write to log file.', error);
+      log.error('Failed to write to log file.', error);
     }
   });
 };
