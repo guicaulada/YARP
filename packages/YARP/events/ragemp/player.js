@@ -142,7 +142,8 @@ mp.events.add('playerWeaponChange', (player, oldWeapon, newWeapon) => {
         if (mp.joaat(id) == newWeapon) {
           character.weapon = id;
           yarp.client.unequipWeapon(player, id);
-          yarp.utils.client.setWeaponAmmo(player, newWeapon, Number(character.equipment[yarp.weapons[id].ammo]));
+          let ammo = yarp.utils.server.default(character.equipment[yarp.weapons[id].ammo], 0);
+          player.setWeaponAmmo(Number(newWeapon), Number(ammo));
         } else if ((mp.joaat(id) == oldWeapon) && (newWeapon != 1970349056)) {
           yarp.client.equipWeapon(player, yarp.weapons[id]);
         }
@@ -164,8 +165,10 @@ mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson,
   let character = player.character;
   if (character) {
     if (character.weapon) {
-      character.equipment[yarp.weapons[character.weapon].ammo] = character.equipment[yarp.weapons[character.weapon].ammo]-1;
-      yarp.utils.client.setWeaponAmmo(player, weaponHash, character.equipment[yarp.weapons[character.weapon].ammo]);
+      let ammo = yarp.utils.server.default(character.equipment[yarp.weapons[character.weapon].ammo], 1);
+      character.equipment[yarp.weapons[character.weapon].ammo] = ammo-1;
+      ammo = character.equipment[yarp.weapons[character.weapon].ammo];
+      player.setWeaponAmmo(mp.joaat(character.weapon), Number(ammo));
     }
   }
 });
