@@ -20,6 +20,9 @@ yarp.server.menuItemClicked = (player, data) => {
     if (data._menuId.includes('inventory') && data._type != 'close') {
         yarp.server.inventoryItemClicked(player, data);
     }
+    if (data._menuId.includes('equipment') && data._type != 'close') {
+        yarp.server.equipmentItemClicked(player, data);
+    }
     if (data._menuId == 'Login Panel') {
         yarp.server.loginItemClicked(player, data);
     }

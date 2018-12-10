@@ -1,24 +1,24 @@
 'use strict';
 /**
- * Inventory menu events
+ * Equipment menu events
  * @memberof yarp.server
  */
 
-yarp.server.openCharacterInventory = (player, character) => {
+yarp.server.openCharacterEquipment = (player, character) => {
   let menu = new yarp.Menu({
-    id: 'inventory' + character.id,
-    title: ['Inventory'],
+    id: 'equipment' + character.id,
+    title: ['Equipment'],
     offset: [0.1, 0.15],
   });
 
   let i = 0;
-  for (let itemId in character.inventory) {
-    if (character.inventory.hasOwnProperty(itemId)) {
+  for (let itemId in character.equipment) {
+    if (character.equipment.hasOwnProperty(itemId)) {
       let item = yarp.items[itemId];
       let submenu = {
         type: 'submenu',
-        id: 'inventory' + item.name,
-        displayText: character.inventory[itemId] + ' - ' + item.name,
+        id: 'equipment' + item.name,
+        displayText: character.equipment[itemId] + ' - ' + item.name,
         caption: character.default(item.caption, ''),
         items: [],
       };
@@ -31,7 +31,7 @@ yarp.server.openCharacterInventory = (player, character) => {
             type: 'text',
             displayText: option,
             caption: option + ` item`,
-            data: {itemId: item.id, option: option, index: o, itemIndex: i},
+            data: {itemId: item.id, option: option, index: o, itemIndex: i, _menuId: 'equipment' + item.name},
           });
           o++;
         }
@@ -51,13 +51,13 @@ yarp.server.openCharacterInventory = (player, character) => {
 };
 
 /**
- * Called when inventory item is clicked on native menu.
+ * Called when equipment item is clicked on native menu.
  * @function menuItemClicked
  * @memberof yarp.server
  * @param {Object} player The player that called the event.
  * @param {Object} data Data representing the event.
  */
-yarp.server.inventoryItemClicked = (player, data) => {
+yarp.server.equipmentItemClicked = (player, data) => {
   let character = player.character;
   let item = yarp.items[data.itemId];
   if (item && character) {
@@ -65,10 +65,10 @@ yarp.server.inventoryItemClicked = (player, data) => {
     if (option) {
       option(player);
     }
-    let amount = character.inventory[item.id];
+    let amount = character.equipment[item.id];
     let submenu = {
       type: 'submenu',
-      id: 'inventory' + item.name,
+      id: 'equipment' + item.name,
       displayText: amount + ' - ' + item.name,
       caption: yarp.utils.server.default(item.caption, ''),
       items: [],
@@ -81,28 +81,28 @@ yarp.server.inventoryItemClicked = (player, data) => {
           type: 'text',
           displayText: option,
           caption: option + ` item`,
-          data: {itemId: item.id, option: option, index: i, itemIndex: data.itemIndex, _menuId: 'inventory' + item.name},
+          data: {itemId: item.id, option: option, index: i, itemIndex: data.itemIndex},
         });
         i++;
       }
     }
     if (amount) {
-      yarp.menus['inventory' + character.id].updateItem(player, data.itemIndex, submenu);
+      yarp.menus['equipment' + character.id].updateItem(player, data.itemIndex, submenu);
     } else {
-      yarp.menus['inventory' + character.id].removeItem(player, data.itemIndex);
+      yarp.menus['equipment' + character.id].removeItem(player, data.itemIndex);
     }
   }
 };
 
-yarp.server.closeCharacterInventory = (player, character) => {
-  yarp.menus['inventory' + character.id].close(player);
+yarp.server.closeCharacterEquipment = (player, character) => {
+  yarp.menus['equipment' + character.id].close(player);
 };
 
 
-yarp.server.toggleCharacterInventory = (player, character) => {
-  if (!yarp.menus['inventory' + character.id] || !yarp.menus['inventory' + character.id].isVisible(player)) {
-    character.openInventory();
+yarp.server.toggleCharacterEquipment = (player, character) => {
+  if (!yarp.menus['equipment' + character.id] || !yarp.menus['equipment' + character.id].isVisible(player)) {
+    character.openEquipment();
   } else {
-    character.closeInventory();
+    character.closeEquipment();
   }
 };

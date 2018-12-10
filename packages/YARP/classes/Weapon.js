@@ -27,19 +27,35 @@ class Weapon extends yarp.Item {
       this._position = this.default(params.position, new mp.Vector3(0, 0, 0));
       this._rotation = this.default(params.rotation, new mp.Vector3(0, 0, 0));
       this._visible = this.default(params.visible, false);
-      this._options.Equip = ((player) => {
-        let character = player.character;
-        if (!character.equipment[this.id]) {
-          if (character.takeItem(this.id, 1, false)) {
-            character.equipment[this.id] = 1;
-            player.giveWeapon(mp.joaat(this.id), this.default(character.equipment[this.ammo], 0));
-          }
-        }
-      }).toString();
       if (!this._visible) this._alpha = 0;
       yarp.mng.register(this);
       yarp.mng.register(this, yarp.Item);
       this.makeGetterSetter();
+      this.options = (player) => {
+        let options = {};
+        if (player.character.hasEquipment(this.id)) {
+          options['Unequip'] = (player) => {
+            let amount = this.default(player.character.equipment[this.id], 0);
+            if (player.character.takeEquipment(this.id, amount)) {
+              player.character.giveItem(this.id, amount);
+              player.removeWeapon(mp.joaat(this.id));
+              yarp.client.unequipWeapon(player, this.id);
+            }
+          };
+        } else {
+          options['Equip'] = (player) => {
+            let character = player.character;
+            if (!character.hasEquipment(this.id)) {
+              if (character.takeItem(this.id, 1)) {
+                character.giveEquipment(this.id, 1);
+                player.giveWeapon(mp.joaat(this.id), this.default(character.equipment[this.ammo], 0));
+                yarp.client.equipWeapon(player, this);
+              }
+            }
+          };
+        }
+        return options;
+      };
     } else {
       throw new TypeError('Weapon class requires id and name to be instantiated.\nParameters: ' + JSON.stringify(params));
     }

@@ -165,9 +165,8 @@ mp.events.add('playerWeaponShot', (player, targetPositionJson, targetEntityJson,
   let character = player.character;
   if (character) {
     if (character.weapon) {
-      let ammo = yarp.utils.server.default(character.equipment[yarp.weapons[character.weapon].ammo], 1);
-      character.equipment[yarp.weapons[character.weapon].ammo] = ammo-1;
-      ammo = character.equipment[yarp.weapons[character.weapon].ammo];
+      character.takeEquipment(yarp.weapons[character.weapon].ammo, 1);
+      let ammo = yarp.utils.server.default(character.equipment[yarp.weapons[character.weapon].ammo], 0);
       player.setWeaponAmmo(mp.joaat(character.weapon), Number(ammo));
     }
   }

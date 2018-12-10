@@ -13,7 +13,7 @@ class Item extends yarp.Object {
    * @param {Number} [params.weight=0]
    * @param {Boolean} [params.spoil=false]
    * @param {String} [params.model='prop_paper_bag_01']
-   * @param {Object} [params.options={}]
+   * @param {Function} [params.options=() => {}]
    * @memberof Item
    */
   constructor(params) {
@@ -26,14 +26,7 @@ class Item extends yarp.Object {
       this._spoil = this.default(params.spoil, false);
       this._weight = this.default(params.weight, 0);
       this._model = this.default(params.model, 'prop_paper_bag_01');
-      this._options = this.default(params.options, {});
-
-      // Turning functions into strings
-      for (let id in this._options) {
-        if (this._options.hasOwnProperty(id)) {
-          this._options[id] = this.default(this._options[id], () => {}).toString();
-        }
-      }
+      this._options = this.default(params.options, () => {}).toString();
 
       yarp.mng.register(this);
       this.makeGetterSetter();
@@ -43,35 +36,24 @@ class Item extends yarp.Object {
   }
 
   /**
-   * Gets item options functions.
+   * Evals the options parameter.
    * @instance
    * @function options
-   * @return {Object} Functions indexed by option.
    * @memberof Item
    */
   get options() {
-    let value = {};
-    for (let id in this._options) {
-      if (this._options.hasOwnProperty(id)) {
-        value[id] = eval(this._options[id]);
-      }
-    }
-    return value;
+    return (eval(this._options));
   }
 
   /**
-   * Sets item options functions as strings.
+   * Set options function as string.
    * @instance
    * @function options
-   * @param {Array<function>} value Array of option functions
+   * @param {Function} value Options function.
    * @memberof Item
    */
   set options(value) {
-    for (let id in value) {
-      if (this._options.hasOwnProperty(id)) {
-        this._options[id] = value[id].toString();
-      }
-    }
+    this._options = value.toString();
   }
 
   /**

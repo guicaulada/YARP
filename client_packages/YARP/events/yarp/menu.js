@@ -272,6 +272,9 @@ yarp.client.menuAddItems = (menuId, items) => {
 yarp.client.menuUpdateItem = (menuId, index, item) => {
     let menuItem = yarp.menus[menuId].menuItems[index];
     Object.assign(menuItem, item);
+    if (item.type == 'submenu') {
+        yarp.client.menuUpdateItems(item.id, item.items);
+    }
 };
 
 /**
@@ -301,6 +304,7 @@ yarp.client.menuRemoveItem = (menuId, index) => {
     yarp.client.removeSubMenu(currentMenu);
     yarp.menus[menuId].menuItems.splice(index, 1);
     yarp.menus[menuId].setToItem(index % yarp.menus[menuId].menuItems.length);
+    yarp.client.refreshMenuIndex(menuId);
 };
 
 /**
@@ -316,6 +320,28 @@ yarp.client.menuRemoveItems = (menuId, indexStart, indexEnd) => {
     yarp.client.removeSubMenu(currentMenu);
     yarp.menus[menuId].menuItems.splice(indexStart, indexEnd);
     yarp.menus[menuId].setToItem(indexStart % yarp.menus[menuId].menuItems.length);
+    yarp.client.refreshMenuIndex(menuId);
+};
+
+/**
+ * Recalculate index for menu items.
+ * @function refreshMenuIndex
+ * @memberof yarp.client
+ * @param {String} menuId The menu id.
+ */
+yarp.client.refreshMenuIndex = (menuId) => {
+    for (let i in yarp.menus[menuId].menuItems) {
+        if (yarp.menus[menuId].menuItems[i].data) {
+            yarp.menus[menuId].menuItems[i].data.itemIndex = i;
+            if (yarp.menus[menuId].menuItems[i].menu) {
+                for (let j in yarp.menus[menuId].menuItems[i].menu.menuItems) {
+                    if (yarp.menus[menuId].menuItems[i].menu.menuItems[j].data) {
+                        yarp.menus[menuId].menuItems[i].menu.menuItems[j].data.itemIndex = i;
+                    }
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -388,7 +414,6 @@ yarp.client.removeSubMenu = (menu) => {
     if (typeof menu === 'string') menu = yarp.menus[menu];
     NativeMenu.MenuPool.removeSubMenu(menu);
 };
-
 
 /**
  * Renders the menus.

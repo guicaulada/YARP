@@ -4,7 +4,7 @@
  * @memberof yarp.client
  */
 
-let equiped = {};
+let equipped = {};
 
 /**
  * Attach a weapon model to the character.
@@ -26,36 +26,36 @@ yarp.client.equipWeapon = (weapon) => {
       weapon._rotation.x, weapon._rotation.y, weapon._rotation.z,
       false, false, false, false, 2, true
     );
-    equiped[weapon._id] = obj;
+    equipped[weapon._id] = obj;
   }
 };
 
 /**
- * Deletes specific equiped weapon.
+ * Deletes specific equipped weapon.
  * @function unequipWeapon
  * @memberof yarp.client
  * @param {String} id The weapon id.
  */
 yarp.client.unequipWeapon = (id) => {
-  if (equiped[id] != null) {
-    equiped[id].destroy();
-    equiped[id] = null;
+  if (equipped[id] != null) {
+    equipped[id].destroy();
+    equipped[id] = null;
   }
 };
 
 /**
- * Deletes every equiped weapon.
+ * Deletes every equipped weapon.
  * @function unequipAllWeapons
  * @memberof yarp.client
  */
 yarp.client.unequipAllWeapons = () => {
-  for (id in equiped) {
-    if (equiped[id] != null) {
-      equiped[id].destroy();
-      equiped[id] = null;
+  for (id in equipped) {
+    if (equipped[id] != null) {
+      equipped[id].destroy();
+      equipped[id] = null;
     }
   }
-  equiped = {};
+  equipped = {};
 };
 
 /**

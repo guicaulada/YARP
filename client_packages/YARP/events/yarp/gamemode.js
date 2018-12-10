@@ -72,7 +72,6 @@ yarp.client.runClientCode = (code) => {
   eval(code);
 };
 
-
 /**
  * Run client function.
  * @function runClientFunction
@@ -150,6 +149,17 @@ yarp.client.playerUnbindKey = (id) => {
     mp.keys.unbind(yarp.hotkeys[id].key, false, yarp.hotkeys[id].call);
     yarp.hotkeys[id] = null;
   }
+};
+
+/**
+ * Returns true if key is pressed.
+ * @function isKeyPressed
+ * @memberof yarp.client
+ * @param {String} key The virtual key code.
+ * @return {Boolean} True/false depending if the key is pressed.
+ */
+yarp.client.isKeyPressed = (key) => {
+  return mp.keys.isDown(yarp.utils.client.getVirtualKeys()[key.toUpperCase()]);
 };
 
 /**

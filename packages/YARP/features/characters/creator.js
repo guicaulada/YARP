@@ -579,6 +579,7 @@ yarp.server.loadCharacter = (player, id) => {
   character.applyCustomization();
 
   yarp.hotkeys['Inventory'].bind(player);
+  yarp.hotkeys['Close All Menus'].bind(player);
 
   if (character.user.hasPermission('menu.testmenu')) {
     yarp.hotkeys['Toggle Menu'].bind(player, ['Test Menu']);

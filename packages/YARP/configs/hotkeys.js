@@ -25,8 +25,12 @@ let config = {
   'Inventory': {
     key: 'I',
     category: 'utility',
-    call: (player, args) => {
-      player.character.toggleInventory();
+    call: async (player, args) => {
+      if (await yarp.client.isKeyPressed(player, 'LSHIFT') || await yarp.client.isKeyPressed(player, 'RSHIFT')) {
+        player.character.openEquipment();
+      } else {
+        player.character.openInventory();
+      }
     },
   },
   'Toggle Menu': {
@@ -41,6 +45,13 @@ let config = {
     category: 'utility',
     call: (player, args) => {
       args[0].open(player);
+    },
+  },
+  'Close All Menus': {
+    key: 'BACK',
+    category: 'utility',
+    call: (player, args) => {
+      yarp.client.closeAllMenus(player);
     },
   },
   'Test Proxy': {

@@ -66,3 +66,4 @@ yarp.server.add.menuItemClicked = (player, data) => {
 
 require('./creator.js');
 require('./inventory.js');
+require('./equipment.js');

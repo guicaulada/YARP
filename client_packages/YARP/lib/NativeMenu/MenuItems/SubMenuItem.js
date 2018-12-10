@@ -34,15 +34,17 @@ class SubMenuItem extends NativeMenu.MenuItem {
    * @memberof SubMenuItem
    */
   render(x, y, yCaption) {
-    if (this._isSelect) {
-      this.menu.render(x + NativeMenu.MainMenu.MENU_WIDTH, y);
-      if (Date.now() - NativeMenu.MainMenu.CONTROL_TICK_TIME_MS > NativeMenu.MainMenu.LAST_TICK_TIME) {
-        if (mp.game.controls.isControlPressed(0, NativeMenu.Control.INPUT_CELLPHONE_RIGHT)) {
-          NativeMenu.MenuPool.displaySubMenu(this.menu);
-        } else {
-          if (mp.game.controls.isControlPressed(0, NativeMenu.Control.INPUT_CELLPHONE_LEFT)) {
-            NativeMenu.MenuPool.removeSubMenu(this.menu);
-            NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
+    if (this.menu.menuItems.length > 0) {
+      if (this._isSelect) {
+        this.menu.render(x + NativeMenu.MainMenu.MENU_WIDTH, y);
+        if (Date.now() - NativeMenu.MainMenu.CONTROL_TICK_TIME_MS > NativeMenu.MainMenu.LAST_TICK_TIME) {
+          if (mp.game.controls.isControlPressed(0, NativeMenu.Control.INPUT_CELLPHONE_RIGHT)) {
+            NativeMenu.MenuPool.displaySubMenu(this.menu);
+          } else {
+            if (mp.game.controls.isControlPressed(0, NativeMenu.Control.INPUT_CELLPHONE_LEFT)) {
+              NativeMenu.MenuPool.removeSubMenu(this.menu);
+              NativeMenu.MainMenu.LAST_TICK_TIME = Date.now();
+            }
           }
         }
       }

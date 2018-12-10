@@ -503,13 +503,13 @@ class Character extends yarp.Object {
    * @function giveItem
    * @param {Object} item Item to give.
    * @param {Number} amount Amount to give.
-   * @param {Boolean} equiped If the item is equiped.
+   * @param {Boolean} equipped If the item is equipped.
    * @return {Boolean} Operation success/fail.
    * @memberof Character
    */
-  giveItem(item, amount, equiped) {
+  giveItem(item, amount, equipped) {
     if ((typeof item) === 'string') item = yarp.items[item];
-    let inventory = (equiped) ? this.equipment : this.inventory;
+    let inventory = (equipped) ? this.equipment : this.inventory;
     if (this.weight + item.weight < yarp.variables['Max Weight'].value) {
       if (inventory[item.id] != null) {
         inventory[item.id] = inventory[item.id] + amount;
@@ -528,13 +528,13 @@ class Character extends yarp.Object {
    * @function takeItem
    * @param {Object} item Item to take.
    * @param {Number} amount Amount to take.
-   * @param {Boolean} equiped If the item is equiped.
+   * @param {Boolean} equipped If the item is equipped.
    * @return {Boolean} Operation success/fail.
    * @memberof Character
    */
-  takeItem(item, amount, equiped) {
+  takeItem(item, amount, equipped) {
     if ((typeof item) === 'string') item = yarp.items[item];
-    let inventory = (equiped) ? this.equipment : this.inventory;
+    let inventory = (equipped) ? this.equipment : this.inventory;
     if (inventory[item.id] != null) {
       if (inventory[item.id]-amount >= 0) {
         inventory[item.id] = inventory[item.id]-amount;
@@ -551,13 +551,16 @@ class Character extends yarp.Object {
   /**
    * Check if has an item.
    * @instance
-   * @function takeItem
-   * @param {String} id Item id.
+   * @function hasItem
+   * @param {Object} item Item to check.
+   * @param {Boolean} equipped If the item is equipped.
    * @return {Boolean} If has or not the item.
    * @memberof Character
    */
-  hasItem(id) {
-    return (this.inventory[id] != null && this.inventory[id] > 0) || (this.equipment[id] != null && this.equipment[id] > 0);
+  hasItem(item, equipped) {
+    if ((typeof item) === 'string') item = yarp.items[item];
+    let inventory = (equipped) ? this.equipment : this.inventory;
+    return (inventory[item.id] != null && inventory[item.id] > 0);
   }
 
   /**
@@ -565,16 +568,68 @@ class Character extends yarp.Object {
    * @instance
    * @function hasItems
    * @param {Array<String>} items Items id.
+   * @param {Boolean} equipped If the item is equipped.
    * @return {Boolean} If has or not all items.
    * @memberof Character
    */
-  hasItems(items) {
+  hasItems(items, equipped) {
     for (let i = 0; i < items.length; i++) {
-      if (!this.hasItems(items[i])) {
+      if (!this.hasItems(items[i], equipped)) {
         return false;
       }
     }
     return true;
+  }
+
+  /**
+   * Give an equipment.
+   * @instance
+   * @function giveEquipment
+   * @param {Object} item Item to give.
+   * @param {Number} amount Amount to give.
+   * @return {Boolean} Operation success/fail.
+   * @memberof Character
+   */
+  giveEquipment(item, amount) {
+    return this.giveItem(item, amount, true);
+  }
+
+  /**
+   * Take an equipment.
+   * @instance
+   * @function takeItem
+   * @param {Object} item Item to take.
+   * @param {Number} amount Amount to take.
+   * @return {Boolean} Operation success/fail.
+   * @memberof Character
+   */
+  takeEquipment(item, amount) {
+    return this.takeItem(item, amount, true);
+  }
+
+  /**
+   * Check if has an equipment.
+   * @instance
+   * @function hasItem
+   * @param {Object} item Item to check.
+   * @return {Boolean} If has or not the item.
+   * @memberof Character
+   */
+  hasEquipment(item) {
+    return this.hasItem(item, true);
+  }
+
+  /**
+   * Check if has an equipment.
+   * @instance
+   * @function hasItem
+   * @param {Object} item Item to check.
+   * @param {Boolean} equipped If the item is equipped.
+   * @return {Boolean} If has or not the item.
+   * @memberof Character
+   */
+  hasEquipments(item) {
+    return this.hasItems(item, true);
   }
 
   /**
@@ -953,6 +1008,36 @@ class Character extends yarp.Object {
    */
   toggleInventory() {
     yarp.server.toggleCharacterInventory(this.player, this);
+  }
+
+  /**
+   * Open character equipment menu.
+   * @instance
+   * @function openEquipment
+   * @memberof Character
+   */
+  openEquipment() {
+    yarp.server.openCharacterEquipment(this.player, this);
+  }
+
+  /**
+   * Close character equipment menu.
+   * @instance
+   * @function closeEquipment
+   * @memberof Character
+   */
+  closeEquipment() {
+    yarp.server.closeCharacterEquipment(this.player, this);
+  }
+
+  /**
+   * Toggle character equipment menu.
+   * @instance
+   * @function toggleEquipment
+   * @memberof Character
+   */
+  toggleEquipment() {
+    yarp.server.toggleCharacterEquipment(this.player, this);
   }
 }
 

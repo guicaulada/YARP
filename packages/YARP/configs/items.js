@@ -5,66 +5,78 @@ let config = {
     name: 'Fries',
     model: 'prop_food_chips',
     category: 'Food',
-    options: {
-      'Eat': (player) => {
-        player.character.takeItem(this, 1);
-        player.character.hunger -= 5;
-      },
+    options: (player) => {
+      return {
+        'Eat': (player) => {
+          player.character.takeItem(this, 1);
+          player.character.hunger -= 5;
+        },
+      };
     },
   },
   'burger': {
     name: 'Burger',
     model: 'prop_cs_burger_01',
     category: 'Food',
-    options: {
-      'Eat': (player) => {
-        player.character.takeItem(this, 1);
-        player.character.hunger -= 10;
-      },
+    options: (player) => {
+      return {
+        'Eat': (player) => {
+          player.character.takeItem(this, 1);
+          player.character.hunger -= 10;
+        },
+      };
     },
   },
   'hotdog': {
     name: 'Hot Dog',
     model: 'prop_cs_hotdog_01',
     category: 'Food',
-    options: {
-      'Eat': (player) => {
-        player.character.takeItem(this, 1);
-        player.character.hunger -= 15;
-      },
+    options: (player) => {
+      return {
+        'Eat': (player) => {
+          player.character.takeItem(this, 1);
+          player.character.hunger -= 15;
+        },
+      };
     },
   },
   'beer': {
     name: 'Beer Bottle',
     model: 'prop_cs_beer_bot_01',
     category: 'Food',
-    options: {
-      'Drink': (player) => {
-        player.character.takeItem(this, 1);
-        player.character.thirst -= 5;
-      },
+    options: (player) => {
+      return {
+        'Drink': (player) => {
+          player.character.takeItem(this, 1);
+          player.character.thirst -= 5;
+        },
+      };
     },
   },
   'juice': {
     name: 'Juice Box',
     model: 'prop_food_bs_juice01',
     category: 'Food',
-    options: {
-      'Drink': (player) => {
-        player.character.takeItem(this, 1);
-        player.character.thirst -= 10;
-      },
+    options: (player) => {
+      return {
+        'Drink': (player) => {
+          player.character.takeItem(this, 1);
+          player.character.thirst -= 10;
+        },
+      };
     },
   },
   'soda': {
     name: 'Soda Can',
     model: 'ng_proc_sodacan_01a',
     category: 'Food',
-    options: {
-      'Drink': (player) => {
-        player.character.takeItem(this, 1);
-        player.character.thirst -= 15;
-      },
+    options: (player) => {
+      return {
+        'Drink': (player) => {
+          player.character.takeItem(this, 1);
+          player.character.thirst -= 15;
+        },
+      };
     },
   },
 };
@@ -94,23 +106,34 @@ for (let ammo in ammos) {
       name: ammos[ammo],
       model: 'v_ret_gc_ammostack',
       category: 'Ammo',
-      options: {
-        'Equip': (player) => {
-          let maxBullets = 250;
-          let amount = 0;
-          let equipped = this.default(player.character.equipment[this.id], 0);
-          if (player.character.inventory[this.id] > maxBullets) {
-            amount = maxBullets;
-          } else {
-            amount = player.character.inventory[this.id];
-          }
-          if (equipped + amount > maxBullets) {
-            amount = maxBullets - equipped;
-          }
-          if (player.character.takeItem(this.id, amount, false)) {
-            player.character.equipment[this.id] = equipped + amount;
-          }
-        },
+      options: (player) => {
+        let options = {};
+        if (player.character.hasEquipment(this.id)) {
+          options['Unequip'] = (player) => {
+            let amount = this.default(player.character.equipment[this.id], 0);
+            if (player.character.takeEquipment(this.id, amount)) {
+              player.character.giveItem(this.id, amount);
+            }
+          };
+        } else {
+          options['Equip'] = (player) => {
+            let maxBullets = 250;
+            let amount = 0;
+            let equipped = this.default(player.character.equipment[this.id], 0);
+            if (player.character.inventory[this.id] > maxBullets) {
+              amount = maxBullets;
+            } else {
+              amount = player.character.inventory[this.id];
+            }
+            if (equipped + amount > maxBullets) {
+              amount = maxBullets - equipped;
+            }
+            if (player.character.takeItem(this.id, amount)) {
+              player.character.giveEquipment(this.id, amount);
+            }
+          };
+        }
+        return options;
       },
     };
   }
