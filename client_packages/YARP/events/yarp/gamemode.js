@@ -159,6 +159,7 @@ yarp.client.playerUnbindKey = (id) => {
  * @return {Boolean} True/false depending if the key is pressed.
  */
 yarp.client.isKeyPressed = (key) => {
+  mp.keys.isDown(yarp.utils.client.getVirtualKeys()[key.toUpperCase()]); // Without this it returns true after button is released... why ?
   return mp.keys.isDown(yarp.utils.client.getVirtualKeys()[key.toUpperCase()]);
 };
 
