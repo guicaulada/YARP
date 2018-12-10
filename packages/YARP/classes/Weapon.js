@@ -31,7 +31,7 @@ class Weapon extends yarp.Item {
       yarp.mng.register(this);
       yarp.mng.register(this, yarp.Item);
       this.makeGetterSetter();
-      this.options = (player) => {
+      this.options = (player, args) => {
         let options = {};
         if (player.character.hasEquipment(this.id)) {
           options['Unequip'] = (player) => {

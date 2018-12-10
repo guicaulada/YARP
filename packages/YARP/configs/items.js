@@ -5,7 +5,7 @@ let config = {
     name: 'Fries',
     model: 'prop_food_chips',
     category: 'Food',
-    options: (player) => {
+    options: (player, args) => {
       return {
         'Eat': (player) => {
           player.character.takeItem(this, 1);
@@ -18,7 +18,7 @@ let config = {
     name: 'Burger',
     model: 'prop_cs_burger_01',
     category: 'Food',
-    options: (player) => {
+    options: (player, args) => {
       return {
         'Eat': (player) => {
           player.character.takeItem(this, 1);
@@ -31,7 +31,7 @@ let config = {
     name: 'Hot Dog',
     model: 'prop_cs_hotdog_01',
     category: 'Food',
-    options: (player) => {
+    options: (player, args) => {
       return {
         'Eat': (player) => {
           player.character.takeItem(this, 1);
@@ -44,7 +44,7 @@ let config = {
     name: 'Beer Bottle',
     model: 'prop_cs_beer_bot_01',
     category: 'Food',
-    options: (player) => {
+    options: (player, args) => {
       return {
         'Drink': (player) => {
           player.character.takeItem(this, 1);
@@ -57,7 +57,7 @@ let config = {
     name: 'Juice Box',
     model: 'prop_food_bs_juice01',
     category: 'Food',
-    options: (player) => {
+    options: (player, args) => {
       return {
         'Drink': (player) => {
           player.character.takeItem(this, 1);
@@ -70,7 +70,7 @@ let config = {
     name: 'Soda Can',
     model: 'ng_proc_sodacan_01a',
     category: 'Food',
-    options: (player) => {
+    options: (player, args) => {
       return {
         'Drink': (player) => {
           player.character.takeItem(this, 1);
@@ -106,9 +106,9 @@ for (let ammo in ammos) {
       name: ammos[ammo],
       model: 'v_ret_gc_ammostack',
       category: 'Ammo',
-      options: (player) => {
+      options: (player, args) => {
         let options = {};
-        if (player.character.hasEquipment(this.id)) {
+        if (args == 'equipment') {
           options['Unequip'] = (player) => {
             let amount = this.default(player.character.equipment[this.id], 0);
             if (player.character.takeEquipment(this.id, amount)) {

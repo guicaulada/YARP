@@ -24,7 +24,7 @@ yarp.server.openCharacterEquipment = (player, character) => {
       };
 
       let o = 0;
-      let playerOptions = item.options(player);
+      let playerOptions = item.options(player, 'equipment');
       for (let option in playerOptions) {
         if (playerOptions.hasOwnProperty(option)) {
           submenu.items.push({
@@ -61,7 +61,7 @@ yarp.server.equipmentItemClicked = (player, data) => {
   let character = player.character;
   let item = yarp.items[data.itemId];
   if (item && character) {
-    let option = item.options(player)[data.option];
+    let option = item.options(player, 'equipment')[data.option];
     if (option) {
       option(player);
     }
@@ -74,7 +74,7 @@ yarp.server.equipmentItemClicked = (player, data) => {
       items: [],
     };
     let i = 0;
-    let playerOptions = item.options(player);
+    let playerOptions = item.options(player, 'equipment');
     for (let option in playerOptions) {
       if (playerOptions.hasOwnProperty(option)) {
         submenu.items.push({
